@@ -1,18 +1,175 @@
-html {
-  font-size: 14px;
+/* VARIABLES */
+/*
+    h - hue
+    s - saturation
+    l - lightness
+    m - main
+    d - dark
+    l - light
+    t - text
+    
+    1 - in calc function we can use maximum difference of 30%
+    2 - 's' and 'l' variables can use maximum difference of 10% from 50%
+*/
+
+:root {
+    /* colors */
+    --h: 190;
+    --s: 50%;
+    --l: 50%;
+    --m-color: hsl(var(--h), var(--s), var(--l));
+    --m-d-color: hsl(var(--h), var(--s), calc(var(--l) - 30%));
+    --m-l-color: hsl(var(--h), var(--s), calc(var(--l) + 30%));
+    --t-color: hsl(0, 0%, 15%); /* #212121 */
+    /* devices */
+    --tablet: 1024px;
+    --mobile-s: 320px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* CSS NORMALIZE */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Roboto', Arial, sans-serif;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+html,
 body {
-  margin-bottom: 60px;
+    height: 100%;
+    width: 100%;
+    line-height: 1;
+    font-size: 16px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+}
+
+input:active,
+input:focus{
+    inset: var(--m-color);
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+a {
+    display: contents;
+    color: unset;
+}
+
+a,
+a:visited,
+a:hover {
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+tr,
+td,
+th {
+    font: inherit;
+}
+
+
+
+/* MAIN STRUCTURE */
+
+.site-header{
+    background-color: var(--m-color);
+}
+
+.site-footer {
+    background-color: var(--m-color);
+}
+
+/* REPEATABLE BLOCKS */
+
+.container{
+    width: min(95%, 1500px);
+    margin: 0 auto;
+}
+
+/* titles */
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.page-subtitle {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.section-subtitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.logic-block-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.logic-block-subtitle {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+/* underheaders - first sections */
+
+.main-underheader{
+    height: 100vh;
+}
+
+@media (max-width: 900px){
+    .main-underheader{
+        height: auto;
+    }
 }
