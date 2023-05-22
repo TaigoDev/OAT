@@ -9,11 +9,20 @@
 <body>
     <header class="site-header">
         <nav class="navigation">
-            
+            <div class="logo">
+                <img src="~/images/basic/logo.svg" alt="логотип">
+                Омский авиационный колледж имени Н.Е. жуковского
+            </div>
+            <div class="functional">
+                <img class="icon" alt="версия для слабовидящих">
+                <img class="icon" alt="оплатить обучение">
+                <img class="icon" alt="поиск">
+                <img class="icon" alt="меню">
+            </div>
         </nav>
     </header>
     
-    <main role="main">
+    <main class="site-main" role="main">
         @RenderBody()
     </main>
     

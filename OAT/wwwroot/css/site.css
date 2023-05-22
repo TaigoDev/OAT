@@ -20,9 +20,13 @@
     --m-color: hsl(var(--h), var(--s), var(--l));
     --m-d-color: hsl(var(--h), var(--s), calc(var(--l) - 30%));
     --m-l-color: hsl(var(--h), var(--s), calc(var(--l) + 30%));
-    --t-color: hsl(0, 0%, 15%); /* #212121 */
+    --matte-color: hsl(0, 0%, 15%); /* #212121 */
     /* devices */
-    --tablet: 1024px;
+    --laptop-l: 1440px;
+    --laptop: 1024px;
+    --tablet: 768px;
+    --mobile-l: 425px;
+    --mobile-m: 375px;
     --mobile-s: 320px;
 }
 
@@ -34,7 +38,6 @@
     margin: 0;
     padding: 0;
     border: 0;
-    font-family: 'Roboto', Arial, sans-serif;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -46,6 +49,8 @@ body {
     width: 100%;
     line-height: 1;
     font-size: 16px;
+    font-family: 'Roboto', "Segoe UI", Arial, sans-serif;
+    color: var(--matte-color);
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
 }
@@ -108,16 +113,44 @@ th {
     font: inherit;
 }
 
-
+textarea{
+    resize: none;
+}
 
 /* MAIN STRUCTURE */
 
+body {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    grid-auto-rows: 0px 1fr auto;
+
+    --max-header-heigth: 90px;
+}
+
 .site-header{
-    background-color: var(--m-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: var(--max-header-heigth);
+    grid-area: header;
+    text-transform: uppercase;
+}
+
+.site-main{
+    grid-area: main;
 }
 
 .site-footer {
     background-color: var(--m-color);
+    grid-area: footer;
+    padding: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 /* REPEATABLE BLOCKS */
@@ -166,6 +199,9 @@ th {
 
 .main-underheader{
     height: 100vh;
+    padding-top: calc(var(--max-header-heigth) + 80px);
+    padding-bottom: 20px;
+    background-color: gray;
 }
 
 @media (max-width: 900px){

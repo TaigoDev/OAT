@@ -6,4 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\basic\" />
+    <Folder Include="wwwroot\images\people\" />
+    <Folder Include="wwwroot\videos\" />
+  </ItemGroup>
+
 </Project>
