@@ -3,23 +3,144 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OAT</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <header class="site-header">
-        <nav class="navigation">
-            <div class="logo">
-                <img src="~/images/basic/logo.svg" alt="логотип">
-                Омский авиационный колледж имени Н.Е. жуковского
-            </div>
-            <div class="functional">
-                <img class="icon" alt="версия для слабовидящих">
-                <img class="icon" alt="оплатить обучение">
-                <img class="icon" alt="поиск">
-                <img class="icon" alt="меню">
-            </div>
-        </nav>
+    <header id="site-header" class="site-header">
+        <div class="container">
+            <nav class="navigation">
+                <a class="logo" href="/">
+                    <img src="~/images/basic/logo.svg" alt="логотип">
+                    Омский авиационный колледж имени Н.Е. жуковского
+                </a>
+                <div class="functional">
+                    <img id="menu-icon" class="icon" src="~/images/basic/burger.svg" alt="меню">
+                    <img id="search-icon" class="icon" src="~/images/basic/search.svg" alt="поиск">
+                    <a href="/"><img class="icon" src="~/images/basic/rubles.svg" alt="оплатить обучение"></a>
+                    <img id="eye-icon" class="icon" src="~/images/basic/eyeOpen.svg" alt="версия для слабовидящих">
+                </div>
+                <ul class="dropdown-menu">
+                    <!-- FOR STUDENTS -->
+                    <li class="dropdown-menu-item">
+                        <div class="dropdown-menu-item-title accordion-head">
+                            <a href="">
+                                Студентам
+                            </a>
+                        </div>
+                        <ul class="dropdown-menu-item-body accordion-body">
+                            <li>
+                                <a href="">
+                                    Новости
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Поэтажный план (Корпус 1, ул. Ленина 24)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    3D экскурсия по колледжу
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Научно-исследовательская работа
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Трудойстройство
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Спортивный клуб
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Дистанционное обучение
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Дистанционное обучение - очная форма обучения
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- FOR APPLICANTS -->
+
+                    <li class="dropdown-menu-item">
+                        <div class="dropdown-menu-item-title">
+                            <a href="">
+                                Студентам
+                            </a>
+                        </div>
+                        <ul class="dropdown-menu-item-body">
+                            <li>
+                                <a href="">
+                                    Приемная комиссия
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Специальности и профессии
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Подготовительные курсы
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Экскурсия по колледжу
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Индивидуальное обучение
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Правила приема
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Повышение квалификации
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Сертификация D-link, Cisco
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Специальности очно-заочного (вечернего) отделения
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Схема расположения колледжа
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    Профориентационные мероприятия
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
     
     <main class="site-main" role="main">
