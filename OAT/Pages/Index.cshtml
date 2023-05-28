@@ -4,6 +4,8 @@
     ViewData["Title"] = "главная";
 }
 
+<link rel="stylesheet" href="~/css/main.css" asp-append-version="true">
+<script src="~/js/newsSlider.js" asp-append-version="true"></script>
 <section class="main-underheader">
     
     <video autoplay muted loop class="main-underheader-background">
@@ -62,5 +64,67 @@
                 </a>
             </li>
         </ul>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h3 class="section-title">
+            Новости
+        </h3>
+        <div class="news-slider-container">
+            <div id="slider-prev" class="news-slider-arrow news-slider-prev">
+                <img src="~/images/mainPage/arrow.svg" alt="">
+            </div>
+            <div id="slider-next" class="news-slider-arrow news-slider-next">
+                <img src="~/images/mainPage/arrow.svg" alt="">
+            </div>
+            <ul id="news-slider" class="news-slider">
+                <li class="news-item">
+                    <img src="~/images/mainPage/news1.jpg" alt="">
+                    <div class="news-content">
+                        <div class="news-date">
+                            25 мая 2023
+                        </div>
+                        <div class="news-header">
+                            "Я не играю в шахматы - в шахматах я борюсь" Александр Алёхин
+                        </div>
+                    </div>
+                </li>
+                <li class="news-item">
+                    <img src="~/images/mainPage/news2.jpg" alt="">
+                    <div class="news-content">
+                        <div class="news-date">
+                            23 мая 2023
+                        </div>
+                        <div class="news-header">
+                            А вот и продолжение от студентов #Омавиат, которые трудятся на предприятиях Омской области и хотят вам кое-что рассказать
+                        </div>
+                    </div>
+                </li>
+                <li class="news-item">
+                    <img src="~/images/mainPage/news3.jpg" alt="">
+                    <div class="news-content">
+                        <div class="news-date">
+                            19 мая 2023
+                        </div>
+                        <div class="news-header">
+                            Демонстрационный экзамен по компетенции R11 Предпринимательство
+                        </div>
+                    </div>
+                </li>
+                <li class="news-item">
+                    <img src="~/images/mainPage/news4.jpg" alt="">
+                    <div class="news-content">
+                        <div class="news-date">
+                            19 мая 2023
+                        </div>
+                        <div class="news-header">
+                            Студенты групп ЭМ-419, ЭМ-429 Омского авиационного колледжа приступили к сдаче демонстрационного экзамена по компетенции "Электромонтаж"
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </section>
