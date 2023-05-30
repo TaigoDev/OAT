@@ -6,19 +6,19 @@ window.addEventListener("load", () => {
 
     let slidePosition = 0;
     sliderPrev.addEventListener("click", () => {
-        if (slidePosition > 1) {
-            slidePosition++;
-            newsSlider.style = `--news-offset: ${100 * slidePosition}%; transform: translateX(calc(var(--news-offset) - 90px));`;
-        }
         if (slidePosition == 1) {
-            slidePosition++;
-            newsSlider.style = `--news-offset: ${100 * slidePosition}%; transform: translateX(var(--news-offset));`;
+            slidePosition--;
+            newsSlider.style = `--news-offset: ${-100 * slidePosition}%; transform: translateX(var(--news-offset));`;
+        }
+        if (slidePosition > 1) {
+            slidePosition--;
+            newsSlider.style = `--news-offset: ${-100 * slidePosition}%; transform: translateX(calc(var(--news-offset) - var(--news-offset-helper) * ${slidePosition}));`;
         }
     });
     sliderNext.addEventListener("click", () => {
         if (slidePosition < 5) {
-            slidePosition--;
-            newsSlider.style = `--news-offset: ${100 * slidePosition}%; transform: translateX(calc(var(--news-offset) - 90px));`;
+            slidePosition++;
+            newsSlider.style = `--news-offset: ${-100 * slidePosition}%; transform: translateX(calc(var(--news-offset) - var(--news-offset-helper) * ${slidePosition}));`;
         }
     });
 });

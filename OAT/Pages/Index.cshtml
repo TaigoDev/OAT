@@ -6,6 +6,9 @@
 
 <link rel="stylesheet" href="~/css/main.css" asp-append-version="true">
 <script src="~/js/newsSlider.js" asp-append-version="true"></script>
+
+<!-- underheader -->
+
 <section class="main-underheader">
     
     <video autoplay muted loop class="main-underheader-background">
@@ -67,64 +70,165 @@
     </div>
 </section>
 
+<!-- news -->
+
 <section>
     <div class="container">
         <h3 class="section-title">
             Новости
         </h3>
         <div class="news-slider-container">
-            <div id="slider-prev" class="news-slider-arrow news-slider-prev">
-                <img src="~/images/mainPage/arrow.svg" alt="">
-            </div>
-            <div id="slider-next" class="news-slider-arrow news-slider-next">
-                <img src="~/images/mainPage/arrow.svg" alt="">
-            </div>
             <ul id="news-slider" class="news-slider">
                 <li class="news-item">
                     <img src="~/images/mainPage/news1.jpg" alt="">
-                    <div class="news-content">
+                    <a href="" class="news-content">
                         <div class="news-date">
                             25 мая 2023
                         </div>
                         <div class="news-header">
                             "Я не играю в шахматы - в шахматах я борюсь" Александр Алёхин
                         </div>
-                    </div>
+                    </a>
                 </li>
                 <li class="news-item">
                     <img src="~/images/mainPage/news2.jpg" alt="">
-                    <div class="news-content">
+                    <a href="" class="news-content">
                         <div class="news-date">
                             23 мая 2023
                         </div>
                         <div class="news-header">
                             А вот и продолжение от студентов #Омавиат, которые трудятся на предприятиях Омской области и хотят вам кое-что рассказать
                         </div>
-                    </div>
+                    </a>
                 </li>
                 <li class="news-item">
                     <img src="~/images/mainPage/news3.jpg" alt="">
-                    <div class="news-content">
+                    <a href="" class="news-content">
                         <div class="news-date">
                             19 мая 2023
                         </div>
                         <div class="news-header">
                             Демонстрационный экзамен по компетенции R11 Предпринимательство
                         </div>
-                    </div>
+                    </a>
                 </li>
                 <li class="news-item">
                     <img src="~/images/mainPage/news4.jpg" alt="">
-                    <div class="news-content">
+                    <a href="" class="news-content">
                         <div class="news-date">
                             19 мая 2023
                         </div>
                         <div class="news-header">
                             Студенты групп ЭМ-419, ЭМ-429 Омского авиационного колледжа приступили к сдаче демонстрационного экзамена по компетенции "Электромонтаж"
                         </div>
-                    </div>
+                    </a>
                 </li>
             </ul>
+            <div class="news-slider-footer">
+                <a class="all-news" href="">
+                    Все новости
+                </a>
+                <div class="news-slider-btns">
+                    <div id="slider-prev" class="news-slider-arrow news-slider-prev">
+                        <img src="~/images/mainPage/arrow.svg" alt="">
+                    </div>
+                    <div id="slider-next" class="news-slider-arrow news-slider-next">
+                        <img src="~/images/mainPage/arrow.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- important cards -->
+
+<section>
+    <div class="container">
+        <h3 class="section-title">
+            Обучайся с нами!
+        </h3>
+        <ul class="cards-list">
+            <li class="card-item">
+                <a href="">
+                    <div class="card-item-header">
+                        Специальности и профессии
+                    </div>
+                    <div class="card-item-description">
+                        Узнай больше про наши программы обучения
+                    </div>
+                </a>
+            </li>
+            <li class="card-item">
+                <a href="">
+                    <div class="card-item-header">
+                        Проекты и события
+                    </div>
+                    <div class="card-item-description">
+                        Важная информация
+                    </div>
+                </a>
+            </li>
+            <li class="card-item">
+                <a href="">
+                    <div class="card-item-header">
+                        Повышение квалификации
+                    </div>
+                    <div class="card-item-description">
+                        Узнай больше про наши программы обучения
+                    </div>
+                </a>
+            </li>
+            <li class="card-item">
+                <a href="">
+                    <div class="card-item-header">
+                        Вопрос-ответ
+                    </div>
+                    <div class="card-item-description">
+                        Узнай больше про наши программы обучения
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- gos links -->
+
+<section>
+    <div class="container">
+        <h3 class="section-title">
+            Улучши свой город!
+        </h3>
+
+        <a class="gorod-sreda" href="https://55.gorodsreda.ru/?utm_medium=site&utm_source=cur55">
+            <img src="~/images/mainPage/gorodSreda.jpg" alt="благоустройство города Омск">
+        </a>
+
+        <div class="problems-container">
+            <div class="problems">
+                <div class="problems-info">
+                    <h4>
+                        Не убран снег, яма на дороге, не горит фонарь?
+                    </h4>
+                    <div class="problems-info-desc">
+                        Столкнулись с проблемой - сообщите о ней!
+                    </div>
+                    <button class="problems-btn" type="button">
+                        Сообщить о проблеме
+                    </button>
+                </div>
+                <div class="problems-img">
+                    <img src="~/images/mainPage/banner-fluid-bg-2.svg" alt="">
+                </div>
+
+                <div class="problems-slogan">
+                    <img src="~/images/mainPage/gosuslugi-logo.svg" alt="госуслуги">
+                    <div class="problems-slogan-description">
+                        Решаем вместе
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
