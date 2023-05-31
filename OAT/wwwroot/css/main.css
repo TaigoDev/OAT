@@ -226,12 +226,18 @@
 	display: flex;
 	justify-content: center;
 	width: fit-content;
-	max-width: 300px;
+	max-width: 350px;
 	margin: 0 auto;
 	border: 20px double;
 	border-radius: 15px;
 	background-color: var(--m-color);
 	overflow: hidden;
+}
+
+@media (width<600px){
+	.gorod-sreda{
+		max-width: 300px;
+	}
 }
 
 .gorod-sreda img{
