@@ -5,18 +5,20 @@
 
 'use strict'
 window.addEventListener("load", () => {
-    let header = document.getElementById("site-header");
+    let mainMenuWindow = document.getElementById("main-menu-window");
+    let mainMenu = document.getElementById("main-menu");
     let menuIcon = document.getElementById("menu-icon");
-    let dropdownMenuElements = document.querySelectorAll(".dropdown-menu-item");
+    let mainMenuElements = document.querySelectorAll(".main-menu-item");
 
-    dropdownMenuElements.forEach(element => {
-        element.querySelector(".dropdown-menu-item-title").addEventListener("click", () => {
-            dropdownMenuElements.forEach(element => element.classList.add("dropdown-menu-item-inactive"));
-            element.classList.toggle("dropdown-menu-item-inactive");
+    mainMenuElements.forEach(element => {
+        element.querySelector(".main-menu-item-title").addEventListener("click", () => {
+            mainMenuElements.forEach(element => element.classList.add("main-menu-item-inactive"));
+            element.classList.toggle("main-menu-item-inactive");
         });
     });
 
     menuIcon.addEventListener("click", () => {
-        header.classList.toggle("header-drop");
+        mainMenu.classList.toggle("main-menu-open");
+        mainMenuWindow.classList.toggle("main-menu-window-open");
     });
 });
