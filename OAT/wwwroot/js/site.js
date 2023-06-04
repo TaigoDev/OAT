@@ -9,6 +9,8 @@ window.addEventListener("load", () => {
     let mainMenu = document.getElementById("main-menu");
     let menuIcon = document.getElementById("menu-icon");
     let mainMenuElements = document.querySelectorAll(".main-menu-item");
+    let accordionsList = document.querySelectorAll(".accordion");
+
 
     mainMenuElements.forEach(element => {
         element.querySelector(".main-menu-item-title").addEventListener("click", () => {
@@ -18,7 +20,24 @@ window.addEventListener("load", () => {
     });
 
     menuIcon.addEventListener("click", () => {
-        mainMenu.classList.toggle("main-menu-open");
+        if (mainMenu.classList.contains("main-menu-open")) {
+            mainMenu.classList.remove("main-menu-open");
+            mainMenuElements.forEach(element => element.classList.add("main-menu-item-inactive"));
+        }
+        else {
+            mainMenu.classList.add("main-menu-open");
+        }
         mainMenuWindow.classList.toggle("main-menu-window-open");
+    });
+
+    accordionsList.forEach(accordion => {
+        accordion.querySelector(".accordion-head").insertAdjacentHTML("beforeend", `<img id="eye-icon" class="icon accordion-head-icon" src="/images/basic/accordionMore.svg" alt="версия для слабовидящих">`);
+        console.log(accordion.querySelector(".accordion-head-icon"));
+        accordion.querySelector(".accordion-head-icon").addEventListener("click", () => {
+            accordionsList.forEach(accordion => {
+                accordion.classList.remove("open");
+            });
+            accordion.classList.add("open");
+        });
     });
 });
