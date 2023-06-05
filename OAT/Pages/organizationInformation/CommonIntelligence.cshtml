@@ -4,8 +4,6 @@
     ViewData["Title"] = "Основные сведения";
 }
 
-<link rel="stylesheet" href="~/css/info.css" asp-append-version="true">
-
 <div class="container content-page">
     <section class="content">
         <h2 class="section-title">
@@ -195,8 +193,13 @@
                     </a>
                 </li>
                 <li>
-                    <a class="sidebar-link">
+                    <a href='@Url.Page("Documents")' class="sidebar-link">
                         Документы
+                    </a>
+                </li>
+                <li>
+                    <a href='@Url.Page("Education")' class="sidebar-link">
+                        Образование
                     </a>
                 </li>
             </ul>

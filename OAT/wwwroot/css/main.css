@@ -227,7 +227,7 @@
 	justify-content: center;
 	width: fit-content;
 	max-width: 350px;
-	margin: 0 auto;
+	margin: 0 auto 40px auto;
 	border: 20px double;
 	border-radius: 15px;
 	background-color: var(--m-color);
@@ -252,7 +252,7 @@
 .problems-container {
 	width: 90%;
 	height: 280px;
-	margin: 40px auto;
+	margin: 0 auto;
 	background-color: aqua;
 	border-radius: 5px;
 	background: linear-gradient(138.4deg,#38bafe 26.49%,#2d73bc 79.45%);
