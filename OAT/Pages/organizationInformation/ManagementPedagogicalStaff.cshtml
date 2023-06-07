@@ -1,0 +1,76 @@
+﻿@page
+@model ManagementPedagogicalStaffModel
+@{
+    ViewData["Title"] = "Руководство. Педагогический (научно-педагогический) состав";
+}
+
+<div class="container content-page">
+    <section class="content">
+        <h2 class="section-title">
+            Руководство. Педагогический (научно-педагогический) состав
+        </h2>
+
+        <form class="search-people">
+            <input type="search">
+            <button>
+                Поиск
+            </button>
+        </form>
+
+        <h3 class="section-subtitle">
+            Руководство
+        </h3>
+        <ul class="people-list">
+            <li class="people-item">
+                <div class="img-container">
+                    <img src="~/images/people/kolcov.jpeg" alt="">
+                </div>
+                <div class="people-item-body">
+                    <div class="people-item-body-fio">
+                        Кольцов Александр Германович
+                    </div>
+                    <div class="people-item-body-job">
+                        Директор
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
+        <h3 class="section-subtitle">
+            Заместители руководителя
+        </h3>
+        <h3 class="section-subtitle">
+            Главный бухгалтер
+        </h3>
+        <h3 class="section-subtitle">
+            Персональный состав педагогических работников
+        </h3>
+
+        
+    </section>
+    <aside class="sidebar">
+        <h3 class="sidebar-title">
+            Сведения об образовательной организации
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li>
+                    <a href='@Url.Page("CommonIntelligence")' class="sidebar-link sidebar-link-selected">
+                        Основные сведения
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link">
+                        Структура и органы управления образовательной организацией
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link">
+                        Документы
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>

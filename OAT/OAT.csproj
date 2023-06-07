@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -49,6 +49,10 @@
     <Folder Include="wwwroot\documents\organizationInformation\studentSupport\" />
     <Folder Include="wwwroot\documents\organizationInformation\library\" />
     <Folder Include="wwwroot\images\basic\" />
+    <Folder Include="wwwroot\images\organizationInformation\pedagogicalStaff\" />
+    <Folder Include="wwwroot\images\organizationInformation\accessibleEnvironment\" />
+    <Folder Include="wwwroot\images\organizationInformation\internationalCooperation\" />
+    <Folder Include="wwwroot\images\organizationInformation\library\" />
     <Folder Include="wwwroot\images\people\" />
     <Folder Include="wwwroot\videos\" />
   </ItemGroup>
