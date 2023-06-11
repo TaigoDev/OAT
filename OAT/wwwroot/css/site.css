@@ -207,10 +207,6 @@ th {
 	opacity: 0.5;
 }
 
-/*.sidebar-links li:nth-child(2n)::after {
-	height: 2px;
-}*/
-
 .sidebar-links li:last-child::after {
 	display: none;
 }
@@ -234,13 +230,15 @@ th {
 .rounded {
 	display: block;
 	max-width: min(100%, 450px);
-	margin: 0 auto;
+	margin: 0 auto 20px auto;
 	border-radius: 20px;
 }
 
 .images-list-slider-container {
 	position: relative;
-	max-width: 450px;
+	max-width: 440px;
+	margin: 0 auto 20px auto;
+	border-radius: 25px;
 	overflow: hidden;
 }
 
@@ -262,6 +260,10 @@ th {
 	transition: opacity 300ms, visibility 300ms;
 }
 
+.images-list-slider-container-btn:hover{
+	opacity: 1;
+}
+
 .images-list-slider-container-btn-inactive {
 	visibility: hidden;
 	opacity: 0;
@@ -279,8 +281,8 @@ th {
 
 .images-list-slider {
 	display: flex;
-	column-gap: 30px;
-	transform: translateX(calc((-100% - 30px) * var(--images-slider-helper)));
+	column-gap: 40px;
+	transform: translateX(calc((-100% - 40px) * var(--images-slider-helper)));
 	--images-slider-helper: 0;
 	transition: 1s transform;
 }
@@ -288,6 +290,7 @@ th {
 .images-list-slider img {
 	width: 100%;
 	border-radius: 15px;
+	transform: scale(1.02);
 }
 
 /* lists */
@@ -335,7 +338,40 @@ ul.customized li:hover:before {
 	box-shadow: 0 0 0 8px rgba(0, 0, 0, .2);
 }
 
+ol.customized {
+	display: flex;
+	flex-direction: column;
+	row-gap: 15px;
+	counter-reset: num;
+	margin: 0 0 20px 35px;
+}
 
+ol.customized li {
+    position: relative;
+    line-height: 1.3;
+}
+
+ol.customized li:hover::before {
+    transform: scale(1.25);
+}
+
+ol.customized li:before {
+    content: counter(num);
+    counter-increment: num;
+    position: absolute;
+    top: 0;
+    left: -38px;
+	display: grid;
+	place-content: center;
+    width: 20px;
+    height: 20px;
+    background: #266fa0;
+    color: var(--light-white);
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid #040c21;
+	transition: 300ms transform ease-in-out;
+}
 
 /* tables */
 
@@ -430,12 +466,21 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	margin-bottom: 20px;
 }
 
-@media (width<600px){
+.section-subtitle-small {
+	font-size: 1.4rem;
+	font-weight: 700;
+	margin-bottom: 20px;
+}
+
+@media (width<600px) {
 	.section-title{
 		font-size: 1.8rem;
 	}
 	.section-subtitle{
 		font-size: 1.5rem;
+	}
+	.section-subtitle-small {
+		font-size: 1.25rem;
 	}
 }
 
