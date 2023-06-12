@@ -1,0 +1,118 @@
+﻿@page
+@model LogisticsModel
+@{
+    ViewData["Title"] = "Материально-техническое обеспечение и оснащенность образовательного процесса";
+}
+
+<div class="container content-page">
+    <section class="content">
+        <h2 class="section-title">
+            Материально-техническое обеспечение и оснащенность образовательного процесса
+        </h2>
+        <h3 class="section-subtitle">
+            Оборудованные учебные кабинеты
+        </h3>
+
+
+
+        <h3 class="section-subtitle">
+            Проведение практических занятий
+        </h3>
+        
+        
+        
+        <h3 class="section-subtitle">
+            Библиотека
+        </h3>
+        
+        
+        
+        <h3 class="section-subtitle">
+            Спортивная деятельность
+        </h3>
+
+
+
+        <h3 class="section-subtitle">
+            Средства обучения и воспитания
+        </h3>
+
+
+
+        <h3 class="section-subtitle">
+            Условия получения знаний обучающихся
+        </h3>
+        <h4 class="section-subtitle-small">
+            Питание
+        </h4>
+        <h4 class="section-subtitle-small">
+            Охрана здоровья
+        </h4>
+
+
+
+        <h3 class="section-subtitle">
+            Доступ к информационным системам и информационно-телекоммуникационным сетям/Информационная обеспеченность
+        </h3>
+
+
+
+        <h3 class="section-subtitle">
+            Электронные образовательные ресурсы, к которым обеспечивается доступ обучающихся
+        </h3>
+        <h4 class="section-subtitle-small">
+            Собственные ресурсы (при наличии)
+        </h4>
+        <h4 class="section-subtitle-small">
+            Сторонние ресурсы (при наличии)
+        </h4>
+
+
+
+        <h3 class="section-subtitle">
+            По вопросам обращаться
+        </h3>
+
+        <div class="question-contact">
+            <div class="question-contact-head">
+                <a class="question-contact-head-img-container" href="">
+                    <img src="~/images/basic/unnamed.jpg">
+                </a>
+                <p class="question-contact-head-fio">ФИО</p>
+                <p class="question-contact-head-post">
+                    Должность
+                </p>
+            </div>
+            <div class="question-contact-body">
+                <p class="question-contact-body-address">адрес</p>
+                <p class="question-contact-body-phone">телефон</p>
+                <p class="question-contact-body-time">режим работы</p>
+            </div>
+        </div>
+        
+    </section>
+    <aside class="sidebar">
+        <h3 class="sidebar-title">
+            Сведения об образовательной организации
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li>
+                    <a href='@Url.Page("CommonIntelligence")' class="sidebar-link sidebar-link-selected">
+                        Основные сведения
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link">
+                        Структура и органы управления образовательной организацией
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link">
+                        Документы
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>

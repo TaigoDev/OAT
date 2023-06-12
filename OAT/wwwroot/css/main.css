@@ -58,7 +58,7 @@
 	border: 1.5px solid var(--matte-color);
 	cursor: pointer;
 	opacity: 0.9;
-	--rotate-arrow: 0deg;
+	--rotate-arrow: 90deg;
 	transition: opacity 500ms;
 }
 
@@ -72,12 +72,11 @@
 }
 
 .news-slider-prev {
-	--rotate-arrow: 180deg;
+	--rotate-arrow: -90deg;
 }
 
 .news-slider-arrow img {
 	width: 15px;
-	filter: invert(1);
 	transition: 500ms;
 }
 
