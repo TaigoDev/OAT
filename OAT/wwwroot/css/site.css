@@ -1274,10 +1274,11 @@ section.content::before{
 	height: 50px;
 	border-radius: 50%;
 	background-color: var(--matte-color);
+	opacity: 0.7;
 	cursor: pointer;
 
 	filter: drop-shadow(2px 4px 6px black);
-
+	transition: opacity 500ms;
 	animation-name: levitation;
 	animation-iteration-count: infinite;
 	animation-duration: 10s;
@@ -1287,6 +1288,7 @@ section.content::before{
 
 .main-menu-icon:hover{
 	animation-play-state: paused;
+	opacity: 1;
 }
 
 @keyframes levitation {
