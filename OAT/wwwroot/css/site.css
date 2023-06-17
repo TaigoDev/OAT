@@ -21,7 +21,7 @@
 	--m-d-color: hsl(var(--h), var(--s), calc(var(--l) - 30%));
 	--m-l-color: hsl(var(--h), var(--s), calc(var(--l) + 20%));
 	--matte-color: hsl(0, 0%, 15%);
-	--light-white: hsl(var(--h), 100%, 97%);
+	--light-white: hsl(var(--h), 90%, 95%);
 	/* devices */
 	--laptop-l: 1440px;
 	--laptop: 1024px;
@@ -243,7 +243,7 @@ th {
 
 .images-list-slider-container {
 	position: relative;
-	max-width: 440px;
+	width: 440px;
 	margin: 0 auto 20px auto;
 	border-radius: 25px;
 	overflow: hidden;
@@ -300,6 +300,12 @@ th {
 	transform: scale(1.02);
 }
 
+@media(width<500px){
+	.images-list-slider-container {
+		max-width: calc(100vw - 30px);
+	}
+}
+
 /* lists */
 
 ul.customized {
@@ -333,7 +339,7 @@ ul.customized li::after {
     top: 13px;
     bottom: 10px;
     width: 1px;
-    height: 120%;
+    height: calc(100% + 5px);
     border-left: 2px dotted #4F5151;
 }
 
@@ -350,7 +356,7 @@ ol.customized {
 	flex-direction: column;
 	row-gap: 15px;
 	counter-reset: num;
-	margin: 0 0 20px 35px;
+	margin: 0 0 20px 15px;
 }
 
 ol.customized li {
@@ -362,7 +368,7 @@ ol.customized li {
 }
 
 ol.customized li:hover::before {
-    transform: scale(1.25);
+    transform: scale(1.2);
 }
 
 ol.customized li:before {
@@ -380,6 +386,7 @@ ol.customized li:before {
     text-align: center;
     border-radius: 50%;
     border: 2px solid transparent;
+	box-shadow: 0 0 0px 3px #f1f1f1;
     transition: 300ms transform ease-in-out;
 }
 
@@ -480,14 +487,14 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .section-subtitle-small {
-	font-size: 1.3rem;
+	font-size: 1.25rem;
 	font-weight: 700;
 	margin-bottom: 8px;
 }
 
 @media (width<600px) {
 	.section-title{
-		font-size: 1.8rem;
+		font-size: 1.85rem;
 	}
 	.section-subtitle{
 		font-size: 1.5rem;
@@ -826,7 +833,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	background: linear-gradient(90deg, #3f5fad, #133254 35%, #040f2b);
 	color: var(--light-white);
 	border-radius: 15px;
-	border: 3px solid;
 	transition: filter 500ms;
 }
 
@@ -989,9 +995,69 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	row-gap: 10px;
 }
 
+.staff-person-basic-job {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.staff-person-basic-job::before {
+	content: "";
+	height: 20px;
+	min-width: 20px;
+	background-image: url("../images/basic/work.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.staff-person-basic-phone {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.staff-person-basic-phone::before {
+	content: "";
+	height: 20px;
+	min-width: 20px;
+	background-image: url("../images/basic/phone-call.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.staff-person-basic-phone {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.staff-person-basic-phone::before {
+	content: "";
+	height: 20px;
+	min-width: 20px;
+	background-image: url("../images/basic/phone.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.staff-person-basic-email {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.staff-person-basic-email::before {
+	content: "";
+	height: 20px;
+	min-width: 20px;
+	background-image: url("../images/basic/mail.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
 .staff-person-basic-photo {
 	position: relative;
-	max-width: 250px;
+	max-width: 225px;
 }
 
 .staff-person-basic-photo img {
@@ -1102,13 +1168,13 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .question-contact-head-img-container:hover img {
-	transform: scale(1.1);
+	transform: scale(1.2);
 }
 
 .question-contact-head-img-container img{
 	padding: 10px;
 	border-radius: 50%;
-	transition: transform 500ms ease;
+	transition: transform 600ms ease;
 }
 
 .question-contact-head-fio{
@@ -1189,6 +1255,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	width: 100vw;
 	height: 100%;
 	object-fit: cover;
+	filter: brightness(0.85);
 }
 
 .main-underheader .container {
@@ -1301,6 +1368,7 @@ body {
 	display: table;
 	padding-top: calc(var(--max-header-heigth) + 40px);
 	--max-header-heigth: 110px;
+	background-color: #f1f1f1;
 }
 
 section::before,
@@ -1320,7 +1388,7 @@ section.content::before{
 
 .footer-bottom::before,
 .footer-bottom::after {
-	height: 20px;
+	height: 10px;
 }
 
 /* HEADER */
@@ -1834,6 +1902,7 @@ section.content::before{
 	}
 	.footer-bottom-row {
 		flex-direction: column;
+		max-width: none;
 	}
 }
 
