@@ -1555,10 +1555,9 @@ section.content::before{
 	min-height: 200px;
 	padding: 20px;
 	border-radius: 20px;
-	background-color: hsl(0, 0%, 15%, 80%);
+	background-color: hsl(0, 0%, 15%, 95%);
 	visibility: hidden;
 	opacity: 0;
-	backdrop-filter: blur(10px);
 	transition: opacity 750ms, visibility 750ms;
 }
 
@@ -1665,7 +1664,6 @@ section.content::before{
 	width: 200px;
 	max-height: 180px;
 	padding: 10px 20px;
-	border: 0.5px solid transparent;
 	border-top-width: 7px;
 	border-bottom-width: 7px;
 	border-radius: 10px;
