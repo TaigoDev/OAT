@@ -14,6 +14,8 @@ window.addEventListener("load", () => {
     /* optional elements */
     let accordionsList = document.querySelectorAll(".accordion");
     let imagesSliders = document.querySelectorAll(".images-list-slider-container");
+    let plane = document.getElementById("plane");
+    let sidebar = document.getElementById("sidebar");
 
     /* main menu functional */
     mainMenuElements.forEach(element => {
@@ -81,5 +83,37 @@ window.addEventListener("load", () => {
                 sliderContainerNext.classList.add("images-list-slider-container-btn-inactive");
             }
         });
+    }
+
+    /* plane fly */
+
+    plane.addEventListener("click", () => {
+        plane.classList.add("fly");
+        smoothScroll('#sidebar', 4500);
+    });
+
+    function smoothScroll(target, duration) {
+        var targetElement = document.querySelector(target);
+        var targetPosition = targetElement.offsetTop;
+        var startPosition = window.pageYOffset;
+        var distance = targetPosition - startPosition;
+        var startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            var timeElapsed = currentTime - startTime;
+            var run = ease(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        function ease(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        requestAnimationFrame(animation);
     }
 });

@@ -149,14 +149,117 @@ th {
 }
 
 .content-page {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
-	column-gap: 50px;
+	gap: 30px 50px;
 }
 
 .content {
 	max-width: 950px;
 	width: 100%;
+}
+
+.plane {
+	position: absolute;
+	display: block;
+	left: 0;
+	top: -30px;
+	width: 50px;
+	height: 50px;
+	background-image: url("../images/basic/plane.svg");
+	background-size: cover;
+	animation: levitation 7s infinite ease-in-out;
+}
+
+.plane.fly{
+	animation: 5500ms planeFlyPC ease-in-out both;
+}
+
+@media(width<900px){
+	.plane.fly {
+		animation: 5000ms planeFly linear both;
+	}
+}
+
+@keyframes planeLevitation {
+	0%, 100% {
+		transform: translateY(-5px);
+	}
+
+	25% {
+		transform: translateY(-9px);
+	}
+
+	50% {
+		transform: rotateX(-1deg) translateY(-12px);
+	}
+
+	75% {
+		transform: rotateX(1deg) translateY(-7px);
+	}
+}
+
+@keyframes planeFlyPC {
+	0% {
+		transform: translateX(0);
+	}
+
+	40% {
+		transform: translateX(35vw) translateY(16px) rotate(6deg);
+	}
+
+	55% {
+		left: 30%;
+		transform: translateX(35vw) translateY(-12px) rotate(-2deg);
+	}
+
+	70% {
+		left: 50%;
+		transform: translateX(50vw) translateY(-16px);
+	}
+
+	100% {
+		transform: translateX(100vw) translateY(-26px);
+	}
+}
+
+@keyframes planeFly {
+	0%{
+		
+	}
+
+	25% {
+		left: 50%;
+		transform: translateY(50%);
+		position: sticky;
+	}
+
+	50% {
+		rotate: 90deg;
+	}
+
+	75% {
+		transform: translateY(50%);
+		rotate: 90deg;
+	}
+	85% {
+		left: 50%;
+		top: 80vh;
+		rotate: 0deg;
+		transform: translateX(-50%);
+		position: sticky;
+		opacity: 1;
+	}
+	100% {
+		left: 50%;
+		top: 80vh;
+		rotate: 0deg;
+		transform: translateX(-50%);
+		position: sticky;
+		visibility: hidden;
+		opacity: 0;
+	}
 }
 
 .sidebar {
@@ -218,11 +321,12 @@ th {
 }
 
 @media (width<900px){
-	.sidebar{
-		display: none;
+	.sidebar {
+		position: static;
+		max-width: none;
 	}
-	.content-page{
-		display: block;
+	.content-page {
+		flex-direction: column;
 	}
 }
 
@@ -395,7 +499,7 @@ ol.customized li:before {
 table.customized {
 	display: block;
 	min-width: 100%;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	border: 2px solid;
 	border-spacing: 2px;
 	background-color: black;
@@ -542,7 +646,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 @media (width<600px) {
-	.section-title{
+	.section-title {
 		font-size: 1.85rem;
 	}
 	.section-subtitle{
@@ -1414,7 +1518,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 body {
 	display: table;
-	padding-top: calc(var(--max-header-heigth) + 40px);
+	padding-top: calc(var(--max-header-heigth) + 45px);
 	--max-header-heigth: 110px;
 	background-color: #f1f1f1;
 }
