@@ -227,7 +227,6 @@
 	width: fit-content;
 	max-width: 350px;
 	margin: 0 auto 40px auto;
-	border: 20px double;
 	border-radius: 15px;
 	background-color: var(--m-color);
 	overflow: hidden;
@@ -241,11 +240,11 @@
 
 .gorod-sreda img{
 	width: 100%;
-	transition: 750ms;
+	transition: 700ms;
 }
 
 .gorod-sreda:hover img{
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 
 .problems-container {
