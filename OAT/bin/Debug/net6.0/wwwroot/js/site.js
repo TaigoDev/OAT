@@ -85,9 +85,11 @@ window.addEventListener("load", () => {
         });
     }
 
+    /* plane fly */
+
     plane.addEventListener("click", () => {
-        plane.style = "animation: 3500ms planeFly ease-in-out both;";
-        smoothScroll('#sidebar', 5000);
+        plane.classList.add("fly");
+        smoothScroll('#sidebar', 4500);
     });
 
     function smoothScroll(target, duration) {

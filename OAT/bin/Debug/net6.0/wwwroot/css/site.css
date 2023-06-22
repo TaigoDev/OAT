@@ -164,11 +164,22 @@ th {
 	position: absolute;
 	display: block;
 	left: 0;
-	top: -35px;
+	top: -30px;
 	width: 50px;
 	height: 50px;
 	background-image: url("../images/basic/plane.svg");
 	background-size: cover;
+	animation: levitation 7s infinite ease-in-out;
+}
+
+.plane.fly{
+	animation: 5500ms planeFlyPC ease-in-out both;
+}
+
+@media(width<900px){
+	.plane.fly {
+		animation: 5000ms planeFly linear both;
+	}
 }
 
 @keyframes planeLevitation {
@@ -186,6 +197,30 @@ th {
 
 	75% {
 		transform: rotateX(1deg) translateY(-7px);
+	}
+}
+
+@keyframes planeFlyPC {
+	0% {
+		transform: translateX(0);
+	}
+
+	40% {
+		transform: translateX(35vw) translateY(16px) rotate(6deg);
+	}
+
+	55% {
+		left: 30%;
+		transform: translateX(35vw) translateY(-12px) rotate(-2deg);
+	}
+
+	70% {
+		left: 50%;
+		transform: translateX(50vw) translateY(-16px);
+	}
+
+	100% {
+		transform: translateX(100vw) translateY(-26px);
 	}
 }
 
