@@ -57,7 +57,7 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
-bin\Debug\net6.0\OAT.staticwebassets.runtime
+bin/Debug/net6.0/OAT.staticwebassets.runtime
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
