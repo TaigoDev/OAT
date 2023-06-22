@@ -206,12 +206,12 @@ th {
 	}
 
 	40% {
-		transform: translateX(35vw) translateY(16px) rotate(6deg);
+		transform: translateX(25vw) translateY(16px) rotate(6deg);
 	}
 
 	55% {
 		left: 30%;
-		transform: translateX(35vw) translateY(-12px) rotate(-2deg);
+		transform: translateX(30vw) translateY(-2px) rotate(-2deg);
 	}
 
 	70% {
