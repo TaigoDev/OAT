@@ -1,9 +1,0 @@
-﻿/* только для тех страниц, у которых есть main-underheader */
-
-body {
-	padding-top: 0px;
-}
-
-.site-header::before{
-	display: none;
-}

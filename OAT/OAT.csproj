@@ -10,4 +10,7 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
   </ItemGroup>
+	<Target Name="TestDelete" AfterTargets="xxx">
+		<Delete Files="$(Outputpath)*.runtime.json"/>
+	</Target>
 </Project>
