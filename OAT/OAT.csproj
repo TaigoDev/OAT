@@ -10,7 +10,10 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\basic\bmw" />
+  </ItemGroup>
 	<Target Name="TestDelete" AfterTargets="xxx">
-		<Delete Files="$(Outputpath)*.runtime.json"/>
+		<Delete Files="$(Outputpath)*.runtime.json" />
 	</Target>
 </Project>
