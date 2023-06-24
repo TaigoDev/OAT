@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
         }
     });
     sliderNext.addEventListener("click", () => {
-        if (slidePosition < 5) {
+        if (slidePosition < 2) {
             slidePosition++;
             newsSlider.style = `--news-offset: ${-100 * slidePosition}%; transform: translateX(calc(var(--news-offset) - var(--news-offset-helper) * ${slidePosition}));`;
         }
