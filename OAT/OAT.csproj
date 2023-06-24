@@ -11,4 +11,10 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+	  <Content Remove="wwwroot\videos\Chto_takoe_nesanktsionirovanniy_miting.mp4" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="YamlDotNet" Version="13.1.1" />
+	</ItemGroup>
 </Project>

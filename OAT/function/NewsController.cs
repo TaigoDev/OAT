@@ -131,6 +131,7 @@ namespace OAT.function
 				"images/news/news41.jpg",
 				"images/news/news42.jpg",
 				"images/news/news43.jpg",
+				"images/news/news44.jpg",
 			};
 		}
 	}
