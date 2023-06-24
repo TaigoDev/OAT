@@ -18,21 +18,10 @@ window.addEventListener("load", () => {
     let sidebar = document.getElementById("sidebar");
 
     /* main menu functional */
-    mainMenuElements.forEach(element => {
-        element.querySelector(".main-menu-item-title").addEventListener("click", () => {
-            mainMenuElements.forEach(element => element.classList.add("main-menu-item-inactive"));
-            element.classList.toggle("main-menu-item-inactive");
-        });
-    });
 
     menuIcon.addEventListener("click", () => {
-        if (mainMenu.classList.contains("main-menu-open")) {
-            mainMenu.classList.remove("main-menu-open");
-            mainMenuElements.forEach(element => element.classList.add("main-menu-item-inactive"));
-        }
-        else {
-            mainMenu.classList.add("main-menu-open");
-        }
+        menuIcon.classList.toggle("main-menu-icon-active");
+        mainMenu.classList.toggle("main-menu-open");
         mainMenuWindow.classList.toggle("main-menu-window-open");
     });
 
