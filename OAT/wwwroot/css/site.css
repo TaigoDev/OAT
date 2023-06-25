@@ -70,6 +70,10 @@ body {
 	overflow-x: hidden;
 }
 
+label{
+	width: fit-content;
+}
+
 input:active,
 input:focus{
 	inset: var(--m-color);

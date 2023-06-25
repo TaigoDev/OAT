@@ -1,0 +1,29 @@
+﻿@page
+@model AuthorizationModel
+@{
+    ViewData["Title"] = "Авторизация";
+	Layout = "_Panel";
+}
+
+<link rel="stylesheet" href="~/css/authorization.css">
+
+<section class="container">
+	<a href='@Url.Page("/Index")' class="exit">
+		<img class="icon" src="~/images/panel/exit.svg" alt="выход">
+	</a>
+
+	<form id="login-form" class="login-form" action="">
+		<label for="login-form" class="form-title">Вход в аккаунт</label>
+		<div class="inputs">
+			<div class="input-box">
+				<label for="login">Логин</label>
+				<input id="login" type="text">
+			</div>
+			<div class="input-box">
+				<label for="password">Пароль</label>
+				<input id="password" type="password">
+			</div>
+		</div>
+		<button id="sign-in" class="sign-in">Войти</button>
+	</form>
+</section>
