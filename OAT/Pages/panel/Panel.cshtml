@@ -1,0 +1,49 @@
+﻿@page
+@model PanelModel
+@{
+    ViewData["Title"] = "Панель";
+}
+
+<link rel="stylesheet" href="~/css/panel.css">
+<script src="~/js/panel.js" asp-append-version="true"></script>
+<section class="container">
+    <form id="news" class="news">
+        <label for="news" style="font-size: 1.25rem;">
+            Новости
+        </label>
+        <br>
+        <label for="news-id">
+            ID
+        </label>
+        <input id="news-id" type="number">
+        <label for="news-title">
+            Название
+        </label>
+        <input id="news-title" type="text">
+        <label for="news-date">
+            Дата
+        </label>
+        <input id="news-date" type="date">
+        <label for="news-text">
+            Текст
+        </label>
+        <br>
+        <textarea id="news-text" style="margin-top: 20px; width: 280px; height: 200px;">Текст новости, её содержание.</textarea>
+        <br>
+        <label for="images">
+            Фото
+        </label>
+        <div class="zone">
+            <div id="dropZ">
+                <i class="fa fa-cloud-upload"></i>
+                <div>Drag and drop your file here</div>
+                <span>OR</span>
+                <div class="selectFile">
+                    <label for="file">Select file</label>
+                    <input type="file" name="files[]" id="file">
+                </div>
+                <p>File size limit : 10 MB</p>
+            </div>
+        </div>
+    </form>
+</section>

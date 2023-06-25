@@ -524,12 +524,24 @@ table.customized {
 	overflow: auto;
 }
 
+.content table.customized {
+	max-width: calc(100vw - 350px);
+}
+
 table.customized thead{
 	background-color: #464646;
     color: var(--light-white);
+}
+
+table.customized thead,
+table.customized th{
 	font-size: 1.1rem;
     font-weight: 500;
     text-align: center;
+}
+
+table.customized th{
+	padding: 5px;
 }
 
 table.customized thead td{
@@ -548,7 +560,6 @@ table.customized tbody td{
 table.customized tbody tr td:first-child{
 	font-weight: 500;
 	text-align: left;
-	
 }
 
 table.customized tbody tr:nth-child(2n){
@@ -562,7 +573,7 @@ table.customized tbody tr:nth-child(2n){
 }
 
 @media(width<900px) {
-	table.customized {
+	table.customized, .content table.customized {
 		max-width: 90vw;
 	}
 }
@@ -1302,7 +1313,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	width: 150px;
 	height: 150px;
 	border-radius: 50%;
-	background-color: hsl(226.35deg 89.66% 14.57%);
+	background-color: hsl(225 70% 20% / 1);
 	background-image: url("../images/basic/good.svg");
 	background-position: 30px 90px;
 	background-size: 30px;
@@ -1333,7 +1344,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	place-items: center;
 	width: 70%;
 	padding: 5px;
-	background-color: #005780;
+	background-color: hsl(225 70% 20% / 1);
 	border-radius: 50%;
 	overflow: hidden;
 }
@@ -1345,7 +1356,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 .question-contact-head-img-container img{
 	padding: 10px;
 	border-radius: 50%;
-	transition: transform 600ms ease;
+	transition: transform 750ms ease;
 }
 
 .question-contact-head-fio{
