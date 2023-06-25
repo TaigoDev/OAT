@@ -6,22 +6,67 @@
 
 body {
     background-color: var(--matte-color);
-    padding-top: calc(var(--panel-height) + 10px);
+    padding-top: 0;
     color: var(--light-white);
-    --panel-height: 50px;
 }
 
 section::before, section::after{
-    content: none;
+    height: 20px;
 }
 
 /* header */
-.panel-header{
+
+.panel-header {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    height: var(--panel-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: hsl(0 0% 30% / .7);
+    text-transform: uppercase;
+    font-weight: 700;
+    overflow: hidden;
+}
+
+.panel-tabs {
+    display: flex;
+    column-gap: 3px;
+    height: 100%;
+    background-color: var(--matte-color);
+}
+
+.panel-tabs li {
+    height: 200%;
+    width: 100px;
+    color: var(--matte-color);
+    background-color: hsl(0deg 0% 100% / 75%);
+    transition: transform 400ms ease-in-out, background-color 400ms ease;
+}
+
+.panel-tabs li:hover{
+    background-color: hsl(0deg 0% 100% / 90%);
+    transform: translateY(-50%);
+}
+
+.panel-tabs a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.panel-tabs span{
+    display: grid;
+    place-items: center;
+    height: 50%;
+}
+
+.panel-tabs li img {
+    display: block;
+    height: 50%;
+    margin: 0 auto;
 }
 
 .exit {
@@ -44,6 +89,8 @@ section::before, section::after{
 .exit:hover img {
 	transform: scale(1.25);
 }
+
+/* panel form */
 
 .panel-form{
     display: flex;
@@ -83,7 +130,13 @@ section::before, section::after{
 	outline: none;
 }
 
+.news-text {
+    max-width: 400px;
+    height: 200px;
+}
+
 /* NOT ME */
+
 .zone {
     background: radial-gradient(ellipse at center,#5a8aeb 0,#2f4ac9 100%);
     width: 80%;
@@ -94,12 +147,13 @@ section::before, section::after{
     transition: all 0.3s ease-out;
     box-shadow: 0 0 0 1px rgba(255,255,255,.05),inset 0 0 .25em 0 rgba(0,0,0,.25);
 }
-    .zone .selectFile {
-        height: 50px;
-        margin: 20px auto;
-        position: relative;
-        width: 200px;
-    }
+
+.zone .selectFile {
+    height: 50px;
+    margin: 20px auto;
+    position: relative;
+    width: 200px;
+}
 
 .zone label, input {
     cursor: pointer;
@@ -107,7 +161,7 @@ section::before, section::after{
     width: 100%;
     max-width: 400px;
     border-radius: 5px;          
-  }
+}
 
 .zone  label {
     background: #fff;
@@ -121,25 +175,26 @@ section::before, section::after{
     text-transform: uppercase;
     font-weight: 400;   
     box-shadow: 0 1px 1px gray;
-  }
+}
 
 .zone  input[type=file] {
     opacity: 0;
-  }
-
+}
 
 .zone.in {
     color: white;
     border-color: white;
     background: radial-gradient(ellipse at center,#EB6A5A 0,#c9402f 100%);
 }
+
 .zone.in  i {          
     color:#fff;
-  }
+}
+
 .zone.in  label {
     background: #fff;
     color:#EB6A5A;
-  }
+}
 
 .zone.hover {
     color: gray;
@@ -149,12 +204,12 @@ section::before, section::after{
 }
 .zone.hover  i {          
     color:#EB6A5A;
-  }
+}
+
 .zone.hover  label {
     background: #fff;
     color:#EB6A5A;
-  }
-
+}
 
 .zone.fade {
   transition: all 0.3s ease-out;

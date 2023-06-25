@@ -2,14 +2,47 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/panel.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/panel.css" asp-append-version="true">
 </head>
 <body>
     <header class="panel-header">
-
+        <ul class="panel-tabs">
+            <li>
+                <a href="">
+                    <span>
+                        Новости
+                    </span>
+                    <img class="icon" src="~/images/panel/news.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span>
+                        Контент
+                    </span>
+                    <img class="icon" src="~/images/panel/exit.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span>
+                        Другое
+                    </span>
+                    <img class="icon" src="~/images/panel/exit.svg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <span>
+                        Выйти
+                    </span>
+                    <img class="icon" src="~/images/panel/exit.svg" alt="">
+                </a>
+            </li>
+        </ul>
     </header>
     <main class="site-main" role="main">
         @RenderBody()

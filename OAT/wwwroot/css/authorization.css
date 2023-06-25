@@ -2,12 +2,18 @@
     page 'registration'
     
 */
-
+/* normalize */
 body {
 	display: grid;
 	place-items: center;
 	color: var(--matte-color);
 }
+
+.panel-header{
+	display: none;
+}
+
+/* authorization */
 
 .login-form {
 	position: relative;

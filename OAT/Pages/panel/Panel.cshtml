@@ -2,38 +2,49 @@
 @model PanelModel
 @{
     ViewData["Title"] = "Панель";
+    Layout = "_Panel";
 }
 
-<link rel="stylesheet" href="~/css/panel.css">
 <script src="~/js/panel.js" asp-append-version="true"></script>
 <section class="container">
-    <form id="news" class="news" method="post" enctype="multipart/form-data">
-        <label for="news" style="font-size: 1.25rem;">
+    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+        <label for="news" class="panel-form-title">
             Новости
         </label>
-        <br>
-        <label for="news-id">
-            ID
-        </label>
-        <input id="news-id" type="number">
-        <label for="news-title">
-            Название
-        </label>
-        <input id="news-title" type="text">
-        <label for="news-date">
-            Дата
-        </label>
-        <input id="news-date" type="date">
-        <label for="news-text">
-            Текст
-        </label>
-        <br>
-        <textarea id="news-text" style="margin-top: 20px; width: 280px; height: 200px;">Текст новости, её содержание.</textarea>
-        <br>
-        <label for="images">
-            Фото
-        </label>
-        <input type="file" name="uploadedFile" /><br>
+        
+        <div class="input-box">
+            <label for="news-id">
+                ID
+            </label>
+            <input id="news-id" type="number">
+        </div>
+
+        <div class="input-box">
+            <label for="news-title">
+                Название
+            </label>
+            <input id="news-title" type="text">
+        </div>
+
+        <div class="input-box">
+            <label for="news-date">
+                Дата
+            </label>
+            <input id="news-date" type="date">
+        </div>
+
+        <div class="input-box">
+            <label for="news-text">
+                Текст
+            </label>
+            <textarea class="news-text" id="news-text">Текст новости, её содержание.</textarea>
+        </div>
+        <div class="input-box">
+            <label for="images">
+                Фото
+            </label>
+            <input id="images" type="file" name="uploadedFile">
+        </div>
 
     </form>
 </section>
