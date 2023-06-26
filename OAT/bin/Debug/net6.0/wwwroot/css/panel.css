@@ -42,11 +42,12 @@ section::before, section::after{
     height: 200%;
     width: 100px;
     color: var(--matte-color);
-    background-color: var(--light-white);
-    transition: transform 400ms ease-in-out;
+    background-color: hsl(0deg 0% 100% / 75%);
+    transition: transform 400ms ease-in-out, background-color 400ms ease;
 }
 
 .panel-tabs li:hover{
+    background-color: hsl(0deg 0% 100% / 90%);
     transform: translateY(-50%);
 }
 
@@ -130,7 +131,7 @@ section::before, section::after{
 }
 
 .news-text {
-    width: 280px;
+    max-width: 400px;
     height: 200px;
 }
 

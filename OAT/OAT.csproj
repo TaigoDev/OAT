@@ -26,6 +26,13 @@
 	  <PackageReference Include="YamlDotNet" Version="13.1.1" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="wwwroot\documents\organizationInformation\jobs\" />
 	  <Folder Include="wwwroot\news\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="Pages\organizationInformation\Jobs.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
 	</ItemGroup>
 </Project>
