@@ -1493,50 +1493,50 @@
   pointer-events: auto !important;
 }
 
-.rounded {
+.customized {
   border-radius: 0.25rem !important;
 }
 
-.rounded-0 {
+.customized-0 {
   border-radius: 0 !important;
 }
 
-.rounded-1 {
+.customized-1 {
   border-radius: 0.2rem !important;
 }
 
-.rounded-2 {
+.customized-2 {
   border-radius: 0.25rem !important;
 }
 
-.rounded-3 {
+.customized-3 {
   border-radius: 0.3rem !important;
 }
 
-.rounded-circle {
+.customized-circle {
   border-radius: 50% !important;
 }
 
-.rounded-pill {
+.customized-pill {
   border-radius: 50rem !important;
 }
 
-.rounded-top {
+.customized-top {
   border-top-left-radius: 0.25rem !important;
   border-top-right-radius: 0.25rem !important;
 }
 
-.rounded-end {
+.customized-end {
   border-top-right-radius: 0.25rem !important;
   border-bottom-right-radius: 0.25rem !important;
 }
 
-.rounded-bottom {
+.customized-bottom {
   border-bottom-right-radius: 0.25rem !important;
   border-bottom-left-radius: 0.25rem !important;
 }
 
-.rounded-start {
+.customized-start {
   border-bottom-left-radius: 0.25rem !important;
   border-top-left-radius: 0.25rem !important;
 }
