@@ -166,8 +166,15 @@ th {
 }
 
 .content {
-	max-width: 950px;
+	max-width: min(950px, calc(100vw - 350px));
+	min-width: 300px;
 	width: 100%;
+}
+
+@media (width<900px){
+	.content {
+		max-width: 93vw;
+	}
 }
 
 .content a{
@@ -525,18 +532,13 @@ ol.customized li:before {
 
 table.customized {
 	display: block;
-	/*min-width: 100%;*/
-	max-width: 950px;
+	max-width: 100%;
 	width: fit-content;
 	margin-bottom: 20px;
 	border: 2px solid;
 	border-spacing: 2px;
 	background-color: black;
 	overflow: auto;
-}
-
-.content table.customized {
-	max-width: calc(100vw - 350px);
 }
 
 table.customized thead{
@@ -575,18 +577,6 @@ table.customized tbody tr td:first-child{
 
 table.customized tbody tr:nth-child(2n){
 	background: #929292;
-}
-
-@media(900px<width<1150px) {
-	table.customized {
-		max-width: calc(100vw - 350px);
-	}
-}
-
-@media(width<900px) {
-	table.customized, .content table.customized {
-		max-width: 90vw;
-	}
 }
 
 table.two-column {
@@ -1137,25 +1127,26 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 .ped-staff-pages {
 	display: flex;
-	column-gap: 15px;
+	align-items: center;
+	column-gap: 20px;
 }
 
 .ped-staff-page {
 	display: block;
-	padding: 5px 10px;
+	padding: 5px;
 	font-size: 1.2rem;
 	color: var(--light-white) !important;
 	transition: color 300ms;
 }
 
 .ped-staff-page:not(.current):hover {
-	color: white;
-	transform: scale(1.1);
+	color: white !important;
+	transform: scale(1.15);
 }
 
 .ped-staff-page.current{
-	color: gray;
-	transform: scale(0.9);
+	color: gray !important;
+	font-size: 1rem;
 }
 
 @media (width<400px){

@@ -13,10 +13,10 @@
 .library-timetable {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-columns: repeat(auto-fit, 300px);
     gap: 20px;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    max-width: 800px;
 }
 
 .library-timetable-item {
@@ -25,6 +25,7 @@
     row-gap: 10px;
     max-width: 320px;
     width: 100%;
+    min-height: 140px;
     padding: 10px;
     border: 2px solid;
     border-radius: 5px;
@@ -32,6 +33,22 @@
 
 .library-timetable-item:nth-of-type(2n){
     margin-left: auto;
+}
+
+.library-timetable-item:nth-child(1){
+    box-shadow: -6px -6px 0px -2px;
+}
+
+.library-timetable-item:nth-child(2){
+    box-shadow: 6px -6px 0px -2px;
+}
+
+.library-timetable-item:nth-child(3){
+    box-shadow: -6px 6px 0px -2px;
+}
+
+.library-timetable-item:nth-child(4){
+    box-shadow: 6px 6px 0px -2px;
 }
 
 .library-timetable-item-head {
@@ -53,4 +70,23 @@
 
 .library-timetable-item-body-row span:first-of-type {
     width: 10ch;
+}
+
+@media(600px<width<1000px){
+    .library-timetable {
+        grid-template-columns: repeat(auto-fit, 300px);
+    }
+    .library-timetable-item {
+        box-shadow: 0px 7px 2px -2px !important;
+    }
+}
+
+@media(width<600px) {
+    .library-timetable {
+        grid-template-columns: repeat(auto-fit, 270px);
+        justify-content: center;
+    }
+    .library-timetable-item {
+        box-shadow: 0px 7px 2px -2px !important;
+    }
 }
