@@ -28,22 +28,23 @@ namespace OAT.function
 			foreach (string file in files)
 				try
 				{
-					using StreamReader reader = new StreamReader(file);
-
-					News.Add(new NewsData
-					{
-						id = int.Parse(Path.GetFileName(file).Replace(".yaml", "")) - 1,
-						data = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance)
-						.Build().Deserialize<NewsDataYML>(reader.ReadToEnd()),
-					});
-				}
+                    var news = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build().Deserialize<NewsDataYML>(File.ReadAllText(file));
+                    News.Add(new NewsData
+                    {
+                        id = int.Parse(Path.GetFileName(file).Replace(".yaml", "")),
+                        short_description = string.Join(" ", news.text.GetWords(30)),
+                        data = news,
+                    });
+                }
 				catch (Exception ex)
 				{
 					Console.WriteLine($"OAT.Core.News: File upload error {Path.GetFileName(file)}");
 				}
 
 			News = News.OrderBy(x => x.id).ToList();
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            News.Reverse();
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 			{
 				var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
 
@@ -77,12 +78,13 @@ namespace OAT.function
 					foreach (string file in files)
 						try
 						{
-							using StreamReader reader = new StreamReader(file);
+							var news = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build().Deserialize<NewsDataYML>(File.ReadAllText(file));
 							News.Add(new NewsData
 							{
-								id = int.Parse(Path.GetFileName(file).Replace(".yaml", "")) - 1,
-								data = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build().Deserialize<NewsDataYML>(reader.ReadToEnd()),
-							});
+								id = int.Parse(Path.GetFileName(file).Replace(".yaml", "")),
+								short_description = string.Join(" ", news.text.GetWords(30)),
+								data = news,
+							}) ;
 						}
 						catch (Exception ex)
 						{
@@ -91,7 +93,9 @@ namespace OAT.function
 				}
 				Console.WriteLine($"OAT.Core.News: We successful load updated news");
 				News = News.OrderBy(x => x.id).ToList();
-				Thread.Sleep(300000);
+				News.Reverse();
+
+                Thread.Sleep(30000);
 			}
 		}).Start();
 		private static void CopyFilesRecursively(string sourcePath, string targetPath)
@@ -103,9 +107,10 @@ namespace OAT.function
 				File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
 		}
 
-		public class NewsData
+        public class NewsData
 		{
 			public int id { get; set; }
+			public string short_description { get; set; }
 			public NewsDataYML data { get; set; }
 		}
 
@@ -133,6 +138,16 @@ namespace OAT.function
 				"images/news/news43.jpg",
 				"images/news/news44.jpg",
 			};
-		}
+
+			public NewsDataYML(string date, string title, string text, List<string> photos)
+			{
+				this.date = date;
+				this.title = title;
+				this.text = text;
+				this.photos = photos;
+			}
+            public NewsDataYML() { }
+
+        }
 	}
 }

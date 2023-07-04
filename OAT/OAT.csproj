@@ -10,13 +10,20 @@
 		<None Include="wwwroot\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Include="*.yml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="wwwroot\news\**" />
+	  <Content Remove="wwwroot\news\**" />
+	  <EmbeddedResource Remove="wwwroot\news\**" />
+	  <None Remove="wwwroot\news\**" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Remove="wwwroot\css\allNews.css" />
 	  <Content Remove="wwwroot\css\authorization.css" />
-	  <Content Remove="wwwroot\css\library.css" />
 	  <Content Remove="wwwroot\css\news.css" />
-	  <Content Remove="wwwroot\css\organizationInformation\menagementPedagogicalStaff.css" />
 	  <Content Remove="wwwroot\css\organizationInformation\vacancies.css" />
 	  <Content Remove="wwwroot\images\panel\exit.svg" />
 	  <Content Remove="wwwroot\js\panel.js" />
@@ -25,16 +32,12 @@
 	  <Content Remove="wwwroot\videos\Pravila_povedeniya_v_sotsialynih_setyah.mp4" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="HtmlAgilityPack" Version="1.11.48" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="YamlDotNet" Version="13.1.1" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="wwwroot\documents\organizationInformation\jobs\" />
-	  <Folder Include="wwwroot\news\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Content Update="Pages\organizationInformation\Jobs.cshtml">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
+	  <Folder Include="wwwroot\images\news\" />
+	  <Folder Include="bitrix\" />
 	</ItemGroup>
 </Project>

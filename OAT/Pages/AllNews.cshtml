@@ -1,4 +1,5 @@
 ﻿@page
+@using OAT.function;
 @model AllNewsModel
 @{
     ViewData["Title"] = "Все новости";
@@ -11,83 +12,28 @@
 		Новости Омского авиационного колледжа имени Н.Е. Жуковского
     </h3>
 	<div class="news-list">
-
-		<div class="news-item">
-			<div class="news-item-img">
-				<img src="~/images/people/savinAntonViktorovic.png" alt="">
-			</div>
-			<div class="news-item-content">
-				<div class="news-item-date">
-					Дата
+		@foreach(var news in NewsController.News)
+		{
+			<div class="news-item">
+				<div class="news-item-img">
+					<img src="@news.data.photos[0]" alt="">
 				</div>
-				<div class="news-item-title">
-					Название
-				</div>
-				<div class="news-item-info">
-					Описание, оно будет немного побольше
-					<a href="">
-						ещё...
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="news-item">
-			<div class="news-item-img">
-				<img src="~/images/people/savinAntonViktorovic.png" alt="">
-			</div>
-			<div class="news-item-content">
-				<div class="news-item-date">
-					Дата
-				</div>
-				<div class="news-item-title">
-					Название
-				</div>
-				<div class="news-item-info">
-					Описание, оно будет немного побольше
-					<a href="">
-						ещё...
-					</a>
+				<div class="news-item-content">
+					<div class="news-item-date">
+						@news.data.date
+					</div>
+					<div class="news-item-title">
+						@news.data.title
+					</div>
+					<div class="news-item-info">
+						@news.short_description
+						<a href="~/news?id=@news.id">
+							ещё...
+						</a>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="news-item">
-			<div class="news-item-img">
-				<img src="~/images/people/savinAntonViktorovic.png" alt="">
-			</div>
-			<div class="news-item-content">
-				<div class="news-item-date">
-					Дата
-				</div>
-				<div class="news-item-title">
-					Название
-				</div>
-				<div class="news-item-info">
-					Описание, оно будет немного побольше
-					<a href="">
-						ещё...
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="news-item">
-			<div class="news-item-img">
-				<img src="~/images/people/savinAntonViktorovic.png" alt="">
-			</div>
-			<div class="news-item-content">
-				<div class="news-item-date">
-					Дата
-				</div>
-				<div class="news-item-title">
-					Название
-				</div>
-				<div class="news-item-info">
-					Описание, оно будет немного побольше
-					<a href="">
-						ещё...
-					</a>
-				</div>
-			</div>
-		</div>
+		}
 				
 	</div>
 </section>
