@@ -32,7 +32,7 @@ app.Use(async (context, next) => {
 	var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value);
 	if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
 	{
-		context.Response.Redirect($"{ProxyController.config.MainUrl}{OnNewSite}");
+		context.Response.Redirect($"{ProxyController.config.MainUrl}/{OnNewSite}");
 		return ;
 	}
     await next();
