@@ -10,7 +10,7 @@ public class UrlsContoller
         if (cPage.Count() != 0)
             return cPage.FirstOrDefault()?.current;
 
-        var page = pages.Where(p => p.maps.Where(m => $"/{m}" == path || $"/{m}/" == path).Count() == 0 ? false : true).FirstOrDefault();
+        var page = pages.Where(p => $"/{p}" == path || $"/{p}/" == path).FirstOrDefault();
         return page == null ? null : page.current;
     }
 
@@ -48,12 +48,12 @@ public class UrlsContoller
 public class IPage
 {
     public string current { get; set; }
-    public string[] maps { get; set; }
+    public string map { get; set; }
 
-    public IPage(string current, params string[] maps)
+    public IPage(string map, string current)
     {
         this.current = current;
-        this.maps = maps;
+        this.map = map;
     }
 
 }
