@@ -12,12 +12,6 @@
             Новости
         </label>
         
-        <div class="input-box">
-            <label for="news-id">
-                ID
-            </label>
-            <input id="news-id" type="number">
-        </div>
 
         <div class="input-box">
             <label for="news-title">
@@ -43,8 +37,38 @@
             <label for="images">
                 Фото
             </label>
-            <input id="images" type="file" name="uploadedFile">
+            <input type="file" name="postedFiles" id="files" name="files" multiple="multiple" />
         </div>
+        <input type="submit" class="sign-in" value="Отправить" onclick="AjaxFormSubmit()" />
 
     </form>
 </section>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    function AjaxFormSubmit() {
+        //Set the URL.
+        var url = "@ProxyController.config.MainUrl/api/news/upload";
+        //Add the Field values to FormData object.
+        var formData = new FormData();
+        var fileUpload = $("#files").get(0);
+        var files = fileUpload.files;
+        formData.append("title", $("#news-title").val());
+        formData.append("date", $("#news-date").val());
+        formData.append("text", $("#news-text").val());
+        for (var i = 0; i < files.length; i++) {
+            formData.append("files", files[i]);
+        }
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (response) {
+            if (response.Status === "success") {
+                $("#lblMessage").html(response.Message);
+            }
+        });
+    }
+</script>

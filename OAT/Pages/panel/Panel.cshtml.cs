@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages
 {
+	[Authorize]
 	public class PanelModel : PageModel
 	{
 		private readonly ILogger<IndexModel> _logger;
