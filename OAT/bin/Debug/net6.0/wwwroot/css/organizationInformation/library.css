@@ -1,8 +1,10 @@
 ﻿.library-logo {
     max-width: min(100%, 250px) !important;
     border-radius: 50% !important;
-    border: 10px double #0a0a0a8c !important;
-    background-color: #252525 !important; /* #0546FA */
+    border: 12px solid #194b89 !important;
+    border-inline: 12px solid #1d3f6f !important;
+    background: radial-gradient(#e7e7e7 50%, #0500ff69 75%) !important;
+    /* background-color: #e4e4e4 !important; */
 }
 
 .library-main-text p{

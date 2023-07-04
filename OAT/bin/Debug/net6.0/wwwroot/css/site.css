@@ -317,6 +317,7 @@ th {
 	background-color: hsl(0 0% 25% / 1);
 	border-radius: 0 0 calc(var(--sidebar-border-radius) - var(--sidebar-border-width) - 1px) calc(var(--sidebar-border-radius) - var(--sidebar-border-width) - 1px);
 	color: var(--light-white);
+	font-size: 0.95rem;
 }
 
 .sidebar-links {
@@ -1017,20 +1018,17 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	background: linear-gradient(90deg, #3f5fad, #133254 35%, #040f2b);
 	color: var(--light-white);
 	border-radius: 15px;
-	transition: filter 500ms;
+	opacity: 0.95;
+	transition: opacity 500ms;
 }
 
 .people-item:hover{
-	filter: brightness(0.9);
-}
-
-.people-item:hover .people-item-img-container{
-	filter: brightness(1.1);
+	opacity: 1;
 }
 
 .people-item-img-container {
 	display: block;
-	height: 140px;
+	min-height: 140px;
 	max-height: 140px;
 	min-width: 140px;
 	max-width: 140px;
@@ -1039,7 +1037,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	border-radius: 50%;
 	background-color: #1975bbba;
 	overflow: hidden;
-	transition: filter 500ms;
 }
 
 .people-item-img-container img {
@@ -1076,85 +1073,10 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	font-size: 1.05rem;
 }
 
-@media(width<500px){
+@media(width<550px){
 	.people-item {
 		max-width: none;
 		padding: 5px;
-	}
-}
-
-/* people nav */
-
-.ped-staff-nav-container {
-	display: flex;
-	column-gap: 20px;
-	justify-content: center;
-	margin: 15px;
-}
-
-.ped-staff-nav {
-	display: flex;
-	align-items: center;
-	column-gap: 15px;
-	padding: 10px 15px;
-	border-radius: 15px;
-	background-color: var(--matte-color);
-}
-
-.ped-staff-arrow {
-	display: grid;
-	padding: 7px;
-	place-items: center;
-	background-color: #474747;
-	border-radius: 50%;
-}
-
-.ped-staff-prev {
-	transform: rotate(-90deg);
-}
-
-.ped-staff-prev:hover img{
-	transform: translateY(-3px);
-}
-
-.ped-staff-next {
-	transform: rotate(90deg);
-}
-
-.ped-staff-next:hover img{
-	transform: translateY(-3px);
-}
-
-.ped-staff-pages {
-	display: flex;
-	align-items: center;
-	column-gap: 20px;
-}
-
-.ped-staff-page {
-	display: block;
-	padding: 5px;
-	font-size: 1.2rem;
-	color: var(--light-white) !important;
-	transition: color 300ms;
-}
-
-.ped-staff-page:not(.current):hover {
-	color: white !important;
-	transform: scale(1.15);
-}
-
-.ped-staff-page.current{
-	color: gray !important;
-	font-size: 1rem;
-}
-
-@media (width<400px){
-	.ped-staff-nav {
-		column-gap: 10px;
-	}
-	.ped-staff-pages {
-		column-gap: 2px;
 	}
 }
 
