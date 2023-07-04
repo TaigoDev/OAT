@@ -317,6 +317,7 @@ th {
 	background-color: hsl(0 0% 25% / 1);
 	border-radius: 0 0 calc(var(--sidebar-border-radius) - var(--sidebar-border-width) - 1px) calc(var(--sidebar-border-radius) - var(--sidebar-border-width) - 1px);
 	color: var(--light-white);
+	font-size: 0.95rem;
 }
 
 .sidebar-links {
@@ -1017,15 +1018,12 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	background: linear-gradient(90deg, #3f5fad, #133254 35%, #040f2b);
 	color: var(--light-white);
 	border-radius: 15px;
-	transition: filter 500ms;
+	opacity: 0.95;
+	transition: opacity 500ms;
 }
 
 .people-item:hover{
-	filter: brightness(0.9);
-}
-
-.people-item:hover .people-item-img-container{
-	filter: brightness(1.1);
+	opacity: 1;
 }
 
 .people-item-img-container {
@@ -1039,7 +1037,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	border-radius: 50%;
 	background-color: #1975bbba;
 	overflow: hidden;
-	transition: filter 500ms;
 }
 
 .people-item-img-container img {
