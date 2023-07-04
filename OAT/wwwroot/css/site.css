@@ -926,6 +926,81 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	}
 }
 
+/* pages navigation */
+
+.pages-nav-container {
+	display: flex;
+	column-gap: 20px;
+	justify-content: center;
+	margin: 35px 15px 15px 15px;
+}
+
+.pages-nav {
+	display: flex;
+	align-items: center;
+	column-gap: 15px;
+	padding: 10px 15px;
+	border-radius: 15px;
+	background-color: var(--matte-color);
+}
+
+.pages-nav-arrow {
+	display: grid;
+	padding: 7px;
+	place-items: center;
+	background-color: #474747;
+	border-radius: 50%;
+}
+
+.pages-nav-prev {
+	transform: rotate(-90deg);
+}
+
+.pages-nav-prev:hover img{
+	transform: translateY(-3px);
+}
+
+.pages-nav-next {
+	transform: rotate(90deg);
+}
+
+.pages-nav-next:hover img{
+	transform: translateY(-3px);
+}
+
+.pages-nav-pages-list {
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
+}
+
+.pages-nav-pages-list-item {
+	display: block;
+	padding: 5px;
+	font-size: 1.2rem;
+	color: var(--light-white) !important;
+	transition: color 300ms, transform 200ms;
+}
+
+.pages-nav-pages-list-item:not(.current):hover {
+	color: white !important;
+	transform: scale(1.15);
+}
+
+.pages-nav-pages-list-item.current{
+	color: gray !important;
+	font-size: 1rem;
+}
+
+@media (width<400px){
+	.pages-nav-pages-list {
+		column-gap: 10px;
+	}
+	.pages-nav-pages-list-item {
+		column-gap: 2px;
+	}
+}
+
 /* people search */
 
 .search-people {

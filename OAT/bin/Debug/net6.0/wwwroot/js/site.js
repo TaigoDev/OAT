@@ -50,6 +50,9 @@ window.addEventListener("load", () => {
         let countOfImages = slider.querySelectorAll("img").length;
         let currentImg = 0;
         console.log(countOfImages);
+        if (countOfImages==1) {
+            sliderContainerNext.classList.add("images-list-slider-container-btn-inactive");
+        }
 
         sliderContainerPrev.addEventListener("click", () => {
             if (currentImg > 0) {
