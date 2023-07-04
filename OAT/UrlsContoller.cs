@@ -18,9 +18,28 @@ public class UrlsContoller
     {
         var urls = new List<IPage>()
         {
+            /*
+             * Если страница готова, то в первом аргументе прописываем новую относительную ссылку, 
+             * а во втором аргументе - относительную ссылку битриксу
+             * 
+             * Если страница не готова, то в первом аргументе прописываем относительную ссылку битрикса со "/" в конце!,
+             * а во втором аргументе - новую относительную ссылку
+             * Во всех предыдущих случаях на других страницах мы указываем новую относительную ссылку
+             * 
+             * Если файл страницы вообще отсутствует, то на других страницах, ссылающихся на данную, 
+             * мы указываем относительную ссылку на битрикс. В файле UrlsController ничего не указываем.
+             */ 
+            // main links
             new IPage("allnews", "novosti"),
             new IPage("applicant", "abitur"),
-            new IPage("sveden/ovz/", "organizationInformation/AccessibleEnvironment"),
+            // organization information
+            new IPage("organizationInformation/AccessibleEnvironment", "sveden/ovz"),
+            new IPage("organizationInformation/CommonIntelligence", "sveden/common"),
+            new IPage("organizationInformation/Jobs", "sveden/vacant"),
+            new IPage("organizationInformation/Vacancies", "sveden/vacancy"),
+
+            // limitation
+            //new IPage("sveden/ovz/", "organizationInformation/AccessibleEnvironment"),
         };
         pages = urls;
     }
@@ -31,7 +50,8 @@ public class IPage
     public string current { get; set; }
     public string[] maps { get; set; }
 
-    public IPage(string current, params string[] maps)    {
+    public IPage(string current, params string[] maps)
+    {
         this.current = current;
         this.maps = maps;
     }
