@@ -326,12 +326,12 @@ th {
 	row-gap: 5px;
 }
 
-.sidebar-links li:hover::after {
+.sidebar-link:hover::after {
 	background-color: hsl(0 0% 70% / 1);
 	opacity: 1;
 }
 
-.sidebar-links li::after {
+.sidebar-link::after {
 	content: "";
 	display: block;
 	width: 100%;
@@ -342,8 +342,17 @@ th {
 	transition: opacity 200ms;
 }
 
-.sidebar-links li:last-child::after {
+.sidebar-link:last-child::after {
 	display: none;
+}
+
+.sidebar-link-selected{
+	font-weight: 500;
+}
+
+.sidebar-link-selected::after {
+	background-color: hsl(0 0% 70% / 1);
+	opacity: 1;
 }
 
 @media (width<900px){
