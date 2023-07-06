@@ -7,25 +7,23 @@
 
 <link rel="stylesheet" href="~/css/authorization.css">
 
-<section class="container">
-	<a href='@Url.Page("/Index")' class="exit">
-		<img class="icon" src="~/images/panel/exit.svg" alt="выход">
-	</a>
+<a href='@Url.Page("/Index")' class="exit">
+	<img class="icon" src="~/images/panel/exit.svg" alt="выход">
+</a>
 
-	<form id="login-form" class="login-form" action="/api/login">
-			@if (HttpContext.Request.Query["status"] == "fail")
-			{
-				<h8> Логин или пароль от аккаунта неверный!</h8>
-			}
-		<label for="login-form" class="form-title">Вход в аккаунт</label>
-			<div class="input-box">
-				<label for="login">Логин</label>
-				<input id="login" name="username" type="text">
-			</div>
-			<div class="input-box">
-				<label for="password">Пароль</label>
-				<input id="password" name="password" type="password">
-			</div>
-		<input type="submit" class="sign-in" value="Войти в профиль" />
-	</form>
-</section>
+<form id="login-form" class="login-form" action="/api/login">
+	@if (HttpContext.Request.Query["status"] == "fail")
+	{
+		<div>Логин или пароль от аккаунта неверный!</div>
+	}
+	<label for="login-form" class="form-title">Вход в аккаунт</label>
+	<div class="input-box">
+		<label for="login">Логин</label>
+		<input id="login" name="username" type="text">
+	</div>
+	<div class="input-box">
+		<label for="password">Пароль</label>
+		<input id="password" name="password" type="password">
+	</div>
+	<button type="submit" class="sign-in" value="Войти в профиль">Войти в профиль</button>
+</form>

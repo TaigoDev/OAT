@@ -31,15 +31,17 @@
             <label for="news-text">
                 Текст
             </label>
-            <textarea class="news-text" id="news-text">Текст новости, её содержание.</textarea>
+            <textarea class="customized" id="news-text">Текст новости, её содержание.</textarea>
         </div>
         <div class="input-box">
             <label for="images">
                 Фото
             </label>
-            <input type="file" name="postedFiles" id="files" name="files" multiple="multiple" />
+            <input type="file" name="postedFiles" id="files" name="files" multiple="multiple">
         </div>
-        <input type="submit" class="sign-in" value="Отправить" onclick="AjaxFormSubmit()" />
+        <button type="submit" class="panel-form-send" value="Отправить" onclick="AjaxFormSubmit()" multiple>
+            Отправить
+        </button>
 
     </form>
 </section>

@@ -10,7 +10,30 @@ body {
 	display: none;
 }
 
-/* authorization */
+/* exit */
+
+.exit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--matte-color);
+    border-radius: 0 0 0 50%;
+    /*border-radius: 50% 0% 50% 50%;*/
+}
+
+.exit img {
+	transform: scale(1.15);
+}
+
+.exit:hover img {
+	transform: scale(1.25);
+}
+
+/* authorization form */
 
 .login-form {
 	position: relative;
