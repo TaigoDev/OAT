@@ -94,6 +94,7 @@ input::-webkit-inner-spin-button {
 }
 
 button {
+	font: inherit;
 	cursor: pointer;
 	background: none;
 	outline: none;
@@ -185,7 +186,7 @@ th {
 	position: absolute;
 	display: block;
 	left: 0;
-	top: -30px;
+	top: -32px;
 	width: 50px;
 	height: 50px;
 	background-image: url("../images/basic/plane.svg");
@@ -774,7 +775,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 .section-title {
 	position: relative;
 	width: fit-content;
-	margin-bottom: 45px;
+	margin-bottom: 40px;
 	font-size: 2.2rem;
 	letter-spacing: 1.5px;
 	word-spacing: 1px;
@@ -1588,7 +1589,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 body {
 	display: table;
-	padding-top: calc(var(--max-header-heigth) + 45px);
+	padding-top: calc(var(--max-header-heigth) + 50px);
 	--max-header-heigth: 110px;
 	background-color: #f1f1f1;
 }

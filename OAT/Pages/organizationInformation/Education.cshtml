@@ -9,46 +9,72 @@
         <h2 class="section-title">
             Образование
         </h2>
+
+        <ul class="page-navigation">
+            <li>
+                <a href="#info">
+                    Содержание каждой программы
+                </a>
+            </li>
+            <li>
+                <a href="#spo-specialities">
+                    Образовательные программы по специальностям СПО
+                </a>
+            </li>
+            <li>
+                <a href="#spo-profession">
+                    Образовательные программы по профессиям СПО
+                </a>
+            </li>
+            <li>
+                <a href="#license">
+                    Лицензия
+                </a>
+            </li>
+        </ul>
+
+
+        <h3 id="info" class="section-subtitle">
+            Информация по каждой программе
+        </h3>
+        <ul class="customized">
+            <li>
+                об уровнях образования
+            </li>
+            <li>
+                о кодах и наименовании профессий, специальностей по которым осуществляется подготовка в бюджетном профессиональном образовательном учреждении Омской области «Омский авиационный колледж им.Н.Е. Жуковского»
+            </li>
+            <li>
+                о формах обучения
+            </li>
+            <li>
+                о нормативном сроке обучения
+            </li>
+            <li>
+                о сроке действия государственной аккредитации образовательной программы (при наличии государственной аккредитации)
+            </li>
+            <li>
+                о численности обучающихся по реализуемым образовательным программам (за счет бюджетных ассигнований бюджета Омской области и по договорам об образовании за счет средств физических лиц)
+            </li>
+            <li>
+                о методических и об иных документах, разработанных образовательной организацией для обеспечения образовательного процесса
+            </li>
+            <li>
+                о результатах приема по каждой профессии, специальности (по которым предусмотрены вступительные испытания)
+            </li>
+            <li>
+                о результатах перевода, восстановления и отчисления
+            </li>
+        </ul>
         <p>
             <a target="_blank" href="http://www.consultant.ru/document/cons_doc_LAW_140174/">
                 Федеральный закон от 29.12.2012 N 273-ФЗ (ред. от 29.12.2017) «Об образовании в Российской Федерации»
             </a>
             В бюджетном профессиональном образовательном учреждении Омской области «Омский авиационный колледж им.Н.Е. Жуковского» образование осуществляется на русском языке.
         </p>
-        <b>Данный раздел сайта содержит информацию:</b>
-        <ul class="customized">
-            <li>
-                об уровнях образования;
-            </li>
-            <li>
-                о кодах и наименовании профессий, специальностей по которым осуществляется подготовка в бюджетном профессиональном образовательном учреждении Омской области «Омский авиационный колледж им.Н.Е. Жуковского»
-            </li>
-            <li>
-                о формах обучения;
-            </li>
-            <li>
-                о нормативном сроке обучения;
-            </li>
-            <li>
-                о сроке действия государственной аккредитации образовательной программы (при наличии государственной аккредитации);
-            </li>
-            <li>
-                о численности обучающихся по реализуемым образовательным программам (за счет бюджетных ассигнований бюджета Омской области и по договорам об образовании за счет средств физических лиц);
-            </li>
-            <li>
-                о методических и об иных документах, разработанных образовательной организацией для обеспечения образовательного процесса;
-            </li>
-            <li>
-                о результатах приема по каждой профессии, специальности (по которым предусмотрены вступительные испытания),
-            </li>
-            <li>
-                о результатах перевода, восстановления и отчисления.
-            </li>
-        </ul>
 
-        <!-- PEOPLE -->
 
-        <h3 class="section-subtitle">
+        <h3 id="spo-specialities" class="section-subtitle">
             Образовательные программы по специальностям СПО
         </h3>
 
@@ -4906,7 +4932,8 @@
             </div>
         </div>
 
-        <h3 class="section-subtitle">
+
+        <h3 id="spo-profession" class="section-subtitle">
             Образовательные программы по профессиям СПО
         </h3>
 
@@ -7117,7 +7144,8 @@
             </div>
         </div>
 
-        <h3 class="section-subtitle">
+
+        <h3 id="license" class="section-subtitle">
             Лицензия на осуществление образовательной деятельности
         </h3>
         
@@ -7131,25 +7159,100 @@
             </div>
         </div>
     </section>
-    <aside class="sidebar">
+    <aside id="sidebar" class="sidebar long">
         <h3 class="sidebar-title">
             Сведения об образовательной организации
         </h3>
         <nav class="sidebar-body">
             <ul class="sidebar-links">
-                <li>
-                    <a href='@Url.Page("CommonIntelligence")' class="sidebar-link sidebar-link-selected">
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href='@Url.Page("CommonIntelligence")'>
                         Основные сведения
                     </a>
                 </li>
-                <li>
-                    <a class="sidebar-link">
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Structure")'>
                         Структура и органы управления образовательной организацией
                     </a>
                 </li>
-                <li>
-                    <a class="sidebar-link">
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Documents")'>
                         Документы
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Education")'>
+                        Образование
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("EducationalStandards")'>
+                        Образовательные стандарты
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("EducationalProcess")'>
+                        Организация воспитательного процесса
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("ManagementPedagogicalStaff")'>
+                        Руководство. Педагогический (научно-педагогический) состав
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Logistics")'>
+                        Материально-техническое обеспечение и оснащенность образовательного процесса
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("StudentSupport")'>
+                        Стипендии и меры поддержки обучающихся
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("PaidEducationalServices")'>
+                        Платные образовательные услуги
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("FinancialEconomicActivity")'>
+                        Финансово-хозяйственная деятельность
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='http://localhost:20045/sveden/ovz/'>
+                        Доступная среда
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("InternationalCooperation")'>
+                        Международное сотрудничество
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Terrorism")'>
+                        Противодействие экстремизму и терроризму
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Corruption")'>
+                        Противодействие коррупции
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Jobs")'>
+                        Вакантные места для приема
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Vacancies")'>
+                        Вакансии
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Library")'>
+                        Библиотека
                     </a>
                 </li>
             </ul>

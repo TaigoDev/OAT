@@ -7,9 +7,37 @@
 <link rel="stylesheet" href="~/css/organizationInformation/library.css" asp-append-version="true">
 <div class="container content-page">
     <section class="content">
+        <a id="plane" class="plane" href="#sidebar"></a>
         <h2 class="section-title">
             Библиотека
         </h2>
+
+        <ul class="page-navigation">
+            <li>
+                <a href="#about-library">
+                    О библиотеке
+                </a>
+            </li>
+            <li>
+                <a href="#work-timetable">
+                    График работы
+                </a>
+            </li>
+            <li>
+                <a href="#people">
+                    Сотрудники
+                </a>
+            </li>
+            <li>
+                <a href="#ebs">
+                    Электронно-библиотечные системы
+                </a>
+            </li>
+        </ul>
+
+        <h3 id="about-library" class="section-subtitle">
+            Главное о библиотеке
+        </h3>
         <img class="customized library-logo" src="~/images/organizationInformation/library/biblioteka_logo.png" alt="">
         <div class="library-main-text">
             <p>
@@ -42,7 +70,7 @@
         </div>
         
 
-        <h3 class="section-subtitle">
+        <h3 id="work-timetable" class="section-subtitle">
             График работы библиотеки
         </h3>
         <div class="library-timetable">
@@ -152,7 +180,7 @@
         </div>
 
 
-        <h3 class="section-subtitle">
+        <h3 id="people" class="section-subtitle">
             Сотрудники библиотеки
         </h3>
         <ul class="people-list">
@@ -224,7 +252,7 @@
         </ul>
 
 
-        <h3 class="section-subtitle">
+        <h3 id="ebs" class="section-subtitle">
             Электронно-библиотечные системы
         </h3>
         <h4 class="section-subtitle-small">
@@ -237,7 +265,6 @@
             За доступом в электронно-библиотечную систему обратитесь в библиотеку.
         </p>
         <img class="customized" src="~/images/organizationInformation/library/lan.jpg" alt="">
-
         <h4 class="section-subtitle-small">
             ibooks
         </h4>
