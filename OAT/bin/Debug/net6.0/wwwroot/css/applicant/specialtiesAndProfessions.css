@@ -1,0 +1,65 @@
+﻿/* list of specialities */
+
+.specialities-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 385px);
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+.specialities-item {
+	display: flex;
+	align-items: center;
+	column-gap: 15px;
+	min-height: 175px;
+	padding: 10px;
+	border: 5px solid #1d3682;
+	background-color: #1d1d3f;
+	border-radius: 10px;
+	transition: transform 300ms;
+}
+
+.specialities-item img{
+	height: 130px;
+	border-radius: 10px;
+	/*border: 2px solid;*/
+	transition: transform 300ms;
+}
+
+.specialities-item-text {
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+	height: 90%;
+}
+
+.specialities-item-text-code {
+	font-size: 0.9rem;
+}
+
+.specialities-item-text-name{
+	font-weight: 700;
+}
+
+.specialities-item:hover{
+	transform: scale(1.025);
+}
+
+.specialities-item img:hover {
+	transform: scale(1.05);
+}
+
+@media (width<400px){
+	.specialities-list{
+		grid-template-columns: 1fr;
+	}
+	.specialities-item {
+		flex-direction: column;
+		align-items: center;
+		height: auto;
+		text-align: center;
+	}
+	.specialities-item img{
+		max-height: 100px;
+	}
+}
