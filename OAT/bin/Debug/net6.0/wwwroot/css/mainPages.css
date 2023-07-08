@@ -106,8 +106,8 @@ body {
 .important-link::after{
 	content: "";
 	position: absolute;
-	top: -2px;
-	left: -2px;
+	top: -1.5px;
+	left: -1.5px;
 	z-index: -1;
 	width: 100%;
 	height: 100%;
