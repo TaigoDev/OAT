@@ -1619,8 +1619,7 @@ section.content::before{
 
 .functional {
 	display: flex;
-	flex-direction: row-reverse;
-	column-gap: 20px;
+	column-gap: 15px;
 	height: fit-content;
 }
 
