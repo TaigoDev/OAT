@@ -11,19 +11,23 @@ namespace OAT.Controllers
         [HttpGet, Route("proxing/images/bitrix")]
         public async Task<IActionResult> getImage([FromQuery] string url)
         {
-            url = ProxyController.config.BaseUrl + url;
-            var contentType = string.Empty;
-            new FileExtensionContentTypeProvider().TryGetContentType(url, out contentType);
-            var local_path = $"bitrix/{Utils.GetSHA256(url)}{Path.GetExtension(url)}";
-            if (System.IO.File.Exists(local_path))
-                return File(System.IO.File.ReadAllBytes(local_path), contentType);
-            var cookieContainer = new CookieContainer();
-            using var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
-            using var client = new HttpClient(handler);
-            cookieContainer.Add(new Cookie("BX_USER_ID", "c47a549e60a356564f7ae3aff2f365e9", "/", "www.oat.ru"));
-            var steam = await client.GetStreamAsync(url);
-            SaveImage(local_path, url);
-            return File(ReadFully(steam), contentType);
+            try
+            {
+                url = ProxyController.config.BaseUrl + url;
+                var contentType = string.Empty;
+                new FileExtensionContentTypeProvider().TryGetContentType(url, out contentType);
+                var local_path = $"bitrix/{Utils.GetSHA256(url)}{Path.GetExtension(url)}";
+                if (System.IO.File.Exists(local_path))
+                    return File(System.IO.File.ReadAllBytes(local_path), contentType);
+                var cookieContainer = new CookieContainer();
+                using var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
+                using var client = new HttpClient(handler);
+                cookieContainer.Add(new Cookie("BX_USER_ID", "c47a549e60a356564f7ae3aff2f365e9", "/", "www.oat.ru"));
+                var steam = await client.GetStreamAsync(url);
+                SaveImage(local_path, url);
+                return File(ReadFully(steam), contentType);
+            }
+            catch { return NotFound(); }
         }
 
         private void SaveImage(string filePath, string url) => new Task(async () =>

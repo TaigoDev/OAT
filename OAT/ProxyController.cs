@@ -21,9 +21,7 @@ public static class ProxyController
         HttpResponseMessage response = null;
         if (context.Request.Method == "GET")
             response = await client.GetAsync(BaseUrl);
-
-
-        if (context.Request.Method == "POST")
+        else if (context.Request.Method == "POST")
         {
             try
             {
@@ -52,17 +50,11 @@ public static class ProxyController
                 string newContent = "<meta charset=\"UTF-8\">";
                 HtmlNode newNode = HtmlNode.CreateNode(newContent);
                 head.InsertBefore(newNode, head.FirstChild);
-                if (path.Contains(".js"))
-                    context.Response.ContentType = "text/javascript";
-                else context.Response.ContentType = "text/html";
+                context.Response.ContentType = "text/html";
                 await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
             }
-            else
-            {
-                if (path.Contains(".js"))
-                    context.Response.ContentType = "text/javascript";
-                await context.Response.WriteAsync(body, Encoding.UTF8); 
-            }
+            else await context.Response.WriteAsync(body, Encoding.UTF8); 
+            
         }
     }
 
