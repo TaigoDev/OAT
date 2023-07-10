@@ -24,7 +24,7 @@ if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "bitrix")))
 NewsController.init();
 UrlsContoller.init();
 var app = builder.Build();
-Console.WriteLine($"Bitrix url: {ProxyController.config.BaseUrl}\nMain url: {ProxyController.config.MainUrl}");
+Console.WriteLine($"Bitrix url: {ProxyController.config.BaseUrl}\nMain url: {ProxyController.config.MainUrl}\n 10.07.2023 12:30");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
 app.UseRouting();
