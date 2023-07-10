@@ -1,8 +1,18 @@
 using Controllers.BasicAuth;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using OAT.function;
+using System.Runtime.InteropServices;
+using static ProxyController;
 
 ProxyController.config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), "config.yml"), new ProxyController.Config());
+
+if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+{
+    config.MainUrl = "https://new.oat.ru";
+    config.BaseUrl = "http://10.24.2.13:8082";
+    config.bind_port = 20045;
+    Console.WriteLine("Autocorrect config...");
+}
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
@@ -25,6 +35,7 @@ NewsController.init();
 UrlsContoller.init();
 var app = builder.Build();
 Console.WriteLine($"Bitrix url: {ProxyController.config.BaseUrl}\nMain url: {ProxyController.config.MainUrl}\n 10.07.2023 12:30");
+
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
 app.UseRouting();
