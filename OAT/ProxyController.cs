@@ -14,14 +14,14 @@ public static class ProxyController
 
         if (IsImage(path, ".PNG", ".png", ".JPG", ".jpg", ".JPEG", ".jpg", ".PDF", ".pdf"))
         {
-            context.Response.Redirect($"/proxing/images/bitrix?url={BaseUrl}", true);
+            context.Response.Redirect($"/proxing/images/bitrix?url={path}", true);
             return;
         }
 
         HttpResponseMessage response = null;
         if (context.Request.Method == "GET")
             response = await client.GetAsync(BaseUrl);
-        
+
 
         if (context.Request.Method == "POST")
         {
@@ -29,8 +29,8 @@ public static class ProxyController
             {
                 string documentContents;
                 using (Stream receiveStream = context.Request.Body)
-                    using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
-                        documentContents = readStream.ReadToEnd();
+                using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+                    documentContents = readStream.ReadToEnd();
                 HttpContent content = new StringContent(documentContents, Encoding.UTF8, "application/json");
                 response = await client.PostAsync(BaseUrl, content);
             }
@@ -52,22 +52,24 @@ public static class ProxyController
                 string newContent = "<meta charset=\"UTF-8\">";
                 HtmlNode newNode = HtmlNode.CreateNode(newContent);
                 head.InsertBefore(newNode, head.FirstChild);
+                if (path.Contains(".js")) context.Response.ContentType = "application/javascript";
+                else context.Response.ContentType = "text/html";
                 await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
-            } 
+            }
             else await context.Response.WriteAsync(body, Encoding.UTF8);
         }
     }
 
     private static bool IsImage(string path, params string[] expansions)
     {
-        foreach(var expansion in expansions)
-            if(path.Contains(expansion))    
+        foreach (var expansion in expansions)
+            if (path.Contains(expansion))
                 return true;
         return false;
     }
     public class Config
     {
-        public string BaseUrl { get; set;}
+        public string BaseUrl { get; set; }
 
         public Config(string BaseUrl, string MainUrl, int bind_port)
         {
@@ -76,8 +78,8 @@ public static class ProxyController
             this.bind_port = bind_port;
         }
         public Config() { }
-        public string MainUrl { get; set;}
-        public int bind_port { get; set;}
+        public string MainUrl { get; set; }
+        public int bind_port { get; set; }
     }
 }
 

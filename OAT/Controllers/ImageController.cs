@@ -11,6 +11,7 @@ namespace OAT.Controllers
         [HttpGet, Route("proxing/images/bitrix")]
         public async Task<IActionResult> getImage([FromQuery] string url)
         {
+            url = ProxyController.config.BaseUrl + url;
             var contentType = string.Empty;
             new FileExtensionContentTypeProvider().TryGetContentType(url, out contentType);
             var local_path = $"bitrix/{Utils.GetSHA256(url)}{Path.GetExtension(url)}";
@@ -34,9 +35,10 @@ namespace OAT.Controllers
                 using FileStream outputFileStream = new FileStream(filePath, FileMode.Create);
                 await steam.CopyToAsync(outputFileStream);
             }
-            catch 
-            { 
-                System.IO.File.Delete(filePath);
+            catch
+            {
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
             }
         }).Start();
 
@@ -48,7 +50,7 @@ namespace OAT.Controllers
                 int read;
                 while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
                     ms.Write(buffer, 0, read);
-                
+
                 return ms.ToArray();
             }
         }
