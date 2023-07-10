@@ -28,8 +28,9 @@ Console.WriteLine($"Bitrix url: {ProxyController.config.BaseUrl}\nMain url: {Pro
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
 app.UseRouting();
+app.UseNoSniffHeaders();
 app.Use(async (context, next) => {
-    var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value);
+    var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
     if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
     {
         context.Response.Redirect($"{ProxyController.config.MainUrl}/{OnNewSite}");
@@ -38,7 +39,6 @@ app.Use(async (context, next) => {
     await next();
     if (context.Response.StatusCode == 404)
         await context.DisplayBitrix(next);
-
 });
 
 app.UseAuthentication();

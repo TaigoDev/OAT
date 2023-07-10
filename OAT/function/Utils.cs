@@ -63,7 +63,14 @@ StringSplitOptions options = StringSplitOptions.None)
 
             return Sb.ToString();
         }
-
+        public static IApplicationBuilder UseNoSniffHeaders(this IApplicationBuilder builder)
+        {
+            return builder.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Content-Type-Options", "sniff");
+                await next();
+            });
+        }
         public static string GetCookie(this HttpContext context, string key) => context.Request.Cookies[key];
 		public static void DeleteCookie(this HttpContext context, string key) => context.Response.Cookies.Delete(key);
 		public static T toObject<T>(this string json) => JObject.Parse(json).ToObject<T>();
