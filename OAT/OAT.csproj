@@ -39,8 +39,11 @@
 	  <PackageReference Include="YamlDotNet" Version="13.1.1" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="wwwroot\documents\applicant\admissionRules\" />
+	  <Folder Include="wwwroot\documents\applicant\distanceFullTimeLearning\" />
 	  <Folder Include="wwwroot\documents\organizationInformation\paidEducationalServices\" />
 	  <Folder Include="wwwroot\documents\students\" />
+	  <Folder Include="wwwroot\images\applicant\careerGuidanceEvents\" />
 	  <Folder Include="wwwroot\images\news\" />
 	  <Folder Include="bitrix\" />
 	  <Folder Include="wwwroot\images\students\" />
