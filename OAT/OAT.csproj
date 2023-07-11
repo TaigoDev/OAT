@@ -42,7 +42,7 @@
 	  <Folder Include="wwwroot\documents\applicant\admissionRules\" />
 	  <Folder Include="wwwroot\documents\applicant\distanceFullTimeLearning\" />
 	  <Folder Include="wwwroot\documents\organizationInformation\paidEducationalServices\" />
-	  <Folder Include="wwwroot\documents\students\" />
+	  <Folder Include="wwwroot\documents\students\alumniEmploymentCenterOmaviat\" />
 	  <Folder Include="wwwroot\images\applicant\careerGuidanceEvents\" />
 	  <Folder Include="wwwroot\images\news\" />
 	  <Folder Include="bitrix\" />
