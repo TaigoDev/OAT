@@ -192,7 +192,7 @@
 	line-height: 32px;
 	font-weight: 700;
 	text-align: center;
-	transition: transform 850ms ease-in-out;
+	transition: transform 750ms ease-in-out;
 }
 
 .card-item-header > .lower{
@@ -212,7 +212,7 @@
 	text-align: center;
 	font-size: 1.25rem;
 	font-weight: 500;
-	transition: transform 850ms ease-in-out;
+	transition: transform 750ms ease-in-out;
 }
 
 .card-item:hover .card-item-description,

@@ -1,3 +1,4 @@
-﻿.instruction img{
-	padding: 10px;
+﻿.instruction img {
+	object-fit: unset;
+	border-radius: 35px;
 }

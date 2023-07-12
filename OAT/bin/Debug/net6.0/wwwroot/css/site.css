@@ -759,6 +759,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 .phone::before,
 .place::before,
+.time::before,
 .person::before {
 	content: "";
 	display: inline-block;
@@ -766,6 +767,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	min-height: 20px;
 	max-width: 20px;
 	max-height: 20px;
+	margin-right: 2px;
 	background-size: cover;
 }
 
@@ -774,6 +776,10 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 .place::before {
 	background-image: url("../images/basic/placeBlack.svg");
+}
+
+.time::before {
+	background-image: url("../images/basic/timeBlack.svg");
 }
 
 .person::before {
