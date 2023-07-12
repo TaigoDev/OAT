@@ -4,6 +4,7 @@
     ViewData["Title"] = "Центр содействия трудоустройству выпускников Омавиат";
 }
 
+<link rel="stylesheet" href="~/css/students/alumniEmploymentCenterOmaviat.css" asp-append-version="true">
 
 <div class="container content-page">
     <section class="content">
@@ -14,13 +15,18 @@
 
         <ul class="page-navigation">
             <li>
-                <a href="#feedback">
-                    Связаться с нами
+                <a href="#instruction">
+                    Инструкция
                 </a>
             </li>
             <li>
                 <a href="#resources">
                     Информационные ресурсы с вакансиями
+                </a>
+            </li>
+            <li>
+                <a href="#feedback">
+                    Связаться с нами
                 </a>
             </li>
             <li>
@@ -31,12 +37,19 @@
         </ul>
 
 
-        <h3 id="feedback" class="section-subtitle">
-            Контактная информация
+        <h3 id="instruction" class="section-subtitle">
+            Инструкция
         </h3>
-        <p>
-            За трудоустройство выпускников Омского авиационного колледжа отвечает сразу три человека:
-        </p>
+        <div class="images-list-slider-container instruction">
+            <div class="images-list-slider">
+                <img src="~/images/students/alumniEmploymentCenterOmaviat/instruction-1.jpg" alt="">
+                <img src="~/images/students/alumniEmploymentCenterOmaviat/instruction-2.jpg" alt="">
+                <img src="~/images/students/alumniEmploymentCenterOmaviat/instruction-3.jpg" alt="">
+                <img src="~/images/students/alumniEmploymentCenterOmaviat/instruction-4.jpg" alt="">
+                <img src="~/images/students/alumniEmploymentCenterOmaviat/instruction-5.jpg" alt="">
+                <img src="~/images/students/alumniEmploymentCenterOmaviat/instruction-6.jpg" alt="">
+            </div>
+        </div>
 
 
         <h3 id="resources" class="section-subtitle">
@@ -111,23 +124,152 @@
             </li>
         </ul>
 
+
+        <h3 id="feedback" class="section-subtitle">
+            Контактная информация
+        </h3>
+        <p>
+            За трудоустройство выпускников Омского авиационного колледжа отвечает сразу три человека:
+        </p>
+        <ul class="people-list">
+            <li class="people-item">
+                <a class="people-item-img-container" href=''>
+                    <img src="~/images/people/ulenkovaEvgeniaVoctorovna.png" alt="">
+                </a>
+                <div class="people-item-body more-info">
+                    <div class="people-item-body-fio">
+                        Уленкова Евгения Викторовна
+                    </div>
+                    <div class="people-item-body-job">
+                        Методист
+                    </div>
+                    <div class="people-item-body-phone">
+                        +8(3812)31-75-17
+                    </div>
+                </div>
+            </li>
+            <li class="people-item">
+                <a class="people-item-img-container" href=''>
+                    <img src="~/images/people/buleikoVoctoriaGennadievna.jpg" alt="">
+                </a>
+                <div class="people-item-body more-info">
+                    <div class="people-item-body-fio">
+                        Булейко Виктория Геннадьевна
+                    </div>
+                    <div class="people-item-body-job">
+                        Методист Центра содействия трудоустройству
+                    </div>
+                    <div class="people-item-body-phone">
+                        +8(3812)31-75-17
+                    </div>
+                </div>
+            </li>
+            <li class="people-item">
+                <a class="people-item-img-container" href=''>
+                    <img src="~/images/people/konuxovaIrinaEvgenievna.jpg" alt="">
+                </a>
+                <div class="people-item-body more-info">
+                    <div class="people-item-body-fio">
+                        Конюхова Ирина Евгеньевна
+                    </div>
+                    <div class="people-item-body-job">
+                        Методист
+                    </div>
+                    <div class="people-item-body-phone">
+                        +8(3812)31-75-17
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
         <h3 id="documents" class="section-subtitle">
             Документы
         </h3>
         <div class="accordions-list">
             <div class="accordion">
                 <div class="accordion-head">
-                    Шаблоны
+                    Полезная литература
                 </div>
                 <div class="accordion-body">
-                    <ul class="documents-list">
+                    <div class="accordion-title">Презентации</div>
+                    <ul class="documents-list little">
                         <li class="document-item">
                             <div class="document-item-head">
-                                <a target="_blank" href="~/documents/students/sportClub/diplomiSpartakiadi.pdf">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/samozaniatostSvobodaVibora.pptx">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Самозанятость. Свобода выбора
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/neSlovomADelom.pptx">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Индивидуальный предприниматель. Не словом, а делом
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="accordion-title">Списки</div>
+                    <ul class="documents-list little">
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/mestaProxogdeniaPraktiki.pdf">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Места прохождения практики
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/bankVakanciPartnerov2023.pdf">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Банк вакансий партнеров Омавиат 27.04.2023
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="accordion-title">Остальная электронная литература</div>
+                    <ul class="documents-list little">
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/rezume.docx">
                                 </a>
                             </div>
                             <div class="document-item-body">
                                 Резюме
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/sobesedovanieSamoprezentacia.docx">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Собеседование и самопрезентация
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/timeMenagment.docx">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Тайм-менеджмент для студентов. учиться, работать и отдыхать
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/metodiceskieRekomendaciiPoTrudoustroistvu.pdf">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Методические рекомендации по трудоустройству
                             </div>
                         </li>
                     </ul>
@@ -141,29 +283,47 @@
                     <ul class="documents-list">
                         <li class="document-item">
                             <div class="document-item-head">
-                                <a target="_blank" href="~/documents/students/sportClub/diplomiSpartakiadi.pdf">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/pologenieCentrTrudoustroistva.pdf">
                                 </a>
                             </div>
                             <div class="document-item-body">
                                 Положение о Центре содействия трудоустройству
                             </div>
                         </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-head">
-                    Отчеты
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list">
                         <li class="document-item">
                             <div class="document-item-head">
-                                <a target="_blank" href="~/documents/students/sportClub/diplomiSpartakiadi.pdf">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/planRaboti.docx">
                                 </a>
                             </div>
                             <div class="document-item-body">
-                                Положение о Центре содействия трудоустройству
+                                План работы ЦСТВ Омавиат
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/prikazCentraTrudoustroistva.pdf">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Приказ о Центре содействия трудоустройства выпускников
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/soglashenieCentrZaniatosti.pdf">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Соглашение с центром занятости населения г. Омска 2021 год
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/students/alumniEmploymentCenterOmaviat/zaniatostVipusknikov2022.xlsx">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Занятость выпускников 2022 года
                             </div>
                         </li>
                     </ul>

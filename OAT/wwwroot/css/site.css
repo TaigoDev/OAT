@@ -1245,6 +1245,17 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	}
 }
 
+@media (width < 450px) {
+	.people-item {
+		flex-direction: column;
+		height: auto;
+		text-align: center;
+		background: linear-gradient(180deg, #3f5fad, #133254 35%, #040f2b);
+	}
+	.people-item-body-fio{
+		min-height: auto;
+	}
+}
 /* staff personal page */
 
 .staff-person-basic {
