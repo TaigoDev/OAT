@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.function;
 
 namespace OAT.Pages
 {
-	public class IndexModel : PageModel
-	{
+    public class IndexModel : PageModel
+    {
         private readonly ILogger<IndexModel> _logger;
         public List<NewsController.NewsData> News = new List<NewsController.NewsData>();
         public IndexModel(ILogger<IndexModel> logger)

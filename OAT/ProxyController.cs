@@ -53,8 +53,8 @@ public static class ProxyController
                 context.Response.ContentType = "text/html";
                 await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
             }
-            else await context.Response.WriteAsync(body, Encoding.UTF8); 
-            
+            else await context.Response.WriteAsync(body, Encoding.UTF8);
+
         }
     }
 

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.StaticFiles;
 using OAT.function;
 using System.Net;
-using System.Net.Mime;
 
 namespace OAT.Controllers
 {

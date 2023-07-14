@@ -13,6 +13,7 @@
 		<None Include="*.yml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Remove="wwwroot\news\**" />

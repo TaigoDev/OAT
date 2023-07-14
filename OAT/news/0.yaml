@@ -1,6 +1,22 @@
-date: "25 Июня 2023"
-title: "Новая статья на сайте oat.ru"
-text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+# Дата публикации новости
+date: 2023-07-14
+# Заголовок новой статьи
+title: Что??? Живой диалог с работодателями????
+# Текст статьи. Используйте Enter, чтобы переместиться на новую строку. Смайлики разрешены
+text: >-
+  ЦОПП Омской области проводит встречу абитуриентов и их родителей с представителями крупнейших работодателей города Омска "Ярмарка целевых мест".
+
+
+  У тебя есть уникальный шанс получить целевое направление и гарантии по трудоустройству.
+
+
+  Приходи и вытяни счастливый билет в будущее.
+
+
+  27 июня в 14:00
+
+
+  ул. Ленина 24
+# Фотографии, можно использовать 3, 6, 9 фото. Пример: images/фото.jpg
 photos:
-- images/mainPage/news1.jpg
-- images/mainPage/news3.jpg
+- images/news/501833cbf350ebd62028c298bbec931fa92334ce30779cf42758fdaca1c40816.png

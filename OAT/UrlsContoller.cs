@@ -4,7 +4,7 @@ public class UrlsContoller
     private static List<IPage> pages = new List<IPage>();
     public static void Add(IPage page) => pages.Add(page);
 
-    public static string? Redirect(string path) 
+    public static string? Redirect(string path)
     {
         var cPage = pages.Where(p => $"/{p.current}" == path);
         if (cPage.Count() != 0)

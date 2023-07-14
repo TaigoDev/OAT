@@ -12,7 +12,7 @@
 		Новости Омского авиационного колледжа имени Н.Е. Жуковского
     </h3>
 	<div class="news-list">
-		@foreach(var news in NewsController.News)
+		@foreach(var news in Model.news)
 		{
 			<div class="news-item">
 				<div class="news-item-img">
@@ -38,29 +38,51 @@
 
     <div class="pages-nav-container">
         <div class="pages-nav">
-            <a href="" class="pages-nav-arrow pages-nav-prev">
-                <img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
-            </a>
+
+            @if (!string.IsNullOrWhiteSpace(HttpContext.Request.Query["id"].ToString()) && Convert.ToInt32(HttpContext.Request.Query["id"]) != 1)
+            {
+                <a href="/AllNews?id=@(Convert.ToInt32(HttpContext.Request.Query["id"]) - 1)" class="pages-nav-arrow pages-nav-prev">
+                    <img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
+                </a>
+            }
+
             <div class="pages-nav-pages-list">
-                <a href="" class="pages-nav-pages-list-item current">
-                    1
-                </a>
-                <a href="" class="pages-nav-pages-list-item">
-                    2
-                </a>
-                <a href="" class="pages-nav-pages-list-item">
-                    3
-                </a>
-                <a href="" class="pages-nav-pages-list-item">
-                    4
-                </a>
-                <a href="" class="pages-nav-pages-list-item">
-                    5
-                </a>
+                @for (int i = 0; i < Model.pages ; i++)
+                {
+                    if (string.IsNullOrWhiteSpace(HttpContext.Request.Query["id"].ToString()) && i == 0)
+                    {
+                        <a href="~/AllNews?id=@(i + 1)" class="pages-nav-pages-list-item current">
+                            @(i + 1)
+                        </a>
+                    }
+                    else if (Convert.ToInt32(HttpContext.Request.Query["id"]) == i + 1)
+                    {
+                        <a href="~/AllNews?id=@(i + 1)" class="pages-nav-pages-list-item current">
+                            @(i + 1)
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="~/AllNews?id=@(i + 1)" class="pages-nav-pages-list-item">
+                            @(i + 1)
+                        </a>
+                    }
+                }
             </div>
-            <a href="" class="pages-nav-arrow pages-nav-next">
-                <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
-            </a>
+            
+            @if (string.IsNullOrWhiteSpace(HttpContext.Request.Query["id"].ToString()) && Model.pages > 1)
+            {
+                <a href="/AllNews?id=2" class="pages-nav-arrow pages-nav-next">
+                    <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
+                </a>
+            }
+            else if (!string.IsNullOrWhiteSpace(HttpContext.Request.Query["id"].ToString()) &&
+            Model.pages != Convert.ToInt32(HttpContext.Request.Query["id"]))
+            {
+                <a href="/AllNews?id=@(Convert.ToInt32(HttpContext.Request.Query["id"]) + 1)" class="pages-nav-arrow pages-nav-next">
+                    <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
+                </a>
+            }
         </div>
     </div>
 </section>

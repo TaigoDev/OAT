@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace OAT.function
 {
@@ -36,17 +36,17 @@ StringSplitOptions options = StringSplitOptions.None)
             return DeserializeYML<T>(File.ReadAllText($"{filename}"));
         }
         public static void SetCookie(this HttpContext context, string key, string value)
-		{
-			CookieOptions cookie = new CookieOptions();
-			cookie.Expires = DateTime.Now.AddDays(1);
-			context.Response.Cookies.Append(key, value, cookie);
-		}
-		public static void SetCookie(this HttpContext context, string key, string value, int days)
-		{
-			CookieOptions cookie = new CookieOptions();
-			cookie.Expires = DateTime.Now.AddDays(days);
-			context.Response.Cookies.Append(key, value, cookie);
-		}
+        {
+            CookieOptions cookie = new CookieOptions();
+            cookie.Expires = DateTime.Now.AddDays(1);
+            context.Response.Cookies.Append(key, value, cookie);
+        }
+        public static void SetCookie(this HttpContext context, string key, string value, int days)
+        {
+            CookieOptions cookie = new CookieOptions();
+            cookie.Expires = DateTime.Now.AddDays(days);
+            context.Response.Cookies.Append(key, value, cookie);
+        }
 
         public static string GetSHA256(string value)
         {
@@ -72,9 +72,9 @@ StringSplitOptions options = StringSplitOptions.None)
             });
         }
         public static string GetCookie(this HttpContext context, string key) => context.Request.Cookies[key];
-		public static void DeleteCookie(this HttpContext context, string key) => context.Response.Cookies.Delete(key);
-		public static T toObject<T>(this string json) => JObject.Parse(json).ToObject<T>();
-		public static string toJson(this object json) => JsonConvert.SerializeObject(json);
+        public static void DeleteCookie(this HttpContext context, string key) => context.Response.Cookies.Delete(key);
+        public static T toObject<T>(this string json) => JObject.Parse(json).ToObject<T>();
+        public static string toJson(this object json) => JsonConvert.SerializeObject(json);
         public static string SerializeYML(this object obj) => new SerializerBuilder()
 .WithNamingConvention(CamelCaseNamingConvention.Instance)
 .Build().Serialize(obj);

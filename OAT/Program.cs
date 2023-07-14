@@ -40,7 +40,8 @@ app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}
 app.UseStaticFiles();
 app.UseRouting();
 app.UseNoSniffHeaders();
-app.Use(async (context, next) => {
+app.Use(async (context, next) =>
+{
     var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
     if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
     {
