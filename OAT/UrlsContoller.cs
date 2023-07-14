@@ -54,7 +54,16 @@ public class UrlsContoller
             new IPage("sveden/grants", "organizationInformation/StudentSupport"),
             new IPage("sveden/terror/index.php", "organizationInformation/Terrorism"),
             new IPage("sveden/vacancy", "organizationInformation/Vacancies"),
-            // for Applicants
+            // for applicants
+
+
+            // for students
+
+
+            // for parents
+
+
+            // timetable
 
 
             // limitation

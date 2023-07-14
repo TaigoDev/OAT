@@ -102,51 +102,6 @@ section::before, section::after{
     text-align: center;
 }
 
-.input-box {
-	display: flex;
-	flex-direction: column;
-	row-gap: 5px;
-}
-
-.input-box label {
-	font-weight: 500;
-    font-size: 1.1rem;
-}
-
-.input-box input, .input-box textarea{
-	padding: 5px;
-	border: 3.5px solid transparent;
-	border-radius: 7px;
-	background-color: hsl(0, 0%, 20%);
-	color: var(--light-white);
-	opacity: .95;
-	transition: opacity 300ms, border-color 300ms;
-}
-
-.input-box input:focus, .input-box textarea:focus{
-	border-color: rgb(20, 20, 20);
-	opacity: 1;
-	outline: none;
-}
-
-textarea.customized {
-    min-height: 180px;
-}
-
-input[type=file]::file-selector-button {
-  border: 2px solid #121213;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: var(--light-white);
-  transition: 700ms;
-}
-
-input[type=file]::file-selector-button:hover {
-  background-color: #201e1e;
-  border: 2px solid rgb(20, 20, 20);
-  color: var(--light-white);
-}
-
 .panel-form-send {
 	position: relative;
 	z-index: 1;
