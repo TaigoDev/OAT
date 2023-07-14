@@ -1,0 +1,74 @@
+﻿@page
+@model TimetableClassesModel
+@{
+    ViewData["Title"] = "Расписание ГИА";
+}
+
+<div class="container content-page">
+    <section class="content">
+        <h2 class="section-title">
+            Расписание ГИА
+        </h2>
+
+        <ul class="documents-list little">
+            <li class="document-item">
+                <div class="document-item-head">
+                    <a target="_blank" href="~/documents/timetable/timetableGIA/gia.xlsx">
+                    </a>
+                </div>
+                <div class="document-item-body">
+                    расписание государственной итоговой аттестации БПОУ омавиат
+                </div>
+            </li>
+            <li class="document-item">
+                <div class="document-item-head">
+                    <a target="_blank" href="~/documents/timetable/timetableGIA/konsultacii.xls">
+                    </a>
+                </div>
+                <div class="document-item-body">
+                    консультации к ДП
+                </div>
+            </li>
+        </ul>
+        
+    </section>
+    <aside id="sidebar" class="sidebar">
+        <h3 class="sidebar-title">
+            Расписание
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li class="sidebar-link">
+                    <a href=''>
+                        Расписание занятий
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Изменения в расписании занятий
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Расписание практик
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Расписание ПО и ДПО
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Расписание сессий
+                    </a>
+                </li>
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href=''>
+                        Расписание ГИА
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>

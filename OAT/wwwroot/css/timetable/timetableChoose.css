@@ -1,0 +1,22 @@
+﻿.choose-corpus{
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+}
+
+.choose-corpus > .corpus {
+	display: block;
+	padding: 10px;
+	border: 4px solid #223a93;
+	border-radius: 15px;
+	outline: 3px solid transparent;
+	background-color: #0d1639;
+	transition: background-color 400ms, border-color 400ms, outline-color 400ms;
+	color: var(--light-white);
+}
+
+.corpus:hover {
+	background-color: #0b122e;
+	border-color: #253e99;
+	outline-color: #253e99;
+}

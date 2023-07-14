@@ -1,0 +1,19 @@
+﻿.report-corruption {
+	display: block;
+	margin: 20px auto;
+	padding: 10px;
+	border-radius: 10px;
+	outline: 5px solid #4f4fd5;
+	outline-offset: -3px;
+	background-color: #141476;
+	color: var(--light-white);
+	font-weight: 500;
+	text-transform: uppercase;
+	transition: outline-color 300ms, outline-offset 250ms, letter-spacing 250ms;
+}
+
+.report-corruption:hover{
+	outline-color: #2727ff;
+	outline-offset: 4px;
+	letter-spacing: 0.04em;
+}

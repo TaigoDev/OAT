@@ -25,9 +25,11 @@
 	  <Content Remove="wwwroot\css\applicant\specialtiesAndProfessions.css" />
 	  <Content Remove="wwwroot\css\authorization.css" />
 	  <Content Remove="wwwroot\css\news.css" />
+	  <Content Remove="wwwroot\css\organizationInformation\corruption.css" />
 	  <Content Remove="wwwroot\css\organizationInformation\vacancies.css" />
 	  <Content Remove="wwwroot\css\students\alumniEmploymentCenterOmaviat.css" />
 	  <Content Remove="wwwroot\css\students\distanceLearning.css" />
+	  <Content Remove="wwwroot\css\timetable\timetableChoose.css" />
 	  <Content Remove="wwwroot\images\panel\exit.svg" />
 	  <Content Remove="wwwroot\js\panel.js" />
 	  <Content Remove="wwwroot\videos\Chto_takoe_nesanktsionirovanniy_miting.mp4" />
@@ -44,6 +46,12 @@
 	  <Folder Include="wwwroot\documents\applicant\distanceFullTimeLearning\" />
 	  <Folder Include="wwwroot\documents\organizationInformation\paidEducationalServices\" />
 	  <Folder Include="wwwroot\documents\students\alumniEmploymentCenterOmaviat\" />
+	  <Folder Include="wwwroot\documents\timetable\timetableGIA\" />
+	  <Folder Include="wwwroot\documents\timetable\timetableSession\lenina\" />
+	  <Folder Include="wwwroot\documents\timetable\timetableSession\xmelnickogo\" />
+	  <Folder Include="wwwroot\documents\timetable\timetableSession\kosmiceski\" />
+	  <Folder Include="wwwroot\documents\timetable\timetableSession\volxovstroia\" />
+	  <Folder Include="wwwroot\documents\timetable\timetablePODPO\" />
 	  <Folder Include="wwwroot\images\applicant\careerGuidanceEvents\" />
 	  <Folder Include="wwwroot\images\news\" />
 	  <Folder Include="bitrix\" />

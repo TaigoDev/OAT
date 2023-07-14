@@ -1,0 +1,70 @@
+﻿@page
+@model TimetableClassesModel
+@{
+    ViewData["Title"] = "Расписание занятий";
+}
+
+<link rel="stylesheet" href="~/css/timetable/timetableChoose.css" asp-append-version="true">
+
+<div class="container content-page">
+    <section class="content">
+        <h2 class="section-title">
+            Расписание занятий
+        </h2>
+
+        <div class="choose-corpus">
+            <a href="" class="corpus">
+                Корпус 1 | ул. Ленина, 24
+            </a>
+            <a href="" class="corpus">
+                Корпус 2 | ул. Б. Хмельницкого, 281а
+            </a>
+            <a href="" class="corpus">
+                Корпус 3 | пр. Космический, 14а
+            </a>
+            <a href="" class="corpus">
+                Корпус 4 | ул. Волховстроя, 5
+            </a>
+        </div>
+        
+    </section>
+    <aside id="sidebar" class="sidebar">
+        <h3 class="sidebar-title">
+            Расписание
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href=''>
+                        Расписание занятий
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Изменения в расписании занятий
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Расписание практик
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Расписание ПО и ДПО
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Расписание сессий
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Расписание ГИА
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>
