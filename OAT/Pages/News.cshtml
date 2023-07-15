@@ -10,9 +10,10 @@
     <h3 class="news-title">
         @Model.news.data.title
     </h3>
-    <p>
-        @Model.news.data.text
-    </p>
+        @foreach (var t in Model.text)
+        {
+            <p>@t</p>
+        }
     <div class="images-list-slider-container">
         <div class="images-list-slider">
             @foreach(var image in Model.news.data.photos)

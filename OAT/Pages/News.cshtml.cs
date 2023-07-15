@@ -12,6 +12,8 @@ namespace OAT.Pages
             _logger = logger;
         }
         public NewsController.NewsData news { get; set; }
+        public List<string> text = new List<string>();
+
         public void OnGet()
         {
             if (HttpContext.Request.Query["id"].ToString() == null)
@@ -19,8 +21,9 @@ namespace OAT.Pages
             var id = Convert.ToInt32(HttpContext.Request.Query["id"]);
             if (id > NewsController.News.Count())
                 Redirect("~");
-
+            
             news = NewsController.News.Where(n => n.id == id).FirstOrDefault();
+            text.AddRange(news.data.text.Split("\n"));
         }
     }
 }
