@@ -22,12 +22,23 @@ StringSplitOptions options = StringSplitOptions.None)
 
             string[] words = input.Split(wordDelimiter, count + 1, options);
             if (words.Length <= count)
-                return words;   // not so many words found
+                return words;
 
-            // remove last "word" since that contains the rest of the string
             Array.Resize(ref words, words.Length - 1);
 
             return words;
+        }
+
+        public static void CreateDirectory(params string[] paths)
+        {
+            foreach (var path in paths)
+                CreateDirectory(path);
+        }
+
+        public static void CreateDirectory(string path)
+        {
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
         }
         public static T SetupConfiguration<T>(string filename, T obj)
         {

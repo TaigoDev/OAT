@@ -21,7 +21,12 @@ namespace OAT.Controllers
                 }
 
             System.IO.File.WriteAllText($"news/{function.NewsController.News.Count()}.yaml", new function.NewsController.NewsDataYML(date, title, text, photos).SerializeYML());
-
+            Logger.Info($"Пользователь опубликовал новую новость.\n" +
+                $"Текст: {text}\n" +
+                $"Дата: {date}\n" +
+                $"Имя: {title}\n" +
+                $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
+                $"IP-адрес: {HttpContext.Connection.RemoteIpAddress}");
             return Redirect("/");
         }
 

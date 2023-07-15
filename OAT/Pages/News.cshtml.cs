@@ -21,7 +21,7 @@ namespace OAT.Pages
             var id = Convert.ToInt32(HttpContext.Request.Query["id"]);
             if (id > NewsController.News.Count())
                 Redirect("~");
-            
+
             news = NewsController.News.Where(n => n.id == id).FirstOrDefault();
             text.AddRange(news.data.text.Split("\n"));
         }

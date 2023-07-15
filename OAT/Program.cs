@@ -4,7 +4,7 @@ using OAT.function;
 using System.Runtime.InteropServices;
 using static ProxyController;
 
-ProxyController.config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), "config.yml"), new ProxyController.Config());
+config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), "config.yml"), new Config());
 
 if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 {
@@ -13,6 +13,9 @@ if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
     config.bind_port = 20045;
     Console.WriteLine("Autocorrect config...");
 }
+Console.WriteLine($"Bitrix url: {ProxyController.config.BaseUrl}" +
+    $"\nMain url: {ProxyController.config.MainUrl}");
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
@@ -27,14 +30,15 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 });
 builder.Services.AddAuthorization();
 builder.Services.AddMvc(options => options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter()));
-builder.WebHost.UseUrls($"http://0.0.0.0:{ProxyController.config.bind_port}");
+builder.WebHost.UseUrls($"http://0.0.0.0:{config.bind_port}");
 
-if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "bitrix")))
-    Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "bitrix"));
+Utils.CreateDirectory(
+    Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
+    Logger.path,
+    Logger.path_PreventedAttempts);
 NewsController.init();
 UrlsContoller.init();
 var app = builder.Build();
-Console.WriteLine($"Bitrix url: {ProxyController.config.BaseUrl}\nMain url: {ProxyController.config.MainUrl}");
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
