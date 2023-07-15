@@ -10,7 +10,7 @@
 	gap: 15px;
 }
 
-.captcha-qontainer{
+.captcha-container {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 15px;
@@ -30,4 +30,16 @@
 	border-radius: 15px;
 	background-color: var(--matte-color);
 	color: var(--light-white);
+}
+
+@media (width<500px){
+	.basic-data {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (width<450px) {
+	.captcha-container {
+		grid-template-columns: 1fr;
+	}
 }

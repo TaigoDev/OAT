@@ -1,0 +1,455 @@
+﻿@page
+@model ContactsModel
+@{
+    ViewData["Title"] = "Контакты";
+}
+
+<link rel="stylesheet" href="~/css/feedback/contacts.css" asp-append-version="true">
+
+<div class="container content-page">
+    <section class="content">
+        <a id="plane" class="plane" href="#sidebar"></a>
+        <h2 class="section-title">
+            Контакты
+        </h2>
+
+        <ul class="page-navigation">
+            <li>
+                <a href="#educational-part">
+                    Учебные части
+                </a>
+            </li>
+            <li>
+                <a href="#branches">
+                    Отделения
+                </a>
+            </li>
+            <li>
+                <a href="#departments">
+                    Отделы
+                </a>
+            </li>
+            <li>
+                <a href="#another">
+                    Другое
+                </a>
+            </li>
+            <li>
+                <a href="#requisites">
+                    Реквизиты
+                </a>
+            </li>
+        </ul>
+
+
+        <h3 id="educational-part" class="section-subtitle">
+            Учебные части
+        </h3>
+        <div class="contacts-list">
+            <a href="tel:8 (3812) 31 30 42" class="contacts-item">
+                <div class="contacts-item-title">
+                    №1<br>(ул. Ленина, 24)
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        8 (3812) 31 30 42
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 7:30 - 19:30
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 53-64-57" class="contacts-item">
+                <div class="contacts-item-title">
+                    №2<br>(пр. Космический, 14а)
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 53-64-57
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-СБ: 7:30-19:30
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 36-04-64" class="contacts-item">
+                <div class="contacts-item-title">
+                    №3<br>(ул. Б. Хмельницкого, 281а.)
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 36-04-64
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-СБ: 7:30-19:30
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <h3 id="branches" class="section-subtitle">
+            Отделения
+        </h3>
+        <div class="contacts-list">
+            <a href="tel:+7 (3812) 31-73-77" class="contacts-item">
+                <div class="contacts-item-title">
+                    технологий аэрокосмического производства
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-73-77
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-СБ: 8:30 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-73-77" class="contacts-item">
+                <div class="contacts-item-title">
+                    электромеханики, радиотехники и технологии сварки
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-73-77
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-73-55" class="contacts-item">
+                <div class="contacts-item-title">
+                    инновационных образовательных программ
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-73-55
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:30 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-73-55" class="contacts-item">
+                <div class="contacts-item-title">
+                    содействия трудоустройству
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-73-55
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:30 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-73-55" class="contacts-item">
+                <div class="contacts-item-title">
+                    профессиональной ориентации
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-73-55
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:30 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 53-64-57" class="contacts-item">
+                <div class="contacts-item-title">
+                    программ подготовки квалифицированных рабочих и служащих
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 53-64-57
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-44-65" class="contacts-item">
+                <div class="contacts-item-title">
+                    очно-заочного обучения (вечернее)
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-44-65, 
+                        36-06-58
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:30 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-44-81" class="contacts-item">
+                <div class="contacts-item-title">
+                    производственной практики
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-44-81
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <h3 id="departments" class="section-subtitle">
+            Отделы
+        </h3>
+        <div class="contacts-list">
+            <a href="tel:+7 (3812) 31-73-27" class="contacts-item">
+                <div class="contacts-item-title">
+                    кадров
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-73-27
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 30-52-97" class="contacts-item">
+                <div class="contacts-item-title">
+                    бухгалтерского учёта
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 30-52-97
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-74-66" class="contacts-item">
+                <div class="contacts-item-title">
+                    организации образовательных программ
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-74-66
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 53-64-57" class="contacts-item">
+                <div class="contacts-item-title">
+                    воспитательной работы, организации социально-психологической среды и личностного развития обучающихся
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 53-64-57
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-73-36" class="contacts-item">
+                <div class="contacts-item-title">
+                    хозяйственный
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-73-36
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <h3 id="another" class="section-subtitle">
+            Другое
+        </h3>
+        <div class="contacts-list">
+            <a href="tel:8 (3812) 31 16 39" class="contacts-item">
+                <div class="contacts-item-title">
+                    Приемная комиссия
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        8 (3812) 31 16 39
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00 - 18:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:8 (3812) 31 44 65" class="contacts-item">
+                <div class="contacts-item-title">
+                    Приемная директора
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        8 (3812) 31 44 65
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 30-52-92" class="contacts-item">
+                <div class="contacts-item-title">
+                    Председатель профкома
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 30-52-92
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:30 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-44-65" class="contacts-item">
+                <div class="contacts-item-title">
+                    Педагогический совет
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-44-65
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-73-55" class="contacts-item">
+                <div class="contacts-item-title">
+                    Центр содействия трудоустройтсву выпускников
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-73-55
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 30-52-95" class="contacts-item">
+                <div class="contacts-item-title">
+                    Библиотека
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 30-52-95
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00 - 17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-44-65" class="contacts-item">
+                <div class="contacts-item-title">
+                    Медпункт
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-44-65
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-18:00; СБ: 8:00-15:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-16-39" class="contacts-item">
+                <div class="contacts-item-title">
+                    Архив
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-16-39
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (3812) 31-44-65" class="contacts-item">
+                <div class="contacts-item-title">
+                    Канцелярия
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (3812) 31-44-65
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+            <a href="tel:+7 (905) 942-23-09" class="contacts-item">
+                <div class="contacts-item-title">
+                    Многофункциональный центр прикладных квалификаций
+                </div>
+                <div class="contacts-item-body">
+                    <div class="contacts-item-phone">
+                        +7 (905) 942-23-09
+                    </div>
+                    <div class="contacts-item-timetable">
+                        ПН-ПТ: 8:00-17:00
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <h3 id="requisites" class="section-subtitle">
+            Реквизиты
+        </h3>
+        <p>
+            <b>ОГРН</b> - 1025500988875
+        </p>
+        <p>
+            <b>ИНН/КПП</b> - 5504000055/550401001
+        </p>
+        <p>
+            <b>Почта</b> - omaviat@oat.ru
+        </p>
+        
+    </section>
+    <aside id="sidebar" class="sidebar">
+        <h3 class="sidebar-title">
+            Обратная связь
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href=''>
+                        Как добраться
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Контактная информация
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Схема расположения колледжа
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Вопрос-ответ
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>
