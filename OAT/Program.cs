@@ -11,7 +11,7 @@ if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
     config.MainUrl = "https://new.oat.ru";
     config.BaseUrl = "http://10.24.2.13:8082";
     config.bind_port = 20045;
-    Console.WriteLine("Autocorrect config...");
+    Console.WriteLine("Autocorrecting of config...");
 }
 Console.WriteLine($"Bitrix url: {ProxyController.config.BaseUrl}" +
     $"\nMain url: {ProxyController.config.MainUrl}");
