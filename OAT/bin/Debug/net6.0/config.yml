@@ -1,3 +1,8 @@
 baseUrl: https://www.oat.ru
 mainUrl: http://localhost:20045
 bindPort: 20045
+dbIp: "taigo.xyz"
+dbPort: 3306
+dbUser: "u20_tqSmWnicfV"
+dbPassword: "4seGYYxlRNOa9@!EGVw1ZqiB"
+dbName: s20_oat

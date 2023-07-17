@@ -29,21 +29,18 @@ public class NewsController
         News.Clear();
         string[] files = Directory.GetFiles("news", "*.yaml");
         foreach (string file in files)
-            try
-            {
-                var news = Utils.DeserializeYML<NewsFile>(File.ReadAllText(file));
-                News.Add(new News(
-                    Path.GetFileNameWithoutExtension(file).ToInt32(),
-                    news.text.GetWords(30),
-                    news.date,
-                    news.title,
-                    news.text,
-                    news.photos));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"OAT.Core.News: File upload error {Path.GetFileName(file)}");
-            }
+        {
+            var text = File.ReadAllText(file);
+            var news = Utils.DeserializeYML<NewsFile>(text);
+            News.Add(new News(
+                Path.GetFileNameWithoutExtension(file).ToInt32(),
+                news.text.GetWords(15),
+                news.date,
+                news.title,
+                news.text,
+                news.photos));
+
+        }
 
         Console.WriteLine($"OAT.Core.News: We successful load updated news");
         News = News.OrderBy(x => x.id).ToList().Reverse<News>();

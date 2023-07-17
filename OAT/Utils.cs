@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using MySqlConnector;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+using static ProxyController;
 
 public static class Utils
 {
@@ -13,7 +15,7 @@ public static class Utils
         if (File.Exists(path))
             File.Delete(path);
     }
-    public static string[] GetWords(
+    public static string[] GetWordsLocal(
 this string input,
 int count = -1,
 string[] wordDelimiter = null,
@@ -131,11 +133,21 @@ StringSplitOptions options = StringSplitOptions.None)
         list.Reverse();
         return list;
     }
-
-    public static string GetWords(this string text, int count) =>
-        string.Join(" ", text.GetWords(30));
+    public static string GetWords(this string text, int count)
+        => string.Join(" ", text.GetWordsLocal(count));
+    
 
     public static int ToInt32(this string text) =>
         int.Parse(text);
+
+    public static string GetConnectionString() => new MySqlConnectionStringBuilder
+    {
+        Server = config.db_ip,
+        UserID = config.db_user,
+        Password = config.db_password,
+        Database = config.db_name,
+        MaximumPoolSize = 2000u,
+        AllowUserVariables = true
+    }.ConnectionString;
 }
 

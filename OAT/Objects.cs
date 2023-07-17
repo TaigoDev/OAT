@@ -1,16 +1,14 @@
 ﻿public class Config
 {
     public string BaseUrl { get; set; }
-
-    public Config(string BaseUrl, string MainUrl, int bind_port)
-    {
-        this.BaseUrl = BaseUrl;
-        this.MainUrl = MainUrl;
-        this.bind_port = bind_port;
-    }
-    public Config() { }
     public string MainUrl { get; set; }
     public int bind_port { get; set; }
+    public string db_ip { get; set; }
+    public int db_port { get; set; }
+    public string db_user { get; set;}
+    public string db_password { get; set;}
+    public string db_name { get; set;}
+
 }
 public class IPage
 {
@@ -58,5 +56,5 @@ public class NewsFile
         this.text = text;
         this.photos = photos;
     }
-
+    public NewsFile() { }
 }

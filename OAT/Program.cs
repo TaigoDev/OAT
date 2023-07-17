@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MySqlConnector;
 using OAT;
+using Recovery.Tables;
+using RepoDb;
 using System.Runtime.InteropServices;
+using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
 
 config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), "config.yml"), new Config());
@@ -12,7 +16,7 @@ if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
     config.bind_port = 20045;
     Console.WriteLine("Autocorrecting of config...");
 }
-
+GlobalConfiguration.Setup().UseMySqlConnector();
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
@@ -31,6 +35,7 @@ app.Run();
 
 void SetupControllers()
 {
+    HealthTables.init();
     Utils.CreateDirectory(
     Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
     Path.Combine(Directory.GetCurrentDirectory(), "news"),
@@ -38,6 +43,7 @@ void SetupControllers()
     Logger.path_PreventedAttempts);
     NewsController.init();
     UrlsContoller.init();
+    CreateAdminAccount();
 }
 
 void SetupServices(ref WebApplicationBuilder builder)
@@ -69,4 +75,17 @@ async Task Proxing(HttpContext context, Func<Task> next)
     await next();
     if (context.Response.StatusCode == 404)
         await context.DisplayBitrix(next);
+}
+
+async void CreateAdminAccount()
+{
+    using var connection = new MySqlConnection(Utils.GetConnectionString());
+    var records = await connection.QueryAsync<users>(e => e.username == "admin");
+    if (records.Any())
+        return;
+    await connection.InsertAsync(new users(
+        "ќмский авиационный колледж",
+        "admin",
+        Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
+        Enums.Role.admin));
 }
