@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.function;
 
 namespace OAT.Pages
 {
@@ -11,7 +10,7 @@ namespace OAT.Pages
         {
             _logger = logger;
         }
-        public NewsController.NewsData news { get; set; }
+        public News news { get; set; }
         public List<string> text = new List<string>();
 
         public void OnGet()
@@ -22,8 +21,8 @@ namespace OAT.Pages
             if (id > NewsController.News.Count())
                 Redirect("~");
 
-            news = NewsController.News.Where(n => n.id == id).FirstOrDefault();
-            text.AddRange(news.data.text.Split("\n"));
+            news = NewsController.News.Where(n => n.id == id).First();
+            text.AddRange(news.text.Split("\n"));
         }
     }
 }

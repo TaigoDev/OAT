@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OAT.function;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace OAT.Controllers
 {
@@ -15,12 +12,14 @@ namespace OAT.Controllers
             foreach (IFormFile file in files)
                 if (file.Length > 0)
                 {
-                    photos.Add($"images/news/{sha256_hash($"{file.FileName}-{file.Length}")}.png");
-                    using (Stream fileStream = new FileStream(Path.Combine("wwwroot/images/news", sha256_hash($"{file.FileName}-{file.Length}") + ".png"), FileMode.Create))
-                        await file.CopyToAsync(fileStream);
+                    var path = $"images/news/{Utils.sha256_hash($"{file.FileName}-{file.Length}")}{Path.GetExtension(file.FileName)}";
+                    photos.Add(path);
+                    using Stream fileStream = new FileStream(Path.Combine("wwwroot", path), FileMode.Create);
+                    await file.CopyToAsync(fileStream);
                 }
 
-            System.IO.File.WriteAllText($"news/{function.NewsController.News.Count()}.yaml", new function.NewsController.NewsDataYML(date, title, text, photos).SerializeYML());
+            System.IO.File.WriteAllText($"news/{NewsController.News.Count()}.yaml", new NewsFile(date, title, text, photos).SerializeYML());
+
             Logger.Info($"Пользователь опубликовал новую новость.\n" +
                 $"Текст: {text}\n" +
                 $"Дата: {date}\n" +
@@ -30,20 +29,6 @@ namespace OAT.Controllers
             return Redirect("/");
         }
 
-        public static String sha256_hash(string value)
-        {
-            StringBuilder Sb = new StringBuilder();
 
-            using (var hash = SHA256.Create())
-            {
-                Encoding enc = Encoding.UTF8;
-                byte[] result = hash.ComputeHash(enc.GetBytes(value));
-
-                foreach (byte b in result)
-                    Sb.Append(b.ToString("x2"));
-            }
-
-            return Sb.ToString();
-        }
     }
 }

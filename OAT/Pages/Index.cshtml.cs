@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.function;
 
 namespace OAT.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        public List<NewsController.NewsData> News = new List<NewsController.NewsData>();
+        public List<News> News = new List<News>();
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;

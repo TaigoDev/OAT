@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.function;
 
 namespace OAT.Pages
 {
@@ -7,7 +6,7 @@ namespace OAT.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public List<NewsController.NewsData> news { get; set; }
+        public List<News> news { get; set; }
         public int pages { get; set; }
 
         public AllNewsModel(ILogger<IndexModel> logger)

@@ -8,7 +8,7 @@
 
 <article class="container">
     <h3 class="news-title">
-        @Model.news.data.title
+        @Model.news.title
     </h3>
         @foreach (var t in Model.text)
         {
@@ -16,7 +16,7 @@
         }
     <div class="images-list-slider-container">
         <div class="images-list-slider">
-            @foreach(var image in Model.news.data.photos)
+            @foreach(var image in Model.news.photos)
             {
                 <img src="@image" alt="">
             }

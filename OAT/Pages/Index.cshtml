@@ -83,13 +83,13 @@
                 @foreach (var news in Model.News)
                 {
                     <li class="news-item">
-                        <img src="@news.data.photos[0]" alt="">
+                        <img src="@news.photos[0]" alt="">
                         <a href="~/news?id=@news.id" class="news-content">
                             <div class="news-date">
-                                @news.data.date
+                                @news.date
                             </div>
                             <div class="news-header">
-                                @news.data.title
+                                @news.title
                             </div>
                         </a>
                     </li>

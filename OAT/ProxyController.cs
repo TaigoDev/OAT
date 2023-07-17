@@ -38,24 +38,28 @@ public static class ProxyController
             }
         }
 
-        if (response != null)
+        if (response == null)
         {
-            context.Response.StatusCode = (int)response.StatusCode;
-            var body = await response.Content.ReadAsStringAsync();
-            var doc = new HtmlDocument();
-            doc.LoadHtml(body);
-            var head = doc.DocumentNode.SelectSingleNode("/html/head");
-            if (head != null)
-            {
-                string newContent = "<meta charset=\"UTF-8\">";
-                HtmlNode newNode = HtmlNode.CreateNode(newContent);
-                head.InsertBefore(newNode, head.FirstChild);
-                context.Response.ContentType = "text/html";
-                await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
-            }
-            else await context.Response.WriteAsync(body, Encoding.UTF8);
-
+            await context.Response.WriteAsync("FATAL ERROR: response was null", Encoding.UTF8);
+            return;
         }
+
+        context.Response.StatusCode = (int)response.StatusCode;
+        var body = await response.Content.ReadAsStringAsync();
+        var doc = new HtmlDocument();
+        doc.LoadHtml(body);
+        var head = doc.DocumentNode.SelectSingleNode("/html/head");
+        if (head != null)
+        {
+            string newContent = "<meta charset=\"UTF-8\">";
+            HtmlNode newNode = HtmlNode.CreateNode(newContent);
+            head.InsertBefore(newNode, head.FirstChild);
+            context.Response.ContentType = "text/html";
+            await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
+        }
+        else await context.Response.WriteAsync(body, Encoding.UTF8);
+
+
     }
 
     private static bool IsImage(string path, params string[] expansions)
@@ -65,19 +69,6 @@ public static class ProxyController
                 return true;
         return false;
     }
-    public class Config
-    {
-        public string BaseUrl { get; set; }
 
-        public Config(string BaseUrl, string MainUrl, int bind_port)
-        {
-            this.BaseUrl = BaseUrl;
-            this.MainUrl = MainUrl;
-            this.bind_port = bind_port;
-        }
-        public Config() { }
-        public string MainUrl { get; set; }
-        public int bind_port { get; set; }
-    }
 }
 
