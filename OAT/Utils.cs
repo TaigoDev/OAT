@@ -1,6 +1,8 @@
 ﻿using MySqlConnector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RepoDb;
+using RepoDb.Extensions;
 using System.Security.Cryptography;
 using System.Text;
 using YamlDotNet.Serialization;
@@ -127,7 +129,17 @@ StringSplitOptions options = StringSplitOptions.None)
 
         return Sb.ToString();
     }
-
+    public static async Task<int> getLastId(string table, string parametr = "id")
+    {
+        int userId = 0;
+        using (var connection = new MySqlConnection(GetConnectionString()))
+        {
+            var obj = await connection.ExecuteQueryAsync<dynamic>($"SELECT MAX({parametr}) AS max FROM `{table}`;");
+            if (obj.AsList()[0].max != null)
+                userId = obj.AsList()[0].max + 1;
+        }
+        return userId;
+    }
     public static List<T> Reverse<T>(this List<T> list)
     {
         list.Reverse();
