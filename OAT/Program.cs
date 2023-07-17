@@ -11,7 +11,7 @@ config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), 
 
 if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 {
-    config.MainUrl = "https://new.oat.ru";
+    config.MainUrl = "https://oat.ru";
     config.BaseUrl = "http://10.24.2.13:8082";
     config.bind_port = 20045;
     Console.WriteLine("Autocorrecting of config...");
