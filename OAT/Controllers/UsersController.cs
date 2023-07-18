@@ -10,6 +10,7 @@ namespace OAT.Controllers
         [HttpPost, Route("api/users/new"), AuthorizeRoles(Enums.Role.admin)]
         public async Task<IActionResult> NewUser(string Fullname, string username, string password, string role)
         {
+            Console.WriteLine($"Username: {User.Username()} Password: {User.Password()}");
             if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
                 return Redirect("api/logout");
             using var connection = new MySqlConnection(Utils.GetConnectionString());
