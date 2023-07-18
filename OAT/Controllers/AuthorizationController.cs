@@ -36,7 +36,7 @@ namespace OAT.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity));
 
-            Logger.Info($"Удачная попытка входа в аккаунт {username} управления." +
+            Logger.Info($"Удачная попытка входа в аккаунт {username} управления. Роль: {records.First().role}" +
                     $"IP-адрес: {HttpContext.Connection.RemoteIpAddress}");
             return Redirect("/admin/panel");
         }
