@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages
 {
-    [AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter, Enums.Role.manager)]
+    [Authorize]
     public class PanelModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -15,7 +15,8 @@ namespace OAT.Pages
 
         public void OnGet()
         {
-
+            if (User == null || !User.Identity.IsAuthenticated)
+                Redirect("admin/authorization");
         }
     }
 }

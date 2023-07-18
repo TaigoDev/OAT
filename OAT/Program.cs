@@ -66,20 +66,30 @@ void SetupServices(ref WebApplicationBuilder builder)
 
 async Task Proxing(HttpContext context, Func<Task> next)
 {
-    var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
-    if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
+    try
     {
-        context.Response.Redirect($"{config.MainUrl}/{OnNewSite}");
-        return;
+        var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
+        if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
+        {
+            context.Response.Redirect($"{config.MainUrl}/{OnNewSite}");
+            return;
+        }
+        await next();
     }
-    await next();
+    catch(Exception ex) 
+    {
+        Logger.Error(ex.ToString());
+    }
     if (context.Response.StatusCode == 404)
         await context.DisplayBitrix(next);
+
 }
 
 async void CreateAdminAccount()
 {
     using var connection = new MySqlConnection(Utils.GetConnectionString());
+    foreach (var user in await connection.QueryAllAsync<users>())
+        Console.WriteLine(user.username);
     var records = await connection.QueryAsync<users>(e => e.username == "admin");
     if (records.Any())
         return;

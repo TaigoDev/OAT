@@ -13,18 +13,14 @@ namespace OAT.Controllers
             Console.WriteLine($"Username: {User.Username()} Password: {User.Password()}");
             try
             {
-                Console.WriteLine("join");
-
                 if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
                     return Redirect("api/logout");
                 using var connection = new MySqlConnection(Utils.GetConnectionString());
-                Console.WriteLine("new connection");
                 if (string.IsNullOrWhiteSpace(Fullname) ||
                     string.IsNullOrWhiteSpace(username) ||
                     string.IsNullOrWhiteSpace(password) ||
                     string.IsNullOrWhiteSpace(role))
                     return Redirect("admin/users");
-                Console.WriteLine("check complete");
 
                 if (role == "Репортер")
                     role = Enums.Role.reporter.ToString();
@@ -32,10 +28,8 @@ namespace OAT.Controllers
                     role = Enums.Role.admin.ToString();
                 else
                     role = Enums.Role.manager.ToString();
-                Console.WriteLine("role complete");
 
                 await connection.InsertAsync(new users(Fullname, username, Utils.sha256_hash(password), role));
-                Console.WriteLine("insert complete");
 
                 return Redirect("admin/users");
             }
