@@ -11,13 +11,24 @@
     <header class="panel-header">
         <ul class="panel-tabs">
             <li>
-                <a href="">
+                <a href="panel">
                     <span>
                         Новости
                     </span>
                     <img class="icon" src="~/images/panel/news.svg" alt="">
                 </a>
             </li>
+            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin))
+            {
+                <li>
+                    <a href="users">
+                        <span>
+                            Users
+                        </span>
+                    <img class="icon" src="~/images/panel/exitBlack.svg" alt="">
+                    </a>
+                </li>
+            }
             <li>
                 <a href="">
                     <span>

@@ -1,8 +1,10 @@
 ﻿using MySqlConnector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Recovery.Tables;
 using RepoDb;
 using RepoDb.Extensions;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using YamlDotNet.Serialization;
@@ -161,5 +163,13 @@ StringSplitOptions options = StringSplitOptions.None)
         MaximumPoolSize = 2000u,
         AllowUserVariables = true
     }.ConnectionString;
+
+
+    public static string Username(this ClaimsPrincipal User) =>
+        User.Identities.ToList()[0].Claims.ToList()[0].Value;
+    public static string Password(this ClaimsPrincipal User) =>
+        User.Identities.ToList()[0].Claims.ToList()[1].Value;
+    public static bool IsRole(this ClaimsPrincipal User, Enums.Role role) =>
+        User.Identities.ToList()[0].Claims.ToList()[2].Value == role.ToString();
 }
 

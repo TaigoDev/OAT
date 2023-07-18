@@ -9,13 +9,6 @@ using static ProxyController;
 
 config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), "config.yml"), new Config());
 
-if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-{
-    config.MainUrl = "https://oat.ru";
-    config.BaseUrl = "http://10.24.2.13:8082";
-    config.bind_port = 20045;
-    Console.WriteLine("Autocorrecting of config...");
-}
 GlobalConfiguration.Setup().UseMySqlConnector();
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
@@ -55,8 +48,8 @@ void SetupServices(ref WebApplicationBuilder builder)
     {
         options.ExpireTimeSpan = TimeSpan.FromDays(31);
         options.SlidingExpiration = true;
-        options.AccessDeniedPath = "/panel/authorization";
-        options.LoginPath = "/panel/authorization";
+        options.AccessDeniedPath = "/admin/authorization";
+        options.LoginPath = "/admin/authorization";
         options.Cookie.Name = "Authorization";
     });
     builder.Services.AddAuthorization();
