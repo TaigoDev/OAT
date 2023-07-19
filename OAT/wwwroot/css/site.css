@@ -1920,6 +1920,39 @@ section.content::before{
 
 /* FOOTER */
 
+.partners-list {
+	display: flex;
+	gap: 20px;
+	height: 100px;
+	animation: 40s partners-animation infinite;
+	--width-part-block: 600px;
+}
+
+.partners-list:hover{
+	animation-play-state: paused;
+}
+
+.partners-list img{
+	object-fit: cover;
+	filter: grayscale(1);
+}
+
+.partners-list img:hover{
+	filter: grayscale(0);
+}
+
+@keyframes partners-animation {
+	0%,100% {
+		transform: translateX(0);
+	}
+
+	50% {
+		transform: translateX(calc(0px - var(--width-part-block)));
+	}
+}
+
+
+
 .site-footer {
 	display: table-row;
 	background-color: rgba(33, 33, 33, 0.04);

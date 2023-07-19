@@ -140,8 +140,13 @@ table.users tbody tr td:first-child {
 /* change user btn */
 
 .panel-table-button {
-    padding: 5px;
+    margin: 3px 0;
     font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-align: left !important;
+    width: 100%;
+    text-align: left;
 }
 
 /* news table */
