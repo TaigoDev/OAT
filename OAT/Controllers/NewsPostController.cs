@@ -10,8 +10,7 @@ namespace OAT.Controllers
             Logger.Info("Выкладываю новость...");
             if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
-            Logger.Info("Авторизация прошла успешно...");
-
+            Logger.Info("Авторизация прошла успешно...");          
             var photos = new List<string>();
             foreach (IFormFile file in files)
                 if (file.Length > 0)
