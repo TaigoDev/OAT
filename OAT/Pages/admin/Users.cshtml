@@ -12,7 +12,6 @@
             Создание нового пользователя
         </label>
         
-
         <div class="input-box">
             <label for="user-fn">
                 ФИО
@@ -33,6 +32,7 @@
             </label>
             <input id="user-password" type="text">
         </div>
+
         <div class="input-box">
             <label for="user-role">
                 Тип пользователя
@@ -43,9 +43,46 @@
                 <option value="manager">Менеджер</option>
             </select>
         </div>
+
         <button type="submit" class="panel-form-send" value="Отправить" onclick="AjaxFormSubmit();return false" multiple>
             Отправить
         </button>
+
+        <table class="customized users">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        ФИО
+                    </th>
+                    <th>
+                        Краткий ник
+                    </th>
+                    <th>
+                        Действие
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        Очень длинное ФИО
+                    </td>
+                    <td>
+                        Очень длинный краткий ник
+                    </td>
+                    <td>
+                        <button class="panel-table-button">изменить пароль</button>
+                        <button class="panel-table-button">удалить</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
     </form>
 </section>

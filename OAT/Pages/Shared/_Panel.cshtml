@@ -32,9 +32,9 @@
             <li>
                 <a href="">
                     <span>
-                        Content
+                        Answers
                     </span>
-                    <img class="icon" src="~/images/panel/exitBlack.svg" alt="">
+                    <img class="icon" src="~/images/panel/answers.svg" alt="">
                 </a>
             </li>
             <li>
@@ -60,9 +60,13 @@
         <section class="container">
             @if (User != null && User.Identity.IsAuthenticated)
             {
-                <p>Account: @User.Username()</p>
-                <br />
-                <p>IP: @Context.Request.Headers["CF-Connecting-IP"]</p>
+                <div class="current-user-info">
+                    <img class="current-user-info-head" src="~/images/panel/currentUser.svg">
+                    <div class="current-user-info-body">
+                        <p class="current-user-info-name"><b>Имя:</b> @User.Username()</p>
+                        <p class="current-user-info-ip"><b>IP:</b> @Context.Request.Headers["CF-Connecting-IP"]</p>
+                    </div>
+                </div>
             }
         </section>
     </main>
