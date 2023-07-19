@@ -28,12 +28,12 @@ $(document).bind('dragover', function (e) {
 });
 
 function SendNews() {
-    //Set the URL.
-    var url = "http://localhost:20045/api/news/upload";
-    //Add the Field values to FormData object.
+    var url = "https://www.oat.ru/api/news/upload";
     var formData = new FormData();
+
     var fileUpload = $("#files").get(0);
     var files = fileUpload.files;
+
     formData.append("title", $("#news-title").val());
     formData.append("date", $("#news-date").val());
     formData.append("text", $("#news-text").val());
@@ -46,6 +46,7 @@ function SendNews() {
         data: formData,
         processData: false,
         contentType: false,
+        mimeType: "multipart/form-data",
         success: function (response) {
             alert("Новость успешно добавлена");
             location.reload();

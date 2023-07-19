@@ -29,7 +29,7 @@ $(document).bind('dragover', function (e) {
 
 function SendNews() {
     //Set the URL.
-    var url = "http://localhost:20045/api/news/upload";
+    var url = "https://www.oat.ru/api/news/upload";
     //Add the Field values to FormData object.
     var formData = new FormData();
     var fileUpload = $("#files").get(0);
