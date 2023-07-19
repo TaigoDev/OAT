@@ -29,7 +29,7 @@ namespace OAT.Controllers
                     role = Enums.Role.manager.ToString();
 
                 await connection.InsertAsync(new users(Fullname, username, Utils.sha256_hash(password), role));
-
+                Logger.Info($"Пользователь {User.Username()} добавил нового пользователя {Fullname} c ником {username} и ролью {role}");
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch(Exception ex) {

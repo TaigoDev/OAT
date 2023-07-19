@@ -15,10 +15,17 @@
         processData: false,
         contentType: false,
         success: function (response) {
-            alert(response);
+            alert("Пользователь успешно добавлен");
+            location.reload();
         },
         error: function (jqXHR, exception) {
             alert(jqXHR.status);
+            if (jqXHR.status == 401) {
+                window.location = "https://www.oat.ru/api/logout";
+            }
+            if (jqXHR.status == 406) {
+                window.location = "https://www.oat.ru/admin/users";
+            }
         }
     });
 }

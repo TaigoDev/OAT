@@ -61,7 +61,7 @@
         {
             <p>Account: @User.Username()</p>
             <br/>
-            <p>IP: @Context.Request.Query["CF-Connecting-IP"]</p>
+            <p>IP: @Context.Request.Headers["CF-Connecting-IP"]</p>
         }
     </main>
     

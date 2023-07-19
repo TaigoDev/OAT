@@ -67,9 +67,15 @@
             data: formData,
             processData: false,
             contentType: false
-        }).done(function (response) {
-            if (response.Status === "success") {
-                $("#lblMessage").html(response.Message);
+            success: function (response) {
+                alert("Новость успешно добавлена");
+                location.reload();
+            },
+            error: function (jqXHR, exception) {
+                alert(jqXHR.status);
+                if (jqXHR.status == 401) {
+                    window.location = "https://www.oat.ru/api/logout";
+                }
             }
         });
     }

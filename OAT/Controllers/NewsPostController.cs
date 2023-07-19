@@ -9,7 +9,7 @@ namespace OAT.Controllers
         public async Task<IActionResult> AddFile(string title, string date, string text, List<IFormFile> files)
         {
             if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
-                return Redirect("api/logout");
+                return StatusCode(StatusCodes.Status401Unauthorized);
 
             var photos = new List<string>();
             foreach (IFormFile file in files)
@@ -27,7 +27,7 @@ namespace OAT.Controllers
                 $"SHA256 (TEXT): {Utils.sha256_hash(text)}\n" +
                 $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
                 $"IP-адрес: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
-            return Redirect("/");
+            return StatusCode(StatusCodes.Status200OK);
         }
 
 
