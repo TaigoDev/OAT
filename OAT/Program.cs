@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MySqlConnector;
 using OAT;
-using OAT.Controllers;
 using Recovery.Tables;
 using RepoDb;
 using System.Runtime.InteropServices;
@@ -17,6 +16,8 @@ if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
     Console.WriteLine("Autocorrecting of config...");
 }
 GlobalConfiguration.Setup().UseMySqlConnector();
+Console.WriteLine(Utils.GetConnectionString());
+
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
@@ -86,13 +87,20 @@ async Task Proxing(HttpContext context, Func<Task> next)
 
 async void CreateAdminAccount()
 {
-    using var connection = new MySqlConnection(Utils.GetConnectionString());
-    var records = await connection.QueryAsync<users>(e => e.username == "admin");
-    if (records.Any())
-        return;
-    await connection.InsertAsync(new users(
-        "ќмский авиационный колледж",
-        "admin",
-        Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
-        Enums.Role.admin));
+    try
+    {
+        using var connection = new MySqlConnection(Utils.GetConnectionString());
+        var records = await connection.QueryAsync<users>(e => e.username == "admin");
+        if (records.Any())
+            return;
+        await connection.InsertAsync(new users(
+            "ќмский авиационный колледж",
+            "admin",
+            Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
+            Enums.Role.admin));
+    }
+    catch(Exception ex)
+    {
+        Console.WriteLine(ex);
+    }
 }

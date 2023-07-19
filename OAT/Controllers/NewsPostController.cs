@@ -23,9 +23,8 @@ namespace OAT.Controllers
             System.IO.File.WriteAllText($"news/{NewsController.News.Count()}.yaml", new NewsFile(date, title, text, photos).SerializeYML());
 
             Logger.Info($"Пользователь опубликовал новую новость.\n" +
-                $"Текст: {text}\n" +
-                $"Дата: {date}\n" +
-                $"Имя: {title}\n" +
+                $"ID: {NewsController.News.Count()}\n" +
+                $"SHA256 (TEXT): {Utils.sha256_hash(text)}\n" +
                 $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
                 $"IP-адрес: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
             return Redirect("/");
