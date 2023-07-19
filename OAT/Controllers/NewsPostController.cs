@@ -27,7 +27,7 @@ namespace OAT.Controllers
                 $"Дата: {date}\n" +
                 $"Имя: {title}\n" +
                 $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
-                $"IP-адрес: {HttpContext.Connection.RemoteIpAddress}");
+                $"IP-адрес: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
             return Redirect("/");
         }
 

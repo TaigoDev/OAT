@@ -5,6 +5,7 @@
     Layout = "_Panel";
 }
 <script src="~/js/panel.js" asp-append-version="true"></script>
+<script src="~/js/users.js" asp-append-version="true"></script>
 <section class="container">
     <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
         <label for="news" class="panel-form-title">
@@ -42,7 +43,7 @@
                 <option value="manager">Менеджер</option>
             </select>
         </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="AjaxFormSubmit()" multiple>
+        <button type="submit" class="panel-form-send" value="Отправить" onclick="AjaxFormSubmit();return false" multiple>
             Отправить
         </button>
 
@@ -50,27 +51,3 @@
 </section>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript">
-    function AjaxFormSubmit() {
-        var url = "@ProxyController.config.MainUrl/api/users/new";
-        var formData = new FormData();
-        var e = document.getElementById("user-role");
-        var value = e.value;
-        var text = e.options[e.selectedIndex].text;
-        formData.append("Fullname", $("#user-fn").val());
-        formData.append("username", $("#user-name").val());
-        formData.append("password", $("#user-password").val());
-        formData.append("role", text);
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: formData,
-            processData: false,
-            contentType: false
-        }).done(function (response) {
-            if (response.Status === "success") {
-                $("#lblMessage").html(response.Message);
-            }
-        });
-    }
-</script>

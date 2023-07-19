@@ -11,7 +11,7 @@
     <header class="panel-header">
         <ul class="panel-tabs">
             <li>
-                <a href="panel">
+                <a href="panel?oq=@Utils.RandomString(64)">
                     <span>
                         Новости
                     </span>
@@ -21,7 +21,7 @@
             @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin))
             {
                 <li>
-                    <a href="users">
+                    <a href="users?oq=@Utils.RandomString(64)">
                         <span>
                             Users
                         </span>
@@ -57,6 +57,12 @@
     </header>
     <main class="site-main" role="main">
         @RenderBody()
+        @if (User != null && User.Identity.IsAuthenticated)
+        {
+            <p>Account: @User.Username()</p>
+            <br/>
+            <p>IP: @Context.Request.Query["CF-Connecting-IP"]</p>
+        }
     </main>
     
 

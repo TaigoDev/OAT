@@ -20,7 +20,6 @@ GlobalConfiguration.Setup().UseMySqlConnector();
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
-Console.WriteLine(await AuthorizationController.CheckLogin("admin", "ae8a7818dfe0601e79d37f8b51b9bcf957ddc52d7fb454539882371e6517b834"));
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
@@ -88,8 +87,6 @@ async Task Proxing(HttpContext context, Func<Task> next)
 async void CreateAdminAccount()
 {
     using var connection = new MySqlConnection(Utils.GetConnectionString());
-    foreach (var user in await connection.QueryAllAsync<users>())
-        Console.WriteLine(user.username);
     var records = await connection.QueryAsync<users>(e => e.username == "admin");
     if (records.Any())
         return;

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RepoDb;
 using RepoDb.Extensions;
+using System;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -133,6 +134,13 @@ StringSplitOptions options = StringSplitOptions.None)
 
         return Sb.ToString();
     }
+    public static string RandomString(int length)
+    {
+        const string chars = "qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890qwertyuiopasdfghjklzxcvbnm1234567890";
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+    }
+
     public static async Task<int> getLastId(string table, string parametr = "id")
     {
         int userId = 0;

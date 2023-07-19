@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages
@@ -15,6 +16,8 @@ namespace OAT.Pages
 
         public void OnGet()
         {
+            if (!HttpContext.Request.Query["oq"].Any())
+                Redirect($"admin/panel?oq={Utils.RandomString(64)}");
             if (User == null || !User.Identity.IsAuthenticated)
                 Redirect("admin/authorization");
         }

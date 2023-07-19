@@ -35,6 +35,7 @@
 	  <Content Remove="wwwroot\css\timetable\timetableChoose.css" />
 	  <Content Remove="wwwroot\images\panel\exit.svg" />
 	  <Content Remove="wwwroot\js\panel.js" />
+	  <Content Remove="wwwroot\js\users.js" />
 	  <Content Remove="wwwroot\videos\Chto_takoe_nesanktsionirovanniy_miting.mp4" />
 	  <Content Remove="wwwroot\videos\Otvetstvennosty_za_ekstremizm.mp4" />
 	  <Content Remove="wwwroot\videos\Pravila_povedeniya_v_sotsialynih_setyah.mp4" />

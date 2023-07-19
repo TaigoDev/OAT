@@ -10,17 +10,16 @@ namespace OAT.Controllers
         [HttpPost, Route("api/users/new"), AuthorizeRoles(Enums.Role.admin)]
         public async Task<IActionResult> NewUser(string Fullname, string username, string password, string role)
         {
-            Console.WriteLine($"Username: {User.Username()} Password: {User.Password()}");
             try
             {
                 if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
-                    return Redirect("api/logout");
+                    return StatusCode(StatusCodes.Status401Unauthorized);
                 using var connection = new MySqlConnection(Utils.GetConnectionString());
                 if (string.IsNullOrWhiteSpace(Fullname) ||
                     string.IsNullOrWhiteSpace(username) ||
                     string.IsNullOrWhiteSpace(password) ||
                     string.IsNullOrWhiteSpace(role))
-                    return Redirect("admin/users");
+                    return StatusCode(StatusCodes.Status406NotAcceptable);
 
                 if (role == "Репортер")
                     role = Enums.Role.reporter.ToString();
@@ -31,7 +30,7 @@ namespace OAT.Controllers
 
                 await connection.InsertAsync(new users(Fullname, username, Utils.sha256_hash(password), role));
 
-                return Redirect("admin/users");
+                return StatusCode(StatusCodes.Status200OK);
             }
             catch(Exception ex) {
                 Console.WriteLine(ex);
