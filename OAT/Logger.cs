@@ -6,6 +6,7 @@
 
     public static void Info(string message)
     {
+        OAT.Telegram.SendMessage($"[{DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}");
         if (HasFile())
             File.AppendAllText(
                 Path.Combine(path, $"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log"),
@@ -18,6 +19,7 @@
 
     public static void InfoInAttempts(string message)
     {
+        OAT.Telegram.SendMessage($"[{DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}");
         if (HasFile())
             File.AppendAllText(
                 Path.Combine(path_PreventedAttempts, $"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log"),
@@ -30,6 +32,7 @@
 
     public static void Warning(string message)
     {
+        OAT.Telegram.SendMessage($"[WARNING {DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}");
         if (HasFile())
             File.AppendAllText(
                 Path.Combine(path, $"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log"),
@@ -42,6 +45,7 @@
 
     public static void Error(string message)
     {
+        OAT.Telegram.SendMessage($"[ERROR {DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}");
         if (HasFile())
             File.AppendAllText(
                 Path.Combine(path, $"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log"),

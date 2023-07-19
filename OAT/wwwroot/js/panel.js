@@ -26,3 +26,35 @@ $(document).bind('dragover', function (e) {
         dropZone.removeClass('in hover');
     }, 100);
 });
+
+function SendNews() {
+    //Set the URL.
+    var url = "http://localhost:20045/api/news/upload";
+    //Add the Field values to FormData object.
+    var formData = new FormData();
+    var fileUpload = $("#files").get(0);
+    var files = fileUpload.files;
+    formData.append("title", $("#news-title").val());
+    formData.append("date", $("#news-date").val());
+    formData.append("text", $("#news-text").val());
+    for (var i = 0; i < files.length; i++) {
+        formData.append("files", files[i]);
+    }
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            alert("Новость успешно добавлена");
+            location.reload();
+        },
+        error: function (jqXHR, exception) {
+            alert(jqXHR.status);
+            if (jqXHR.status == 401) {
+                window.location = "https://www.oat.ru/api/logout";
+            }
+        }
+    });
+}

@@ -39,7 +39,7 @@
             </label>
             <input type="file" name="postedFiles" id="files" name="files" multiple="multiple">
         </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="AjaxFormSubmit()" multiple>
+        <button type="submit" class="panel-form-send" value="Отправить" onclick="SendNews();return false" multiple>
             Отправить
         </button>
 
@@ -47,36 +47,3 @@
 </section>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript">
-    function AjaxFormSubmit() {
-        //Set the URL.
-        var url = "@ProxyController.config.MainUrl/api/news/upload";
-        //Add the Field values to FormData object.
-        var formData = new FormData();
-        var fileUpload = $("#files").get(0);
-        var files = fileUpload.files;
-        formData.append("title", $("#news-title").val());
-        formData.append("date", $("#news-date").val());
-        formData.append("text", $("#news-text").val());
-        for (var i = 0; i < files.length; i++) {
-            formData.append("files", files[i]);
-        }
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: formData,
-            processData: false,
-            contentType: false
-            success: function (response) {
-                alert("Новость успешно добавлена");
-                location.reload();
-            },
-            error: function (jqXHR, exception) {
-                alert(jqXHR.status);
-                if (jqXHR.status == 401) {
-                    window.location = "https://www.oat.ru/api/logout";
-                }
-            }
-        });
-    }
-</script>

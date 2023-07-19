@@ -43,6 +43,7 @@ void SetupControllers()
     Logger.path_PreventedAttempts);
     NewsController.init();
     UrlsContoller.init();
+    OAT.Telegram.init();
     CreateAdminAccount();
 }
 

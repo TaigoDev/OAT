@@ -24,7 +24,6 @@ namespace OAT.Controllers
                     $"IP-адрес отправителя: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
                 return Redirect("/admin/authorization?status=fail");
             }
-
             var claims = new[] {
                 new Claim("username", username),
                 new Claim("sha256_password", Utils.sha256_hash(password)),
