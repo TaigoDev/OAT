@@ -25,7 +25,7 @@
                         <span>
                             Users
                         </span>
-                    <img class="icon" src="~/images/panel/exitBlack.svg" alt="">
+                    <img class="icon" src="~/images/panel/users.svg" alt="">
                     </a>
                 </li>
             }
@@ -57,12 +57,14 @@
     </header>
     <main class="site-main" role="main">
         @RenderBody()
-        @if (User != null && User.Identity.IsAuthenticated)
-        {
-            <p>Account: @User.Username()</p>
-            <br/>
-            <p>IP: @Context.Request.Headers["CF-Connecting-IP"]</p>
-        }
+        <section class="container">
+            @if (User != null && User.Identity.IsAuthenticated)
+            {
+                <p>Account: @User.Username()</p>
+                <br />
+                <p>IP: @Context.Request.Headers["CF-Connecting-IP"]</p>
+            }
+        </section>
     </main>
     
 
