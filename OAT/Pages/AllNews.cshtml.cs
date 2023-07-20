@@ -6,7 +6,7 @@ namespace OAT.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public List<News> news { get; set; }
+        public List<News> news = new List<News>(); //fix error load news
         public int pages { get; set; }
 
         public AllNewsModel(ILogger<IndexModel> logger)

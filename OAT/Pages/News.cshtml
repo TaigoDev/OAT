@@ -12,13 +12,22 @@
     </h3>
         @foreach (var t in Model.text)
         {
-            <p>@t</p>
+            @Html.Raw(@t)
         }
     <div class="images-list-slider-container">
         <div class="images-list-slider">
             @foreach(var image in Model.news.photos)
             {
-                <img src="@image" alt="">
+                @if (!image.Contains(".mp4"))
+                {
+                    <img src="@image" alt="">
+                }
+                else
+                {
+                    <video class="customized" controls>
+                        <source src="@image" type="video/mp4">
+                    </video>
+                }
             }
         </div>
     </div>

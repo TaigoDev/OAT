@@ -7,10 +7,8 @@ namespace OAT.Controllers
         [HttpPost, Route("api/news/upload"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
         public async Task<IActionResult> AddFile(string title, string date, string text, List<IFormFile> files)
         {
-            Logger.Info("Выкладываю новость...");
             if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
-            Logger.Info("Авторизация прошла успешно...");          
             var photos = new List<string>();
             foreach (IFormFile file in files)
                 if (file.Length > 0)
@@ -29,6 +27,19 @@ namespace OAT.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
-
+        [HttpDelete("api/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
+        public async Task<IActionResult> RemoveNews(int id)
+        {
+            if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+                return StatusCode(StatusCodes.Status401Unauthorized);
+            if (!System.IO.File.Exists($"news/{id}.yaml"))
+                return StatusCode(StatusCodes.Status204NoContent);
+            System.IO.File.Delete($"news/{id}.yaml");
+            Logger.Info($"Пользователь удалил новость.\n" +
+                $"ID: {id}\n" +
+                $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
+                $"IP-адрес: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
+            return StatusCode(StatusCodes.Status200OK);
+        }
     }
 }

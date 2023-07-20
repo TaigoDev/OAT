@@ -59,3 +59,26 @@ function SendNews() {
         }
     });
 }
+
+function DeleteNews(id) {
+    var url = "https://www.oat.ru/api/news/" + id + "/delete";
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            alert("Новость успешно удалена");
+            location.reload();
+        },
+        error: function (jqXHR, exception) {
+            if (jqXHR.status == 401) {
+                window.location = "https://www.oat.ru/api/logout";
+            }
+            if(jqXHR.status == 204) {
+                alert("Новость не найдена");
+            }
+            console.log(jqXHR.status);
+        }
+    });
+}

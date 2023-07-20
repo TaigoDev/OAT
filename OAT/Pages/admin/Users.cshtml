@@ -4,8 +4,8 @@
     ViewData["Title"] = "Пользователи";
     Layout = "_Panel";
 }
-<script src="~/js/panel.js" asp-append-version="true"></script>
-<script src="~/js/users.js" asp-append-version="true"></script>
+<script src="~/js/panel.js" asp-append-version="true" charset="utf-8"></script>
+<script src="~/js/users.js" asp-append-version="true" charset="utf-8"></script>
 <section class="container">
     <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
         <label for="news" class="panel-form-title">
@@ -61,27 +61,30 @@
                         Краткий ник
                     </th>
                     <th>
-                        Действие
+                        Управление
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        Очень длинное ФИО
-                    </td>
-                    <td>
-                        Очень длинный краткий ник
-                    </td>
-                    <td>
-                        <button class="panel-table-button">изменить пароль</button>
-                        <button class="panel-table-button">удалить</button>
-                    </td>
-                </tr>
-            </tbody>
+            @foreach(var user in Model.users)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            @user.id
+                        </td>
+                        <td>
+                           @user.FullName
+                        </td>
+                        <td>
+                            @user.username
+                        </td>
+                        <td>
+                            <button class="panel-table-button">изменить пароль</button>
+                            <button class="panel-table-button">удалить</button>
+                        </td>
+                    </tr>
+                </tbody>
+            }
         </table>
 
     </form>

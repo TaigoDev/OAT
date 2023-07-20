@@ -80,7 +80,7 @@ async Task Proxing(HttpContext context, Func<Task> next)
     catch(Exception ex) 
     {
         Logger.Error(ex.ToString());
-    }
+    } 
     if (context.Response.StatusCode == 404)
         await context.DisplayBitrix(next);
 
