@@ -15,17 +15,27 @@
         processData: false,
         contentType: false,
         success: function (response) {
-            alert("Пользователь успешно добавлен");
+            SendMessage("message-success");
             location.reload();
+
         },
         error: function (jqXHR, exception) {
             alert(jqXHR.status);
             if (jqXHR.status == 401) {
+                SendMessage("message-fail-auth");
                 window.location = "https://www.oat.ru/api/logout";
+
             }
             if (jqXHR.status == 406) {
+                SendMessage("message-fail-auth");
                 window.location = "https://www.oat.ru/admin/users";
             }
         }
     });
+}
+
+function SendMessage(tag) {
+    var element = document.getElementById(tag);
+    element.classList.add("panel-message-active");
+    setTimeout("document.getElementById(\"" + tag + "\").classList.remove(\"panel-message-active\")", 2000);
 }

@@ -26,7 +26,6 @@ $(document).bind('dragover', function (e) {
         dropZone.removeClass('in hover');
     }, 100);
 });
-
 function SendNews() {
     var url = "https://www.oat.ru/api/news/upload";
     var formData = new FormData();
@@ -48,14 +47,16 @@ function SendNews() {
         contentType: false,
         mimeType: "multipart/form-data",
         success: function (response) {
-            alert("Новость успешно добавлена");
-            location.reload();
+            SendMessage("message-success");
         },
         error: function (jqXHR, exception) {
             alert(jqXHR.status);
             if (jqXHR.status == 401) {
+                SendMessage("message-fail-auth");
                 window.location = "https://www.oat.ru/api/logout";
             }
+            else
+                SendMessage("message-fail");
         }
     });
 }
@@ -68,17 +69,23 @@ function DeleteNews(id) {
         processData: false,
         contentType: false,
         success: function (response) {
-            alert("Новость успешно удалена");
+            SendMessage("message-success-delete");
             location.reload();
         },
         error: function (jqXHR, exception) {
             if (jqXHR.status == 401) {
+                SendMessage("message-fail-auth");
                 window.location = "https://www.oat.ru/api/logout";
             }
-            if(jqXHR.status == 204) {
-                alert("Новость не найдена");
+            if (jqXHR.status == 204) {
+                SendMessage("message-fail-delete");
             }
             console.log(jqXHR.status);
         }
     });
+}
+function SendMessage(tag) {
+    var element = document.getElementById(tag);
+    element.classList.add("panel-message-active");
+    setTimeout("document.getElementById(\"" + tag + "\").classList.remove(\"panel-message-active\")", 2000);
 }

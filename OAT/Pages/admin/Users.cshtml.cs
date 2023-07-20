@@ -15,7 +15,8 @@ namespace OAT.Pages.admin
             if (!HttpContext.Request.Query["oq"].Any())
                 Redirect($"admin/users?oq={Utils.RandomString(64)}");
             using var connection = new MySqlConnection(Utils.GetConnectionString());
-            users = (await connection.QueryAllAsync<users>()).ToList();
+            var records = connection.QueryAllAsync<users>().GetAwaiter().GetResult();
+            users = records.ToList();
         }
     }
 }

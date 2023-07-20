@@ -18,7 +18,8 @@ namespace OAT.Controllers
                 if (string.IsNullOrWhiteSpace(Fullname) ||
                     string.IsNullOrWhiteSpace(username) ||
                     string.IsNullOrWhiteSpace(password) ||
-                    string.IsNullOrWhiteSpace(role))
+                    string.IsNullOrWhiteSpace(role) || 
+                    (await connection.QueryAsync<users>(e => e.username == username)).Any())
                     return StatusCode(StatusCodes.Status406NotAcceptable);
 
                 if (role == "Репортер")
