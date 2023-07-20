@@ -4,7 +4,7 @@ namespace OAT.Controllers
 {
     public class NewsPostController : Controller
     {
-        [HttpPost, Route("api/news/upload"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
+        [RequestSizeLimit(1000000000000), HttpPost, Route("api/news/upload"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
         public async Task<IActionResult> AddFile(string title, string date, string text, List<IFormFile> files)
         {
             if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
