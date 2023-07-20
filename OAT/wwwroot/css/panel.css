@@ -237,3 +237,23 @@ table.news tbody tr td:first-child {
 .panel-form-send:hover::after {
 	width: 300px;
 }
+
+/* panel message */
+
+.panel-message {
+    position: fixed;
+    bottom: -20px;
+    right: 20px;
+    background: hsl(0, 0%, 20%);
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 500ms, visibility 500ms, transform 500ms;
+    color: var(--light-white);
+}
+
+.panel-message-active{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-40px);
+}
