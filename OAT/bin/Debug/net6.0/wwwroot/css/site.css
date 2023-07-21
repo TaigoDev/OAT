@@ -822,10 +822,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 /* text */
 
-.email{
-
-}
-
 .phone::before,
 .place::before,
 .time::before,
@@ -1924,7 +1920,7 @@ section.content::before{
 	display: flex;
 	gap: 20px;
 	height: 100px;
-	animation: 40s partners-animation infinite;
+	animation: partners-animation 40s linear infinite;
 	--width-part-block: 600px;
 }
 

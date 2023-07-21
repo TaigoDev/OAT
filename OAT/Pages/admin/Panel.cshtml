@@ -42,44 +42,45 @@
             Отправить
         </button>
 
-        <table class="customized news">
-            <thead>
+    </form>
+
+    <table class="customized news">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Дата
+                </th>
+                <th>
+                    Управление
+                </th>
+            </tr>
+        </thead>
+        @foreach (var news in NewsController.News)
+        {
+            <tbody>
                 <tr>
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        Имя
-                    </th>
-                    <th>
-                        Дата
-                    </th>
-                    <th>
-                        Управление
-                    </th>
-                </tr>
-            </thead>
-            @foreach(var news in NewsController.News)
-            {
-                <tbody>
-                    <tr>
-                        <td>
-                            @news.id
-                        </td>
-                        <td>
-                            @news.title
-                        </td>
-                        <td>
-                            @news.date
-                        </td>
-                        <td>
-                            <button onclick="DeleteNews(@news.id); return false" class="panel-table-button">удалить</button>
-                        </td>
+                    <td>
+                        @news.id
+                    </td>
+                    <td>
+                        @news.title
+                    </td>
+                    <td>
+                        @news.date
+                    </td>
+                    <td>
+                        <button onclick="DeleteNews(@news.id); return false" class="panel-table-button">удалить</button>
+                    </td>
                 </tr>
             </tbody>
-            }
-        </table>
-    </form>
+        }
+    </table>
 </section>
 
 <aside id="message-success" class="panel-message">👌 Новость успешно добавлена 👌</aside>

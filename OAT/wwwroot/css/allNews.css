@@ -55,7 +55,8 @@
 .news-item-title {
 	word-wrap: break-word;
 	font-weight: 500;
-	font-size: 1.5rem;
+	font-size: 1.4rem;
+	letter-spacing: -0.02em;
 }
 
 .news-item-info {

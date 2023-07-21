@@ -137,8 +137,15 @@ table.users tbody tr td:first-child {
     text-align: center !important;
 }
 
-/* change user btn */
+/* bug fix */
 
+@media(width<380px) {
+    table.customized {
+        max-width: 95vw;
+    }
+}
+
+/* change user btn */
 .panel-table-button {
     margin: 3px 0;
     font-size: 0.8rem;
@@ -166,7 +173,7 @@ table.news tbody tr td:first-child {
     flex-direction: column;
     row-gap: 15px;
     max-width: 500px;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
 }
 
 .panel-form-title {
