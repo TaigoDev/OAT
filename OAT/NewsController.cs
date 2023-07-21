@@ -54,7 +54,7 @@ public class NewsController
         for (int i = 0; i < News.Count; i++)
         {
             newsOnPage.Add(News[i]);
-            if ((i % 10 == 0 && i != 0) || (News.Count < 10 && i + 1 == News.Count))
+            if (newsOnPage.Count == 10 || i + 1 == News.Count)
             {
                 pages.Add(newsOnPage);
                 newsOnPage = new List<News>();

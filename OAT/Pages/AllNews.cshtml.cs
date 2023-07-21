@@ -16,19 +16,14 @@ namespace OAT.Pages
 
         public void OnGet()
         {
-            Console.WriteLine("Join");
             try
             {
-                Console.WriteLine(NewsController.pages.Count());
-
                 pages = NewsController.pages.Count();
                 Console.WriteLine(pages);
                 if (string.IsNullOrEmpty(HttpContext.Request.Query["id"]))
                     news = NewsController.pages[0];
                 else
                     news = NewsController.pages[Convert.ToInt32(HttpContext.Request.Query["id"]) - 1];
-                Console.WriteLine(news.Count());
-
             }
             catch (Exception ex) {
                 Logger.Error(ex.ToString());
