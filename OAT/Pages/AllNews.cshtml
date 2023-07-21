@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="~/css/allNews.css">
 
-<section class="container">
+<section class="container allNews">
     <h3 class="section-title all-news-title">
 		Новости Омского авиационного колледжа имени Н.Е. Жуковского
     </h3>
@@ -15,9 +15,9 @@
 		@foreach(var news in Model.news)
 		{
 			<div class="news-item">
-				<div class="news-item-img">
+                <a class="news-item-img" href="~/news?id=@news.id">
 					<img src="@news.photos[0]" alt="">
-				</div>
+				</a>
 				<div class="news-item-content">
 					<div class="news-item-date">
 						@news.date

@@ -693,7 +693,7 @@ ol.customized {
 	flex-direction: column;
 	row-gap: 15px;
 	counter-reset: num;
-	margin: 0 0 20px 15px;
+	margin: 10px 0 20px 15px;
 }
 
 ol.customized li {

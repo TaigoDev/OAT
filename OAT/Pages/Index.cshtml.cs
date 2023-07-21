@@ -13,7 +13,7 @@ namespace OAT.Pages
 
         public void OnGet()
         {
-            for (int i = 0; i < (NewsController.News.Count() >= 8 ? 8 : NewsController.News.Count()); i++)
+            for (int i = 0; i < (NewsController.News.Count() >= 9 ? 9 : NewsController.News.Count()); i++)
                 News.Add(NewsController.News[i]);
         }
     }

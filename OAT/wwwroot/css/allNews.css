@@ -1,9 +1,15 @@
-﻿.all-news-title{
+﻿.all-news-title {
 	width: 100%;
 	text-align: center;
+	margin-bottom: 50px;
 }
 
-/* all news */
+.allNews::before{
+	height: 0px;
+}
+
+/* all news list */
+
 .news-list {
 	display: flex;
 	flex-wrap: wrap;
@@ -25,11 +31,27 @@
 }
 
 .news-item-img {
+	position: relative;
+	display: block;
 	overflow: hidden;
 	height: fit-content;
 	max-height: 210px;
 	min-width: 300px;
 	border-radius: 25px;
+}
+
+.news-item-img::before{
+	content: "";
+	position: absolute;
+	left: -30px;
+	bottom: -30px;
+	width: 30px;
+	height: 30px;
+	background: url("../images/news/plane.svg") no-repeat;
+	background-size: cover;
+	opacity: 0.6;
+	rotate: 20deg;
+	transition: 850ms transform ease-in-out;
 }
 
 .news-item-img img {
@@ -72,6 +94,11 @@
 .news-item-img:hover img {
 	transform: scale(1.25);
 }
+
+.news-item-img:hover::before {
+	transform: translateX(120px) translateY(-165px) scale(2);
+}
+
 
 @media (width <= 700px) {
 
