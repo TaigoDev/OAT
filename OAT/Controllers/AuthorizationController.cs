@@ -37,7 +37,7 @@ namespace OAT.Controllers
 
             Logger.Info($"Удачная попытка входа в аккаунт {username} управления. Роль: {records.First().role} " +
                     $"IP-адрес: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
-            return Redirect($"/admin/panel?oq={Utils.RandomString(64)}");
+            return Redirect($"/admin/panel");
         }
 
         [HttpGet, Route("/api/logout")]

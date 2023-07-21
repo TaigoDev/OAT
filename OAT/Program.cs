@@ -70,7 +70,7 @@ async Task Proxing(HttpContext context, Func<Task> next)
     try
     {
         var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
-        if (!context.Request.Path.ToString().Contains("admin"))
+        if (!context.Response.HasStarted && !context.Request.Path.ToString().Contains("admin"))
             context.Response.Headers.CacheControl = "public, max-age=14400";
         else
             context.Response.Headers.CacheControl = "no-cache, no-store";
