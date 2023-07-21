@@ -55,7 +55,8 @@ public static class ProxyController
             string newContent = "<meta charset=\"UTF-8\">";
             HtmlNode newNode = HtmlNode.CreateNode(newContent);
             head.InsertBefore(newNode, head.FirstChild);
-            context.Response.ContentType = "text/html";
+            if (!context.Response.HasStarted)
+                context.Response.ContentType = "text/html";
             await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
         }
         else await context.Response.WriteAsync(body, Encoding.UTF8);
