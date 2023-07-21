@@ -70,20 +70,25 @@ async Task Proxing(HttpContext context, Func<Task> next)
     try
     {
         var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
+        if (!context.Request.Path.ToString().Contains("admin"))
+            context.Response.Headers.CacheControl = "public, max-age=14400";
+        else
+            context.Response.Headers.CacheControl = "no-cache, no-store";
+
         if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
         {
             context.Response.Redirect($"{config.MainUrl}/{OnNewSite}");
             return;
         }
         await next();
+        if (context.Response.StatusCode == 404)
+            await context.DisplayBitrix(next);
     }
     catch(Exception ex) 
     {
         Logger.Error(ex.ToString());
+        context.Response.Redirect("https://www.oat.ru/");
     } 
-    if (context.Response.StatusCode == 404)
-        await context.DisplayBitrix(next);
-
 }
 
 async void CreateAdminAccount()

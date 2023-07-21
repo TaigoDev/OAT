@@ -43,12 +43,13 @@ public static class ProxyController
             await context.Response.WriteAsync("FATAL ERROR: response was null", Encoding.UTF8);
             return;
         }
-
-        context.Response.StatusCode = (int)response.StatusCode;
+        if (!context.Response.HasStarted)
+            context.Response.StatusCode = (int)response.StatusCode;
         var body = await response.Content.ReadAsStringAsync();
         var doc = new HtmlDocument();
         doc.LoadHtml(body);
         var head = doc.DocumentNode.SelectSingleNode("/html/head");
+
         if (head != null)
         {
             string newContent = "<meta charset=\"UTF-8\">";
