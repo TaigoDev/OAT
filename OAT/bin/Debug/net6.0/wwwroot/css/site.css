@@ -615,7 +615,6 @@ img.customized {
 	width: 100%;
 	object-fit: cover;
 	border-radius: 25px;
-	transform: scale(1.02);
 }
 
 @media(width<500px){
@@ -1920,8 +1919,8 @@ section.content::before{
 	display: flex;
 	gap: 20px;
 	height: 100px;
-	animation: partners-animation 40s linear infinite;
-	--width-part-block: 600px;
+	animation: partners-animation 200s linear infinite;
+	--width-part-block: 5000px;
 }
 
 .partners-list:hover{

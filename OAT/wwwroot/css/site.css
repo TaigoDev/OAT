@@ -1919,8 +1919,8 @@ section.content::before{
 	display: flex;
 	gap: 20px;
 	height: 100px;
-	animation: partners-animation 40s linear infinite;
-	--width-part-block: 600px;
+	animation: partners-animation 250s linear infinite;
+	--width-part-block: 8600px;
 }
 
 .partners-list:hover{
@@ -1930,6 +1930,7 @@ section.content::before{
 .partners-list img{
 	object-fit: cover;
 	filter: grayscale(1);
+	transition: filter 300ms;
 }
 
 .partners-list img:hover{
@@ -1946,11 +1947,9 @@ section.content::before{
 	}
 }
 
-
-
 .site-footer {
 	display: table-row;
-	background-color: rgba(33, 33, 33, 0.04);
+	background-color: rgb(33 33 33 / 10%);
 	text-transform: uppercase;
 	font-weight: 700;
 }
@@ -1959,7 +1958,7 @@ section.content::before{
 	display: flex;
 	justify-content: space-between;
 	gap: 70px;
-	margin: 40px 0;
+	margin: 30px 0;
 }
 
 .footer-top-item {
