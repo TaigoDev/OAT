@@ -127,45 +127,6 @@ section::before, section::after{
     }
 }
 
-/* users table */
-
-.users{
-    margin: 0 auto;
-}
-
-table.users tbody tr td:first-child {
-    text-align: center !important;
-}
-
-/* bug fix */
-
-@media(width<380px) {
-    table.customized {
-        max-width: 95vw;
-    }
-}
-
-/* change user btn */
-.panel-table-button {
-    margin: 3px 0;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: underline;
-    text-align: left !important;
-    width: 100%;
-    text-align: left;
-}
-
-/* news table */
-
-.news {
-    margin: 0 auto;
-}
-
-table.news tbody tr td:first-child {
-    text-align: center !important;
-}
-
 /* panel form */
 
 .panel-form {
@@ -243,6 +204,44 @@ table.news tbody tr td:first-child {
 
 .panel-form-send:hover::after {
 	width: 300px;
+}
+
+/* panel table */
+
+.panel-table {
+    margin: 0 auto;
+    max-width: min(700px, 95vw) !important;
+    max-height: 500px;
+}
+
+table.panel-table tbody tr td:first-child {
+    text-align: center !important;
+}
+
+/* bug fix */
+
+@media(width<380px) {
+    table.customized {
+        max-width: 95vw;
+    }
+}
+
+/* change user btn */
+
+.panel-table-button {
+    margin: 3px 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-align: left !important;
+    width: 100%;
+    text-align: left;
+}
+
+/* news table */
+
+table.news tbody tr td:first-child {
+    text-align: center !important;
 }
 
 /* panel message */

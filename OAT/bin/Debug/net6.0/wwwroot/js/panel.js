@@ -26,6 +26,9 @@ $(document).bind('dragover', function (e) {
         dropZone.removeClass('in hover');
     }, 100);
 });
+
+document.getElementById('news-date').valueAsDate = new Date();
+
 function SendNews() {
     var url = "https://www.oat.ru/api/news/upload";
     var formData = new FormData();
