@@ -55,8 +55,15 @@ public class UrlsContoller
             new IPage("sveden/terror/index.php", "organizationInformation/Terrorism"),
             new IPage("sveden/vacancy", "organizationInformation/Vacancies"),
             // for applicants
-
-
+            new IPage("abitur/priemnaya-komissiya", "applicant/SelectionCommittee"),
+            new IPage("abitur/spetsialnosti", "applicant/SpecialtiesAndProfessions"),
+            new IPage("abitur/podgotovitelnye-kursy", "applicant/TrainingCourses"),
+            new IPage("abitur/individualnoe-obuchenie", "applicant/IndividualTraining"),
+            new IPage("abitur/pravila-priema", "applicant/AdmissionRules"),
+            new IPage("abitur/povyshenie-kvalifikatsii", "applicant/QualificationIncrease"),
+            new IPage("abitur/sertifikatsiya-d-link-cisco", "applicant/DLinkCisco"),
+            new IPage("abitur/spetsialnosti-ochno-zaochnogo-vechernego-otdeleniya/", "applicant/SpecialtiesPartTimeEvening"),
+            new IPage("abitur/prof.php", "applicant/CareerGuidanceEvents"),
             // for students
 
 
