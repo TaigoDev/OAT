@@ -14,7 +14,7 @@
 	align-items: center;
 	width: 210px;
 	height: 210px;
-	padding: 20px 8px;
+	padding: 25px 8px;
 	border-radius: 50%;
 	background-color: #30385f;
 	text-align: center;
@@ -33,7 +33,7 @@
 	z-index: -1;
 	filter: invert(1);
 	background: center / 40% no-repeat url("../../images/basic/phone.svg");
-	transition: background-size 400ms, opacity 400ms, filter 400ms;
+	transition: background-size 450ms, opacity 450ms, filter 450ms;
 }
 
 .contacts-list > .contacts-item:hover::after{
@@ -51,4 +51,8 @@
 .contacts-item-title {
 	font-weight: 500;
 	letter-spacing: 0.015em;
+}
+
+.contacts-item-title::first-letter {
+	text-transform: uppercase;
 }

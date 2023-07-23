@@ -65,13 +65,19 @@ public class UrlsContoller
             new IPage("abitur/spetsialnosti-ochno-zaochnogo-vechernego-otdeleniya/", "applicant/SpecialtiesPartTimeEvening"),
             new IPage("abitur/prof.php", "applicant/CareerGuidanceEvents"),
             // for students
-
-
+            new IPage("students/distant", "students/DistanceFullTimeLearning"),
+            new IPage("students/distantsionnoe-obuchenie", "students/DistanceLearning"),
+            new IPage("students/sport/index.php", "students/SportClub"),
+            new IPage("sveden/Employment/Employment.php", "students/AlumniEmploymentCenterOmaviat"),
+            new IPage("sveden/Employment/center.php", "students/AlumniEmploymentCenterOmsk"),
+            new IPage("parents/pravila-vnutrennego-rasporyadka-dnya-studentov", "students/DailyRoutineRules"),
             // for parents
 
 
             // timetable
 
+
+            // feedback
 
             // limitation
             new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),
