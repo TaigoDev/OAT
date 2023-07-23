@@ -211,7 +211,7 @@ section::before, section::after{
 .panel-table {
     margin: 0 auto;
     max-width: min(700px, 95vw) !important;
-    max-height: 500px;
+    max-height: 400px;
 }
 
 table.panel-table tbody tr td:first-child {
@@ -236,12 +236,6 @@ table.panel-table tbody tr td:first-child {
     text-align: left !important;
     width: 100%;
     text-align: left;
-}
-
-/* news table */
-
-table.news tbody tr td:first-child {
-    text-align: center !important;
 }
 
 /* panel message */

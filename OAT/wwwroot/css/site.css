@@ -1940,6 +1940,11 @@ section.content::before{
 
 /* FOOTER */
 
+.partners-list-container {
+	overflow: hidden;
+	margin-top: 40px;
+}
+
 .partners-list {
 	display: flex;
 	gap: 20px;
@@ -1968,7 +1973,7 @@ section.content::before{
 	}
 
 	50% {
-		transform: translateX(calc(0px - var(--width-part-block)));
+		transform: translateX(calc(0px - var(--width-part-block) + 100vw));
 	}
 }
 

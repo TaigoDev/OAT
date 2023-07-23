@@ -9,7 +9,7 @@ window.addEventListener("load", () => {
     let mainMenuWindow = document.getElementById("main-menu-window");
     let mainMenu = document.getElementById("main-menu");
     let menuIcon = document.getElementById("menu-icon");
-    let mainMenuElements = document.querySelectorAll(".main-menu-item");
+    const partnersSlider = document.querySelectorAll(".partners-list > a > img");
 
     /* optional elements */
     let accordionsList = document.querySelectorAll(".accordion");
@@ -36,6 +36,15 @@ window.addEventListener("load", () => {
             accordion.classList.add("open");
         });
     });
+
+    /* partners list functional */
+    let partnersSliderWidth = 0;
+    partnersSlider.forEach(element => {
+        partnersSliderWidth = partnersSliderWidth + element.offsetWidth + 20;
+    });
+    console.log(partnersSliderWidth);
+    document.querySelector(".partners-list").style = `--width-part-block: ${partnersSliderWidth - 20}px;`;
+
 
     /* images slider functional */
     for (let i = 0; i < imagesSliders.length; i++) {
@@ -78,11 +87,12 @@ window.addEventListener("load", () => {
     }
 
     /* plane fly */
-
-    plane.addEventListener("click", () => {
-        plane.classList.add("fly");
-        smoothScroll('#sidebar', 4500);
-    });
+    if (plane) {
+        plane.addEventListener("click", () => {
+            plane.classList.add("fly");
+            smoothScroll('#sidebar', 4500);
+        });
+    }
 
     function smoothScroll(target, duration) {
         var targetElement = document.querySelector(target);

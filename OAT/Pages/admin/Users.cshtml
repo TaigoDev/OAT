@@ -6,6 +6,7 @@
 }
 <script src="~/js/panel.js" asp-append-version="true" charset="utf-8"></script>
 <script src="~/js/users.js" asp-append-version="true" charset="utf-8"></script>
+<link rel="stylesheet" href="~/css/panel/users.css" asp-append-version="true">
 <section class="container">
     <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
         <label for="news" class="panel-form-title">
@@ -81,7 +82,14 @@
                         @user.username
                     </td>
                     <td>
-                        <button class="panel-table-button">изменить пароль</button>
+                        <div class="change-password-container">
+                            <button class="panel-table-button change-password-button">изменить пароль</button>
+                            <div class="change-password-input-container">
+                                <input class="change-password-input" type="text" placeholder="новый пароль">
+                                <input class="change-password-input" type="text" placeholder="подтверждение нового пароля">
+                            </div>
+                        </div>
+                        <button class="panel-table-button">заблокировать</button>
                         <button class="panel-table-button">удалить</button>
                     </td>
                 </tr>

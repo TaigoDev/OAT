@@ -38,6 +38,8 @@
 	max-height: 210px;
 	min-width: 300px;
 	border-radius: 25px;
+	--block-width: 120px;
+	--block-height: 165px;
 }
 
 .news-item-img::before{
@@ -50,14 +52,13 @@
 	background: url("../images/news/plane.svg") no-repeat;
 	background-size: cover;
 	opacity: 0.6;
-	rotate: 20deg;
-	transition: 850ms transform ease-in-out;
+	transition: 750ms transform ease-in-out;
 }
 
 .news-item-img img {
 	object-fit: cover;
 	width: 100%;
-	max-height: 210px;
+	min-height: 210px;
 	border-radius: 25px;
 	transition: 725ms;
 }
@@ -96,7 +97,7 @@
 }
 
 .news-item-img:hover::before {
-	transform: translateX(120px) translateY(-165px) scale(2);
+	transform: translateX(calc(0px + var(--block-width) + 50%)) translateY(calc(0px - var(--block-height) - 50%)) scale(2);
 }
 
 

@@ -1,0 +1,38 @@
+﻿@page
+@model OAT.Pages.admin.MySQLModel
+@{
+    ViewData["Title"] = "MySQL";
+    Layout = "_Panel";
+}
+<script src="~/js/panel.js" asp-append-version="true" charset="utf-8"></script>
+
+<section class="container">
+    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+        <label for="news" class="panel-form-title">
+            Команды MySQL
+        </label>
+        
+        <div class="input-box">
+            <label for="MySQL-query">
+                Ввод
+            </label>
+            <input id="MySQL-query" type="text">
+        </div>
+
+        <div class="input-box">
+            <label for="MySQL-output">
+                Вывод
+            </label>
+            <textarea readonly class="customized" id="MySQL-output"></textarea>
+        </div>
+
+        <button type="submit" class="panel-form-send" value="Отправить" onclick="AjaxFormSubmit();return false" multiple>
+            Отправить
+        </button>
+
+    </form>
+</section>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<aside id="message-success" class="panel-message">👌 Команда успешно выполнена 👌</aside>
+<aside id="message-fail-auth" class="panel-message">❌ Cессия истекла</aside>
