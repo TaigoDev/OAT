@@ -58,7 +58,7 @@
 .news-item-img img {
 	object-fit: cover;
 	width: 100%;
-	min-height: 210px;
+	max-height: 210px;
 	border-radius: 25px;
 	transition: 725ms;
 }
