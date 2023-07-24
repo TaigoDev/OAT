@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using static Enums;
 
 namespace Recovery.Tables
@@ -49,10 +48,10 @@ public static class Enums
     public static string GetRoleList(params Role[] roles)
     {
         var list = string.Empty;
-        foreach(var role in roles)
-            if(role != roles[roles.Length - 1])
+        foreach (var role in roles)
+            if (role != roles[roles.Length - 1])
                 list += $"{role},";
-            else 
+            else
                 list += role.ToString();
         return list;
     }

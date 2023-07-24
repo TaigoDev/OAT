@@ -37,14 +37,17 @@
                     <img class="icon" src="~/images/panel/answers.svg" alt="">
                 </a>
             </li>
-            <li>
-                <a href="MySQL">
+            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin))
+            {
+                <li>
+                    <a href="MySQL">
                     <span>
                         Mysql
                     </span>
                     <img class="icon" src="~/images/panel/mysql.svg" alt="">
                 </a>
             </li>
+            }  
             <li>
                 <a href="/api/logout">
                     <span>
@@ -64,7 +67,7 @@
                     <img class="current-user-info-head" src="~/images/panel/currentUser.svg">
                     <div class="current-user-info-body">
                         <p class="current-user-info-name"><b>Имя:</b> @User.Username()</p>
-                        <p class="current-user-info-ip"><b>IP:</b> @Context.Request.Headers["CF-Connecting-IP"]</p>
+                        <p class="current-user-info-ip"><b>IP:</b> @Context.UserIP()</p>
                     </div>
                 </div>
             }

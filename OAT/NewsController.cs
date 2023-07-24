@@ -24,7 +24,7 @@ public class NewsController
         }
     }
 
-    protected static void Loader()
+    public static void Loader()
     {
         News.Clear();
         string[] files = Directory.GetFiles("news", "*.yaml");

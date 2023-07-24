@@ -3,11 +3,15 @@ date: 01.01.2001
 # Заголовок новой статьи
 title: Новая статья на сайте OAT
 # Текст статьи. Используйте Enter, чтобы переместиться на новую строку. Смайлики разрешены
-text: Текст новой статьи на сайте OAT <a href="https://example.com">https://example.com</a>
+text: >
+    Your long
+
+    string here.
+
+    <a href="https://example.com">https://example.com</a>
 # Фотографии, можно использовать 3, 6, 9 фото. Пример: images/фото.jpg
 photos:
 - images/news/news41.jpg
 - images/news/news42.jpg
 - images/news/news43.jpg
 - images/news/news44.jpg
-

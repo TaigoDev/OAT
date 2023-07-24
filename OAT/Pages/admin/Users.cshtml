@@ -90,7 +90,7 @@
                             </div>
                         </div>
                         <button class="panel-table-button">заблокировать</button>
-                        <button class="panel-table-button">удалить</button>
+                        <button class="panel-table-button" onclick="DeleteUser(@user.id); return false">удалить</button>
                     </td>
                 </tr>
             </tbody>
@@ -100,5 +100,7 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <aside id="message-success" class="panel-message">👌 Пользователь успешно добавлен 👌</aside>
+<aside id="message-success-delete" class="panel-message">👌 Пользователь успешно удален 👌</aside>
 <aside id="message-fail-auth" class="panel-message">❌ Cессия истекла</aside>
+<aside id="message-fail-delete" class="panel-message">❌ Пользователь не найден</aside>
 <aside id="message-fail-406" class="panel-message">❌ Пользователь с таким именем существует или не все поля заполнены</aside>

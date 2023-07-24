@@ -33,7 +33,7 @@ namespace TAIGO.ZCore.DPC.Recovery
                 await connection.ExecuteNonQueryAsync(cmd);
                 Console.WriteLine($"Recovery.Tables: We have successfully restored the {table.GetType().Name} table");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"FAIL: We were unable to restore the tables Ex: {ex}");
             }

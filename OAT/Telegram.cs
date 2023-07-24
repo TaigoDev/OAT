@@ -19,8 +19,8 @@ namespace OAT
 
 
         public static async void SendMessage(string message)
-            => await botClient.SendTextMessageAsync(new ChatId(int.Parse(config.chat_id)), message);    
-         
+            => await botClient.SendTextMessageAsync(new ChatId(int.Parse(config.chat_id)), message);
+
 
     }
 }

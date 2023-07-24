@@ -23,7 +23,8 @@ namespace OAT.Controllers
                 $"ID: {NewsController.News.Count()}\n" +
                 $"SHA256 (TEXT): {Utils.sha256_hash(text)}\n" +
                 $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
-                $"IP-адрес: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
+                $"IP-адрес: {HttpContext.UserIP()}");
+            NewsController.Loader();
             return StatusCode(StatusCodes.Status200OK);
         }
 
@@ -38,7 +39,8 @@ namespace OAT.Controllers
             Logger.Info($"Пользователь удалил новость.\n" +
                 $"ID: {id}\n" +
                 $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
-                $"IP-адрес: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
+                $"IP-адрес: {HttpContext.UserIP()}");
+            NewsController.Loader();
             return StatusCode(StatusCodes.Status200OK);
         }
     }

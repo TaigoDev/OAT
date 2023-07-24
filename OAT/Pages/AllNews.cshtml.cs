@@ -25,7 +25,8 @@ namespace OAT.Pages
                 else
                     news = NewsController.pages[Convert.ToInt32(HttpContext.Request.Query["id"]) - 1];
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Logger.Error(ex.ToString());
             }
 

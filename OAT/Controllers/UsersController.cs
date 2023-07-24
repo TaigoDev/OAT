@@ -18,7 +18,7 @@ namespace OAT.Controllers
                 if (string.IsNullOrWhiteSpace(Fullname) ||
                     string.IsNullOrWhiteSpace(username) ||
                     string.IsNullOrWhiteSpace(password) ||
-                    string.IsNullOrWhiteSpace(role) || 
+                    string.IsNullOrWhiteSpace(role) ||
                     (await connection.QueryAsync<users>(e => e.username == username)).Any())
                     return StatusCode(StatusCodes.Status406NotAcceptable);
 
@@ -33,10 +33,29 @@ namespace OAT.Controllers
                 Logger.Info($"Пользователь {User.Username()} добавил нового пользователя {Fullname} c ником {username} и ролью {role}");
                 return StatusCode(StatusCodes.Status200OK);
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex);
                 return Ok(ex);
             }
+        }
+
+        [HttpDelete("api/users/{id:int}/delete"), AuthorizeRoles(Enums.Role.admin)]
+        public async Task<IActionResult> RemoveNews(int id)
+        {
+            if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+                return StatusCode(StatusCodes.Status401Unauthorized);
+            using var connection = new MySqlConnection(Utils.GetConnectionString());
+
+            var records = await connection.QueryAsync<users>(e => e.id == id);
+            if (!records.Any())
+                return StatusCode(StatusCodes.Status204NoContent);
+            await connection.DeleteAsync(records.First());
+            Logger.Info($"Пользователь удалил аккаунт.\n" +
+                $"Удаленный аккаунт: {id}-{records.First().username}-{records.First().FullName}\n" +
+                $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
+                $"IP-адрес: {HttpContext.UserIP()}");
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }

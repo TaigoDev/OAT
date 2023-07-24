@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.FileProviders;
 using MySqlConnector;
 using OAT;
 using Recovery.Tables;
@@ -24,6 +25,10 @@ SetupControllers();
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "static"))
+}); 
 app.UseRouting();
 app.UseNoSniffHeaders();
 app.Use((context, next) => Proxing(context, next));
@@ -39,6 +44,7 @@ void SetupControllers()
     Utils.CreateDirectory(
     Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
     Path.Combine(Directory.GetCurrentDirectory(), "news"),
+    Path.Combine(Directory.GetCurrentDirectory(), "static"),
     Logger.path,
     Logger.path_PreventedAttempts);
     NewsController.init();
@@ -61,7 +67,11 @@ void SetupServices(ref WebApplicationBuilder builder)
         options.Cookie.Name = "Authorization";
     });
     builder.Services.AddAuthorization();
-    builder.Services.AddMvc(options => options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter()));
+    builder.Services.AddMvc(options =>
+    {
+        options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter());
+        options.Filters.Add<ExceptionFilter>();
+    });
     builder.WebHost.UseUrls($"http://0.0.0.0:{config.bind_port}");
 }
 
@@ -84,12 +94,12 @@ async Task Proxing(HttpContext context, Func<Task> next)
         if (context.Response.StatusCode == 404)
             await context.DisplayBitrix(next);
     }
-    catch(Exception ex) 
+    catch (Exception ex)
     {
         //Logger.Error(ex.ToString());
         Console.WriteLine(ex);
         context.Response.Redirect("https://www.oat.ru/");
-    } 
+    }
 }
 
 async void CreateAdminAccount()
@@ -106,7 +116,7 @@ async void CreateAdminAccount()
             Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
             Enums.Role.admin));
     }
-    catch(Exception ex)
+    catch (Exception ex)
     {
         Console.WriteLine(ex);
     }

@@ -1,13 +1,10 @@
-# Дата публикации новости
-date: 01.01.2001
-# Заголовок новой статьи
-title: Новая статья на сайте OAT
-# Текст статьи. Используйте Enter, чтобы переместиться на новую строку. Смайлики разрешены
-text: Текст новой статьи на сайте OAT <a href="https://example.com">https://example.com</a>
-# Фотографии, можно использовать 3, 6, 9 фото. Пример: images/фото.jpg
-photos:
-- images/news/news41.jpg
-- images/news/news42.jpg
-- images/news/news43.jpg
-- images/news/news44.jpg
+date: 2023-07-24
+title: Тест
+text: >-
+  Текст новости, 
 
+  её содержание.
+
+  <a href="https://example.com">https://example.com</a>
+photos:
+- images/news/610bc28f54aef042482c6235fd565bfb19acab5e2e04e14c9919681fa8c71ff7.jpg

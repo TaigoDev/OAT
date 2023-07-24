@@ -1,7 +1,4 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MySqlConnector;
-using Recovery.Tables;
-using RepoDb;
 
 namespace OAT.Pages.admin
 {
@@ -9,7 +6,7 @@ namespace OAT.Pages.admin
     {
         public async void OnGet()
         {
-            
+
         }
     }
 }

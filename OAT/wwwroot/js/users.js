@@ -33,7 +33,29 @@
         }
     });
 }
-
+function DeleteUser(id) {
+    var url = "https://www.oat.ru/api/users/" + id + "/delete";
+    $.ajax({
+        type: 'DELETE',
+        url: url,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            SendMessage("message-success-delete");
+            location.reload();
+        },
+        error: function (jqXHR, exception) {
+            if (jqXHR.status == 401) {
+                SendMessage("message-fail-auth");
+                window.location = "https://www.oat.ru/api/logout";
+            }
+            if (jqXHR.status == 204) {
+                SendMessage("message-fail-delete");
+            }
+            console.log(jqXHR.status);
+        }
+    });
+}
 function SendMessage(tag) {
     var element = document.getElementById(tag);
     element.classList.add("panel-message-active");

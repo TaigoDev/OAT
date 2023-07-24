@@ -5,7 +5,6 @@ using System.Text;
 public static class ProxyController
 {
     public static Config config = new Config();
-
     public static async Task DisplayBitrix(this HttpContext context, Func<Task> next)
     {
         var path = context.Request.Path.Value;

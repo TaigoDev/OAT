@@ -14,22 +14,22 @@ namespace TAIGO.ZCore.DPC.Services
         {
             try
             {
-                foreach (var type in Assembly.GetExecutingAssembly().GetTypes().Where(t => 
+                foreach (var type in Assembly.GetExecutingAssembly().GetTypes().Where(t =>
                 t.Namespace == "Recovery.Tables").ToList())
                     tables.Add(Activator.CreateInstance(type) ?? throw new Exception("Recovery is not available"));
-            
-            using var connection = new MySqlConnection(Utils.GetConnectionString());
-            Console.WriteLine(Utils.GetConnectionString());
-            
-            var mysql_tables = (await connection.ExecuteQueryAsync<string>($"SHOW TABLES;")).ToList();
-            foreach (var table in mysql_tables)
-                Console.WriteLine(table);
-            foreach (var table in tables)
-                if (mysql_tables.Where(x => x == table.GetType().Name).FirstOrDefault() == null)
-                {
-                    TableRecovery.Recreate(table);
-                    Logger.Info($"HealthTables: We have successfully restored the {new List<PropertyInfo>(table.GetType().GetProperties()).GetType().Name} table");
-                }
+
+                using var connection = new MySqlConnection(Utils.GetConnectionString());
+                Console.WriteLine(Utils.GetConnectionString());
+
+                var mysql_tables = (await connection.ExecuteQueryAsync<string>($"SHOW TABLES;")).ToList();
+                foreach (var table in mysql_tables)
+                    Console.WriteLine(table);
+                foreach (var table in tables)
+                    if (mysql_tables.Where(x => x == table.GetType().Name).FirstOrDefault() == null)
+                    {
+                        TableRecovery.Recreate(table);
+                        Logger.Info($"HealthTables: We have successfully restored the {new List<PropertyInfo>(table.GetType().GetProperties()).GetType().Name} table");
+                    }
             }
             catch (Exception ex)
             {

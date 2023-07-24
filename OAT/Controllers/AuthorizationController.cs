@@ -21,7 +21,7 @@ namespace OAT.Controllers
                 Logger.InfoInAttempts($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
                     $"L: {username}\n" +
                     $"P: {password}\n" +
-                    $"IP-адрес отправителя: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
+                    $"IP-адрес отправителя: {HttpContext.UserIP()}");
                 return Redirect("/admin/authorization?status=fail");
             }
             var claims = new[] {
@@ -36,7 +36,7 @@ namespace OAT.Controllers
                 new ClaimsPrincipal(identity));
 
             Logger.Info($"Удачная попытка входа в аккаунт {username} управления. Роль: {records.First().role} " +
-                    $"IP-адрес: {HttpContext.Request.Headers["CF-Connecting-IP"]}");
+                    $"IP-адрес: {HttpContext.UserIP()}");
             return Redirect($"/admin/panel");
         }
 

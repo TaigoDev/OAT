@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RepoDb;
 using RepoDb.Extensions;
-using System;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -117,7 +116,7 @@ StringSplitOptions options = StringSplitOptions.None)
         }
     }
 
-    
+
 
     public static string sha256_hash(string value)
     {
@@ -159,7 +158,7 @@ StringSplitOptions options = StringSplitOptions.None)
     }
     public static string GetWords(this string text, int count)
         => string.Join(" ", text.GetWordsLocal(count));
-    
+
 
     public static int ToInt32(this string text) =>
         int.Parse(text);
@@ -181,5 +180,10 @@ StringSplitOptions options = StringSplitOptions.None)
         User.Identities.ToList()[0].Claims.ToList()[1].Value;
     public static bool IsRole(this ClaimsPrincipal User, Enums.Role role) =>
         User.Identities.ToList()[0].Claims.ToList()[2].Value == role.ToString();
+
+    public static string UserIP(this HttpContext context) =>
+        !string.IsNullOrWhiteSpace(context.Request.Headers["CF-Connecting-IP"]) ?
+        context.Request.Headers["CF-Connecting-IP"] : context.Connection.RemoteIpAddress!.ToString();
+
 }
 
