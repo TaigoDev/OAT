@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 using MySqlConnector;
 using OAT;
+using OAT.Readers;
 using Recovery.Tables;
 using RepoDb;
 using System.Runtime.InteropServices;
@@ -50,6 +51,7 @@ void SetupControllers()
     NewsController.init();
     UrlsContoller.init();
     OAT.Telegram.init();
+    ScheduleReader.init();
     CreateAdminAccount();
 }
 
