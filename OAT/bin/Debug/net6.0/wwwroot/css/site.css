@@ -1562,7 +1562,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 .question-contact-head-post {
 	font-weight: 500;
-	font-size: 1.10rem;
+	font-size: 1.1rem;
 }
 
 .question-contact-body {
@@ -1572,48 +1572,40 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	padding: 20px;
 }
 
-.question-contact-body-address {
+.question-contact-body-address,
+.question-contact-body-phone,
+.question-contact-body-time,
+.question-contact-body-email{
 	display: flex;
 	align-items: center;
 	column-gap: 10px;
 }
 
-.question-contact-body-address::before {
+.question-contact-body-address::before,
+.question-contact-body-phone::before,
+.question-contact-body-time::before,
+.question-contact-body-email::before{
 	content: "";
 	height: 20px;
     min-width: 20px;
-	background-image: url("../images/basic/address.svg");
 	background-size: contain;
     background-repeat: no-repeat;
 }
 
-.question-contact-body-phone {
-	display: flex;
-	align-items: center;
-	column-gap: 10px;
+.question-contact-body-address::before {
+	background-image: url("../images/basic/address.svg");
 }
 
 .question-contact-body-phone::before {
-	content: "";
-	height: 20px;
-	min-width: 20px;
 	background-image: url("../images/basic/phone-call.svg");
-	background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.question-contact-body-time {
-	display: flex;
-	column-gap: 10px;
 }
 
 .question-contact-body-time::before {
-	content: "";
-	height: 20px;
-	min-width: 20px;
 	background-image: url("../images/basic/time.svg");
-	background-size: contain;
-    background-repeat: no-repeat;
+}
+
+.question-contact-body-email::before {
+	background-image: url("../images/basic/mail.svg");
 }
 
 @media (width<480px){
@@ -1948,9 +1940,10 @@ section.content::before{
 .partners-list {
 	display: flex;
 	gap: 20px;
-	height: 100px;
-	animation: partners-animation 250s linear infinite;
-	--width-part-block: 8600px;
+	height: 90px;
+	width: 100vw;
+	animation: partners-animation 180s linear infinite;
+	--width-part-block: 9500px;
 }
 
 .partners-list:hover{
