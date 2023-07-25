@@ -7,7 +7,7 @@
     public static void Info(string message)
     {
         OAT.Telegram.SendMessage($"[{DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}");
-        if (HasFile())
+        if (HasFilePreventedAttempts())
             File.AppendAllText(
                 Path.Combine(path, $"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log"),
                 $"[{DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}\n");
