@@ -1,5 +1,4 @@
-﻿
-
+﻿using System.Text;
 
 
 public class NewsController
@@ -24,22 +23,32 @@ public class NewsController
         }
     }
 
-    public static void Loader()
+    public static async void Loader()
     {
+        
         News.Clear();
         string[] files = Directory.GetFiles("news", "*.yaml");
         foreach (string file in files)
         {
-            var text = File.ReadAllText(file);
-            var news = Utils.DeserializeYML<NewsFile>(text);
-            News.Add(new News(
-                Path.GetFileNameWithoutExtension(file).ToInt32(),
-                news.text.GetWords(15),
-                news.date,
-                news.title,
-                news.text,
-                news.photos));
-
+            try
+            {
+                using FileStream fsSource = new FileStream(file, FileMode.Open, FileAccess.Read);
+                byte[] buffer = new byte[fsSource.Length];
+                await fsSource.ReadAsync(buffer, 0, buffer.Length);
+              
+                var news = Utils.DeserializeYML<NewsFile>(Encoding.Default.GetString(buffer));
+                News.Add(new News(
+                    Path.GetFileNameWithoutExtension(file).ToInt32(),
+                    news.text.GetWords(15),
+                    news.date,
+                    news.title,
+                    news.text,
+                    news.photos));
+            }
+            catch(Exception ex)
+            {
+                Logger.Error(ex.ToString());    
+            }
         }
 
         Console.WriteLine($"OAT.Core.News: We successful load updated news");
