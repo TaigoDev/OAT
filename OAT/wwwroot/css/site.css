@@ -1941,7 +1941,7 @@ section.content::before{
 	gap: 20px;
 	height: 90px;
 	width: 100vw;
-	animation: partners-animation 180s linear infinite;
+	animation: partners-animation 160s linear infinite;
 	--width-part-block: 9500px;
 }
 
