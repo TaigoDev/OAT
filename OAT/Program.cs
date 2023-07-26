@@ -9,14 +9,8 @@ using System.Runtime.InteropServices;
 using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
 
-config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), "config.yml"), new Config());
-if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-{
-    config.MainUrl = "https://www.oat.ru";
-    config.BaseUrl = "http://10.24.2.13:8082";
-    config.bind_port = 20045;
-    Console.WriteLine("Autocorrecting of config...");
-}
+config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), 
+    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
 GlobalConfiguration.Setup().UseMySqlConnector();
 
 var builder = WebApplication.CreateBuilder(args);

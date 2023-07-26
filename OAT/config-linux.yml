@@ -1,0 +1,8 @@
+baseUrl: https://www.oat.ru
+mainUrl: http://10.24.2.13:8082
+bindPort: 20045
+dbIp: db_new.oat.ru
+dbPort: 3306
+dbUser: "root"
+dbPassword: "EBLQ|bG8axO0oLOM#I}8"
+dbName: www.oat.ru
