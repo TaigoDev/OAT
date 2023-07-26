@@ -35,6 +35,8 @@
 	  <Content Remove="wwwroot\css\panel\users.css" />
 	  <Content Remove="wwwroot\css\students\alumniEmploymentCenterOmaviat.css" />
 	  <Content Remove="wwwroot\css\students\distanceLearning.css" />
+	  <Content Remove="wwwroot\css\timetable\groups.css" />
+	  <Content Remove="wwwroot\css\timetable\timetable.css" />
 	  <Content Remove="wwwroot\css\timetable\timetableChoose.css" />
 	  <Content Remove="wwwroot\images\panel\exit.svg" />
 	  <Content Remove="wwwroot\js\allNews.js" />

@@ -1134,17 +1134,16 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .accordion-body::-webkit-scrollbar{
-	width: 6px;
-	height: 6px;
+	width: 8px;
+	height: 8px;
 }
 
 .accordion-body::-webkit-scrollbar-track{
-	background-color: transparent;
+	background-color: hsl(230, 30%, 70%);
 }
 
 .accordion-body::-webkit-scrollbar-thumb{
-	background-color: var(--matte-color);
-	border-radius: 0 6px 6px 0;
+	background-color: hsl(230, 30%, 50%);
 }
 
 .accordion-body::-webkit-scrollbar-corner{

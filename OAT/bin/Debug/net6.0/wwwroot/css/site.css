@@ -1143,7 +1143,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .accordion-body::-webkit-scrollbar-thumb{
-	background-color: var(--matte-color);
+	background-color: hsl(0, 0%, 20%);
 	border-radius: 0 6px 6px 0;
 }
 
