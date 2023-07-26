@@ -1,7 +1,7 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace OAT
+namespace OAT.Utilities
 {
     public class Telegram
     {

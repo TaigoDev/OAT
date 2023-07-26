@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 using MySqlConnector;
-using OAT;
 using OAT.Readers;
+using OAT.Utilities;
 using Recovery.Tables;
 using RepoDb;
 using System.Runtime.InteropServices;
@@ -18,11 +18,11 @@ if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
     Console.WriteLine("Autocorrecting of config...");
 }
 GlobalConfiguration.Setup().UseMySqlConnector();
-Console.WriteLine(Utils.GetConnectionString());
 
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
+
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
@@ -41,17 +41,21 @@ app.Run();
 
 void SetupControllers()
 {
+    Console.WriteLine(Utils.GetConnectionString());
     HealthTables.init();
     Utils.CreateDirectory(
     Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
     Path.Combine(Directory.GetCurrentDirectory(), "news"),
     Path.Combine(Directory.GetCurrentDirectory(), "static"),
+    Path.Combine(Directory.GetCurrentDirectory(), "static", "teachers"),
+    Path.Combine(Directory.GetCurrentDirectory(), "schedule"),
     Logger.path,
     Logger.path_PreventedAttempts);
     NewsController.init();
     UrlsContoller.init();
-    OAT.Telegram.init();
+    OAT.Utilities.Telegram.init();
     ScheduleReader.init();
+    CommandsController.init();
     CreateAdminAccount();
 }
 
@@ -98,7 +102,6 @@ async Task Proxing(HttpContext context, Func<Task> next)
     }
     catch (Exception ex)
     {
-        //Logger.Error(ex.ToString());
         Console.WriteLine(ex);
         context.Response.Redirect("https://www.oat.ru/");
     }

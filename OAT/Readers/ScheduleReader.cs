@@ -1,39 +1,43 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿#pragma warning disable CS8602
 using System.Xml;
-using static OAT.Readers.ScheduleReader;
 
 namespace OAT.Readers
 {
     public class ScheduleReader
     {
 
-        public static List<Group> groups = new List<Group>();
+        public static List<Group> b1 = new List<Group>();
+        public static List<Group> b2 = new List<Group>();
+        public static List<Group> b3 = new List<Group>();
+        public static List<Group> b4 = new List<Group>();
 
-        public static void init()
+        public static async void init()
         {
             try
             {
-                var xDoc = new XmlDocument();
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule.xml");
-                if (!File.Exists(path))
-                {
-                    Logger.Error("Файл schedule.xml не найден!");
-                    return;
-                }
-                var content = File.ReadAllText(path);
-                xDoc.LoadXml(content.Replace("windows-1251", "utf-8"));
-                XmlNode xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
-                var total = xml_groups.ChildNodes.Count;
-                int current = 0;
-                using var progress = new ProgressBar();
 
-                foreach (XmlNode xml_group in xml_groups)
+                using var progress = new ProgressBar();
+                for (int i = 1; i <= 4; i++)
                 {
-                    groups.Add(new Group(xml_group.Attributes!["name"]!.Value, GetWeeks(xml_group)));
-                    current++;
-                    progress.Report((double)(100f / total) * current);
+                    var xDoc = new XmlDocument();
+                    var xml = LoadXml($"b{i}");
+
+                    if (xml == null)
+                        return;
+
+                    xDoc.LoadXml(xml);
+                    XmlNode xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
+                    var total = xml_groups.ChildNodes.Count;
+                    int current = 0;
+
+                    foreach (XmlNode xml_group in xml_groups)
+                    {
+                        GetBuilding(i).Add(new Group(xml_group.Attributes!["name"]!.Value, GetWeeks(xml_group)));
+                        current++;
+                        progress.Report((double)((25f / total) * current + (25 * (i - 1))) / 100);
+                    }
                 }
-                Logger.Info($"Расписание успешно загружено за {progress.stopWatch.ElapsedMilliseconds} ms");
+                Console.WriteLine($"Расписания загружены за {progress.stopWatch.ElapsedMilliseconds} ms");
             }
             catch(Exception ex)
             {
@@ -78,6 +82,29 @@ namespace OAT.Readers
             return subgroups;
         }
 
-        
+        protected static string? LoadXml(string filename)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");
+            if (!File.Exists(path))
+            {
+                Logger.Error($"Файл schedule/{filename}.xml не найден!");
+                return null;
+            }
+            var content = File.ReadAllText(path);
+            return content.Replace("windows-1251", "utf-8");
+        }
+
+        protected static List<Group> GetBuilding(int i)
+        {
+            switch(i)
+            {
+                case 1: return b1;
+                case 2: return b2;
+                case 3: return b3;
+                case 4: return b4;
+            }
+            return new List<Group>();
+        }
+
     }
 }

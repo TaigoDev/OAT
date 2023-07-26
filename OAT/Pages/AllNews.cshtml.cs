@@ -19,7 +19,6 @@ namespace OAT.Pages
             try
             {
                 pages = NewsController.pages.Count();
-                Console.WriteLine(pages);
                 if (string.IsNullOrEmpty(HttpContext.Request.Query["id"]))
                     news = NewsController.pages[0];
                 else

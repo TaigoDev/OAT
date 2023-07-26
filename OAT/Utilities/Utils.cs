@@ -116,7 +116,22 @@ StringSplitOptions options = StringSplitOptions.None)
         }
     }
 
-
+    public class Runs<T>
+    {
+        public delegate Task method(T parametr);
+        public static async Task InTasks(method method, List<T> parametrs)
+        {
+            var tasks = new List<Task>();
+            foreach (var parametr in parametrs)
+                tasks.Add(method.Invoke(parametr));
+            await Task.WhenAll(tasks.Where(t => t != null).ToArray());
+        }
+        public static async Task InTask(method method, List<T> parametrs)
+        {
+            foreach (var parametr in parametrs)
+                await method.Invoke(parametr);
+        }
+    }
 
     public static string sha256_hash(string value)
     {
@@ -185,5 +200,15 @@ StringSplitOptions options = StringSplitOptions.None)
         !string.IsNullOrWhiteSpace(context.Request.Headers["CF-Connecting-IP"]) ?
         context.Request.Headers["CF-Connecting-IP"] : context.Connection.RemoteIpAddress!.ToString();
 
+    public static string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+    public static string Base64Decode(string base64EncodedData)
+    {
+        var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+        return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+    }
 }
 

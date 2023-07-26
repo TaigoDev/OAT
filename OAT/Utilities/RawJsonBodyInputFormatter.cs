@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Runtime.InteropServices;
 
-namespace OAT
+namespace OAT.Utilities
 {
     public class RawJsonBodyInputFormatter : InputFormatter
     {
