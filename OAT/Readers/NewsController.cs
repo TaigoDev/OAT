@@ -58,16 +58,23 @@ public class NewsController
 
     protected static void SetupPages()
     {
-        pages = new List<List<News>>();
-        var newsOnPage = new List<News>();
-        for (int i = 0; i < News.Count; i++)
+        try
         {
-            newsOnPage.Add(News[i]);
-            if (newsOnPage.Count == 10 || i + 1 == News.Count)
+            pages = new List<List<News>>();
+            var newsOnPage = new List<News>();
+            for (int i = 0; i < News.Count; i++)
             {
-                pages.Add(newsOnPage);
-                newsOnPage = new List<News>();
+                newsOnPage.Add(News[i]);
+                if (newsOnPage.Count == 10 || i + 1 == News.Count)
+                {
+                    pages.Add(newsOnPage);
+                    newsOnPage = new List<News>();
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex.ToString());
         }
     }
 }
