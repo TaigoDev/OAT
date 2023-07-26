@@ -42,21 +42,28 @@ app.Run();
 void SetupControllers()
 {
     Console.WriteLine(Utils.GetConnectionString());
-    HealthTables.init();
-    Utils.CreateDirectory(
-    Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
-    Path.Combine(Directory.GetCurrentDirectory(), "news"),
-    Path.Combine(Directory.GetCurrentDirectory(), "static"),
-    Path.Combine(Directory.GetCurrentDirectory(), "static", "teachers"),
-    Path.Combine(Directory.GetCurrentDirectory(), "schedule"),
-    Logger.path,
-    Logger.path_PreventedAttempts);
-    NewsController.init();
-    UrlsContoller.init();
-    OAT.Utilities.Telegram.init();
-    ScheduleReader.init();
-    CommandsController.init();
-    CreateAdminAccount();
+    try
+    {
+        HealthTables.init();
+        Utils.CreateDirectory(
+        Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
+        Path.Combine(Directory.GetCurrentDirectory(), "news"),
+        Path.Combine(Directory.GetCurrentDirectory(), "static"),
+        Path.Combine(Directory.GetCurrentDirectory(), "static", "teachers"),
+        Path.Combine(Directory.GetCurrentDirectory(), "schedule"),
+        Logger.path,
+        Logger.path_PreventedAttempts);
+        NewsController.init();
+        UrlsContoller.init();
+        OAT.Utilities.Telegram.init();
+        ScheduleReader.init();
+        CommandsController.init();
+        CreateAdminAccount();
+    }
+    catch(Exception ex)
+    {
+        Logger.Error(ex.ToString());
+    }
 }
 
 void SetupServices(ref WebApplicationBuilder builder)
