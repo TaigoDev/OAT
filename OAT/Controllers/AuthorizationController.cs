@@ -49,9 +49,16 @@ namespace OAT.Controllers
 
         public static async Task<bool> CheckLogin(string username, string password)
         {
-            using var connection = new MySqlConnection(Utils.GetConnectionString());
-            var records = await connection.QueryAsync<users>((e) => e.username == username && e.password == password);
-            return records.Any();
+            try
+            {
+                using var connection = new MySqlConnection(Utils.GetConnectionString());
+                var records = await connection.QueryAsync<users>((e) => e.username == username && e.password == password);
+                return records.Any();
+            }catch(Exception ex)
+            {
+                Logger.Error(ex.ToString());
+                return false;
+            }
         }
     }
 }

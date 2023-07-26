@@ -11,10 +11,17 @@ namespace OAT.Utilities
 
         public static async void init()
         {
-            config = Utils.SetupConfiguration("telegram.yml", new TelegramConfig());
-            botClient = new TelegramBotClient(config.token, new HttpClient());
-            var me = await botClient.GetMeAsync();
-            Console.WriteLine($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
+            try
+            {
+                config = Utils.SetupConfiguration("telegram.yml", new TelegramConfig());
+                botClient = new TelegramBotClient(config.token, new HttpClient());
+                var me = await botClient.GetMeAsync();
+                Console.WriteLine($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.ToString());
+            }
         }
 
 

@@ -53,6 +53,7 @@ public class ProgressBar : IDisposable, IProgress<double>
 
     private void UpdateText(string text)
     {
+
         // Get length of common portion
         int commonPrefixLength = 0;
         int commonLength = Math.Min(currentText.Length, text.Length);

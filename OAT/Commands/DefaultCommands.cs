@@ -4,7 +4,6 @@ using Recovery.Tables;
 using RepoDb;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Telegram.Bot.Types;
 using static Utils;
 
 public interface ICommand
@@ -24,9 +23,13 @@ public class Help : ICommand
 
     public void Execute(string[] args)
     {
-        Console.WriteLine("\nВсе команды:");
-        foreach (var cmds in CommandsController.commands)
-            Console.WriteLine($"/{cmds.name} - {cmds.description};");
+        try
+        {
+            Console.WriteLine("\nВсе команды:");
+            foreach (var cmds in CommandsController.commands)
+                Console.WriteLine($"/{cmds.name} - {cmds.description};");
+        }
+        catch { }
     }
 }
 
@@ -45,25 +48,35 @@ public class Import : ICommand
     public string name { get; set; } = "import";
     public Regex pattern { get; set; } = new Regex(@"^/\w*", RegexOptions.Compiled | RegexOptions.IgnoreCase);
     public string description { get; set; } = "используйте /import teaching-staff -y, чтобы импортировать весь персонал";
-
+    private string url;
     public void Execute(string[] args)
     {
-        if (args.Length == 2)
+        try
         {
-            if (args[1] == "teaching-staff")
+            if (args.Length == 2)
+            {
+                if (args[1] == "teaching-staff")
+                    Console.WriteLine("Подтвердите операцию добавив -y");
+                else
+                    Console.WriteLine("Не найден тип импорта");
+
+            }
+            else if (args.Length <= 1)
+            {
+                Console.WriteLine("Не найден тип импорта");
+            }
+            else if (args[2] != "-y")
                 Console.WriteLine("Подтвердите операцию добавив -y");
             else
-                Console.WriteLine("Не найден тип импорта");
-
+            {
+                url = args[3];
+                new Task(() => ImportTeachers()).Start();
+            }
         }
-        else if (args.Length <= 1)
+        catch(Exception ex)
         {
-            Console.WriteLine("Не найден тип импорта");
+            Logger.Error(ex.ToString());
         }
-        else if (args[2] != "-y")
-            Console.WriteLine("Подтвердите операцию добавив -y");
-        else
-            new Task(() => ImportTeachers()).Start();
     }
 
     private async void ImportTeachers()
@@ -114,6 +127,12 @@ public class Import : ICommand
             var info = data.InnerText;
 
             using var connection = new MySqlConnection(Utils.GetConnectionString());
+
+            if((await connection.QueryAsync<Teachers>(n => n.id == Convert.ToInt32(id))).Any())
+            {
+                OAT.Utilities.Telegram.SendMessage($"[{DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: Пропуск {id} уже есть в бд");
+                return;
+            }
             await connection.InsertAsync(new Teachers(int.Parse(id), FullName,
                 email, telephone, Base64Encode(info), photo_url)); 
 
@@ -135,13 +154,13 @@ public class Import : ICommand
         try
         {
             var httpClient = new HttpClient();
-            var html = await httpClient.GetStringAsync($"https://new.oat.ru/sveden/employees/{id}/");
+            var html = await httpClient.GetStringAsync($"{url}/sveden/employees/{id}/");
             return html;
         }
         catch(Exception ex )
         {
             if (i == 10)
-                Logger.Error($"Ошибка скачивания страницы: https://new.oat.ru/sveden/employees/{id}/:\n{ex}");
+                Logger.Error($"Ошибка скачивания страницы: {url}/sveden/employees/{id}/:\n{ex}");
 
             await Task.Delay(10000);
             return await DownloadHtml(id, i + 1);
@@ -153,7 +172,7 @@ public class Import : ICommand
         if (string.IsNullOrWhiteSpace(url))
             return "";
         using var client = new HttpClient();
-        client.BaseAddress = new Uri("https://new.oat.ru");
+        client.BaseAddress = new Uri(this.url);
         var steam = await client.GetStreamAsync(url);
         using FileStream outputFileStream = new FileStream(Path.Combine(Directory.GetCurrentDirectory(), "static", "teachers", $"{sha256_hash(FullName)}.png"), FileMode.Create);
         await steam.CopyToAsync(outputFileStream);
