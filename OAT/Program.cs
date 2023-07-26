@@ -44,6 +44,7 @@ void SetupControllers()
     Console.WriteLine(Utils.GetConnectionString());
     try
     {
+        UrlsContoller.init();
         HealthTables.init();
         Utils.CreateDirectory(
         Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
@@ -54,7 +55,6 @@ void SetupControllers()
         Logger.path,
         Logger.path_PreventedAttempts);
         NewsController.init();
-        UrlsContoller.init();
         OAT.Utilities.Telegram.init();
         ScheduleReader.init();
         CommandsController.init();
