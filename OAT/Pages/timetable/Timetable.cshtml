@@ -1,386 +1,237 @@
-﻿@page
+﻿@page "{building?}/{group_name?}"
 @model TimetableModel
 @{
-    ViewData["Title"] = "Расписание группы <ИМЯ>";
+    ViewData["Title"] = "Расписание группы " + Model.group_name;
 }
 
 <link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
 <section class="timetable-container">
-    <h2 class="section-title timetable-title">
-        Расписание группы ИМЯ ГРУППЫ
-    </h2>
+    @if (string.IsNullOrWhiteSpace(Model.building) || string.IsNullOrWhiteSpace(Model.group_name) || Model.group is null)
+    {
+        <h2 class="section-title timetable-title">
+            Здания или группы не существует
+        </h2>
+    }
+    else
+    {
+        <h2 class="section-title timetable-title">
+            Расписание группы @Model.group_name
+        </h2>
+        <table class="customized timetable">
+            <thead>
+                <tr>
+                    <th>
+                        №
+                    </th>
+                    <th>
+                        Время
+                    </th>
+                    <th>
+                        Понедельник-1
+                    </th>
+                    <th>
+                        Вторник-1
+                    </th>
+                    <th>
+                        Среда-1
+                    </th>
+                    <th>
+                        Четверг-1
+                    </th>
+                    <th>
+                        Пятница-1
+                    </th>
+                    <th>
+                        Суббота-1
+                    </th>
+                    <th>
+                        Воскресенье-1
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model.group != null)
+                {
+                    Week week = Model.group.weeks.Where(e => e.id == 1).First();
+                    @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
+                    {
+                        List<Lesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
+                        string[] ring = Model.group.lesson_times[lesson_id - 1].Split(" - ");
 
-    <table class="customized timetable">
-        <thead>
-            <tr>
-                <th>
-                    №
-                </th>
-                <th>
-                    Время
-                </th>
-                <th>
-                    1-Понедельник
-                </th>
-                <th>
-                    1-Вторник
-                </th>
-                <th>
-                    1-Среда
-                </th>
-                <th>
-                    1-Четверг
-                </th>
-                <th>
-                    1-Пятница
-                </th>
-                <th>
-                    1-Суббота
-                </th>
-                <th>
-                    1-Воскресенье
-                </th>
-                <th>
-                    2-Понедельник
-                </th>
-                <th>
-                    2-Вторник
-                </th>
-                <th>
-                    2-Среда
-                </th>
-                <th>
-                    2-Четверг
-                </th>
-                <th>
-                    2-Пятница
-                </th>
-                <th>
-                    2-Суббота
-                </th>
-                <th>
-                    2-Воскресенье
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    1
-                </td>
-                <td>
-                    8:00
-                    <br>
-                    9:30
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
+                        <tr>
 
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="subject">
-                        <div class="subject-name">
-                            Предмет
-                        </div>
-                        <div class="subject-more">
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                            <div class="subject-more-item">
-                                <div class="subject-teacher">
-                                    Преподаватель
-                                </div>
-                                <div class="subject-teacher">
-                                    Кабинет
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                            <td>
+                                @lesson_id
+                            </td>
+                            <td>
+                                @if (ring.Length == 2)
+                                {
+                                    @ring[0]
+                                    <br/>
+                                    @ring[1]
+                                }
+                                else
+                                {
+                                    @Model.group.lesson_times[lesson_id - 1]
+                                }
+                            </td>
+
+                            @foreach (var lesson in lessons)
+                            {
+                                if (lesson is null)
+                                {
+                                    <td></td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <div class="subject">
+                                            <div class="subject-name">
+                                                @lesson.subgroups.First().short_subject
+                                            </div>
+                                            <div class="subject-more">
+                                                @if (lesson.subgroups.Count == 1)
+                                                {
+                                                    <div class="subject-more-item">
+                                                        <div class="subject-teacher">
+                                                            @lesson.subgroups.First().teacher
+                                                        </div>
+                                                        <div class="subject-teacher">
+                                                            @lesson.subgroups.First().cabinet
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else 
+                                                    foreach(var group in lesson.subgroups)
+                                                    {
+                                                        <div class="subject-more-item">
+                                                            <div class="subject-teacher">
+                                                                @group.teacher
+                                                            </div>
+                                                            <div class="subject-teacher">
+                                                                @group.cabinet
+                                                            </div>
+                                                        </div>
+                                                    }
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                            }
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+
+        <table class="customized timetable">
+            <thead>
+                <tr>
+                    <th>
+                        №
+                    </th>
+                    <th>
+                        Время
+                    </th>
+                    <th>
+                        Понедельник-2
+                    </th>
+                    <th>
+                        Вторник-2
+                    </th>
+                    <th>
+                        Среда-2
+                    </th>
+                    <th>
+                        Четверг-2
+                    </th>
+                    <th>
+                        Пятница-2
+                    </th>
+                    <th>
+                        Суббота-2
+                    </th>
+                    <th>
+                        Воскресенье-2
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.group != null)
+                {
+                    Week week = Model.group.weeks.Where(e => e.id == 2).First();
+                    @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
+                    {
+                        List<Lesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
+                        string[] ring = Model.group.lesson_times[lesson_id - 1].Split(" - ");
+
+                        <tr>
+
+                            <td>
+                                @lesson_id
+                            </td>
+                            <td>
+                                @if (ring.Length == 2)
+                                {
+                                    @ring[0]
+                                    <br />
+                                    @ring[1]
+                                }
+                                else
+                                {
+                                    @Model.group.lesson_times[lesson_id - 1]
+                                }
+                            </td>
+
+                            @foreach (var lesson in lessons)
+                            {
+                                if (lesson is null)
+                                {
+                                    <td></td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <div class="subject">
+                                            <div class="subject-name">
+                                                @lesson.subgroups.First().short_subject
+                                            </div>
+                                            <div class="subject-more">
+                                                @if (lesson.subgroups.Count == 1)
+                                                {
+                                                    <div class="subject-more-item">
+                                                        <div class="subject-teacher">
+                                                            @lesson.subgroups.First().teacher
+                                                        </div>
+                                                        <div class="subject-teacher">
+                                                            @lesson.subgroups.First().cabinet
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                    foreach (var group in lesson.subgroups)
+                                                    {
+                                                        <div class="subject-more-item">
+                                                            <div class="subject-teacher">
+                                                                @group.teacher
+                                                            </div>
+                                                            <div class="subject-teacher">
+                                                                @group.cabinet
+                                                            </div>
+                                                        </div>
+                                                    }
+                                            </div>
+                                        </div>
+                                    </td>
+                                }
+                            }
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    }
 </section>
     

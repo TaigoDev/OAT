@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using System.Runtime.InteropServices;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace OAT.Utilities
@@ -29,7 +30,10 @@ namespace OAT.Utilities
         {
             try
             {
-                await botClient.SendTextMessageAsync(new ChatId(int.Parse(config.chat_id)), message);
+                if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    await botClient.SendTextMessageAsync(new ChatId(int.Parse(config.chat_id)), message);
+                else
+                    Console.WriteLine(message);
             }
             catch { }
         }

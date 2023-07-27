@@ -66,14 +66,19 @@ public class TelegramConfig
 }
 public class Group
 {
-    public Group(string name, List<Week> weeks)
+    public Group(string name, int curse, List<Week> weeks, List<string> lesson_times)
     {
         this.name = name;
         this.weeks = weeks;
+        this.curse = curse;
+        this.lesson_times = lesson_times;
     }
-
+    
     public string name { get; set; }
+    public int curse { get; set; }
     public List<Week> weeks { get; set; } = new List<Week>(2);
+
+    public List<string> lesson_times { get; set; }
 }
 
 public class Week
@@ -129,3 +134,4 @@ public class Subgroup
     public string teacher { get; set; }
     public string cabinet { get; set; }
 }
+

@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Options;
+using OAT.Readers;
 
 namespace OAT.Pages.timetable
 {
@@ -11,9 +15,15 @@ namespace OAT.Pages.timetable
             _logger = logger;
         }
 
-        public void OnGet()
-        {
+        public string? building { get; set; }
+        public List<Group>? groups { get; set; }
+        public int max_curse { get; set; }
 
+        public void OnGet(string? building)
+        {
+            groups = ScheduleReader.GetGroupsByBuilding(building);
+            max_curse = groups!.Count == 0 ? 0 : groups.Max(e => e.curse);
+            this.building = groups is null ? null : building;
         }
     }
 }
