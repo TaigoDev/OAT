@@ -1933,16 +1933,16 @@ section.content::before{
 
 /* search */
 .site-search-container {
+	position: fixed;
+	top: 100px;
+	left: calc(50% - 150px);
+	width: 300px;
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity 500ms, visibility 500ms;
 }
 
 .site-search {
-	position: fixed;
-	top: 20px;
-	left: calc(50% - 150px);
-	width: 300px;
 	border-radius: 10px;
 }
 
