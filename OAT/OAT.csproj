@@ -42,6 +42,7 @@
 	  <Content Remove="wwwroot\js\allNews.js" />
 	  <Content Remove="wwwroot\js\mysql.js" />
 	  <Content Remove="wwwroot\js\panel.js" />
+	  <Content Remove="wwwroot\js\schedule.js" />
 	  <Content Remove="wwwroot\js\users.js" />
 	  <Content Remove="wwwroot\videos\Chto_takoe_nesanktsionirovanniy_miting.mp4" />
 	  <Content Remove="wwwroot\videos\Otvetstvennosty_za_ekstremizm.mp4" />

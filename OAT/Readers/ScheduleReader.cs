@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS8602
+using System.Diagnostics;
 using System.Text;
 using System.Xml;
 
@@ -16,8 +17,12 @@ namespace OAT.Readers
         {
             try
             {
-
-                using var progress = new ProgressBar();
+                ul_lenina_24.Clear();
+                ul_b_khmelnickogo_281a.Clear();
+                pr_kosmicheskij_14a.Clear();
+                ul_volkhovstroya_5.Clear();
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
                 for (int i = 1; i <= 4; i++)
                 {
                     var xDoc = new XmlDocument();
@@ -27,8 +32,6 @@ namespace OAT.Readers
                     {
                         xDoc.LoadXml(xml);
                         XmlNode xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
-                        var total = xml_groups.ChildNodes.Count;
-                        int current = 0;
 
                         foreach (XmlNode xml_group in xml_groups)
                         {
@@ -38,12 +41,12 @@ namespace OAT.Readers
                                 int.Parse(name.First(e => char.IsDigit(e)).ToString()),
                                 GetWeeks(xml_group),
                                 GetLessonsTime(xDoc)));
-                            current++;
-                            progress.Report((double)((25f / total) * current + (25 * (i - 1))) / 100);
                         }
                     }
                 }
-                Console.WriteLine($"Расписания загружены за {progress.stopWatch.ElapsedMilliseconds} ms");
+                stopWatch.Stop();
+
+                Console.WriteLine($"Расписания загружены за {stopWatch.ElapsedMilliseconds} ms");
             }
             catch(Exception ex)
             {
@@ -101,9 +104,37 @@ namespace OAT.Readers
             return content.Replace("windows-1251", "utf-8");
         }
 
+       
+        protected static async Task<string> ReadFile(string path)
+        {
+            try
+            {
+                using FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                using StreamReader reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251));
+
+
+                return await reader_encoding.ReadToEndAsync();
+            }
+            catch
+            {
+                await Task.Delay(2000);
+                using FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                using StreamReader reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251));
+                return await reader_encoding.ReadToEndAsync();
+            }
+        }
+
+        protected static List<string> GetLessonsTime(XmlDocument doc)
+        {
+            var rings = doc.GetElementsByTagName("rings").Item(0);
+            var lessons_time = new List<string>();
+            foreach (XmlNode ring in rings)
+                lessons_time.Add($"{ring.Attributes["begin_time"]!.Value} - {ring.Attributes["end_time"]!.Value}");
+            return lessons_time;
+        }
         protected static List<Group> GetBuilding(int i)
         {
-            switch(i)
+            switch (i)
             {
                 case 1: return ul_lenina_24;
                 case 2: return ul_b_khmelnickogo_281a;
@@ -128,22 +159,22 @@ namespace OAT.Readers
             return null;
         }
 
-        protected static async Task<string> ReadFile(string path)
+        public static string GetFilenameByBuilding(string name)
         {
-            using FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-            using StreamReader reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251));
+            if (string.IsNullOrEmpty(name))
+                return null;
 
-            return await reader_encoding.ReadToEndAsync();
+            switch (name)
+            {
+                case "ul_lenina_24": return "b1";
+                case "ul_b_khmelnickogo_281a": return "b2";
+                case "pr_kosmicheskij_14a": return "b3";
+                case "ul_volkhovstroya_5": return "b4";
+            }
+            return null;
         }
 
-        protected static List<string> GetLessonsTime(XmlDocument doc)
-        {
-            var rings = doc.GetElementsByTagName("rings").Item(0);
-            var lessons_time = new List<string>();
-            foreach (XmlNode ring in rings)
-                lessons_time.Add($"{ring.Attributes["begin_time"]!.Value} - {ring.Attributes["end_time"]!.Value}");
-            return lessons_time;
-        }
+
 
     }
 }
