@@ -164,6 +164,7 @@ th {
 	display: flex;
 	justify-content: space-between;
 	gap: 30px 50px;
+	padding-bottom: 20px;
 }
 
 .content {
@@ -1666,10 +1667,10 @@ section.content::before{
 	grid-area: header;
 	text-transform: uppercase;
 	font-weight: 700;
-	font-size: 0.9rem;
 	color: var(--light-white);
+	background-image: linear-gradient(#00000075, transparent);
 	overflow: hidden;
-	transition: max-height 1750ms ease-in-out, background-color 1750ms ease-in-out;
+	transition: max-height 1750ms ease-in-out,background-color 1750ms ease-in-out;
 }
 
 .site-header::before{
@@ -1701,7 +1702,8 @@ section.content::before{
 }
 
 .logo-text {
-	zoom: 0.95;
+	zoom: .95;
+	font-size: 0.9rem;
 }
 
 @media (width < 600px){
@@ -1929,20 +1931,39 @@ section.content::before{
 	}
 }
 
-/* FOOTER */
+/* search */
+.site-search-container {
+	position: fixed;
+	top: 100px;
+	left: calc(50% - 150px);
+	width: 300px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 500ms, visibility 500ms;
+}
 
+.site-search {
+	border-radius: 10px;
+}
+
+.site-search-container-active{
+	opacity: 1;
+	visibility: visible;
+}
+
+/* FOOTER */
 .partners-list-container {
 	overflow: hidden;
 	margin-top: 40px;
 }
 
 .partners-list {
-	display: flex;
-	gap: 20px;
-	height: 90px;
-	width: 100vw;
-	animation: partners-animation 160s linear infinite;
-	--width-part-block: 9500px;
+    display: flex;
+    gap: 20px;
+    height: 90px;
+    width: 100vw;
+    animation: partners-animation 160s linear infinite;
+    --width-part-block: 9500px;
 }
 
 .partners-list:hover{

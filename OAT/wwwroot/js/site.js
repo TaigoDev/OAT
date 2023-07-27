@@ -5,27 +5,37 @@
 
 'use strict'
 window.addEventListener("load", () => {
-    /* main elements */
+    /* E L E M E N T S */
+    /* main */
     let mainMenuWindow = document.getElementById("main-menu-window");
     let mainMenu = document.getElementById("main-menu");
     let menuIcon = document.getElementById("menu-icon");
+    let searchIcon = document.getElementById("search-icon");
     const partnersSlider = document.querySelectorAll(".partners-list > a > img");
+    let siteSearch = document.querySelector(".gsc-control-cse");
 
-    /* optional elements */
+    /* optional */
     let accordionsList = document.querySelectorAll(".accordion");
     let imagesSliders = document.querySelectorAll(".images-list-slider-container");
     let plane = document.getElementById("plane");
     let sidebar = document.getElementById("sidebar");
 
-    /* main menu functional */
 
+    /* F U N C T I O N A L */
+    /* search */
+    siteSearch.classList.add("site-search");
+    searchIcon.addEventListener("click", () => {
+        document.querySelector(".site-search-container").classList.toggle("site-search-container-active");
+    });
+
+    /* main menu */
     menuIcon.addEventListener("click", () => {
         menuIcon.classList.toggle("main-menu-icon-active");
         mainMenu.classList.toggle("main-menu-open");
         mainMenuWindow.classList.toggle("main-menu-window-open");
     });
 
-    /* accordion functional */
+    /* accordion */
     accordionsList.forEach(accordion => {
         accordion.querySelector(".accordion-head").insertAdjacentHTML("beforeend", `<img id="eye-icon" class="icon accordion-head-icon" src="/images/basic/accordionMore.svg" alt="версия для слабовидящих">`);
         console.log(accordion.querySelector(".accordion-head-icon"));
@@ -37,7 +47,7 @@ window.addEventListener("load", () => {
         });
     });
 
-    /* partners list functional */
+    /* partners list */
     let partnersSliderWidth = 0;
     partnersSlider.forEach(element => {
         partnersSliderWidth = partnersSliderWidth + element.offsetWidth + 20;
@@ -46,7 +56,7 @@ window.addEventListener("load", () => {
     document.querySelector(".partners-list").style = `--width-part-block: ${partnersSliderWidth - 20}px;`;
 
 
-    /* images slider functional */
+    /* images slider */
     for (let i = 0; i < imagesSliders.length; i++) {
         let sliderContainer = imagesSliders[i];
         sliderContainer.insertAdjacentHTML("afterbegin", `<div class="images-list-slider-container-btn prev"></div><div class="images-list-slider-container-btn next">

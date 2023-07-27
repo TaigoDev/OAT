@@ -24,6 +24,7 @@
 	height: fit-content;
 	padding-bottom: 5px;
 	font-weight: 500;
+	font-size: 1.1rem;
 }
 
 .all-news:hover:after {

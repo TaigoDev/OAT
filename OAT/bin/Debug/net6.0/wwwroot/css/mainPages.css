@@ -25,7 +25,7 @@ body {
 	width: 100vw;
 	height: 100%;
 	object-fit: cover;
-	filter: brightness(0.85);
+	filter: brightness(0.8);
 }
 
 .main-underheader .container {
@@ -39,7 +39,7 @@ body {
 
 @media (width<1800px) {
 	.main-underheader .container {
-		padding-top: calc(var(--max-header-heigth) + 100px);
+		padding-top: calc(var(--max-header-heigth) + 120px);
 	}
 }
 
@@ -99,8 +99,8 @@ body {
 	width: 320px;
 	border: 2px solid var(--light-white);
 	border-radius: 10px;
-	background-color: #0000003d;
-	transition: background-color 750ms, border-color 750ms;
+	background-color: #23212199;
+	transition: background-color 750ms,border-color 750ms;
 }
 
 .important-link::after{
