@@ -1,5 +1,5 @@
 ﻿@page
-@model TimetablePODPOModel
+@model PODPOModel
 @{
     ViewData["Title"] = "Расписание ПО и ДПО";
 }
@@ -12,7 +12,7 @@
 
         <div class="document-item">
             <div class="document-item-head">
-                <a target="_blank" href="~/documents/timetable/timetablePODPO/raspisaniePOiDPO.xls">
+                <a target="_blank" href="~/documents/timetable/PODPO/raspisaniePOiDPO.xls">
                 </a>
             </div>
             <div class="document-item-body">
@@ -27,32 +27,32 @@
         <nav class="sidebar-body">
             <ul class="sidebar-links">
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Classes")'>
                         Расписание занятий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("ClassesChanges")'>
                         Изменения в расписании занятий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Practice")'>
                         Расписание практик
                     </a>
                 </li>
                 <li class="sidebar-link sidebar-link-selected">
-                    <a href=''>
+                    <a href='@Url.Page("PODPO")'>
                         Расписание ПО и ДПО
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Session")'>
                         Расписание сессий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("GIA")'>
                         Расписание ГИА
                     </a>
                 </li>

@@ -2,11 +2,11 @@
 
 namespace OAT.Pages.timetable
 {
-    public class TimetableGIAModel : PageModel
+    public class ClassesChangesModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public TimetableGIAModel(ILogger<IndexModel> logger)
+        public ClassesChangesModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }

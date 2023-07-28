@@ -1,5 +1,5 @@
 ﻿@page
-@model TimetableGIAModel
+@model GIAModel
 @{
     ViewData["Title"] = "Расписание ГИА";
 }
@@ -13,7 +13,7 @@
         <ul class="documents-list little">
             <li class="document-item">
                 <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/timetableGIA/gia.xlsx">
+                    <a target="_blank" href="~/documents/timetable/GIA/gia.xlsx">
                     </a>
                 </div>
                 <div class="document-item-body">
@@ -22,7 +22,7 @@
             </li>
             <li class="document-item">
                 <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/timetableGIA/konsultacii.xls">
+                    <a target="_blank" href="~/documents/timetable/GIA/konsultacii.xls">
                     </a>
                 </div>
                 <div class="document-item-body">
@@ -39,32 +39,32 @@
         <nav class="sidebar-body">
             <ul class="sidebar-links">
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Classes")'>
                         Расписание занятий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("ClassesChanges")'>
                         Изменения в расписании занятий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Practice")'>
                         Расписание практик
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("PODPO")'>
                         Расписание ПО и ДПО
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Session")'>
                         Расписание сессий
                     </a>
                 </li>
                 <li class="sidebar-link sidebar-link-selected">
-                    <a href=''>
+                    <a href='@Url.Page("GIA")'>
                         Расписание ГИА
                     </a>
                 </li>

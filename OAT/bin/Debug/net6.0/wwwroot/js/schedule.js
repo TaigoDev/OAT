@@ -1,5 +1,5 @@
 ﻿function UploadSchedule(building, files_id) {
-    var url = "http://localhost:20045/api/schedule/" + building + "/upload";
+    var url = "https://www.oat.ru/api/schedule/" + building + "/upload";
     var formData = new FormData();
 
     var fileUpload = $("#" + files_id).get(0);

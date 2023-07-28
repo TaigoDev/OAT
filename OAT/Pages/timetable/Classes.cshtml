@@ -1,10 +1,10 @@
 ﻿@page
-@model TimetableClassesModel
+@model ClassesModel
 @{
     ViewData["Title"] = "Расписание занятий";
 }
 
-<link rel="stylesheet" href="~/css/timetable/timetableChoose.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/timetable/choose.css" asp-append-version="true">
 
 <div class="container content-page">
     <section class="content">
@@ -35,32 +35,32 @@
         <nav class="sidebar-body">
             <ul class="sidebar-links">
                 <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("TimetableClasses")'>
+                    <a href='@Url.Page("Classes")'>
                         Расписание занятий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("TimetableClassesChanges")'>
+                    <a href='@Url.Page("ClassesChanges")'>
                         Изменения в расписании занятий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("TimetablePractice")'>
+                    <a href='@Url.Page("Practice")'>
                         Расписание практик
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("TimetablePODPO")'>
+                    <a href='@Url.Page("PODPO")'>
                         Расписание ПО и ДПО
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("TimetableSession")'>
+                    <a href='@Url.Page("Session")'>
                         Расписание сессий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("TimetableGIA")'>
+                    <a href='@Url.Page("GIA")'>
                         Расписание ГИА
                     </a>
                 </li>

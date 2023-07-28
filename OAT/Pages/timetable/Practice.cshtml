@@ -1,5 +1,5 @@
 ﻿@page
-@model TimetablePracticeModel
+@model PracticeModel
 @{
     ViewData["Title"] = "Расписание практик";
 }
@@ -13,7 +13,7 @@
         <ul class="documents-list">
             <li class="document-item">
                 <div class="document-item-head">
-                    <a target="_blank" href="">
+                    <a target="_blank" href="~/documents/timetable/practice/практика с 19.06.xlsx">
                     </a>
                 </div>
                 <div class="document-item-body">
@@ -22,7 +22,7 @@
             </li>
             <li class="document-item">
                 <div class="document-item-head">
-                    <a target="_blank" href="">
+                    <a target="_blank" href="~/documents/timetable/practice/практика с 12.06.xlsx">
                     </a>
                 </div>
                 <div class="document-item-body">
@@ -31,7 +31,7 @@
             </li>
             <li class="document-item">
                 <div class="document-item-head">
-                    <a target="_blank" href="">
+                    <a target="_blank" href="~/documents/timetable/practice/практика июнь.docx">
                     </a>
                 </div>
                 <div class="document-item-body">
@@ -39,7 +39,7 @@
                 </div>
                 <li class="document-item">
                 <div class="document-item-head">
-                    <a target="_blank" href="">
+                    <a target="_blank" href="~/documents/timetable/practice/практика с 05.06.xlsx">
                     </a>
                 </div>
                 <div class="document-item-body">
@@ -48,7 +48,7 @@
             </li>
             <li class="document-item">
                 <div class="document-item-head">
-                    <a target="_blank" href="">
+                    <a target="_blank" href="~/documents/timetable/practice/практика с 29.05.xlsx">
                     </a>
                 </div>
                 <div class="document-item-body">
@@ -64,32 +64,32 @@
         <nav class="sidebar-body">
             <ul class="sidebar-links">
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Classes")'>
                         Расписание занятий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("ClassesChanges")'>
                         Изменения в расписании занятий
                     </a>
                 </li>
                 <li class="sidebar-link sidebar-link-selected">
-                    <a href=''>
+                    <a href='@Url.Page("Practice")'>
                         Расписание практик
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("PODPO")'>
                         Расписание ПО и ДПО
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Session")'>
                         Расписание сессий
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("GIA")'>
                         Расписание ГИА
                     </a>
                 </li>

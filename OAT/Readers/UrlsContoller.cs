@@ -75,8 +75,12 @@ public class UrlsContoller
 
 
             // timetable
-
-
+            new IPage("students/raspisanie/index.php", "timetable/Classes"),
+            new IPage("students/raspisanie/izmenenia.php", "timetable/ClassesChanges"),
+            new IPage("students/raspisanie/raspPract.php", "timetable/Practice"),
+            new IPage("students/raspisanie/DpoAndPo/index.php", "timetable/PODPO"),
+            new IPage("students/raspisanie/Session", "timetable/Session"),
+            new IPage("students/raspisanie/GIA/index.php", "timetable/GIA"),
             // feedback
 
 

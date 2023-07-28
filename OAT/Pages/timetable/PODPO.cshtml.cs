@@ -2,11 +2,11 @@
 
 namespace OAT.Pages.timetable
 {
-    public class TimetablePracticeModel : PageModel
+    public class PODPOModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public TimetablePracticeModel(ILogger<IndexModel> logger)
+        public PODPOModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
