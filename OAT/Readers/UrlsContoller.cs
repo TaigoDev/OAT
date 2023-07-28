@@ -83,6 +83,8 @@ public class UrlsContoller
             new IPage("students/raspisanie/GIA/index.php", "timetable/GIA"),
             // feedback
 
+            //PROJECTS AND EVENTS
+            //professionalitet
 
             // limitation
             new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),
