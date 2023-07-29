@@ -1876,7 +1876,7 @@ section.content::before{
 	right: 10px;
 	width: 25px;
 	height: 25px;
-	background-image: url("../images/basic/lock.svg");
+	background-image: url("../images/basic/menu/lock.svg");
 	background-size: cover;
 	visibility: hidden;
 	opacity: 0;
@@ -1916,6 +1916,9 @@ section.content::before{
 	row-gap: 10px;
 	font-size: 0.8rem;
 	text-align: center;
+}
+
+.main-menu-item-title a{
 	color: var(--light-white);
 }
 
