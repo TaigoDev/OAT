@@ -1,6 +1,6 @@
 ﻿.project-partners {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 250px);
+	grid-template-columns: repeat(auto-fit, 230px);
 	gap: 40px;
 	justify-content: space-evenly;
 	text-align: center;
@@ -17,10 +17,11 @@
 	border-radius: 10px;
 	background-image: radial-gradient(#5573ffd9, #00537d8c);
 	font-weight: 500;
+	font-size: 0.9rem;
 	line-height: 1.1;
 }
 
 .project-partners-item-img{
-	width: 200px;
+	width: 180px;
 	border-radius: 10px;
 }

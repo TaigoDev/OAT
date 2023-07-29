@@ -8,13 +8,13 @@
 <section class="timetable-container">
     @if (string.IsNullOrWhiteSpace(Model.building) || string.IsNullOrWhiteSpace(Model.group_name) || Model.group is null)
     {
-        <h2 class="section-title timetable-title">
+        <h2 class="section-title centered-title">
             Здания или группы не существует
         </h2>
     }
     else
     {
-        <h2 class="section-title timetable-title">
+        <h2 class="section-title centered-title">
             Расписание группы @Model.group_name
         </h2>
         <table class="customized timetable">

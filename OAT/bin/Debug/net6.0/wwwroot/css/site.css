@@ -114,6 +114,7 @@ textarea {
 a {
 	display: contents;
 	color: unset;
+	color: #4D89E2;
 }
 
 a,
@@ -332,6 +333,10 @@ th {
 .sidebar-link:hover::after {
 	background-color: hsl(0 0% 70% / 1);
 	opacity: 1;
+}
+
+.sidebar-link a{
+	color: var(--light-white);
 }
 
 .sidebar-link::after {
@@ -947,6 +952,11 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	font-size: 1.1rem;
 	font-weight: 700;
 	margin: 15px 0 5px 0;
+}
+
+.centered-title{
+	text-align: center;
+	width: 100%;
 }
 
 .hide-title {
@@ -1704,6 +1714,7 @@ section.content::before{
 .logo-text {
 	zoom: .8;
 	font-size: 0.8rem;
+	color: var(--light-white);
 }
 
 @media (width < 600px){
@@ -1724,11 +1735,12 @@ section.content::before{
 	column-gap: 40px;
 }
 
-.important-pages li{
+.important-pages li a{
+	color: var(--light-white);
 	transition: 500ms;
 }
 
-.important-pages li:hover{
+.important-pages li:hover a{
 	color: #4d89e2;
 }
 
@@ -1904,6 +1916,7 @@ section.content::before{
 	row-gap: 10px;
 	font-size: 0.8rem;
 	text-align: center;
+	color: var(--light-white);
 }
 
 .main-menu-item-title-pictogram {
@@ -2121,6 +2134,7 @@ section.content::before{
 }
 
 .footer-bottom-pages li a{
+	color: var(--light-white);
 	transition: 500ms;
 }
 

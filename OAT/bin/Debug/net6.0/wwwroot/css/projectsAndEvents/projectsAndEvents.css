@@ -1,9 +1,4 @@
-﻿.projects-and-events-title {
-	text-align: center;
-	width: 100%;
-}
-
-.projects-list{
+﻿.projects-list{
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 200px);
 	justify-content: center;

@@ -3,10 +3,6 @@
 	margin: 0 auto;
 }
 
-.timetable-title {
-	text-align: center;
-}
-
 table.timetable tbody tr td:first-child {
 	text-align: center !important;
 }
