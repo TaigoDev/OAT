@@ -59,18 +59,15 @@
 	border-radius: 50%;
 	border: 2.5px solid var(--matte-color);
 	cursor: pointer;
-	opacity: 0.75;
 	--rotate-arrow: 90deg;
-	transition: opacity 400ms;
+	transition: opacity 400ms, visibility 400ms;
 }
 
-.news-slider-arrow:hover{
-	opacity: 1;
-}
-
+/*
 .news-slider-arrow:hover img{
 	transform: scale(1.1);
 }
+*/
 
 .news-slider-prev {
 	--rotate-arrow: -90deg;
@@ -79,6 +76,12 @@
 .news-slider-arrow img {
 	width: 15px;
 	transition: 500ms;
+}
+
+.news-slider-arrow-inactive{
+	opacity: 0;
+	cursor: default;
+	visibility: hidden;
 }
 
 .news-slider {

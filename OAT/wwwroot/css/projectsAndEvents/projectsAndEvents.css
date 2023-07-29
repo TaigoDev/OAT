@@ -1,0 +1,27 @@
+﻿.projects-and-events-title {
+	text-align: center;
+	width: 100%;
+}
+
+.projects-list{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 200px);
+	justify-content: center;
+	gap: 50px;
+	max-width: min(100%, 1100px);
+	margin: 0 auto;
+}
+
+.projects-list{
+	display: grid;
+	place-items: center;
+}
+
+.projects-list img{
+	border-radius: 10px;
+	width: 200px;
+}
+
+section::before{
+	height: 0;
+}

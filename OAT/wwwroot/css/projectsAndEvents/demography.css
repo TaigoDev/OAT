@@ -1,0 +1,10 @@
+﻿.projects-list{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 200px);
+	gap: 25px;
+}
+
+.projects-list img{
+	border-radius: 10px;
+	width: 200px;
+}

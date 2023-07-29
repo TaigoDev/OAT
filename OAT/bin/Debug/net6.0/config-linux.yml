@@ -1,5 +1,5 @@
-baseUrl: http://10.24.2.13:8082
-mainUrl: https://www.oat.ru
+baseUrl: https://www.oat.ru
+mainUrl: http://10.24.2.13:8082
 bindPort: 20045
 dbIp: db_new.oat.ru
 dbPort: 3306
