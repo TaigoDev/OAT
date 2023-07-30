@@ -19,8 +19,10 @@ namespace OAT.Controllers
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");
             Utils.FileDelete(path);
+
             using Stream fileStream = new FileStream(path, FileMode.Create);
             file.CopyTo(fileStream);
+
             Logger.Info($"Пользователь {User.Username()} обновил расписание для {building}\nIP: {HttpContext.UserIP()}");
             ScheduleReader.init();
             return StatusCode(StatusCodes.Status200OK);

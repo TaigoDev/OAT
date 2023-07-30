@@ -23,7 +23,7 @@ namespace OAT.Pages.timetable
         {
             groups = ScheduleReader.GetGroupsByBuilding(building);
             max_curse = groups!.Count == 0 ? 0 : groups.Max(e => e.curse);
-            this.building = groups is null ? null : building;
+            this.building = building;
         }
     }
 }
