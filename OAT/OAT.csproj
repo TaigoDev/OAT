@@ -45,15 +45,13 @@
 	  <Content Remove="wwwroot\js\panel.js" />
 	  <Content Remove="wwwroot\js\schedule.js" />
 	  <Content Remove="wwwroot\js\users.js" />
-	  <Content Remove="wwwroot\videos\Chto_takoe_nesanktsionirovanniy_miting.mp4" />
-	  <Content Remove="wwwroot\videos\Otvetstvennosty_za_ekstremizm.mp4" />
-	  <Content Remove="wwwroot\videos\Pravila_povedeniya_v_sotsialynih_setyah.mp4" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="HtmlAgilityPack" Version="1.11.48" />
 	  <PackageReference Include="MySqlConnector" Version="2.2.6" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="RepoDb.MySqlConnector" Version="1.13.1" />
+	  <PackageReference Include="Telegram.Bot" Version="19.0.0" />
 	  <PackageReference Include="Telegram.Bot.Enforcer" Version="13.0.13" />
 	  <PackageReference Include="YamlDotNet" Version="13.1.1" />
 	</ItemGroup>
@@ -73,5 +71,6 @@
 	  <Folder Include="wwwroot\images\news\" />
 	  <Folder Include="bitrix\" />
 	  <Folder Include="wwwroot\images\students\" />
+	  <Folder Include="wwwroot\videos\" />
 	</ItemGroup>
 </Project>
