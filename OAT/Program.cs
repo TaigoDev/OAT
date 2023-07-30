@@ -38,6 +38,7 @@ void SetupControllers()
     Console.WriteLine(Utils.GetConnectionString());
     try
     {
+        OAT.Utilities.Telegram.init();
         UrlsContoller.init();
         HealthTables.init();
         Utils.CreateDirectory(
@@ -49,7 +50,6 @@ void SetupControllers()
         Logger.path,
         Logger.path_PreventedAttempts);
         NewsController.init();
-        OAT.Utilities.Telegram.init();
         ScheduleReader.init();
         CommandsController.init();
         CreateAdminAccount();

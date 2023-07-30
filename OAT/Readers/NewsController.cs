@@ -9,7 +9,6 @@ public class NewsController
     public static void init()
     {
         AutoUpdate();
-        Console.WriteLine($"OAT.Core.News: We successful load {News.Count} news");
         new Task(() => AutoUpdate());
     }
 
@@ -25,8 +24,10 @@ public class NewsController
 
     public static async void Loader()
     {
-        
-        News.Clear();
+        try
+        {
+
+            News.Clear();
         string[] files = Directory.GetFiles("news", "*.yaml");
         foreach (string file in files)
         {
@@ -51,9 +52,14 @@ public class NewsController
             }
         }
 
-        Console.WriteLine($"OAT.Core.News: We successful load updated news");
+        Console.WriteLine($"OAT.Core.News: We successful load {News.Count} news");
         News = News.OrderBy(x => x.id).ToList().Reverse<News>();
         SetupPages();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex.ToString());
+        }
     }
 
     protected static void SetupPages()

@@ -45,7 +45,6 @@
 
     public static void Error(string message)
     {
-        OAT.Utilities.Telegram.SendMessage($"[ERROR {DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}");
         if (HasFile())
             File.AppendAllText(
                 Path.Combine(path, $"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log"),
@@ -54,6 +53,9 @@
             File.WriteAllText(
                 Path.Combine(path, $"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log"),
                 $"[ERROR {DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}\n");
+        Console.WriteLine(message);
+        OAT.Utilities.Telegram.SendMessage($"[ERROR {DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: {message}");
+
     }
 
     private static bool HasFile() =>
