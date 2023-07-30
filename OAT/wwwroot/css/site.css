@@ -46,8 +46,6 @@
 
 /* CSS NORMALIZE */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,400&display=swap');
-
 * {
 	margin: 0;
 	padding: 0;
@@ -63,7 +61,7 @@ body {
 	width: 100vw;
 	line-height: 1.4;
 	font-size: 16px;
-	font-family: 'Roboto', "Segoe UI", Arial, sans-serif;
+	font-family: "Segoe UI", Arial, sans-serif;
 	color: var(--matte-color);
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
@@ -158,6 +156,22 @@ th {
 .container {
 	width: min(95%, 1500px);
 	margin: 0 auto;
+}
+
+section.centered,
+article.centered{
+	width: min(95%, 1200px);
+	margin: 0 auto;
+}
+
+section.centered::before,
+article.centered::before{
+	height: 0;
+}
+
+section.centered .section-title{
+	text-align: center;
+	width: 100%;
 }
 
 .content-page {
@@ -954,7 +968,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	margin: 15px 0 5px 0;
 }
 
-.centered-title{
+.title-centered{
 	text-align: center;
 	width: 100%;
 }

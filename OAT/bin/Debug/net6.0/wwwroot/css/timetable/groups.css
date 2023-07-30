@@ -1,4 +1,8 @@
-﻿table.groups tbody td {
+﻿table.groups{
+	margin: 0 auto;
+}
+
+table.groups tbody td {
 	padding: 8px;
 }
 
@@ -10,6 +14,7 @@ table.groups tbody tr:first-child td:nth-child(2) {
 table.groups tbody tr td:first-child {
 	padding: 10px 15px;
 }
+
 td a {
 	color: #0850bb;
 }

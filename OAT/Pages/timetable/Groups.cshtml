@@ -6,16 +6,16 @@
 
 <link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
 <link rel="stylesheet" href="~/css/timetable/groups.css" asp-append-version="true">
-<section class="timetable-container">
+<section class="centered">
     @if (string.IsNullOrEmpty(Model.building))
     {
-        <h2 class="section-title centered-title">
+        <h2 class="section-title">
             Здание не найдено
         </h2>
     }
     else
     {
-        <h2 class="section-title centered-title">
+        <h2 class="section-title title-centered">
         Группы
     </h2>
     <table class="customized timetable groups">

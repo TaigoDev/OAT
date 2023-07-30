@@ -25,7 +25,3 @@
 .workshops-list-item img{
 	width: 60px;
 }
-
-section::before{
-	height: 0;
-}

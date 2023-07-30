@@ -1,8 +1,4 @@
-﻿.allNews::before{
-	height: 0px;
-}
-
-/* all news list */
+﻿/* all news list */
 
 .news-list {
 	display: flex;
