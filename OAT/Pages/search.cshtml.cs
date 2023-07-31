@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages
 {
-    public class searchModel : PageModel
+    public class SearchModel : PageModel
     {
         public void OnGet()
         {

@@ -12,13 +12,12 @@ window.addEventListener("load", () => {
     let menuIcon = document.getElementById("menu-icon");
     let searchIcon = document.getElementById("search-icon");
     const partnersSlider = document.querySelectorAll(".partners-list > a > img");
-    let siteSearch = document.querySelector(".gsc-control-cse");
+    let siteSearch = document.querySelector(".site-search-container");
 
     /* optional */
     let accordionsList = document.querySelectorAll(".accordion");
     let imagesSliders = document.querySelectorAll(".images-list-slider-container");
     let plane = document.getElementById("plane");
-    let sidebar = document.getElementById("sidebar");
 
 
     /* F U N C T I O N A L */
