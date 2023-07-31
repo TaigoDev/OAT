@@ -9,7 +9,9 @@ public static class ProxyController
     {
         var path = context.Request.Path.Value;
         var BaseUrl = $"{config.BaseUrl}{path}";
-        var client = new HttpClient();
+        HttpClientHandler clientHandler = new HttpClientHandler();
+        clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+        var client = new HttpClient(clientHandler);
 
         if (IsImage(path, ".PNG", ".png", ".JPG", ".jpg", ".JPEG", ".jpg", ".PDF", ".pdf"))
         {

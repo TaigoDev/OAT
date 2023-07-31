@@ -12,7 +12,7 @@ using static ProxyController;
 config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), 
     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
 GlobalConfiguration.Setup().UseMySqlConnector();
-
+Console.WriteLine($"bu - {config.BaseUrl}; mu - {config.MainUrl}");
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
@@ -104,7 +104,8 @@ async Task Proxing(HttpContext context, Func<Task> next)
     catch (Exception ex)
     {
         Console.WriteLine(ex);
-        context.Response.Redirect("https://www.oat.ru/");
+        if (!context.Response.HasStarted)
+            context.Response.Redirect("https://www.oat.ru/");
     }
 }
 

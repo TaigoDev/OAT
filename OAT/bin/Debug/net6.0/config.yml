@@ -1,4 +1,4 @@
-baseUrl: https://www.oat.ru
+baseUrl: https://new.oat.ru
 mainUrl: http://localhost:20045
 bindPort: 20045
 dbIp: "taigo.xyz"
