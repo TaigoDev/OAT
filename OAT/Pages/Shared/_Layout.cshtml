@@ -145,7 +145,7 @@
                             s.type = 'text/javascript'; 
                             s.async = true;
                             s.charset = 'utf-8';
-                            s.src = (d.location.protocol === 'https:' ? 'https:' : 'http:') + '//localhost:20045/js/yandex_all.js'; 
+                            s.src = '@ProxyController.config.MainUrl/js/yandex_all.js'; 
                             h.parentNode.insertBefore(s, h); (w[c] || (w[c] = [])).push(function () 
                             { 
                                 Ya.Site.Form.init() 
@@ -156,8 +156,9 @@
 
             <style> 
 
-                #ya-site-form__submit {
+                #ya-site-form0 .ya-site-form__search {
                    border-radius: 10px;
+
                 }
             </style>
          
