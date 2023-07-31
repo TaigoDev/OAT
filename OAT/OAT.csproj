@@ -45,6 +45,7 @@
 	  <Content Remove="wwwroot\js\panel.js" />
 	  <Content Remove="wwwroot\js\schedule.js" />
 	  <Content Remove="wwwroot\js\users.js" />
+	  <Content Remove="wwwroot\js\yandex_all.js" />
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="HtmlAgilityPack" Version="1.11.48" />
