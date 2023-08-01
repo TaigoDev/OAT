@@ -48,6 +48,7 @@
 	  <Content Remove="wwwroot\js\yandex_all.js" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="AspNetCore.ReCaptcha" Version="1.7.0" />
 	  <PackageReference Include="HtmlAgilityPack" Version="1.11.48" />
 	  <PackageReference Include="MySqlConnector" Version="2.2.6" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

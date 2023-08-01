@@ -1,10 +1,12 @@
 ﻿@page
-@model LocationModel
+@using AspNetCore.ReCaptcha
+@model QuestionAnswerModel
 @{
     ViewData["Title"] = "Вопрос-ответ";
 }
 
 <link rel="stylesheet" href="~/css/feedback/questionAnswer.css" asp-append-version="true">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class="container content-page">
     <section class="content">
@@ -12,23 +14,25 @@
             Вопрос-ответ
         </h2>
 
-        <form class="questions">
+        <form class="questions" method="post">
+            <div asp-validation-summary="All"></div>
+
             <div class="basic-data">
                 <div class="input-box">
                     <label for="name">Имя</label>
-                    <input id="name" type="text" placeholder="Введите имя">
+                    <input asp-for="name" id="name" type="text" placeholder="Введите имя">
                 </div>
                 <div class="input-box">
                     <label for="email">E-mail</label>
-                    <input id="email" type="email" placeholder="Введите почту">
+                    <input asp-for="email" id="email" type="email" placeholder="Введите почту">
                 </div>
                 <div class="input-box">
                     <label for="phone">Телефон</label>
-                    <input id="phone" type="tel" placeholder="Введите телефон">
+                    <input asp-for="telephone" id="telephone" type="tel" placeholder="Введите телефон">
                 </div>
                 <div class="input-box">
                     <label for="theme">Тема вопроса</label>
-                    <select id="theme">
+                    <select asp-for="topic" id="topic">
                         <option>
                             Директору
                         </option>
@@ -43,14 +47,10 @@
             </div>
             <div class="input-box">
                 <label for="question-text">Вопрос</label>
-                <textarea class="customized" placeholder="Введите вопрос"></textarea>
+                <textarea asp-for="description" id="description" class="customized" placeholder="Введите вопрос"></textarea>
             </div>
             <div class="captcha-container">
-                <div class="input-box">
-                    <label for="Captcha">Captcha</label>
-                    <input type="text">
-                </div>
-                <img src="" alt="Captcha" class="captcha">
+                @Html.ReCaptcha()
             </div>
             <p class="question-warning">
                 Нажимая на кнопку "Отправить", вы даете согласие на обработку персональных данных
@@ -89,3 +89,6 @@
         </nav>
     </aside>
 </div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer></script>

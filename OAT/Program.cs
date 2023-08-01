@@ -1,3 +1,4 @@
+using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 using MySqlConnector;
@@ -80,7 +81,9 @@ void SetupServices(ref WebApplicationBuilder builder)
         options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter());
         options.Filters.Add<ExceptionFilter>();
     });
+    builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
     builder.WebHost.UseUrls($"http://0.0.0.0:{config.bind_port}");
+
 }
 
 async Task Proxing(HttpContext context, Func<Task> next)

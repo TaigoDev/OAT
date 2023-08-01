@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RepoDb;
 using RepoDb.Extensions;
+using System.Net.Mail;
+using System.Net;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -42,6 +45,24 @@ StringSplitOptions options = StringSplitOptions.None)
     {
         foreach (var path in paths)
             CreateDirectory(path);
+    }
+
+    public static void SendEmail(string from, string to, string message)
+    {
+        var smtpClient = new SmtpClient("smtp-relay.oat.local")
+        {
+            Port = 25,
+            Credentials = new NetworkCredential("service@oat.ru", ""),
+            EnableSsl = false,
+        };
+        MailAddress addressFrom = new MailAddress("service@oat.ru", from);
+        MailAddress addressTo = new MailAddress(to);
+        MailMessage m = new MailMessage(addressFrom, addressTo);
+
+        m.Body = message;
+        m.Subject = "Новый вопрос с сайта oat.ru";
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            smtpClient.Send(m);
     }
 
     public static void CreateDirectory(string path)

@@ -43,3 +43,6 @@
 		grid-template-columns: 1fr;
 	}
 }
+.error {
+	color: red;
+}
