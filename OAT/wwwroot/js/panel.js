@@ -95,7 +95,7 @@ function SendMessage(tag) {
 }
 
 function UploadProfNews() {
-    var url = "http://localhost:20045/api/prof/news/upload";
+    var url = "https://www.oat.ru/api/prof/news/upload";
     var formData = new FormData();
 
     var fileUpload = $("#files-prof").get(0);
