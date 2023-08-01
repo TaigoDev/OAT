@@ -30,7 +30,7 @@ namespace OAT.Pages.feedback
             switch (topic)
             {
                 case "Директору":
-                    sendTo = "";
+                    sendTo = "koltsov@oat.ru";
                     break;
                 case "Зам.Директора":
                     sendTo = "";
