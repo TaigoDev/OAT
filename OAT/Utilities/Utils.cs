@@ -67,7 +67,13 @@ StringSplitOptions options = StringSplitOptions.None)
         cookie.Expires = DateTime.Now.AddDays(days);
         context.Response.Cookies.Append(key, value, cookie);
     }
+    public static IEnumerable<IEnumerable<T>> PagesSplit<T> (this IEnumerable<T> source, int itemsPerSet)
+    {
+        var sourceList = source as List<T> ?? source.ToList();
+        for (var index = 0; index < sourceList.Count; index += itemsPerSet)
+            yield return sourceList.Skip(index).Take(itemsPerSet);
 
+    }
     public static string GetSHA256(string value)
     {
         StringBuilder Sb = new StringBuilder();
@@ -94,6 +100,7 @@ StringSplitOptions options = StringSplitOptions.None)
     public static string GetCookie(this HttpContext context, string key) => context.Request.Cookies[key];
     public static void DeleteCookie(this HttpContext context, string key) => context.Response.Cookies.Delete(key);
     public static T toObject<T>(this string json) => JObject.Parse(json).ToObject<T>();
+    public static T toObjectJC<T>(this string json) => JsonConvert.DeserializeObject<T>(json);
     public static string toJson(this object json) => JsonConvert.SerializeObject(json);
     public static string SerializeYML(this object obj) => new SerializerBuilder()
 .WithNamingConvention(CamelCaseNamingConvention.Instance)

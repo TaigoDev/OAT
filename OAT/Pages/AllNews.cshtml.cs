@@ -18,11 +18,11 @@ namespace OAT.Pages
         {
             try
             {
-                pages = NewsController.pages.Count();
+                pages = NewsReader.pages.Count();
                 if (string.IsNullOrEmpty(HttpContext.Request.Query["id"]))
-                    news = NewsController.pages[0];
+                    news = NewsReader.pages[0];
                 else
-                    news = NewsController.pages[Convert.ToInt32(HttpContext.Request.Query["id"]) - 1];
+                    news = NewsReader.pages[Convert.ToInt32(HttpContext.Request.Query["id"]) - 1];
             }
             catch (Exception ex)
             {

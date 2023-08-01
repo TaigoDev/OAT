@@ -49,7 +49,8 @@ void SetupControllers()
         Path.Combine(Directory.GetCurrentDirectory(), "schedule"),
         Logger.path,
         Logger.path_PreventedAttempts);
-        NewsController.init();
+        NewsReader.init();
+        ProfNewsReader.init();
         ScheduleReader.init();
         CommandsController.init();
         CreateAdminAccount();

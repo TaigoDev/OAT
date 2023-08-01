@@ -15,8 +15,6 @@ namespace OAT.Pages
 
         public void OnGet()
         {
-            if (!HttpContext.Request.Query["oq"].Any())
-                Redirect($"admin/panel?oq={Utils.RandomString(64)}");
             if (User == null || !User.Identity.IsAuthenticated)
                 Redirect("admin/authorization");
         }

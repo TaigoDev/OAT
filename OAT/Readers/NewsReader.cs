@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 
-public class NewsController
+public class NewsReader
 {
     public static List<News> News = new List<News>();
     public static List<List<News>> pages = new List<List<News>>();

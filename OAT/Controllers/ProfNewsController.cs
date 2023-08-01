@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
+using OAT.Readers;
+using Recovery.Tables;
+using RepoDb;
 
 namespace OAT.Controllers
 {
-    public class NewsPostController : Controller
+    public class ProfNewsController : Controller
     {
-        [RequestSizeLimit(1000000000000), HttpPost, Route("api/news/upload"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
+        [RequestSizeLimit(1000000000000), HttpPost, Route("api/prof/news/upload"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
         public async Task<IActionResult> AddFile(string title, string date, string text, List<IFormFile> files)
         {
             try
@@ -14,6 +18,7 @@ namespace OAT.Controllers
 
                 if (!Check(title, date, text))
                     return StatusCode(StatusCodes.Status400BadRequest);
+
                 var photos = new List<string>();
                 foreach (IFormFile file in files)
                     if (file.Length > 0)
@@ -24,43 +29,54 @@ namespace OAT.Controllers
                         await file.CopyToAsync(fileStream);
                     }
 
-                System.IO.File.WriteAllText($"news/{NewsReader.News.Count()}.yaml", new NewsFile(date, title, text, photos).SerializeYML());
-                Logger.Info($"Пользователь опубликовал новую новость.\n" +
-                    $"ID: {NewsReader.News.Count()}\n" +
+                using var connection = new MySqlConnection(Utils.GetConnectionString());
+                var news = new ProfNews(date, title, text, text.GetWords(15), photos);
+                await connection.InsertAsync(news);
+
+                Logger.Info($"Пользователь опубликовал новую новость (Prof).\n" +
+                    $"ID: {news.id}\n" +
                     $"SHA256 (TEXT): {Utils.sha256_hash(text)}\n" +
                     $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
                     $"IP-адрес: {HttpContext.UserIP()}");
-                NewsReader.Loader();
+
+                ProfNewsReader.init();
                 return StatusCode(StatusCodes.Status200OK);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Error(ex.ToString());
                 return StatusCode(StatusCodes.Status200OK);
             }
         }
 
-        [HttpDelete("api/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
+        [HttpDelete("api/prof/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
         public async Task<IActionResult> RemoveNews(int id)
         {
             if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
-            if (!System.IO.File.Exists($"news/{id}.yaml"))
+            using var connection = new MySqlConnection(Utils.GetConnectionString());
+
+            var record = await connection.QueryAsync<ProfNews>(e => e.id == id);
+
+            if (!record.Any())
                 return StatusCode(StatusCodes.Status204NoContent);
-            System.IO.File.Delete($"news/{id}.yaml");
+            ProfNewsReader.init();
+            await connection.DeleteAsync(record.First());
+
             Logger.Info($"Пользователь удалил новость.\n" +
                 $"ID: {id}\n" +
                 $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
                 $"IP-адрес: {HttpContext.UserIP()}");
-            NewsReader.Loader();
             return StatusCode(StatusCodes.Status200OK);
         }
+
         private bool Check(params string[] strings)
         {
-            foreach (var s in strings)
-                if (string.IsNullOrWhiteSpace(s))
+            foreach(var s in strings)
+                if(string.IsNullOrWhiteSpace(s))
                     return false;
             return true;
         }
+            
     }
 }

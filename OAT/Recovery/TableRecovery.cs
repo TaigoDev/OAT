@@ -18,7 +18,7 @@ namespace TAIGO.ZCore.DPC.Recovery
                 foreach (PropertyInfo prop in props)
                 {
                     if (prop.PropertyType == typeof(string) || prop.PropertyType == typeof(Enums.Role))
-                        cmd += $"{prop.Name} varchar(10000), ";
+                        cmd += $"{prop.Name} text(10000), ";
                     else if (prop.PropertyType == typeof(int))
                     {
                         cmd += $"{prop.Name} int(255), ";

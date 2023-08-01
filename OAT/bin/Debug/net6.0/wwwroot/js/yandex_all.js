@@ -650,7 +650,7 @@
                         delete this.params.searchid),
                     this.i18n_keyset = c.i18n[this.params.language]().external_form,
                     this.buildAction().buildCSS().buildHTML(r, i).buildSuggest().buildInputHint().addOpensearch().initEvents(),
-                    this.set({padding:6px;
+                    this.set({
                         text: a,
                         web: +this.params.websearch + ""
                     }),
