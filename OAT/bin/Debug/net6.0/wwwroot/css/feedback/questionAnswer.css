@@ -22,14 +22,12 @@
 }
 
 .question-warning {
-	color: #DDDADA;
+	color: #929199;
 }
 
-.question-send{
-	padding: 15px;
-	border-radius: 15px;
-	background-color: var(--matte-color);
-	color: var(--light-white);
+.question-send {
+	min-width: min(400px, 100%);
+	margin: 0 auto;
 }
 
 @media (width<500px){
@@ -43,6 +41,15 @@
 		grid-template-columns: 1fr;
 	}
 }
-.error {
+
+/* validation */
+
+.validation-summary-errors {
 	color: red;
+	font-size: 0.8rem;
+}
+
+.validation-summary-errors ul{
+	list-style: decimal;
+	padding-left: 15px;
 }
