@@ -28,11 +28,11 @@ namespace OAT.Controllers
                 $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 
             System.IO.File.WriteAllText(path, qr.ToSvgString(4), Encoding.UTF8);
-            var pathPng = SaveToPng(path);
-			GeneratePdfFile(pathPng, purpose, summa.ToString(), FullName);
-			Utils.FileDelete(pathPng);
+            //var pathPng = SaveToPng(path);
+			GeneratePdfFile(path, purpose, summa.ToString(), FullName);
+			//Utils.FileDelete(pathPng);
 			Utils.FileDelete(path);
-			var filename = new FileInfo(pathPng.Replace(".png", ".pdf")).Name;
+			var filename = new FileInfo(path.Replace(".svg", ".pdf")).Name;
 			return Ok($"/pay/download/{filename}");
         }
 
@@ -132,7 +132,7 @@ namespace OAT.Controllers
 						});
 				});
 			});
-			document.GeneratePdf(png.Replace(".png", ".pdf"));
+			document.GeneratePdf(png.Replace(".svg", ".pdf"));
 			
 		}
 
@@ -204,7 +204,7 @@ namespace OAT.Controllers
 					columns.RelativeColumn(2);
 					columns.RelativeColumn(2);
 				});
-				table.Cell().Row(1).Padding(10).AlignCenter().Image(File.ReadAllBytes(file));
+				table.Cell().Row(1).Padding(10).AlignCenter().Image(Placeholders.Image(250, 250));
 				table.Cell().Row(2).BorderTop(1).PaddingLeft(2).Padding(20).PaddingBottom(100).AlignCenter().Text(name).FontFamily("Arial");
 			});
 		}
