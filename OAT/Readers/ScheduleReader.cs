@@ -97,7 +97,7 @@ namespace OAT.Readers
             var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");
             if (!File.Exists(path))
             {
-                Logger.Error($"Файл schedule/{filename}.xml не найден!");
+                Logger.Warning($"Файл schedule/{filename}.xml не найден!");
                 return null;
             }
             var content = await ReadFile(path);

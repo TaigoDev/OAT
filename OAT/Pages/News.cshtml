@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id?}"
 @model NewsModel
 @{
     ViewData["Title"] = "Новость";
@@ -7,29 +7,42 @@
 <link rel="stylesheet" href="~/css/news.css">
 
 <article class="centered">
-    <h3 class="news-title">
-        @Model.news.title
-    </h3>
-        @foreach (var t in Model.text)
+    @if (!string.IsNullOrWhiteSpace(Model.id) && NewsReader.News.Count() - 1 >= Convert.ToInt32(Model.id))
+    {
+        var news = NewsReader.News.First(e => e.id == Convert.ToInt32(Model.id));
+        <h3 class="news-title">
+            @news.title
+        </h3>
+        @foreach (var t in news.text.Split("\n"))
         {
             <p>@Html.Raw(@t)</p>
         }
-    <div class="images-list-slider-container">
-        <div class="images-list-slider">
-            @foreach(var image in Model.news.photos)
-            {
-                @if (!image.Contains(".mp4"))
+        <div class="images-list-slider-container">
+            <div class="images-list-slider">
+                @foreach (var image in news.photos)
                 {
-                    <img src="@image" alt="">
+                    @if (!image.Contains(".mp4"))
+                    {
+                        <img src="@image" alt="">
+                    }
+                    else
+                    {
+                        <video class="customized" controls>
+                            <source src="@image" type="video/mp4">
+                        </video>
+                    }
                 }
-                else
-                {
-                    <video class="customized" controls>
-                        <source src="@image" type="video/mp4">
-                    </video>
-                }
-            }
+            </div>
         </div>
-    </div>
+
+    }
+    else
+    {
+        <h3 class="news-title">
+            Упс, такой страницы нет...
+            <br>
+            Мы знаем о проблеме и уже решаем ее
+        </h3>
+    }
 </article>
 

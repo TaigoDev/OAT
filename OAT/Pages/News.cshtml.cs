@@ -4,25 +4,11 @@ namespace OAT.Pages
 {
     public class NewsModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public NewsModel(ILogger<IndexModel> logger)
+        public string? id { get; set; }
+        public void OnGet(string? id)
         {
-            _logger = logger;
-        }
-        public News news { get; set; }
-        public List<string> text = new List<string>();
+            this.id = id;
 
-        public void OnGet()
-        {
-            if (HttpContext.Request.Query["id"].ToString() == null)
-                Redirect("~");
-            var id = Convert.ToInt32(HttpContext.Request.Query["id"]);
-            if (id > NewsReader.News.Count())
-                Redirect("~");
-
-            news = NewsReader.News.Where(n => n.id == id).First();
-            text.AddRange(news.text.Split("\n"));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace OAT.Readers
                 var records = await connection.QueryAllAsync<ProfNews>();
                 news = records.ToList();
                 news.Reverse();
-                pages = news.PagesSplit(1);
+                pages = news.PagesSplit(10);
             }
             catch (Exception ex)
             {

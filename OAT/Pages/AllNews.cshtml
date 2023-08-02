@@ -2,88 +2,94 @@
 @model AllNewsModel
 @{
     ViewData["Title"] = "Все новости";
+
+    var query = HttpContext.Request.Query["id"].ToString();
+    var id = string.IsNullOrWhiteSpace(query) ? 1 : Convert.ToInt32(query);
 }
 
 <link rel="stylesheet" href="~/css/allNews.css">
 <script src="~/js/allNews.js" asp-append-version="true"></script>
 
 <section class="centered">
-    <h3 class="section-title">
-		Новости Омского авиационного колледжа имени Н.Е. Жуковского
-    </h3>
-	<div class="news-list">
-        
-		@foreach(var news in Model.news)
-		{
-			<div class="news-item">
-                <a class="news-item-img" href="~/news?id=@news.id">
-					<img src="@news.photos[0]" alt="">
-				</a>
-				<div class="news-item-content">
-					<div class="news-item-date">
-						@news.date
-					</div>
-					<div class="news-item-title">
-						@news.title
-					</div>
-					<div class="news-item-info">
-						@news.short_description
-						<a href="~/news?id=@news.id">
-							ещё...
-						</a>
-					</div>
-				</div>
-			</div>
-		}	
-	</div>
 
-    <div class="pages-nav-container">
-        <div class="pages-nav">
 
-            @if (!string.IsNullOrWhiteSpace(HttpContext.Request.Query["id"].ToString()) && Convert.ToInt32(HttpContext.Request.Query["id"]) != 1)
-            {
-                <a href="/AllNews?id=@(Convert.ToInt32(HttpContext.Request.Query["id"]) - 1)" class="pages-nav-arrow pages-nav-prev">
-                    <img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
-                </a>
-            }
 
-            <div class="pages-nav-pages-list">
-                @for (int i = 0; i < Model.pages ; i++)
-                {
-                    if (string.IsNullOrWhiteSpace(HttpContext.Request.Query["id"].ToString()) && i == 0)
-                    {
-                        <a href="~/AllNews?id=@(i + 1)" class="pages-nav-pages-list-item current">
-                            @(i + 1)
-                        </a>
-                    }
-                    else if (Convert.ToInt32(HttpContext.Request.Query["id"]) == i + 1)
-                    {
-                        <a href="~/AllNews?id=@(i + 1)" class="pages-nav-pages-list-item current">
-                            @(i + 1)
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="~/AllNews?id=@(i + 1)" class="pages-nav-pages-list-item">
-                            @(i + 1)
-                        </a>
-                    }
-                }
-            </div>
+    @if (NewsReader.News.Count() != 0 && NewsReader.pages.Count() >= id)
+    {
+        <h3 class="section-title">
+            Новости Омского авиационного колледжа имени Н.Е. Жуковского
+        </h3>
+        <div class="news-list">
             
-            @if (string.IsNullOrWhiteSpace(HttpContext.Request.Query["id"].ToString()) && Model.pages > 1)
+            @foreach (var news in NewsReader.pages.ToList()[id - 1])
             {
-                <a href="/AllNews?id=2" class="pages-nav-arrow pages-nav-next">
-                    <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
-                </a>
-            }
-            else if (!string.IsNullOrWhiteSpace(HttpContext.Request.Query["id"].ToString()) &&
-            Model.pages != Convert.ToInt32(HttpContext.Request.Query["id"]))
-            {
-                <a href="/AllNews?id=@(Convert.ToInt32(HttpContext.Request.Query["id"]) + 1)" class="pages-nav-arrow pages-nav-next">
-                    <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
-                </a>
+                <div class="news-item">
+                    <a class="news-item-img" href="~/news/@news.id">
+                        <img src="@news.photos[0]" alt="">
+                    </a>
+                    <div class="news-item-content">
+                        <div class="news-item-date">
+                            @news.date
+                        </div>
+                        <div class="news-item-title">
+                            @news.title
+                        </div>
+                        <div class="news-item-info">
+                            @Html.Raw(news.short_description)
+                            <a href="~/news/@news.id">
+                                ещё...
+                            </a>
+                        </div>
+                    </div>
+                </div>
             }
         </div>
-    </div>
+
+        <div class="pages-nav-container">
+            <div class="pages-nav">
+
+                @if (id != 1)
+                {
+                    <a href="/AllNews?id=@(id - 1)" class="pages-nav-arrow pages-nav-prev">
+                        <img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
+                    </a>
+                }
+
+                <div class="pages-nav-pages-list">
+                    @foreach (var item in NewsReader.pages.Select((value, index) => new { index, value }))
+                    {
+                        var index = item.index + 1;
+                        if (id == index)
+                        {
+                            <a href="~/AllNews?id=@index" class="pages-nav-pages-list-item current">
+                                @index
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="~/AllNews?id=@index" class="pages-nav-pages-list-item">
+                                @index
+                            </a>
+                        }
+                    
+                    }
+                </div>
+                @if (id != NewsReader.pages.Count())
+                {
+                    <a href="/AllNews?id=@(id + 1)" class="pages-nav-arrow pages-nav-next">
+                        <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
+                    </a>
+                }
+            </div>
+        </div>
+
+    }   
+    else
+    {
+        <h3 class="section-title">
+            Упс, такой страницы нет...
+            <br>
+            Мы знаем о проблеме и уже решаем ее
+        </h3>
+    }
 </section>

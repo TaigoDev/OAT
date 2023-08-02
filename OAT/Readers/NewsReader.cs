@@ -1,10 +1,11 @@
-﻿using System.Text;
+﻿using Recovery.Tables;
+using System.Text;
 
 
 public class NewsReader
 {
     public static List<News> News = new List<News>();
-    public static List<List<News>> pages = new List<List<News>>();
+    public static IEnumerable<IEnumerable<News>> pages = new List<List<News>>();
 
     public static void init()
     {
@@ -54,7 +55,7 @@ public class NewsReader
 
             Console.WriteLine($"OAT.Core.News: We successful load {News.Count} news");
             News = News.OrderBy(x => x.id).ToList().Reverse<News>();
-            SetupPages();
+            pages = News.PagesSplit(10);
         }
         catch (Exception ex)
         {
@@ -62,26 +63,6 @@ public class NewsReader
         }
     }
 
-    protected static void SetupPages()
-    {
-        try
-        {
-            pages = new List<List<News>>();
-            var newsOnPage = new List<News>();
-            for (int i = 0; i < News.Count; i++)
-            {
-                newsOnPage.Add(News[i]);
-                if (newsOnPage.Count == 10 || i + 1 == News.Count)
-                {
-                    pages.Add(newsOnPage);
-                    newsOnPage = new List<News>();
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex.ToString());
-        }
-    }
+
 }
 

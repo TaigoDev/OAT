@@ -6,29 +6,12 @@ namespace OAT.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public List<News> news = new List<News>(); //fix error load news
-        public int pages { get; set; }
 
         public AllNewsModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
 
-        public void OnGet()
-        {
-            try
-            {
-                pages = NewsReader.pages.Count();
-                if (string.IsNullOrEmpty(HttpContext.Request.Query["id"]))
-                    news = NewsReader.pages[0];
-                else
-                    news = NewsReader.pages[Convert.ToInt32(HttpContext.Request.Query["id"]) - 1];
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex.ToString());
-            }
 
-        }
     }
 }
