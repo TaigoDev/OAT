@@ -18,7 +18,7 @@ Console.WriteLine($"bu - {config.BaseUrl}; mu - {config.MainUrl}");
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
-//OplataController.CreateReceipt("С909023428", "02.08.2023", "Тест Тест Тест", "Тест Тест Тест", "ПР", 200, "Добровольное пожертвование на приобретение спортивного инвентаря");
+
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
@@ -46,6 +46,7 @@ void SetupControllers()
             Path.Combine(Directory.GetCurrentDirectory(), "static"),
             Path.Combine(Directory.GetCurrentDirectory(), "static", "teachers"),
             Path.Combine(Directory.GetCurrentDirectory(), "schedule"),
+            Path.Combine(Directory.GetCurrentDirectory(), "pay"),
             Logger.path,
             Logger.path_PreventedAttempts);
 

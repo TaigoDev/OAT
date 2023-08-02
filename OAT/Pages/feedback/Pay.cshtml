@@ -18,25 +18,25 @@
                     Назначение платежа
                 </label>
                 <select id="appointment">
-                    <option value="">
+                    <option value="Платное обучение">
                         Платное обучение
                     </option>
-                    <option value="">
+                    <option value="Дистанционное обучение">
                         Дистанционное обучение
                     </option>
-                    <option value="">
+                    <option value="Дополнительные образовательные услуги">
                         Дополнительные образовательные услуги
                     </option>
-                    <option value="">
+                    <option value="Оказание платных услуг">
                         Оказание платных услуг
                     </option>
-                    <option value="">
+                    <option value="Добровольное пожертвование">
                         Добровольное пожертвование
                     </option>
-                    <option value="">
+                    <option value="Подготовительные курсы">
                         Подготовительные курсы
                     </option>
-                    <option value="">
+                    <option value="Профессиональная переподготовка">
                         Профессиональная переподготовка
                     </option>
                 </select>
@@ -45,19 +45,19 @@
                 <label for="number">
                     Номер договора
                 </label>
-                <input id="text" type="number">
+                <input id="documentId" type="text">
             </div>
             <div class="input-box">
                 <label for="date">
                     Дата договора
                 </label>
-                <input id="date" type="date">
+                <input id="documentDate" type="date">
             </div>
             <div class="input-box">
                 <label for="student-fio">
                     ФИО студента
                 </label>
-                <input id="student-fio" type="text">
+                <input id="studentFullName" type="text">
             </div>
             <div class="input-box">
                 <label for="group">
@@ -69,7 +69,7 @@
                 <label for="payer-fio">
                     ФИО плательщика
                 </label>
-                <input id="payer-fio" type="text">
+                <input id="FullName" type="text">
             </div>
             <div class="input-box">
                 <label for="email">
@@ -96,7 +96,7 @@
                     Устанавливая флажок внутри данного чек-бокса вы даете согласие на обработку своих персональных данных.
                 </label>
             </div>
-            <button class="customized">Сформировать квитанцию</button>
+            <button onclick="Upload()" class="customized">Сформировать квитанцию</button>
         </form>
 
 
@@ -137,3 +137,4 @@
         </nav>
     </aside>
 </div>
+<script type="text/javascript" src="/js/pay.js" charset="utf-8"></script>
