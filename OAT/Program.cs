@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 using MySqlConnector;
+using OAT.Controllers;
 using OAT.Readers;
 using OAT.Utilities;
 using Recovery.Tables;
@@ -17,7 +18,7 @@ Console.WriteLine($"bu - {config.BaseUrl}; mu - {config.MainUrl}");
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
-
+//OplataController.CreateReceipt("С909023428", "02.08.2023", "Тест Тест Тест", "Тест Тест Тест", "ПР", 200, "Добровольное пожертвование на приобретение спортивного инвентаря");
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
