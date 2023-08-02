@@ -12,7 +12,7 @@ namespace OAT.Pages.timetable
             _logger = logger;
         }
         public string? building { get; set; }
-        public string? group_name { get; set; } 
+        public string? group_name { get; set; }
         public Group? group { get; set; }
 
         public void OnGet(string? building, string? group_name)
@@ -32,7 +32,7 @@ namespace OAT.Pages.timetable
         }
 
         public int GetMaxLessonsInDay(Week week) =>
-            week.days.Max(e => 
+            week.days.Max(e =>
             e.lessons.Count == 0 ? 0 : e.lessons.Max(l => l.id));
         public int GetMinLessonsInDay(Week week) =>
     week.days.Min(e => e.lessons.Count == 0 ? 100 : e.lessons.Min(l => l.id));

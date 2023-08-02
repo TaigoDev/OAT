@@ -28,33 +28,33 @@ public class NewsReader
         {
 
             News.Clear();
-        string[] files = Directory.GetFiles("news", "*.yaml");
-        foreach (string file in files)
-        {
-            try
+            string[] files = Directory.GetFiles("news", "*.yaml");
+            foreach (string file in files)
             {
-                using FileStream fsSource = new FileStream(file, FileMode.Open, FileAccess.Read);
-                byte[] buffer = new byte[fsSource.Length];
-                await fsSource.ReadAsync(buffer, 0, buffer.Length);
-              
-                var news = Utils.DeserializeYML<NewsFile>(Encoding.Default.GetString(buffer));
-                News.Add(new News(
-                    Path.GetFileNameWithoutExtension(file).ToInt32(),
-                    news.text.GetWords(15),
-                    news.date,
-                    news.title,
-                    news.text,
-                    news.photos));
-            }
-            catch(Exception ex)
-            {
-                Logger.Error(ex.ToString());    
-            }
-        }
+                try
+                {
+                    using FileStream fsSource = new FileStream(file, FileMode.Open, FileAccess.Read);
+                    byte[] buffer = new byte[fsSource.Length];
+                    await fsSource.ReadAsync(buffer, 0, buffer.Length);
 
-        Console.WriteLine($"OAT.Core.News: We successful load {News.Count} news");
-        News = News.OrderBy(x => x.id).ToList().Reverse<News>();
-        SetupPages();
+                    var news = Utils.DeserializeYML<NewsFile>(Encoding.Default.GetString(buffer));
+                    News.Add(new News(
+                        Path.GetFileNameWithoutExtension(file).ToInt32(),
+                        news.text.GetWords(15),
+                        news.date,
+                        news.title,
+                        news.text,
+                        news.photos));
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex.ToString());
+                }
+            }
+
+            Console.WriteLine($"OAT.Core.News: We successful load {News.Count} news");
+            News = News.OrderBy(x => x.id).ToList().Reverse<News>();
+            SetupPages();
         }
         catch (Exception ex)
         {

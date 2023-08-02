@@ -3,8 +3,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RepoDb;
 using RepoDb.Extensions;
-using System.Net.Mail;
 using System.Net;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -88,7 +88,7 @@ StringSplitOptions options = StringSplitOptions.None)
         cookie.Expires = DateTime.Now.AddDays(days);
         context.Response.Cookies.Append(key, value, cookie);
     }
-    public static IEnumerable<IEnumerable<T>> PagesSplit<T> (this IEnumerable<T> source, int itemsPerSet)
+    public static IEnumerable<IEnumerable<T>> PagesSplit<T>(this IEnumerable<T> source, int itemsPerSet)
     {
         var sourceList = source as List<T> ?? source.ToList();
         for (var index = 0; index < sourceList.Count; index += itemsPerSet)
@@ -144,22 +144,7 @@ StringSplitOptions options = StringSplitOptions.None)
         }
     }
 
-    public class Runs<T>
-    {
-        public delegate Task method(T parametr);
-        public static async Task InTasks(method method, List<T> parametrs)
-        {
-            var tasks = new List<Task>();
-            foreach (var parametr in parametrs)
-                tasks.Add(method.Invoke(parametr));
-            await Task.WhenAll(tasks.Where(t => t != null).ToArray());
-        }
-        public static async Task InTask(method method, List<T> parametrs)
-        {
-            foreach (var parametr in parametrs)
-                await method.Invoke(parametr);
-        }
-    }
+
 
     public static string sha256_hash(string value)
     {
@@ -240,3 +225,39 @@ StringSplitOptions options = StringSplitOptions.None)
     }
 }
 
+public class RunModules
+{
+    public delegate void method();
+    public static void StartModules(params method[] modules)
+    {
+        foreach (var module in modules)
+        {
+            try
+            {
+                module.Invoke();
+                Logger.Info($"✅ Модуль сайта {module.Method.ReflectedType!.Name} успешно загружен!");
+            }
+            catch (Exception ex)
+            {
+                Logger.ErrorWithCatch($"Ошибка загрузки модуля {module.Method.Name}. Продолжаю запуск...\n\nОшибка: {ex}");
+            }
+        }
+    }
+}
+
+public class Runs<T>
+{
+    public delegate Task method(T parametr);
+    public static async Task InTasks(method method, List<T> parametrs)
+    {
+        var tasks = new List<Task>();
+        foreach (var parametr in parametrs)
+            tasks.Add(method.Invoke(parametr));
+        await Task.WhenAll(tasks.Where(t => t != null).ToArray());
+    }
+    public static async Task InTask(method method, List<T> parametrs)
+    {
+        foreach (var parametr in parametrs)
+            await method.Invoke(parametr);
+    }
+}

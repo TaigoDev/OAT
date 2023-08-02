@@ -54,7 +54,8 @@ namespace OAT.Controllers
                 using var connection = new MySqlConnection(Utils.GetConnectionString());
                 var records = await connection.QueryAsync<users>((e) => e.username == username && e.password == password);
                 return records.Any();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logger.Error(ex.ToString());
                 return false;

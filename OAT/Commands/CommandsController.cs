@@ -34,7 +34,8 @@ public class CommandsController
             }
         }
 
-        catch(Exception ex) {
+        catch (Exception ex)
+        {
             Logger.Error(ex.ToString());
 
         }

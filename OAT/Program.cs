@@ -1,4 +1,4 @@
-using AspNetCore.ReCaptcha;
+Ôªøusing AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 using MySqlConnector;
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
 
-config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(), 
+config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(),
     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
 GlobalConfiguration.Setup().UseMySqlConnector();
 Console.WriteLine($"bu - {config.BaseUrl}; mu - {config.MainUrl}");
@@ -24,7 +24,7 @@ app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "static"))
-}); 
+});
 app.UseRouting();
 app.UseNoSniffHeaders();
 app.Use((context, next) => Proxing(context, next));
@@ -39,24 +39,26 @@ void SetupControllers()
     Console.WriteLine(Utils.GetConnectionString());
     try
     {
-        OAT.Utilities.Telegram.init();
-        UrlsContoller.init();
-        HealthTables.init();
         Utils.CreateDirectory(
-        Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
-        Path.Combine(Directory.GetCurrentDirectory(), "news"),
-        Path.Combine(Directory.GetCurrentDirectory(), "static"),
-        Path.Combine(Directory.GetCurrentDirectory(), "static", "teachers"),
-        Path.Combine(Directory.GetCurrentDirectory(), "schedule"),
-        Logger.path,
-        Logger.path_PreventedAttempts);
-        NewsReader.init();
-        ProfNewsReader.init();
-        ScheduleReader.init();
-        CommandsController.init();
-        CreateAdminAccount();
+            Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
+            Path.Combine(Directory.GetCurrentDirectory(), "news"),
+            Path.Combine(Directory.GetCurrentDirectory(), "static"),
+            Path.Combine(Directory.GetCurrentDirectory(), "static", "teachers"),
+            Path.Combine(Directory.GetCurrentDirectory(), "schedule"),
+            Logger.path,
+            Logger.path_PreventedAttempts);
+
+        RunModules.StartModules(
+            OAT.Utilities.Telegram.init,
+            UrlsContoller.init,
+            HealthTables.init,
+            NewsReader.init,
+            ProfNewsReader.init,
+            ScheduleReader.init,
+            CommandsController.init,
+            CreateAdminAccount);
     }
-    catch(Exception ex)
+    catch (Exception ex)
     {
         Logger.Error(ex.ToString());
     }
@@ -122,7 +124,7 @@ async void CreateAdminAccount()
         if (records.Any())
             return;
         await connection.InsertAsync(new users(
-            "ŒÏÒÍËÈ ‡‚Ë‡ˆËÓÌÌ˚È ÍÓÎÎÂ‰Ê",
+            "–û–º—Å–∫–∏–π –∞–≤–∏–∞—Ü–∏–æ–Ω–Ω—ã–π –∫–æ–ª–ª–µ–¥–∂",
             "admin",
             Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
             Enums.Role.admin));
@@ -132,3 +134,5 @@ async void CreateAdminAccount()
         Console.WriteLine(ex);
     }
 }
+
+

@@ -14,7 +14,7 @@ namespace OAT.Controllers
             if (file is null || file.Length == 0 || filename is null || Path.GetExtension(file.FileName) is not ".xml")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
-            if(!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+            if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");

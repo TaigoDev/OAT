@@ -1,6 +1,6 @@
 ﻿
 function SendCmd() {
-    var url = "https://www.oat.ru/api/mysql/cmd";
+    var url = "/api/mysql/cmd";
     var formData = new FormData();
     formData.append("command", $("#MySQL-query").val());
     $.ajax({

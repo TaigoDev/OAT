@@ -30,7 +30,7 @@ $(document).bind('dragover', function (e) {
 document.getElementById('news-date').valueAsDate = new Date();
 
 function SendNews() {
-    var url = "https://www.oat.ru/api/news/upload";
+    var url = "/api/news/upload";
     var formData = new FormData();
 
     var fileUpload = $("#files").get(0);
@@ -65,7 +65,7 @@ function SendNews() {
 }
 
 function DeleteNews(id) {
-    var url = "https://www.oat.ru/api/news/" + id + "/delete";
+    var url = "/api/news/" + id + "/delete";
     $.ajax({
         type: 'DELETE',
         url: url,
@@ -95,7 +95,7 @@ function SendMessage(tag) {
 }
 
 function UploadProfNews() {
-    var url = "https://www.oat.ru/api/prof/news/upload";
+    var url = "/api/prof/news/upload";
     var formData = new FormData();
 
     var fileUpload = $("#files-prof").get(0);
@@ -129,7 +129,7 @@ function UploadProfNews() {
     });
 }
 function DeleteProfNews(id) {
-    var url = "https://www.oat.ru/api/prof/news/" + id + "/delete";
+    var url = "/api/prof/news/" + id + "/delete";
     $.ajax({
         type: 'DELETE',
         url: url,

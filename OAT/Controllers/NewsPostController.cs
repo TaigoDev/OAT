@@ -33,7 +33,7 @@ namespace OAT.Controllers
                 NewsReader.Loader();
                 return StatusCode(StatusCodes.Status200OK);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Error(ex.ToString());
                 return StatusCode(StatusCodes.Status200OK);

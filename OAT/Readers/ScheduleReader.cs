@@ -48,11 +48,11 @@ namespace OAT.Readers
 
                 Console.WriteLine($"Расписания загружены за {stopWatch.ElapsedMilliseconds} ms");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Error(ex.ToString());
             }
-            
+
         }
 
         protected static List<Week> GetWeeks(XmlNode xml_group)
@@ -104,7 +104,7 @@ namespace OAT.Readers
             return content.Replace("windows-1251", "utf-8");
         }
 
-       
+
         protected static async Task<string> ReadFile(string path)
         {
             try

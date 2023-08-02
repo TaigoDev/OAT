@@ -1,5 +1,5 @@
 ﻿function AjaxFormSubmit() {
-    var url = "https://www.oat.ru/api/users/new";
+    var url = "/api/users/new";
     var formData = new FormData();
     var e = document.getElementById("user-role");
     var value = e.value;
@@ -34,7 +34,7 @@
     });
 }
 function DeleteUser(id) {
-    var url = "https://www.oat.ru/api/users/" + id + "/delete";
+    var url = "/api/users/" + id + "/delete";
     $.ajax({
         type: 'DELETE',
         url: url,

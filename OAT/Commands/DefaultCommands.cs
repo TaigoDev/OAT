@@ -73,7 +73,7 @@ public class Import : ICommand
                 new Task(() => ImportTeachers()).Start();
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Logger.Error(ex.ToString());
         }
@@ -83,11 +83,11 @@ public class Import : ICommand
     {
         Logger.Info("Начинаю импорт преподавателей");
         var ids = new List<string>();
-        for(int i = 0; i <= 999; i++)
+        for (int i = 0; i <= 999; i++)
             ids.Add(GetId(i));
         await Runs<string>.InTask(Load, ids);
         Logger.Info("Импорт завершен");
-    } 
+    }
 
     private string GetId(int i)
     {
@@ -128,13 +128,13 @@ public class Import : ICommand
 
             using var connection = new MySqlConnection(Utils.GetConnectionString());
 
-            if((await connection.QueryAsync<Teachers>(n => n.id == Convert.ToInt32(id))).Any())
+            if ((await connection.QueryAsync<Teachers>(n => n.id == Convert.ToInt32(id))).Any())
             {
                 OAT.Utilities.Telegram.SendMessage($"[{DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: Пропуск {id} уже есть в бд");
                 return;
             }
             await connection.InsertAsync(new Teachers(int.Parse(id), FullName,
-                email, telephone, Base64Encode(info), photo_url)); 
+                email, telephone, Base64Encode(info), photo_url));
 
             OAT.Utilities.Telegram.SendMessage($"[{DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss")}]: ✅ Импорт {FullName} успешно завершен\n" +
                 $"photo_url: {photo_url}\n" +
@@ -143,7 +143,7 @@ public class Import : ICommand
                 $"job: {job}\n " +
                 $"info: {Utils.sha256_hash(info)}");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Logger.Error($"Ошибка импорта {id}: {ex}");
         }
@@ -157,7 +157,7 @@ public class Import : ICommand
             var html = await httpClient.GetStringAsync($"{url}/sveden/employees/{id}/");
             return html;
         }
-        catch(Exception ex )
+        catch (Exception ex)
         {
             if (i == 10)
                 Logger.Error($"Ошибка скачивания страницы: {url}/sveden/employees/{id}/:\n{ex}");

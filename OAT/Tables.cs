@@ -55,8 +55,8 @@ namespace Recovery.Tables
         public string FullName { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
-        public string base64_profile { get; set; }  
-        public string image_url { get; set; } 
+        public string base64_profile { get; set; }
+        public string image_url { get; set; }
     }
 
     public class ProfNews

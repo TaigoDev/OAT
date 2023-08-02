@@ -63,7 +63,7 @@ namespace OAT.Controllers
             ProfNewsReader.init();
             await connection.DeleteAsync(record.First());
 
-            Logger.Info($"Пользователь удалил новость.\n" +
+            Logger.Info($"Пользователь удалил новость. (Prof)\n" +
                 $"ID: {id}\n" +
                 $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
                 $"IP-адрес: {HttpContext.UserIP()}");
@@ -72,11 +72,11 @@ namespace OAT.Controllers
 
         private bool Check(params string[] strings)
         {
-            foreach(var s in strings)
-                if(string.IsNullOrWhiteSpace(s))
+            foreach (var s in strings)
+                if (string.IsNullOrWhiteSpace(s))
                     return false;
             return true;
         }
-            
+
     }
 }

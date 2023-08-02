@@ -73,7 +73,7 @@ public class Group
         this.curse = curse;
         this.lesson_times = lesson_times;
     }
-    
+
     public string name { get; set; }
     public int curse { get; set; }
     public List<Week> weeks { get; set; } = new List<Week>(2);
