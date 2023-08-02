@@ -54,7 +54,7 @@ namespace OAT.Controllers
 				{
 					page.Header().AlignCenter().PaddingTop(8)
 						.Text("Внимание! Документ создан автоматически, проверьте данные перед оплатой").
-						FontSize(12).FontColor(Colors.Red.Darken4).Bold().FontFamily("Arial");
+						FontSize(12).FontColor(Colors.Red.Darken4).Bold().FontFamily("DejaVu Sans");
 
 					page.Content()
 						.MinimalBox().AlignCenter().Border(0).Padding(8).Table(table =>
@@ -71,56 +71,56 @@ namespace OAT.Controllers
 							table.Cell().Border(1).AlignCenter().AddBoardQr("ИЗВЕЩЕНИЕ", png);
 							table.Cell().Border(1).Padding(6).Text(e =>
 							{
-								e.Line("Омский авиационный колледж имени Н.Е. Жуковского").FontFamily("Arial").FontSize(12);
-								e.Line("\nПолучатель: Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)").FontFamily("Arial").FontSize(12);
-								e.Span("ИНН: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("5504000055 ").FontFamily("Arial").FontSize(12);
-								e.Span("КПП: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("550401001 ").FontFamily("Arial").FontSize(12);
-								e.Span("БИК: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("015209001\n").FontFamily("Arial").FontSize(12);
-								e.Span("КБК: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("01000000000000000130").FontFamily("Arial").FontSize(12);
-								e.Span("ОКТМО: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("52701000\n").FontFamily("Arial").FontSize(12);
+								e.Line("Омский авиационный колледж имени Н.Е. Жуковского").FontFamily("DejaVu Sans").FontSize(12);
+								e.Line("\nПолучатель: Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("ИНН: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("5504000055 ").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("КПП: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("550401001 ").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("БИК: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("015209001\n").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("КБК: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("01000000000000000130").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("ОКТМО: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("52701000\n").FontFamily("DejaVu Sans").FontSize(12);
 								e.Element().RCAndKCTable();
-								e.Line("в Отделение Омск Банка России//УФК по Омской области г. Омск Номер лицевого счёта: 010220608\n").FontFamily("Arial").FontSize(12);
-								e.Line("Назначение платежа:").FontFamily("Arial").FontSize(12).Bold();
-								e.Line($"{purpose}\n").FontFamily("Arial").FontSize(12);
-								e.Span("Сумма: ").FontFamily("Arial").FontSize(12);
-								e.Span(summa).Bold().FontFamily("Arial").FontSize(12);
-								e.Span(" руб.\n").FontFamily("Arial").FontSize(12);
-								e.Span("ФИО (плательщик): ").FontFamily("Arial").FontSize(12);
-								e.Span(FullName).Underline().FontFamily("Arial").FontSize(12);
-								e.Line("\n\nC условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен").FontFamily("Arial").FontSize(12);
-								e.Line("\nПодпись: _____________ дата \"____\" ___________ 20___г.").FontFamily("Arial").FontSize(12);
+								e.Line("в Отделение Омск Банка России//УФК по Омской области г. Омск Номер лицевого счёта: 010220608\n").FontFamily("DejaVu Sans").FontSize(12);
+								e.Line("Назначение платежа:").FontFamily("DejaVu Sans").FontSize(12).Bold();
+								e.Line($"{purpose}\n").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("Сумма: ").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span(summa).Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span(" руб.\n").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("ФИО (плательщик): ").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span(FullName).Underline().FontFamily("DejaVu Sans").FontSize(12);
+								e.Line("\n\nC условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен").FontFamily("DejaVu Sans").FontSize(12);
+								e.Line("\nПодпись: _____________ дата \"____\" ___________ 20___г.").FontFamily("DejaVu Sans").FontSize(12);
 							});
 							table.Cell().Row(2).Border(1).AlignCenter().AddBoardQr("КВИТАНЦИЯ", "D:\\GitProjects\\TaigoDev\\OAT\\OAT\\pay\\0effb13158df9385f205dd02aee3402a889815065e33b62bedf14186f7895f3a.png");
 							table.Cell().Border(1).Padding(6).Text(e =>
 							{
-								e.Line("Омский авиационный колледж имени Н.Е. Жуковского").FontFamily("Arial").FontSize(12);
-								e.Line("\nПолучатель: Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)").FontFamily("Arial").FontSize(12);
-								e.Span("ИНН: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("5504000055 ").FontFamily("Arial").FontSize(12);
-								e.Span("КПП: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("550401001 ").FontFamily("Arial").FontSize(12);
-								e.Span("БИК: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("015209001\n").FontFamily("Arial").FontSize(12);
-								e.Span("КБК: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("01000000000000000130").FontFamily("Arial").FontSize(12);
-								e.Span("ОКТМО: ").Bold().FontFamily("Arial").FontSize(12);
-								e.Span("52701000\n").FontFamily("Arial").FontSize(12);
+								e.Line("Омский авиационный колледж имени Н.Е. Жуковского").FontFamily("DejaVu Sans").FontSize(12);
+								e.Line("\nПолучатель: Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("ИНН: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("5504000055 ").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("КПП: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("550401001 ").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("БИК: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("015209001\n").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("КБК: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("01000000000000000130").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("ОКТМО: ").Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("52701000\n").FontFamily("DejaVu Sans").FontSize(12);
 								e.Element().RCAndKCTable();
-								e.Line("в Отделение Омск Банка России//УФК по Омской области г. Омск Номер лицевого счёта: 010220608\n").FontFamily("Arial").FontSize(12);
-								e.Line("Назначение платежа:").FontFamily("Arial").FontSize(12).Bold();
-								e.Line($"{purpose}\n").FontFamily("Arial").FontSize(12);
-								e.Span("Сумма: ").FontFamily("Arial").FontSize(12);
-								e.Span(summa).Bold().FontFamily("Arial").FontSize(12);
-								e.Span(" руб.\n").FontFamily("Arial").FontSize(12);
-								e.Span("ФИО (плательщик): ").FontFamily("Arial").FontSize(12);
-								e.Span(FullName).Underline().FontFamily("Arial").FontSize(12);
-								e.Line("\n\nC условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен").FontFamily("Arial").FontSize(12);
-								e.Line("\nПодпись: _____________ дата \"____\" ___________ 20___г.").FontFamily("Arial").FontSize(12);
+								e.Line("в Отделение Омск Банка России//УФК по Омской области г. Омск Номер лицевого счёта: 010220608\n").FontFamily("DejaVu Sans").FontSize(12);
+								e.Line("Назначение платежа:").FontFamily("DejaVu Sans").FontSize(12).Bold();
+								e.Line($"{purpose}\n").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("Сумма: ").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span(summa).Bold().FontFamily("DejaVu Sans").FontSize(12);
+								e.Span(" руб.\n").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span("ФИО (плательщик): ").FontFamily("DejaVu Sans").FontSize(12);
+								e.Span(FullName).Underline().FontFamily("DejaVu Sans").FontSize(12);
+								e.Line("\n\nC условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен").FontFamily("DejaVu Sans").FontSize(12);
+								e.Line("\nПодпись: _____________ дата \"____\" ___________ 20___г.").FontFamily("DejaVu Sans").FontSize(12);
 							});
 						});
 
@@ -128,7 +128,7 @@ namespace OAT.Controllers
 						.AlignCenter().PaddingBottom(20)
 						.Text(x =>
 						{
-							x.Span($"© {DateTime.UtcNow.Year} ОМСКИЙ АВИАЦИОННЫЙ КОЛЛЕДЖ").FontFamily("Arial").Bold().FontSize(10);
+							x.Span($"© {DateTime.UtcNow.Year} ОМСКИЙ АВИАЦИОННЫЙ КОЛЛЕДЖ").FontFamily("DejaVu Sans").Bold().FontSize(10);
 						});
 				});
 			});
@@ -182,13 +182,13 @@ namespace OAT.Controllers
 					columns.RelativeColumn(5);
 				});
 				var numbers = "03224643520000005201";
-				table.Cell().Border(1).AlignCenter().Text("Р/C").FontFamily("Arial");
+				table.Cell().Border(1).AlignCenter().Text("Р/C").FontFamily("DejaVu Sans");
 				foreach (var str in numbers)
-					table.Cell().Border(1).AlignCenter().Text(str.ToString()).FontFamily("Arial");
-				table.Cell().Row(2).Border(1).AlignCenter().Text("К/C").FontFamily("Arial");
+					table.Cell().Border(1).AlignCenter().Text(str.ToString()).FontFamily("DejaVu Sans");
+				table.Cell().Row(2).Border(1).AlignCenter().Text("К/C").FontFamily("DejaVu Sans");
 				numbers = "40102810245370000044";
 				foreach (var str in numbers)
-					table.Cell().Border(1).AlignCenter().Text(str.ToString()).FontFamily("Arial");
+					table.Cell().Border(1).AlignCenter().Text(str.ToString()).FontFamily("DejaVu Sans");
 			});
 		}
 
@@ -205,7 +205,7 @@ namespace OAT.Controllers
 					columns.RelativeColumn(2);
 				});
 				table.Cell().Row(1).Padding(10).AlignCenter().Image(Placeholders.Image(250, 250));
-				table.Cell().Row(2).BorderTop(1).PaddingLeft(2).Padding(20).PaddingBottom(100).AlignCenter().Text(name).FontFamily("Arial");
+				table.Cell().Row(2).BorderTop(1).PaddingLeft(2).Padding(20).PaddingBottom(100).AlignCenter().Text(name).FontFamily("DejaVu Sans");
 			});
 		}
 
