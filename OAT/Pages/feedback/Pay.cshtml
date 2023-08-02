@@ -1,0 +1,139 @@
+﻿@page
+@model PayModel
+@{
+    ViewData["Title"] = "Электронные платежи";
+}
+
+<link rel="stylesheet" href="~/css/feedback/pay.css" asp-append-version="true">
+
+<div class="container content-page">
+    <section class="content">
+        <h2 class="section-title">
+            Электронные платежи
+        </h2>
+
+        <form class="pay-form">
+            <div class="input-box">
+                <label for="appointment">
+                    Назначение платежа
+                </label>
+                <select id="appointment">
+                    <option value="">
+                        Платное обучение
+                    </option>
+                    <option value="">
+                        Дистанционное обучение
+                    </option>
+                    <option value="">
+                        Дополнительные образовательные услуги
+                    </option>
+                    <option value="">
+                        Оказание платных услуг
+                    </option>
+                    <option value="">
+                        Добровольное пожертвование
+                    </option>
+                    <option value="">
+                        Подготовительные курсы
+                    </option>
+                    <option value="">
+                        Профессиональный переподготовка
+                    </option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label for="number">
+                    Номер договора
+                </label>
+                <input id="number" type="number">
+            </div>
+            <div class="input-box">
+                <label for="date">
+                    Дата договора
+                </label>
+                <input id="date" type="date">
+            </div>
+            <div class="input-box">
+                <label for="student-fio">
+                    ФИО студента
+                </label>
+                <input id="student-fio" type="text">
+            </div>
+            <div class="input-box">
+                <label for="group">
+                    Группа обучения
+                </label>
+                <input id="group" type="text">
+            </div>
+            <div class="input-box">
+                <label for="payer-fio">
+                    ФИО плательщика
+                </label>
+                <input id="payer-fio" type="text">
+            </div>
+            <div class="input-box">
+                <label for="email">
+                    E-mail
+                </label>
+                <input id="email" type="email">
+            </div>
+            <div class="input-box">
+                <label for="phone">
+                    Телефон
+                </label>
+                <input id="phone" type="tel">
+            </div>
+            <div class="input-box">
+                <label for="cost">
+                    Сумма, ₽
+                </label>
+                <input id="cost" type="number">
+            </div>
+
+            <div>
+                <input type="checkbox" id="agreement" value="agreement" />
+                <label for="agreement">
+                    Устанавливая флажок внутри данного чек-бокса вы даете согласие на обработку своих персональных данных.
+                </label>
+            </div>
+            <button class="customized">Сформировать квитанцию</button>
+        </form>
+
+
+
+    </section>
+    <aside id="sidebar" class="sidebar">
+        <h3 class="sidebar-title">
+            Обратная связь
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Location")'>
+                        Как добраться
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Contacts")'>
+                        Контактная информация
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href=''>
+                        Схема расположения колледжа
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("QuestionAnswer")'>
+                        Вопрос-ответ
+                    </a>
+                </li>
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href='@Url.Page("Pay")'>
+                        Электронные платежи
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>

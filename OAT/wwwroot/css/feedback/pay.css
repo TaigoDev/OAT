@@ -1,0 +1,6 @@
+﻿.pay-form{
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+	max-width: min(450px, 100%);
+}

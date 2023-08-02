@@ -65,13 +65,13 @@
         </h3>
         <nav class="sidebar-body">
             <ul class="sidebar-links">
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href=''>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Location")'>
                         Как добраться
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href=''>
+                    <a href='@Url.Page("Contacts")'>
                         Контактная информация
                     </a>
                 </li>
@@ -80,9 +80,14 @@
                         Схема расположения колледжа
                     </a>
                 </li>
-                <li class="sidebar-link">
-                    <a href=''>
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href='@Url.Page("QuestionAnswer")'>
                         Вопрос-ответ
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Pay")'>
+                        Электронные платежи
                     </a>
                 </li>
             </ul>
