@@ -47,7 +47,7 @@
             contentType: false,
             mimeType: "multipart/form-data",
             success: function (response) {
-                SendMessage("message-success");
+                window.location.href = response;
             },
             error: function (jqXHR, exception) {
                 alert(jqXHR.status);

@@ -1,6 +1,12 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using Net.Codecrete.QrCodeGenerator;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using Svg;
+using System.Drawing.Imaging;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace OAT.Controllers
@@ -18,655 +24,190 @@ namespace OAT.Controllers
                 $"|CBC=01000000000000000130|OKTMO=52701000|CATEGORY=1";
 
             var qr = QrCode.EncodeText(qrData, QrCode.Ecc.Medium);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "pay", 
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "pay",
                 $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 
             System.IO.File.WriteAllText(path, qr.ToSvgString(4), Encoding.UTF8);
-			var html = GenerateHtmlForReceipt(path, documentId, documentDate, studentFullName, FullName, group, summa, purpose);
-
-        
-			
-			return Ok();
+            var pathPng = SaveToPng(path);
+			GeneratePdfFile(pathPng, purpose, summa.ToString(), FullName);
+			Utils.FileDelete(pathPng);
+			Utils.FileDelete(path);
+			var filename = new FileInfo(pathPng.Replace(".png", ".pdf")).Name;
+			return Ok($"/pay/download/{filename}");
         }
 
-	
+		[HttpGet("pay/download/{filename}")]
+		public IActionResult DownloadFile(string filename)
+		{
+			var path = Path.Combine(Directory.GetCurrentDirectory(), "pay", filename);
+			var bytes = System.IO.File.ReadAllBytes(path);
+			System.IO.File.Delete(path);
+			return File(bytes, "application/pdf");
 
-        protected string GenerateHtmlForReceipt(string file, string? documentId, string? documentDate, string? studentFullName, string FullName, string group, int summa, string purpose)
+		}
+
+		protected void GeneratePdfFile(string png, string purpose, string summa, string FullName)
         {
-            return $@"<!DOCTYPE html>
-<html lang=""ru"">
-<head>
-    <meta charset=""utf-8"">
-    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0, maximum-scale=1.0"">
-    <title></title>
-    <link rel=""stylesheet"" href=""/css/site.css?v=RPkaDbBoFQzdF_grtWGW5K_8SX16CrP-jDLKr3dpcE4"">
-</head>
-<body>
-    <header id=""site-header"" class=""site-header"">
-        <div class=""container"">
-            <nav class=""navigation"">
-                <a class=""logo"" href=""/"">
-                    <img src=""/images/basic/logo.svg"" alt=""логотип"">
-                    <span class=""logo-text"">Омский авиационный колледж имени Н.Е. жуковского</span>
-                </a>
+			var document = Document.Create(container =>
+			{
+				container.Page(page =>
+				{
+					page.Header().AlignCenter().PaddingTop(8)
+						.Text("Внимание! Документ создан автоматически, проверьте данные перед оплатой").
+						FontSize(12).FontColor(Colors.Red.Darken4).Bold().FontFamily("Arial");
 
-                <ul class=""important-pages"">
-                    <li>
-                        <a href='/Applicant'>
-                            Абитуриентам
-                        </a>
-                    </li>
-                    <li>
-                        <a href='/Students'>
-                            Обучающимся
-                        </a>
-                    </li>
-                    <li>
-                        <a href='/timetable/Classes'>
-                            Расписание
-                        </a>
-                    </li>
-                </ul>
+					page.Content()
+						.MinimalBox().AlignCenter().Border(0).Padding(8).Table(table =>
+						{
 
-                <div class=""functional"">
-                    <a href=""https://e.oat.ru/""><img class=""icon"" src=""/images/basic/sitemap.svg"" alt=""карта колледжа""></a>
-                    <a href=""/pay/""><img class=""icon"" src=""/images/basic/rubles.svg"" alt=""оплатить обучение""></a>
-                    <img id=""eye-icon"" class=""icon"" src=""/images/basic/eyeOpen.svg"" alt=""версия для слабовидящих"">
-                    <img id=""search-icon"" class=""icon"" src=""/images/basic/search.svg"" alt=""поиск"">
-                </div>
+							table.ColumnsDefinition(columns =>
+							{
+								columns.ConstantColumn(200);
+								columns.ConstantColumn(370);
 
-                <div id=""menu-icon"" class=""main-menu-icon"">
-                    <img class=""icon"" src=""/images/basic/menu/burger.svg"" alt=""меню"">
-                </div>
+								columns.RelativeColumn(2);
+								columns.RelativeColumn(2);
+							});
+							table.Cell().Border(1).AlignCenter().AddBoardQr("ИЗВЕЩЕНИЕ", png);
+							table.Cell().Border(1).Padding(6).Text(e =>
+							{
+								e.Line("Омский авиационный колледж имени Н.Е. Жуковского").FontFamily("Arial").FontSize(12);
+								e.Line("\nПолучатель: Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)").FontFamily("Arial").FontSize(12);
+								e.Span("ИНН: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("5504000055 ").FontFamily("Arial").FontSize(12);
+								e.Span("КПП: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("550401001 ").FontFamily("Arial").FontSize(12);
+								e.Span("БИК: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("015209001\n").FontFamily("Arial").FontSize(12);
+								e.Span("КБК: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("01000000000000000130").FontFamily("Arial").FontSize(12);
+								e.Span("ОКТМО: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("52701000\n").FontFamily("Arial").FontSize(12);
+								e.Element().RCAndKCTable();
+								e.Line("в Отделение Омск Банка России//УФК по Омской области г. Омск Номер лицевого счёта: 010220608\n").FontFamily("Arial").FontSize(12);
+								e.Line("Назначение платежа:").FontFamily("Arial").FontSize(12).Bold();
+								e.Line($"{purpose}\n").FontFamily("Arial").FontSize(12);
+								e.Span("Сумма: ").FontFamily("Arial").FontSize(12);
+								e.Span(summa).Bold().FontFamily("Arial").FontSize(12);
+								e.Span(" руб.\n").FontFamily("Arial").FontSize(12);
+								e.Span("ФИО (плательщик): ").FontFamily("Arial").FontSize(12);
+								e.Span(FullName).Underline().FontFamily("Arial").FontSize(12);
+								e.Line("\n\nC условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен").FontFamily("Arial").FontSize(12);
+								e.Line("\nПодпись: _____________ дата \"____\" ___________ 20___г.").FontFamily("Arial").FontSize(12);
+							});
+							table.Cell().Row(2).Border(1).AlignCenter().AddBoardQr("КВИТАНЦИЯ", "D:\\GitProjects\\TaigoDev\\OAT\\OAT\\pay\\0effb13158df9385f205dd02aee3402a889815065e33b62bedf14186f7895f3a.png");
+							table.Cell().Border(1).Padding(6).Text(e =>
+							{
+								e.Line("Омский авиационный колледж имени Н.Е. Жуковского").FontFamily("Arial").FontSize(12);
+								e.Line("\nПолучатель: Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)").FontFamily("Arial").FontSize(12);
+								e.Span("ИНН: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("5504000055 ").FontFamily("Arial").FontSize(12);
+								e.Span("КПП: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("550401001 ").FontFamily("Arial").FontSize(12);
+								e.Span("БИК: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("015209001\n").FontFamily("Arial").FontSize(12);
+								e.Span("КБК: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("01000000000000000130").FontFamily("Arial").FontSize(12);
+								e.Span("ОКТМО: ").Bold().FontFamily("Arial").FontSize(12);
+								e.Span("52701000\n").FontFamily("Arial").FontSize(12);
+								e.Element().RCAndKCTable();
+								e.Line("в Отделение Омск Банка России//УФК по Омской области г. Омск Номер лицевого счёта: 010220608\n").FontFamily("Arial").FontSize(12);
+								e.Line("Назначение платежа:").FontFamily("Arial").FontSize(12).Bold();
+								e.Line($"{purpose}\n").FontFamily("Arial").FontSize(12);
+								e.Span("Сумма: ").FontFamily("Arial").FontSize(12);
+								e.Span(summa).Bold().FontFamily("Arial").FontSize(12);
+								e.Span(" руб.\n").FontFamily("Arial").FontSize(12);
+								e.Span("ФИО (плательщик): ").FontFamily("Arial").FontSize(12);
+								e.Span(FullName).Underline().FontFamily("Arial").FontSize(12);
+								e.Line("\n\nC условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен").FontFamily("Arial").FontSize(12);
+								e.Line("\nПодпись: _____________ дата \"____\" ___________ 20___г.").FontFamily("Arial").FontSize(12);
+							});
+						});
 
-                <div id=""main-menu-window"" class=""main-menu-window"">
-                    <ul id=""main-menu"" class=""main-menu"">
-
-                        <!-- FOR STUDENTS -->
-
-                        <li class=""main-menu-item main-menu-item-inactive"">
-                            <div class=""main-menu-item-title"">
-                                <a href='/students/DistanceLearning' class=""main-menu-item-title-pictogram"">
-                                    <img class=""icon"" src=""/images/basic/menu/student.svg"" alt="""">
-                                </a>
-                                <a href='/students/DistanceLearning'>
-                                    Студентам
-                                </a>
-                            </div>
-                        </li>
-
-                        <!-- FOR APPLICANTS -->
-
-                        <li class=""main-menu-item main-menu-item-inactive"">
-                            <div class=""main-menu-item-title"">
-                                <a href='/applicant/SelectionCommittee' class=""main-menu-item-title-pictogram"">
-                                    <img class=""icon"" src=""/images/basic/menu/applicant.svg"" alt="""">
-                                </a>
-                                <a href='/applicant/SelectionCommittee'>
-                                    Абитуриентам
-                                </a>
-                            </div>
-                        </li>
-
-                        <!-- FOR PARENTS -->
-
-                        <li class=""main-menu-item main-menu-item-inactive"">
-                            <div class=""main-menu-item-title"">
-                                <a href=""/parents/organizatsiya-uchebnogo-protsessa-v-kolledzhe/"" class=""main-menu-item-title-pictogram"">
-                                    <img class=""icon"" src=""/images/basic/menu/parents.svg"" alt="""">
-                                </a>
-                                <a href=""/parents/organizatsiya-uchebnogo-protsessa-v-kolledzhe/"">
-                                    Родителям
-                                </a>
-                            </div>
-                        </li>
-
-                        <!-- ABOUT COLLEGE -->
-
-                        <li class=""main-menu-item main-menu-item-inactive"">
-                            <div class=""main-menu-item-title"">
-                                <a href='/organizationInformation/CommonIntelligence' class=""main-menu-item-title-pictogram"">
-                                    <img class=""icon"" src=""/images/basic/menu/college.svg"" alt="""">
-                                </a>
-                                <a href='/organizationInformation/CommonIntelligence'>
-                                    Колледж
-                                </a>
-                            </div>
-                        </li>
-
-                        <!-- FOR CONTACTS -->
-
-                        <li class=""main-menu-item main-menu-item-inactive"">
-                            <div class=""main-menu-item-title"">
-                                <a href=""/contacts/"" class=""main-menu-item-title-pictogram"">
-                                    <img class=""icon"" src=""/images/basic/menu/contacts.svg"" alt="""">
-                                </a>
-                                <a href=""/contacts/"">
-                                    Контакты
-                                </a>
-                            </div>
-                        </li>
-
-                        <!-- additionally -->
-
-                        <li class=""main-menu-item main-menu-item-inactive"">
-                            <div class=""main-menu-item-title"">
-                                <a href='/timetable/Classes' class=""main-menu-item-title-pictogram"">
-                                    <img class=""icon"" src=""/images/basic/menu/question.svg"" alt="""">
-                                </a>
-                                <a href='/timetable/Classes'>
-                                    Расписание
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-
-            </nav>
-
-            <div class=""site-search-container"">
-
-                <div class=""ya-site-form ya-site-form_inited_no"" data-bem=""{{&quot;action&quot;:&quot;http://localhost:20045/search&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;#ffffff&quot;,&quot;fontsize&quot;:14,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;ru&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;БПОУ Омавиат&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;ru&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2958566,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Поиск по сайту www.oat.ru&quot;,&quot;input_placeholderColor&quot;:&quot;#000000&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}}"">
-                    <form action=""https://yandex.ru/search/site/"" method=""get"" target=""_self"" accept-charset=""utf-8"">
-                        <input type=""hidden"" name=""searchid"" value=""2958566"" />
-                        <input type=""hidden"" name=""l10n"" value=""ru"" />
-                        <input type=""hidden"" name=""reqenc"" value="""" />
-                        <input type=""search"" name=""text"" value="""" />
-                        <input type=""submit"" value=""Найти"" />
-                    </form>
-                </div>
-                <style type=""text/css"">
-                    .ya-page_js_yes .ya-site-form_inited_no {{
-                        display: none;
-                    }}
-                </style>
-                <script type=""text/javascript"">
-                    (function (w, d, c) {{
-                        var s = d.createElement('script'),
-                            h = d.getElementsByTagName('script')[0],
-                            e = d.documentElement;
-                        if ((' ' + e.className + ' ').indexOf(' ya-page_js_yes ') === -1) {{
-                            e.className += ' ya-page_js_yes';
-                        }}
-                        s.type = 'text/javascript';
-                        s.async = true;
-                        s.charset = 'utf-8';
-                        s.src = 'http://localhost:20045/js/yandex_all.js';
-                        h.parentNode.insertBefore(s, h);
-                        (w[c] || (w[c] = [])).push(function () {{
-                            Ya.Site.Form.init()
-                        }})
-                    }})(window, document, 'yandex_site_callbacks');
-                </script>
-
-            </div>
-
-            <style> 
-
-                #ya-site-form0 .ya-site-form__search {{
-                   border-radius: 10px;
-
-                }}
-            </style>
-         
-        </div>
-    </header>
-    
-    <main class=""site-main"" role=""main"">
-        <div style='text-align:center; margin: 0 0 10px 0;'>ВНИМАТЕЛЬНО ПРОВЕРЬТЕ СВОИ ДАННЫЕ, КВИТАНЦИЯ СФОРМИРОВАНА АВТОМАТИЧЕСКИ</div>
-<table border='1' style='border-collapse:collapse; width:100%;'>
-	<tr>
-		<td style='text-align:center; width:200px; vertical-align: top;'>
-			<img src="""" {{file}}"""" style='width:200px; border-bottom:1px solid black; margin: 0 0 50px 0;'> </img>
-			ИЗВЕЩЕНИЕ
-		</td>
-		<td style='padding: 5px 5px 30px 5px;'>
-			Омский авиационный колледж имени Н.Е. Жуковского<br><br>
-			Получатель: Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)<br>
-			<b>ИНН</b> 5504000055 <b>КПП</b> 550401001 <b>БИК</b> 015209001<br> </br>
-			<b>КБК</b> 01000000000000000130 <b>ОКТМО</b> 52701000<br>
-			<table border='1' style='border-collapse:collapse; width:100%; text-align:center;'>
-				<tr>
-					<td>Р/С</td>
-					<td>0</td>
-					<td>3</td>
-					<td>2</td>
-					<td>2</td>
-					<td>4</td>
-					<td>6</td>
-					<td>4</td>
-					<td>3</td>
-					<td>5</td>
-					<td>2</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>5</td>
-					<td>2</td>
-					<td>0</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>К/С</td>
-					<td>4</td>
-					<td>0</td>
-					<td>1</td>
-					<td>0</td>
-					<td>2</td>
-					<td>8</td>
-					<td>1</td>
-					<td>0</td>
-					<td>2</td>
-					<td>4</td>
-					<td>5</td>
-					<td>3</td>
-					<td>7</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>4</td>
-					<td>4</td>
-				</tr>
-			</table>
-			в Отделение Омск Банка России//УФК по Омской области г. Омск<br>
-			Номер лицевого счёта: 010220608<br><br>
-			<b>Назначение платежа:</b><br>
-			""""{{purpose}}"""" по дог.№<b>""""{{documentId}}""""</b> от """"{{documentDate}}"""" г. за """"{{studentFullName}}"""" гр.№""""{{group}}""""<br>
-			Сумма: <b>""""{{summa}}""""</b> руб.<br>
-			ФИО (плательщик):<span style='text-decoration:underline;'>""""{{FullName}}""""</span><br><br>
-			C условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен<br><br>
-			Подпись:_________________ дата \""""____\"""" ___________ 20___г.<br><br><br>
-		</td>
-	</tr>
-	<tr>
-		<td style='text-align:center; width:200px; vertical-align: top;'>
-			<img src="""" {{file}}"""" style='width:200px; border-bottom:1px solid black; margin: 0 0 50px 0;'> </img>
-			КВИТАНЦИЯ
-		</td>
-		<td style='padding: 5px 5px 30px 5px;'>
-			Омский авиационный колледж имени Н.Е. Жуковского<br><br>
-			Получатель: Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)<br>
-			<b>ИНН</b> 5504000055 <b>КПП</b> 550401001 <b>БИК</b> 015209001<br>
-			<b>КБК</b> 01000000000000000130 <b>ОКТМО</b> 52701000<br>
-			<table border='1' style='border-collapse:collapse; width:100%; text-align:center;'>
-				<tr>
-					<td>Р/С</td>
-					<td>0</td>
-					<td>3</td>
-					<td>2</td>
-					<td>2</td>
-					<td>4</td>
-					<td>6</td>
-					<td>4</td>
-					<td>3</td>
-					<td>5</td>
-					<td>2</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>5</td>
-					<td>2</td>
-					<td>0</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>К/С</td>
-					<td>4</td>
-					<td>0</td>
-					<td>1</td>
-					<td>0</td>
-					<td>2</td>
-					<td>8</td>
-					<td>1</td>
-					<td>0</td>
-					<td>2</td>
-					<td>4</td>
-					<td>5</td>
-					<td>3</td>
-					<td>7</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>4</td>
-					<td>4</td>
-				</tr>
-			</table>
-			в Отделение Омск Банка России//УФК по Омской области г. Омск<br>
-			Номер лицевого счёта: 010220608<br><br>
-			<b>Назначение платежа:</b><br>
-			""""{{purpose}}"""" по дог.№<b>""""{{documentId}}""""</b> от """"{{documentDate}}"""" г. за """"{{studentFullName}}"""" гр.№""""{{group}}""""<br>
-			Сумма: <b>"""".$summa.""""</b> руб.<br>
-			ФИО (плательщик):<span style='text-decoration:underline;'>""""{{FullName}}""""</span><br><br>
-			C условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен<br><br>
-			Подпись:_________________ дата \""""____\"""" ___________ 20___г.<br><br><br>
-		</td>
-	</tr>
-</table>
-    </main>
-    
-    <footer class=""site-footer"">
-        <div class=""partners-list-container"">
-            <div class=""partners-list"">
-                <a href=""https://www.uec-saturn.ru/?sat=280"" target=""_blank"">
-                    <img src=""/images/basic/partners/odkSaturn.png"" alt="""">
-                </a>
-                <a href=""https://guit.omskportal.ru/oiv/buguit"" target=""_blank"">
-                    <img src=""/images/basic/partners/omskaiaGubernia.png"" alt="""">
-                </a>
-                <a href=""http://omport.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/omskiRecnoiPort.png"" alt="""">
-                </a>
-                <a href=""http://oniip.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/oniip.png"" alt="""">
-                </a>
-                <a href=""http://polyot.su/"" target=""_blank"">
-                    <img src=""/images/basic/partners/polet.png"" alt="""">
-                </a>
-                <a href=""http://www.aoomkb.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/omskoeMashinostroitelnoeBuro.png"" alt="""">
-                </a>
-                <a href=""https://omgpu.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/pedagogiceskiUniversitet.png"" alt="""">
-                </a>
-                <a href=""https://www.cisco.com/"" target=""_blank"">
-                    <img src=""/images/basic/partners/cisco.png"" alt="""">
-                </a>
-                <a href=""https://www.visual-paradigm.com/"" target=""_blank"">
-                    <img src=""/images/basic/partners/visualParadigm.png"" alt="""">
-                </a>
-                <a href=""http://xn--b1apfhqi.xn--p1ai/"" target=""_blank"">
-                    <img src=""/images/basic/partners/visokieTehnologii.png"" alt="""">
-                </a>
-                <a href=""https://www.cisco.com/"" target=""_blank"">
-                    <img src=""/images/basic/partners/salut.png"" alt="""">
-                </a>
-                <a href=""https://www.oemz.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/electromehaniceskiZavod.png"" alt="""">
-                </a>
-                <a href=""https://www.omskelectro.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/omskElectro.png"" alt="""">
-                </a>
-                <a href=""https://sibpribor.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/sibirskiePriboriSistemi.png"" alt="""">
-                </a>
-                <a href=""https://www.smartkom.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/smartcom.png"" alt="""">
-                </a>
-                <a href=""https://admomsk.ru/web/guest/government/divisions/47/technologies/about"" target=""_blank"">
-                    <img src=""/images/basic/partners/upravlenieInformacionnoKommunikacionnixTehnologi.png"" alt="""">
-                </a>
-                <a href=""https://www.omskagregat.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/omskiAgregatniZavod.png"" alt="""">
-                </a>
-                <a href=""http://transmash-omsk.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/omskTransMash.png"" alt="""">
-                </a>
-                <a href=""http://www.relero.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/radiozavodImeniPopova.png"" alt="""">
-                </a>
-                <a href=""http://xn--80aafyrmaqq.xn--p1ai/site"" target=""_blank"">
-                    <img src=""/images/basic/partners/motor.png"" alt="""">
-                </a>
-                <a href=""https://auto-plus.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/avtoplus.png"" alt="""">
-                </a>
-                <a href=""https://www.addamant.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/addamant.png"" alt="""">
-                </a>
-                <a href=""https://ante55.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/ante.png"" alt="""">
-                </a>
-                <a href=""https://bsomsk.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/biznesSistemi.jpg"" alt="""">
-                </a>
-                <a href=""https://ds.gazprom-neft.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/gazpromCifrovieReshenia.svg"" alt="""">
-                </a>
-                <a href=""http://gidroprivod55.ru/about"" target=""_blank"">
-                    <img src=""/images/basic/partners/omskGidroPrivod.png"" alt="""">
-                </a>
-                <a href=""https://zngs.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/zavodNeftegazovixSistem.png"" alt="""">
-                </a>
-                <a href=""https://lenta.com/o-kompanii/"" target=""_blank"">
-                    <img src=""/images/basic/partners/lenta.png"" alt="""">
-                </a>
-                <a href=""https://mt-t.ru/omsk/"" target=""_blank"">
-                    <img src=""/images/basic/partners/mttehno.png"" alt="""">
-                </a>
-                <a href=""https://mir-omsk.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/npoMir.png"" alt="""">
-                </a>
-                <a href=""https://cryontk.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/kriogennaiaTehnika.png"" alt="""">
-                </a>
-                <a href=""https://www.omkc.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/omskieKabelnieSeti.png"" alt="""">
-                </a>
-                <a href=""https://siblift.com/"" target=""_blank"">
-                    <img src=""/images/basic/partners/pkfSiblift.png"" alt="""">
-                </a>
-                <a href=""http://ppconsult.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/proektiPoddergka.png"" alt="""">
-                </a>
-                <a href=""https://www.ritmservice.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/ritmServis.png"" alt="""">
-                </a>
-                <a href=""https://sibsr.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/sibirskaiaStudiaRazrabotcikov.png"" alt="""">
-                </a>
-                <a href=""https://sigma-it.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/sigma.png"" alt="""">
-                </a>
-                <a href=""http://www.ooo-skb.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/kompleksnaiaBezopasnost.jpg"" alt="""">
-                </a>
-                <a href=""https://xn--80ab2achei.xn--p1ai/"" target=""_blank"">
-                    <img src=""/images/basic/partners/blankom.png"" alt="""">
-                </a>
-                <a href=""https://www.patrik.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/patrik.png"" alt="""">
-                </a>
-                <a href=""http://www.saturn-omsk.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/saturn.png"" alt="""">
-                </a>
-                <a href=""https://www.rosseti.ru/about/sites/?ELEMENT_ID=12370"" target=""_blank"">
-                    <img src=""/images/basic/partners/rossetiSibir.png"" alt="""">
-                </a>
-                <a href=""http://www.souzmash-omsk.ru/"" target=""_blank"">
-                    <img src=""/images/basic/partners/souzMashinostroiteleiRossii.png"" alt="""">
-                </a>
-                <a href=""http://www.ckba.net/"" target=""_blank"">
-                    <img src=""/images/basic/partners/ckba.png"" alt="""">
-                </a>
-            </div>
-        </div>
-        <section class=""container"">
-
-            <div class=""footer-top"">
-                <div class=""footer-top-item"">
-                    <h5 class=""footer-top-item-title"">
-                        приемная комиссия
-                    </h5>
-                    <div class=""footer-top-item-body"">
-                        <div>
-                            ул. Ленина, 24, Омск
-                        </div>
-                        <div>
-                            <a href=""tel:+8 (3812) 31 16 39"">
-                                8(3812)31-16-39
-                            </a>
-                        </div>
-                        <div>
-                            ПН-ПТ 8:00-18:00
-                        </div>
-                    </div>
-                </div>
-                <div class=""footer-top-item"">
-                    <h5 class=""footer-top-item-title"">
-                        учебная часть
-                    </h5>
-                    <div class=""footer-top-item-body"">
-                        <div>
-                            ул. Ленина, 24, Омск
-                        </div>
-                        <div>
-                            <a href=""tel:+8 (3812) 31 30 42"">
-                                8(3812)31-30-42
-                            </a>
-                        </div>
-                        <div>
-                            ПН-ПТ 7:30-19:30
-                        </div>
-                    </div>
-                </div>
-                <div class=""footer-top-item"">
-                    <h5 class=""footer-top-item-title"">
-                        приемная директора
-                    </h5>
-                    <div class=""footer-top-item-body"">
-                        <div>
-                            <a href=""tel:+8 (3812) 31 44 65"">
-                                8(3812)31-44-65
-                            </a>
-                        </div>
-                        <div>
-                            ПН-ПТ 8:00-17:00
-                        </div>
-                    </div>
-                </div>
-                <div class=""footer-top-item"">
-                    <h5 class=""footer-top-item-title"">
-                        отделения
-                    </h5>
-                    <div class=""footer-top-item-body"">
-                        <a href=""/contacts/#otdel-kadrov"">
-                            Отдел кадров
-                        </a>
-                        <a href=""/contacts/#uchebnaya-chast-2-pr-kosmicheskiy-14a"">
-                            Учебная часть №2 (пр. Космический, 14а)
-                        </a>
-                        <a href=""/contacts/#uchebnaya-chast-3-ul-b-khmelnitskogo-281a"">
-                            Учебная часть №3 (ул. Б. Хмельницкого, 281а)
-                        </a>
-                        <a href=""/contacts/#otdelenie-tekhnologiy-aerokosmicheskogo-proizvodstva"">
-                            Отделение технологий аэрокосмического производства
-                        </a>
-                        <a href=""/contacts/#otdelenie-elektromekhaniki-radiotekhniki-itekhnologii-svarki"">
-                            Отделение электромеханики, радиотехники и технологии сварки
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <div class=""footer-bottom"">
-            <div class=""container"">
-                <div class=""footer-bottom-row"">
-                    <div class=""footer-bottom-logo"">
-                        <img src=""/images/basic/logo.svg"" alt="""">
-                        <span class=""footer-bottom-logo-text"">
-                            Бюджетное профессиональное образовательное учреждение
-                            Омской области «Омский авиационный колледж имени Н.Е. Жуковского»
-                        </span>
-                    </div>
-                    <ul class=""footer-bottom-social"">
-                        <li>
-                            <a href=""https://vk.com/omaviat_2020"">
-                                <img class=""icon"" src=""/images/basic/socialLinks/vk.svg"" alt="""">
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""https://www.youtube.com/channel/UC-Ss6mzhYiKeGZaCBNyXo2w"">
-                                <img class=""icon"" src=""/images/basic/socialLinks/youtube.svg"" alt="""">
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""https://t.me/omaviatomsk2021"">
-                                <img class=""icon"" src=""/images/basic/socialLinks/telegram.svg"" alt="""">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class=""footer-bottom-row"">
-                    <ul class=""footer-bottom-pages"">
-                        <li>
-                            <a href='/timetable/Classes'>
-                                расписание
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""/parents/organizatsiya-uchebnogo-protsessa-v-kolledzhe/"">
-                                родителям
-                            </a>
-                        </li>
-                        <li>
-                            <a href="""">
-                                партнёры
-                            </a>
-                        </li>
-                        <li>
-                            <a href='/students/DistanceLearning'>
-                                студентам
-                            </a>
-                        </li>
-                        <li>
-                            <a href='/organizationInformation/CommonIntelligence'>
-                                колледж
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""https://help.oat.ru/"">
-                                техподдержка
-                            </a>
-                        </li>
-                        <li>
-                            <a href='/applicant/SelectionCommittee'>
-                                абитуриентам
-                            </a>
-                        </li>
-                        <li>
-                            <a href=""/contacts/"">
-                                контакты
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class=""copyright"">
-                    © 2023 ОМСКИЙ АВИАЦИОННЫЙ КОЛЛЕДЖ
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src=""/lib/jquery/dist/jquery.min.js""></script>
-    <script src=""/lib/bootstrap/dist/js/bootstrap.bundle.min.js""></script>
-    <script src=""/js/site.js?v=5h4792lZI1p1jcw0Sflh-vW9VR4bJFgNAyNDvSd18ME""></script>
-
-    
-
-<!-- Visual Studio Browser Link -->
-<script type=""text/javascript"" src=""/_vs/browserLink"" async=""async"" id=""__browserLink_initializationData"" data-requestId=""1051c4b24b3045858c9114c143f41ca0"" data-requestMappingFromServer=""false"" data-connectUrl=""http://localhost:58255/d3813661bd42407692e1b50257909e59/browserLink""></script>
-<!-- End Browser Link -->
-
-<script src=""/_framework/aspnetcore-browser-refresh.js""></script></body>
-</html>
-";
+					page.Footer()
+						.AlignCenter().PaddingBottom(20)
+						.Text(x =>
+						{
+							x.Span($"© {DateTime.UtcNow.Year} ОМСКИЙ АВИАЦИОННЫЙ КОЛЛЕДЖ").FontFamily("Arial").Bold().FontSize(10);
+						});
+				});
+			});
+			document.GeneratePdf(png.Replace(".png", ".pdf"));
+			
+		}
 
 
-        }
+		public static string SaveToPng(string path)
+		{
+			var svgDocument = SvgDocument.Open(path);
+			var bitmap = svgDocument.Draw();
+			bitmap.Save(path.Replace(".svg", ".png"), ImageFormat.Png);
+			return path.Replace(".svg", ".png");
+		}
 
 
-    }
+
+	}
+	static class SimpleExtension
+	{
+		public static void RCAndKCTable(this IContainer container)
+		{
+			container.Table(table =>
+			{
+				table.ColumnsDefinition(columns =>
+				{
+					columns.ConstantColumn(40);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+					columns.ConstantColumn(15);
+
+					columns.RelativeColumn(5);
+					columns.RelativeColumn(5);
+				});
+				var numbers = "03224643520000005201";
+				table.Cell().Border(1).AlignCenter().Text("Р/C").FontFamily("Arial");
+				foreach (var str in numbers)
+					table.Cell().Border(1).AlignCenter().Text(str.ToString()).FontFamily("Arial");
+				table.Cell().Row(2).Border(1).AlignCenter().Text("К/C").FontFamily("Arial");
+				numbers = "40102810245370000044";
+				foreach (var str in numbers)
+					table.Cell().Border(1).AlignCenter().Text(str.ToString()).FontFamily("Arial");
+			});
+		}
+
+		public static void AddBoardQr(this IContainer container, string name, string file)
+		{
+			container.Table(table =>
+			{
+				table.ColumnsDefinition(columns =>
+				{
+					columns.ConstantColumn(200);
+					columns.ConstantColumn(200);
+
+					columns.RelativeColumn(2);
+					columns.RelativeColumn(2);
+				});
+				table.Cell().Row(1).Padding(10).AlignCenter().Image(File.ReadAllBytes(file));
+				table.Cell().Row(2).BorderTop(1).PaddingLeft(2).Padding(20).PaddingBottom(100).AlignCenter().Text(name).FontFamily("Arial");
+			});
+		}
+
+	}
 }
