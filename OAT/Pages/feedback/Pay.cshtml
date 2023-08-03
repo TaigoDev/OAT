@@ -42,19 +42,44 @@
                 </select>
             </div>
             <div class="input-box">
-                <label for="number">
+                <label for="donation">
+                    Пожертвование на
+                </label>
+                <select id="donationt">
+                    <option value="Приобретение спортивного инвентаря">
+                        Приобретение спортивного инвентаря
+                    </option>
+                    <option value="Приобретение хозяйственного инвентаря">
+                        Приобретение хозяйственного инвентаря
+                    </option>
+                    <option value="Приобретение строительных материалов">
+                        Приобретение строительных материалов
+                    </option>
+                    <option value="Приобретение учебного оборудования и расходных материалов">
+                        Приобретение учебного оборудования и расходных материалов
+                    </option>
+                    <option value="Выполнение ремонтных работ">
+                        Выполнение ремонтных работ
+                    </option>
+                    <option value="Приобретение оргтехники и расходных материалов">
+                        Приобретение оргтехники и расходных материалов
+                    </option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label for="documentId">
                     Номер договора
                 </label>
                 <input id="documentId" type="text">
             </div>
             <div class="input-box">
-                <label for="date">
+                <label for="documentDate">
                     Дата договора
                 </label>
                 <input id="documentDate" type="date">
             </div>
             <div class="input-box">
-                <label for="student-fio">
+                <label for="studentFullName">
                     ФИО студента
                 </label>
                 <input id="studentFullName" type="text">
@@ -66,7 +91,7 @@
                 <input id="group" type="text">
             </div>
             <div class="input-box">
-                <label for="payer-fio">
+                <label for="FullName">
                     ФИО плательщика
                 </label>
                 <input id="FullName" type="text">
@@ -98,8 +123,6 @@
             </div>
             <button onclick="Upload();return false" class="customized">Сформировать квитанцию</button>
         </form>
-
-
 
     </section>
     <aside id="sidebar" class="sidebar">

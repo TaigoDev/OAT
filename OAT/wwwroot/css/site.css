@@ -505,6 +505,7 @@ section.centered .section-title{
 .input-box label {
 	font-weight: 500;
     font-size: 1.1rem;
+	letter-spacing: 0.02em;
 }
 
 .input-box input, .input-box textarea, .input-box select{
@@ -513,8 +514,13 @@ section.centered .section-title{
 	border-radius: 7px;
 	background-color: hsl(0, 0%, 20%);
 	color: var(--light-white);
+	letter-spacing: 0.075em;
 	opacity: .95;
 	transition: opacity 300ms, border-color 300ms;
+}
+
+.input-box textarea{
+	letter-spacing: 0.05em;
 }
 
 .input-box input:focus, .input-box textarea:focus{

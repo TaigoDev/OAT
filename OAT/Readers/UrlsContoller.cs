@@ -54,7 +54,7 @@ public class UrlsContoller
             new IPage("sveden/grants", "organizationInformation/StudentSupport"),
             new IPage("sveden/terror/index.php", "organizationInformation/Terrorism"),
             new IPage("sveden/vacancy", "organizationInformation/Vacancies"),
-            // for applicants
+            // applicants
             new IPage("abitur/priemnaya-komissiya", "applicant/SelectionCommittee"),
             new IPage("abitur/spetsialnosti", "applicant/SpecialtiesAndProfessions"),
             new IPage("abitur/podgotovitelnye-kursy", "applicant/TrainingCourses"),
@@ -64,14 +64,14 @@ public class UrlsContoller
             new IPage("abitur/sertifikatsiya-d-link-cisco", "applicant/DLinkCisco"),
             new IPage("abitur/spetsialnosti-ochno-zaochnogo-vechernego-otdeleniya/", "applicant/SpecialtiesPartTimeEvening"),
             new IPage("abitur/prof.php", "applicant/CareerGuidanceEvents"),
-            // for students
+            // students
             new IPage("students/distant", "students/DistanceFullTimeLearning"),
             new IPage("students/distantsionnoe-obuchenie", "students/DistanceLearning"),
             new IPage("students/sport/index.php", "students/SportClub"),
             new IPage("sveden/Employment/Employment.php", "students/AlumniEmploymentCenterOmaviat"),
             new IPage("sveden/Employment/center.php", "students/AlumniEmploymentCenterOmsk"),
             new IPage("parents/pravila-vnutrennego-rasporyadka-dnya-studentov", "students/DailyRoutineRules"),
-            // for parents
+            // parents
 
 
             // timetable
@@ -82,9 +82,12 @@ public class UrlsContoller
             new IPage("students/raspisanie/Session", "timetable/Session"),
             new IPage("students/raspisanie/GIA/index.php", "timetable/GIA"),
             // feedback
-
-            //PROJECTS AND EVENTS
-            //professionalitet
+            new IPage("contacts/kak-dobratsya", "feedback/Location"),
+            new IPage("contacts/", "feedback/Contacts"),
+            new IPage("contacts/vopros-otvet/", "feedback/QuestionAnswer"),
+            new IPage("pay/", "feedback/Pay"),
+            // PROJECTS AND EVENTS
+            // professionalitet
 
             // limitation
             new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),

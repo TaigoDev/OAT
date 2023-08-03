@@ -16,6 +16,7 @@
           "Newtonsoft.Json": "13.0.3",
           "QuestPDF": "2022.12.6",
           "RepoDb.MySqlConnector": "1.13.1",
+          "SkiaSharp": "2.88.3",
           "SkiaSharp.NativeAssets.Linux": "2.88.3",
           "SkiaSharp.NativeAssets.Linux.NoDependencies": "2.88.3",
           "Svg": "3.4.4",

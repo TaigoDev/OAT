@@ -4,3 +4,7 @@
 	row-gap: 10px;
 	max-width: min(450px, 100%);
 }
+
+.hide{
+	display: none;
+}
