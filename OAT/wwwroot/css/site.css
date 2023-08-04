@@ -158,7 +158,7 @@ th {
 
 section.centered,
 article.centered{
-	width: min(95%, 1200px);
+	width: min(95%, 1150px);
 	margin: 0 auto;
 }
 
