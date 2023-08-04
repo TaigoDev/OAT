@@ -19,7 +19,7 @@
         @if (ProfNewsReader.news.Count() != 0 && ProfNewsReader.pages.Count() >= id)
         {
 
-            <div class="news-list" style="max-width: 600px;">
+            <div class="news-list" style="max-width: none;">
                 @foreach (var news in ProfNewsReader.pages.ToList()[id - 1])
                 {
                     var photos = news.photos.toObjectJC<List<string>>();
