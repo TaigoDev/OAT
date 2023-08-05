@@ -1,0 +1,410 @@
+﻿@page
+@model LocationModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Печать";
+}
+
+<style>
+
+    h3, h4{
+        text-align: center;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-spacing: 0px;
+    }
+
+    td{
+        vertical-align: top;
+    }
+
+    img{
+        width: 250px;
+        height: 250px;
+    }
+
+    button {
+        position: relative;
+        display: block;
+        padding: 10px;
+        margin: 20px auto;
+        min-width: 200px;
+        border: 4px solid transparent;
+        border-radius: 15px;
+        background-color: hsl(0, 0%, 20%);
+        color: var(--light-white);
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        opacity: 0.95;
+        overflow: hidden;
+        transition: border-color 300ms, opacity 300ms;
+        color: white;
+    }
+
+    button:hover {
+        border-color: rgb(20, 20, 20);
+    }
+</style>
+
+<div style="max-width: 950px; margin: 10px auto;">
+    <h3 style="text-align: center;">
+        ВНИМАТЕЛЬНО ПРОВЕРЬТЕ СВОИ ДАННЫЕ, КВИТАНЦИЯ СФОРМИРОВАНА АВТОМАТИЧЕСКИ
+    </h3>
+    <table>
+        <tr>
+            <td style="width: 250px; height: 250px;">
+                <img src="" alt="qr код">
+            </td>
+            <td rowspan="2">
+                Омский авиационный колледж имени Н.Е. Жуковского
+                <br>
+                <br>
+                Получатель: Министерство финансов Омской области (БПОУ "Омавиат" л/c 010220608)
+                <br>
+                <b>ИНН</b>..... <b>КПП</b>..... <b>БИК</b>......<b>КБК</b>......<b>ОКТМО</b>
+                <table>
+                    <tr>
+                        <td>
+                            Р/С
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            К/С
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                    </tr>
+                </table>
+                в Отделение Омск Банка России//УФК по Омской области г. Омск
+                <br>
+                Номер лицевого счёта: 010220608
+                <br>
+                <br>
+                <b>Назначение платежа:</b>
+                <br>
+                Добровольное пожертвование на приобретение оргтехники и расходных материалов
+                <br>
+                Суммма: <b>1</b> руб.
+                <br>
+                ФИО (плательщик): <u>Семён Александрович Носков</u>
+                <br>
+                <br>
+                С условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен
+                <br>
+                <br>
+                Подпись:____________________ дата "__" _________ 20___г.
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+                <h4>ИЗВЕЩЕНИЕ</h4>
+                <br>
+            </td>
+        </tr>
+
+
+
+
+
+        <tr>
+            <td style="width: 250px; height: 250px;">
+                <img src="" alt="qr код">
+            </td>
+            <td rowspan="2">
+                Омский авиационный колледж имени Н.Е. Жуковского
+                <br>
+                <br>
+                Получатель: Министерство финансов Омской области (БПОУ "Омавиат" л/c 010220608)
+                <br>
+                <b>ИНН</b>..... <b>КПП</b>..... <b>БИК</b>......<b>КБК</b>......<b>ОКТМО</b>
+                <table>
+                    <tr>
+                        <td>
+                            Р/С
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            К/С
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                    </tr>
+                </table>
+                в Отделение Омск Банка России//УФК по Омской области г. Омск
+                <br>
+                Номер лицевого счёта: 010220608
+                <br>
+                <br>
+                <b>Назначение платежа:</b>
+                <br>
+                Добровольное пожертвование на приобретение оргтехники и расходных материалов
+                <br>
+                Суммма: <b>1</b> руб.
+                <br>
+                ФИО (плательщик): <u>Семён Александрович Носков</u>
+                <br>
+                <br>
+                С условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен
+                <br>
+                <br>
+                Подпись:____________________ дата "__" _________ 20___г.
+                <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+                <h4>КВИТАНЦИЯ</h4>
+                <br>
+            </td>
+        </tr>
+    </table>
+
+    <button onclick="window.print()">
+        Print
+    </button>
+</div>

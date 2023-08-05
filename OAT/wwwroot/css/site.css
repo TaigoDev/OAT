@@ -158,7 +158,7 @@ th {
 
 section.centered,
 article.centered{
-	width: min(95%, 1150px);
+	width: min(95vw, 1150px);
 	margin: 0 auto;
 }
 
@@ -665,6 +665,7 @@ img.customized {
 video.customized {
 	display: block;
 	margin: 0px auto 20px auto;
+	min-width: min(400px, 100%);
 	max-width: 550px;
 	border-radius: 15px;
 }
