@@ -9,6 +9,12 @@
 	width: min(100%, 350px);
 }
 
+@property --akcent {
+	syntax: "<color>";
+	inherits: false;
+	initial-value: #000;
+}
+
 .workshops-list-item {
 	display: flex;
 	column-gap: 30px;
@@ -17,9 +23,15 @@
 	padding: 20px;
 	border: 3px solid var(--matte-color);
 	border-radius: 10px;
-	background-image: radial-gradient(#3660ffc7, #267e9be0);
+	background: radial-gradient(#3660ffc7, var(--akcent));
 	font-weight: 500;
 	color: var(--light-white);
+	--akcent: #207e9be0;
+	transition: --akcent 500ms;
+}
+
+.workshops-list-item:hover{
+	--akcent: #129dbae0;
 }
 
 .workshops-list-item img{

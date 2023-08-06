@@ -189,6 +189,24 @@
 	color: var(--light-white);
 }
 
+.card-item a::after{
+	content: "";
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	width: 50%;
+	translate: -50% -75%;
+	aspect-ratio: 1;
+	background: center/cover url(../images/mainPage/planeFront.svg);
+	opacity: 0;
+	transition: opacity 750ms ease-in-out, translate 750ms ease-in-out;
+}
+
+.card-item:hover a::after{
+	opacity: 0.25;
+	translate: -50% -50%;
+}
+
 .card-item-header {
 	display: flex;
 	flex-direction: column;
