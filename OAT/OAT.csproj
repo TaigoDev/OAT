@@ -58,6 +58,7 @@
 	  <Content Remove="wwwroot\js\mysql.js" />
 	  <Content Remove="wwwroot\js\panel.js" />
 	  <Content Remove="wwwroot\js\pay.js" />
+	  <Content Remove="wwwroot\js\pdf.js" />
 	  <Content Remove="wwwroot\js\schedule.js" />
 	  <Content Remove="wwwroot\js\users.js" />
 	  <Content Remove="wwwroot\js\yandex_all.js" />
@@ -66,7 +67,6 @@
 	  <_ContentIncludedByDefault Remove="wwwroot\js\pay.js" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="AspNetCore.ReCaptcha" Version="1.7.0" />
 	  <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" Version="2.8.2.3" />
 	  <PackageReference Include="HtmlAgilityPack" Version="1.11.48" />
 	  <PackageReference Include="MySqlConnector" Version="2.2.6" />

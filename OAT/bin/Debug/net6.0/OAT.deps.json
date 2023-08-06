@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v6.0": {
       "OAT/1.0.0": {
         "dependencies": {
-          "AspNetCore.ReCaptcha": "1.7.0",
           "HarfBuzzSharp.NativeAssets.Linux": "2.8.2.3",
           "HtmlAgilityPack": "1.11.48",
           "MySqlConnector": "2.2.6",
@@ -26,22 +25,6 @@
         },
         "runtime": {
           "OAT.dll": {}
-        }
-      },
-      "AspNetCore.ReCaptcha/1.7.0": {
-        "dependencies": {
-          "Microsoft.Extensions.Options": "3.1.0"
-        },
-        "runtime": {
-          "lib/net6.0/AspNetCore.ReCaptcha.dll": {
-            "assemblyVersion": "1.7.0.0",
-            "fileVersion": "1.7.0.0"
-          }
-        },
-        "resources": {
-          "lib/net6.0/nl/AspNetCore.ReCaptcha.resources.dll": {
-            "locale": "nl"
-          }
         }
       },
       "ExCSS/4.1.4": {
@@ -144,14 +127,6 @@
         }
       },
       "Microsoft.CSharp/4.7.0": {},
-      "Microsoft.Extensions.DependencyInjection.Abstractions/3.1.0": {},
-      "Microsoft.Extensions.Options/3.1.0": {
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.0",
-          "Microsoft.Extensions.Primitives": "3.1.0"
-        }
-      },
-      "Microsoft.Extensions.Primitives/3.1.0": {},
       "Microsoft.NETCore.Platforms/5.0.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Microsoft.Win32.Primitives/4.3.0": {
@@ -1304,13 +1279,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AspNetCore.ReCaptcha/1.7.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-lDuXXZUIB2kNh3c3MYxB2nXlAw2ixJdZagZvkrpZhhKXEdcmIMMWLpH3FZY28ls0An/U+vBbebTpI+kBx/z3YA==",
-      "path": "aspnetcore.recaptcha/1.7.0",
-      "hashPath": "aspnetcore.recaptcha.1.7.0.nupkg.sha512"
-    },
     "ExCSS/4.1.4": {
       "type": "package",
       "serviceable": true,
@@ -1373,27 +1341,6 @@
       "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
       "path": "microsoft.csharp/4.7.0",
       "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
-    },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/3.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-44rDtOf1JXXAFpNT2EXMExaDm/4OJ2RXOL9i9lE4bK427nzC7Exphv+beB6IgluyE2GIoo8zezTStMXI7MQ8WA==",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/3.1.0",
-      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.3.1.0.nupkg.sha512"
-    },
-    "Microsoft.Extensions.Options/3.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-9b6JHY7TAXrSfZ6EEGf+j8XnqKIiMPErfmaNXhJYSCb+BUW2H4RtzkNJvwLJzwgzqBP0wtTjyA6Uw4BPPdmkMw==",
-      "path": "microsoft.extensions.options/3.1.0",
-      "hashPath": "microsoft.extensions.options.3.1.0.nupkg.sha512"
-    },
-    "Microsoft.Extensions.Primitives/3.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-LEKAnX7lhUhSoIc2XraCTK3M4IU/LdVUzCe464Sa4+7F4ZJuXHHRzZli2mDbiT4xzAZhgqXbvfnb5+CNDcQFfg==",
-      "path": "microsoft.extensions.primitives/3.1.0",
-      "hashPath": "microsoft.extensions.primitives.3.1.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/5.0.0": {
       "type": "package",

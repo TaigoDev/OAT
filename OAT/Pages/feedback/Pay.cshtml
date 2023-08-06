@@ -5,8 +5,13 @@
 }
 
 <link rel="stylesheet" href="~/css/feedback/pay.css" asp-append-version="true">
-
-<div class="container content-page">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="~/js/pdf.js"></script>
+<script type="text/javascript">
+    var element = document.getElementById('#page');
+    html2pdf(element);
+</script>
+<div class="container content-page" id="page">
     <section class="content">
         <h2 class="section-title">
             Электронные платежи
@@ -42,44 +47,19 @@
                 </select>
             </div>
             <div class="input-box">
-                <label for="donation">
-                    Пожертвование на
-                </label>
-                <select id="donationt">
-                    <option value="Приобретение спортивного инвентаря">
-                        Приобретение спортивного инвентаря
-                    </option>
-                    <option value="Приобретение хозяйственного инвентаря">
-                        Приобретение хозяйственного инвентаря
-                    </option>
-                    <option value="Приобретение строительных материалов">
-                        Приобретение строительных материалов
-                    </option>
-                    <option value="Приобретение учебного оборудования и расходных материалов">
-                        Приобретение учебного оборудования и расходных материалов
-                    </option>
-                    <option value="Выполнение ремонтных работ">
-                        Выполнение ремонтных работ
-                    </option>
-                    <option value="Приобретение оргтехники и расходных материалов">
-                        Приобретение оргтехники и расходных материалов
-                    </option>
-                </select>
-            </div>
-            <div class="input-box">
-                <label for="documentId">
+                <label for="number">
                     Номер договора
                 </label>
                 <input id="documentId" type="text">
             </div>
             <div class="input-box">
-                <label for="documentDate">
+                <label for="date">
                     Дата договора
                 </label>
                 <input id="documentDate" type="date">
             </div>
             <div class="input-box">
-                <label for="studentFullName">
+                <label for="student-fio">
                     ФИО студента
                 </label>
                 <input id="studentFullName" type="text">
@@ -91,7 +71,7 @@
                 <input id="group" type="text">
             </div>
             <div class="input-box">
-                <label for="FullName">
+                <label for="payer-fio">
                     ФИО плательщика
                 </label>
                 <input id="FullName" type="text">
@@ -122,8 +102,12 @@
                 </label>
             </div>
             <button onclick="Upload();return false" class="customized">Сформировать квитанцию</button>
-            <!--<button class="customized" onclick="window.print()">Print</button>-->
+            <a href="javascript:window.print()">Click to Print This Page</a>
+
+
         </form>
+
+
 
     </section>
     <aside id="sidebar" class="sidebar">

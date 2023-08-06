@@ -1,4 +1,6 @@
 ﻿function Upload() {
+    html2pdf(document.getElementById('#page'));
+
     var formData = new FormData();
     var purpose = $("#appointment").find(":selected").val();
     if (purpose == "Добровольное пожертвование") {
@@ -61,4 +63,3 @@
         });
     }
 }
-
