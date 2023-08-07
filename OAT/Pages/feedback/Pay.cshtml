@@ -3,26 +3,18 @@
 @{
     ViewData["Title"] = "Электронные платежи";
 }
-
 <link rel="stylesheet" href="~/css/feedback/pay.css" asp-append-version="true">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="~/js/pdf.js"></script>
-<script type="text/javascript">
-    var element = document.getElementById('#page');
-    html2pdf(element);
-</script>
-<div class="container content-page" id="page">
+<div class="container content-page">
     <section class="content">
         <h2 class="section-title">
             Электронные платежи
         </h2>
-
         <form class="pay-form">
             <div class="input-box">
                 <label for="appointment">
                     Назначение платежа
                 </label>
-                <select id="appointment">
+                <select id="appointment" onchange="onSelectPurpose()">
                     <option value="Платное обучение">
                         Платное обучение
                     </option>
@@ -41,37 +33,62 @@
                     <option value="Подготовительные курсы">
                         Подготовительные курсы
                     </option>
-                    <option value="Профессиональная переподготовка">
+                    <option value="Профессиональная переподготовка" >
                         Профессиональная переподготовка
                     </option>
                 </select>
             </div>
-            <div class="input-box">
-                <label for="number">
+            <div class="input-box" id="container-donationt">
+                <label for="donation">
+                    Пожертвование на
+                </label>
+                <select id="donationt">
+                    <option value="Приобретение спортивного инвентаря">
+                        Приобретение спортивного инвентаря
+                    </option>
+                    <option value="Приобретение хозяйственного инвентаря">
+                        Приобретение хозяйственного инвентаря
+                    </option>
+                    <option value="Приобретение строительных материалов">
+                        Приобретение строительных материалов
+                    </option>
+                    <option value="Приобретение учебного оборудования и расходных материалов">
+                        Приобретение учебного оборудования и расходных материалов
+                    </option>
+                    <option value="Выполнение ремонтных работ">
+                        Выполнение ремонтных работ
+                    </option>
+                    <option value="Приобретение оргтехники и расходных материалов">
+                        Приобретение оргтехники и расходных материалов
+                    </option>
+                </select>
+            </div>
+            <div class="input-box" id="container-documentId">
+                <label for="documentId">
                     Номер договора
                 </label>
                 <input id="documentId" type="text">
             </div>
-            <div class="input-box">
-                <label for="date">
+            <div class="input-box" id="container-documentDate">
+                <label for="documentDate">
                     Дата договора
                 </label>
                 <input id="documentDate" type="date">
             </div>
-            <div class="input-box">
-                <label for="student-fio">
+            <div class="input-box" id="container-studentFullName">
+                <label for="studentFullName">
                     ФИО студента
                 </label>
                 <input id="studentFullName" type="text">
             </div>
-            <div class="input-box">
+            <div class="input-box" id="container-group">
                 <label for="group">
                     Группа обучения
                 </label>
                 <input id="group" type="text">
             </div>
             <div class="input-box">
-                <label for="payer-fio">
+                <label for="FullName">
                     ФИО плательщика
                 </label>
                 <input id="FullName" type="text">
@@ -94,20 +111,14 @@
                 </label>
                 <input id="cost" type="number">
             </div>
-
             <div>
                 <input type="checkbox" id="agreement" value="agreement" />
                 <label for="agreement">
                     Устанавливая флажок внутри данного чек-бокса вы даете согласие на обработку своих персональных данных.
                 </label>
             </div>
-            <button onclick="Upload();return false" class="customized">Сформировать квитанцию</button>
-            <a href="javascript:window.print()">Click to Print This Page</a>
-
-
+            <button onclick="RedirectToPrint();return false" class="customized">Сформировать квитанцию</button>
         </form>
-
-
 
     </section>
     <aside id="sidebar" class="sidebar">
@@ -145,4 +156,8 @@
         </nav>
     </aside>
 </div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="/js/pay.js" charset="utf-8"></script>
+<aside id="message-fail-checkbox" class="panel-message">❌ Подтвердите обработку данных </aside>
+<aside id="message-fail-fields" class="panel-message">❌ Заполните все поля! </aside>
+<aside id="message-fail-contract" class="panel-message">❌ Договор не найден, проверьте данные </aside>

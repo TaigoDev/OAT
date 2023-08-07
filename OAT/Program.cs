@@ -59,6 +59,7 @@ void SetupControllers()
             ProfNewsReader.init,
             ScheduleReader.init,
             CommandsController.init,
+            ContractReader.init,
             CreateAdminAccount);
     }
     catch (Exception ex)

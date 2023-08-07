@@ -27,7 +27,9 @@ namespace AspNetCore.ReCaptcha
             {
                 Proxy = proxy,
                
-            };
+            }; 
+            httpClientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+
             _client = new HttpClient(handler: httpClientHandler, disposeHandler: true);
             _client.BaseAddress = client.BaseAddress;
             _logger = logger;

@@ -135,3 +135,11 @@ public class Subgroup
     public string cabinet { get; set; }
 }
 
+public class Contract
+{
+    public string NomKontrakt { get; set; }
+    public string DataKontrakt { get; set; }
+    public string FullName { get; set; }
+    public string Gruppa { get; set; }
+    public string Zakazchik { get; set; }
+}
