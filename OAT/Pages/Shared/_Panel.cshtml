@@ -18,14 +18,14 @@
                     <img class="icon" src="~/images/panel/news.svg" alt="">
                 </a>
             </li>
-            <li>
+@*            <li>
                 <a href="">
                     <span>
                         Answers
                     </span>
                     <img class="icon" src="~/images/panel/answers.svg" alt="">
                 </a>
-            </li>
+            </li>*@
             @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin))
             {
                 <li>
@@ -45,14 +45,26 @@
                 </a>
             </li>
             }
-            <li>
-                <a href="schedule">
-                    <span>
-                        Timetable
-                    </span>
-                    <img class="icon" src="~/images/panel/timetable.svg" alt="">
-                </a>
-            </li>
+            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin, Enums.Role.schedule_manager))
+            {
+                <li>
+                    <a href="schedule">
+                        <span>
+                            Timetable
+                        </span>
+                        <img class="icon" src="~/images/panel/timetable.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a href="files">
+                        <span>
+                            Files
+                        </span>
+                        <img class="icon" src="~/images/panel/timetable.svg" alt="">
+                    </a>
+                </li>
+            }
+
             <li>
                 <a href="/">
                     <span>

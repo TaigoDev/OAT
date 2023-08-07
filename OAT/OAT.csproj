@@ -55,6 +55,7 @@
 	  <Content Remove="wwwroot\images\basic\duck.svg" />
 	  <Content Remove="wwwroot\images\panel\exit.svg" />
 	  <Content Remove="wwwroot\js\allNews.js" />
+	  <Content Remove="wwwroot\js\files.js" />
 	  <Content Remove="wwwroot\js\mysql.js" />
 	  <Content Remove="wwwroot\js\panel.js" />
 	  <Content Remove="wwwroot\js\pay.js" />
@@ -67,17 +68,11 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="CsvHelper" Version="30.0.1" />
-	  <PackageReference Include="HarfBuzzSharp.NativeAssets.Linux" Version="2.8.2.3" />
-	  <PackageReference Include="HtmlAgilityPack" Version="1.11.48" />
+	  <PackageReference Include="HtmlAgilityPack" Version="1.11.51" />
 	  <PackageReference Include="MySqlConnector" Version="2.2.6" />
 	  <PackageReference Include="Net.Codecrete.QrCodeGenerator" Version="2.0.3" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-	  <PackageReference Include="QuestPDF" Version="2022.12.6" />
 	  <PackageReference Include="RepoDb.MySqlConnector" Version="1.13.1" />
-	  <PackageReference Include="SkiaSharp" Version="2.88.3" />
-	  <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.3" />
-	  <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.3" />
-	  <PackageReference Include="Svg" Version="3.4.4" />
 	  <PackageReference Include="Telegram.Bot" Version="19.0.0" />
 	  <PackageReference Include="Telegram.Bot.Enforcer" Version="13.0.13" />
 	  <PackageReference Include="YamlDotNet" Version="13.1.1" />

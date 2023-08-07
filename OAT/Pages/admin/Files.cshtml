@@ -1,0 +1,120 @@
+﻿@page
+@model OAT.Pages.admin.FilesModel
+@{
+    Layout = "_Panel";
+    ViewData["Title"] = "Управление файлами";
+
+}
+<section class="container">
+
+    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+        <label for="news" class="panel-form-title">
+            Управление изменением расписания
+        </label>
+        <div class="input-box">
+            <label for="user-role">
+                Корпус
+            </label>
+            <select id="corpus">
+                <option value="b1">
+                    Ул. Ленина, 24
+                </option>
+                <option value="b2">
+                    Б. Хмельницкого, 281А
+                </option>
+                <option value="b3">
+                    Пр. Космический, 14А
+                </option>
+                <option value="b4">
+                    Ул. Волховстроя, 5
+                </option>
+            </select>
+        </div>
+        <div class="input-box">
+            <label for="images">
+                Файл
+            </label>
+            <input type="file" name="postedFiles" id="files-corpus" name="files" accept=".xls">
+        </div>
+        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadScheduleChanges('files-corpus');return false" multiple>
+            Обновить
+        </button>
+    </form>
+  
+    <br/>
+    <br/>
+    <br/>
+    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+        
+        <label for="news" class="panel-form-title">
+            Документы сессий
+        </label>
+        <div class="input-box">
+            <label for="user-role">
+                Корпус
+            </label>
+            <select id="user-role">
+                <option value="b1">
+                    Ул. Ленина, 24
+                </option>
+                <option value="b2">
+                    Б. Хмельницкого, 281А
+                </option>
+                <option value="b3">
+                    Пр. Космический, 14А
+                </option>
+                <option value="b4">
+                    Ул. Волховстроя, 5
+                </option>
+            </select>
+        </div>
+        <div class="input-box">
+            <label for="images">
+                Файл
+            </label>
+            <input type="file" name="postedFiles" id="files-ul_lenina_24" name="files" accept=".xml">
+        </div>
+        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('ul_lenina_24', 'files-ul_lenina_24');return false" multiple>
+            Добавить
+        </button>
+    </form>
+    <table class="customized panel-table">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Управление
+                </th>
+            </tr>
+        </thead>
+        @*        @foreach (var news in NewsReader.News)
+        {
+        <tbody id="@news.id">
+        <tr>
+        <td>
+        @news.id
+        </td>
+        <td>
+        @news.title
+        </td>
+        <td>
+        @news.date
+        </td>
+        <td>
+        <button onclick="DeleteNews(@news.id); return false" class="panel-table-button">удалить</button>
+        </td>
+        </tr>
+        </tbody>
+        }*@
+    </table>
+
+</section>
+<script type="text/javascript" src="/js/files.js" charset="utf-8"></script>
+<aside id="message-success" class="panel-message">👌 Расписание успешно обновлено 👌</aside>
+<aside id="message-fail-auth" class="panel-message">❌ Cессия истекла</aside>
+<aside id="message-fail" class="panel-message">❌ Ошибка при обновлении расписания. Скорее всего файл не .xls</aside>

@@ -1,9 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages.admin
 {
-    [AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter, Enums.Role.schedule_manager)]
-    public class ScheduleModel : PageModel
+    public class FilesModel : PageModel
     {
         public void OnGet()
         {

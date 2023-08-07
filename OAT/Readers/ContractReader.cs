@@ -20,7 +20,7 @@ namespace OAT.Readers
             contracts = csv.GetRecords<Contract>().ToList();
         }
 
-        public static bool IsContract(Func<Contract, bool> predicate) => 
+        public static bool IsContract(Func<Contract, bool> predicate) =>
             contracts.Where(predicate).Any();
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -31,7 +30,7 @@ namespace AspNetCore.ReCaptcha
         /// <param name="expiredCallback">Google ReCaptcha expired callback method. Used in v2 ReCaptcha.</param>
         /// <param name="autoTheme">Indicates whether the theme is automatically set to 'dark' based on the user's system settings.</param>
         /// <returns></returns>
-        public static IHtmlContent ReCaptchaV2(Uri baseUrl, string siteKey, string size, string theme, string language, 
+        public static IHtmlContent ReCaptchaV2(Uri baseUrl, string siteKey, string size, string theme, string language,
             string callback, string errorCallback, string expiredCallback, bool autoTheme = false)
         {
             var content = new HtmlContentBuilder();

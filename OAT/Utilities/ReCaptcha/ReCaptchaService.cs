@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Options;
 using System.Net;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace AspNetCore.ReCaptcha
 {
@@ -26,8 +22,8 @@ namespace AspNetCore.ReCaptcha
             var httpClientHandler = new HttpClientHandler
             {
                 Proxy = proxy,
-               
-            }; 
+
+            };
             httpClientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
             _client = new HttpClient(handler: httpClientHandler, disposeHandler: true);

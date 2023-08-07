@@ -3,7 +3,7 @@ using OAT.Readers;
 
 namespace OAT.Controllers
 {
-    [AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter, Enums.Role.manager)]
+    [AuthorizeRoles(Enums.Role.admin, Enums.Role.schedule_manager)]
     public class SchedulePostControllers : Controller
     {
 

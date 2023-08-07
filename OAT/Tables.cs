@@ -94,18 +94,16 @@ namespace Recovery.Tables
 
 public static class Enums
 {
-    public enum Role { admin, reporter, manager }
 
-    public static string GetRoleList(params Role[] roles)
-    {
-        var list = string.Empty;
-        foreach (var role in roles)
-            if (role != roles[roles.Length - 1])
-                list += $"{role},";
-            else
-                list += role.ToString();
-        return list;
-    }
+    /*
+    admin - все ниже, а также управление пользователями и MySql
+    reporter - новости, новости професионалитета 
+    schedule_manager - расписание, изменение расписания, документы сессии
+     */
+
+    public enum Role { admin, reporter, schedule_manager }
+
+
 }
 public class AuthorizeRolesAttribute : AuthorizeAttribute
 {

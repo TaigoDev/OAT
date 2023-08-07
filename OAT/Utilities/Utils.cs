@@ -208,6 +208,13 @@ StringSplitOptions options = StringSplitOptions.None)
         User.Identities.ToList()[0].Claims.ToList()[1].Value;
     public static bool IsRole(this ClaimsPrincipal User, Enums.Role role) =>
         User.Identities.ToList()[0].Claims.ToList()[2].Value == role.ToString();
+    public static bool IsRole(this ClaimsPrincipal User, params Enums.Role[] roles)
+    {
+        foreach (var role in roles)
+            if (User.IsRole(role))
+                return true;
+        return false;
+    }
 
     public static string UserIP(this HttpContext context) =>
         !string.IsNullOrWhiteSpace(context.Request.Headers["CF-Connecting-IP"]) ?

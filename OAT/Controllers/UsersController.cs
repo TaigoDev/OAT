@@ -27,7 +27,7 @@ namespace OAT.Controllers
                 else if (role == "Администратор")
                     role = Enums.Role.admin.ToString();
                 else
-                    role = Enums.Role.manager.ToString();
+                    role = Enums.Role.schedule_manager.ToString();
 
                 await connection.InsertAsync(new users(Fullname, username, Utils.sha256_hash(password), role));
                 Logger.Info($"Пользователь {User.Username()} добавил нового пользователя {Fullname} c ником {username} и ролью {role}");

@@ -36,7 +36,7 @@ namespace OAT.Pages.feedback
                     sendTo = "";
                     break;
                 default:
-                    sendTo = "";
+                    sendTo = "post@oat.ru";
                     break;
             }
 

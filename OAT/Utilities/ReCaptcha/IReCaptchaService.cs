@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace AspNetCore.ReCaptcha
+﻿namespace AspNetCore.ReCaptcha
 {
     public interface IReCaptchaService
     {

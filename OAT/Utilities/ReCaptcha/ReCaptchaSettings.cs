@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.Localization;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.Extensions.Localization;
 
 namespace AspNetCore.ReCaptcha
 {

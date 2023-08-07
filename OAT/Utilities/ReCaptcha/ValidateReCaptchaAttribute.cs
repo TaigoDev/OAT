@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Resources;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using System.Diagnostics.CodeAnalysis;
+using System.Resources;
 
 namespace AspNetCore.ReCaptcha
 {
@@ -65,7 +61,7 @@ namespace AspNetCore.ReCaptcha
             {
                 throw new ArgumentNullException(nameof(reCaptchaSettingsSnapshot));
             }
-            
+
             _reCaptchaSettings = reCaptchaSettingsSnapshot.Value;
         }
 
@@ -109,7 +105,7 @@ namespace AspNetCore.ReCaptcha
                 // Nothing to do - reCAPTCHA is not enabled / enforced.
                 return;
             }
-            
+
             if (!context.HttpContext.Request.HasFormContentType)
             {
                 context.ModelState.AddModelError("", GetErrorMessage(context));
