@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using CsvHelper.Configuration;
 using System.Globalization;
 
 namespace OAT.Readers
@@ -15,8 +16,11 @@ namespace OAT.Readers
                 Logger.Warning("Файл database.csv не найден!");
                 return;
             }
+            var config = new CsvConfiguration(CultureInfo.CurrentCulture) { Delimiter = ";" };
+
+
             using var reader = new StreamReader(path);
-            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+            using var csv = new CsvReader(reader, config);
             contracts = csv.GetRecords<Contract>().ToList();
         }
 

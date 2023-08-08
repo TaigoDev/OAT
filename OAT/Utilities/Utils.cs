@@ -246,7 +246,7 @@ public class RunModules
             }
             catch (Exception ex)
             {
-                Logger.ErrorWithCatch($"Ошибка загрузки модуля {module.Method.Name}. Продолжаю запуск...\n\nОшибка: {ex}");
+                Logger.ErrorWithCatch($"Ошибка загрузки модуля {module.Method.ReflectedType!.Name}. Продолжаю запуск...\n\nОшибка: {ex}");
             }
         }
     }
