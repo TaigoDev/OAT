@@ -1065,6 +1065,10 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	font-size: 0.7rem;
 }
 
+.document-item-body::first-letter{
+	text-transform: uppercase;
+}
+
 .document-item:hover {
 	border-color: var(--matte-color);
 	border-color: hsl(223.87deg 6.48% 20.18%); /* #1f67ae */
