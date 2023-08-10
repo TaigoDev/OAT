@@ -48,7 +48,8 @@ void SetupControllers()
             Path.Combine(Directory.GetCurrentDirectory(), "pay"),
             Logger.path,
             Logger.path_PreventedAttempts);
-
+        
+        /* WARNING: Not support async methods */
         RunModules.StartModules(
             OAT.Utilities.Telegram.init,
             UrlsContoller.init,
