@@ -8,12 +8,12 @@ public static class ProxyController
     public static async Task DisplayBitrix(this HttpContext context, Func<Task> next)
     {
         var path = context.Request.Path.Value;
-        var BaseUrl = $"{config.BaseUrl}{path}";
+        var BaseUrl = $"{config.BaseUrl}{path}{context.Request.QueryString.Value}";
         HttpClientHandler clientHandler = new HttpClientHandler();
         clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
         var client = new HttpClient(clientHandler);
 
-        if (IsImage(path, ".PNG", ".png", ".JPG", ".jpg", ".JPEG", ".jpg", ".PDF", ".pdf"))
+        if (IsImage(path, ".PNG", ".png", ".JPG", ".jpg", ".JPEG", ".jpg", ".PDF", ".pdf", ".jpeg"))
         {
             context.Response.Redirect($"/proxing/images/bitrix?url={path}", true);
             return;
