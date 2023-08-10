@@ -2024,6 +2024,10 @@ section.content::before{
 	transition: background 300ms;
 }
 
+.ya-site-form__input-text::placeholder {
+	opacity: 0.8;
+}
+
 .ya-site-form__input-text::placeholder{
 	color: whitesmoke;
 }
@@ -2033,9 +2037,14 @@ section.content::before{
 }
 
 .ya-site-form__search-input-layout input[type="button"] {
-	background: hsl(219.24deg 77.79% 48.68% / 91%);
+	background: hsl(220deg 77% 48% / 90%);
 	color: var(--light-white);
 	font-weight: 700;
+	transition: background 300ms;
+}
+
+.ya-site-form__search-input-layout input[type="button"]:hover {
+	background: hsl(220 77% 40% / 90%);
 }
 
 /* FOOTER */
