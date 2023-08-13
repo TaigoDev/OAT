@@ -9,20 +9,13 @@ namespace OAT.Readers
         public static List<ProfNews> news = new List<ProfNews>();
         public static IEnumerable<IEnumerable<ProfNews>> pages = new List<List<ProfNews>>();
 
-        public static async void init()
+        public static async Task init()
         {
-            try
-            {
-                using var connection = new MySqlConnection(Utils.GetConnectionString());
-                var records = await connection.QueryAllAsync<ProfNews>();
-                news = records.ToList();
-                news.Reverse();
-                pages = news.PagesSplit(10);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex);
-            }
+            using var connection = new MySqlConnection(Utils.GetConnectionString());
+            var records = await connection.QueryAllAsync<ProfNews>();
+            news = records.ToList();
+            news.Reverse();
+            pages = news.PagesSplit(10);
         }
 
     }

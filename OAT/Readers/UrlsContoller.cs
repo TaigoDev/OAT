@@ -14,7 +14,7 @@ public class UrlsContoller
         return page == null ? null : page.current;
     }
 
-    public static void init()
+    public static Task init()
     {
         var urls = new List<IPage>()
         {
@@ -93,6 +93,7 @@ public class UrlsContoller
             new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),
         };
         pages = urls;
+        return Task.CompletedTask;
     }
 }
 

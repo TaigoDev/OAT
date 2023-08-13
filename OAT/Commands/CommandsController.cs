@@ -4,9 +4,9 @@
 public class CommandsController
 {
     public static List<ICommand> commands = new List<ICommand>();
-    public static void init() => new Task(() =>
+    public static Task init()
     {
-        try
+        new Task(() =>
         {
             foreach (var type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).Where(t => typeof(ICommand).IsAssignableFrom(t)).ToList())
                 if (type.Name.ToString() != "ICommand")
@@ -32,14 +32,9 @@ public class CommandsController
                 }
                 catch { }
             }
-        }
-
-        catch (Exception ex)
-        {
-            Logger.Error(ex.ToString());
-
-        }
-    }).Start();
+        }).Start();
+        return Task.CompletedTask;
+    }
 
 }
 

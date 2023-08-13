@@ -11,6 +11,9 @@ namespace OAT.Controllers
         public IActionResult DownloadFile(string filename)
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "pay", filename);
+            if (!System.IO.File.Exists(path))
+                return NotFound();
+
             var bytes = System.IO.File.ReadAllBytes(path);
             System.IO.File.Delete(path);
             return File(bytes, "image/svg+xml");
@@ -18,10 +21,13 @@ namespace OAT.Controllers
 
         [HttpGet("pay/contract/search")]
         public IActionResult Search([FromQuery] string documentId, [FromQuery] string documentDate,
-            [FromQuery] string studentFullName, [FromQuery] string group, [FromQuery] string FullName) =>
-            Ok(ContractReader.IsContract(e => e.NomKontrakt == documentId && e.DataKontrakt == documentDate &&
-            e.FullName == studentFullName && e.Gruppa == group && e.Zakazchik == FullName));
+            [FromQuery] string studentFullName, [FromQuery] string group, [FromQuery] string FullName)
+        {
 
+           Logger.Info($"Поиск {documentId} {documentDate} {studentFullName} {group} {FullName}");
+           return Ok(ContractReader.IsContract(e => e.NomKontrakt.ToLower() == documentId.ToLower() && e.DataKontrakt.ToLower() == documentDate.ToLower() &&
+            e.FullName.ToLower() == studentFullName.ToLower() && e.Gruppa.ToLower() == group.ToLower() && e.Zakazchik.ToLower() == FullName.ToLower()));
 
+        }
     }
 }

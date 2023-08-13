@@ -3,8 +3,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RepoDb;
 using RepoDb.Extensions;
+using System;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Mail;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -234,22 +237,27 @@ StringSplitOptions options = StringSplitOptions.None)
 
 public class RunModules
 {
-    public delegate void method();
-    public static void StartModules(params method[] modules)
+
+    public static async void StartModules(params Func<Task>[] modules)
     {
         foreach (var module in modules)
         {
             try
             {
-                module.Invoke();
-                Logger.Info($"✅ Модуль сайта {module.Method.ReflectedType!.Name} успешно загружен!");
+                await module.Invoke();
+                Logger.Info($"✅ Модуль сайта {GetMethodName(module)} успешно загружен!");
             }
             catch (Exception ex)
             {
-                Logger.ErrorWithCatch($"Ошибка загрузки модуля {module.Method.ReflectedType!.Name}. Продолжаю запуск...\n\nОшибка: {ex}");
+                Logger.ErrorWithCatch($"❌ Ошибка загрузки модуля {GetMethodName(module)}. Продолжаю запуск...\nОшибка: {ex}");
             }
         }
     }
+
+    private static string GetMethodName(Func<Task> module) =>
+        $"{module.Method.DeclaringType!.Name}.{module.Method.Name}";
+    
+
 }
 
 public class Runs<T>
@@ -267,4 +275,24 @@ public class Runs<T>
         foreach (var parametr in parametrs)
             await method.Invoke(parametr);
     }
+}
+
+public class Repeater
+{
+    public static void Repeat(Func<Task> method, int time) =>
+        new Task(async () =>
+        {
+            while (true)
+            {
+                try
+                {
+                    await method.Invoke();
+                    await Task.Delay(time);
+                }
+                catch(Exception ex)
+                {
+                    Logger.ErrorWithCatch(ex.ToString());
+                }
+            }
+        }).Start();
 }

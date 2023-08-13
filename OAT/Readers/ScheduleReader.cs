@@ -13,46 +13,37 @@ namespace OAT.Readers
         public static List<Group> pr_kosmicheskij_14a = new List<Group>();
         public static List<Group> ul_volkhovstroya_5 = new List<Group>();
 
-        public static async void init()
+        public static async Task init()
         {
-            try
+            ul_lenina_24.Clear();
+            ul_b_khmelnickogo_281a.Clear();
+            pr_kosmicheskij_14a.Clear();
+            ul_volkhovstroya_5.Clear();
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            for (int i = 1; i <= 4; i++)
             {
-                ul_lenina_24.Clear();
-                ul_b_khmelnickogo_281a.Clear();
-                pr_kosmicheskij_14a.Clear();
-                ul_volkhovstroya_5.Clear();
-                var stopWatch = new Stopwatch();
-                stopWatch.Start();
-                for (int i = 1; i <= 4; i++)
+                var xDoc = new XmlDocument();
+                var xml = await LoadXml($"b{i}");
+
+                if (xml is not null)
                 {
-                    var xDoc = new XmlDocument();
-                    var xml = await LoadXml($"b{i}");
+                    xDoc.LoadXml(xml);
+                    XmlNode xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
 
-                    if (xml is not null)
+                    foreach (XmlNode xml_group in xml_groups)
                     {
-                        xDoc.LoadXml(xml);
-                        XmlNode xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
-
-                        foreach (XmlNode xml_group in xml_groups)
-                        {
-                            var name = xml_group.Attributes!["name"]!.Value;
-                            GetBuilding(i).Add(new Group(
-                                name,
-                                int.Parse(name.First(e => char.IsDigit(e)).ToString()),
-                                GetWeeks(xml_group),
-                                GetLessonsTime(xDoc)));
-                        }
+                        var name = xml_group.Attributes!["name"]!.Value;
+                        GetBuilding(i).Add(new Group(
+                            name,
+                            int.Parse(name.First(e => char.IsDigit(e)).ToString()),
+                            GetWeeks(xml_group),
+                            GetLessonsTime(xDoc)));
                     }
                 }
-                stopWatch.Stop();
-
-                Console.WriteLine($"Расписания загружены за {stopWatch.ElapsedMilliseconds} ms");
             }
-            catch (Exception ex)
-            {
-                Logger.Error(ex.ToString());
-            }
-
+            stopWatch.Stop();
+            Console.WriteLine($"Расписания загружены за {stopWatch.ElapsedMilliseconds} ms");
         }
 
         protected static List<Week> GetWeeks(XmlNode xml_group)

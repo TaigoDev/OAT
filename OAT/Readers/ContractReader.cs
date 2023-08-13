@@ -8,12 +8,12 @@ namespace OAT.Readers
     {
         protected static List<Contract> contracts = new List<Contract>();
 
-        public static void init()
+        public static async Task init()
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "database.csv");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "kontra.csv");
             if (!File.Exists(path))
             {
-                Logger.Warning("Файл database.csv не найден!");
+                Logger.Warning("Файл kontra.csv не найден!");
                 return;
             }
             var config = new CsvConfiguration(CultureInfo.CurrentCulture) { Delimiter = ";" };
@@ -21,7 +21,13 @@ namespace OAT.Readers
 
             using var reader = new StreamReader(path);
             using var csv = new CsvReader(reader, config);
-            contracts = csv.GetRecords<Contract>().ToList();
+            var records = csv.GetRecordsAsync<Contract>();
+            contracts = await records.ToListAsync();
+            for(int i = 0; i < 20; i++)
+            {
+                if(i < contracts.Count())
+                Logger.Info($"{contracts[i].NomKontrakt} {contracts[i].DataKontrakt} {contracts[i].FullName} {contracts[i].Gruppa} {contracts[i].Zakazchik}");
+            } 
         }
 
         public static bool IsContract(Func<Contract, bool> predicate) =>

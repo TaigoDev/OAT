@@ -118,24 +118,17 @@ async Task Proxing(HttpContext context, Func<Task> next)
     }
 }
 
-async void CreateAdminAccount()
+async Task CreateAdminAccount()
 {
-    try
-    {
-        using var connection = new MySqlConnection(Utils.GetConnectionString());
-        var records = await connection.QueryAsync<users>(e => e.username == "admin");
-        if (records.Any())
-            return;
-        await connection.InsertAsync(new users(
-            "Омский авиационный колледж",
-            "admin",
-            Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
-            Enums.Role.admin));
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex);
-    }
+    using var connection = new MySqlConnection(Utils.GetConnectionString());
+    var records = await connection.QueryAsync<users>(e => e.username == "admin");
+    if (records.Any())
+        return;
+    await connection.InsertAsync(new users(
+        "Омский авиационный колледж",
+        "admin",
+        Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
+        Enums.Role.admin));
 }
 
 
