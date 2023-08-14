@@ -16,7 +16,11 @@ namespace OAT.Readers
                 Logger.Warning("Файл kontra.csv не найден!");
                 return;
             }
-            var config = new CsvConfiguration(CultureInfo.CurrentCulture) { Delimiter = ";" };
+            var config = new CsvConfiguration(CultureInfo.CurrentCulture) 
+            { 
+                Delimiter = ";",
+                BadDataFound = null
+            };
 
 
             using var reader = new StreamReader(path);
