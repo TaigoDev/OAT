@@ -47,16 +47,22 @@ namespace OAT.Pages.feedback
             }
             else
             {
-                if (!ContractReader.IsContract(e => e.NomKontrakt == documentId && e.DataKontrakt == documentDate &&
-            e.FullName == studentFullName && e.Gruppa == group && e.Zakazchik == FullName))
+                var contract = new Contract();
+                if (!ContractReader.GetContract(e => 
+                e.documentId.ToSearchView() == documentId.ToSearchView() && 
+                e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
+                e.studentFullName.ToSearchView() == studentFullName.ToSearchView() && 
+                e.Group.ToSearchView() == group.ToSearchView() && 
+                e.FullName.ToSearchView() == FullName.ToSearchView(), out contract))
                     return;
 
-                M_Purpose = $"{GetPurpose(purpose)} по дог.№ {documentId}, {studentFullName} гр.№ {group}";
-                M_FullName = FullName;
+
+                M_Purpose = $"{GetPurpose(purpose)} по дог.№ {contract.documentId.Replace(" ", "")}, {contract.studentFullName} гр.№ {contract.Group}";
+                M_FullName = contract.FullName;
                 M_summa = summa;
 
                 var qrData = $"ST00012|Name=Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)|PersonalAcc=03224643520000005201|BankName=Отделение Омск Банка России//УФК по Омской области г. Омск|BIC=015209001|CorrespAcc=0|PayeeINN=5504000055|KPP=550401001|" +
-                    $"Purpose={M_Purpose}|Contract={documentId}|ChildFio={studentFullName}|Sum={summa}|" +
+                    $"Purpose={M_Purpose}|Contract={contract.documentId.Replace(" ", "")}|ChildFio={contract.studentFullName}|Sum={summa}|" +
                     $"CBC=01000000000000000130|OKTMO=52701000|CATEGORY=1";
 
                 var qr = QrCode.EncodeText(qrData, QrCode.Ecc.Medium);

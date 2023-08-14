@@ -1,4 +1,6 @@
-﻿public class Config
+﻿using CsvHelper.Configuration.Attributes;
+
+public class Config
 {
     public string BaseUrl { get; set; }
     public string MainUrl { get; set; }
@@ -137,9 +139,15 @@ public class Subgroup
 
 public class Contract
 {
-    public string NomKontrakt { get; set; }
-    public string DataKontrakt { get; set; }
+    [Name("NomKontrakt")]
+    public string documentId { get; set; }
+
+    [Name("DataKontrakt")]
+    public string documentDate { get; set; }
+    [Name("FullName")]
+    public string studentFullName { get; set; }
+    [Name("Gruppa")]
+    public string Group { get; set; }
+    [Name("Zakazchik")]
     public string FullName { get; set; }
-    public string Gruppa { get; set; }
-    public string Zakazchik { get; set; }
 }

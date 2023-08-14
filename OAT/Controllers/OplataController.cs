@@ -24,10 +24,14 @@ namespace OAT.Controllers
             [FromQuery] string studentFullName, [FromQuery] string group, [FromQuery] string FullName)
         {
 
-           Logger.Info($"Поиск {documentId} {documentDate} {studentFullName} {group} {FullName}");
-           return Ok(ContractReader.IsContract(e => e.NomKontrakt.ToLower() == documentId.ToLower() && e.DataKontrakt.ToLower() == documentDate.ToLower() &&
-            e.FullName.ToLower() == studentFullName.ToLower() && e.Gruppa.ToLower() == group.ToLower() && e.Zakazchik.ToLower() == FullName.ToLower()));
-
+           return Ok(ContractReader.IsContract(e => 
+                e.documentId.ToSearchView() == documentId.ToSearchView() && 
+                e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
+                e.studentFullName.ToSearchView() == studentFullName.ToSearchView() && 
+                e.Group.ToSearchView() == group.ToSearchView() && 
+                e.FullName.ToSearchView() == FullName.ToSearchView()));
         }
+
+
     }
 }

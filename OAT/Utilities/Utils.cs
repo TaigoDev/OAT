@@ -233,6 +233,9 @@ StringSplitOptions options = StringSplitOptions.None)
         var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
         return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
     }
+
+    public static string ToSearchView(this string s) =>
+        s.ToLower().Replace(" ", "");
 }
 
 public class RunModules
@@ -240,18 +243,21 @@ public class RunModules
 
     public static async void StartModules(params Func<Task>[] modules)
     {
+        bool IsError = false;
         foreach (var module in modules)
         {
             try
             {
                 await module.Invoke();
-                Logger.Info($"✅ Модуль сайта {GetMethodName(module)} успешно загружен!");
             }
             catch (Exception ex)
             {
+                IsError = true;
                 Logger.ErrorWithCatch($"❌ Ошибка загрузки модуля {GetMethodName(module)}. Продолжаю запуск...\nОшибка: {ex}");
             }
         }
+       
+        Logger.Info(IsError ? "⚠️ Сайт был запущен, но не все модули были загружены успешно" : "✅ Все модули сайта были успешно загружены");
     }
 
     private static string GetMethodName(Func<Task> module) =>

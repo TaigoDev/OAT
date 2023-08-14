@@ -1,7 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace OAT.Readers
 {
@@ -17,12 +16,14 @@ namespace OAT.Readers
                 Logger.Warning("Файл kontra.csv не найден!");
                 return;
             }
+
+            var badRecord = new List<string>();
             var config = new CsvConfiguration(CultureInfo.CurrentCulture) 
             { 
                 Delimiter = ";",
-                BadDataFound = null
+                Mode = CsvMode.NoEscape,
+                BadDataFound =  context => badRecord.Add(context.RawRecord)
             };
-
 
             using var reader = new StreamReader(path);
             using var csv = new CsvReader(reader, config);
@@ -35,18 +36,38 @@ namespace OAT.Readers
                 }
                 catch(Exception ex)
                 {
-                    Logger.Error($"Ошибка загрузки договора: {ex}");
+                    Logger.ErrorWithCatch(ex.ToString());
                 }
             }
 
-            for(int i = 0; i < 20; i++)
+            if (badRecord.Any())
             {
-                if(i < contracts.Count())
-                Logger.Info($"{contracts[i].NomKontrakt} {contracts[i].DataKontrakt} {contracts[i].FullName} {contracts[i].Gruppa} {contracts[i].Zakazchik}");
-            } 
+                var errorString = $"⚠️ При чтении файла kontra.csv произошли ошибки, которые не позволили загрузить {badRecord.Count()} строк(-у,-и)" +
+                    $"\nВсего загружено строк: {badRecord.Count()}" +
+                    "\nСтроки, которые не удалось загрузить:\n";
+                foreach (var record in badRecord)
+                    errorString += record;
+                Logger.Warning(errorString);
+            }
+            
         }
 
         public static bool IsContract(Func<Contract, bool> predicate) =>
             contracts.Where(predicate).Any();
+
+        public static bool GetContract(Func<Contract, bool> predicate, out Contract contract) 
+        {
+            var records = contracts.Where(predicate);
+            if (records.Any())
+            {
+                contract = records.First();
+                return true;
+            }
+            else
+            {
+                contract = null;
+                return false;
+            }
+        }
     }
 }
