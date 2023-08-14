@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OAT.Readers
 {
@@ -25,8 +26,19 @@ namespace OAT.Readers
 
             using var reader = new StreamReader(path);
             using var csv = new CsvReader(reader, config);
-            var records = csv.GetRecordsAsync<Contract>();
-            contracts = await records.ToListAsync();
+            while (csv.Read())
+            {
+                try
+                {
+                    var record = csv.GetRecord<Contract>();
+                    contracts.Add(record!);
+                }
+                catch(Exception ex)
+                {
+                    Logger.Error($"Ошибка загрузки договора: {ex}");
+                }
+            }
+
             for(int i = 0; i < 20; i++)
             {
                 if(i < contracts.Count())
