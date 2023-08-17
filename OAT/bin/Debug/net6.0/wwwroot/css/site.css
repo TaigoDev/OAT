@@ -1387,6 +1387,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 		min-height: auto;
 	}
 }
+
 /* staff personal page */
 
 .staff-person-basic {
@@ -1986,6 +1987,7 @@ section.content::before{
 }
 
 /* search */
+
 .site-search-container {
 	position: fixed;
 	top: 100px;
@@ -2048,6 +2050,7 @@ section.content::before{
 }
 
 /* FOOTER */
+
 .partners-list-container {
 	overflow: hidden;
 	margin-top: 40px;

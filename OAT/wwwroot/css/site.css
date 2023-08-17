@@ -1004,9 +1004,9 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	min-height: 160px;
 	max-width: 210px;
 	border-radius: 10px;
-	background-color: #040c21;
-	color: hsl(200deg 34.68% 86.15%);
-	opacity: 0.75;
+	background-color: #07112c;
+	color: hsl(200deg 35% 85%);
+	opacity: 0.8;
 	overflow: hidden;
 	transition: border-color 500ms, opacity 500ms;
 }
@@ -1026,7 +1026,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	bottom: 0;
 	width: 0;
 	height: 2.5px;
-	background-color: hsl(200deg 74.3% 39.75%);
+	background-color: hsl(200deg 75% 40%);
 	opacity: 0;
 	transition: left 1s, width 500ms, opacity 500ms;
 }
@@ -1041,7 +1041,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
     width: 100px;
     height: 100px;
     border: 3px solid transparent;
-    background-color: #040c21;
+    background-color: #07112c;
     transform: translateX(10px) translateY(-25px);
     border-radius: calc(50% + 1px);
     border-radius: 0 0 0 50%;
@@ -1071,7 +1071,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 .document-item:hover {
 	border-color: var(--matte-color);
-	border-color: hsl(223.87deg 6.48% 20.18%); /* #1f67ae */
+	border-color: hsl(225deg 10% 20%); /* #1f67ae */
 	opacity: 0.9;
 }
 
@@ -1083,7 +1083,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .document-item:hover .document-item-head a {
-	border-color: hsl(200deg 74.3% 39.75%);
+	border-color: hsl(200deg 75% 40%);
 }
 
 .document-item:hover .document-item-head a::after {
@@ -1132,7 +1132,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	padding: 17px 15px;
 	border: 2px solid;
 	border-radius: 15px;
-	background-color: hsl(230 30% 20% / 1);
+	background-color: hsl(230 35% 17% / 1);
 	overflow: hidden;
 }
 
@@ -1387,6 +1387,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 		min-height: auto;
 	}
 }
+
 /* staff personal page */
 
 .staff-person-basic {
@@ -1986,6 +1987,7 @@ section.content::before{
 }
 
 /* search */
+
 .site-search-container {
 	position: fixed;
 	top: 100px;
@@ -2048,6 +2050,7 @@ section.content::before{
 }
 
 /* FOOTER */
+
 .partners-list-container {
 	overflow: hidden;
 	margin-top: 40px;

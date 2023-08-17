@@ -1,0 +1,130 @@
+﻿@page
+@model ProgramsModel
+@{
+    ViewData["Title"] = "Программы";
+}
+
+<div class="container content-page">
+    <section class="content">
+        <h2 class="section-title">
+            Программы
+        </h2>
+
+        <div class="accordions-list">
+            <div class="accordion">
+                <div class="accordion-head">
+                    09.02.02 Компьютерные сети
+                </div>
+                <div class="accordion-body">
+                    <ul class="documents-list little">
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/programs/09.02.02">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                ОПОП-П
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/programs/09.02.02">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Приложение 1
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/programs/09.02.02">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Приложение 2
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/programs/09.02.02">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Приложение 3
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/programs/09.02.02">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Приложение 4
+                            </div>
+                        </li>
+                        <li class="document-item">
+                            <div class="document-item-head">
+                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/programs/09.02.02">
+                                </a>
+                            </div>
+                            <div class="document-item-body">
+                                Приложение 5
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+    </section>
+    <aside id="sidebar" class="sidebar">
+        <h3 class="sidebar-title">
+            Профессионалитет
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li class="sidebar-link">
+                    <a href='@Url.Page("About")'>
+                        О профессионалитете
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Specialities")'>
+                        Специальности
+                    </a>
+                </li>
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href='@Url.Page("Programs")'>
+                        Программы
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Partners")'>
+                        Партнеры
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("ManagementCompany")'>
+                        Управляющая компания
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("RepairProgress")'>
+                        Ход ремонтных работ
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("/applicant/AdmissionRules")'>
+                        Правила приема
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("ProjectNews")'>
+                        Новости проекта
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>
