@@ -34,6 +34,7 @@ app.MapRazorPages();
 app.Run();
 
 
+
 void SetupControllers()
 {
     Console.WriteLine(Utils.GetConnectionString());

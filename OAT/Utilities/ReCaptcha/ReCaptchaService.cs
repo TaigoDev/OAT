@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 
 namespace AspNetCore.ReCaptcha
@@ -12,24 +13,33 @@ namespace AspNetCore.ReCaptcha
 
         public ReCaptchaService(HttpClient client, IOptions<ReCaptchaSettings> reCaptchaSettings, ILogger<ReCaptchaService> logger)
         {
-            var proxy = new WebProxy
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Address = new Uri($"http://10.0.55.52:3128"),
-                BypassProxyOnLocal = false,
-                UseDefaultCredentials = false,
-            };
+                var proxy = new WebProxy
+                {
+                    Address = new Uri($"http://10.0.55.52:3128"),
+                    BypassProxyOnLocal = false,
+                    UseDefaultCredentials = false,
+                };
 
-            var httpClientHandler = new HttpClientHandler
+                var httpClientHandler = new HttpClientHandler
+                {
+                    Proxy = proxy,
+                };
+                httpClientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+
+                _client = new HttpClient(handler: httpClientHandler, disposeHandler: true);
+                _client.BaseAddress = client.BaseAddress;
+                _logger = logger;
+                _reCaptchaSettings = reCaptchaSettings.Value;
+            }
+            else
             {
-                Proxy = proxy,
-
-            };
-            httpClientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-
-            _client = new HttpClient(handler: httpClientHandler, disposeHandler: true);
-            _client.BaseAddress = client.BaseAddress;
-            _logger = logger;
-            _reCaptchaSettings = reCaptchaSettings.Value;
+                _client = new HttpClient();
+                _client.BaseAddress = client.BaseAddress;
+                _logger = logger;
+                _reCaptchaSettings = reCaptchaSettings.Value;
+            }
         }
 
         /// <inheritdoc />

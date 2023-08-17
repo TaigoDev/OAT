@@ -26,27 +26,28 @@ namespace OAT.Pages.feedback
         {
             if (!ModelState.IsValid)
                 return Page();
-            var sendTo = string.Empty;
-            switch (topic)
+            var sendTo = topic switch
             {
-                case "Директору":
-                    sendTo = "koltsov@oat.ru";
-                    break;
-                case "Зам.Директора":
-                    sendTo = "";
-                    break;
-                default:
-                    sendTo = "post@oat.ru";
-                    break;
-            }
+                "Профессионалитет" or "Производство" => "nazarov@oat.ru",
+                "Воспитательная работа" => "kameneva@oat.ru",
+                "Учебная деятельность" => "trockaya@oat.ru",
+                "Профориентация" or "Трудоустройство" or "Приемная комиссия" or "Курсовая подготовка" => "savin@oat.ru",
+                "Главная бухгалтерия" or "Бухгалтерия" or "Экономика" => "dolgusheva_ny@oat.ru",
+                "Директор школы" => "subbotin.sa@oat.ru",
+                _ => "post@oat.ru"
+            };
 
             Utils.SendEmail(email, sendTo, $"" +
                 $"Имя: {name}\n" +
                 $"Почта для ответа: {email}\n" +
                 $"Телефон: {telephone}\n" +
+                $"Тема: {topic}\n" +
                 $"Вопрос: {description}");
 
             return RedirectToPage();
         }
+
+
+
     }
 }
