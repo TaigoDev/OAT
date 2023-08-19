@@ -17,23 +17,44 @@
         {
             <p>@Html.Raw(@t)</p>
         }
+
+        
         <div class="images-list-slider-container">
             <div class="images-list-slider">
                 @foreach (var image in news.photos)
                 {
-                    @if (!image.Contains(".mp4"))
+                    @if (!image.Contains(".mp4") && !image.Contains(".pdf"))
                     {
                         <img src="/@image" alt="">
                     }
-                    else
+                    else if(image.Contains(".mp4"))
                     {
                         <video class="customized" controls>
                             <source src="/@image" type="video/mp4">
                         </video>
                     }
+                    else
+                    {
+
+                    }
                 }
             </div>
         </div>
+
+        foreach (var pdf in news.photos.Where(e => e.Contains(".pdf")))
+        {
+            <li class="document-item">
+                <div class="document-item-head">
+                    <a target="_blank" href="/">
+                    </a>
+                </div>
+                <div class="document-item-body">
+                    @news.title
+                </div>
+            </li>
+        }
+        
+        <br/>
 
     }
     else

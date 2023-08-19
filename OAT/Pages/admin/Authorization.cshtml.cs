@@ -13,7 +13,6 @@ namespace OAT.Pages
 
         public void OnGet()
         {
-
         }
     }
 }
