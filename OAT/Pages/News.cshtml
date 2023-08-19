@@ -43,7 +43,7 @@
 
         foreach (var pdf in news.photos.Where(e => e.Contains(".pdf")))
         {
-            <li class="document-item">
+            <ul class="document-item" style="width: 50%; margin: 0 auto;">
                 <div class="document-item-head">
                     <a target="_blank" href="/">
                     </a>
@@ -51,7 +51,7 @@
                 <div class="document-item-body">
                     @news.title
                 </div>
-            </li>
+            </ul>
         }
         
         <br/>
