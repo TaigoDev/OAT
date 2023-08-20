@@ -16,10 +16,13 @@
             SendMessage("message-success");
         },
         error: function (jqXHR, exception) {
-            alert(jqXHR.status);
+            console.log(jqXHR.status);
             if (jqXHR.status == 401) {
                 SendMessage("message-fail-auth");
                 window.location = "https://www.oat.ru/api/logout";
+            }
+            else if (jqXHR.status == 406) {
+                SendMessage("message-fail-perms");
             }
             else
                 SendMessage("message-fail");

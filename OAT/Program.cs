@@ -129,7 +129,7 @@ async Task CreateAdminAccount()
         "Омский авиационный колледж",
         "admin",
         Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
-        Enums.Role.admin));
+        Enums.Role.admin, Enums.Building.all));
 }
 
 

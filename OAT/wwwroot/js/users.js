@@ -8,6 +8,7 @@
     formData.append("username", $("#user-name").val());
     formData.append("password", $("#user-password").val());
     formData.append("role", text);
+    formData.append("building", document.getElementById("building-role").value);
     $.ajax({
         type: 'POST',
         url: url,

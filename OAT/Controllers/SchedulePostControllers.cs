@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OAT.Readers;
+using OAT.Utilities;
 
 namespace OAT.Controllers
 {
-    [AuthorizeRoles(Enums.Role.admin, Enums.Role.schedule_manager)]
+    [AuthorizeRoles(Enums.Role.schedule_manager, Enums.Role.admin)]
     public class SchedulePostControllers : Controller
     {
 
@@ -17,14 +18,17 @@ namespace OAT.Controllers
             if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
 
+            if (!Permissions.HaveBuildingByName(User.Building(), building))
+                return StatusCode(StatusCodes.Status406NotAcceptable);
+                    
             var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");
             Utils.FileDelete(path);
 
             using Stream fileStream = new FileStream(path, FileMode.Create);
-            file.CopyTo(fileStream);
-
+            await file.CopyToAsync(fileStream);
+            fileStream.Dispose();
             Logger.Info($"Пользователь {User.Username()} обновил расписание для {building}\nIP: {HttpContext.UserIP()}");
-            ScheduleReader.init();
+            await ScheduleReader.init();
             return StatusCode(StatusCodes.Status200OK);
         }
 

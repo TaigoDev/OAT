@@ -1,4 +1,5 @@
 ﻿@page
+@using OAT.Utilities;
 @model OAT.Pages.admin.FilesModel
 @{
     Layout = "_Panel";
@@ -16,18 +17,31 @@
                 Корпус
             </label>
             <select id="corpus">
-                <option value="b1">
-                    Ул. Ленина, 24
-                </option>
-                <option value="b2">
-                    Б. Хмельницкого, 281А
-                </option>
-                <option value="b3">
-                    Пр. Космический, 14А
-                </option>
-                <option value="b4">
-                    Ул. Волховстроя, 5
-                </option>
+                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_lenina_24))
+                {
+                    <option value="b1">
+                        Ул. Ленина, 24
+                    </option>
+                }
+                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_b_khmelnickogo_281a))
+                {
+                    <option value="b2">
+                        Б. Хмельницкого, 281А
+                    </option>
+                }
+                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.pr_kosmicheskij_14a))
+                {
+                    <option value="b3">
+                        Пр. Космический, 14А
+                    </option>
+
+                }
+                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_volkhovstroya_5))
+                {
+                    <option value="b4">
+                        Ул. Волховстроя, 5
+                    </option>
+                }
             </select>
         </div>
         <div class="input-box">
@@ -54,18 +68,31 @@
                 Корпус
             </label>
             <select id="user-role">
-                <option value="b1">
-                    Ул. Ленина, 24
-                </option>
-                <option value="b2">
-                    Б. Хмельницкого, 281А
-                </option>
-                <option value="b3">
-                    Пр. Космический, 14А
-                </option>
-                <option value="b4">
-                    Ул. Волховстроя, 5
-                </option>
+                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_lenina_24))
+                {
+                    <option value="b1">
+                        Ул. Ленина, 24
+                    </option>
+                }
+                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_b_khmelnickogo_281a))
+                {
+                    <option value="b2">
+                        Б. Хмельницкого, 281А
+                    </option>
+                }
+                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.pr_kosmicheskij_14a))
+                {
+                    <option value="b3">
+                        Пр. Космический, 14А
+                    </option>
+
+                }
+                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_volkhovstroya_5))
+                {
+                    <option value="b4">
+                        Ул. Волховстроя, 5
+                    </option>
+                }
             </select>
         </div>
         <div class="input-box">
@@ -118,3 +145,4 @@
 <aside id="message-success" class="panel-message">👌 Расписание успешно обновлено 👌</aside>
 <aside id="message-fail-auth" class="panel-message">❌ Cессия истекла</aside>
 <aside id="message-fail" class="panel-message">❌ Ошибка при обновлении расписания. Скорее всего файл не .xls</aside>
+<aside id="message-fail-perms" class="panel-message">❌ У вас нет прав для редактирования этого корпуса</aside>

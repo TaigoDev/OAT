@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using static Enums;
+using OAT.Utilities;
 
 namespace Recovery.Tables
 {
@@ -13,22 +13,25 @@ namespace Recovery.Tables
             this.password = password;
             this.role = role;
         }
-        public users(string FullName, string username, string password, Enums.Role role)
+        public users(string FullName, string username, string password, Enums.Role role, Enums.Building building)
         {
             id = Utils.getLastId("users").GetAwaiter().GetResult();
             this.FullName = FullName;
             this.username = username;
             this.password = password;
             this.role = role.ToString();
+            this.building = building.ToString();
         }
-        public users(string FullName, string username, string password, string role)
+        public users(string FullName, string username, string password, string role, string building)
         {
             id = Utils.getLastId("users").GetAwaiter().GetResult();
             this.FullName = FullName;
             this.username = username;
             this.password = password;
             this.role = role;
+            this.building = building;
         }
+
         public users() { }
 
         public int id { get; set; }
@@ -36,7 +39,7 @@ namespace Recovery.Tables
         public string username { get; set; }
         public string password { get; set; }
         public string role { get; set; }
-
+        public string building { get; set; }
     }
 
     public class Teachers
@@ -91,25 +94,3 @@ namespace Recovery.Tables
     }
 }
 
-
-public static class Enums
-{
-
-    /*
-    admin - все ниже, а также управление пользователями и MySql
-    reporter - новости, новости професионалитета 
-    schedule_manager - расписание, изменение расписания, документы сессии
-     */
-
-    public enum Role { admin, reporter, schedule_manager }
-
-
-}
-public class AuthorizeRolesAttribute : AuthorizeAttribute
-{
-    public AuthorizeRolesAttribute(params Role[] allowedRoles)
-    {
-        var allowedRolesAsStrings = allowedRoles.Select(x => Enum.GetName(typeof(Role), x));
-        Roles = string.Join(",", allowedRolesAsStrings);
-    }
-}

@@ -38,10 +38,23 @@
             <label for="user-role">
                 Тип пользователя
             </label>
-            <select id="user-role">
+            <select id="user-role" >
                 <option value="admin">Администратор</option>
                 <option value="reporter">Репортер</option>
-                <option value="manager">Менеджер</option>
+                <option value="schedule_manager">Менеджер по расписанию</option>
+                <option value="files_manager">Менеджер по файлам</option>
+            </select>
+        </div>
+        <div class="input-box">
+            <label for="user-role">
+                Разрешенные строения
+            </label>
+            <select id="building-role">
+                <option value="all">Все здания</option>
+                <option value="ul_lenina_24">ул Ленина, 24</option>
+                <option value="ul_b_khmelnickogo_281a">ул. Б. Хмельницкого, 281а</option>
+                <option value="pr_kosmicheskij_14a">пр. Космический, 14ам</option>
+                <option value="ul_volkhovstroya_5">ул. Волховстроя, 5</option>
             </select>
         </div>
 

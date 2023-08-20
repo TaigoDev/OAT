@@ -1,6 +1,7 @@
 ﻿using MySqlConnector;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OAT.Utilities;
 using RepoDb;
 using RepoDb.Extensions;
 using System;
@@ -209,6 +210,8 @@ StringSplitOptions options = StringSplitOptions.None)
         User.Identities.ToList()[0].Claims.ToList()[0].Value;
     public static string Password(this ClaimsPrincipal User) =>
         User.Identities.ToList()[0].Claims.ToList()[1].Value;
+    public static string Building(this ClaimsPrincipal User) =>
+       User.Identities.ToList()[0].Claims.ToList()[3].Value;
     public static bool IsRole(this ClaimsPrincipal User, Enums.Role role) =>
         User.Identities.ToList()[0].Claims.ToList()[2].Value == role.ToString();
     public static bool IsRole(this ClaimsPrincipal User, params Enums.Role[] roles)

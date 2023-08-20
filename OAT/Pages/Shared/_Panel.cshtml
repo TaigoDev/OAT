@@ -55,6 +55,11 @@
                         <img class="icon" src="~/images/panel/timetable.svg" alt="">
                     </a>
                 </li>
+
+            }
+
+            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin, Enums.Role.files_manager))
+            {
                 <li>
                     <a href="files">
                         <span>
@@ -64,6 +69,7 @@
                     </a>
                 </li>
             }
+
 
             <li>
                 <a href="/">

@@ -1,4 +1,5 @@
 ﻿@page
+@using OAT.Utilities;
 @model OAT.Pages.admin.ScheduleModel
 @{
     ViewData["Title"] = "Обновить расписание";
@@ -6,66 +7,80 @@
 }
 <section class="container">
 
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-        <label for="news" class="panel-form-title">
-            ул. Ленина, 24
-        </label>
-        <div class="input-box">
-            <label for="images">
-                Файл
+    @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_lenina_24))
+    {
+        <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+            <label for="news" class="panel-form-title">
+                ул. Ленина, 24
             </label>
-            <input type="file" name="postedFiles" id="files-ul_lenina_24" name="files" accept=".xml">
-        </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('ul_lenina_24', 'files-ul_lenina_24');return false" multiple>
-            Обновить
-        </button>
-    </form>
+            <div class="input-box">
+                <label for="images">
+                    Файл
+                </label>
+                <input type="file" name="postedFiles" id="files-ul_lenina_24" name="files" accept=".xml">
+            </div>
+            <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('ul_lenina_24', 'files-ul_lenina_24');return false" multiple>
+                Обновить
+            </button>
+        </form>
+    }
 
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-        <label for="news" class="panel-form-title">
-            Б. Хмельницкого, 281а
-        </label>
-        <div class="input-box">
-            <label for="images">
-                Файл
+    @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_b_khmelnickogo_281a))
+    {
+        <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+            <label for="news" class="panel-form-title">
+                Б. Хмельницкого, 281а
             </label>
-            <input type="file" name="postedFiles" id="files-ul_b_khmelnickogo_281a" name="files" accept=".xml">
-        </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('ul_b_khmelnickogo_281a', 'files-ul_b_khmelnickogo_281a');return false" multiple>
-            Обновить
-        </button>
+            <div class="input-box">
+                <label for="images">
+                    Файл
+                </label>
+                <input type="file" name="postedFiles" id="files-ul_b_khmelnickogo_281a" name="files" accept=".xml">
+            </div>
+            <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('ul_b_khmelnickogo_281a', 'files-ul_b_khmelnickogo_281a');return false" multiple>
+                Обновить
+            </button>
 
-    </form>
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-        <label for="news" class="panel-form-title">
-            пр. Космический, 14а
-        </label>
-        <div class="input-box">
-            <label for="images">
-                Файл
+        </form>
+    }
+
+    @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.pr_kosmicheskij_14a))
+    {
+        <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+            <label for="news" class="panel-form-title">
+                пр. Космический, 14а
             </label>
-            <input type="file" name="postedFiles" id="files-pr_kosmicheskij_14a" name="files" accept=".xml">
-        </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('pr_kosmicheskij_14a', 'files-pr_kosmicheskij_14a');return false" multiple>
-            Обновить
-        </button>
+            <div class="input-box">
+                <label for="images">
+                    Файл
+                </label>
+                <input type="file" name="postedFiles" id="files-pr_kosmicheskij_14a" name="files" accept=".xml">
+            </div>
+            <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('pr_kosmicheskij_14a', 'files-pr_kosmicheskij_14a');return false" multiple>
+                Обновить
+            </button>
 
-    </form>
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-        <label for="news" class="panel-form-title">
-            ул. Волховстроя, 5
-        </label>
-        <div class="input-box">
-            <label for="images">
-                Файл
+        </form>
+    }
+
+    @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_volkhovstroya_5))
+    {
+        <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+            <label for="news" class="panel-form-title">
+                ул. Волховстроя, 5
             </label>
-            <input type="file" name="postedFiles" id="files-ul_volkhovstroya_5" name="files" accept=".xml">
-        </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('ul_volkhovstroya_5', 'files-ul_volkhovstroya_5');return false" multiple>
-            Обновить
-        </button>
+            <div class="input-box">
+                <label for="images">
+                    Файл
+                </label>
+                <input type="file" name="postedFiles" id="files-ul_volkhovstroya_5" name="files" accept=".xml">
+            </div>
+            <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('ul_volkhovstroya_5', 'files-ul_volkhovstroya_5');return false" multiple>
+                Обновить
+            </button>
 
-    </form>
+        </form>
+    }
 </section>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="/js/panel.js" charset="utf-8"></script>
@@ -73,3 +88,4 @@
 <aside id="message-success" class="panel-message">👌 Расписание успешно обновлено 👌</aside>
 <aside id="message-fail-auth" class="panel-message">❌ Cессия истекла</aside>
 <aside id="message-fail" class="panel-message">❌ Ошибка при обновлении расписания. Скорее всего файл не .xml</aside>
+<aside id="message-fail-perms" class="panel-message">❌ У вас нет прав для редактирования этого корпуса</aside>

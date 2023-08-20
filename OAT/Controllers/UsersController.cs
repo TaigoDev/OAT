@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
+using OAT.Utilities;
 using Recovery.Tables;
 using RepoDb;
 
@@ -8,7 +9,7 @@ namespace OAT.Controllers
     public class UsersController : Controller
     {
         [HttpPost, Route("api/users/new"), AuthorizeRoles(Enums.Role.admin)]
-        public async Task<IActionResult> NewUser(string Fullname, string username, string password, string role)
+        public async Task<IActionResult> NewUser(string Fullname, string username, string password, string role, string building)
         {
             try
             {
@@ -29,7 +30,7 @@ namespace OAT.Controllers
                 else
                     role = Enums.Role.schedule_manager.ToString();
 
-                await connection.InsertAsync(new users(Fullname, username, Utils.sha256_hash(password), role));
+                await connection.InsertAsync(new users(Fullname, username, Utils.sha256_hash(password), role, building));
                 Logger.Info($"Пользователь {User.Username()} добавил нового пользователя {Fullname} c ником {username} и ролью {role}");
                 return StatusCode(StatusCodes.Status200OK);
             }

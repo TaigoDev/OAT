@@ -27,7 +27,8 @@ namespace OAT.Controllers
             var claims = new[] {
                 new Claim("username", username),
                 new Claim("sha256_password", Utils.sha256_hash(password)),
-                new Claim(ClaimTypes.Role, records.First().role)
+                new Claim(ClaimTypes.Role, records.First().role),
+                new Claim("Building", records.First().building),
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
