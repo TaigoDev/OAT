@@ -97,4 +97,10 @@
 	  <Folder Include="wwwroot\images\students\" />
 	  <Folder Include="wwwroot\videos\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="Pages\feedback\Map.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
 </Project>

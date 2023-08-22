@@ -38,6 +38,7 @@ public class UrlsContoller
             // organization information
             new IPage("sveden/ovz", "organizationInformation/AccessibleEnvironment"),
             new IPage("sveden/common", "organizationInformation/CommonIntelligence"),
+            new IPage("sveden", "organizationInformation/CommonIntelligence"),
             new IPage("sveden/corup/index.php", "organizationInformation/Corruption"),
             new IPage("sveden/document", "organizationInformation/Documents"),
             new IPage("sveden/education", "organizationInformation/Education"),
@@ -72,7 +73,7 @@ public class UrlsContoller
             new IPage("sveden/Employment/center.php", "students/AlumniEmploymentCenterOmsk"),
             new IPage("parents/pravila-vnutrennego-rasporyadka-dnya-studentov", "students/DailyRoutineRules"),
             // parents
-
+            new IPage("parents/organizatsiya-uchebnogo-protsessa-v-kolledzhe", "parents/EducationalProcessOrganization"),
 
             // timetable
             new IPage("students/raspisanie/index.php", "timetable/Classes"),
@@ -91,6 +92,7 @@ public class UrlsContoller
 
             // limitation
             new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),
+            new IPage("feedback/Map", "skhema-kolledzha/"),
         };
         pages = urls;
         return Task.CompletedTask;
