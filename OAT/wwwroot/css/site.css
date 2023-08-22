@@ -2060,7 +2060,7 @@ section.content::before{
     display: flex;
     gap: 20px;
     height: 90px;
-    width: 100vw;
+    max-width: 100vw;
     animation: partners-animation 160s linear infinite;
     --width-part-block: 9500px;
 }
