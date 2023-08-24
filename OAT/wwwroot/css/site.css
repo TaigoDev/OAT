@@ -538,12 +538,12 @@ textarea.customized::-webkit-scrollbar {
 }
 
 textarea.customized::-webkit-scrollbar-track {
-	background-color: gray;
+	background-color: #444444;
 }
 
 textarea.customized::-webkit-scrollbar-thumb {
 	width: 3px;
-	background-color: var(--matte-color);
+	background-color: gray;
 }
 
 input[type=file]::file-selector-button {

@@ -35,16 +35,22 @@ window.addEventListener("load", () => {
     });
 
     /* accordion */
-    accordionsList.forEach(accordion => {
-        accordion.querySelector(".accordion-head").insertAdjacentHTML("beforeend", `<img id="eye-icon" class="icon accordion-head-icon" src="/images/basic/accordionMore.svg" alt="версия для слабовидящих">`);
-        console.log(accordion.querySelector(".accordion-head-icon"));
-        accordion.querySelector(".accordion-head-icon").addEventListener("click", () => {
-            accordionsList.forEach(accordion => {
-                accordion.classList.remove("open");
-            });
-            accordion.classList.add("open");
+    for (let i = 0; i < accordionsList.length; i++) {
+        accordionsList[i].querySelector(".accordion-head").insertAdjacentHTML("beforeend", `<img class="icon accordion-head-icon" src="/images/basic/accordionMore.svg" alt="версия для слабовидящих">`);
+        accordionsList[i].querySelector(".accordion-head-icon").addEventListener("click", () => {
+            if (accordionsList[i].classList.contains("open")) {
+                accordionsList[i].classList.remove("open");
+            }
+            else {
+                accordionsList[i].classList.add("open");
+                for (let j = 0; j < accordionsList.length; j++) {
+                    if (j != i) {
+                        accordionsList[j].classList.remove("open");
+                    }
+                }
+            }
         });
-    });
+    }
 
     /* partners list */
     let partnersSliderWidth = 0;
