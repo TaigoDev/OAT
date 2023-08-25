@@ -13,7 +13,9 @@ namespace OAT.Utilities
 
         public static List<Role> GetUserRoles(string username)
         {
+
             using var ldap = new LdapConnection(new LdapDirectoryIdentifier(ProxyController.config.ldap_IP, ProxyController.config.ldap_port));
+
             ldap.SessionOptions.ProtocolVersion = 3;
             ldap.AuthType = AuthType.Basic;
             ldap.Bind(new System.Net.NetworkCredential(ProxyController.config.ldap_login, ProxyController.config.ldap_password));

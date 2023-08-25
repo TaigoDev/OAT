@@ -5,6 +5,7 @@ using MySqlConnector;
 using OAT.Utilities;
 using Recovery.Tables;
 using RepoDb;
+using System.Data;
 using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Security.Claims;
@@ -23,7 +24,6 @@ namespace OAT.Controllers
             {
                 Logger.InfoInAttempts($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
                     $"L: {username}\n" +
-                    $"P: {password}\n" +
                     $"IP-адрес отправителя: {HttpContext.UserIP()}");
                 return Redirect("/admin/authorization?status=fail");
             }
