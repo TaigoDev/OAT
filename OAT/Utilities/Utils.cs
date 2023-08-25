@@ -206,19 +206,32 @@ StringSplitOptions options = StringSplitOptions.None)
     }.ConnectionString;
 
 
-    public static string Username(this ClaimsPrincipal User) =>
-        User.Identities.ToList()[0].Claims.ToList()[0].Value;
-    public static string Password(this ClaimsPrincipal User) =>
+    public static string GetToken(this ClaimsPrincipal User) =>
         User.Identities.ToList()[0].Claims.ToList()[1].Value;
-    public static string Building(this ClaimsPrincipal User) =>
-       User.Identities.ToList()[0].Claims.ToList()[3].Value;
-    public static bool IsRole(this ClaimsPrincipal User, Enums.Role role) =>
-        User.Identities.ToList()[0].Claims.ToList()[2].Value == role.ToString();
+    public static string GetUsername(this ClaimsPrincipal User) =>
+        User.Identities.ToList()[0].Claims.ToList()[0].Value;
+    public static bool IsRole(this ClaimsPrincipal User, Enums.Role role)
+    {
+        var roles = Permissions.GetUserRoles(User.GetUsername());
+
+        if (role.ToString().Contains("ALL"))
+            for (int i = 1; i <= 4; i++)
+                if (IsRole(User, Enum.Parse<Enums.Role>(role.ToString().Replace("ALL", $"campus_{i}"))))
+                    return true;
+
+        foreach (var _role in roles)
+            if (_role == role)
+                return true;
+        return false;
+    }
     public static bool IsRole(this ClaimsPrincipal User, params Enums.Role[] roles)
     {
+       var userRoles = Permissions.GetUserRoles(User.GetUsername());
+
         foreach (var role in roles)
             if (User.IsRole(role))
                 return true;
+
         return false;
     }
 

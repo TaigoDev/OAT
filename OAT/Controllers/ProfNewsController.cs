@@ -8,12 +8,12 @@ namespace OAT.Controllers
 {
     public class ProfNewsController : Controller
     {
-        [RequestSizeLimit(1000000000000), HttpPost, Route("api/prof/news/upload"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
+        [RequestSizeLimit(1000000000000), HttpPost, Route("api/prof/news/upload"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_prof_news)]
         public async Task<IActionResult> AddFile(string title, string date, string text, List<IFormFile> files)
         {
             try
             {
-                if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+                if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
                     return StatusCode(StatusCodes.Status401Unauthorized);
 
                 if (!Check(title, date, text))
@@ -36,7 +36,7 @@ namespace OAT.Controllers
                 Logger.Info($"Пользователь опубликовал новую новость (Prof).\n" +
                     $"ID: {news.id}\n" +
                     $"SHA256 (TEXT): {Utils.sha256_hash(text)}\n" +
-                    $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
+                    $"Пользователь: {User.GetUsername()}\n" +
                     $"IP-адрес: {HttpContext.UserIP()}");
 
                 ProfNewsReader.init();
@@ -49,10 +49,10 @@ namespace OAT.Controllers
             }
         }
 
-        [HttpDelete("api/prof/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
+        [HttpDelete("api/prof/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_prof_news)]
         public async Task<IActionResult> RemoveNews(int id)
         {
-            if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+            if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
             using var connection = new MySqlConnection(Utils.GetConnectionString());
 

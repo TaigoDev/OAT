@@ -26,16 +26,8 @@
                     <img class="icon" src="~/images/panel/answers.svg" alt="">
                 </a>
             </li>*@
-            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin))
+            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin))
             {
-                <li>
-                    <a href="users">
-                        <span>
-                            Users
-                        </span>
-                        <img class="icon" src="~/images/panel/users.svg" alt="">
-                    </a>
-                </li>
                 <li>
                     <a href="MySQL">
                     <span>
@@ -45,7 +37,7 @@
                 </a>
             </li>
             }
-            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin, Enums.Role.schedule_manager))
+            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_schedule_ALL))
             {
                 <li>
                     <a href="schedule">
@@ -58,7 +50,7 @@
 
             }
 
-            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.admin, Enums.Role.files_manager))
+            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_manager_changes_ALL))
             {
                 <li>
                     <a href="files">
@@ -97,7 +89,7 @@
                 <div class="current-user-info">
                     <img class="current-user-info-head" src="~/images/panel/currentUser.svg">
                     <div class="current-user-info-body">
-                        <p class="current-user-info-name"><b>Имя:</b> @User.Username()</p>
+                        <p class="current-user-info-name"><b>Имя:</b> @User.GetUsername()</p>
                         <p class="current-user-info-ip"><b>IP:</b> @Context.UserIP()</p>
                     </div>
                 </div>

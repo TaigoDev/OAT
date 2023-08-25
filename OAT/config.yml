@@ -6,3 +6,9 @@ dbPort: 3306
 dbUser: "u20_tqSmWnicfV"
 dbPassword: "4seGYYxlRNOa9@!EGVw1ZqiB"
 dbName: s20_oat
+ldapIP: "178.74.67.83"
+ldapPort: 789
+ldapLogin: "ld"
+ldapPassword: "ldaps332!@"
+ldapDomain: "elki55"
+ldapZone: "ru"

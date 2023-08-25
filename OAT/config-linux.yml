@@ -6,3 +6,9 @@ dbPort: 3306
 dbUser: "root"
 dbPassword: "EBLQ|bG8axO0oLOM#I}8"
 dbName: www.oat.ru
+ldapIP: "178.74.67.83"
+ldapPort: 789
+ldapLogin: "ld"
+ldapPassword: "ldaps332!@"
+ldapDomain: "elki55"
+ldapZone: "ru"

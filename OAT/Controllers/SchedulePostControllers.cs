@@ -4,7 +4,7 @@ using OAT.Utilities;
 
 namespace OAT.Controllers
 {
-    [AuthorizeRoles(Enums.Role.schedule_manager, Enums.Role.admin)]
+    [AuthorizeRoles(Enums.Role.www_manager_schedule_ALL, Enums.Role.www_admin)]
     public class SchedulePostControllers : Controller
     {
 
@@ -15,10 +15,10 @@ namespace OAT.Controllers
             if (file is null || file.Length == 0 || filename is null || Path.GetExtension(file.FileName) is not ".xml")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
-            if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+            if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
 
-            if (!Permissions.HaveBuildingByName(User.Building(), building))
+            if (!Permissions.HavePermissionСampus(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
                     
             var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");
@@ -27,7 +27,7 @@ namespace OAT.Controllers
             using Stream fileStream = new FileStream(path, FileMode.Create);
             await file.CopyToAsync(fileStream);
             fileStream.Dispose();
-            Logger.Info($"Пользователь {User.Username()} обновил расписание для {building}\nIP: {HttpContext.UserIP()}");
+            Logger.Info($"Пользователь {User.GetUsername()} обновил расписание для {building}\nIP: {HttpContext.UserIP()}");
             await ScheduleReader.init();
             return StatusCode(StatusCodes.Status200OK);
         }

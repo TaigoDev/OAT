@@ -6,16 +6,16 @@ namespace OAT.Controllers
     public class FilesController : Controller
     {
 
-        [HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.files_manager, Enums.Role.admin)]
+        [HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_changes_ALL, Enums.Role.www_admin)]
         public async Task<IActionResult> UploadChangesSchedule(string building, IFormFile file)
         {
             if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xls")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
-            if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+            if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
 
-            if (!Permissions.HaveBuildingById(User.Building(), building))
+            if (!Permissions.HavePermissionСampusById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{building}-changes.xls");
@@ -23,7 +23,7 @@ namespace OAT.Controllers
             using Stream fileStream = new FileStream(path, FileMode.Create);
             await file.CopyToAsync(fileStream);
             fileStream.Dispose();
-            Logger.Info($"Пользователь {User.Username()} обновил файл с изменением расписания для {building}\nIP: {HttpContext.UserIP()}");
+            Logger.Info($"Пользователь {User.GetUsername()} обновил файл с изменением расписания для {building}\nIP: {HttpContext.UserIP()}");
             return StatusCode(StatusCodes.Status200OK);
         }
 

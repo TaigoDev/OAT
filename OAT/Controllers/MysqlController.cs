@@ -6,11 +6,12 @@ namespace OAT.Controllers
 {
     public class MysqlController : Controller
     {
-        [HttpPost, Route("api/mysql/cmd"), AuthorizeRoles(Enums.Role.admin)]
+        [HttpPost, Route("api/mysql/cmd"), AuthorizeRoles(Enums.Role.www_admin)]
         public async Task<IActionResult> SendCmd(string command)
         {
-            if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+            if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
+            return StatusCode(200);
             var answer = new object();
             try
             {
@@ -21,7 +22,7 @@ namespace OAT.Controllers
             {
                 answer = ex.Message;
             }
-            Logger.Info($"Пользователь {User.Username()} выполним команду в базе данных - {command}\nIP: {HttpContext.UserIP()}");
+            Logger.Info($"Пользователь {User.GetUsername()} выполним команду в базе данных - {command}\nIP: {HttpContext.UserIP()}");
             return Ok(answer);
         }
     }

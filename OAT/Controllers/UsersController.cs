@@ -8,6 +8,7 @@ namespace OAT.Controllers
 {
     public class UsersController : Controller
     {
+        /*
         [HttpPost, Route("api/users/new"), AuthorizeRoles(Enums.Role.admin)]
         public async Task<IActionResult> NewUser(string Fullname, string username, string password, string role, string building)
         {
@@ -58,5 +59,6 @@ namespace OAT.Controllers
                 $"IP-адрес: {HttpContext.UserIP()}");
             return StatusCode(StatusCodes.Status200OK);
         }
+        */
     }
 }

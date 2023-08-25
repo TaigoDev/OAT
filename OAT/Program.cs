@@ -6,6 +6,8 @@ using OAT.Readers;
 using OAT.Utilities;
 using Recovery.Tables;
 using RepoDb;
+using System.DirectoryServices.Protocols;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
@@ -59,8 +61,7 @@ void SetupControllers()
             ProfNewsReader.init,
             ScheduleReader.init,
             CommandsController.init,
-            ContractReader.init,
-            CreateAdminAccount);
+            ContractReader.init);
     }
     catch (Exception ex)
     {
@@ -119,17 +120,17 @@ async Task Proxing(HttpContext context, Func<Task> next)
     }
 }
 
-async Task CreateAdminAccount()
-{
-    using var connection = new MySqlConnection(Utils.GetConnectionString());
-    var records = await connection.QueryAsync<users>(e => e.username == "admin");
-    if (records.Any())
-        return;
-    await connection.InsertAsync(new users(
-        "Омский авиационный колледж",
-        "admin",
-        Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
-        Enums.Role.admin, Enums.Building.all));
-}
+//async Task CreateAdminAccount()
+//{
+//    using var connection = new MySqlConnection(Utils.GetConnectionString());
+//    var records = await connection.QueryAsync<users>(e => e.username == "admin");
+//    if (records.Any())
+//        return;
+//    await connection.InsertAsync(new users(
+//        "Омский авиационный колледж",
+//        "admin",
+//        Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
+//        Enums.Role.admin, Enums.Building.all));
+//}
 
 

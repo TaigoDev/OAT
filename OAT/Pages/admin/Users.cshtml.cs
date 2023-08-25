@@ -5,18 +5,12 @@ using RepoDb;
 
 namespace OAT.Pages.admin
 {
-    [AuthorizeRoles(Enums.Role.admin)]
+    [AuthorizeRoles(Enums.Role.www_admin)]
     public class UsersModel : PageModel
     {
-        public List<users> users = new List<users>();
 
         public async void OnGet()
         {
-            if (!HttpContext.Request.Query["oq"].Any())
-                Redirect($"admin/users?oq={Utils.RandomString(64)}");
-            using var connection = new MySqlConnection(Utils.GetConnectionString());
-            var records = connection.QueryAllAsync<users>().GetAwaiter().GetResult();
-            users = records.ToList();
         }
     }
 }

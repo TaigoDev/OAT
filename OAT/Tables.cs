@@ -3,44 +3,6 @@ using OAT.Utilities;
 
 namespace Recovery.Tables
 {
-    public class users
-    {
-        public users(int id, string FullName, string username, string password, string role)
-        {
-            this.id = id;
-            this.FullName = FullName;
-            this.username = username;
-            this.password = password;
-            this.role = role;
-        }
-        public users(string FullName, string username, string password, Enums.Role role, Enums.Building building)
-        {
-            id = Utils.getLastId("users").GetAwaiter().GetResult();
-            this.FullName = FullName;
-            this.username = username;
-            this.password = password;
-            this.role = role.ToString();
-            this.building = building.ToString();
-        }
-        public users(string FullName, string username, string password, string role, string building)
-        {
-            id = Utils.getLastId("users").GetAwaiter().GetResult();
-            this.FullName = FullName;
-            this.username = username;
-            this.password = password;
-            this.role = role;
-            this.building = building;
-        }
-
-        public users() { }
-
-        public int id { get; set; }
-        public string FullName { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string role { get; set; }
-        public string building { get; set; }
-    }
 
     public class Teachers
     {
@@ -92,5 +54,31 @@ namespace Recovery.Tables
         public string photos { get; set; }
 
     }
+
+    public class Tokens
+    {
+
+        public Tokens() { }
+
+        public Tokens(int id, string username, string token, string issued)
+        {
+            this.id = id;
+            this.username = username;
+            Token = token;
+            this.issued = issued;
+        }
+        public Tokens(string username, string token, string issued)
+        {
+            id = Utils.getLastId("Tokens").GetAwaiter().GetResult(); ;
+            this.username = username;
+            Token = token;
+            this.issued = issued;
+        }
+        public int id { get; set; }
+        public string username { get; set; }
+        public string Token { get; set; }
+        public string issued { get; set; }
+    }
+
 }
 

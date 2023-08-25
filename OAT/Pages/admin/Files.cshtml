@@ -17,26 +17,26 @@
                 Корпус
             </label>
             <select id="corpus">
-                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_lenina_24))
+                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_lenina_24))
                 {
                     <option value="b1">
                         Ул. Ленина, 24
                     </option>
                 }
-                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_b_khmelnickogo_281a))
+                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_b_khmelnickogo_281a))
                 {
                     <option value="b2">
                         Б. Хмельницкого, 281А
                     </option>
                 }
-                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.pr_kosmicheskij_14a))
+                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.pr_kosmicheskij_14a))
                 {
                     <option value="b3">
                         Пр. Космический, 14А
                     </option>
 
                 }
-                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_volkhovstroya_5))
+                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_volkhovstroya_5))
                 {
                     <option value="b4">
                         Ул. Волховстроя, 5
@@ -68,26 +68,26 @@
                 Корпус
             </label>
             <select id="user-role">
-                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_lenina_24))
+                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_lenina_24))
                 {
                     <option value="b1">
                         Ул. Ленина, 24
                     </option>
                 }
-                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_b_khmelnickogo_281a))
+                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_b_khmelnickogo_281a))
                 {
                     <option value="b2">
                         Б. Хмельницкого, 281А
                     </option>
                 }
-                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.pr_kosmicheskij_14a))
+                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.pr_kosmicheskij_14a))
                 {
                     <option value="b3">
                         Пр. Космический, 14А
                     </option>
 
                 }
-                @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_volkhovstroya_5))
+                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_volkhovstroya_5))
                 {
                     <option value="b4">
                         Ул. Волховстроя, 5

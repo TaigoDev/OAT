@@ -5,16 +5,17 @@ namespace OAT.Controllers
 {
     public class NewsPostController : Controller
     {
-        [RequestSizeLimit(1000000000000), HttpPost, Route("api/news/upload"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
+        [RequestSizeLimit(1000000000000), HttpPost, Route("api/news/upload"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_news)]
         public async Task<IActionResult> AddFile(string title, string date, string text, List<IFormFile> files)
         {
             try
             {
-                if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+                if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
                     return StatusCode(StatusCodes.Status401Unauthorized);
 
                 if (!Check(title, date, text))
                     return StatusCode(StatusCodes.Status400BadRequest);
+
                 var photos = new List<string>();
                 foreach (IFormFile file in files)
                     if (file.Length > 0)
@@ -29,7 +30,7 @@ namespace OAT.Controllers
                 Logger.Info($"Пользователь опубликовал новую новость.\n" +
                     $"ID: {NewsReader.News.Count()}\n" +
                     $"SHA256 (TEXT): {Utils.sha256_hash(text)}\n" +
-                    $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
+                    $"Пользователь: {User.GetUsername()}\n" +
                     $"IP-адрес: {HttpContext.UserIP()}");
                 NewsReader.Loader();
                 return StatusCode(StatusCodes.Status200OK);
@@ -41,21 +42,24 @@ namespace OAT.Controllers
             }
         }
 
-        [HttpDelete("api/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.admin, Enums.Role.reporter)]
+        [HttpDelete("api/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_news)]
         public async Task<IActionResult> RemoveNews(int id)
         {
-            if (!await AuthorizationController.CheckLogin(User.Username(), User.Password()))
+            if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
                 return StatusCode(StatusCodes.Status401Unauthorized);
+
             if (!System.IO.File.Exists($"news/{id}.yaml"))
                 return StatusCode(StatusCodes.Status204NoContent);
+
             System.IO.File.Delete($"news/{id}.yaml");
             Logger.Info($"Пользователь удалил новость.\n" +
                 $"ID: {id}\n" +
-                $"Пользователь: {User.Identities.ToList()[0].Claims.ToList()[0].Value}\n" +
+                $"Пользователь: {User.GetUsername()}\n" +
                 $"IP-адрес: {HttpContext.UserIP()}");
             NewsReader.Loader();
             return StatusCode(StatusCodes.Status200OK);
         }
+
         private bool Check(params string[] strings)
         {
             foreach (var s in strings)
@@ -63,5 +67,6 @@ namespace OAT.Controllers
                     return false;
             return true;
         }
+
     }
 }

@@ -7,7 +7,7 @@
 }
 <section class="container">
 
-    @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_lenina_24))
+    @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_lenina_24))
     {
         <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
             <label for="news" class="panel-form-title">
@@ -25,7 +25,7 @@
         </form>
     }
 
-    @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_b_khmelnickogo_281a))
+    @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_b_khmelnickogo_281a))
     {
         <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
             <label for="news" class="panel-form-title">
@@ -44,7 +44,7 @@
         </form>
     }
 
-    @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.pr_kosmicheskij_14a))
+    @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.pr_kosmicheskij_14a))
     {
         <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
             <label for="news" class="panel-form-title">
@@ -63,7 +63,7 @@
         </form>
     }
 
-    @if (Permissions.HaveBuildingByName(User.Building(), Enums.Building.ul_volkhovstroya_5))
+    @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_volkhovstroya_5))
     {
         <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
             <label for="news" class="panel-form-title">

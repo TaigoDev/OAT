@@ -21,7 +21,7 @@
                 SendMessage("message-fail-auth");
                 window.location = "https://www.oat.ru/api/logout";
             }
-            else if (jqXHR.status == 406) {
+            else if (jqXHR.status == 406 || jqXHR.status == 403) {
                 SendMessage("message-fail-perms");
             }
             else
