@@ -542,5 +542,5 @@
 /* code of future */
 
 .code-of-future{
-	width: min(100%, 600px);
+	max-width: min(100%, 600px) !important;
 }
