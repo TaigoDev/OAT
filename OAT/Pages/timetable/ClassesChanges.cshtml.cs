@@ -2,6 +2,7 @@
 
 namespace OAT.Pages.timetable
 {
+    [NoCache]
     public class ClassesChangesModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

@@ -12,8 +12,9 @@ namespace TAIGO.ZCore.DPC.Services
 
         public static async Task init()
         {
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes().Where(t =>
-            t.Namespace == "Recovery.Tables").ToList())
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes()
+                      .Where(m => m.GetCustomAttributes(typeof(MysqlTable), false).Length > 0)
+                      .ToList())
                 tables.Add(Activator.CreateInstance(type) ?? throw new Exception("Recovery is not available"));
 
             using var connection = new MySqlConnection(Utils.GetConnectionString());

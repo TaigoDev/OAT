@@ -18,11 +18,11 @@ namespace OAT.Readers
             }
 
             var badRecord = new List<string>();
-            var config = new CsvConfiguration(CultureInfo.CurrentCulture) 
-            { 
+            var config = new CsvConfiguration(CultureInfo.CurrentCulture)
+            {
                 Delimiter = ";",
                 Mode = CsvMode.NoEscape,
-                BadDataFound =  context => badRecord.Add(context.RawRecord)
+                BadDataFound = context => badRecord.Add(context.RawRecord)
             };
 
             using var reader = new StreamReader(path);
@@ -34,7 +34,7 @@ namespace OAT.Readers
                     var record = csv.GetRecord<Contract>();
                     contracts.Add(record!);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Logger.ErrorWithCatch(ex.ToString());
                 }
@@ -49,13 +49,13 @@ namespace OAT.Readers
                     errorString += record;
                 Logger.Warning(errorString);
             }
-            
+
         }
 
         public static bool IsContract(Func<Contract, bool> predicate) =>
             contracts.Where(predicate).Any();
 
-        public static bool GetContract(Func<Contract, bool> predicate, out Contract contract) 
+        public static bool GetContract(Func<Contract, bool> predicate, out Contract contract)
         {
             var records = contracts.Where(predicate);
             if (records.Any())

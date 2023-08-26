@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using OAT.Readers;
-using Recovery.Tables;
 using RepoDb;
 
 namespace OAT.Controllers
 {
     public class ProfNewsController : Controller
     {
-        [RequestSizeLimit(1000000000000), HttpPost, Route("api/prof/news/upload"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_prof_news)]
+        [RequestSizeLimit(1000000000000), HttpPost, Route("api/prof/news/upload"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_prof_news), NoCache]
         public async Task<IActionResult> AddFile(string title, string date, string text, List<IFormFile> files)
         {
             try
@@ -49,7 +48,7 @@ namespace OAT.Controllers
             }
         }
 
-        [HttpDelete("api/prof/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_prof_news)]
+        [HttpDelete("api/prof/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_prof_news), NoCache]
         public async Task<IActionResult> RemoveNews(int id)
         {
             if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))

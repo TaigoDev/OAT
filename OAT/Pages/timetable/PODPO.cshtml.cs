@@ -2,6 +2,7 @@
 
 namespace OAT.Pages.timetable
 {
+    [NoCache]
     public class PODPOModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

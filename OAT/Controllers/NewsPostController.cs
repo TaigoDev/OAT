@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OAT.Utilities;
 
 namespace OAT.Controllers
 {
     public class NewsPostController : Controller
     {
-        [RequestSizeLimit(1000000000000), HttpPost, Route("api/news/upload"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_news)]
+        [RequestSizeLimit(1000000000000), HttpPost, Route("api/news/upload"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_news), NoCache]
         public async Task<IActionResult> AddFile(string title, string date, string text, List<IFormFile> files)
         {
             try
@@ -42,7 +41,7 @@ namespace OAT.Controllers
             }
         }
 
-        [HttpDelete("api/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_news)]
+        [HttpDelete("api/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_news), NoCache]
         public async Task<IActionResult> RemoveNews(int id)
         {
             if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))

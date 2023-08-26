@@ -8,7 +8,7 @@ namespace OAT.Controllers
     public class SchedulePostControllers : Controller
     {
 
-        [HttpPost("api/schedule/{building}/upload")]
+        [HttpPost("api/schedule/{building}/upload"), NoCache]
         public async Task<IActionResult> UploadSchedule(string building, IFormFile file)
         {
             var filename = ScheduleReader.GetFilenameByBuilding(building);
@@ -20,7 +20,7 @@ namespace OAT.Controllers
 
             if (!Permissions.HavePermissionСampus(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
-                    
+
             var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");
             Utils.FileDelete(path);
 

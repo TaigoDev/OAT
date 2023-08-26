@@ -48,11 +48,11 @@ namespace OAT.Pages.feedback
             else
             {
                 var contract = new Contract();
-                if (!ContractReader.GetContract(e => 
-                e.documentId.ToSearchView() == documentId.ToSearchView() && 
+                if (!ContractReader.GetContract(e =>
+                e.documentId.ToSearchView() == documentId.ToSearchView() &&
                 e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
-                e.studentFullName.ToSearchView() == studentFullName.ToSearchView() && 
-                e.Group.ToSearchView() == group.ToSearchView() && 
+                e.studentFullName.ToSearchView() == studentFullName.ToSearchView() &&
+                e.Group.ToSearchView() == group.ToSearchView() &&
                 e.FullName.ToSearchView() == FullName.ToSearchView(), out contract))
                     return;
 

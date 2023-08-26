@@ -136,7 +136,7 @@ namespace OAT.Utilities
         public static bool HavePermissionСampus(string username, Building BuildingName) =>
             HavePermissionСampus(username, BuildingName.ToString());
 
-    } 
+    }
 
 
 
@@ -185,7 +185,7 @@ public static class Enums
     public static List<string> ConvertToString(this List<Role> roles)
     {
         var _roles = new List<string>();
-        foreach(var role in roles)
+        foreach (var role in roles)
             _roles.Add(role.ToString());
         return _roles;
     }

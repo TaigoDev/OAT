@@ -6,7 +6,7 @@ namespace OAT.Controllers
 {
     public class MysqlController : Controller
     {
-        [HttpPost, Route("api/mysql/cmd"), AuthorizeRoles(Enums.Role.www_admin)]
+        [HttpPost, Route("api/mysql/cmd"), AuthorizeRoles(Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> SendCmd(string command)
         {
             if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))

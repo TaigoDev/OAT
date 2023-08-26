@@ -1,13 +1,11 @@
 ﻿using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
-using MySqlConnector;
+using Microsoft.Net.Http.Headers;
 using OAT.Readers;
 using OAT.Utilities;
-using Recovery.Tables;
 using RepoDb;
-using System.DirectoryServices.Protocols;
-using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
@@ -51,7 +49,7 @@ void SetupControllers()
             Path.Combine(Directory.GetCurrentDirectory(), "pay"),
             Logger.path,
             Logger.path_PreventedAttempts);
-        
+
         /* WARNING: Not support async methods */
         RunModules.StartModules(
             OAT.Utilities.Telegram.init,
@@ -71,6 +69,7 @@ void SetupControllers()
 
 void SetupServices(ref WebApplicationBuilder builder)
 {
+
     builder.Services.AddRazorPages();
     builder.Services.AddControllersWithViews();
     builder.Services.AddEndpointsApiExplorer();
@@ -87,6 +86,7 @@ void SetupServices(ref WebApplicationBuilder builder)
     {
         options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter());
         options.Filters.Add<ExceptionFilter>();
+
     });
     builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
     builder.WebHost.UseUrls($"http://0.0.0.0:{config.bind_port}");
@@ -97,12 +97,16 @@ async Task Proxing(HttpContext context, Func<Task> next)
 {
     try
     {
-        var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
-        if (!context.Request.Path.ToString().Contains("admin"))
-            context.Response.Headers.CacheControl = "public, max-age=14400";
-        else
-            context.Response.Headers.CacheControl = "no-cache, no-store";
 
+        context.Response.GetTypedHeaders().CacheControl =
+            new CacheControlHeaderValue()
+            {
+                Public = true,
+                MaxAge = TimeSpan.FromHours(2),
+            };
+
+
+        var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
         if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
         {
             context.Response.Redirect($"{config.MainUrl}/{OnNewSite}");

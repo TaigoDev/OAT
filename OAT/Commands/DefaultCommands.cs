@@ -1,6 +1,5 @@
 ﻿using HtmlAgilityPack;
 using MySqlConnector;
-using Recovery.Tables;
 using RepoDb;
 using System.Reflection;
 using System.Text.RegularExpressions;

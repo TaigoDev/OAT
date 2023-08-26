@@ -1,5 +1,4 @@
 ﻿using MySqlConnector;
-using Recovery.Tables;
 using RepoDb;
 
 namespace OAT.Readers

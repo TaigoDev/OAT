@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using OAT.Utilities;
-using Recovery.Tables;
 using RepoDb;
-using System.Data;
 using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Security.Claims;
@@ -14,7 +12,7 @@ namespace OAT.Controllers
 {
     public class AuthorizationController : Controller
     {
-        [HttpGet, Route("/api/login")]
+        [HttpGet, Route("/api/login"), NoCache]
         public async Task<IActionResult> Login([FromQuery] string username, [FromQuery] string password)
         {
             using var connection = new MySqlConnection(Utils.GetConnectionString());
@@ -36,7 +34,7 @@ namespace OAT.Controllers
             var claims = new List<Claim>() {
                 new Claim("username", username),
                 new Claim("Token", Token),
-          
+
             };
             var roles = Permissions.GetUserRoles(username);
             foreach (var role in roles)
@@ -52,7 +50,7 @@ namespace OAT.Controllers
             return Redirect($"/admin/panel");
         }
 
-        [HttpGet, Route("/api/logout")]
+        [HttpGet, Route("/api/logout"), NoCache]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -71,7 +69,7 @@ namespace OAT.Controllers
                     return false;
 
                 var record = records.First();
-                if(record.username != user.GetUsername())
+                if (record.username != user.GetUsername())
                 {
                     Logger.Warning("⚠️⚠️⚠️ Попытка подделки токена в Cookie файле клиента.\n" +
                         $"Токен был выдан другому пользователю {record.username}\n" +
@@ -80,7 +78,7 @@ namespace OAT.Controllers
                     return false;
                 }
 
-                if(DateTime.ParseExact(record.issued, "dd.MM.yyyyy HH:mm:ss", null).AddMinutes(30) < DateTime.UtcNow)
+                if (DateTime.ParseExact(record.issued, "dd.MM.yyyyy HH:mm:ss", null).AddMinutes(30) < DateTime.UtcNow)
                     return false;
 
                 return true;
@@ -103,7 +101,7 @@ namespace OAT.Controllers
                 conn.Bind();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Error(ex.ToString());
                 return false;

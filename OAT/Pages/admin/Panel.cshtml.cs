@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages
 {
-    [Authorize]
+    [Authorize, NoCache]
     public class PanelModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

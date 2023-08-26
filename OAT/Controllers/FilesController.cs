@@ -6,7 +6,7 @@ namespace OAT.Controllers
     public class FilesController : Controller
     {
 
-        [HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_changes_ALL, Enums.Role.www_admin)]
+        [HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_changes_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> UploadChangesSchedule(string building, IFormFile file)
         {
             if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xls")
@@ -27,7 +27,7 @@ namespace OAT.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
-        [HttpGet("api/schedule/changes/{building}/download")] 
+        [HttpGet("api/schedule/changes/{building}/download"), NoCache]
         public IActionResult DownloadChanges(string building)
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{building}-changes.xls");

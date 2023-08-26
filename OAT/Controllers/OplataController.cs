@@ -7,7 +7,7 @@ namespace OAT.Controllers
     {
 
 
-        [HttpGet("pay/download/{filename}")]
+        [HttpGet("pay/download/{filename}"), NoCache]
         public IActionResult DownloadFile(string filename)
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "pay", filename);
@@ -19,17 +19,17 @@ namespace OAT.Controllers
             return File(bytes, "image/svg+xml");
         }
 
-        [HttpGet("pay/contract/search")]
+        [HttpGet("pay/contract/search"), NoCache]
         public IActionResult Search([FromQuery] string documentId, [FromQuery] string documentDate,
             [FromQuery] string studentFullName, [FromQuery] string group, [FromQuery] string FullName)
         {
 
-           return Ok(ContractReader.IsContract(e => 
-                e.documentId.ToSearchView() == documentId.ToSearchView() && 
-                e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
-                e.studentFullName.ToSearchView() == studentFullName.ToSearchView() && 
-                e.Group.ToSearchView() == group.ToSearchView() && 
-                e.FullName.ToSearchView() == FullName.ToSearchView()));
+            return Ok(ContractReader.IsContract(e =>
+                 e.documentId.ToSearchView() == documentId.ToSearchView() &&
+                 e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
+                 e.studentFullName.ToSearchView() == studentFullName.ToSearchView() &&
+                 e.Group.ToSearchView() == group.ToSearchView() &&
+                 e.FullName.ToSearchView() == FullName.ToSearchView()));
         }
 
 

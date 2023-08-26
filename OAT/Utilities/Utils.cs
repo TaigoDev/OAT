@@ -4,11 +4,8 @@ using Newtonsoft.Json.Linq;
 using OAT.Utilities;
 using RepoDb;
 using RepoDb.Extensions;
-using System;
-using System.Linq.Expressions;
 using System.Net;
 using System.Net.Mail;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -226,7 +223,7 @@ StringSplitOptions options = StringSplitOptions.None)
     }
     public static bool IsRole(this ClaimsPrincipal User, params Enums.Role[] roles)
     {
-       var userRoles = Permissions.GetUserRoles(User.GetUsername());
+        var userRoles = Permissions.GetUserRoles(User.GetUsername());
 
         foreach (var role in roles)
             if (User.IsRole(role))
@@ -272,13 +269,13 @@ public class RunModules
                 Logger.ErrorWithCatch($"❌ Ошибка загрузки модуля {GetMethodName(module)}. Продолжаю запуск...\nОшибка: {ex}");
             }
         }
-       
+
         Logger.Info(IsError ? "⚠️ Сайт был запущен, но не все модули были загружены успешно" : "✅ Все модули сайта были успешно загружены");
     }
 
     private static string GetMethodName(Func<Task> module) =>
         $"{module.Method.DeclaringType!.Name}.{module.Method.Name}";
-    
+
 
 }
 
@@ -311,7 +308,7 @@ public class Repeater
                     await method.Invoke();
                     await Task.Delay(time);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Logger.ErrorWithCatch(ex.ToString());
                 }

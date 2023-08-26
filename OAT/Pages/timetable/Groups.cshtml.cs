@@ -3,6 +3,7 @@ using OAT.Readers;
 
 namespace OAT.Pages.timetable
 {
+    [NoCache]
     public class GroupsModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;

@@ -2,6 +2,7 @@
 
 namespace OAT.Pages
 {
+    [NoCache]
     public class AuthorizationModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
