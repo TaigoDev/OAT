@@ -101,7 +101,6 @@ namespace OAT.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.ToString());
                 return false;
             }
         }

@@ -64,12 +64,12 @@ namespace OAT.Controllers
         [HttpDelete("api/sessions/{building}/delete"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> RemoveSessionsFile(string building, string filename)
         {
-
             if (!Permissions.HavePermissionСampusById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var File = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{Utils.ConvertStringToHex(filename)}.xls");
             Utils.FileDelete(File);
+            Logger.Info($"{User.GetUsername()} удалил файл сессии {filename}");
             return StatusCode(StatusCodes.Status200OK);
         }
 
