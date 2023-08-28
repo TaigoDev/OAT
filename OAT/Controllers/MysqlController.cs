@@ -9,7 +9,6 @@ namespace OAT.Controllers
         [HttpPost, Route("api/mysql/cmd"), AuthorizeRoles(Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> SendCmd(string command)
         {
-            return StatusCode(200);
             var answer = new object();
             try
             {
