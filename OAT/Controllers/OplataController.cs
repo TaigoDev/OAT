@@ -10,7 +10,7 @@ namespace OAT.Controllers
         [HttpGet("pay/download/{filename}"), NoCache]
         public IActionResult DownloadFile(string filename)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "pay", filename);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay", filename);
             if (!System.IO.File.Exists(path))
                 return NotFound();
 

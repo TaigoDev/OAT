@@ -43,12 +43,11 @@ void SetupControllers()
         Utils.CreateDirectoriesWithCurrentPath(
             "bitrix",
             "news",
-            "static",
-            "pay",
             "Resources",
             "Resources/sessions", "Resources/sessions/b1", "Resources/sessions/b2", "Resources/sessions/b3", "Resources/sessions/b4",
             "Resources/teachers",
             "Resources/schedule",
+            "Resources/pay",
             Logger.path,
             Logger.path_PreventedAttempts);
 

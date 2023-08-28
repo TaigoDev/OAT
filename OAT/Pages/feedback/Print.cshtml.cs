@@ -34,9 +34,9 @@ namespace OAT.Pages.feedback
                     $"Purpose={M_Purpose}|Sum={summa * 100}|CBC=01000000000000000130|OKTMO=52701000";
                 var qr = QrCode.EncodeText(qrData, QrCode.Ecc.Medium);
 
-                var pathIzv = Path.Combine(Directory.GetCurrentDirectory(), "pay",
+                var pathIzv = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
                     $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
-                var pathQvit = Path.Combine(Directory.GetCurrentDirectory(), "pay",
+                var pathQvit = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
                     $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 
                 System.IO.File.WriteAllText(pathIzv, qr.ToSvgString(4), Encoding.UTF8);
@@ -67,9 +67,9 @@ namespace OAT.Pages.feedback
 
                 var qr = QrCode.EncodeText(qrData, QrCode.Ecc.Medium);
 
-                var pathIzv = Path.Combine(Directory.GetCurrentDirectory(), "pay",
+                var pathIzv = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
                     $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
-                var pathQvit = Path.Combine(Directory.GetCurrentDirectory(), "pay",
+                var pathQvit = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
                     $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 
                 System.IO.File.WriteAllText(pathIzv, qr.ToSvgString(4), Encoding.UTF8);
