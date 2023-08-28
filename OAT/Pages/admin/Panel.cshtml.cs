@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages
 {
-    [Authorize, NoCache]
+    [NoCache, Authorize]
     public class PanelModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -15,8 +15,6 @@ namespace OAT.Pages
 
         public void OnGet()
         {
-            if (User == null || !User.Identity.IsAuthenticated)
-                Redirect("admin/authorization");
         }
     }
 }

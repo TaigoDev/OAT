@@ -9,9 +9,6 @@ namespace OAT.Controllers
         {
             try
             {
-                if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
-                    return StatusCode(StatusCodes.Status401Unauthorized);
-
                 if (!Check(title, date, text))
                     return StatusCode(StatusCodes.Status400BadRequest);
 
@@ -44,9 +41,6 @@ namespace OAT.Controllers
         [HttpDelete("api/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_news), NoCache]
         public async Task<IActionResult> RemoveNews(int id)
         {
-            if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
-                return StatusCode(StatusCodes.Status401Unauthorized);
-
             if (!System.IO.File.Exists($"news/{id}.yaml"))
                 return StatusCode(StatusCodes.Status204NoContent);
 

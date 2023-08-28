@@ -47,7 +47,7 @@ namespace OAT.Utilities
                     continue;
                 roles.Add(Role);
             }
-            return roles;
+           return roles;
         }
 
 
@@ -198,4 +198,10 @@ public static class Enums
         ul_volkhovstroya_5
     }
 
+    public enum AuthResult
+    {
+        success,
+        token_expired,
+        fail
+    }
 }

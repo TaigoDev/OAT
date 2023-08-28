@@ -15,13 +15,10 @@ namespace OAT.Controllers
             if (file is null || file.Length == 0 || filename is null || Path.GetExtension(file.FileName) is not ".xml")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
-            if (!await AuthorizationController.ValidateCredentials(User, HttpContext.UserIP()))
-                return StatusCode(StatusCodes.Status401Unauthorized);
-
             if (!Permissions.HavePermissionСampus(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{filename}.xml");
             Utils.FileDelete(path);
 
             using Stream fileStream = new FileStream(path, FileMode.Create);

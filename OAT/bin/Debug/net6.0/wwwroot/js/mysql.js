@@ -20,7 +20,7 @@ function SendCmd() {
             alert(jqXHR.status);
             if (jqXHR.status == 401) {
                 SendMessage("message-fail-auth");
-                window.location = "https://www.oat.ru/api/logout";
+                window.location = "/api/logout";
             }
             else
                 SendMessage("message-fail");

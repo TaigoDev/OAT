@@ -85,10 +85,10 @@ namespace OAT.Readers
 
         protected static async Task<string>? LoadXml(string filename)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{filename}.xml");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{filename}.xml");
             if (!File.Exists(path))
             {
-                Logger.Warning($"Файл schedule/{filename}.xml не найден!");
+                Logger.Warning($"Файл Resources/schedule/{filename}.xml не найден!");
                 return null;
             }
             var content = await ReadFile(path);

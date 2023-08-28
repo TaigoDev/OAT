@@ -1,6 +1,6 @@
 ﻿using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Net.Http.Headers;
 using OAT.Readers;
@@ -40,13 +40,15 @@ void SetupControllers()
     Console.WriteLine(Utils.GetConnectionString());
     try
     {
-        Utils.CreateDirectory(
-            Path.Combine(Directory.GetCurrentDirectory(), "bitrix"),
-            Path.Combine(Directory.GetCurrentDirectory(), "news"),
-            Path.Combine(Directory.GetCurrentDirectory(), "static"),
-            Path.Combine(Directory.GetCurrentDirectory(), "static", "teachers"),
-            Path.Combine(Directory.GetCurrentDirectory(), "schedule"),
-            Path.Combine(Directory.GetCurrentDirectory(), "pay"),
+        Utils.CreateDirectoriesWithCurrentPath(
+            "bitrix",
+            "news",
+            "static",
+            "pay",
+            "Resources",
+            "Resources/sessions", "Resources/sessions/b1", "Resources/sessions/b2", "Resources/sessions/b3", "Resources/sessions/b4",
+            "Resources/teachers",
+            "Resources/schedule",
             Logger.path,
             Logger.path_PreventedAttempts);
 
@@ -86,6 +88,7 @@ void SetupServices(ref WebApplicationBuilder builder)
     {
         options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter());
         options.Filters.Add<ExceptionFilter>();
+        options.Filters.Add<ValidationFilter>();
 
     });
     builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
@@ -97,14 +100,21 @@ async Task Proxing(HttpContext context, Func<Task> next)
 {
     try
     {
-
-        context.Response.GetTypedHeaders().CacheControl =
-            new CacheControlHeaderValue()
-            {
-                Public = true,
-                MaxAge = TimeSpan.FromHours(2),
-            };
-
+        if (!context.Request.Path.Value!.Contains("admin"))
+            context.Response.GetTypedHeaders().CacheControl =
+                new CacheControlHeaderValue()
+                {
+                    Public = true,
+                    MaxAge = TimeSpan.FromHours(2),
+                };
+        else
+            context.Response.GetTypedHeaders().CacheControl =
+                new CacheControlHeaderValue()
+                {
+                     NoCache = true,
+                     NoStore = true,
+                     MaxAge = TimeSpan.FromHours(0),
+                };
 
         var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
         if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)

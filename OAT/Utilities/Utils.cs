@@ -42,10 +42,12 @@ StringSplitOptions options = StringSplitOptions.None)
         return words;
     }
 
-    public static void CreateDirectory(params string[] paths)
+
+
+    public static void CreateDirectoriesWithCurrentPath(params string[] paths)
     {
         foreach (var path in paths)
-            CreateDirectory(path);
+            CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), path));
     }
 
     public static void SendEmail(string from, string to, string message)
@@ -249,6 +251,26 @@ StringSplitOptions options = StringSplitOptions.None)
 
     public static string ToSearchView(this string s) =>
         s.ToLower().Replace(" ", "");
+
+    public static string ConvertStringToHex(String input)
+    {
+        Byte[] stringBytes = Encoding.UTF8.GetBytes(input);
+        StringBuilder sbBytes = new StringBuilder(stringBytes.Length * 2);
+        foreach (byte b in stringBytes)
+            sbBytes.AppendFormat("{0:X2}", b);
+
+        return sbBytes.ToString();
+    }
+
+    public static string ConvertHexToString(String hexInput)
+    {
+        int numberChars = hexInput.Length;
+        byte[] bytes = new byte[numberChars / 2];
+        for (int i = 0; i < numberChars; i += 2)
+            bytes[i / 2] = Convert.ToByte(hexInput.Substring(i, 2), 16);
+
+        return Encoding.UTF8.GetString(bytes);
+    }
 }
 
 public class RunModules

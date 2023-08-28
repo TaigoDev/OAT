@@ -7,6 +7,8 @@ using RepoDb;
 using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Security.Claims;
+using YamlDotNet.Core.Tokens;
+using static Enums;
 
 namespace OAT.Controllers
 {
@@ -15,6 +17,7 @@ namespace OAT.Controllers
         [HttpGet, Route("/api/login"), NoCache]
         public async Task<IActionResult> Login([FromQuery] string username, [FromQuery] string password)
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             using var connection = new MySqlConnection(Utils.GetConnectionString());
             var IsValid = LdapValidateCredentials(username, password);
 
@@ -26,9 +29,9 @@ namespace OAT.Controllers
                 return Redirect("/admin/authorization?status=fail");
             }
 
-
+            ClearExpiredTokens(username);
             var Token = Utils.RandomString(450);
-            await connection.InsertAsync(new Tokens(username, Token, DateTime.UtcNow.ToString("dd.MM.yyyyy HH:mm:ss")));
+            await connection.InsertAsync(new Tokens(username, Token, DateTime.UtcNow.ToString("dd.MM.yyyy HH:mm:ss")));
 
 
             var claims = new List<Claim>() {
@@ -57,7 +60,7 @@ namespace OAT.Controllers
             return Redirect("/");
         }
 
-        public static async Task<bool> ValidateCredentials(ClaimsPrincipal user, string IP)
+        public static async Task<Enums.AuthResult> ValidateCredentials(ClaimsPrincipal user, string IP)
         {
             try
             {
@@ -66,27 +69,22 @@ namespace OAT.Controllers
 
                 var records = await connection.QueryAsync<Tokens>(e => e.Token == Token);
                 if (!records.Any())
-                    return false;
+                    return AuthResult.fail;
 
-                var record = records.First();
-                if (record.username != user.GetUsername())
+                var IsSuccess = false;
+                foreach (var record in records)
                 {
-                    Logger.Warning("⚠️⚠️⚠️ Попытка подделки токена в Cookie файле клиента.\n" +
-                        $"Токен был выдан другому пользователю {record.username}\n" +
-                        $"Используется для: {user.GetUsername()}\n" +
-                        $"IP: {IP}");
-                    return false;
+                    if (record.username != user.GetUsername() || DateTime.ParseExact(record.issued, "dd.MM.yyyy HH:mm:ss", null).AddMinutes(30) < DateTime.UtcNow)
+                        continue;
+                    IsSuccess = true;
                 }
 
-                if (DateTime.ParseExact(record.issued, "dd.MM.yyyyy HH:mm:ss", null).AddMinutes(30) < DateTime.UtcNow)
-                    return false;
-
-                return true;
+                return IsSuccess ? AuthResult.success : AuthResult.token_expired;
             }
             catch (Exception ex)
             {
                 Logger.Error(ex.ToString());
-                return false;
+                return AuthResult.token_expired;
             }
         }
 
@@ -106,6 +104,15 @@ namespace OAT.Controllers
                 Logger.Error(ex.ToString());
                 return false;
             }
+        }
+
+        private static async void ClearExpiredTokens(string username)
+        {
+            using var connection = new MySqlConnection(Utils.GetConnectionString());
+            var records = await connection.QueryAsync<Tokens>(e => e.username == username);
+            foreach (var record in records)
+                if (DateTime.ParseExact(record.issued, "dd.MM.yyyy HH:mm:ss", null).AddMinutes(30) < DateTime.UtcNow)
+                    await connection.DeleteAsync(record);
         }
     }
 }

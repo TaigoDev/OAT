@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using OAT.Controllers;
 using System.Runtime.InteropServices;
+using Telegram.Bot.Types;
 
 namespace OAT.Utilities
 {
@@ -27,24 +29,7 @@ namespace OAT.Utilities
         }
     }
 
-    public class ExceptionFilter : IExceptionFilter
-    {
-        public void OnException(ExceptionContext context)
-        {
-            string? actionName = context.ActionDescriptor.DisplayName;
-            string? exceptionStack = context.Exception.StackTrace;
-            var exceptionMessage = context.Exception.Message;
-            var pc = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
-                "На компьютере разработчика" : "На сервере";
-            Logger.Error($"{pc} произошла ошибка:\n" +
-                $"actionName: {actionName}\n" +
-                $"exceptionStack: {exceptionStack}\n" +
-                $"exceptionMessage: {exceptionMessage}");
-            context.ExceptionHandled = false;
-        }
 
-
-    }
 
 
 

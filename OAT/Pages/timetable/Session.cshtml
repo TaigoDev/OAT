@@ -17,24 +17,18 @@
                 </div>
                 <div class="accordion-body">
                     <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Сессия с 26.06
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Сессия с 21.06
-                            </div>
-                        </li>
+                        @foreach(var file in Model.b1)
+                        {
+                            <li class="document-item">
+                                <div class="document-item-head">
+                                    <a target="_blank" href="/@file.url">
+                                    </a>
+                                </div>
+                                <div class="document-item-body">
+                                    @file.Filename
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -44,24 +38,18 @@
                 </div>
                 <div class="accordion-body">
                     <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                График Квалификационных экзаменов 20.06.2023-30.06.2023 г
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                График сессии с 13.06.2023 - 01.07.2023 г.
-                            </div>
-                        </li>
+                        @foreach (var file in Model.b2)
+                        {
+                            <li class="document-item">
+                                <div class="document-item-head">
+                                    <a target="_blank" href="/@file.url">
+                                    </a>
+                                </div>
+                                <div class="document-item-body">
+                                    @file.Filename
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -71,24 +59,18 @@
                 </div>
                 <div class="accordion-body">
                     <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Сессия c 10.05.23г. по 26.06.23г.
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                График экзаменов ППКРС 2 курс 2023г.
-                            </div>
-                        </li>
+                        @foreach (var file in Model.b3)
+                        {
+                            <li class="document-item">
+                                <div class="document-item-head">
+                                    <a target="_blank" href="/@file.url">
+                                    </a>
+                                </div>
+                                <div class="document-item-body">
+                                    @file.Filename
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -98,33 +80,18 @@
                 </div>
                 <div class="accordion-body">
                     <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                График сессии 3 курс
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                График сессии 2 курс
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Сессия 1 курс 2022-2023
-                            </div>
-                        </li>
+                        @foreach (var file in Model.b4)
+                        {
+                            <li class="document-item">
+                                <div class="document-item-head">
+                                    <a target="_blank" href="/@file.url">
+                                    </a>
+                                </div>
+                                <div class="document-item-body">
+                                    @file.Filename
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

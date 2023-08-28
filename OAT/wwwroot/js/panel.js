@@ -54,9 +54,9 @@ function SendNews() {
         },
         error: function (jqXHR, exception) {
             console.log(jqXHR.status);
-            if (jqXHR.status == 401) {
+            if (jqXHR.status == 401 || jqXHR.status == 405) {
                 SendMessage("message-fail-auth");
-                window.location = "https://www.oat.ru/api/logout";
+                window.location = "/api/logout";
             }
             else if (jqXHR.status == 406 || jqXHR.status == 403) {
                 SendMessage("message-fail-perms");
@@ -80,9 +80,9 @@ function DeleteNews(id) {
             element.remove();
         },
         error: function (jqXHR, exception) {
-            if (jqXHR.status == 401) {
+            if (jqXHR.status == 401 || jqXHR.status == 405) {
                 SendMessage("message-fail-auth");
-                window.location = "https://www.oat.ru/api/logout";
+                window.location = "/api/logout";
             }
             if (jqXHR.status == 204) {
                 SendMessage("message-fail-delete");
@@ -125,9 +125,9 @@ function UploadProfNews() {
         },
         error: function (jqXHR, exception) {
             console.log(jqXHR.status);
-            if (jqXHR.status == 401) {
+            if (jqXHR.status == 401 || jqXHR.status == 405) {
                 SendMessage("message-fail-auth");
-                window.location = "https://www.oat.ru/api/logout";
+                window.location = "/api/logout";
             }
             else if (jqXHR.status == 406 || jqXHR.status == 403) {
                 SendMessage("message-fail-perms");
@@ -152,7 +152,7 @@ function DeleteProfNews(id) {
         error: function (jqXHR, exception) {
             if (jqXHR.status == 401) {
                 SendMessage("message-fail-auth");
-                window.location = "https://www.oat.ru/api/logout";
+                window.location = "/api/logout";
             }
             if (jqXHR.status == 204) {
                 SendMessage("message-fail-delete");
