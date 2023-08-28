@@ -23,7 +23,7 @@ app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "static"))
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "static"))
 });
 app.UseRouting();
 app.UseNoSniffHeaders();
@@ -48,6 +48,7 @@ void SetupControllers()
             "Resources/teachers",
             "Resources/schedule",
             "Resources/pay",
+            "Resources/static",
             Logger.path,
             Logger.path_PreventedAttempts);
 
