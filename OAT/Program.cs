@@ -60,7 +60,6 @@ void SetupControllers()
             NewsReader.init,
             ProfNewsReader.init,
             ScheduleReader.init,
-            CommandsController.init,
             ContractReader.init);
     }
     catch (Exception ex)
