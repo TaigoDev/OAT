@@ -1,22 +1,20 @@
-﻿@page "{building?}/{group_name?}"
+﻿@page "{building?}/{fullname?}"
 @using OAT.Readers;
-@model TimetableModel
+@model OAT.Pages.timetable.TeacherScheduleModel
 @{
-    ViewData["Title"] = "Расписание группы " + Model.group_name;
 }
-
 <link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
 <section class="timetable-container">
-    @if (string.IsNullOrWhiteSpace(Model.building) || string.IsNullOrWhiteSpace(Model.group_name) || Model.group is null)
+    @if (Model.teacher is null)
     {
         <h2 class="section-title title-centered">
-            Здания или группы не существует
+            Такого учителя нет
         </h2>
     }
     else
     {
         <h2 class="section-title title-centered">
-            Расписание группы @Model.group_name
+            Расписание @Model.fullname
         </h2>
         <table class="customized timetable">
             <thead>
@@ -51,12 +49,12 @@
                 </tr>
             </thead>
             <tbody>
-                @if(Model.group != null)
+                @if (Model.teacher != null)
                 {
-                    Week week = Model.group.weeks.Where(e => e.id == 1).First();
+                    TeacherWeek week = Model.teacher.weeks.Where(e => e.id == 1).First();
                     @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
                     {
-                        List<Lesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
+                        List<TeacherLesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
                         string[] ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
 
                         <tr>
@@ -65,16 +63,9 @@
                                 @lesson_id
                             </td>
                             <td>
-                                @if (ring.Length == 2)
-                                {
-                                    @ring[0]
-                                    <br/>
-                                    @ring[1]
-                                }
-                                else
-                                {
-                                    @ScheduleReader.lesson_times[lesson_id - 1]
-                                }
+                                @ring[0]
+                                <br />
+                                @ring[1]
                             </td>
 
                             @foreach (var lesson in lessons)
@@ -88,32 +79,19 @@
                                     <td>
                                         <div class="subject">
                                             <div class="subject-name">
-                                                @lesson.subgroups.First().short_subject
+                                                @lesson.short_subject
                                             </div>
                                             <div class="subject-more">
-                                                @if (lesson.subgroups.Count == 1)
-                                                {
+      
                                                     <div class="subject-more-item">
                                                         <div class="subject-teacher">
-                                                            @lesson.subgroups.First().teacher
+                                                            @lesson.group
                                                         </div>
                                                         <div class="subject-teacher">
-                                                            @lesson.subgroups.First().cabinet
+                                                            @lesson.cabinet
                                                         </div>
                                                     </div>
-                                                }
-                                                else 
-                                                    foreach(var group in lesson.subgroups)
-                                                    {
-                                                        <div class="subject-more-item">
-                                                            <div class="subject-teacher">
-                                                                @group.teacher
-                                                            </div>
-                                                            <div class="subject-teacher">
-                                                                @group.cabinet
-                                                            </div>
-                                                        </div>
-                                                    }
+                                              
                                             </div>
                                         </div>
                                     </td>
@@ -159,12 +137,12 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.group != null)
+                @if (Model.teacher != null)
                 {
-                    Week week = Model.group.weeks.Where(e => e.id == 2).First();
+                    TeacherWeek week = Model.teacher.weeks.Where(e => e.id == 2).First();
                     @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
                     {
-                        List<Lesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
+                        List<TeacherLesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
                         string[] ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
 
                         <tr>
@@ -173,16 +151,9 @@
                                 @lesson_id
                             </td>
                             <td>
-                                @if (ring.Length == 2)
-                                {
                                     @ring[0]
                                     <br />
                                     @ring[1]
-                                }
-                                else
-                                {
-                                    @ScheduleReader.lesson_times[lesson_id - 1]
-                                }
                             </td>
 
                             @foreach (var lesson in lessons)
@@ -196,32 +167,19 @@
                                     <td>
                                         <div class="subject">
                                             <div class="subject-name">
-                                                @lesson.subgroups.First().short_subject
+                                                @lesson.short_subject
                                             </div>
                                             <div class="subject-more">
-                                                @if (lesson.subgroups.Count == 1)
-                                                {
-                                                    <div class="subject-more-item">
-                                                        <div class="subject-teacher">
-                                                            @lesson.subgroups.First().teacher
-                                                        </div>
-                                                        <div class="subject-teacher">
-                                                            @lesson.subgroups.First().cabinet
-                                                        </div>
+
+                                                <div class="subject-more-item">
+                                                    <div class="subject-teacher">
+                                                        @lesson.group
                                                     </div>
-                                                }
-                                                else
-                                                    foreach (var group in lesson.subgroups)
-                                                    {
-                                                        <div class="subject-more-item">
-                                                            <div class="subject-teacher">
-                                                                @group.teacher
-                                                            </div>
-                                                            <div class="subject-teacher">
-                                                                @group.cabinet
-                                                            </div>
-                                                        </div>
-                                                    }
+                                                    <div class="subject-teacher">
+                                                        @lesson.cabinet
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </td>
@@ -235,4 +193,3 @@
         </table>
     }
 </section>
-    

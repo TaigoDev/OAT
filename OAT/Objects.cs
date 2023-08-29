@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System.Security.Cryptography.X509Certificates;
 
 public class Config
 {
@@ -73,19 +74,16 @@ public class TelegramConfig
 }
 public class Group
 {
-    public Group(string name, int curse, List<Week> weeks, List<string> lesson_times)
+    public Group(string name, int curse, List<Week> weeks)
     {
         this.name = name;
         this.weeks = weeks;
         this.curse = curse;
-        this.lesson_times = lesson_times;
     }
 
     public string name { get; set; }
     public int curse { get; set; }
     public List<Week> weeks { get; set; } = new List<Week>(2);
-
-    public List<string> lesson_times { get; set; }
 }
 
 public class Week
@@ -155,4 +153,85 @@ public class Contract
     public string Group { get; set; }
     [Name("Zakazchik")]
     public string FullName { get; set; }
+}
+
+public class TeacherSchedule
+{
+    public TeacherSchedule()
+    {
+    }
+
+    public TeacherSchedule(string fullName, List<TeacherWeek> weeks)
+    {
+        FullName = fullName;
+        this.weeks = weeks;
+    }
+
+    public string FullName { get; set; }
+    public List<TeacherWeek> weeks = new List<TeacherWeek>(2)
+    {
+        new TeacherWeek(1),
+        new TeacherWeek(2)
+    };
+
+}
+
+public class TeacherWeek
+{
+    public TeacherWeek(int id, List<TeacherDay> days)
+    {
+        this.id = id;
+        this.days = days;
+    }
+    public TeacherWeek(int id)
+    {
+        this.id = id;
+    }
+    public int id { get; set; }
+    public List<TeacherDay> days = new List<TeacherDay>(7)
+    {
+        new TeacherDay(1),
+        new TeacherDay(2),
+        new TeacherDay(3),
+        new TeacherDay(4),
+        new TeacherDay(5),
+        new TeacherDay(6),
+        new TeacherDay(7),
+    };
+}
+
+public class TeacherDay
+{
+    public TeacherDay(int id, List<TeacherLesson> lessons)
+    {
+        this.id = id;
+        this.lessons = lessons;
+    }
+    public TeacherDay(int id)
+    {
+        this.id = id;
+    }
+
+    public int id { get; set; }
+    public List<TeacherLesson> lessons = new List<TeacherLesson>();
+}
+
+public class TeacherLesson
+{
+    public TeacherLesson()
+    {
+    }
+
+    public TeacherLesson(int id, string short_subject, string group, string cabinet)
+    {
+        this.id = id;
+        this.short_subject = short_subject;
+        this.group = group;
+        this.cabinet = cabinet;
+    }
+
+    public int id { get; set; }
+    public string short_subject { get; set; }
+    public string group { get; set; }
+    public string cabinet { get; set; }
 }
