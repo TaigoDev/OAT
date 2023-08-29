@@ -1,7 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Readers;
-using System.Text.RegularExpressions;
 
 namespace OAT.Pages.timetable
 {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.Readers;
+using OAT.Utilities;
 
 namespace OAT.Pages.timetable
 {
@@ -19,8 +20,9 @@ namespace OAT.Pages.timetable
 
         public void OnGet(string? building)
         {
-            groups = ScheduleReader.GetGroupsByBuilding(building);
-            max_curse = groups!.Count == 0 ? 0 : groups.Max(e => e.curse);
+            groups = ScheduleUtils.GetGroupsByBuilding(building);
+            if (groups is not null)
+                max_curse = groups!.Count == 0 ? 0 : groups.Max(e => e.curse);
             this.building = building;
         }
     }

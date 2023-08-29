@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.Readers;
+using OAT.Utilities;
 
 namespace OAT.Pages.timetable
 {
@@ -13,7 +14,7 @@ namespace OAT.Pages.timetable
         public void OnGet(string building, string fullname)
         {
             this.fullname = fullname;
-            teacher = ScheduleReader.GetTeacherScheduleByBuilding(building).FirstOrDefault(e => e.FullName.ToLower() == fullname.ToLower());
+            teacher = ScheduleUtils.GetTeacherScheduleByBuilding(building).FirstOrDefault(e => e.FullName.ToLower() == fullname.ToLower());
         }
 
         public List<TeacherLesson> GetAllLessonsByNumber(int id, TeacherWeek week)
@@ -25,9 +26,9 @@ namespace OAT.Pages.timetable
         }
 
         public int GetMaxLessonsInDay(TeacherWeek week) =>
-            week.days.Max(e =>
-            e.lessons.Count == 0 ? 0 : e.lessons.Max(l => l.id));
+            week.days.Max(e => e.lessons.Count == 0 ? 0 : e.lessons.Max(l => l.id));
+
         public int GetMinLessonsInDay(TeacherWeek week) =>
-    week.days.Min(e => e.lessons.Count == 0 ? 100 : e.lessons.Min(l => l.id));
+            week.days.Min(e => e.lessons.Count == 0 ? 100 : e.lessons.Min(l => l.id));
     }
 }

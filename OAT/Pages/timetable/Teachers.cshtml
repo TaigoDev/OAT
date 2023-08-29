@@ -1,5 +1,5 @@
 ﻿@page "{building?}"
-@using OAT.Readers;
+@using OAT.Utilities;
 @model OAT.Pages.timetable.TeachersModel
 @{
     ViewData["Title"] = "Расписание преподавателей";
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var teacher in ScheduleReader.GetTeacherScheduleByBuilding(Model.building))
+            @foreach (var teacher in ScheduleUtils.GetTeacherScheduleByBuilding(Model.building))
             {
                 <tr>
                     <td>
@@ -31,8 +31,6 @@
                     </td>
                 </tr>
             }
-
-            
             
         </tbody>
         

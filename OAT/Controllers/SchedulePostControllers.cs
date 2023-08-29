@@ -11,7 +11,7 @@ namespace OAT.Controllers
         [HttpPost("api/schedule/{building}/upload"), NoCache]
         public async Task<IActionResult> UploadSchedule(string building, IFormFile file)
         {
-            var filename = ScheduleReader.GetFilenameByBuilding(building);
+            var filename = ScheduleUtils.GetFilenameByBuilding(building);
             if (file is null || file.Length == 0 || filename is null || Path.GetExtension(file.FileName) is not ".xml")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
