@@ -57,6 +57,7 @@ public class UrlsContoller
             new IPage("sveden/grants", "organizationInformation/StudentSupport"),
             new IPage("sveden/terror/index.php", "organizationInformation/Terrorism"),
             new IPage("sveden/vacancy", "organizationInformation/Vacancies"),
+
             // applicants
             new IPage("abitur/priemnaya-komissiya", "applicant/SelectionCommittee"),
             new IPage("abitur/spetsialnosti", "applicant/SpecialtiesAndProfessions"),
@@ -67,6 +68,7 @@ public class UrlsContoller
             new IPage("abitur/sertifikatsiya-d-link-cisco", "applicant/DLinkCisco"),
             new IPage("abitur/spetsialnosti-ochno-zaochnogo-vechernego-otdeleniya/", "applicant/SpecialtiesPartTimeEvening"),
             new IPage("abitur/prof.php", "applicant/CareerGuidanceEvents"),
+
             // students
             new IPage("students/distant", "students/DistanceFullTimeLearning"),
             new IPage("students/distantsionnoe-obuchenie", "students/DistanceLearning"),
@@ -74,6 +76,7 @@ public class UrlsContoller
             new IPage("sveden/Employment/Employment.php", "students/AlumniEmploymentCenterOmaviat"),
             new IPage("sveden/Employment/center.php", "students/AlumniEmploymentCenterOmsk"),
             new IPage("parents/pravila-vnutrennego-rasporyadka-dnya-studentov", "students/DailyRoutineRules"),
+
             // parents
             new IPage("parents/organizatsiya-uchebnogo-protsessa-v-kolledzhe", "parents/EducationalProcessOrganization"),
 
