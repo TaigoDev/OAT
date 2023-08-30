@@ -11,6 +11,8 @@ public class UrlsContoller
             return cPage.FirstOrDefault()?.current;
 
         var page = pages.Where(p => $"/{p.map}" == path || $"/{p.map}/" == path).FirstOrDefault();
+        if (path.Contains("raspisanie"))
+            page = new IPage("raspisanie/*", "timetable/Classes");
         return page == null ? null : page.current;
     }
 
@@ -75,13 +77,6 @@ public class UrlsContoller
             // parents
             new IPage("parents/organizatsiya-uchebnogo-protsessa-v-kolledzhe", "parents/EducationalProcessOrganization"),
 
-            // timetable
-            new IPage("students/raspisanie/index.php", "timetable/Classes"),
-            new IPage("students/raspisanie/izmenenia.php", "timetable/ClassesChanges"),
-            new IPage("students/raspisanie/raspPract.php", "timetable/Practice"),
-            new IPage("students/raspisanie/DpoAndPo/index.php", "timetable/PODPO"),
-            new IPage("students/raspisanie/Session", "timetable/Session"),
-            new IPage("students/raspisanie/GIA/index.php", "timetable/GIA"),
             // feedback
             new IPage("contacts/kak-dobratsya", "feedback/Location"),
             new IPage("contacts/", "feedback/Contacts"),
