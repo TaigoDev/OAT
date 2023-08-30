@@ -1369,6 +1369,10 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	font-size: 1.05rem;
 }
 
+.people-item-body-fio-job::first-letter {
+	text-transform: uppercase;
+}
+
 @media(width<550px){
 	.people-item {
 		max-width: none;
