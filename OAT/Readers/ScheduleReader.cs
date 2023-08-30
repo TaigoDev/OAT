@@ -29,16 +29,16 @@ namespace OAT.Readers
             stopWatch.Start();
             for (int i = 1; i <= Enums.campus_count; i++)
             {
-                var xDoc = new XmlDocument();
-                var xml = await LoadXml($"b{i}");
-
-                if (xml is null)
-                    continue;
-
-                xDoc.LoadXml(xml);
-                XmlNode xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
                 try
                 {
+                    var xDoc = new XmlDocument();
+                    var xml = await LoadXml($"b{i}");
+
+                    if (xml is null)
+                        continue;
+
+                    xDoc.LoadXml(xml);
+                    XmlNode xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
                     foreach (XmlNode xml_group in xml_groups)
                     {
                         try
@@ -54,13 +54,14 @@ namespace OAT.Readers
                             Logger.ErrorWithCatch($"Ошибка загрузки группы {xml_group.Attributes!["name"]!.Value} из b{i}. \nОшибка: {ex}");
                         }
                     }
+                    lesson_times = GetLessonsTime(xDoc);
+
                 }
                 catch (Exception ex)
                 {
                     Logger.ErrorWithCatch($"Ошибка загрузки корпуса b{i}. \nОшибка: {ex}");
                 }
 
-                lesson_times = GetLessonsTime(xDoc);
 
             }
             IterateTeacherList(e => e.OrderBy(e => e.FullName.ToCharArray()[0]).ToList());

@@ -85,14 +85,25 @@
                                 }
                                 else
                                 {
+                                    bool HaveDifferentLessons = true;
                                     <td>
                                         <div class="subject">
-                                            <div class="subject-name">
-                                                @lesson.subgroups.First().short_subject
-                                            </div>
+                                            @if (lesson.subgroups.LastOrDefault() is null || lesson.subgroups.Last().short_subject == lesson.subgroups.First().short_subject)
+                                            {
+                                                HaveDifferentLessons = false;
+                                                <div class="subject-name">
+                                                    @lesson.subgroups.First().short_subject
+                                                </div>
+                                            }
                                             <div class="subject-more">
                                                 @if (lesson.subgroups.Count == 1)
                                                 {
+                                                    if (HaveDifferentLessons)
+                                                    {
+                                                        <div class="subject-name">
+                                                            @lesson.subgroups.First().short_subject
+                                                        </div>
+                                                    }
                                                     <div class="subject-more-item">
                                                         <div class="subject-teacher">
                                                             @lesson.subgroups.First().teacher
@@ -102,9 +113,15 @@
                                                         </div>
                                                     </div>
                                                 }
-                                                else 
-                                                    foreach(var group in lesson.subgroups)
+                                                else
+                                                    foreach (var group in lesson.subgroups)
                                                     {
+                                                        if (HaveDifferentLessons)
+                                                        {
+                                                            <div class="subject-name">
+                                                                @group.short_subject
+                                                            </div>
+                                                        }
                                                         <div class="subject-more-item">
                                                             <div class="subject-teacher">
                                                                 @group.teacher
@@ -193,14 +210,25 @@
                                 }
                                 else
                                 {
+                                    bool HaveDifferentLessons = true;
                                     <td>
                                         <div class="subject">
-                                            <div class="subject-name">
-                                                @lesson.subgroups.First().short_subject
-                                            </div>
+                                            @if (lesson.subgroups.LastOrDefault() is null || lesson.subgroups.Last().short_subject == lesson.subgroups.First().short_subject)
+                                            {
+                                                HaveDifferentLessons = false;
+                                                <div class="subject-name">
+                                                    @lesson.subgroups.First().short_subject
+                                                </div>
+                                            }
                                             <div class="subject-more">
                                                 @if (lesson.subgroups.Count == 1)
                                                 {
+                                                    if (HaveDifferentLessons)
+                                                    {
+                                                        <div class="subject-name">
+                                                            @lesson.subgroups.First().short_subject
+                                                        </div>
+                                                    }
                                                     <div class="subject-more-item">
                                                         <div class="subject-teacher">
                                                             @lesson.subgroups.First().teacher
@@ -213,6 +241,12 @@
                                                 else
                                                     foreach (var group in lesson.subgroups)
                                                     {
+                                                        if (HaveDifferentLessons)
+                                                        {
+                                                            <div class="subject-name">
+                                                                @group.short_subject
+                                                            </div>
+                                                        }
                                                         <div class="subject-more-item">
                                                             <div class="subject-teacher">
                                                                 @group.teacher
