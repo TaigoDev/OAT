@@ -95,8 +95,6 @@ namespace OAT.Controllers
             {
                 var authType = OperatingSystem.IsWindows() ? AuthType.Negotiate : AuthType.Basic;
                 username = OperatingSystem.IsWindows() ? username : $"{ProxyController.config.ldap_domain}\\{username}";
-                Logger.Info($"{ProxyController.config.ldap_IP}:{ProxyController.config.ldap_port}. Username: {username}. AuthType: {authType}");
-
                 var conn = new LdapConnection(new LdapDirectoryIdentifier(ProxyController.config.ldap_IP, ProxyController.config.ldap_port), new NetworkCredential(username, password), authType);
                 conn.Bind();
                 return true;
