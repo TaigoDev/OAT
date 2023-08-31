@@ -49,7 +49,6 @@ namespace OAT.Readers
                     errorString += record;
                 Logger.Warning(errorString);
             }
-
         }
 
         public static bool IsContract(Func<Contract, bool> predicate) =>

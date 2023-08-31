@@ -93,7 +93,7 @@ namespace OAT.Readers
                 var lesson_id = int.Parse(lesson.Attributes!["number"]!.Value);
                 lessons.Add(new Lesson(lesson_id, GetSubgroups(lesson, week_id, day_id, groupName, lesson_id, TeacherSchedule)));
             }
-             return lessons;
+            return lessons;
         }
 
         protected static List<Subgroup> GetSubgroups(XmlNode lesson, int week_id, int day_id, string groupName, int lesson_id, List<TeacherSchedule> TeacherSchedule)

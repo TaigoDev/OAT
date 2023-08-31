@@ -271,6 +271,23 @@ StringSplitOptions options = StringSplitOptions.None)
 
         return Encoding.UTF8.GetString(bytes);
     }
+
+    public static Task AutoRepeat(Func<Task> repeat, int minutes)
+    {
+        new Thread(async () =>
+    {
+        try
+        {
+            await repeat.Invoke();
+            await Task.Delay(minutes * 60 * 1000);
+        }
+        catch (Exception ex)
+        {
+            Logger.ErrorWithCatch(ex.ToString());
+        }
+    }).Start();
+        return Task.CompletedTask;
+    }
 }
 
 public class RunModules
