@@ -51,7 +51,6 @@ void SetupControllers()
             "Resources/static",
             Logger.path,
             Logger.path_PreventedAttempts);
-        var contra = new Func<Task>(async () => await ContractReader.init());
         /* WARNING: Not support async methods */
         RunModules.StartModules(
             OAT.Utilities.Telegram.init,
@@ -60,7 +59,7 @@ void SetupControllers()
             NewsReader.init,
             ProfNewsReader.init,
             ScheduleReader.init,
-            ContractReader.init);
+            () => Utils.AutoRepeat(async () => await ContractReader.init(), 15));
     }
     catch (Exception ex)
     {

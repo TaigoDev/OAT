@@ -27,7 +27,7 @@ namespace OAT.Readers
 
             using var reader = new StreamReader(path);
             using var csv = new CsvReader(reader, config);
-            while (csv.Read())
+            while (await csv.ReadAsync())
             {
                 try
                 {
