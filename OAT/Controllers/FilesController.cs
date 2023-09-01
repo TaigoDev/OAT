@@ -85,7 +85,7 @@ namespace OAT.Controllers
         [HttpGet("api/schedule/changes/{building}/download"), NoCache]
         public IActionResult DownloadChanges(string building)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "schedule", $"{building}-changes.xls");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xls");
             if (!System.IO.File.Exists(path))
                 return Redirect("/timetable/ClassesChanges");
 
