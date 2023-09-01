@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Readers;
 using OAT.Utilities;
 
 namespace OAT.Pages.timetable

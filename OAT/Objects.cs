@@ -1,5 +1,4 @@
 ﻿using CsvHelper.Configuration.Attributes;
-using System.Security.Cryptography.X509Certificates;
 
 public class Config
 {

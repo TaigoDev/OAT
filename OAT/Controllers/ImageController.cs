@@ -13,7 +13,7 @@ namespace OAT.Controllers
             {
                 url = ProxyController.config.BaseUrl + url;
 
-                var local_path = $"bitrix/{Utils.GetSHA256(url)}{Path.GetExtension(url)}";
+                var local_path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "bitrix", $"{Utils.GetSHA256(url)}{Path.GetExtension(url)}");
 
                 if (System.IO.File.Exists(local_path))
                     return File(System.IO.File.ReadAllBytes(local_path), ContentType(url));

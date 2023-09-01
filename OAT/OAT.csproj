@@ -95,7 +95,6 @@
 	  <Folder Include="wwwroot\documents\timetable\timetablePODPO\" />
 	  <Folder Include="wwwroot\images\applicant\careerGuidanceEvents\" />
 	  <Folder Include="wwwroot\images\news\" />
-	  <Folder Include="bitrix\" />
 	  <Folder Include="wwwroot\images\students\" />
 	  <Folder Include="wwwroot\videos\" />
 	</ItemGroup>

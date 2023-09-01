@@ -7,7 +7,6 @@ using RepoDb;
 using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Security.Claims;
-using YamlDotNet.Core.Tokens;
 using static Enums;
 
 namespace OAT.Controllers
@@ -23,7 +22,7 @@ namespace OAT.Controllers
 
             if (!IsValid)
             {
-                Logger.InfoInAttempts($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
+                Logger.Info($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
                     $"L: {username}\n" +
                     $"IP-адрес отправителя: {HttpContext.UserIP()}");
                 return Redirect("/admin/authorization?status=fail");
@@ -101,7 +100,7 @@ namespace OAT.Controllers
             }
             catch (Exception ex)
             {
-                Logger.ErrorWithCatch(ex.ToString());
+                Logger.Error(ex.ToString());
                 return false;
             }
         }

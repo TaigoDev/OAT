@@ -1,6 +1,5 @@
 ﻿using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Net.Http.Headers;
 using OAT.Readers;
@@ -41,7 +40,6 @@ void SetupControllers()
     try
     {
         Utils.CreateDirectoriesWithCurrentPath(
-            "bitrix",
             "news",
             "Resources",
             "Resources/sessions", "Resources/sessions/b1", "Resources/sessions/b2", "Resources/sessions/b3", "Resources/sessions/b4",
@@ -49,8 +47,8 @@ void SetupControllers()
             "Resources/schedule",
             "Resources/pay",
             "Resources/static",
-            Logger.path,
-            Logger.path_PreventedAttempts);
+            "Resources/bitrix",
+            "Resources/Logs");
         /* WARNING: Not support async methods */
         RunModules.StartModules(
             OAT.Utilities.Telegram.init,
@@ -109,9 +107,9 @@ async Task Proxing(HttpContext context, Func<Task> next)
             context.Response.GetTypedHeaders().CacheControl =
                 new CacheControlHeaderValue()
                 {
-                     NoCache = true,
-                     NoStore = true,
-                     MaxAge = TimeSpan.FromHours(0),
+                    NoCache = true,
+                    NoStore = true,
+                    MaxAge = TimeSpan.FromHours(0),
                 };
 
         var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
@@ -132,17 +130,5 @@ async Task Proxing(HttpContext context, Func<Task> next)
     }
 }
 
-//async Task CreateAdminAccount()
-//{
-//    using var connection = new MySqlConnection(Utils.GetConnectionString());
-//    var records = await connection.QueryAsync<users>(e => e.username == "admin");
-//    if (records.Any())
-//        return;
-//    await connection.InsertAsync(new users(
-//        "Омский авиационный колледж",
-//        "admin",
-//        Utils.GetSHA256("v~S6pRKEX$}U@IPw"),
-//        Enums.Role.admin, Enums.Building.all));
-//}
 
 

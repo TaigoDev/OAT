@@ -47,7 +47,7 @@ namespace OAT.Utilities
                     continue;
                 roles.Add(Role);
             }
-           return roles;
+            return roles;
         }
 
 

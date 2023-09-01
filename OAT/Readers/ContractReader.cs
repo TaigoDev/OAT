@@ -36,7 +36,7 @@ namespace OAT.Readers
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorWithCatch(ex.ToString());
+                    Logger.Error(ex.ToString());
                 }
             }
 

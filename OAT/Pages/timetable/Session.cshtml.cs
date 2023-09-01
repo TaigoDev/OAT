@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using Telegram.Bot.Types;
-using static Enums;
 
 namespace OAT.Pages.timetable
 {
@@ -14,7 +11,7 @@ namespace OAT.Pages.timetable
         {
             _logger = logger;
         }
-            
+
         public List<FileSession> b1 = new List<FileSession>();
         public List<FileSession> b2 = new List<FileSession>();
         public List<FileSession> b3 = new List<FileSession>();
@@ -43,7 +40,7 @@ namespace OAT.Pages.timetable
                 _ => new List<FileSession>()
             };
         }
-        
+
         public class FileSession
         {
             public FileSession(string filename, string url)

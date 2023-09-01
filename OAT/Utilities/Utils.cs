@@ -283,11 +283,12 @@ StringSplitOptions options = StringSplitOptions.None)
             }
             catch (Exception ex)
             {
-                Logger.ErrorWithCatch(ex.ToString());
+                Logger.Error(ex.ToString());
             }
         }).Start();
         return Task.CompletedTask;
     }
+
 
 }
 
@@ -306,7 +307,7 @@ public class RunModules
             catch (Exception ex)
             {
                 IsError = true;
-                Logger.ErrorWithCatch($"❌ Ошибка загрузки модуля {GetMethodName(module)}. Продолжаю запуск...\nОшибка: {ex}");
+                Logger.Error($"❌ Ошибка загрузки модуля {GetMethodName(module)}. Продолжаю запуск...\nОшибка: {ex}");
             }
         }
 
@@ -350,7 +351,7 @@ public class Repeater
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorWithCatch(ex.ToString());
+                    Logger.Error(ex.ToString());
                 }
             }
         }).Start();

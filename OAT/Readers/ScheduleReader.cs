@@ -1,6 +1,5 @@
 ﻿#pragma warning disable CS8602
 using System.Diagnostics;
-using System.Text;
 using System.Xml;
 using static OAT.Utilities.ScheduleUtils;
 
@@ -38,91 +37,84 @@ namespace OAT.Readers
                         continue;
 
                     xDoc.LoadXml(xml);
-                    XmlNode xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
+                    var xml_groups = xDoc.GetElementsByTagName("timetable").Item(0)!;
                     foreach (XmlNode xml_group in xml_groups)
                     {
                         try
                         {
-                            var name = xml_group.Attributes!["name"]!.Value;
-                            GetBuilding(i).Add(new Group(
-                                name,
-                                int.Parse(name.First(e => char.IsDigit(e)).ToString()),
+                            var name = xml_group.GetAttributeValue("name");
+                            var curs = name.First(e => char.IsDigit(e)).ToString().ToInt32();
+
+                            GetBuilding(i).Add(new Group(name, curs,
                                 GetWeeks(xml_group, name, GetTeacherScheduleListByBuildingId(i))));
                         }
                         catch (Exception ex)
                         {
-                            Logger.ErrorWithCatch($"Ошибка загрузки группы {xml_group.Attributes!["name"]!.Value} из b{i}. \nОшибка: {ex}");
+                            Logger.Error($"Ошибка загрузки группы {xml_group.GetAttributeValue("name")} из b{i}. \nОшибка: {ex}");
                         }
                     }
-                    lesson_times = GetLessonsTime(xDoc);
 
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorWithCatch($"Ошибка загрузки корпуса b{i}. \nОшибка: {ex}");
+                    Logger.Error($"Ошибка загрузки корпуса b{i}. \nОшибка: {ex}");
                 }
 
 
             }
-            IterateTeacherList(e => e.OrderBy(e => e.FullName.ToCharArray()[0]).ToList());
+
+            IterateTeacherList(e => e.OrderBy(e => e.FullName.ToCharArray().First()).ToList());
+            lesson_times = await GetLessonsTime(1);
             stopWatch.Stop();
             Console.WriteLine($"Расписания загружены за {stopWatch.ElapsedMilliseconds} ms");
         }
 
         protected static List<Week> GetWeeks(XmlNode xml_group, string groupName, List<TeacherSchedule> TeacherSchedule)
         {
-            var weeks = new List<Week>();
-            foreach (XmlNode week in xml_group)
-                weeks.Add(new Week(int.Parse(week.Attributes!["number"]!.Value), GetDays(week, weeks.Count, groupName, TeacherSchedule)));
-            return weeks;
+            return xml_group.GetChilds().Select((week, index) =>
+                new Week(int.Parse(week.GetAttributeValue("number")), GetDays(week, index, groupName, TeacherSchedule))).ToList();
         }
 
         protected static List<Day> GetDays(XmlNode week, int week_id, string groupName, List<TeacherSchedule> TeacherSchedule)
         {
-            var days = new List<Day>();
-            foreach (XmlNode day in week)
-                days.Add(new Day(day.Attributes!["name"]!.Value, GetLessons(day, week_id, days.Count, groupName, TeacherSchedule)));
-            return days;
+            return week.GetChilds().Select((day, index) =>
+                new Day(day.GetAttributeValue("name"), GetLessons(day, week_id, index, groupName, TeacherSchedule))).ToList();
         }
 
         protected static List<Lesson> GetLessons(XmlNode day, int week_id, int day_id, string groupName, List<TeacherSchedule> TeacherSchedule)
         {
-            var lessons = new List<Lesson>();
-            foreach (XmlNode lesson in day)
+            return day.GetChilds().ConvertAll(lesson =>
             {
-                var lesson_id = int.Parse(lesson.Attributes!["number"]!.Value);
-                lessons.Add(new Lesson(lesson_id, GetSubgroups(lesson, week_id, day_id, groupName, lesson_id, TeacherSchedule)));
-            }
-            return lessons;
+                var lesson_id = int.Parse(lesson.GetAttributeValue("number"));
+                return new Lesson(lesson_id, GetSubgroups(lesson, week_id, day_id, groupName, lesson_id, TeacherSchedule));
+            });
         }
 
         protected static List<Subgroup> GetSubgroups(XmlNode lesson, int week_id, int day_id, string groupName, int lesson_id, List<TeacherSchedule> TeacherSchedule)
         {
-            var subgroups = new List<Subgroup>();
-            foreach (XmlNode subgroup in lesson)
+            return lesson.GetChilds().ConvertAll(subgroup =>
             {
-                var id = int.Parse(subgroup.Attributes!["number"]!.Value);
-                var subject = subgroup.Attributes!["subject"]!.Value;
-                var short_subject = subgroup.Attributes!["short_subject"]!.Value;
-                var teacherFullName = subgroup.Attributes!["teacher"]!.Value;
-                var cabinet = subgroup.Attributes!["cabinet"]!.Value;
-                subgroups.Add(new Subgroup(id, subject, short_subject, teacherFullName, cabinet));
+                var attributes = subgroup.Attributes!;
+                var id = attributes.GetAttributeValue("number").ToInt32();
+                var subject = attributes.GetAttributeValue("subject");
+                var short_subject = attributes.GetAttributeValue("short_subject");
+                var teacherFullName = attributes.GetAttributeValue("teacher");
+                var cabinet = attributes.GetAttributeValue("cabinet");
 
-                bool Have = false;
                 var teacher = TeacherSchedule.FirstOrDefault(e => e.FullName.ToLower() == teacherFullName.ToLower());
-                if (teacher is not null)
-                    Have = true;
-                else
-                    teacher = new TeacherSchedule();
+                bool InList = teacher is not null ? true : false;
+                teacher = teacher is null ? new TeacherSchedule() : teacher;
+
                 teacher.FullName = teacherFullName;
-                teacher.weeks[week_id].days[day_id].lessons.Add(new TeacherLesson(lesson_id, short_subject, groupName, cabinet));
-                if(!Have)
+                teacher.GetTeacherLesson(week_id, day_id).Add(new TeacherLesson(lesson_id, short_subject, groupName, cabinet));
+
+                if (!InList)
                     TeacherSchedule.Add(teacher);
-            }
-            return subgroups;
+
+                return new Subgroup(id, subject, short_subject, teacherFullName, cabinet);
+            });
         }
 
-       
+
     }
 }
-

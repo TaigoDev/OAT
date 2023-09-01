@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace OAT.Utilities
 {
-    public class ScheduleUtils
+    public static class ScheduleUtils
     {
         public static async Task<string?> LoadXml(string filename)
         {
@@ -25,8 +25,6 @@ namespace OAT.Utilities
             {
                 using FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
                 using StreamReader reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251)!);
-
-
                 return await reader_encoding.ReadToEndAsync();
             }
             catch
@@ -38,12 +36,15 @@ namespace OAT.Utilities
             }
         }
 
-        public static List<string> GetLessonsTime(XmlDocument doc)
+        public static async Task<List<string>> GetLessonsTime(int i)
         {
-            var rings = doc.GetElementsByTagName("rings").Item(0);
+            var xDoc = new XmlDocument();
+            var xml = await LoadXml($"b{i}");
+            xDoc.LoadXml(xml);
+            var rings = xDoc.GetElementsByTagName("rings").Item(0);
             var lessons_time = new List<string>();
             foreach (XmlNode ring in rings)
-                lessons_time.Add($"{ring.Attributes["begin_time"]!.Value} - {ring.Attributes["end_time"]!.Value}");
+                lessons_time.Add($"{ring.GetAttributeValue("begin_time")} - {ring.GetAttributeValue("end_time")}");
             return lessons_time;
         }
 
@@ -117,5 +118,29 @@ namespace OAT.Utilities
                 GetBuilding(i).AddRange(list);
             }
         }
+
+        public static List<XmlNode> GetChilds(this XmlNode node) =>
+            node.ChildNodes.Cast<XmlNode>().ToList();
+
+        public static string GetAttributeValue(this XmlAttributeCollection node, string name)
+        {
+            var attribute = node[name];
+            if (attribute is null)
+                return string.Empty;
+
+            var value = attribute.Value;
+            if (value is null)
+                return string.Empty;
+
+            return value.ToString();
+        }
+
+        public static string GetAttributeValue(this XmlNode node, string name) =>
+            node.Attributes!.GetAttributeValue(name);
+
+        public static List<TeacherLesson> GetTeacherLesson(this TeacherSchedule schedule, int week_id, int day_id) =>
+            schedule.weeks[week_id].days[day_id].lessons;
+
+
     }
 }
