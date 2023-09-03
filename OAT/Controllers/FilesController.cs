@@ -90,7 +90,7 @@ namespace OAT.Controllers
             var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{filename}.xls");
             if (!System.IO.File.Exists(file))
                 return StatusCode(StatusCodes.Status404NotFound);
-            return File(await System.IO.File.ReadAllBytesAsync(file), "application/xls", $"{building}-sessions-{new Random().Next()}.xls");
+            return File(await System.IO.File.ReadAllBytesAsync(file), "application/vnd.ms-excel", $"{building}_sessions_{new Random().Next()}.xls");
         }
 
 		#endregion
@@ -147,7 +147,7 @@ namespace OAT.Controllers
             var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{filename}.xlsx");
             if (!System.IO.File.Exists(file))
                 return StatusCode(StatusCodes.Status404NotFound);
-            return File(await System.IO.File.ReadAllBytesAsync(file), "application/xlsx", $"{building}-practice-{new Random().Next()}.xlsx");
+            return File(await System.IO.File.ReadAllBytesAsync(file), "application/xlsx", $"{building}_practice_{new Random().Next()}.xlsx");
         }
 
 
