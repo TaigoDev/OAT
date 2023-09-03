@@ -123,7 +123,7 @@ function UploadPracticeChanges(files_id) {
     POST(url, formData,
         (response) => {
             MessageController("message-success-sessions");
-            LoadSessionsFileByCorpus();
+            LoadPracticeFileByCorpus();
         }, 
         (code) => {
             console.log(code);
