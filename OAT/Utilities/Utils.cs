@@ -205,10 +205,23 @@ StringSplitOptions options = StringSplitOptions.None)
     }.ConnectionString;
 
 
-    public static string GetToken(this ClaimsPrincipal User) =>
-        User.Identities.ToList()[0].Claims.ToList()[1].Value;
-    public static string GetUsername(this ClaimsPrincipal User) =>
-        User.Identities.ToList()[0].Claims.ToList()[0].Value;
+    public static string GetToken(this ClaimsPrincipal User)
+    {
+		var identity = (ClaimsIdentity)User.Identity;
+		if (identity == null)
+			return "404-GetUsername";
+		return identity.Claims.First(e => e.Type == "Token").Value;
+	}
+    public static string GetUsername(this ClaimsPrincipal User)
+    {
+		var identity = (ClaimsIdentity)User.Identity;
+        if (identity == null)
+            return "404-GetUsername";
+        return identity.Claims.First(
+            e => e.Type == "username"
+            ).Value;
+	}
+
     public static bool IsRole(this ClaimsPrincipal User, Enums.Role role)
     {
         var roles = Permissions.GetUserRoles(User.GetUsername());
@@ -223,6 +236,7 @@ StringSplitOptions options = StringSplitOptions.None)
                 return true;
         return false;
     }
+
     public static bool IsRole(this ClaimsPrincipal User, params Enums.Role[] roles)
     {
         var userRoles = Permissions.GetUserRoles(User.GetUsername());

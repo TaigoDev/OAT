@@ -7,54 +7,81 @@
 <div class="container content-page">
     <section class="content">
         <h2 class="section-title">
-            Расписание практик
+            Расписание практик ул. Ленина, 24
         </h2>
-
         <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/practice/практика с 19.06.xlsx">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Практика с 19.06
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/practice/практика с 12.06.xlsx">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Практика с 12.06
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/practice/практика июнь.docx">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Практика июнь
-                </div>
+            @foreach (var file in Model.b1)
+            {
                 <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/practice/практика с 05.06.xlsx">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Практика с 05.06
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/practice/практика с 29.05.xlsx">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Практика с 29.05
-                </div>
-            </li>
+                    <div class="document-item-head">
+                        <a target="_blank" href="/@file.url">
+                        </a>
+                    </div>
+                    <div class="document-item-body">
+                        @file.Filename
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <br/>
+        <br/>
+        <h2 class="section-title">
+            Расписание практик ул. Б. Хмельницкого, 281а
+        </h2>
+        <ul class="documents-list">
+            @foreach (var file in Model.b2)
+            {
+                <li class="document-item">
+                    <div class="document-item-head">
+                        <a target="_blank" href="/@file.url">
+                        </a>
+                    </div>
+                    <div class="document-item-body">
+                        @file.Filename
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <br />
+        <br />
+        <h2 class="section-title">
+            Расписание практик пр. Космический, 14а
+        </h2>
+        <ul class="documents-list">
+            @foreach (var file in Model.b3)
+            {
+                <li class="document-item">
+                    <div class="document-item-head">
+                        <a target="_blank" href="/@file.url">
+                        </a>
+                    </div>
+                    <div class="document-item-body">
+                        @file.Filename
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <br />
+        <br />
+        <h2 class="section-title">
+            Расписание практик ул. Волховстроя, 5
+        </h2>
+        <ul class="documents-list">
+            @foreach (var file in Model.b4)
+            {
+                <li class="document-item">
+                    <div class="document-item-head">
+                        <a target="_blank" href="/@file.url">
+                        </a>
+                    </div>
+                    <div class="document-item-body">
+                        @file.Filename
+                    </div>
+                </li>
+            }
         </ul>
     </section>
     <aside id="sidebar" class="sidebar">

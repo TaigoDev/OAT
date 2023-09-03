@@ -16,6 +16,10 @@
 	{
 		<div>Логин или пароль от аккаунта неверный!</div>
 	}
+	@if (HttpContext.Request.Query["type"] == "token_expired")
+	{
+		<div>Ваша сессия истекла, авторизуйтесь</div>
+	}
 	<label for="login-form" class="form-title">Вход в аккаунт</label>
 	<div class="input-box">
 		<label for="login">Логин</label>

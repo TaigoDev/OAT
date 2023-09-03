@@ -64,16 +64,18 @@ public class Tokens
         Token = token;
         this.issued = issued;
     }
-    public Tokens(string username, string token, string issued)
+    public Tokens(string username, string token, string issued, string Roles)
     {
         id = Utils.getLastId("Tokens").GetAwaiter().GetResult(); ;
         this.username = username;
         Token = token;
         this.issued = issued;
+        this.Roles = Roles;
     }
     public int id { get; set; }
     public string username { get; set; }
     public string Token { get; set; }
+    public string Roles { get; set; }
     public string issued { get; set; }
 }
 

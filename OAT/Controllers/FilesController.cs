@@ -5,14 +5,14 @@ namespace OAT.Controllers
 {
     public class FilesController : Controller
     {
-
-        [HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_changes_ALL, Enums.Role.www_admin), NoCache]
+		#region Schedule changes 
+		[HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_changes_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> UploadChangesSchedule(string building, IFormFile file)
         {
             if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xls")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
-            if (!Permissions.HavePermissionСampusById(User.GetUsername(), building))
+            if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xls");
@@ -26,13 +26,26 @@ namespace OAT.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
-        [HttpPost("api/sessions/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
+		[HttpGet("api/schedule/changes/{building}/download"), NoCache]
+		public IActionResult DownloadChanges(string building)
+		{
+			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xls");
+			if (!System.IO.File.Exists(path))
+				return Redirect("/timetable/ClassesChanges");
+
+			return File(System.IO.File.ReadAllBytes(path), "application/xls", $"{building}-changes-{new Random().Next()}.xls");
+		}
+
+		#endregion
+		#region Sessions
+
+		[HttpPost("api/sessions/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> UploadSessionsFile(string building, string filename, IFormFile file)
         {
             if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xls")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
-            if (!Permissions.HavePermissionСampusById(User.GetUsername(), building))
+            if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{Utils.ConvertStringToHex(filename)}.xls");
@@ -49,7 +62,7 @@ namespace OAT.Controllers
         [HttpGet("api/sessions/{building}/files"), NoCache]
         public async Task<IActionResult> GetSessionsFiles(string building)
         {
-            if (!Permissions.HavePermissionСampusById(User.GetUsername(), building))
+            if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building);
@@ -62,7 +75,7 @@ namespace OAT.Controllers
         [HttpDelete("api/sessions/{building}/delete"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> RemoveSessionsFile(string building, string filename)
         {
-            if (!Permissions.HavePermissionСampusById(User.GetUsername(), building))
+            if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var File = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{Utils.ConvertStringToHex(filename)}.xls");
@@ -80,18 +93,64 @@ namespace OAT.Controllers
             return File(await System.IO.File.ReadAllBytesAsync(file), "application/xls", $"{building}-sessions-{new Random().Next()}.xls");
         }
 
-        [HttpGet("api/schedule/changes/{building}/download"), NoCache]
-        public IActionResult DownloadChanges(string building)
-        {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xls");
-            if (!System.IO.File.Exists(path))
-                return Redirect("/timetable/ClassesChanges");
+		#endregion
+		#region Practice 
 
-            return File(System.IO.File.ReadAllBytes(path), "application/xls", $"{building}-changes-{new Random().Next()}.xls");
+		[HttpPost("api/practice/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
+		public async Task<IActionResult> UploadPracticeFile(string building, string filename, IFormFile file)
+		{
+			if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xlsx")
+				return StatusCode(StatusCodes.Status400BadRequest);
+
+			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
+				return StatusCode(StatusCodes.Status406NotAcceptable);
+
+			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{Utils.ConvertStringToHex(filename)}.xlsx");
+			Utils.FileDelete(path);
+
+			using Stream fileStream = new FileStream(path, FileMode.Create);
+			await file.CopyToAsync(fileStream);
+			fileStream.Dispose();
+
+			Logger.Info($"Пользователь {User.GetUsername()} добавил файл практики для {building}\nIP: {HttpContext.UserIP()}");
+			return StatusCode(StatusCodes.Status200OK);
+		}
+
+		[HttpGet("api/practice/{building}/files"), NoCache]
+		public async Task<IActionResult> GetPracticeFiles(string building)
+		{
+			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
+				return StatusCode(StatusCodes.Status406NotAcceptable);
+
+			var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building);
+			var files = Directory.GetFiles(folder, "*.xlsx", SearchOption.TopDirectoryOnly).ToList();
+			var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e).Replace(".xlsx", "")));
+
+			return Ok(names.toJson());
+		}
+
+		[HttpDelete("api/practice/{building}/delete"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
+		public async Task<IActionResult> RemovePracticeFile(string building, string filename)
+		{
+			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
+				return StatusCode(StatusCodes.Status406NotAcceptable);
+
+			var File = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{Utils.ConvertStringToHex(filename)}.xlsx");
+			Utils.FileDelete(File);
+			Logger.Info($"{User.GetUsername()} удалил файл практики {filename}");
+			return StatusCode(StatusCodes.Status200OK);
+		}
+
+		[HttpGet("api/practice/{building}/{filename}/download")]
+        public async Task<IActionResult> DownloadPracticeFile(string building, string filename)
+        {
+            var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{filename}.xlsx");
+            if (!System.IO.File.Exists(file))
+                return StatusCode(StatusCodes.Status404NotFound);
+            return File(await System.IO.File.ReadAllBytesAsync(file), "application/xlsx", $"{building}-practice-{new Random().Next()}.xlsx");
         }
 
 
-
-
-    }
+		#endregion
+	}
 }

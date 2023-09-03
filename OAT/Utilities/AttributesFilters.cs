@@ -3,8 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Net.Http.Headers;
+using MySqlConnector;
+using Newtonsoft.Json;
 using OAT.Controllers;
+using RepoDb;
 using System.Runtime.InteropServices;
+using System.Security.Claims;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class MysqlTable : Attribute { }
@@ -59,10 +63,22 @@ public class ValidationFilter : IAsyncActionFilter
         var isDefined = controllerActionDescriptor.MethodInfo.GetCustomAttributes(inherit: true).Any(a => a.GetType().Equals(typeof(AuthorizeRolesAttribute)) || a.GetType().Equals(typeof(AuthorizeAttribute)));
         if (isDefined)
         {
+            using var connection = new MySqlConnection(Utils.GetConnectionString());
+            var token = (await connection.QueryAsync<Tokens>(e => e.Token == context.HttpContext.User.GetToken())).FirstOrDefault();
             var authResult = await AuthorizationController.ValidateCredentials(context.HttpContext.User, context.HttpContext.UserIP());
-            if (authResult is Enums.AuthResult.success)
-                await next();
-            else
+            
+            if (authResult is Enums.AuthResult.success && token != null && token.username == context.HttpContext.User.GetUsername())
+			{
+				var identity = (ClaimsIdentity)context.HttpContext.User.Identity;
+				var claims = identity.Claims.Where(e => e.Type == "Role");
+				foreach (var claim in claims)
+					identity.RemoveClaim(claim);
+				var db_roles = JsonConvert.DeserializeObject<List<Enums.Role>>(token.Roles);
+				foreach (var role in db_roles)
+					identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
+				await next();
+			}
+			else
                 context.Result = authResult is Enums.AuthResult.token_expired ? new StatusCodeResult(401) : new StatusCodeResult(403);
         }
         else
@@ -70,4 +86,48 @@ public class ValidationFilter : IAsyncActionFilter
 
 
     }
+}
+
+public class ValidationFilterForPages : IAsyncPageFilter
+{
+    public async Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)
+    {
+        if (!context.RouteData.Values.Any(e => e.Value != null && e.Value.ToString()!.ToLower().Contains("admin") && !e.Value.ToString()!.ToLower().Contains("authorization")))
+        {
+            await next();
+            return;
+        }
+
+        if(context.HttpContext.User == null || !context.HttpContext.User.Identity.IsAuthenticated)
+        {
+            context.HttpContext.Response.Redirect("/admin/authorization");
+            await next();
+            return;
+        }
+
+        using var connection = new MySqlConnection(Utils.GetConnectionString());
+        var token = (await connection.QueryAsync<Tokens>(e => e.Token == context.HttpContext.User.GetToken())).FirstOrDefault();
+        var authResult = await AuthorizationController.ValidateCredentials(context.HttpContext.User, context.HttpContext.UserIP());
+        if (authResult is Enums.AuthResult.success && token != null && token.username == context.HttpContext.User.GetUsername())
+        {
+			var identity = (ClaimsIdentity)context.HttpContext.User.Identity;
+            var claims = identity.Claims.Where(e => e.Type == "Role");
+            foreach (var claim in claims)
+                identity.RemoveClaim(claim);
+
+            var db_roles = JsonConvert.DeserializeObject<List<Enums.Role>>(token.Roles);
+			foreach (var role in db_roles)
+				identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
+			await next();
+        }
+        else
+        {
+            context.HttpContext.Response.Redirect("/api/logout?type=token_expired");
+            await next();
+            return;
+        }
+    }
+
+    public Task OnPageHandlerSelectionAsync(PageHandlerSelectedContext context) =>
+        Task.CompletedTask;
 }

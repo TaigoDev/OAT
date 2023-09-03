@@ -15,7 +15,7 @@ namespace OAT.Controllers
             if (file is null || file.Length == 0 || filename is null || Path.GetExtension(file.FileName) is not ".xml")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
-            if (!Permissions.HavePermissionСampus(User.GetUsername(), building))
+            if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{filename}.xml");

@@ -12,9 +12,45 @@ namespace OAT.Pages.timetable
             _logger = logger;
         }
 
+        public List<FilePractice> b1 = new List<FilePractice>();
+        public List<FilePractice> b2 = new List<FilePractice>();
+        public List<FilePractice> b3 = new List<FilePractice>();
+        public List<FilePractice> b4 = new List<FilePractice>();
+
         public void OnGet()
         {
+            for (int i = 1; i <= 4; i++)
+            {
+                var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", $"b{i}");
+                var files = Directory.GetFiles(folder, "*.xlsx", SearchOption.TopDirectoryOnly).ToList();
+                GetList(i).AddRange(files.ConvertAll(e => new FilePractice(Utils.ConvertHexToString(Path.GetFileName(e).Replace(".xlsx", "")),
+                    $"api/practice/b{i}/{Path.GetFileName(e).Replace(".xlsx", "")}/download")));
 
+            }
+        }
+
+        private List<FilePractice> GetList(int i)
+        {
+            return i switch
+            {
+                1 => b1,
+                2 => b2,
+                3 => b3,
+                4 => b4,
+                _ => new List<FilePractice>()
+            };
+        }
+
+        public class FilePractice
+        {
+            public FilePractice(string filename, string url)
+            {
+                Filename = filename;
+                this.url = url;
+            }
+
+            public string Filename { get; set; }
+            public string url { get; set; }
         }
     }
 }

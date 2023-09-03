@@ -48,6 +48,7 @@ void SetupControllers()
             "Resources/pay",
             "Resources/static",
             "Resources/bitrix",
+            "Resources/practice", "Resources/practice/b1", "Resources/practice/b2", "Resources/practice/b3", "Resources/practice/b4",
             "Resources/Logs");
         /* WARNING: Not support async methods */
         RunModules.StartModules(
@@ -85,6 +86,7 @@ void SetupServices(ref WebApplicationBuilder builder)
         options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter());
         options.Filters.Add<ExceptionFilter>();
         options.Filters.Add<ValidationFilter>();
+        options.Filters.Add<ValidationFilterForPages>();
 
     });
     builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));

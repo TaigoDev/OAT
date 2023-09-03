@@ -17,26 +17,26 @@
                 Корпус
             </label>
             <select id="corpus">
-                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_lenina_24))
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_1))
                 {
                     <option value="b1">
                         Ул. Ленина, 24
                     </option>
                 }
-                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_b_khmelnickogo_281a))
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_2))
                 {
                     <option value="b2">
                         Б. Хмельницкого, 281А
                     </option>
                 }
-                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.pr_kosmicheskij_14a))
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_3))
                 {
                     <option value="b3">
                         Пр. Космический, 14А
                     </option>
 
                 }
-                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_volkhovstroya_5))
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_4))
                 {
                     <option value="b4">
                         Ул. Волховстроя, 5
@@ -68,26 +68,26 @@
                 Корпус
             </label>
             <select id="corpus-sessions" onchange="LoadSessionsFileByCorpus()">
-                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_lenina_24))
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_1))
                 {
                     <option value="b1">
                         Ул. Ленина, 24
                     </option>
                 }
-                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_b_khmelnickogo_281a))
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_2))
                 {
                     <option value="b2">
                         Б. Хмельницкого, 281А
                     </option>
                 }
-                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.pr_kosmicheskij_14a))
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_3))
                 {
                     <option value="b3">
                         Пр. Космический, 14А
                     </option>
 
                 }
-                @if (Permissions.HavePermissionСampus(User.GetUsername(), Enums.Building.ul_volkhovstroya_5))
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_4))
                 {
                     <option value="b4">
                         Ул. Волховстроя, 5
@@ -130,7 +130,79 @@
         </tbody>
     </table>
 
+    <br />
+    <br />
+    <br />
+    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
 
+        <label for="news" class="panel-form-title">
+            Документы практики
+        </label>
+        <div class="input-box">
+            <label for="user-role">
+                Корпус
+            </label>
+            <select id="corpus-practice" onchange="LoadPracticeFileByCorpus()">
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_1))
+                {
+                    <option value="b1">
+                        Ул. Ленина, 24
+                    </option>
+                }
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_2))
+                {
+                    <option value="b2">
+                        Б. Хмельницкого, 281А
+                    </option>
+                }
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_3))
+                {
+                    <option value="b3">
+                        Пр. Космический, 14А
+                    </option>
+
+                }
+                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_4))
+                {
+                    <option value="b4">
+                        Ул. Волховстроя, 5
+                    </option>
+                }
+            </select>
+        </div>
+        <div class="input-box">
+            <label for="filename-display-practice">
+                Имя файла, которое будет отображаться в описании
+            </label>
+            <input id="filename-display-practice" type="text">
+        </div>
+
+        <div class="input-box">
+            <label for="images">
+                Файл
+            </label>
+            <input type="file" name="postedFiles" id="file-uploader-practice" accept=".xlsx">
+        </div>
+
+        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadPracticeChanges('file-uploader-practice');return false" multiple>
+            Добавить
+        </button>
+    </form>
+    <table class="customized panel-table">
+        <thead>
+            <tr>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Управление
+                </th>
+            </tr>
+        </thead>
+
+        <tbody id="practice-tbody">
+        </tbody>
+    </table>
 </section>
 <script type="text/javascript" src="~/js/admin.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/files.js" charset="utf-8"></script>
