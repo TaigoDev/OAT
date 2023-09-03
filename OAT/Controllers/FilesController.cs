@@ -33,7 +33,7 @@ namespace OAT.Controllers
 			if (!System.IO.File.Exists(path))
 				return Redirect("/timetable/ClassesChanges");
 
-			return File(System.IO.File.ReadAllBytes(path), "application/xls", $"{building}-changes-{new Random().Next()}.xls");
+			return File(System.IO.File.ReadAllBytes(path), "application/xls", $"{building}_changes_{new Random().Next()}.xls");
 		}
 
 		#endregion
