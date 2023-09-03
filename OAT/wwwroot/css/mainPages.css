@@ -51,7 +51,7 @@ body {
 
 @media (width<1500px) {
 	.main-underheader .container {
-		padding-top: calc(var(--max-header-heigth) + 45px);
+		padding-top: calc(var(--max-header-heigth) + 35px);
 	}
 }
 

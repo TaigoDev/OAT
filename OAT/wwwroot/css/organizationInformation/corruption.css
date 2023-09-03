@@ -4,10 +4,10 @@
 	margin: 20px auto;
 	padding: 10px;
 	border-radius: 10px;
-	outline: 5px solid #4f4fd5;
+	outline: 5px solid var(--m-color);
 	outline-offset: -3px;
-	background-color: #141476;
-	color: var(--light-white);
+	background-color: var(--m-l-color);
+	color: var(--light-white) !important;
 	font-weight: 500;
 	text-transform: uppercase;
 	text-align: center;
@@ -15,6 +15,6 @@
 }
 
 .report-corruption:hover{
-	outline-color: #2727ff;
+	outline-color: var(--m-d-color);
 	letter-spacing: 0.04em;
 }

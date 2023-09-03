@@ -62,7 +62,6 @@ window.addEventListener("load", () => {
     console.log(partnersSliderWidth);
     document.querySelector(".partners-list").style = `--width-part-block: ${partnersSliderWidth - 20}px;`;
 
-
     /* images slider */
     for (let i = 0; i < imagesSliders.length; i++) {
         let sliderContainer = imagesSliders[i];
