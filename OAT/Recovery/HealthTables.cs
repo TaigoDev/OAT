@@ -24,7 +24,7 @@ namespace TAIGO.ZCore.DPC.Services
                 if (mysql_tables.Where(x => x == table.GetType().Name).FirstOrDefault() == null)
                 {
                     TableRecovery.Recreate(table);
-                    Logger.Info($"HealthTables: We have successfully restored the {new List<PropertyInfo>(table.GetType().GetProperties()).GetType().Name} table");
+                    Logger.Info($"HealthTables: We have successfully restored the {table.GetType().Name} table");
                 }
         }
     }

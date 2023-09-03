@@ -91,7 +91,7 @@ function RemoveSessionFileByCorpus(filename){
     DELETE(url, formData, 
         (response) => {
             MessageController("message-success-delete-session");
-            LoadSessionsFileByCorpus();
+            LoadPracticeFileByCorpus();
         }, 
         (code) => {
             console.log(code);

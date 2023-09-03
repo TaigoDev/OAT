@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Net.Http.Headers;
+using MySqlConnector;
 using OAT.Readers;
 using OAT.Utilities;
 using RepoDb;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
@@ -34,11 +36,12 @@ app.Run();
 
 
 
-void SetupControllers()
+async void SetupControllers()
 {
     Console.WriteLine(Utils.GetConnectionString());
     try
     {
+        await DropTokens();
         Utils.CreateDirectoriesWithCurrentPath(
             "news",
             "Resources",
@@ -59,6 +62,7 @@ void SetupControllers()
             ProfNewsReader.init,
             ScheduleReader.init,
             () => Utils.AutoRepeat(async () => await ContractReader.init(), 15));
+
     }
     catch (Exception ex)
     {
@@ -134,3 +138,8 @@ async Task Proxing(HttpContext context, Func<Task> next)
 
 
 
+async Task DropTokens()
+{
+    using var connection = new MySqlConnection(Utils.GetConnectionString());
+    await connection.ExecuteNonQueryAsync($"DROP TABLE Tokens;");
+}
