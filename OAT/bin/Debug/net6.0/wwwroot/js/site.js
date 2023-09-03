@@ -7,6 +7,8 @@
 window.addEventListener("load", () => {
     /* E L E M E N T S */
     /* main */
+    const preloader = document.getElementById("preloader");
+    preloader.classList.add("end");
     let mainMenuWindow = document.getElementById("main-menu-window");
     let mainMenu = document.getElementById("main-menu");
     let menuIcon = document.getElementById("menu-icon");
