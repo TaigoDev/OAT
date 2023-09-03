@@ -27,13 +27,13 @@ namespace OAT.Controllers
         }
 
 		[HttpGet("api/schedule/changes/{building}/download"), NoCache]
-		public IActionResult DownloadChanges(string building)
+		public async Task<IActionResult> DownloadChanges(string building)
 		{
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xls");
 			if (!System.IO.File.Exists(path))
 				return Redirect("/timetable/ClassesChanges");
 
-			return File(System.IO.File.ReadAllBytes(path), "application/xls", $"{building}_changes_{new Random().Next()}.xls");
+			return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.ms-excel", $"{building}Changes.xls");
 		}
 
 		#endregion
