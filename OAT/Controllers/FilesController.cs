@@ -33,7 +33,7 @@ namespace OAT.Controllers
 			if (!System.IO.File.Exists(path))
 				return Redirect("/timetable/ClassesChanges");
 
-			return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.ms-excel", $"{building}Changes.xlsx");
+			return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Changes.xlsx");
 		}
 
 		#endregion
@@ -90,7 +90,7 @@ namespace OAT.Controllers
             var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{filename}.xlsx");
             if (!System.IO.File.Exists(file))
                 return StatusCode(StatusCodes.Status404NotFound);
-            return File(await System.IO.File.ReadAllBytesAsync(file), "application/vnd.ms-excel", $"{building}Sessions.xlsx");
+            return File(await System.IO.File.ReadAllBytesAsync(file), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Sessions.xlsx");
         }
 
 		#endregion
@@ -147,7 +147,7 @@ namespace OAT.Controllers
             var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{filename}.xlsx");
             if (!System.IO.File.Exists(file))
                 return StatusCode(StatusCodes.Status404NotFound);
-            return File(await System.IO.File.ReadAllBytesAsync(file), "application/xlsx", $"{building}Practice.xlsx");
+            return File(await System.IO.File.ReadAllBytesAsync(file), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Practice.xlsx");
         }
 
 
