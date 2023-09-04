@@ -9,13 +9,13 @@ namespace OAT.Controllers
 		[HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_changes_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> UploadChangesSchedule(string building, IFormFile file)
         {
-            if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xls")
+            if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xlsx")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
             if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xls");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
             Utils.FileDelete(path);
 
             using Stream fileStream = new FileStream(path, FileMode.Create);
@@ -29,11 +29,11 @@ namespace OAT.Controllers
 		[HttpGet("api/schedule/changes/{building}/download"), NoCache]
 		public async Task<IActionResult> DownloadChanges(string building)
 		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xls");
+			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
 			if (!System.IO.File.Exists(path))
 				return Redirect("/timetable/ClassesChanges");
 
-			return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.ms-excel", $"{building}Changes.xls");
+			return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.ms-excel", $"{building}Changes.xlsx");
 		}
 
 		#endregion
@@ -42,13 +42,13 @@ namespace OAT.Controllers
 		[HttpPost("api/sessions/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> UploadSessionsFile(string building, string filename, IFormFile file)
         {
-            if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xls")
+            if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xlsx")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
             if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{Utils.ConvertStringToHex(filename)}.xls");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{Utils.ConvertStringToHex(filename)}.xlsx");
             Utils.FileDelete(path);
 
             using Stream fileStream = new FileStream(path, FileMode.Create);
@@ -66,8 +66,8 @@ namespace OAT.Controllers
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building);
-            var files = Directory.GetFiles(folder, "*.xls", SearchOption.TopDirectoryOnly).ToList();
-            var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e).Replace(".xls", "")));
+            var files = Directory.GetFiles(folder, "*.xlsx", SearchOption.TopDirectoryOnly).ToList();
+            var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e).Replace(".xlsx", "")));
 
             return Ok(names.toJson());
         }
@@ -78,7 +78,7 @@ namespace OAT.Controllers
             if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
-            var File = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{Utils.ConvertStringToHex(filename)}.xls");
+            var File = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{Utils.ConvertStringToHex(filename)}.xlsx");
             Utils.FileDelete(File);
             Logger.Info($"{User.GetUsername()} удалил файл сессии {filename}");
             return StatusCode(StatusCodes.Status200OK);
@@ -87,10 +87,10 @@ namespace OAT.Controllers
         [HttpGet("api/sessions/{building}/{filename}/download")]
         public async Task<IActionResult> DownloadSessionFile(string building, string filename)
         {
-            var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{filename}.xls");
+            var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building, $"{filename}.xlsx");
             if (!System.IO.File.Exists(file))
                 return StatusCode(StatusCodes.Status404NotFound);
-            return File(await System.IO.File.ReadAllBytesAsync(file), "application/vnd.ms-excel", $"{building}_sessions_{new Random().Next()}.xls");
+            return File(await System.IO.File.ReadAllBytesAsync(file), "application/vnd.ms-excel", $"{building}Sessions.xlsx");
         }
 
 		#endregion
@@ -147,7 +147,7 @@ namespace OAT.Controllers
             var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{filename}.xlsx");
             if (!System.IO.File.Exists(file))
                 return StatusCode(StatusCodes.Status404NotFound);
-            return File(await System.IO.File.ReadAllBytesAsync(file), "application/xlsx", $"{building}_practice_{new Random().Next()}.xlsx");
+            return File(await System.IO.File.ReadAllBytesAsync(file), "application/xlsx", $"{building}Practice.xlsx");
         }
 
 
