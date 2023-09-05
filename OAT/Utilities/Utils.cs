@@ -303,6 +303,17 @@ StringSplitOptions options = StringSplitOptions.None)
         return Task.CompletedTask;
     }
 
+    public static bool IsCorrectFile(IFormFile file, string expansion)
+    {
+        if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) != expansion)
+            return false;
+        return true;
+    }
+
+    public static bool IsCorrectFile(IFormFile file, params string[] expansions) =>
+        expansions.Any(expansion => IsCorrectFile(file, expansion));
+
+    
 
 }
 

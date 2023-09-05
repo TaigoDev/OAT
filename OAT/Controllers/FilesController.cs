@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
+using MimeTypes;
 using OAT.Utilities;
+using Telegram.Bot.Types;
 
 namespace OAT.Controllers
 {
@@ -99,13 +102,13 @@ namespace OAT.Controllers
 		[HttpPost("api/practice/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
 		public async Task<IActionResult> UploadPracticeFile(string building, string filename, IFormFile file)
 		{
-			if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xlsx")
+			if (!Utils.IsCorrectFile(file, ".xlsx", ".docx"))
 				return StatusCode(StatusCodes.Status400BadRequest);
 
 			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
 				return StatusCode(StatusCodes.Status406NotAcceptable);
 
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{Utils.ConvertStringToHex(filename)}.xlsx");
+			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{Utils.ConvertStringToHex(filename)}{Path.GetExtension(file.FileName)}");
 			Utils.FileDelete(path);
 
 			using Stream fileStream = new FileStream(path, FileMode.Create);
@@ -123,8 +126,8 @@ namespace OAT.Controllers
 				return StatusCode(StatusCodes.Status406NotAcceptable);
 
 			var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building);
-			var files = Directory.GetFiles(folder, "*.xlsx", SearchOption.TopDirectoryOnly).ToList();
-			var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e).Replace(".xlsx", "")));
+			var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly).ToList();
+			var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e)));
 
 			return Ok(names.toJson());
 		}
@@ -135,7 +138,7 @@ namespace OAT.Controllers
 			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
 				return StatusCode(StatusCodes.Status406NotAcceptable);
 
-			var File = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{Utils.ConvertStringToHex(filename)}.xlsx");
+			var File = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, Utils.ConvertStringToHex(filename));
 			Utils.FileDelete(File);
 			Logger.Info($"{User.GetUsername()} удалил файл практики {filename}");
 			return StatusCode(StatusCodes.Status200OK);
@@ -144,10 +147,10 @@ namespace OAT.Controllers
 		[HttpGet("api/practice/{building}/{filename}/download")]
         public async Task<IActionResult> DownloadPracticeFile(string building, string filename)
         {
-            var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{filename}.xlsx");
+            var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, Utils.ConvertHexToString(filename));
             if (!System.IO.File.Exists(file))
                 return StatusCode(StatusCodes.Status404NotFound);
-            return File(await System.IO.File.ReadAllBytesAsync(file), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Practice.xlsx");
+            return File(await System.IO.File.ReadAllBytesAsync(file), MimeTypeMap.GetMimeType(Path.GetExtension(file)), Path.GetFileName(Utils.ConvertHexToString(filename)));
         }
 
 

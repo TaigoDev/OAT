@@ -22,9 +22,9 @@ namespace OAT.Pages.timetable
             for (int i = 1; i <= 4; i++)
             {
                 var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", $"b{i}");
-                var files = Directory.GetFiles(folder, "*.xlsx", SearchOption.TopDirectoryOnly).ToList();
-                GetList(i).AddRange(files.ConvertAll(e => new FilePractice(Utils.ConvertHexToString(Path.GetFileName(e).Replace(".xlsx", "")),
-                    $"api/practice/b{i}/{Path.GetFileName(e).Replace(".xlsx", "")}/download")));
+                var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly).ToList();
+                GetList(i).AddRange(files.ConvertAll(e => new FilePractice(Utils.ConvertHexToString(Path.GetFileName(e).Replace(Path.GetExtension(e), "")),
+                    $"api/practice/b{i}/{Utils.ConvertStringToHex(Path.GetFileName(e))}/download")));
 
             }
         }

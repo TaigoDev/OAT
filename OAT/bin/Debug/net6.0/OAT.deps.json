@@ -10,6 +10,7 @@
         "dependencies": {
           "CsvHelper": "30.0.1",
           "HtmlAgilityPack": "1.11.51",
+          "MimeTypeMapOfficial": "1.0.17",
           "MySqlConnector": "2.2.6",
           "Net.Codecrete.QrCodeGenerator": "2.0.3",
           "Newtonsoft.Json": "13.0.3",
@@ -55,6 +56,14 @@
           "Microsoft.NETCore.Platforms": "1.1.0",
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
+        }
+      },
+      "MimeTypeMapOfficial/1.0.17": {
+        "runtime": {
+          "lib/netcoreapp3.1/MimeTypes.dll": {
+            "assemblyVersion": "2.3.2.0",
+            "fileVersion": "2.3.2.0"
+          }
         }
       },
       "MySqlConnector/2.2.6": {
@@ -1044,6 +1053,13 @@
       "sha512": "sha512-9ZQKCWxH7Ijp9BfahvL2Zyf1cJIk8XYLF6Yjzr2yi0b2cOut/HQ31qf1ThHAgCc3WiZMdnWcfJCgN82/0UunxA==",
       "path": "microsoft.win32.primitives/4.3.0",
       "hashPath": "microsoft.win32.primitives.4.3.0.nupkg.sha512"
+    },
+    "MimeTypeMapOfficial/1.0.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-f6DSQSYTckCjq1ifRj0fSLiEmDv+22uo4+JjTeb3MNZK3Ban1XLjA+bTQtD+/7x2NBEAGzBLYIRpS1IU2OgIAw==",
+      "path": "mimetypemapofficial/1.0.17",
+      "hashPath": "mimetypemapofficial.1.0.17.nupkg.sha512"
     },
     "MySqlConnector/2.2.6": {
       "type": "package",

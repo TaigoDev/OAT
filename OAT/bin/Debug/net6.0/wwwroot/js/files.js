@@ -12,7 +12,7 @@ function UploadScheduleChanges(files_id) {
             MessageController("message-success");
         }, 
         (code) => {
-            console.log(code);
+            console.log(`Your error code: ${code} ${url}`);
             switch(code) {
                 case 401: 
                     MessageController("message-fail-auth");
@@ -44,7 +44,7 @@ function UploadSessionsChanges(files_id) {
             LoadSessionsFileByCorpus();
         }, 
         (code) => {
-            console.log(code);
+            console.log(`Your error code: ${code} ${url}`);
             switch(code) {
                 case 401 || 405: 
                     MessageController("message-fail-auth");
@@ -52,6 +52,9 @@ function UploadSessionsChanges(files_id) {
                     break;
                 case 406 || 403: 
                     MessageController("message-fail-perms");
+                    break;
+                case 400:
+                    MessageController("message-fail-extension");
                     break;
                 default:
                     MessageController("message-fail");
@@ -94,7 +97,7 @@ function RemoveSessionFileByCorpus(filename){
             LoadPracticeFileByCorpus();
         }, 
         (code) => {
-            console.log(code);
+            console.log(`Your error code: ${code} ${url}`);
             switch(code) {
                 case 401: 
                     MessageController("message-fail-auth");
@@ -126,7 +129,7 @@ function UploadPracticeChanges(files_id) {
             LoadPracticeFileByCorpus();
         }, 
         (code) => {
-            console.log(code);
+            console.log(`Your error code: ${code} ${url}`);
             switch(code) {
                 case 401 || 405: 
                     MessageController("message-fail-auth");
@@ -134,6 +137,9 @@ function UploadPracticeChanges(files_id) {
                     break;
                 case 406 || 403: 
                     MessageController("message-fail-perms");
+                    break;
+                case 400:
+                    MessageController("message-fail-extension");
                     break;
                 default:
                     MessageController("message-fail");
@@ -176,7 +182,7 @@ function RemovePracticeFileByCorpus(filename){
             LoadSessionsFileByCorpus();
         }, 
         (code) => {
-            console.log(code);
+            console.log(`Your error code: ${code} ${url}`);
             switch(code) {
                 case 401: 
                     MessageController("message-fail-auth");
