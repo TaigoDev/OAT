@@ -33,6 +33,11 @@ namespace OAT.Controllers
             ClearExpiredTokens(username);
             var Token = Utils.RandomString(450);
             var roles = Permissions.GetUserRoles(username);
+            if(roles.Count is 0 || roles is null)
+            {
+                Logger.Info($"Запрос на авторизацию через аккаунт {username} отклонен, т.к. пользователь не имеет ни одного права связанного сайтом.\n IP: {HttpContext.UserIP()}");
+                return Redirect("/admin/authorization?status=fail");
+            }
             await connection.InsertAsync(new Tokens(username, Token, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"), JsonConvert.SerializeObject(roles, new Newtonsoft.Json.Converters.StringEnumConverter())));
 
             var claims = new List<Claim>() {

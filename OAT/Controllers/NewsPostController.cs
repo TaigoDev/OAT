@@ -28,7 +28,7 @@ namespace OAT.Controllers
                     $"SHA256 (TEXT): {Utils.sha256_hash(text)}\n" +
                     $"Пользователь: {User.GetUsername()}\n" +
                     $"IP-адрес: {HttpContext.UserIP()}");
-                NewsReader.Loader();
+                await NewsReader.Loader();
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
