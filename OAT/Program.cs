@@ -142,6 +142,10 @@ async Task Proxing(HttpContext context, Func<Task> next)
 
 async Task DropTokens()
 {
-    using var connection = new MySqlConnection(Utils.GetConnectionString());
-    await connection.ExecuteNonQueryAsync($"DROP TABLE Tokens;");
+    try
+    {
+        using var connection = new MySqlConnection(Utils.GetConnectionString());
+        await connection.ExecuteNonQueryAsync($"DROP TABLE Tokens;");
+    }
+    catch { }
 }
