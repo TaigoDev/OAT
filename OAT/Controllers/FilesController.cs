@@ -127,7 +127,7 @@ namespace OAT.Controllers
 
 			var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building);
 			var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly).ToList();
-			var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e)));
+			var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e).Replace(Path.GetExtension(e), "")));
 
 			return Ok(names.toJson());
 		}
@@ -144,7 +144,7 @@ namespace OAT.Controllers
 			return StatusCode(StatusCodes.Status200OK);
 		}
 
-		[HttpGet("api/practice/{building}/{filename}/download")]
+		[HttpGet("api/practice/{building}/{filename}/download"), NoCache]
         public async Task<IActionResult> DownloadPracticeFile(string building, string filename)
         {
             var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, Utils.ConvertHexToString(filename));

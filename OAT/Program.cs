@@ -8,12 +8,14 @@ using OAT.Utilities;
 using RepoDb;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
+using System.Text;
 using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
 
 config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(),
     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
 GlobalConfiguration.Setup().UseMySqlConnector();
+Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); //https://www.nuget.org/packages/ExcelDataReader/3.7.0-develop00385#readme-body-tab
 Console.WriteLine($"bu - {config.BaseUrl}; mu - {config.MainUrl}");
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
