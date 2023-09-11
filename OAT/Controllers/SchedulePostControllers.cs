@@ -11,14 +11,13 @@ namespace OAT.Controllers
         [HttpPost("api/schedule/{building}/upload"), NoCache]
         public async Task<IActionResult> UploadSchedule(string building, IFormFile file)
         {
-            var filename = ScheduleUtils.GetFilenameByBuilding(building);
-            if (file is null || file.Length == 0 || filename is null || Path.GetExtension(file.FileName) is not ".xml")
+            if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xml")
                 return StatusCode(StatusCodes.Status400BadRequest);
 
             if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{filename}.xml");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}.xml");
             Utils.FileDelete(path);
 
             using Stream fileStream = new FileStream(path, FileMode.Create);
