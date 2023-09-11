@@ -36,7 +36,7 @@ namespace OAT.Controllers
                     $"Пользователь: {User.GetUsername()}\n" +
                     $"IP-адрес: {HttpContext.UserIP()}");
 
-                ProfNewsReader.init();
+                await ProfNewsReader.init();
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
@@ -55,7 +55,7 @@ namespace OAT.Controllers
 
             if (!record.Any())
                 return StatusCode(StatusCodes.Status204NoContent);
-            ProfNewsReader.init();
+            await ProfNewsReader.init();
             await connection.DeleteAsync(record.First());
 
             Logger.Info($"Пользователь удалил новость. (Prof)\n" +

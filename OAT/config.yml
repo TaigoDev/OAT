@@ -3,9 +3,9 @@ mainUrl: http://localhost:20045
 bindPort: 20045
 dbIp: "taigo.xyz"
 dbPort: 3306
-dbUser: "u20_tqSmWnicfV"
-dbPassword: "4seGYYxlRNOa9@!EGVw1ZqiB"
-dbName: s20_oat
+dbUser: "u126_FTgyBjq2cl"
+dbPassword: "qYqy6O.MgSk!lm54ieYlnhly"
+dbName: s126_OAT
 ldapIP: "178.74.67.83"
 ldapPort: 789
 ldapLogin: "ld"
