@@ -17,7 +17,7 @@ using static ProxyController;
 public static class Utils
 {
 
-    public static void FileDelete(string path)
+    public static void FileDelete(string? path)
     {
         if (File.Exists(path))
             File.Delete(path);

@@ -133,13 +133,15 @@ namespace OAT.Controllers
 		}
 
 		[HttpDelete("api/practice/{building}/delete"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
-		public async Task<IActionResult> RemovePracticeFile(string building, string filename)
+		public IActionResult RemovePracticeFile(string building, string filename)
 		{
 			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
 				return StatusCode(StatusCodes.Status406NotAcceptable);
 
-			var File = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, Utils.ConvertStringToHex(filename));
-			Utils.FileDelete(File);
+			var workedDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building);
+            var file = Directory.GetFiles(workedDirectory, $"{Utils.ConvertStringToHex(filename)}.*").FirstOrDefault();
+
+			Utils.FileDelete(file);
 			Logger.Info($"{User.GetUsername()} удалил файл практики {filename}");
 			return StatusCode(StatusCodes.Status200OK);
 		}

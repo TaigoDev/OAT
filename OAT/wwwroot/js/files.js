@@ -179,7 +179,7 @@ function RemovePracticeFileByCorpus(filename){
     DELETE(url, formData, 
         (response) => {
             MessageController("message-success-delete-session");
-            LoadSessionsFileByCorpus();
+            LoadPracticeFileByCorpus();
         }, 
         (code) => {
             console.log(`Your error code: ${code} ${url}`);
