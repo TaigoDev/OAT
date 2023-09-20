@@ -15,12 +15,12 @@
 :root {
 	/* colors */
 	--h: 200;
-	--s: 0.225;
-	--m-color: oklch(0.15 calc(var(--s) + 0.05) var(--h));
+	--s: 0.3;
+	--m-color: oklch(0.2 calc(var(--s) + 0.05) var(--h));
 	--m-d-color: oklch(0.1 var(--s) var(--h));
-	--m-l-color: oklch(0.25 calc(var(--s) + 0.05) var(--h));
+	--m-l-color: oklch(0.3 calc(var(--s) + 0.05) var(--h));
 	--matte-color: oklch(0.25 0 0);
-	--light-white: oklch(0.88 0.02 var(--h));
+	--light-white: oklch(0.9 0 0);
 	/* devices */
 	--laptop-l: 1440px;
 	--laptop: 1024px;
