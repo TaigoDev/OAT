@@ -4,6 +4,8 @@
     ViewData["Title"] = "Успеваемость";
 }
 
+<link rel="stylesheet" href="~/css/parents/academicProgress.css" asp-append-version="true">
+
 <div class="container content-page">
     <section class="content">
         <a id="plane" class="plane" href="#sidebar"></a>
@@ -11,104 +13,27 @@
             Успеваемость
         </h2>
 
-        <ul class="page-navigation">
-            <li>
-                <a href="#firstCourse">
-                    1 курс
-                </a>
-            </li>
-            <li>
-                <a href="#secondCourse">
-                    2 курс
-                </a>
-            </li>
-            <li>
-                <a href="#thirdCourse">
-                    3 курс
-                </a>
-            </li>
-            <li>
-                <a href="#fourthCourse">
-                    4 курс
-                </a>
-            </li>
-        </ul>
-
-
-        <div class="accordions-list">
-            <div id="firstCourse" class="accordion">
-                <div class="accordion-head">
-                    Группы 1 курса
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                АВ112
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+        <form class="grades-form">
+            <h3 class="grades-form-title">
+                Посмотреть оценки
+            </h3>
+            <div class="input-box">
+                <label for="login">
+                    Логин
+                </label>
+                <input id="login" type="text"/>
             </div>
-            <div id="secondCourse" class="accordion">
-                <div class="accordion-head">
-                    Группы 2 курса
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                АВ211
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            <div class="input-box">
+                <label for="password">
+                    Пароль
+                </label>
+                <input id="password" type="password"/>
             </div>
-            <div id="thirdCourse" class="accordion">
-                <div class="accordion-head">
-                    Группы 3 курса
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                АВ310
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="fourthCourse" class="accordion">
-                <div class="accordion-head">
-                    Группы 4 курса
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                БП419
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+            <button class="customized">
+                ВОЙТИ
+            </button>
+        </form>
+        
     </section>
     <aside id="sidebar" class="sidebar">
         <h3 class="sidebar-title">

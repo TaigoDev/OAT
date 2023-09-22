@@ -45,6 +45,7 @@
 	  <Content Remove="wwwroot\css\organizationInformation\corruption.css" />
 	  <Content Remove="wwwroot\css\organizationInformation\vacancies.css" />
 	  <Content Remove="wwwroot\css\panel\users.css" />
+	  <Content Remove="wwwroot\css\parents\academicProgress.css" />
 	  <Content Remove="wwwroot\css\projectsAndEvents\education\informationCommunicationTechnologies.css" />
 	  <Content Remove="wwwroot\css\projectsAndEvents\education\newWorkshops.css" />
 	  <Content Remove="wwwroot\css\projectsAndEvents\education\newWorkshops2022.css" />
