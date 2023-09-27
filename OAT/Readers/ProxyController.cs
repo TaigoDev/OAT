@@ -21,7 +21,11 @@ public static class ProxyController
 
         HttpResponseMessage response = null;
         if (context.Request.Method == "GET")
+        {
+            if (path.Contains("students/perfomance") && !string.IsNullOrEmpty(context.Request.Headers["Authorization"].ToString()))
+                client.DefaultRequestHeaders.Add("Authorization", context.Request.Headers["Authorization"].ToString());            
             response = await client.GetAsync(BaseUrl);
+        }
         else if (context.Request.Method == "POST")
         {
             try
@@ -51,6 +55,13 @@ public static class ProxyController
         doc.LoadHtml(body);
         var head = doc.DocumentNode.SelectSingleNode("/html/head");
 
+        if (path.Contains("students/perfomance") && string.IsNullOrEmpty(context.Request.Headers["Authorization"].ToString()))
+        {
+            context.Response.Headers.Add("Www-Authenticate", "Basic realm=\"Enter your credentials in domain oat.local\"");
+            context.Response.Headers.Add("Vary", "Accept-Encoding");
+            context.Response.Headers.Add("Strict-Transport-Security", "max-age=2592000; includeSubDomains; preload");
+        }
+
         if (head != null)
         {
             string newContent = "<meta charset=\"UTF-8\">";
@@ -58,6 +69,7 @@ public static class ProxyController
             head.InsertBefore(newNode, head.FirstChild);
             if (!context.Response.HasStarted)
                 context.Response.ContentType = "text/html";
+      
             await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
         }
         else await context.Response.WriteAsync(body, Encoding.UTF8);
