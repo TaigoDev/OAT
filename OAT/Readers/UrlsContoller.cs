@@ -91,6 +91,7 @@ public class UrlsContoller
             // limitation
             new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),
             new IPage("feedback/Map", "skhema-kolledzha/"),
+            new IPage("parents/AcademicProgress", "parents/uspevaemost/"),
         };
         pages = urls;
         return Task.CompletedTask;
