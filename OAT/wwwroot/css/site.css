@@ -68,10 +68,6 @@ html,
 body {
 	height: 100%;
 	width: 100%;
-	/*
-	max-width: 100%;
-	max-height: 100%;
-	*/
 	line-height: 1.4;
 	font-size: 16px;
 	font-family: "Segoe UI", Arial, sans-serif;
@@ -167,6 +163,10 @@ th {
 .container {
 	width: min(95%, 1500px);
 	margin: 0 auto;
+}
+
+section {
+	width: 100%;
 }
 
 section.centered,
@@ -321,6 +321,7 @@ section.centered .section-title{
 	min-width: 290px;
 	max-width: 290px;
 	height: fit-content;
+	background: var(--matte-color);
 	border: var(--sidebar-border-width) solid;
 	border-radius: var(--sidebar-border-radius);
 	--sidebar-border-radius: 10px;
@@ -336,14 +337,14 @@ section.centered .section-title{
 	font-size: 1.1rem;
 	font-weight: 700;
 	text-align: center;
-	background-color: oklch(0.17 0 0);
+	background-color: #00000038;
 	border-radius: calc(var(--sidebar-border-radius) - var(--sidebar-border-width) - 1px) calc(var(--sidebar-border-radius) - var(--sidebar-border-width) - 1px) 0 0;
 	color: var(--light-white);
 }
 
 .sidebar-body {
 	padding: 10px;
-	background-color: oklch(0.28 0 0);
+	background-color: #8d8d8d0f;
 	border-radius: 0 0 calc(var(--sidebar-border-radius) - var(--sidebar-border-width) - 1px) calc(var(--sidebar-border-radius) - var(--sidebar-border-width) - 1px);
 	color: var(--light-white);
 	font-size: 0.95rem;
@@ -352,38 +353,43 @@ section.centered .section-title{
 .sidebar-links {
 	display: flex;
 	flex-direction: column;
-	row-gap: 5px;
+	row-gap: 10px;
 }
 
-.sidebar-link:hover::after {
-	background-color: hsl(0 0% 70% / 1);
+.sidebar-link:not(.sidebar-link-selected):hover a::after {
+	background-color: #ffffff61;
 	opacity: 1;
 }
 
 .sidebar-link a{
+	position: relative;
+	display: block;
 	color: var(--light-white);
 }
 
-.sidebar-link::after {
+.sidebar-link a::after {
 	content: "";
+	position: absolute;
+	bottom: -5px;
+	left: 0;
 	display: block;
 	width: 100%;
-	height: 1.5px;
-	margin-top: 5px;
-	background-color: hsl(0 0% 70% / 1);
+	height: 2px;
+	background-color: #ffffff40;
 	opacity: 0.5;
 	transition: opacity 200ms;
 }
 
-.sidebar-link:last-child::after {
+.sidebar-link:last-child a::after {
 	display: none;
 }
 
-.sidebar-link-selected{
-	font-weight: 500;
+.sidebar-link-selected {
+	font-weight: 700;
+	letter-spacing: 0.01em;
 }
 
-.sidebar-link-selected::after {
+.sidebar-link-selected a::after {
 	background-color: hsl(0 0% 70% / 1);
 	opacity: 1;
 }
@@ -2212,6 +2218,7 @@ section.content::before{
 	overflow: hidden;
 	margin-top: 40px;
 	max-width: 100%;
+	width: calc(100vw - 5px);
 }
 
 .partners-list {
@@ -2259,6 +2266,7 @@ section.content::before{
 	background-color: rgb(33 33 33 / 10%);
 	text-transform: uppercase;
 	font-weight: 700;
+	overflow-x: hidden;
 }
 
 .footer-top{
