@@ -20,15 +20,11 @@ namespace OAT.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             using var connection = new MySqlConnection(Utils.GetConnectionString());
-            var IsValid = LdapValidateCredentials(username, password);
+            var IsValid = Ldap.Login(username, password, HttpContext.UserIP());
 
             if (!IsValid)
-            {
-                Logger.Info($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
-                    $"L: {username}\n" +
-                    $"IP-адрес отправителя: {HttpContext.UserIP()}");
                 return Redirect("/admin/authorization?status=fail");
-            }
+            
 
             ClearExpiredTokens(username);
             var Token = Utils.RandomString(450);
@@ -92,23 +88,6 @@ namespace OAT.Controllers
             {
                 Logger.Error(ex.ToString());
                 return AuthResult.token_expired;
-            }
-        }
-
-        private static bool LdapValidateCredentials(string username, string password)
-        {
-
-            try
-            {
-                var authType = OperatingSystem.IsWindows() ? AuthType.Negotiate : AuthType.Basic;
-                username = OperatingSystem.IsWindows() ? username : $"{ProxyController.config.ldap_domain}\\{username}";
-                var conn = new LdapConnection(new LdapDirectoryIdentifier(ProxyController.config.ldap_IP, ProxyController.config.ldap_port), new NetworkCredential(username, password), authType);
-                conn.Bind();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
             }
         }
 

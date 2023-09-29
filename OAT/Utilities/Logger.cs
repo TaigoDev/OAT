@@ -24,7 +24,7 @@
             else
                 await File.WriteAllTextAsync(path, $"{message}\n");
 
-            OAT.Utilities.Telegram.SendMessage(message);
+            OAT.Utilities.TelegramBot.SendMessage(message);
         }
         catch (IOException ex)
         {

@@ -13,26 +13,10 @@ namespace OAT.Utilities
 
         public static List<Role> GetUserRoles(string username)
         {
-            using var ldap = new LdapConnection(new LdapDirectoryIdentifier(ProxyController.config.ldap_IP, ProxyController.config.ldap_port));
-
-            ldap.SessionOptions.ProtocolVersion = 3;
-            ldap.AuthType = AuthType.Basic;
-            ldap.Bind(new System.Net.NetworkCredential(ProxyController.config.ldap_login, ProxyController.config.ldap_password));
-
-            var search = new SearchRequest
-            {
-                DistinguishedName = $"DC={ProxyController.config.ldap_domain},DC={ProxyController.config.ldap_zone}",
-                Filter = $"(&(samaccountname={username}))",
-                Scope = SearchScope.Subtree
-            };
-
-            search.Attributes.Add(null);
-            var results = (SearchResponse)ldap.SendRequest(search);
-            if (results.Entries.Count == 0)
-                return new List<Role>();
-
+            var results = Ldap.SearchByUsername(username);
             var roles = new List<Role>();
-            var attribute = results.Entries[0].Attributes.Values.Cast<DirectoryAttribute>().FirstOrDefault(e => e.Name == "memberOf");
+            var attribute = Ldap.GetAttributeByTag(results, "memberOf");
+
             if (attribute is null)
                 return new List<Role>();
 
@@ -40,8 +24,7 @@ namespace OAT.Utilities
             for (int id = 0; id < values.Count(); id++)
             {
                 var RoleName = Encoding.UTF8.GetString((values[id] as byte[])!).Split(',')[0].Replace("CN=", "");
-                var Role = Enums.Role.www_reporter_prof_news;
-                var success = Enum.TryParse(RoleName, out Role);
+                var success = Enum.TryParse(RoleName, out Role Role);
                 if (!success)
                     continue;
                 roles.Add(Role);

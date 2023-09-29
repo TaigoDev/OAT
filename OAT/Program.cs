@@ -6,7 +6,6 @@ using MySqlConnector;
 using OAT.Readers;
 using OAT.Utilities;
 using RepoDb;
-using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
 using TAIGO.ZCore.DPC.Services;
@@ -14,9 +13,10 @@ using static ProxyController;
 
 config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(),
     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
+
 GlobalConfiguration.Setup().UseMySqlConnector();
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); //https://www.nuget.org/packages/ExcelDataReader/3.7.0-develop00385#readme-body-tab
-Console.WriteLine($"bu - {config.BaseUrl}; mu - {config.MainUrl}");
+
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
@@ -50,6 +50,7 @@ async void SetupControllers()
             "Resources/sessions", "Resources/sessions/b1", "Resources/sessions/b2", "Resources/sessions/b3", "Resources/sessions/b4",
             "Resources/teachers",
             "Resources/schedule",
+            "Resources/journal",
             "Resources/pay",
             "Resources/static",
             "Resources/bitrix",
@@ -57,7 +58,7 @@ async void SetupControllers()
             "Resources/Logs");
         /* WARNING: Not support async methods */
         RunModules.StartModules(
-            OAT.Utilities.Telegram.init,
+            OAT.Utilities.TelegramBot.init,
             UrlsContoller.init,
             HealthTables.init,
             NewsReader.init,
