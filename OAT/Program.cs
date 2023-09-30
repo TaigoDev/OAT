@@ -64,7 +64,8 @@ async void SetupControllers()
             NewsReader.init,
             ProfNewsReader.init,
             ScheduleReader.init,
-            () => Utils.AutoRepeat(async () => await ContractReader.init(), 15));
+            () => Utils.AutoRepeat(async () => await ContractReader.init(), 15),
+            WorkersReader.init);
 
     }
     catch (Exception ex)

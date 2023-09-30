@@ -89,7 +89,7 @@ public class UrlsContoller
             // professionalitet
 
             // limitation
-            new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),
+            //new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),
             new IPage("feedback/Map", "skhema-kolledzha/"),
            // new IPage("parents/AcademicProgress", "parents/uspevaemost/"),
         };

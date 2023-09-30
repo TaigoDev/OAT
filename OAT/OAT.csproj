@@ -59,6 +59,7 @@
 	  <Content Remove="wwwroot\images\basic\duck.mp3" />
 	  <Content Remove="wwwroot\images\basic\duck.svg" />
 	  <Content Remove="wwwroot\images\panel\exit.svg" />
+	  <Content Remove="wwwroot\js\AcademicProgress.js" />
 	  <Content Remove="wwwroot\js\admin.js" />
 	  <Content Remove="wwwroot\js\allNews.js" />
 	  <Content Remove="wwwroot\js\files.js" />
@@ -74,6 +75,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="CsvHelper" Version="30.0.1" />
+	  <PackageReference Include="ExcelMapper" Version="5.2.542" />
 	  <PackageReference Include="HtmlAgilityPack" Version="1.11.51" />
 	  <PackageReference Include="MimeTypeMapOfficial" Version="1.0.17" />
 	  <PackageReference Include="MySqlConnector" Version="2.2.6" />
@@ -81,6 +83,7 @@
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="RepoDb.MySqlConnector" Version="1.13.1" />
 	  <PackageReference Include="System.DirectoryServices.Protocols" Version="7.0.1" />
+	  <PackageReference Include="System.IO.Packaging" Version="7.0.0" />
 	  <PackageReference Include="Telegram.Bot" Version="19.0.0" />
 	  <PackageReference Include="Telegram.Bot.Enforcer" Version="13.0.13" />
 	  <PackageReference Include="YamlDotNet" Version="13.1.1" />

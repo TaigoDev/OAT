@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Cryptography.X509Certificates;
 
 namespace OAT.Pages.organizationInformation
 {
@@ -11,9 +12,11 @@ namespace OAT.Pages.organizationInformation
             _logger = logger;
         }
 
-        public void OnGet()
+        public int id { get; set; }
+        public void OnGet(int? id)
         {
 
+            this.id = id - 1 ?? 0;
         }
     }
 }

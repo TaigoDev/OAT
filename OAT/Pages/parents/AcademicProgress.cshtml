@@ -5,6 +5,7 @@
 }
 
 <link rel="stylesheet" href="~/css/parents/academicProgress.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/feedback/pay.css" asp-append-version="true">
 
 <div class="container content-page">
     <section class="content">
@@ -29,7 +30,7 @@
                 </label>
                 <input id="password" type="password"/>
             </div>
-            <button class="customized">
+            <button onclick="onAuth();return false" class="customized">
                 ВОЙТИ
             </button>
         </form>
@@ -65,3 +66,6 @@
         </nav>
     </aside>
 </div>
+<script type="text/javascript" src="~/js/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/AcademicProgress.js" charset="utf-8"></script>
+<aside id="message-fail-login" class="panel-message">❌ Логин или пароль студента неверный </aside>

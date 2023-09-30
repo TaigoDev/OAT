@@ -54,6 +54,16 @@ namespace OAT.Controllers
             return Redirect($"/admin/panel");
         }
 
+        [HttpPost("/api/students/login"), NoCache]
+        public IActionResult LoginStudents(string username, string password)
+        {
+            HttpContext.SetCookie("student-username", Utils.Base64Encode($"{username}"));
+            HttpContext.SetCookie("student-password", Utils.Base64Encode($"{password}"));
+            return Ldap.Login(username, password, HttpContext.UserIP(), false) ? StatusCode(StatusCodes.Status200OK) : StatusCode(StatusCodes.Status401Unauthorized);
+        }
+        
+
+
         [HttpGet, Route("/api/logout"), NoCache]
         public async Task<IActionResult> Logout()
         {

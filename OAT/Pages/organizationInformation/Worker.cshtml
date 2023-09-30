@@ -1,0 +1,217 @@
+﻿@page "{FullName?}"
+
+@model WorkerModel
+@{
+    ViewData["Title"] = Model.worker is not null ? Model.worker.FullName : "Пользователь не найден";
+}
+
+<div class="container content-page">
+    <section class="content">
+        @if (Model.worker is not null)
+        {
+            var worker = Model.worker;
+            var qualifications = worker.Qualification.Split("\n");
+            <h2 class="section-title">
+                @worker.FullName
+            </h2>
+            <div class="staff-person-basic director">
+                <div class="staff-person-basic-info">
+                    <div class="staff-person-basic-job">
+                        @Model.worker.Post
+                    </div>
+@*                     <div class="staff-person-basic-phone">
+                        30-52-98
+                    </div>
+                    <div class="staff-person-basic-email">
+                        koltsov@oat.ru
+                    </div> *@
+                </div>
+                <div class="staff-person-basic-photo">
+                    <img src="~/images/basic/unnamed.jpg" alt="">
+                </div>
+            </div>
+
+
+            <h2 class="section-subtitle">
+                Образование
+            </h2>
+
+            @if (worker.Education1_Type is not null)
+            {
+                <h4 class="section-subtitle-small">
+                    Уровень первого образования
+                </h4>
+                <p>
+                    @worker.Education1_Type
+                </p>
+                if (worker.Education1_EducationalInstitution is not null)
+                {
+                    <h4 class="section-subtitle-small">
+                        Первое образование учебное заведение:
+                    </h4>
+                    <p>
+                        @worker.Education1_EducationalInstitution @(worker.Education1_issued is not null ? $"({worker.Education1_issued})" : "")
+                    </p>
+                }
+                if (worker.Education1_specialization is not null)
+                {
+                    <h4 class="section-subtitle-small">
+                        Первое образование специальность:
+                    </h4>
+                    <p>
+                        @worker.Education1_specialization
+                    </p>
+                }
+            }
+
+            @if (worker.Education2_Type is not null)
+            {
+                <h4 class="section-subtitle-small">
+                    Уровень второго образования
+                </h4>
+                <p>
+                    @worker.Education2_Type
+                </p>
+                if (worker.Education2_EducationalInstitution is not null)
+                {
+                    <h4 class="section-subtitle-small">
+                        Второе образование учебное заведение:
+                    </h4>
+                    <p>
+                        @worker.Education2_EducationalInstitution @(worker.Education2_issued is not null ? $"({worker.Education2_issued})" : "")
+                    </p>
+                }
+                if (worker.Education2_specialization is not null)
+                {
+                    <h4 class="section-subtitle-small">
+                        Второе образование специальность:
+                    </h4>
+                    <p>
+                        @worker.Education2_specialization
+                    </p>
+                }
+            }
+
+            <h4 class="section-subtitle-small">
+                Квалификация
+            </h4>
+            <ul class="customized">
+                @if(qualifications.Count() != 0)
+                    @foreach (var Qualification in qualifications)
+                    {
+                        <li>
+                            @Qualification
+                        </li>
+                    }
+
+            </ul>
+@*             <h4 class="section-subtitle-small">
+                Наименование направления подготовки и (или) специальности
+            </h4>
+            <p>
+                ФГАОУ ДПО "Государственный институт новых форм обучения" (18.02.2019 - 27.04.2019)
+            </p> *@
+            @if (worker.AcademicDegree is not null)
+            {
+                <h4 class="section-subtitle-small">
+                    Ученая степень 
+                </h4>
+                <p>
+                    @worker.AcademicDegree
+                </p>
+            }
+@*             <h4 class="section-subtitle-small">
+                Ученое звание (при наличии)
+            </h4>
+            <p>
+                Информация не указана
+            </p> *@
+            @if (worker.ProfessionalDevelopment is not null)
+            {
+                var ProfessionalDevelopment = worker.ProfessionalDevelopment.Split("\n");
+                @if (ProfessionalDevelopment.Count() is not 0)
+                {
+                    <h4 class="section-subtitle-small">
+                        Повышение квалификации и (или) профессиональная переподготовка (при наличии)
+                    </h4>
+                    @foreach (var _element in ProfessionalDevelopment)
+                    {
+                        <p>
+                            @_element
+                        </p>
+                    }
+
+                }
+            }
+            <h3 class="section-subtitle">
+                Стаж работы
+            </h3>
+            @if (worker.AllExperience is not null)
+            {
+                <h4 class="section-subtitle-small">
+                    Общий
+                </h4>
+                <p>
+                    @worker.AllExperience
+                </p>
+            }
+
+            @if (worker.ExperienceInOAT is not null)
+            {
+                <h4 class="section-subtitle-small">
+                    Стаж работы в образовательной организации:
+                </h4>
+                <p>
+                    @worker.ExperienceInOAT
+                </p>
+            }
+
+            @if (worker.TeacherExperience is not null)
+            {
+                <h4 class="section-subtitle-small">
+                    Педагогический стаж:
+                </h4>
+                <p>
+                    @worker.TeacherExperience
+                </p>
+            }
+@*             <h4 class="section-subtitle-small">
+                Преподаваемые учебные предметы, курсы, дисциплины(модули)
+            </h4>
+            <p>
+                Информация не указана
+            </p> *@
+        }
+        else
+        {
+            <h2 class="section-title">
+                Пользователь не найден
+            </h2>
+        }
+    </section>
+    
+    <aside class="sidebar">
+        <h3 class="sidebar-title">
+            Сведения об образовательной организации
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li>
+                    <a href='@Url.Page("CommonIntelligence")' class="sidebar-link sidebar-link-selected">
+                        Основные сведения
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link">
+                        Структура и органы управления образовательной организацией
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link">
+                        Документы
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>

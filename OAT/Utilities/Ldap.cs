@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.DirectoryServices.Protocols;
-using System.Linq;
+﻿using System.DirectoryServices.Protocols;
 using System.Net;
-using System.Net.WebSockets;
 using System.Text;
 
 namespace OAT.Utilities
@@ -46,13 +42,20 @@ namespace OAT.Utilities
             return groupName.Replace("OU=", "");      
         }
 
+        public static string? GetFullName(string username)
+        {
+            var response = SearchByUsername(username);
+            var attributes = GetValuesAttributeByTag(response, "cn");
+            return attributes is not null ? attributes.First().Replace("{", "").Replace("}", "") : null;    
+        }
+
         public static SearchResponse SearchByUsername(string username)
         {
             using var ldap = new LdapConnection(new LdapDirectoryIdentifier(ProxyController.config.ldap_IP, ProxyController.config.ldap_port));
 
             ldap.SessionOptions.ProtocolVersion = 3;
             ldap.AuthType = AuthType.Basic;
-            ldap.Bind(new System.Net.NetworkCredential(ProxyController.config.ldap_login, ProxyController.config.ldap_password));
+            ldap.Bind(new NetworkCredential(ProxyController.config.ldap_login, ProxyController.config.ldap_password));
 
             var search = new SearchRequest
             {
