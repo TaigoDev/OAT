@@ -1531,7 +1531,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .staff-person-basic.director .staff-person-basic-photo::before {
-	background-image: url("../images/basic/director.svg");
+	background-image: none;
 }
 
 @media (width<600px){
