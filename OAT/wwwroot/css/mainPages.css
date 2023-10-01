@@ -104,7 +104,7 @@ body {
 	height: 100px;
 	width: 320px;
 	border: 2.5px solid var(--light-white);
-	border-radius: 10px;
+	border-radius: 15px;
 	background-color: #23212199;
 	transition: background-color 750ms,border-color 750ms;
 }
@@ -112,13 +112,13 @@ body {
 .important-link::after{
 	content: "";
 	position: absolute;
-	top: -2px;
-	left: -2px;
+	top: -2.5px;
+	left: -2.5px;
 	z-index: -1;
 	width: 100%;
 	height: 100%;
 	border: inherit;
-	border-radius: 10px;
+	border-radius: inherit;
 	transition: width 350ms, height 350ms, transform 350ms, background-color 350ms;
 }
 
@@ -128,9 +128,6 @@ body {
 }
 
 .important-link:hover::after {
-	width: calc(100% + 5px);
-	height: calc(100% + 5px);
-	transform: translate(-3px, -3px);
 	background-color: white;
 }
 

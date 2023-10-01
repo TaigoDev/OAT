@@ -7,28 +7,43 @@
 <div class="container content-page">
     <section class="content">
         <h2 class="section-title">
-            Расписание практик ул. Ленина, 24
+            Расписание практик
         </h2>
-        <ul class="documents-list">
-            @foreach (var file in Model.b1)
-            {
-                <li class="document-item">
-                    <div class="document-item-head">
-                        <a target="_blank" href="/@file.url">
-                        </a>
-                    </div>
-                    <div class="document-item-body">
-                        @file.Filename
-                    </div>
-                </li>
-            }
-        </ul>
 
-        <br/>
-        <br/>
-        <h2 class="section-title">
+        <h3 class="section-subtitle">
+            Расписание практик ул. Ленина, 24
+        </h3>
+        @if (Model.b1.Count() is not 0)
+        {
+            <ul class="documents-list">
+
+                @foreach (var file in Model.b1)
+                {
+                    <li class="document-item">
+                        <div class="document-item-head">
+                            <a target="_blank" href="/@file.url">
+                            </a>
+                        </div>
+                        <div class="document-item-body">
+                            @file.Filename
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>
+                <b>
+                    ОТСУТСТВУЕТ
+                </b>
+            </p>
+        }
+
+
+        <h3 class="section-subtitle">
             Расписание практик ул. Б. Хмельницкого, 281а
-        </h2>
+        </h3>
         <ul class="documents-list">
             @foreach (var file in Model.b2)
             {
@@ -44,11 +59,10 @@
             }
         </ul>
 
-        <br />
-        <br />
-        <h2 class="section-title">
+
+        <h3 class="section-subtitle">
             Расписание практик пр. Космический, 14а
-        </h2>
+        </h3>
         <ul class="documents-list">
             @foreach (var file in Model.b3)
             {
@@ -64,11 +78,10 @@
             }
         </ul>
 
-        <br />
-        <br />
-        <h2 class="section-title">
+
+        <h3 class="section-subtitle">
             Расписание практик ул. Волховстроя, 5
-        </h2>
+        </h3>
         <ul class="documents-list">
             @foreach (var file in Model.b4)
             {

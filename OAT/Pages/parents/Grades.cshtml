@@ -4,46 +4,59 @@
 @{
     ViewData["Title"] = $"Успеваемость студента {Model.FullName}";
 }
+<link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
 
-<div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Успеваемость студента @Model.FullName
-        </h2>
-        <table class="customized">
-            <thead>
-                <tr>
-                    <th>
-                        Дисциплина
-                    </th>
-                    @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month); i++)
-                    {
-                        <th>
-                            @i
-                        </th>
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Disciplines is not null)
+
+<section class="centered">
+    <h2 class="section-title">
+        Успеваемость студента @Model.FullName
+    </h2>
+    <div class="months">
+        <div class="months-choose">
+            <button class="months-choose-item">
+                Предыдущий месяц
+            </button>
+            <button class="months-choose-item">
+                Следующий месяц
+            </button>
+        </div>
+        <div class="months-current">
+            Октябрь
+        </div>
+    </div>
+    <table class="customized">
+        <thead>
+            <tr>
+                <th>
+                    Дисциплина
+                </th>
+                @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month); i++)
                 {
-                    @foreach (var discipline in Model.Disciplines.Disciplines)
-                    {
-                        <tr>
-                            <td>
-                                @discipline.discipline
-                            </td>
-                            @foreach(var mark in discipline.marks)
-                            {
-                                <td>
-                                    @mark
-                                </td>
-                            }
-                        </tr>
-                    }
-
+                    <th>
+                        @i
+                    </th>
                 }
-            </tbody>
-        </table>
-    </section>
-</div>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Disciplines is not null)
+            {
+                @foreach (var discipline in Model.Disciplines.Disciplines)
+                {
+                    <tr>
+                        <td>
+                            @discipline.discipline
+                        </td>
+                        @foreach (var mark in discipline.marks)
+                        {
+                            <td>
+                                @mark
+                            </td>
+                        }
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</section>
