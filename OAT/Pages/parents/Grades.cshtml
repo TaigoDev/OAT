@@ -2,13 +2,13 @@
 @using OAT.Pages.parents;
 @model GradesModel
 @{
-    ViewData["Title"] = "Успеваемость студента >имя студента<";
+    ViewData["Title"] = $"Успеваемость студента {Model.FullName}";
 }
 
 <div class="container content-page">
     <section class="content">
         <h2 class="section-title">
-            Успеваемость студента >имя студента<
+            Успеваемость студента @Model.FullName
         </h2>
         <table class="customized">
             <thead>
@@ -16,46 +16,33 @@
                     <th>
                         Дисциплина
                     </th>
-                    <th>
-                        1 (птн)
-                    </th>
-                    <th>
-                        2 (сбт)
-                    </th>
-                    <th>
-                        3 (вск)
-                    </th>
+                    @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month); i++)
+                    {
+                        <th>
+                            @i
+                        </th>
+                    }
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        Астрономия
-                    </td>
-                    <td>
-                        5
-                    </td>
-                    <td>
-                        5
-                    </td>
-                    <td>
-                        5
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Иностранный язык
-                    </td>
-                    <td>
-                        5
-                    </td>
-                    <td>
-                        5
-                    </td>
-                    <td>
-                        5
-                    </td>
-                </tr>
+                @if (Model.Disciplines is not null)
+                {
+                    @foreach (var discipline in Model.Disciplines.Disciplines)
+                    {
+                        <tr>
+                            <td>
+                                @discipline.discipline
+                            </td>
+                            @foreach(var mark in discipline.marks)
+                            {
+                                <td>
+                                    @mark
+                                </td>
+                            }
+                        </tr>
+                    }
+
+                }
             </tbody>
         </table>
     </section>

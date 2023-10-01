@@ -31,11 +31,11 @@ namespace TAIGO.ZCore.DPC.Recovery
                 cmd = primary_key != string.Empty ? cmd + $"PRIMARY KEY ({primary_key}));" : $"{cmd.Remove(cmd.Length - 2)});";
                 using var connection = new MySqlConnection(Utils.GetConnectionString());
                 await connection.ExecuteNonQueryAsync(cmd);
-                Console.WriteLine($"Recovery.Tables: We have successfully restored the {table.GetType().Name} table");
+                Logger.InfoWithoutTelegram($"Recovery.Tables: We have successfully restored the {table.GetType().Name} table");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"FAIL: We were unable to restore the tables Ex: {ex}");
+                Logger.Error($"FAIL: We were unable to restore the tables Ex: {ex}");
             }
         }
     }

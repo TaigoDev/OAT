@@ -66,7 +66,7 @@ namespace OAT.Readers
             IterateTeacherList(e => e.OrderBy(e => e.FullName.ToCharArray().First()).ToList());
             lesson_times = await GetLessonsTime(1);
             stopWatch.Stop();
-            Console.WriteLine($"Расписания загружены за {stopWatch.ElapsedMilliseconds} ms");
+            Logger.InfoWithoutTelegram($"Расписания загружены за {stopWatch.ElapsedMilliseconds} ms");
         }
 
         protected static List<Week> GetWeeks(XmlNode xml_group, string groupName, List<TeacherSchedule> TeacherSchedule)

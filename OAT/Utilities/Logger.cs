@@ -5,6 +5,9 @@
     public static void Info(string message)
             => Write($"[{GetTimeUTC()}]: {message}");
 
+    public static void InfoWithoutTelegram(string message)
+            => Write($"[{GetTimeUTC()}]: {message}", true);
+
     public static void Warning(string message)
         => Write($"[WARNING {GetTimeUTC()}]: {message}");
 
@@ -14,7 +17,7 @@
     public static void Error(Exception message)
         => Write($"[ERROR {GetTimeUTC()}]: {message}");
 
-    private static async void Write(string message, int attempt = 0)
+    private static async void Write(string message, bool disableTelegram = false, int attempt = 0)
     {
         try
         {
@@ -23,8 +26,10 @@
                 await File.AppendAllTextAsync(path, $"{message}\n");
             else
                 await File.WriteAllTextAsync(path, $"{message}\n");
-
-            OAT.Utilities.TelegramBot.SendMessage(message);
+            if (!disableTelegram)
+                OAT.Utilities.TelegramBot.SendMessage(message);
+            else
+                Console.WriteLine(message);
         }
         catch (IOException ex)
         {
@@ -34,7 +39,7 @@
                 return;
             }
             await Task.Delay(2000);
-            Write(message, attempt + 1);
+            Write(message, disableTelegram, attempt + 1);
         }
         catch (Exception ex)
         {

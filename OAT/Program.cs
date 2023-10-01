@@ -58,7 +58,7 @@ async void SetupControllers()
             "Resources/Logs");
         /* WARNING: Not support async methods */
         RunModules.StartModules(
-            OAT.Utilities.TelegramBot.init,
+            TelegramBot.init,
             UrlsContoller.init,
             HealthTables.init,
             NewsReader.init,

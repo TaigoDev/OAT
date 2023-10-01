@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using OAT.Readers;
 using OAT.Utilities;
 
 namespace OAT.Pages.parents
@@ -15,6 +16,9 @@ namespace OAT.Pages.parents
 
         public string FullName { get; set; }
         
+        public Student? Disciplines { get; set; }
+
+        public string month { get; set; }
 
         public void OnGet()
         {
@@ -25,8 +29,13 @@ namespace OAT.Pages.parents
                 HttpContext.Response.Redirect("AcademicProgress");
                 return;
             }
-            FullName = Ldap.GetFullName(username) ?? "Пользователь не найден";
-            var groupName = Ldap.GetStudentGroup(username);
+            //FullName = Ldap.GetFullName(username) ?? "Пользователь не найден";
+            //var groupName = Ldap.GetStudentGroup(username);
+            var groupName = "АВ211";
+            FullName = "Герман Егор Владимирович";
+            month = "Июнь";
+            if (groupName is not null)
+                Disciplines = EvaluationsReader.Search(groupName, FullName, "Июнь").GetAwaiter().GetResult();
         }
 
     }

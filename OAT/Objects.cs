@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using static OAT.Readers.EvaluationsReader;
 
 public class Config
 {
@@ -234,3 +235,44 @@ public class TeacherLesson
     public string group { get; set; }
     public string cabinet { get; set; }
 }
+public class Student
+{
+    public string FullName { get; set; }
+    public List<Discipline> Disciplines = new List<Discipline>();
+
+    public Student(string fullName)
+    {
+        FullName = fullName;
+    }
+
+    public static List<Student> ConvertAll(List<RawRecord> records)
+    {
+        var students = new List<Student>();
+        var FullNames = records.GroupBy(x => x.FullName).Select(d => d.First()).ToList().ConvertAll(e => e.FullName);
+        foreach (var FullName in FullNames)
+            students.Add(Convert(FullName, records));
+        return students;
+    }
+
+    public static Student Convert(string FullName, List<RawRecord> records)
+    {
+        var rows = records.Where(e => e.FullName == FullName);
+        var student = new Student(FullName);
+        foreach (var discipline in rows)
+            student.Disciplines.Add(new Discipline(discipline.discipline, discipline.marks));
+        return student;
+    }
+}
+
+public class Discipline
+{
+    public string discipline { get; set; }
+    public List<string> marks = new List<string>();
+
+    public Discipline(string discipline, List<string> marks)
+    {
+        this.discipline = discipline;
+        this.marks = marks;
+    }
+}
+

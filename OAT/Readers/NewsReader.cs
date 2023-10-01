@@ -39,7 +39,7 @@ public class NewsReader
             }
         }
 
-        Console.WriteLine($"OAT.Core.News: We successful load {News.Count} news");
+        Logger.InfoWithoutTelegram($"OAT.Core.News: We successful load {News.Count} news");
         News = News.OrderBy(x => x.id).ToList().Reverse<News>();
         pages = News.PagesSplit(10);
 

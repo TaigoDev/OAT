@@ -26,7 +26,7 @@ namespace OAT.Utilities
                 receiverOptions: receiverOptions,
                 cancellationToken: new CancellationTokenSource().Token
             );
-            Console.WriteLine($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
+            Logger.InfoWithoutTelegram($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
         }
 
 
