@@ -11,7 +11,6 @@
         @if (Model.worker is not null)
         {
             var worker = Model.worker;
-            var qualifications = worker.Qualification.Split("\n");
             <h2 class="section-title">
                 @worker.FullName
             </h2>
@@ -97,14 +96,14 @@
                 Квалификация
             </h4>
             <ul class="customized">
-                @if(qualifications.Count() != 0)
-                    @foreach (var Qualification in qualifications)
+                @if (worker.Qualification is not null)
+                    @foreach (var Qualification in worker.Qualification.Split("\n"))
                     {
                         <li>
                             @Qualification
                         </li>
                     }
-
+                
             </ul>
 @*             <h4 class="section-subtitle-small">
                 Наименование направления подготовки и (или) специальности
