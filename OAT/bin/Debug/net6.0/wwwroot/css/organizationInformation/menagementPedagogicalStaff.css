@@ -1,4 +1,10 @@
-﻿
+﻿/* TEMP */
+.pages-nav-pages-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
 @media(550px<width<1330px){
 	.people-item{
 		max-width: 550px;
