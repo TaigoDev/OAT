@@ -20,7 +20,7 @@ namespace OAT.Pages.organizationInformation
 
             if (text.Length < 3)
                 return;
-            Workers = AllWorkers.Where(e => e.FullName.Contains(text)).ToList();
+            Workers = AllWorkers.Where(e => e.FullName.ToLower().Contains(text)).ToList();
         }
     }
 }
