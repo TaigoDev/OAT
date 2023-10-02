@@ -29,9 +29,8 @@ namespace OAT.Readers
                 SkipBlankCells = false,
             };
             var monthName = sheets.FirstOrDefault(e => e.ToLower() == month.ToLower());
-            if (!DateTime.TryParseExact(month, "MMMM",CultureInfo.CurrentCulture, DateTimeStyles.None, out var dateTime) || monthName is null)
+            if (!DateTime.TryParseExact(month, "MMMM", CultureInfo.GetCultureInfo("ru-ru"), DateTimeStyles.None, out var dateTime) || monthName is null)
                 return null;
-            
             MappingDays(ref excel, DateTime.DaysInMonth(DateTime.Now.Year, dateTime.Month));
 
             var rawRecords = await excel.FetchAsync<RawRecord>(xlsx, monthName);
@@ -57,6 +56,7 @@ namespace OAT.Readers
 
             if (files.Count() >= 1)
                 return files.FirstOrDefault(e => new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
+
             return "";
         }
 

@@ -27,7 +27,7 @@
             else
                 await File.WriteAllTextAsync(path, $"{message}\n");
             if (!disableTelegram)
-                OAT.Utilities.TelegramBot.SendMessage(message);
+                OAT.Utilities.TelegramBot.SendMessage\(message);
             else
                 Console.WriteLine(message);
         }

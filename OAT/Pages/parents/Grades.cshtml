@@ -43,7 +43,7 @@
                     <th>
                         Дисциплина
                     </th>
-                    @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month); i++)
+                    @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", CultureInfo.GetCultureInfo("ru-ru")).Month); i++)
                     {
                         <th>
                             @i
