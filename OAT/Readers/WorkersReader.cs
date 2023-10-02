@@ -12,7 +12,7 @@ namespace OAT.Readers
 
         public static async Task init()
         {
-            using var stream = File.Open(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "teachers.xlsx"), FileMode.Open, FileAccess.Read);
+            using var stream = File.Open(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "workers", "workers.xlsx"), FileMode.Open, FileAccess.Read);
 
             var excel = new ExcelMapper()
             {

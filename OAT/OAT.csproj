@@ -70,6 +70,7 @@
 	  <Content Remove="wwwroot\js\pay.js" />
 	  <Content Remove="wwwroot\js\schedule.js" />
 	  <Content Remove="wwwroot\js\users.js" />
+	  <Content Remove="wwwroot\js\WorkerSearch.js" />
 	  <Content Remove="wwwroot\js\yandex_all.js" />
 	</ItemGroup>
 	<ItemGroup>
