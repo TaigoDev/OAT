@@ -16,6 +16,8 @@ namespace OAT.Utilities
 
         public static async Task init()
         {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                return;
             config = Utils.SetupConfiguration("telegram.yml", new TelegramConfig());
             botClient = new TelegramBotClient(config.token, new HttpClient());
             var me = await botClient.GetMeAsync();

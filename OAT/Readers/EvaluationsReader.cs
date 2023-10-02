@@ -1,6 +1,7 @@
 ﻿using Ganss.Excel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace OAT.Readers
 {
@@ -11,8 +12,10 @@ namespace OAT.Readers
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
+            
+            var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "journal");
 
-            var xlsx = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "journal", $"{group}.xlsx");
+            var xlsx = Path.Combine(folder, GetFileName(folder, group));
             if(!File.Exists(xlsx))
                 return null;
 
@@ -40,7 +43,22 @@ namespace OAT.Readers
         }
 
 
+        private static string GetFileName(string folder, string group)
+        {
+            var matches = Regex.Matches(group, @"(\p{L}+)\s*([\d-]+)");
+            var letters = matches.First().Groups[1].Value;
+            var numbers = matches.First().Groups[2].Value.ToString().Remove(0, 1);
 
+            var files = Directory.GetFiles(folder, "*.xlsx").Where(e =>
+            {
+                var info = new FileInfo(e).Name;
+                return info.Contains(letters) && info.Contains(numbers);
+            });
+
+            if (files.Count() >= 1)
+                return files.FirstOrDefault(e => new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
+            return "";
+        }
 
         private static void MappingDays(ref ExcelMapper excel, int days)
         {

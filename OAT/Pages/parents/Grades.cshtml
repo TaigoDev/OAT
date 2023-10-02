@@ -4,7 +4,7 @@
 @model GradesModel
 @{
     ViewData["Title"] = $"Успеваемость студента {Model.FullName}";
-    var currentMonth = DateTime.ParseExact($"{Model.month}", "MMMM", null);
+    var currentMonth = DateTime.ParseExact($"{Model.month}", "MMMM", CultureInfo.GetCultureInfo("ru-ru"));
     var lastMonth = currentMonth.AddMonths(-1).ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
     var nextMonth = currentMonth.AddMonths(1).ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
 }
