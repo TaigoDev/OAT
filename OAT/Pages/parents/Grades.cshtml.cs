@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.Readers;
 using OAT.Utilities;
+using System.Globalization;
 
 namespace OAT.Pages.parents
 {
@@ -20,22 +21,31 @@ namespace OAT.Pages.parents
 
         public string month { get; set; }
 
-        public void OnGet()
+        public void OnGet(string? month)
         {
-            var username = Utils.Base64Decode(HttpContext.GetCookie("student-username"));
-            var password = Utils.Base64Decode(HttpContext.GetCookie("student-password"));
+            var cookieUsername = HttpContext.GetCookie("student-username");
+            var cookiePassword = HttpContext.GetCookie("student-password");
+
+            if (cookieUsername is null || cookiePassword is null)
+            {
+                HttpContext.Response.Redirect("AcademicProgress");
+                return;
+            }
+
+            var username = Utils.Base64Decode(cookieUsername);
+            var password = Utils.Base64Decode(cookiePassword);
             if (!Ldap.Login(username, password, HttpContext.UserIP(), false))
             {
                 HttpContext.Response.Redirect("AcademicProgress");
                 return;
             }
-            //FullName = Ldap.GetFullName(username) ?? "Пользователь не найден";
-            //var groupName = Ldap.GetStudentGroup(username);
-            var groupName = "АВ211";
-            FullName = "Герман Егор Владимирович";
-            month = "Июнь";
+            FullName = Ldap.GetFullName(username) ?? "Пользователь не найден";
+            var groupName = Ldap.GetStudentGroup(username);
+
+            this.month = month ?? DateTime.Now.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
+            var blackList = new string[] { "август", "июль" };
             if (groupName is not null)
-                Disciplines = EvaluationsReader.Search(groupName, FullName, "Июнь").GetAwaiter().GetResult();
+                Disciplines = !blackList.Contains(month) ? EvaluationsReader.Search(groupName, FullName, this.month).GetAwaiter().GetResult() : null;
         }
 
     }

@@ -32,14 +32,14 @@ namespace OAT.Utilities
             var response = SearchByUsername(username);
             var attributes = GetValuesAttributeByTag(response, "memberOf");
 
-            if (attributes is null || !attributes.Any(e => e.Contains("CN=") && e.Contains("Группа -")))
+            if (attributes is null)
                 return null;
 
-            var groupName = attributes.FirstOrDefault(e => e.Contains("OU="));
-            if (groupName is null)
+            var memberOf = attributes.FirstOrDefault(e => e.Contains("CN=") && e.Contains("Группа -"));
+            if (memberOf is null)
                 return null;
 
-            return groupName.Replace("OU=", "");      
+            return memberOf.Replace("CN=", "").Replace("Группа - ", "");      
         }
 
         public static string? GetFullName(string username)

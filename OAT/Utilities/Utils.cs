@@ -121,7 +121,7 @@ StringSplitOptions options = StringSplitOptions.None)
             await next();
         });
     }
-    public static string GetCookie(this HttpContext context, string key) => context.Request.Cookies[key];
+    public static string? GetCookie(this HttpContext context, string key) => context.Request.Cookies[key];
     public static void DeleteCookie(this HttpContext context, string key) => context.Response.Cookies.Delete(key);
     public static T toObject<T>(this string json) => JObject.Parse(json).ToObject<T>();
     public static T toObjectJC<T>(this string json) => JsonConvert.DeserializeObject<T>(json);

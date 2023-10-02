@@ -1,5 +1,6 @@
 ﻿using Ganss.Excel;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace OAT.Readers
 {
@@ -10,11 +11,12 @@ namespace OAT.Readers
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
+
             var xlsx = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "journal", $"{group}.xlsx");
             if(!File.Exists(xlsx))
                 return null;
 
-            using var stream = File.Open(xlsx, FileMode.Open, FileAccess.Read);
+            var sheets = new ExcelMapper(xlsx).FetchSheetNames().ToList();
             var excel = new ExcelMapper()
             {
                 HeaderRow = true,
@@ -23,12 +25,13 @@ namespace OAT.Readers
                 CreateMissingHeaders = true,
                 SkipBlankCells = false,
             };
+            var monthName = sheets.FirstOrDefault(e => e.ToLower() == month.ToLower());
+            if (!DateTime.TryParseExact(month, "MMMM",CultureInfo.CurrentCulture, DateTimeStyles.None, out var dateTime) || monthName is null)
+                return null;
+            
+            MappingDays(ref excel, DateTime.DaysInMonth(DateTime.Now.Year, dateTime.Month));
 
-            MappingDays(ref excel, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(month, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month));
-            var rawRecords = await excel.FetchAsync<RawRecord>(stream, month);
-
-            stream.Close();
-            await stream.DisposeAsync();
+            var rawRecords = await excel.FetchAsync<RawRecord>(xlsx, monthName);
 
             var student = Student.Convert(FullName, rawRecords.ToList());
             stopWatch.Stop();
@@ -36,10 +39,13 @@ namespace OAT.Readers
             return student;
         }
 
+
+
+
         private static void MappingDays(ref ExcelMapper excel, int days)
         {
-            for (int i = 0; i < days; i++)
-                excel.AddMapping<RawRecord>(3 + i, e => e.cache);
+            for (int i = 1; i <= days + 1; i++)
+                excel.AddMapping<RawRecord>(2 + i, e => e.cache);
         }
         
 
