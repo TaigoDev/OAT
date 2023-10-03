@@ -12,6 +12,8 @@ namespace OAT.Pages.timetable
         public void OnGet(string building, string fullname)
         {
             this.fullname = fullname;
+            if (fullname is null)
+                return;
             teacher = ScheduleUtils.GetTeacherScheduleByBuilding(building).FirstOrDefault(e => e.FullName.ToLower() == fullname.ToLower());
         }
 
