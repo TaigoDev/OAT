@@ -301,6 +301,7 @@
 	border-radius: 20px;
 	color: var(--light-white);
 	background: linear-gradient(45deg, var(--m-color), var(--m-l-color)), radial-gradient(at 70% 30%, rgb(230, 100, 101) 20%, rgb(145, 152, 229) 20%);
+	box-shadow: -20px 20px 100px -20px var(--m-d-color), 20px -20px 100px -20px var(--m-l-color);
 	font-size: 1.5rem;
 	font-weight: 700;
 	line-height: 1;
@@ -348,7 +349,7 @@
 	height: 100%;
 	background: repeating-conic-gradient(var(--m-color) 10%, color-mix(in srgb, var(--m-color) 80%, black) 20%, var(--m-color) 30%);
 	opacity: 0;
-	scale: 3;
+	scale: 2.5;
 	animation: 30s rotate infinite linear normal;
 	transition: opacity 600ms ease;
 }

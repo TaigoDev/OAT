@@ -19,12 +19,14 @@
                     <div class="staff-person-basic-job">
                         @Model.worker.Post
                     </div>
-@*                     <div class="staff-person-basic-phone">
+                    @*                  
+                    <div class="staff-person-basic-phone">
                         30-52-98
                     </div>
                     <div class="staff-person-basic-email">
                         koltsov@oat.ru
-                    </div> *@
+                    </div>
+                    *@
                 </div>
                 <div class="staff-person-basic-photo">
                     <img src="~/images/basic/unnamed.jpg" alt="">
@@ -32,9 +34,9 @@
             </div>
 
 
-            <h2 class="section-subtitle">
+            <h3 class="section-subtitle">
                 Образование
-            </h2>
+            </h3>
 
             @if (worker.Education1_Type is not null)
             {
@@ -105,12 +107,14 @@
                     }
                 
             </ul>
-@*             <h4 class="section-subtitle-small">
+            @*          
+            <h4 class="section-subtitle-small">
                 Наименование направления подготовки и (или) специальности
             </h4>
             <p>
                 ФГАОУ ДПО "Государственный институт новых форм обучения" (18.02.2019 - 27.04.2019)
-            </p> *@
+            </p>
+            *@
             @if (worker.AcademicDegree is not null)
             {
                 <h4 class="section-subtitle-small">
@@ -120,12 +124,15 @@
                     @worker.AcademicDegree
                 </p>
             }
-@*             <h4 class="section-subtitle-small">
+
+            @*
+            <h4 class="section-subtitle-small">
                 Ученое звание (при наличии)
             </h4>
             <p>
                 Информация не указана
-            </p> *@
+            </p>
+            *@
             @if (worker.ProfessionalDevelopment is not null)
             {
                 var ProfessionalDevelopment = worker.ProfessionalDevelopment.Split("\n");
@@ -175,12 +182,14 @@
                     @worker.TeacherExperience
                 </p>
             }
-@*             <h4 class="section-subtitle-small">
+            @*             
+            <h4 class="section-subtitle-small">
                 Преподаваемые учебные предметы, курсы, дисциплины(модули)
             </h4>
             <p>
                 Информация не указана
-            </p> *@
+            </p>
+            *@
         }
         else
         {
@@ -190,25 +199,100 @@
         }
     </section>
     
-    <aside class="sidebar">
+    <aside id="sidebar" class="sidebar long">
         <h3 class="sidebar-title">
             Сведения об образовательной организации
         </h3>
         <nav class="sidebar-body">
             <ul class="sidebar-links">
-                <li>
-                    <a href='@Url.Page("CommonIntelligence")' class="sidebar-link sidebar-link-selected">
+                <li class="sidebar-link">
+                    <a href='@Url.Page("CommonIntelligence")'>
                         Основные сведения
                     </a>
                 </li>
-                <li>
-                    <a class="sidebar-link">
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Structure")'>
                         Структура и органы управления образовательной организацией
                     </a>
                 </li>
-                <li>
-                    <a class="sidebar-link">
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Documents")'>
                         Документы
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Education")'>
+                        Образование
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("EducationalStandards")'>
+                        Образовательные стандарты
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("EducationalProcess")'>
+                        Организация воспитательного процесса
+                    </a>
+                </li>
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href='@Url.Page("ManagementPedagogicalStaff")'>
+                        Руководство. Педагогический (научно-педагогический) состав
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Logistics")'>
+                        Материально-техническое обеспечение и оснащенность образовательного процесса
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("PaidEducationalServices")'>
+                        Платные образовательные услуги
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("FinancialEconomicActivity")'>
+                        Финансово-хозяйственная деятельность
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Jobs")'>
+                        Вакантные места для приема
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Vacancies")'>
+                        Вакансии
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("AccessibleEnvironment")'>
+                        Доступная среда
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("InternationalCooperation")'>
+                        Международное сотрудничество
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("StudentSupport")'>
+                        Стипендии и меры поддержки обучающихся
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Terrorism")'>
+                        Противодействие экстремизму и терроризму
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Corruption")'>
+                        Противодействие коррупции
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Library")'>
+                        Библиотека
                     </a>
                 </li>
             </ul>

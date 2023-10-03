@@ -488,6 +488,7 @@ section.centered .section-title{
 	display: block;
 	padding: 5px;
 	font-size: 1.2rem;
+	line-height: 1;
 	color: var(--light-white) !important;
 	transition: color 300ms, transform 200ms;
 }
@@ -1435,64 +1436,31 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	row-gap: 10px;
 }
 
-.staff-person-basic-job {
+.staff-person-basic-job, .staff-person-basic-phone, .staff-person-basic-email {
 	display: flex;
 	align-items: center;
 	column-gap: 10px;
 }
 
-.staff-person-basic-job::before {
+.staff-person-basic-job::before, .staff-person-basic-phone::before, .staff-person-basic-email::before{
 	content: "";
-	height: 20px;
-	min-width: 20px;
+	height: 25px;
+	min-width: 25px;
 	background-image: url("../images/basic/work.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
 }
 
-.staff-person-basic-phone {
-	display: flex;
-	align-items: center;
-	column-gap: 10px;
+.staff-person-basic-job::before {
+	background-image: url("../images/basic/work.svg");
 }
 
 .staff-person-basic-phone::before {
-	content: "";
-	height: 20px;
-	min-width: 20px;
-	background-image: url("../images/basic/phone-call.svg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
-
-.staff-person-basic-phone {
-	display: flex;
-	align-items: center;
-	column-gap: 10px;
-}
-
-.staff-person-basic-phone::before {
-	content: "";
-	height: 20px;
-	min-width: 20px;
 	background-image: url("../images/basic/phone.svg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
-
-.staff-person-basic-email {
-	display: flex;
-	align-items: center;
-	column-gap: 10px;
 }
 
 .staff-person-basic-email::before {
-	content: "";
-	height: 20px;
-	min-width: 20px;
 	background-image: url("../images/basic/mail.svg");
-	background-size: contain;
-	background-repeat: no-repeat;
 }
 
 .staff-person-basic-photo {
@@ -1502,7 +1470,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 .staff-person-basic-photo img {
 	border-radius: 40% 5%;
-	border: 15px solid #2b50ac;
+	border: 10px solid #2b50ac;
 	transition: border-radius 750ms;
 }
 
@@ -1519,19 +1487,19 @@ table.two-column.second-column-low tr td:nth-child(2) {
     position: absolute;
     right: -15px;
     top: -15px;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: #2b50ac;
-	background-size: 45px;
-	background-position: center;
-	background-repeat: no-repeat;
-	transform: translate(-15px, 15px);
-	transition: transform 500ms;
+    background-size: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translate(-15px, 15px);
+    transition: transform 500ms;
 }
 
 .staff-person-basic.director .staff-person-basic-photo::before {
-	background-image: none;
+	background-image: url("../images/people/professions/worker.svg");
 }
 
 @media (width<600px){
