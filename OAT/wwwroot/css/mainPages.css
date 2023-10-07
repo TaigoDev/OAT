@@ -11,7 +11,7 @@ body {
 /* underheaders - first sections */
 
 .main-underheader {
-	min-height: 100vh;
+	min-height: 100dvh;
 	padding-bottom: 20px;
 	color: var(--light-white);
 	position: relative;
@@ -22,7 +22,7 @@ body {
 	top: 0;
 	left: 0;
 	z-index: -1;
-	width: 100vw;
+	width: 100dvw;
 	height: 100%;
 	object-fit: cover;
 	filter: brightness(0.8);
@@ -33,7 +33,7 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 	row-gap: 50px;
-	min-height: 95vh;
+	min-height: 95dvh;
 	padding-top: calc(var(--max-header-heigth) + 200px);
 }
 
@@ -93,33 +93,33 @@ body {
 }
 
 .important-links {
-	display: flex;
-	flex-wrap: wrap;
+	--columns: 4;
+	display: grid;
+	grid-template-columns: repeat(var(--columns), minmax(250px, 500px));
 	justify-content: space-between;
-	gap: 30px;
+	gap: 40px 60px;
 }
 
 .important-link {
 	position: relative;
 	height: 100px;
-	width: 320px;
+	width: 100%;
 	border: 2.5px solid var(--light-white);
 	border-radius: 15px;
 	background-color: #23212199;
-	transition: background-color 750ms,border-color 750ms;
+	transition: background-color 750ms, border-color 750ms;
 }
 
 .important-link::after{
 	content: "";
 	position: absolute;
-	top: -2.5px;
-	left: -2.5px;
+	top: 0;
+	left: 0;
 	z-index: -1;
 	width: 100%;
 	height: 100%;
-	border: inherit;
 	border-radius: inherit;
-	transition: width 350ms, height 350ms, transform 350ms, background-color 350ms;
+	transition: background-color 350ms;
 }
 
 .important-link:hover {
@@ -146,15 +146,16 @@ body {
 	object-fit: contain;
 }
 
-@media (1450px>width>600px) {
-	.important-link {
-		width: 45%;
-		max-width: 500px;
+@media (width<1450px) {
+	.important-links {
+		--columns: 2;
 	}
 }
 
-@media (width<600px) {
+@media (width<750px) {
 	.important-links {
+		--columns: 1;
 		justify-content: center;
+		gap: 40px;
 	}
 }

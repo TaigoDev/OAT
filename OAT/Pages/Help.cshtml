@@ -1,53 +1,121 @@
 ﻿@page
 @model HelpModel
 @{
-    ViewData["Title"] = "Оформление заявки";
     Layout = "";
 }
 
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
-<link rel="stylesheet" href="~/css/help.css" asp-append-version="true">
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/help.css" asp-append-version="true">
+    <script src="~/js/help.js" asp-append-version="true"></script>
+    <meta name="viewport" content="width=device-width">
+    <title>Оформление заявки</title>
+</head>
+<body>
+    <section>
+        <div class="help">
+            <div id="help-steps" class="help-steps">
+                <div class="help-steps-item">
+                    <div class="help-steps-item-number">
+                        1
+                    </div>
+                    <div class="help-steps-item-text">
+                        КОНТАКТНАЯ ИНФОРМАЦИЯ
+                    </div>
+                </div>
+                <div class="help-steps-item">
+                    <div class="help-steps-item-number">
+                        2
+                    </div>
+                    <div class="help-steps-item-text">
+                        МЕСТОНАХОЖДЕНИЕ
+                    </div>
+                </div>
+                <div class="help-steps-item">
+                    <div class="help-steps-item-number">
+                        3
+                    </div>
+                    <div class="help-steps-item-text">
+                        ОПИСАНИЕ ПРОБЛЕМЫ
+                    </div>
+                </div>
+            </div>
 
-<section>
-    <div class="help">
-        <div class="help-steps">
-            <div class="help-steps-item">
-                <div class="help-steps-item-number">
-                    1
-                </div>
-                <div class="help-steps-item-text">
-                    КОНТАКТНАЯ ИНФОРМАЦИЯ
-                </div>
-            </div>
-            <div class="help-steps-item">
-                <div class="help-steps-item-number">
-                    2
-                </div>
-                <div class="help-steps-item-text">
-                    МЕСТОНАХОЖДЕНИЕ
-                </div>
-            </div>
-            <div class="help-steps-item">
-                <div class="help-steps-item-number">
-                    3
-                </div>
-                <div class="help-steps-item-text">
-                    ОПИСАНИЕ ПРОБЛЕМЫ
-                </div>
+            <div class="help-forms">
+                <form id="first-step" class="help-form active">
+                    <div class="help-form-head">
+                        <h2 class="help-form-head-title">
+                            Контактная информация
+                        </h2>
+                        <h3 class="help-form-head-guide">
+                            Заполните информацию о себе
+                        </h3>
+                    </div>
+                    <div class="help-form-body">
+                        <input class="help-form-body-item" type="text" placeholder="*Введите Ваше ФИО" />
+                        <input class="help-form-body-item" type="number" placeholder="*Введите Ваш номер телефона" />
+                        <input class="help-form-body-item" type="text" placeholder="Ваш телеграм" />
+                        <p class="help-form-body-additional">
+                            Поля со звездочкой* обязательны к заполнению
+                        </p>
+                    </div>
+                    <input type="button" id="to-second" class="help-form-button" value="Далее">
+                </form>
+                <form id="second-step" class="help-form">
+                    <div class="help-form-head">
+                        <h2 class="help-form-head-title">
+                            Местонахождение
+                        </h2>
+                        <h3 class="help-form-head-guide">
+                            Выберите корпус
+                        </h3>
+                    </div>
+                    <div class="help-form-body">
+                        <div class="select-container">
+                            <select class="help-form-body-item">
+                                <option value="">Ленина</option>
+                                <option value="">Богдана хмельницкого</option>
+                                <option value="">Космический проспект</option>
+                                <option value="">Волхостроя</option>
+                                <option value="">Суровцева</option>
+                                <option value="">Тара</option>
+                            </select>
+                        </div>
+                        <input class="help-form-body-item" type="text" placeholder="*Номер кабинета" />
+                        <p class="help-form-body-additional">
+                            Поля со звездочкой* обязательны к заполнению
+                        </p>
+                    </div>
+                    <div class="help-form-buttons">
+                        <input type="button" id="to-first" class="help-form-button" value="Назад">
+                        <input type="button" id="to-third" class="help-form-button" value="Далее">
+                    </div>
+                </form>
+                <form id="third-step" class="help-form">
+                    <div class="help-form-head">
+                        <h2 class="help-form-head-title">
+                            Описание проблемы
+                        </h2>
+                        <h3 class="help-form-head-guide">
+                            Подробно опишите Вашу проблему
+                        </h3>
+                    </div>
+                    <div class="help-form-body">
+                        <textarea placeholder="* Опишите вашу проблему, например:
+1)Не работает принтер
+2)Не работает сканер" class="help-form-body-item"></textarea>
+                        <p class="help-form-body-additional">
+                            Поля со звездочкой* обязательны к заполнению
+                        </p>
+                    </div>
+                    <div class="help-form-buttons">
+                        <input type="button" id="back-to-second" class="help-form-button" value="Назад">
+                        <input type="submit" id="send" class="help-form-button" value="Отправить">
+                    </div>
+                </form>
             </div>
         </div>
-
-        <div class="help-forms">
-            <form class="help-form">
-                <div class="help-form-head">
-                    <h2 class="help-form-head-title">
-                        Контактная информация
-                    </h2>
-                    <h3 class="help-form-head-guide">
-                        Заполните информацию о себе
-                    </h3>
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
+    </section>
+</body>
+</html>

@@ -67,6 +67,7 @@
 	  <Content Remove="wwwroot\js\admin.js" />
 	  <Content Remove="wwwroot\js\allNews.js" />
 	  <Content Remove="wwwroot\js\files.js" />
+	  <Content Remove="wwwroot\js\help.js" />
 	  <Content Remove="wwwroot\js\mysql.js" />
 	  <Content Remove="wwwroot\js\panel.js" />
 	  <Content Remove="wwwroot\js\pay.js" />
@@ -114,6 +115,9 @@
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 	  </Content>
+	  <None Update="wwwroot\js\help.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	  <None Update="wwwroot\css\another\cityImprovement.css">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

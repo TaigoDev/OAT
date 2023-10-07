@@ -113,7 +113,7 @@
     width: 100%;
 	object-fit: cover;
 	filter: brightness(0.7);
-	transition: 700ms;
+	transition: 600ms;
 }
 
 .news-content {
@@ -161,16 +161,18 @@
 
 /* impornant cards */
 
-.cards-list{
-	display: flex;
+.cards-list {
+	--columns: 4;
+	display: grid;
+	grid-template-columns: repeat(var(--columns), minmax(250px, 320px));
 	justify-content: space-between;
-	gap: 30px;
+	gap: 50px;
 }
 
 .card-item {
 	position: relative;
-	width: 300px;
-	height: 300px;
+	width: 100%;
+	aspect-ratio: 1;
 	background-color: #303068;
 	border-radius: 20px;
 	color: var(--light-white);
@@ -199,7 +201,7 @@
 	aspect-ratio: 1;
 	background: center/cover url(../images/mainPage/planeFront.svg);
 	opacity: 0;
-	transition: opacity 750ms ease-in-out, translate 750ms ease-in-out;
+	transition: opacity 650ms ease-in-out, translate 650ms ease-in-out;
 }
 
 .card-item:hover a::after{
@@ -217,11 +219,11 @@
 	line-height: 32px;
 	font-weight: 700;
 	text-align: center;
-	transition: transform 750ms ease-in-out;
+	transition: transform 650ms ease-in-out;
 }
 
 .card-item-header > .lower{
-	font-size: 1.45rem;
+	font-size: 0.9em;
 }
 
 .card-item-description {
@@ -237,7 +239,7 @@
 	text-align: center;
 	font-size: 1.25rem;
 	font-weight: 500;
-	transition: transform 750ms ease-in-out;
+	transition: transform 650ms ease-in-out;
 }
 
 .card-item:hover .card-item-description,
@@ -247,34 +249,14 @@
 
 @media (width<1300px){
 	.cards-list {
-		display: grid;
-		grid-template-columns: repeat(2, 350px);
+		--columns: 2;
 		justify-content: center;
-	}
-	.card-item {
-		width: 350px;
-		height: 350px;
-	}
-}
-
-@media (width<800px) {
-	.cards-list {
-		grid-template-columns: repeat(2, 275px);
-	}
-	.card-item {
-		width: 275px;
-		height: 275px;
 	}
 }
 
 @media (width<650px) {
 	.cards-list {
-		grid-template-columns: 300px;
-	}
-
-	.card-item {
-		width: 300px;
-		height: 300px;
+		--columns: 1;
 	}
 }
 

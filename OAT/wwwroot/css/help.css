@@ -9,7 +9,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	row-gap: 100px;
+	row-gap: 85px;
 }
 
 .help-steps{
@@ -19,15 +19,30 @@
 	justify-content: center;
 }
 
-.help-steps::before{
+.help-steps::before, .help-steps::after{
 	content: "";
 	position: absolute;
+	z-index: -1;
 	top: 50%;
 	left: 0;
 	translate: 0 -50%;
-	width: 100%;
+    width: 0;
 	height: 2px;
-	background: linear-gradient(90deg, var(--m-l-color), transparent 50%);
+	background: linear-gradient(90deg, var(--m-l-color) 80%, transparent);
+	transition: 650ms ease-in-out;
+}
+
+.help-steps::before{
+	width: 100%;
+	background: #b7b7b7;
+}
+
+.help-steps.second.help-steps::after{
+	width: 50%;
+}
+
+.help-steps.third.help-steps::after{
+	width: 100%;
 }
 
 .help-steps-item {
@@ -37,16 +52,30 @@
 	color: var(--light-white);
 }
 
+.help-steps-item:nth-child(1) .help-steps-item-number{
+	background: var(--akcent);
+}
+
+.help-steps.second .help-steps-item:nth-child(2) .help-steps-item-number{
+	background: var(--akcent);
+}
+
+.help-steps.third .help-steps-item:nth-child(2) .help-steps-item-number, .help-steps.third .help-steps-item:nth-child(3) .help-steps-item-number {
+	background: var(--akcent);
+}
+
 .help-steps-item-number {
+	--akcent: var( --m-l-color);
 	display: grid;
 	place-items: center;
 	width: 30px;
 	aspect-ratio: 1;
 	border-radius: 10px;
-	background: #20a322;
+	background: #b7b7b7;
 	color: var(--light-white);
 	font-weight: 600;
 	font-size: 1.1rem;
+	transition: 650ms ease-in-out;
 }
 
 .help-steps-item-text {
@@ -60,18 +89,33 @@
 
 .help-forms {
 	width: 300px;
-	height: 380px;
+	height: 400px;
+	position: relative;
 }
 
 .help-form {
+	position: absolute;
+	top: 0;
+	left: 0;
 	display: flex;
 	flex-direction: column;
-	row-gap: 20px;
+	row-gap: 30px;
+	justify-content: space-between;
 	padding: 20px 25px;
 	border-radius: 10px;
 	background: #e9e9e9;
 	border: 4px solid #00000017;
 	box-shadow: 0 5px 45px -10px #000000b8;
+	opacity: 0;
+	visibility: hidden;
+	translate: 100%;
+	transition: opacity 550ms ease-in-out, translate 550ms ease-in-out, visibility 550ms ease-in-out;
+}
+
+.help-form.active{
+	opacity: 1;
+	translate: 0;
+	visibility: visible;
 }
 
 .help-form-head{
@@ -92,5 +136,94 @@
 .help-form-head-guide {
 	font-size: 0.8rem;
 	font-weight: 500;
-	opacity: 0.8;
+	opacity: 0.7;
+}
+
+.help-form-body{
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.help-form-body-item{
+	padding: 10px;
+	border-radius: 10px;
+	border: 2px solid transparent;
+	transition: 200ms ease;
+}
+
+.select-container {
+	position: relative;
+}
+
+select.help-form-body-item {
+	appearance: none;
+	width: 100%;
+}
+
+.select-container::after {
+	content: "";
+	position: absolute;
+	display: block;
+	top: 50%;
+	right: 10px;
+	width: 15px;
+	aspect-ratio: 1;
+	translate: 0 -50%;
+	filter: invert(1);
+	rotate: 180deg;
+	background: center/cover url(../images/basic/arrow.svg);
+	pointer-events: none;
+}
+
+textarea.help-form-body-item{
+	min-height: 100px;
+}
+
+textarea.help-form-body-item::-webkit-scrollbar {
+	width: 5px;
+}
+
+textarea.help-form-body-item::-webkit-scrollbar-track {
+	background: #00000090;
+	border-radius: 0 5px 5px 0;
+}
+
+textarea.help-form-body-item::-webkit-scrollbar-thumb {
+	background: #00000090;
+}
+.help-form-body-additional {
+	opacity: 0.7;
+	text-align: center;
+	margin-bottom: 0;
+	font-size: 0.8rem;
+}
+
+.help-form-buttons{
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+}
+
+.help-form-button {
+	min-width: 100px;
+	padding: 8px 10px;
+	border-radius: 10px;
+	background: white;
+	border: 2px solid #00000030;
+	transition: border-color 300ms;
+}
+
+.help-form-button:hover{
+	border-color: #00000063;
+}
+
+@media(width<550px){
+	.help-steps {
+		gap: 80px;
+	}
+	.help-steps-item-text {
+		font-size: 0.8rem;
+		scale: 0.7;
+	}
 }
