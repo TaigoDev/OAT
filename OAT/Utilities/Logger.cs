@@ -48,7 +48,7 @@
     }
 
     private static string GetTimeUTC() =>
-        DateTime.UtcNow.ToString("dd.MM.yyyy mm:HH:ss");
+            DateTime.UtcNow.ToString("dd.MM.yyyy HH:mm:ss");
 
 }
 
