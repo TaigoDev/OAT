@@ -136,7 +136,7 @@
 .help-form-head-guide {
 	font-size: 0.8rem;
 	font-weight: 500;
-	opacity: 0.8;
+	opacity: 0.7;
 }
 
 .help-form-body{
@@ -149,6 +149,7 @@
 	padding: 10px;
 	border-radius: 10px;
 	border: 2px solid transparent;
+	transition: 200ms ease;
 }
 
 .select-container {
@@ -215,4 +216,14 @@ textarea.help-form-body-item::-webkit-scrollbar-thumb {
 
 .help-form-button:hover{
 	border-color: #00000063;
+}
+
+@media(width<550px){
+	.help-steps {
+		gap: 80px;
+	}
+	.help-steps-item-text {
+		font-size: 0.8rem;
+		scale: 0.7;
+	}
 }
