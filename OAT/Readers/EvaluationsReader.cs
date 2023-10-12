@@ -7,7 +7,7 @@ namespace OAT.Readers
 {
     public class EvaluationsReader
     {
-        //TODO: Проверить возможность одновременного чтения
+
         public static async Task<Student?> Search(string group, string FullName, string month)
         {
             var stopWatch = new Stopwatch();
@@ -34,14 +34,15 @@ namespace OAT.Readers
             MappingDays(ref excel, DateTime.DaysInMonth(DateTime.Now.Year, dateTime.Month));
 
             var rawRecords = await excel.FetchAsync<RawRecord>(xlsx, monthName);
-
+            Logger.Info(rawRecords.Count().ToString());
+            Logger.Info(rawRecords.First().FullName);
             var student = Student.Convert(FullName, rawRecords.ToList());
             stopWatch.Stop();
             Logger.InfoWithoutTelegram($"Оценки пользователя загружены за {stopWatch.ElapsedMilliseconds}ms");
             return student;
         }
 
-
+        
         private static string GetFileName(string folder, string group)
         {
             var matches = Regex.Matches(group, @"(\p{L}+)\s*([\d-]+)");
@@ -55,7 +56,8 @@ namespace OAT.Readers
             });
 
             if (files.Count() >= 1)
-                return files.FirstOrDefault(e => new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
+                return files.FirstOrDefault(e => 
+                new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
 
             return "";
         }

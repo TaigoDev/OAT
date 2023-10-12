@@ -256,7 +256,7 @@ public class Student
 
     public static Student Convert(string FullName, List<RawRecord> records)
     {
-        var rows = records.Where(e => e.FullName == FullName);
+        var rows = records.Where(e => e.FullName.Replace("ё", "е") == FullName.Replace("ё", "е"));
         var student = new Student(FullName);
         foreach (var discipline in rows)
             student.Disciplines.Add(new Discipline(discipline.discipline, discipline.marks));

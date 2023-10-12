@@ -37,11 +37,13 @@ namespace OAT.Utilities
             try
             {
                 if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                    await botClient.SendTextMessageAsync(new ChatId(int.Parse(config.chat_id)), message);
+                    await botClient.SendTextMessageAsync(new ChatId(long.Parse(config.chat_id)), message);
                 else
                     Console.WriteLine(message);
             }
-            catch { }
+            catch(Exception ex) {
+                Logger.Error(ex);
+            }
         }
 
 
@@ -49,8 +51,8 @@ namespace OAT.Utilities
         {
             try
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                    await botClient.SendTextMessageAsync(new ChatId(int.Parse(config.chat_id)), message,
+                if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    await botClient.SendTextMessageAsync(new ChatId(long.Parse(config.chat_id)), message,
                         replyMarkup: Buttons.CreateKeyboard(Buttons.CreateButtonInRow("🔓 Посмотреть ошибку", $"{ErrorNotification.Message}")));
                 else
                     Console.WriteLine(message);
