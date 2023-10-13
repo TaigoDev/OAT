@@ -39,14 +39,14 @@ namespace OAT.Utilities
             if (memberOf is null)
                 return null;
 
-            return memberOf.Replace("CN=", "").Replace("Группа - ", "");      
+            return memberOf.Replace("CN=", "").Replace("Группа - ", "");
         }
 
         public static string? GetFullName(string username)
         {
             var response = SearchByUsername(username);
             var attributes = GetValuesAttributeByTag(response, "cn");
-            return attributes is not null ? attributes.First().Replace("{", "").Replace("}", "") : null;    
+            return attributes is not null ? attributes.First().Replace("{", "").Replace("}", "") : null;
         }
 
         public static SearchResponse SearchByUsername(string username)
@@ -69,9 +69,9 @@ namespace OAT.Utilities
         }
 
         public static DirectoryAttribute? GetAttributeByTag(SearchResponse results, string tag) =>
-            results.Entries.Count is 0 ? null : 
+            results.Entries.Count is 0 ? null :
             results.Entries[0].Attributes.Values.Cast<DirectoryAttribute>().FirstOrDefault(e => e.Name == tag);
-        
+
         public static List<string>? GetValuesAttributeByTag(SearchResponse results, string tag)
         {
             var attribute = GetAttributeByTag(results, tag);

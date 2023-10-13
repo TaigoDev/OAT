@@ -2226,9 +2226,9 @@ section.content::before{
 .partners-list {
 	display: flex;
 	gap: 20px;
-	height: 90px;
+	height: 85px;
 	max-width: 100dvw;
-	animation: partners-animation 160s linear infinite;
+	animation: partners-animation 180s linear infinite;
 	--width-part-block: 9500px;
 }
 

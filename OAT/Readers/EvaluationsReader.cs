@@ -12,11 +12,11 @@ namespace OAT.Readers
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            
+
             var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "journal");
 
             var xlsx = Path.Combine(folder, GetFileName(folder, group));
-            if(!File.Exists(xlsx))
+            if (!File.Exists(xlsx))
                 return null;
 
             var sheets = new ExcelMapper(xlsx).FetchSheetNames().ToList();
@@ -40,7 +40,7 @@ namespace OAT.Readers
             return student;
         }
 
-        
+
         private static string GetFileName(string folder, string group)
         {
             var matches = Regex.Matches(group, @"(\p{L}+)\s*([\d-]+)");
@@ -54,7 +54,7 @@ namespace OAT.Readers
             });
 
             if (files.Count() >= 1)
-                return files.FirstOrDefault(e => 
+                return files.FirstOrDefault(e =>
                 new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
 
             return "";
@@ -71,7 +71,7 @@ namespace OAT.Readers
             for (int i = 1; i <= days + 1; i++)
                 excel.AddMapping<RawRecord>(2 + i, e => e.cache);
         }
-        
+
 
         public class RawRecord
         {
@@ -83,9 +83,9 @@ namespace OAT.Readers
 
             public List<string> marks = new List<string>();
 
-            public string? cache { get { return null;} set { marks.Add(value ?? ""); } }
+            public string? cache { get { return null; } set { marks.Add(value ?? ""); } }
         }
 
-       
+
     }
 }

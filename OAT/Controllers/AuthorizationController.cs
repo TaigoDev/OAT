@@ -5,10 +5,7 @@ using MySqlConnector;
 using Newtonsoft.Json;
 using OAT.Utilities;
 using RepoDb;
-using System.DirectoryServices.Protocols;
-using System.Net;
 using System.Security.Claims;
-using YamlDotNet.Core.Tokens;
 using static Enums;
 
 namespace OAT.Controllers
@@ -24,12 +21,12 @@ namespace OAT.Controllers
 
             if (!IsValid)
                 return Redirect("/admin/authorization?status=fail");
-            
+
 
             ClearExpiredTokens(username);
             var Token = Utils.RandomString(450);
             var roles = Permissions.GetUserRoles(username);
-            if(roles.Count is 0 || roles is null)
+            if (roles.Count is 0 || roles is null)
             {
                 Logger.Info($"Запрос на авторизацию через аккаунт {username} отклонен, т.к. пользователь не имеет ни одного права связанного сайтом.\n IP: {HttpContext.UserIP()}");
                 return Redirect("/admin/authorization?status=fail");
@@ -61,7 +58,7 @@ namespace OAT.Controllers
             HttpContext.SetCookie("student-password", Utils.Base64Encode($"{password}"));
             return Ldap.Login(username, password, HttpContext.UserIP(), false) ? StatusCode(StatusCodes.Status200OK) : StatusCode(StatusCodes.Status401Unauthorized);
         }
-        
+
 
 
         [HttpGet, Route("/api/logout"), NoCache]

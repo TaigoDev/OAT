@@ -17,6 +17,7 @@ public class Config
     public string ldap_password { get; set; }
     public string ldap_domain { get; set; }
     public string ldap_zone { get; set; }
+    public bool bitrixProxy { get; set; }
 }
 public class IPage
 {

@@ -66,19 +66,19 @@ public class ValidationFilter : IAsyncActionFilter
             using var connection = new MySqlConnection(Utils.GetConnectionString());
             var token = (await connection.QueryAsync<Tokens>(e => e.Token == context.HttpContext.User.GetToken())).FirstOrDefault();
             var authResult = await AuthorizationController.ValidateCredentials(context.HttpContext.User, context.HttpContext.UserIP());
-            
+
             if (authResult is Enums.AuthResult.success && token != null && token.username == context.HttpContext.User.GetUsername())
-			{
-				var identity = (ClaimsIdentity)context.HttpContext.User.Identity;
-				var claims = identity.Claims.Where(e => e.Type == "Role");
-				foreach (var claim in claims)
-					identity.RemoveClaim(claim);
-				var db_roles = JsonConvert.DeserializeObject<List<Enums.Role>>(token.Roles);
-				foreach (var role in db_roles)
-					identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
-				await next();
-			}
-			else
+            {
+                var identity = (ClaimsIdentity)context.HttpContext.User.Identity;
+                var claims = identity.Claims.Where(e => e.Type == "Role");
+                foreach (var claim in claims)
+                    identity.RemoveClaim(claim);
+                var db_roles = JsonConvert.DeserializeObject<List<Enums.Role>>(token.Roles);
+                foreach (var role in db_roles)
+                    identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
+                await next();
+            }
+            else
                 context.Result = authResult is Enums.AuthResult.token_expired ? new StatusCodeResult(401) : new StatusCodeResult(403);
         }
         else
@@ -98,7 +98,7 @@ public class ValidationFilterForPages : IAsyncPageFilter
             return;
         }
 
-        if(context.HttpContext.User == null || !context.HttpContext.User.Identity.IsAuthenticated)
+        if (context.HttpContext.User == null || !context.HttpContext.User.Identity.IsAuthenticated)
         {
             context.HttpContext.Response.Redirect("/admin/authorization");
             await next();
@@ -110,15 +110,15 @@ public class ValidationFilterForPages : IAsyncPageFilter
         var authResult = await AuthorizationController.ValidateCredentials(context.HttpContext.User, context.HttpContext.UserIP());
         if (authResult is Enums.AuthResult.success && token != null && token.username == context.HttpContext.User.GetUsername())
         {
-			var identity = (ClaimsIdentity)context.HttpContext.User.Identity;
+            var identity = (ClaimsIdentity)context.HttpContext.User.Identity;
             var claims = identity.Claims.Where(e => e.Type == "Role");
             foreach (var claim in claims)
                 identity.RemoveClaim(claim);
 
             var db_roles = JsonConvert.DeserializeObject<List<Enums.Role>>(token.Roles);
-			foreach (var role in db_roles)
-				identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
-			await next();
+            foreach (var role in db_roles)
+                identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
+            await next();
         }
         else
         {

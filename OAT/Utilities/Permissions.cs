@@ -2,7 +2,6 @@
 using MySqlConnector;
 using Newtonsoft.Json;
 using RepoDb;
-using System.DirectoryServices.Protocols;
 using System.Text;
 using static Enums;
 
@@ -71,16 +70,16 @@ namespace OAT.Utilities
             using var connection = new MySqlConnection(Utils.GetConnectionString());
             var records = await connection.QueryAsync<Tokens>(e => e.Token == Token);
             var record = records.FirstOrDefault();
-			if (record is null)
+            if (record is null)
                 return false;
 
-			var db_roles = JsonConvert.DeserializeObject<List<Role>>(record.Roles);
+            var db_roles = JsonConvert.DeserializeObject<List<Role>>(record.Roles);
             if (db_roles == null)
                 return false;
 
-			return db_roles.Any(e => e == role || e == Role.www_admin);
+            return db_roles.Any(e => e == role || e == Role.www_admin);
         }
-        
+
 
     }
 

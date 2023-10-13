@@ -5,6 +5,33 @@ using System.Text;
 public static class ProxyController
 {
     public static Config config = new Config();
+
+    public static void BitrixProxy(this WebApplication context) =>
+        context.Use((context, next) => Proxy(context, next));
+
+    async static Task Proxy(HttpContext context, Func<Task> next)
+    {
+        try
+        {
+
+            var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
+            if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
+            {
+                context.Response.Redirect($"{config.MainUrl}/{OnNewSite}");
+                return;
+            }
+            await next();
+            if (context.Response.StatusCode == 404)
+                await context.DisplayBitrix(next);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            if (!context.Response.HasStarted)
+                context.Response.Redirect("https://www.oat.ru/");
+        }
+    }
+
     public static async Task DisplayBitrix(this HttpContext context, Func<Task> next)
     {
         var path = context.Request.Path.Value;
@@ -23,7 +50,7 @@ public static class ProxyController
         if (context.Request.Method == "GET")
         {
             if (path.Contains("students/perfomance") && !string.IsNullOrEmpty(context.Request.Headers["Authorization"].ToString()))
-                client.DefaultRequestHeaders.Add("Authorization", context.Request.Headers["Authorization"].ToString());            
+                client.DefaultRequestHeaders.Add("Authorization", context.Request.Headers["Authorization"].ToString());
             response = await client.GetAsync(BaseUrl);
         }
         else if (context.Request.Method == "POST")
@@ -69,7 +96,7 @@ public static class ProxyController
             head.InsertBefore(newNode, head.FirstChild);
             if (!context.Response.HasStarted)
                 context.Response.ContentType = "text/html";
-      
+
             await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
         }
         else await context.Response.WriteAsync(body, Encoding.UTF8);

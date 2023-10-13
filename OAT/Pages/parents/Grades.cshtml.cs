@@ -16,7 +16,7 @@ namespace OAT.Pages.parents
         }
 
         public string FullName { get; set; }
-        
+
         public Student? Disciplines { get; set; }
 
         public string month { get; set; }

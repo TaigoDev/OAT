@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -41,7 +40,8 @@ namespace OAT.Utilities
                 else
                     Console.WriteLine(message);
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 Logger.Error(ex);
             }
         }
@@ -57,7 +57,8 @@ namespace OAT.Utilities
                 else
                     Console.WriteLine(message);
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 Logger.Error(ex);
             }
         }

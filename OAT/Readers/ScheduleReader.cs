@@ -19,7 +19,8 @@ namespace OAT.Readers
         public static List<TeacherSchedule> teachers_ul_volkhovstroya_5 = new List<TeacherSchedule>();
         public static List<string> lesson_times = new List<string>();
 
-        public static async Task i        {
+        public static async Task init()
+        {
             IterateGroupList(e => new List<Group>());
             IterateTeacherList(e => new List<TeacherSchedule>());
 

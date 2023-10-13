@@ -207,20 +207,20 @@ StringSplitOptions options = StringSplitOptions.None)
 
     public static string GetToken(this ClaimsPrincipal User)
     {
-		var identity = (ClaimsIdentity)User.Identity;
-		if (identity == null)
-			return "404-GetUsername";
-		return identity.Claims.First(e => e.Type == "Token").Value;
-	}
+        var identity = (ClaimsIdentity)User.Identity;
+        if (identity == null)
+            return "404-GetUsername";
+        return identity.Claims.First(e => e.Type == "Token").Value;
+    }
     public static string GetUsername(this ClaimsPrincipal User)
     {
-		var identity = (ClaimsIdentity)User.Identity;
+        var identity = (ClaimsIdentity)User.Identity;
         if (identity == null)
             return "404-GetUsername";
         return identity.Claims.First(
             e => e.Type == "username"
             ).Value;
-	}
+    }
 
     public static bool IsRole(this ClaimsPrincipal User, Enums.Role role)
     {
@@ -313,7 +313,7 @@ StringSplitOptions options = StringSplitOptions.None)
     public static bool IsCorrectFile(IFormFile file, params string[] expansions) =>
         expansions.Any(expansion => IsCorrectFile(file, expansion));
 
-    
+
 
 }
 

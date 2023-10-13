@@ -1,21 +1,17 @@
 ﻿using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Net.Http.Headers;
 using MySqlConnector;
 using OAT.Readers;
 using OAT.Utilities;
 using RepoDb;
 using System.Runtime.InteropServices;
-using System.Text;
 using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
 
 config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(),
     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
-
 GlobalConfiguration.Setup().UseMySqlConnector();
-Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); //https://www.nuget.org/packages/ExcelDataReader/3.7.0-develop00385#readme-body-tab
 
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
@@ -24,13 +20,13 @@ SetupControllers();
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "static"))
-});
 app.UseRouting();
 app.UseNoSniffHeaders();
-app.Use((context, next) => Proxing(context, next));
+
+app.Use((context, next) => CacheController(context, next));
+if (config.bitrixProxy)
+    app.BitrixProxy();
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
@@ -40,10 +36,8 @@ app.Run();
 
 async void SetupControllers()
 {
-    Console.WriteLine(Utils.GetConnectionString());
     try
     {
-        await DropTokens();
         Utils.CreateDirectoriesWithCurrentPath(
             "news",
             "Resources",
@@ -60,6 +54,7 @@ async void SetupControllers()
         RunModules.StartModules(
             TelegramBot.init,
             UrlsContoller.init,
+            DropTokens,
             HealthTables.init,
             NewsReader.init,
             ProfNewsReader.init,
@@ -102,52 +97,33 @@ void SetupServices(ref WebApplicationBuilder builder)
 
 }
 
-async Task Proxing(HttpContext context, Func<Task> next)
+
+async Task CacheController(HttpContext context, Func<Task> next)
 {
-    try
+    if (!context.Request.Path.Value!.Contains("admin"))
     {
-        if (!context.Request.Path.Value!.Contains("admin"))
-            context.Response.GetTypedHeaders().CacheControl =
-                new CacheControlHeaderValue()
-                {
-                    Public = true,
-                    MaxAge = TimeSpan.FromHours(2),
-                };
-        else
-            context.Response.GetTypedHeaders().CacheControl =
-                new CacheControlHeaderValue()
-                {
-                    NoCache = true,
-                    NoStore = true,
-                    MaxAge = TimeSpan.FromHours(0),
-                };
-
-        var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
-        if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
-        {
-            context.Response.Redirect($"{config.MainUrl}/{OnNewSite}");
-            return;
-        }
+        context.Response.GetTypedHeaders().CacheControl =
+            new CacheControlHeaderValue()
+            {
+                Public = true,
+                MaxAge = TimeSpan.FromHours(2),
+            };
         await next();
-        if (context.Response.StatusCode == 404)
-            await context.DisplayBitrix(next);
+        return;
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex);
-        if (!context.Response.HasStarted)
-            context.Response.Redirect("https://www.oat.ru/");
-    }
+
+    context.Response.GetTypedHeaders().CacheControl =
+            new CacheControlHeaderValue()
+            {
+                NoCache = true,
+                NoStore = true,
+                MaxAge = TimeSpan.FromHours(0),
+            };
+    await next();
 }
-
-
 
 async Task DropTokens()
 {
-    try
-    {
-        using var connection = new MySqlConnection(Utils.GetConnectionString());
-        await connection.ExecuteNonQueryAsync($"DROP TABLE Tokens;");
-    }
-    catch { }
+    using var connection = new MySqlConnection(Utils.GetConnectionString());
+    await connection.ExecuteNonQueryAsync($"DROP TABLE Tokens;");
 }

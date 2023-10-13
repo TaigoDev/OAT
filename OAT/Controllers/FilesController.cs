@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
 using MimeTypes;
 using OAT.Utilities;
-using Telegram.Bot.Types;
 
 namespace OAT.Controllers
 {
     public class FilesController : Controller
     {
-		#region Schedule changes 
-		[HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_changes_ALL, Enums.Role.www_admin), NoCache]
+        #region Schedule changes 
+        [HttpPost("api/schedule/changes/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_changes_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> UploadChangesSchedule(string building, IFormFile file)
         {
             if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xlsx")
@@ -29,20 +27,20 @@ namespace OAT.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
-		[HttpGet("api/schedule/changes/{building}/download"), NoCache]
-		public async Task<IActionResult> DownloadChanges(string building)
-		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
-			if (!System.IO.File.Exists(path))
-				return Redirect("/timetable/ClassesChanges");
+        [HttpGet("api/schedule/changes/{building}/download"), NoCache]
+        public async Task<IActionResult> DownloadChanges(string building)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
+            if (!System.IO.File.Exists(path))
+                return Redirect("/timetable/ClassesChanges");
 
-			return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Changes.xlsx");
-		}
+            return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Changes.xlsx");
+        }
 
-		#endregion
-		#region Sessions
+        #endregion
+        #region Sessions
 
-		[HttpPost("api/sessions/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
+        [HttpPost("api/sessions/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
         public async Task<IActionResult> UploadSessionsFile(string building, string filename, IFormFile file)
         {
             if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xlsx")
@@ -96,57 +94,57 @@ namespace OAT.Controllers
             return File(await System.IO.File.ReadAllBytesAsync(file), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Sessions.xlsx");
         }
 
-		#endregion
-		#region Practice 
+        #endregion
+        #region Practice 
 
-		[HttpPost("api/practice/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
-		public async Task<IActionResult> UploadPracticeFile(string building, string filename, IFormFile file)
-		{
-			if (!Utils.IsCorrectFile(file, ".xlsx", ".docx"))
-				return StatusCode(StatusCodes.Status400BadRequest);
+        [HttpPost("api/practice/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
+        public async Task<IActionResult> UploadPracticeFile(string building, string filename, IFormFile file)
+        {
+            if (!Utils.IsCorrectFile(file, ".xlsx", ".docx"))
+                return StatusCode(StatusCodes.Status400BadRequest);
 
-			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
-				return StatusCode(StatusCodes.Status406NotAcceptable);
+            if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
+                return StatusCode(StatusCodes.Status406NotAcceptable);
 
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{Utils.ConvertStringToHex(filename)}{Path.GetExtension(file.FileName)}");
-			Utils.FileDelete(path);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, $"{Utils.ConvertStringToHex(filename)}{Path.GetExtension(file.FileName)}");
+            Utils.FileDelete(path);
 
-			using Stream fileStream = new FileStream(path, FileMode.Create);
-			await file.CopyToAsync(fileStream);
-			fileStream.Dispose();
+            using Stream fileStream = new FileStream(path, FileMode.Create);
+            await file.CopyToAsync(fileStream);
+            fileStream.Dispose();
 
-			Logger.Info($"Пользователь {User.GetUsername()} добавил файл практики для {building}\nIP: {HttpContext.UserIP()}");
-			return StatusCode(StatusCodes.Status200OK);
-		}
+            Logger.Info($"Пользователь {User.GetUsername()} добавил файл практики для {building}\nIP: {HttpContext.UserIP()}");
+            return StatusCode(StatusCodes.Status200OK);
+        }
 
-		[HttpGet("api/practice/{building}/files"), NoCache]
-		public async Task<IActionResult> GetPracticeFiles(string building)
-		{
-			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
-				return StatusCode(StatusCodes.Status406NotAcceptable);
+        [HttpGet("api/practice/{building}/files"), NoCache]
+        public async Task<IActionResult> GetPracticeFiles(string building)
+        {
+            if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
+                return StatusCode(StatusCodes.Status406NotAcceptable);
 
-			var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building);
-			var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly).ToList();
-			var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e).Replace(Path.GetExtension(e), "")));
+            var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building);
+            var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly).ToList();
+            var names = files.ConvertAll(e => Utils.ConvertHexToString(Path.GetFileName(e).Replace(Path.GetExtension(e), "")));
 
-			return Ok(names.toJson());
-		}
+            return Ok(names.toJson());
+        }
 
-		[HttpDelete("api/practice/{building}/delete"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
-		public IActionResult RemovePracticeFile(string building, string filename)
-		{
-			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
-				return StatusCode(StatusCodes.Status406NotAcceptable);
+        [HttpDelete("api/practice/{building}/delete"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
+        public IActionResult RemovePracticeFile(string building, string filename)
+        {
+            if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
+                return StatusCode(StatusCodes.Status406NotAcceptable);
 
-			var workedDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building);
+            var workedDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building);
             var file = Directory.GetFiles(workedDirectory, $"{Utils.ConvertStringToHex(filename)}.*").FirstOrDefault();
 
-			Utils.FileDelete(file);
-			Logger.Info($"{User.GetUsername()} удалил файл практики {filename}");
-			return StatusCode(StatusCodes.Status200OK);
-		}
+            Utils.FileDelete(file);
+            Logger.Info($"{User.GetUsername()} удалил файл практики {filename}");
+            return StatusCode(StatusCodes.Status200OK);
+        }
 
-		[HttpGet("api/practice/{building}/{filename}/download"), NoCache]
+        [HttpGet("api/practice/{building}/{filename}/download"), NoCache]
         public async Task<IActionResult> DownloadPracticeFile(string building, string filename)
         {
             var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", building, Utils.ConvertHexToString(filename));
@@ -156,6 +154,6 @@ namespace OAT.Controllers
         }
 
 
-		#endregion
-	}
+        #endregion
+    }
 }
