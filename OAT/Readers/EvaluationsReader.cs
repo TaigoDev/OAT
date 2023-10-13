@@ -34,8 +34,6 @@ namespace OAT.Readers
             MappingDays(ref excel, DateTime.DaysInMonth(DateTime.Now.Year, dateTime.Month));
 
             var rawRecords = await excel.FetchAsync<RawRecord>(xlsx, monthName);
-            Logger.Info(rawRecords.Count().ToString());
-            Logger.Info(rawRecords.First().FullName);
             var student = Student.Convert(FullName, rawRecords.ToList());
             stopWatch.Stop();
             Logger.InfoWithoutTelegram($"Оценки пользователя загружены за {stopWatch.ElapsedMilliseconds}ms");
@@ -52,7 +50,7 @@ namespace OAT.Readers
             var files = Directory.GetFiles(folder, "*.xlsx").Where(e =>
             {
                 var info = new FileInfo(e).Name;
-                return info.Contains(letters) && info.Contains(numbers);
+                return info.Contains(letters) && GetGroupNumbers(info).Contains(numbers);
             });
 
             if (files.Count() >= 1)
@@ -60,6 +58,12 @@ namespace OAT.Readers
                 new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
 
             return "";
+        }
+
+        private static string GetGroupNumbers(string name)
+        {
+            var matches = Regex.Matches(name, @"(\p{L}+)\s*([\d-]+)");
+            return matches.First().Groups[2].Value.ToString().Remove(0, 1);
         }
 
         private static void MappingDays(ref ExcelMapper excel, int days)
