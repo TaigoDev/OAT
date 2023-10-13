@@ -12,4 +12,4 @@ ldapLogin: "ld"
 ldapPassword: "ldaps332!@"
 ldapDomain: "elki55"
 ldapZone: "ru"
-bitrixProxy: true
+bitrixProxy: false

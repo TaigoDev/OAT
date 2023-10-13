@@ -34,7 +34,7 @@ app.Run();
 
 
 
-async void SetupControllers()
+void SetupControllers()
 {
     try
     {
