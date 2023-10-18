@@ -104,7 +104,14 @@
                                                             @lesson.subgroups.First().short_subject
                                                         </div>
                                                     }
-                                                    <div class="subject-more-item">
+      
+                                                    <div class="subject-more-item">                                          
+                                                        @if (lesson.subgroups.First().id != 0)
+                                                        {
+                                                            <div class="subject-teacher">
+                                                                Подгруппа @lesson.subgroups.First().id
+                                                            </div>
+                                                        }
                                                         <div class="subject-teacher">
                                                             @lesson.subgroups.First().teacher
                                                         </div>
@@ -233,6 +240,12 @@
                                                         </div>
                                                     }
                                                     <div class="subject-more-item">
+                                                        @if (lesson.subgroups.First().id != 0)
+                                                        {
+                                                            <div class="subject-teacher">
+                                                                Подгруппа @lesson.subgroups.First().id
+                                                            </div>
+                                                        }
                                                         <div class="subject-teacher">
                                                             @lesson.subgroups.First().teacher
                                                         </div>
