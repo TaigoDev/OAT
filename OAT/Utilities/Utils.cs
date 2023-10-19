@@ -247,10 +247,9 @@ StringSplitOptions options = StringSplitOptions.None)
 
         return false;
     }
-
     public static string UserIP(this HttpContext context) =>
         !string.IsNullOrWhiteSpace(context.Request.Headers["CF-Connecting-IP"]) ?
-        context.Request.Headers["CF-Connecting-IP"] : context.Connection.RemoteIpAddress!.ToString();
+        context.Request.Headers["CF-Connecting-IP"] : context.Request.Headers["X-Real-IP"];
 
     public static string Base64Encode(string plainText)
     {
