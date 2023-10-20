@@ -1,4 +1,6 @@
-﻿[MysqlTable]
+﻿using OAT.Utilities;
+
+[MysqlTable]
 public class Teachers
 {
     public Teachers(int id, string FullName, string email, string phone, string base64_profile, string image_url)
@@ -34,7 +36,7 @@ public class ProfNews
 
     public ProfNews(string date, string title, string description, string short_description, List<string> photos)
     {
-        id = Utils.getLastId("ProfNews").GetAwaiter().GetResult();
+        id = DataBaseUtils.getLastId("ProfNews").GetAwaiter().GetResult();
         this.date = date;
         this.title = title;
         this.description = description;
@@ -66,7 +68,7 @@ public class Tokens
     }
     public Tokens(string username, string token, string issued, string Roles)
     {
-        id = Utils.getLastId("Tokens").GetAwaiter().GetResult(); ;
+        id = DataBaseUtils.getLastId("Tokens").GetAwaiter().GetResult(); ;
         this.username = username;
         Token = token;
         this.issued = issued;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
+using OAT.Utilities;
 using RepoDb;
 
 namespace OAT.Controllers
@@ -12,7 +13,7 @@ namespace OAT.Controllers
             var answer = new object();
             try
             {
-                using var connection = new MySqlConnection(Utils.GetConnectionString());
+                using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
                 answer = await connection.ExecuteQueryAsync<object>(command);
             }
             catch (Exception ex)

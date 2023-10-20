@@ -1,7 +1,8 @@
 ﻿#pragma warning disable CS8602
 using System.Diagnostics;
 using System.Xml;
-using static OAT.Utilities.ScheduleUtils;
+using OAT.UtilsHelper;
+using static OAT.UtilsHelper.ScheduleUtils;
 
 namespace OAT.Readers
 {

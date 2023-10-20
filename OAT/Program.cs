@@ -1,15 +1,18 @@
-﻿using AspNetCore.ReCaptcha;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Net.Http.Headers;
 using MySqlConnector;
 using OAT.Readers;
 using OAT.Utilities;
+using OAT.UtilsHelper;
+using OAT.UtilsHelper.ReCaptcha;
+using OAT.UtilsHelper.Recovery;
+using OAT.UtilsHelper.Telegram;
 using RepoDb;
 using System.Runtime.InteropServices;
 using TAIGO.ZCore.DPC.Services;
 using static ProxyController;
 
-config = Utils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(),
+config = await FileUtils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(),
     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
 GlobalConfiguration.Setup().UseMySqlConnector();
 
@@ -38,7 +41,7 @@ void SetupControllers()
 {
     try
     {
-        Utils.CreateDirectoriesWithCurrentPath(
+        DirectoryUtils.CreateDirectoriesWithCurrentPath(
             "news",
             "Resources",
             "Resources/sessions", "Resources/sessions/b1", "Resources/sessions/b2", "Resources/sessions/b3", "Resources/sessions/b4",
@@ -51,7 +54,7 @@ void SetupControllers()
             "Resources/practice", "Resources/practice/b1", "Resources/practice/b2", "Resources/practice/b3", "Resources/practice/b4",
             "Resources/Logs");
         /* WARNING: Not support async methods */
-        RunModules.StartModules(
+        Runs.StartModules(
             TelegramBot.init,
             UrlsContoller.init,
             DropTokens,
@@ -59,7 +62,7 @@ void SetupControllers()
             NewsReader.init,
             ProfNewsReader.init,
             ScheduleReader.init,
-            () => Utils.AutoRepeat(async () => await ContractReader.init(), 15),
+            () => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),
             WorkersReader.init);
 
     }
@@ -124,6 +127,6 @@ async Task CacheController(HttpContext context, Func<Task> next)
 
 async Task DropTokens()
 {
-    using var connection = new MySqlConnection(Utils.GetConnectionString());
+    using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
     await connection.ExecuteNonQueryAsync($"DROP TABLE Tokens;");
 }

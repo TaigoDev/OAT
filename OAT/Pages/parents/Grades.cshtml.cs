@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.Readers;
 using OAT.Utilities;
+using OAT.UtilsHelper;
 using System.Globalization;
 
 namespace OAT.Pages.parents
@@ -32,8 +33,8 @@ namespace OAT.Pages.parents
                 return;
             }
 
-            var username = Utils.Base64Decode(cookieUsername);
-            var password = Utils.Base64Decode(cookiePassword);
+            var username = StringUtils.Base64Decode(cookieUsername);
+            var password = StringUtils.Base64Decode(cookiePassword);
             if (!Ldap.Login(username, password, HttpContext.UserIP(), false))
             {
                 HttpContext.Response.Redirect("AcademicProgress");

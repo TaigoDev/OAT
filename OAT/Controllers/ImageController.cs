@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
+using OAT.Utilities;
 using System.Net;
 
 namespace OAT.Controllers
@@ -13,14 +14,14 @@ namespace OAT.Controllers
             {
                 url = ProxyController.config.BaseUrl + url;
 
-                var local_path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "bitrix", $"{Utils.GetSHA256(url)}{Path.GetExtension(url)}");
+                var local_path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "bitrix", $"{StringUtils.SHA226(url)}{Path.GetExtension(url)}");
 
                 if (System.IO.File.Exists(local_path))
                     return File(System.IO.File.ReadAllBytes(local_path), ContentType(url));
 
                 SaveImage(local_path, url);
                 var steam = await ImageStream(url);
-                return File(Utils.ReadFully(steam), ContentType(url));
+                return File(StringUtils.ReadFully(steam), ContentType(url));
             }
             catch
             {
@@ -55,7 +56,7 @@ namespace OAT.Controllers
             }
             catch
             {
-                Utils.FileDelete(filePath);
+                FileUtils.FileDelete(filePath);
             }
         }).Start();
 

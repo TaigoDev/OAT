@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OAT.Readers;
 using OAT.Utilities;
+using OAT.UtilsHelper;
 
 namespace OAT.Controllers
 {
@@ -18,7 +19,7 @@ namespace OAT.Controllers
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}.xml");
-            Utils.FileDelete(path);
+            FileUtils.FileDelete(path);
 
             using Stream fileStream = new FileStream(path, FileMode.Create);
             await file.CopyToAsync(fileStream);

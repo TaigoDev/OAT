@@ -22,7 +22,7 @@
             <div class="news-list" style="max-width: none;">
                 @foreach (var news in ProfNewsReader.pages.ToList()[id - 1])
                 {
-                    var photos = news.photos.toObjectJC<List<string>>();
+                    var photos = news.photos.toObject<List<string>>();
                     <div class="news-item">
                         <a class="news-item-img" href="news/@news.id">
                             @if (photos.Count > 0)

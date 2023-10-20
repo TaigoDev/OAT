@@ -19,7 +19,7 @@
         }
         <div class="images-list-slider-container">
             <div class="images-list-slider">
-                @foreach (var image in news.photos.toObjectJC<List<string>>())
+                @foreach (var image in news.photos.toObject<List<string>>())
                 {
                     @if (!image.Contains(".mp4"))
                     {

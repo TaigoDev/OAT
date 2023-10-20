@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using OAT.Readers;
+using OAT.Utilities;
 using RepoDb;
 
 namespace OAT.Controllers
@@ -20,19 +21,19 @@ namespace OAT.Controllers
                 foreach (IFormFile file in files)
                     if (file.Length > 0)
                     {
-                        var path = $"images/news/{Utils.sha256_hash($"{file.FileName}-{file.Length}")}{Path.GetExtension(file.FileName)}";
+                        var path = $"images/news/{StringUtils.SHA226($"{file.FileName}-{file.Length}")}{Path.GetExtension(file.FileName)}";
                         photos.Add(path);
                         using Stream fileStream = new FileStream(Path.Combine("wwwroot", path), FileMode.Create);
                         await file.CopyToAsync(fileStream);
                     }
 
-                using var connection = new MySqlConnection(Utils.GetConnectionString());
+                using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
                 var news = new ProfNews(date, title, text, text.GetWords(15), photos);
                 await connection.InsertAsync(news);
 
                 Logger.Info($"Пользователь опубликовал новую новость (Prof).\n" +
                     $"ID: {news.id}\n" +
-                    $"SHA256 (TEXT): {Utils.sha256_hash(text)}\n" +
+                    $"SHA256 (TEXT): {StringUtils.SHA226(text)}\n" +
                     $"Пользователь: {User.GetUsername()}\n" +
                     $"IP-адрес: {HttpContext.UserIP()}");
 
@@ -49,7 +50,7 @@ namespace OAT.Controllers
         [HttpDelete("api/prof/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_prof_news), NoCache]
         public async Task<IActionResult> RemoveNews(int id)
         {
-            using var connection = new MySqlConnection(Utils.GetConnectionString());
+            using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
 
             var record = await connection.QueryAsync<ProfNews>(e => e.id == id);
 

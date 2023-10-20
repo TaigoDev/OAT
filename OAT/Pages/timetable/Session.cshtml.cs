@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using OAT.Utilities;
 
 namespace OAT.Pages.timetable
 {
@@ -23,7 +24,7 @@ namespace OAT.Pages.timetable
             {
                 var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", $"b{i}");
                 var files = Directory.GetFiles(folder, "*.xls", SearchOption.TopDirectoryOnly).ToList();
-                GetList(i).AddRange(files.ConvertAll(e => new FileSession(Utils.ConvertHexToString(Path.GetFileName(e).Replace(".xls", "")),
+                GetList(i).AddRange(files.ConvertAll(e => new FileSession(StringUtils.ConvertHexToString(Path.GetFileName(e).Replace(".xls", "")),
                     $"api/sessions/b{i}/{Path.GetFileName(e).Replace(".xls", "")}/download")));
 
             }

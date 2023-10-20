@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using Newtonsoft.Json;
 using OAT.Utilities;
+using OAT.UtilsHelper;
 using RepoDb;
 using System.Security.Claims;
 using static Enums;
@@ -16,7 +17,7 @@ namespace OAT.Controllers
         public async Task<IActionResult> Login([FromQuery] string username, [FromQuery] string password)
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            using var connection = new MySqlConnection(Utils.GetConnectionString());
+            using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
             var IsValid = Ldap.Login(username, password, HttpContext.UserIP());
 
             if (!IsValid)
@@ -24,7 +25,7 @@ namespace OAT.Controllers
 
 
             ClearExpiredTokens(username);
-            var Token = Utils.RandomString(450);
+            var Token = StringUtils.RandomString(450);
             var roles = Permissions.GetUserRoles(username);
             if (roles.Count is 0 || roles is null)
             {
@@ -54,8 +55,8 @@ namespace OAT.Controllers
         [HttpPost("/api/students/login"), NoCache]
         public IActionResult LoginStudents(string username, string password)
         {
-            HttpContext.SetCookie("student-username", Utils.Base64Encode($"{username}"));
-            HttpContext.SetCookie("student-password", Utils.Base64Encode($"{password}"));
+            HttpContext.SetCookie("student-username", StringUtils.Base64Encode($"{username}"));
+            HttpContext.SetCookie("student-password", StringUtils.Base64Encode($"{password}"));
             return Ldap.Login(username, password, HttpContext.UserIP(), false) ? StatusCode(StatusCodes.Status200OK) : StatusCode(StatusCodes.Status401Unauthorized);
         }
 
@@ -73,7 +74,7 @@ namespace OAT.Controllers
             try
             {
                 var Token = user.GetToken();
-                using var connection = new MySqlConnection(Utils.GetConnectionString());
+                using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
 
                 var records = await connection.QueryAsync<Tokens>(e => e.Token == Token);
                 if (!records.Any())
@@ -100,7 +101,7 @@ namespace OAT.Controllers
 
         private static async void ClearExpiredTokens(string username)
         {
-            using var connection = new MySqlConnection(Utils.GetConnectionString());
+            using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
             var records = await connection.QueryAsync<Tokens>(e => e.username == username);
             foreach (var record in records)
                 if (DateTime.ParseExact(record.issued, "dd.MM.yyyy HH:mm:ss", null).AddMinutes(30) < DateTime.Now)

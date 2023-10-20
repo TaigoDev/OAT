@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Codecrete.QrCodeGenerator;
 using OAT.Readers;
+using OAT.Utilities;
 using System.Text;
 
 namespace OAT.Pages.feedback
@@ -35,9 +36,9 @@ namespace OAT.Pages.feedback
                 var qr = QrCode.EncodeText(qrData, QrCode.Ecc.Medium);
 
                 var pathIzv = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
-                    $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
+                    $"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
                 var pathQvit = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
-                    $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
+                    $"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 
                 System.IO.File.WriteAllText(pathIzv, qr.ToSvgString(4), Encoding.UTF8);
                 System.IO.File.WriteAllText(pathQvit, qr.ToSvgString(4), Encoding.UTF8);
@@ -68,9 +69,9 @@ namespace OAT.Pages.feedback
                 var qr = QrCode.EncodeText(qrData, QrCode.Ecc.Medium);
 
                 var pathIzv = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
-                    $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
+                    $"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
                 var pathQvit = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
-                    $"{Utils.sha256_hash($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
+                    $"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 
                 System.IO.File.WriteAllText(pathIzv, qr.ToSvgString(4), Encoding.UTF8);
                 System.IO.File.WriteAllText(pathQvit, qr.ToSvgString(4), Encoding.UTF8);

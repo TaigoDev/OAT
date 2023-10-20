@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using OAT.Utilities;
+using System.Text;
 
 
 public class NewsReader
@@ -8,7 +9,7 @@ public class NewsReader
 
     public static Task init()
     {
-        Repeater.Repeat(Loader, 300000);
+        RepeaterUtils.Repeat(Loader, 300000);
         return Task.CompletedTask;
     }
 
@@ -24,7 +25,7 @@ public class NewsReader
                 byte[] buffer = new byte[fsSource.Length];
                 await fsSource.ReadAsync(buffer, 0, buffer.Length);
 
-                var news = Utils.DeserializeYML<NewsFile>(Encoding.Default.GetString(buffer));
+                var news = StringUtils.DeserializeYML<NewsFile>(Encoding.Default.GetString(buffer));
                 News.Add(new News(
                     Path.GetFileNameWithoutExtension(file).ToInt32(),
                     news.text.GetWords(15),

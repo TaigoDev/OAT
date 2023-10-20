@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using OAT.Utilities;
 using RepoDb;
 
 namespace OAT.Readers
@@ -10,7 +11,7 @@ namespace OAT.Readers
 
         public static async Task init()
         {
-            using var connection = new MySqlConnection(Utils.GetConnectionString());
+            using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
             var records = await connection.QueryAllAsync<ProfNews>();
             news = records.ToList();
             news.Reverse();

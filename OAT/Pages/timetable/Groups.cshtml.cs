@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Utilities;
+using OAT.UtilsHelper;
 
 namespace OAT.Pages.timetable
 {
