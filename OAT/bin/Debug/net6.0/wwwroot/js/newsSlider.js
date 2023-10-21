@@ -9,25 +9,25 @@ window.addEventListener("load", () => {
         if (slidePosition == 1) {
             slidePosition--;
             newsSlider.style = `--news-offset: ${-100 * slidePosition}%; transform: translateX(var(--news-offset));`;
-            sliderNext.classList.remove("news-slider-arrow-inactive");
+            sliderNext.classList.remove("inactive");
         }
         if (slidePosition > 1) {
             slidePosition--;
             newsSlider.style = `--news-offset: ${-100 * slidePosition}%; transform: translateX(calc(var(--news-offset) - var(--news-offset-helper) * ${slidePosition}));`;
-            sliderNext.classList.remove("news-slider-arrow-inactive");
+            sliderNext.classList.remove("inactive");
         }
         else {
-            sliderPrev.classList.add("news-slider-arrow-inactive");
+            sliderPrev.classList.add("inactive");
         }
     });
     sliderNext.addEventListener("click", () => {
         if (slidePosition < 2) {
             slidePosition++;
             newsSlider.style = `--news-offset: ${-100 * slidePosition}%; transform: translateX(calc(var(--news-offset) - var(--news-offset-helper) * ${slidePosition}));`;
-            sliderPrev.classList.remove("news-slider-arrow-inactive");
+            sliderPrev.classList.remove("inactive");
         }
         if (slidePosition == 2) {
-            sliderNext.classList.add("news-slider-arrow-inactive");
+            sliderNext.classList.add("inactive");
         }
     });
 });
