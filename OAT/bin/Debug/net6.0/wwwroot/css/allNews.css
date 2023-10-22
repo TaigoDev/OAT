@@ -43,7 +43,7 @@
 	background: url("../images/news/plane.svg") no-repeat;
 	background-size: cover;
 	opacity: 0.7;
-	transition: transform 700ms ease-in-out;
+	transition: transform 600ms ease-in-out;
 }
 
 .news-item-img img {
@@ -51,7 +51,7 @@
 	width: 100%;
 	max-height: 210px;
 	border-radius: 25px;
-	transition: transform 700ms ease-in-out;
+	transition: transform 600ms ease-in-out;
 }
 
 .news-item-content {

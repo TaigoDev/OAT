@@ -142,8 +142,8 @@ body {
 }
 
 .important-link img {
-	width: 55px;
-	object-fit: contain;
+    width: 55px;
+    aspect-ratio: 1;
 }
 
 @media (width<1450px) {
