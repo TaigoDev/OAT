@@ -1907,7 +1907,6 @@ section.content::before{
 .functional img {
     cursor: pointer;
     filter: contrast(.65);
-    transition: 300ms ease;
 }
 
 .functional img:hover {
@@ -2083,6 +2082,12 @@ section.content::before{
 	width: 115px;
 	font-size: .8rem;
 	text-align: center;
+	opacity: 0.7;
+	transition: 300ms ease;
+}
+
+.main-menu-item:hover{
+	opacity: 1;
 }
 
 .main-menu-item a{
