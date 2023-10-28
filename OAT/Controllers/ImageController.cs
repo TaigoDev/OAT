@@ -29,6 +29,20 @@ namespace OAT.Controllers
             }
         }
 
+        [HttpGet("api/images/teachers/{FullName?}")]
+        public async Task<IActionResult> GetTeacherPhoto(string? FullName)
+        {
+            if (FullName is null)
+                return Redirect("/images/basic/unnamed.jpg");
+
+            var workedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "workers");
+            var files = Directory.GetFiles(workedFolder, $"{FullName}.*");
+            if(!files.Any())
+                return Redirect("/images/basic/unnamed.jpg");
+
+            return File(await System.IO.File.ReadAllBytesAsync(files.First()), "application/png");
+        }
+
         private string ContentType(string url)
         {
             var contentType = string.Empty;

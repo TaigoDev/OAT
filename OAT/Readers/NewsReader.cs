@@ -16,7 +16,7 @@ public class NewsReader
     public static async Task Loader()
     {
         News.Clear();
-        string[] files = Directory.GetFiles("news", "*.yaml");
+        var files = Directory.GetFiles("news", "*.yaml");
         foreach (string file in files)
         {
             try
@@ -43,7 +43,6 @@ public class NewsReader
         Logger.InfoWithoutTelegram($"OAT.Core.News: We successful load {News.Count} news");
         News = News.OrderBy(x => x.id).ToList().Reverse<News>();
         pages = News.PagesSplit(10);
-
     }
 
 
