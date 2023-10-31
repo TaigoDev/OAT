@@ -29,6 +29,15 @@ app.UseNoSniffHeaders();
 app.Use((context, next) => CacheController(context, next));
 if (config.bitrixProxy)
     app.BitrixProxy();
+else
+{
+    app.Use(async (context, next) => 
+    {
+        await next();
+        if (context.Response.StatusCode == 404)
+            context.Response.Redirect("https://www.oat.ru/Duck");
+    });
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
