@@ -12,6 +12,9 @@ namespace OAT.UtilsHelper
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                    return false;
+
                 var authType = OperatingSystem.IsWindows() ? AuthType.Negotiate : AuthType.Basic;
                 username = OperatingSystem.IsWindows() ? username : $"{ProxyController.config.ldap_domain}\\{username}";
                 var conn = new LdapConnection(new LdapDirectoryIdentifier(ProxyController.config.ldap_IP, ProxyController.config.ldap_port), new NetworkCredential(username, password), authType);
