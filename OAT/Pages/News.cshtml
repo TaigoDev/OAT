@@ -7,7 +7,21 @@
 <link rel="stylesheet" href="~/css/news.css">
 
 <article class="centered">
-    @if (!string.IsNullOrWhiteSpace(Model.id) && NewsReader.News.Count() - 1 >= Convert.ToInt32(Model.id))
+    @{
+        if (string.IsNullOrWhiteSpace(Model.id) || NewsReader.News is null)
+        {
+            PrintError();
+            return;
+        }
+
+        var IsInt = int.TryParse(Model.id, out var id);
+        if (!IsInt || NewsReader.News.Max(e => e.id) < id)
+        {
+            PrintError();
+            return;
+        }
+    }    
+    @if (!string.IsNullOrWhiteSpace(Model.id) && NewsReader.News.Max(e => e.id) >= int.Parse(Model.id))
     {
         var news = NewsReader.News.First(e => e.id == Convert.ToInt32(Model.id));
         <h3 class="news-title">
@@ -57,13 +71,15 @@
         <br/>
 
     }
-    else
-    {
-        <h3 class="news-title">
-            Упс, такой страницы нет...
-            <br>
-            Мы знаем о проблеме и уже решаем ее
-        </h3>
+    @{
+        void PrintError()
+        {
+            <h3 class="news-title">
+                Упс, такой страницы нет...
+                <br>
+                Мы знаем о проблеме и уже решаем ее
+            </h3>
+        }
     }
 </article>
 
