@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
 using OAT.Utilities;
+using RepoDb;
 
 namespace OAT.Controllers
 {
@@ -22,14 +24,16 @@ namespace OAT.Controllers
                         using Stream fileStream = new FileStream(Path.Combine("wwwroot", path), FileMode.Create);
                         await file.CopyToAsync(fileStream);
                     }
+                using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+                var news = new News(date, title, text, photos);
+                await connection.InsertAsync(news);
 
-                System.IO.File.WriteAllText($"news/{NewsReader.News.Count()}.yaml", new NewsFile(date, title, text, photos).SerializeYML());
                 Logger.Info($"Пользователь опубликовал новую новость.\n" +
-                    $"ID: {NewsReader.News.Count()}\n" +
+                    $"ID: {news.id}\n" +
                     $"SHA256 (TEXT): {StringUtils.SHA226(text)}\n" +
                     $"Пользователь: {User.GetUsername()}\n" +
                     $"IP-адрес: {HttpContext.UserIP()}");
-                await NewsReader.Loader();
+                await NewsReader.init();
                 return StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
@@ -42,15 +46,13 @@ namespace OAT.Controllers
         [HttpDelete("api/news/{id:int}/delete"), AuthorizeRoles(Enums.Role.www_admin, Enums.Role.www_reporter_news), NoCache]
         public async Task<IActionResult> RemoveNews(int id)
         {
-            if (!System.IO.File.Exists($"news/{id}.yaml"))
-                return StatusCode(StatusCodes.Status204NoContent);
-
-            System.IO.File.Delete($"news/{id}.yaml");
+            using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+            await connection.DeleteAllAsync(await connection.QueryAsync<News>(e => e.id == id));
             Logger.Info($"Пользователь удалил новость.\n" +
                 $"ID: {id}\n" +
                 $"Пользователь: {User.GetUsername()}\n" +
                 $"IP-адрес: {HttpContext.UserIP()}");
-            await NewsReader.Loader();
+            await NewsReader.init();
             return StatusCode(StatusCodes.Status200OK);
         }
 

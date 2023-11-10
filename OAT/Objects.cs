@@ -32,9 +32,9 @@ public class IPage
 
 }
 
-public class News
+public class NewsFileFormat
 {
-    public News(int id, string short_description, string date, string title, string text, List<string> photos)
+    public NewsFileFormat(int id, string short_description, string date, string title, string text, List<string> photos)
     {
         this.id = id;
         this.short_description = short_description;

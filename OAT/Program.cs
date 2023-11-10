@@ -119,7 +119,7 @@ async Task CacheController(HttpContext context, Func<Task> next)
             new CacheControlHeaderValue()
             {
                 Public = true,
-                MaxAge = TimeSpan.FromHours(2),
+                MaxAge = TimeSpan.FromHours(24),
             };
         await next();
         return;

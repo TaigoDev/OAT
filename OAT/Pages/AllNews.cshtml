@@ -1,4 +1,5 @@
 ﻿@page
+@using OAT.Utilities;
 @model AllNewsModel
 @{
     ViewData["Title"] = "Все новости";
@@ -14,7 +15,7 @@
 
 
 
-    @if (NewsReader.News.Count() != 0 && NewsReader.pages.Count() >= id)
+    @if (NewsReader.pages.Count() >= id)
     {
         <h3 class="section-title">
             Новости Омского авиационного колледжа имени Н.Е. Жуковского
@@ -35,7 +36,7 @@
                             @news.title
                         </div>
                         <div class="news-item-info">
-                            @Html.Raw(news.short_description)
+                            @Html.Raw(news.description.GetWords(10))
                             <a href="~/news/@news.id">
                                 ещё...
                             </a>

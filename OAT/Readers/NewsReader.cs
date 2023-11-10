@@ -1,22 +1,29 @@
-﻿using OAT.Utilities;
+﻿using MySqlConnector;
+using OAT.Utilities;
+using RepoDb;
 using System.Text;
 
 
 public class NewsReader
 {
-    public static List<News> News = new List<News>();
     public static IEnumerable<IEnumerable<News>> pages = new List<List<News>>();
+    public static List<News> news = new List<News>();
 
-    public static Task init()
+    public static async Task init()
     {
-        RepeaterUtils.Repeat(Loader, 300000);
-        return Task.CompletedTask;
+        await ConvertFileToMySQL();
+        using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+        var records = await connection.QueryAllAsync<News>();
+        news = records.ToList();
+        news.Reverse();
+        pages = news.PagesSplit(10);
     }
 
-    public static async Task Loader()
+    [Obsolete]
+    public static async Task ConvertFileToMySQL()
     {
-        News.Clear();
         var files = Directory.GetFiles("news", "*.yaml");
+        using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
         foreach (string file in files)
         {
             try
@@ -25,24 +32,29 @@ public class NewsReader
                 byte[] buffer = new byte[fsSource.Length];
                 await fsSource.ReadAsync(buffer, 0, buffer.Length);
 
+                var id = Path.GetFileNameWithoutExtension(file).ToInt32();
                 var news = StringUtils.DeserializeYML<NewsFile>(Encoding.Default.GetString(buffer));
-                News.Add(new News(
-                    Path.GetFileNameWithoutExtension(file).ToInt32(),
-                    news.text.GetWords(15),
-                    news.date,
-                    news.title,
-                    news.text,
-                    news.photos));
+                var _news = new News(id,
+                    news.date, news.title, news.text, news.photos);
+                var records = await connection.ExistsAsync<News>(e => e.id == id);
+                if(await connection.ExistsAsync<News>(e => e.id == id))
+                {
+                    Logger.Warning($"Новость {id} уже существует в бд!");
+                    continue;
+                }
+                await connection.InsertAsync(_news);
+                Logger.InfoWithoutTelegram($"Новость {id} была успешно перенесена в бд");
+                fsSource.Close();
+                fsSource.Dispose();
+                File.Move(file, $"{file}.old");
             }
             catch (Exception ex)
             {
                 Logger.Error(ex.ToString());
             }
+
         }
 
-        Logger.InfoWithoutTelegram($"OAT.Core.News: We successful load {News.Count} news");
-        News = News.OrderBy(x => x.id).ToList().Reverse<News>();
-        pages = News.PagesSplit(10);
     }
 
 
