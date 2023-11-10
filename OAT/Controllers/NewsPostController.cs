@@ -12,7 +12,7 @@ namespace OAT.Controllers
         {
             try
             {
-                if (!Check(title, date, text))
+                if (!Check(title, date, text) || !files.Any())
                     return StatusCode(StatusCodes.Status400BadRequest);
 
                 var photos = new List<string>();
