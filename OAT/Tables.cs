@@ -119,4 +119,8 @@ public class News
     public string description { get; set; }
     public string photos { get; set; }
 
+
+    public List<string> GetPhotos() =>
+        photos.toObject<List<string>>();
+
 }
