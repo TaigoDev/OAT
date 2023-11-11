@@ -18,6 +18,27 @@
         <h2 class="section-title title-centered">
             Расписание группы @Model.group_name
         </h2>
+        <table class="customized timetable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>
+                        №
+                    </th>
+                    <th>
+                        Время
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="teacher">
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <table class="customized timetable">
             <thead>
                 <tr>
@@ -87,35 +108,35 @@
                                 {
                                     bool HaveDifferentLessons = true;
                                     <td>
-                                        <div class="subject">
+                                        <div class="subjectt">
                                             @if (lesson.subgroups.LastOrDefault() is null || lesson.subgroups.Last().short_subject == lesson.subgroups.First().short_subject)
                                             {
                                                 HaveDifferentLessons = false;
-                                                <div class="subject-name">
+                                                <div class="subjectt-name">
                                                     @lesson.subgroups.First().short_subject
                                                 </div>
                                             }
-                                            <div class="subject-more">
+                                            <div class="subjectt-more">
                                                 @if (lesson.subgroups.Count == 1)
                                                 {
                                                     if (HaveDifferentLessons)
                                                     {
-                                                        <div class="subject-name">
+                                                        <div class="subjectt-name">
                                                             @lesson.subgroups.First().short_subject
                                                         </div>
                                                     }
       
-                                                    <div class="subject-more-item">                                          
+                                                    <div class="subjectt-more-item">                                          
                                                         @if (lesson.subgroups.First().id != 0)
                                                         {
-                                                            <div class="subject-teacher">
+                                                            <div class="subjectt-teacher">
                                                                 Подгруппа @lesson.subgroups.First().id
                                                             </div>
                                                         }
                                                         <div class="subject-teacher">
                                                             @lesson.subgroups.First().teacher
                                                         </div>
-                                                        <div class="subject-teacher">
+                                                        <div class="subjectt-teacher">
                                                             @lesson.subgroups.First().cabinet
                                                         </div>
                                                     </div>
@@ -125,18 +146,18 @@
                                                     {
                                                         if (HaveDifferentLessons)
                                                         {
-                                                            <div class="subject-name">
+                                                            <div class="subjectt-name">
                                                                 @group.short_subject
                                                             </div>
                                                         }
-                                                        <div class="subject-more-item">
+                                                        <div class="subjectt-more-item">
                                                             <div class="subject-teacher">
                                                                 Подгруппа @group.id
                                                             </div>
-                                                            <div class="subject-teacher">
+                                                            <div class="subjectt-teacher">
                                                                 @group.teacher
                                                             </div>
-                                                            <div class="subject-teacher">
+                                                            <div class="subjectt-teacher">
                                                                 @group.cabinet
                                                             </div>
                                                         </div>
@@ -235,7 +256,7 @@
                                                 {
                                                     if (HaveDifferentLessons)
                                                     {
-                                                        <div class="subject-name">
+                                                        <div class="subjectt-name">
                                                             @lesson.subgroups.First().short_subject
                                                         </div>
                                                     }
@@ -264,10 +285,10 @@
                                                             </div>
                                                         }
                                                         <div class="subject-more-item">
-                                                            <div class="subject-teacher">
+                                                            <div class="subjectt-teacher">
                                                                 Подгруппа @group.id
                                                             </div>
-                                                            <div class="subject-teacher">
+                                                            <div class="subjectt-teacher">
                                                                 @group.teacher
                                                             </div>
                                                             <div class="subject-teacher">
