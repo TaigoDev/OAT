@@ -61,11 +61,13 @@
 	border: 2.5px solid var(--matte-color);
 	cursor: pointer;
 	--rotate-arrow: 90deg;
-	transition: opacity 350ms ease, visibility 350ms ease, border-color 350ms ease;
+	opacity: 0.8;
+	transition: 350ms ease;
 }
 
 .news-slider-arrow:hover{
 	border-color: black;
+	opacity: 1;
 }
 
 
