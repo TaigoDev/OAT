@@ -5,10 +5,10 @@ public class Logger
 
 
     public static void Info(string message)
-            => Write($"[{GetTimeUTC()}]: {message}");
+        => Write($"[{GetTimeUTC()}]: {message}");
 
     public static void InfoWithoutTelegram(string message)
-            => Write($"[{GetTimeUTC()}]: {message}", true);
+        => Write($"[{GetTimeUTC()}]: {message}", true);
 
     public static void Warning(string message)
         => Write($"[WARNING {GetTimeUTC()}]: {message}");
@@ -19,7 +19,7 @@ public class Logger
     public static void Error(Exception message)
         => Write($"[ERROR {GetTimeUTC()}]: {message}");
 
-    private static async void Write(string message, bool disableTelegram = false, int attempt = 0)
+    private static async void Write(string message, bool disableTelegram = false)
     {
         try
         {
@@ -32,16 +32,6 @@ public class Logger
                 TelegramBot.SendMessage(message);
             else
                 Console.WriteLine(message);
-        }
-        catch (IOException ex)
-        {
-            if (attempt > 3)
-            {
-                Console.WriteLine(ex);
-                return;
-            }
-            await Task.Delay(2000);
-            Write(message, disableTelegram, attempt + 1);
         }
         catch (Exception ex)
         {
