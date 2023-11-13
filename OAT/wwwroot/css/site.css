@@ -324,7 +324,7 @@ section.centered .section-title{
 	background: var(--matte-color);
 	border: var(--sidebar-border-width) solid;
 	border-radius: var(--sidebar-border-radius);
-	--sidebar-border-radius: 10px;
+	--sidebar-border-radius: 15px;
 	--sidebar-border-width: 4px;
 }
 
@@ -802,7 +802,7 @@ table.customized::-webkit-scrollbar-thumb {
 }
 
 table.customized thead{
-	background-color: #ffffff30;
+	background-color: #ffffff35;
     color: var(--light-white);
 }
 
@@ -822,7 +822,7 @@ table.customized thead td{
 }
 
 table.customized tbody{
-	background-color: #ffffff8a;
+	background-color: #ffffff80;
 }
 
 table.customized tbody td{
