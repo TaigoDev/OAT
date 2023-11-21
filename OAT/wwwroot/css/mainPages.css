@@ -98,7 +98,7 @@ body {
 	display: grid;
 	grid-template-columns: repeat(var(--columns), minmax(250px, 500px));
 	justify-content: space-between;
-	gap: 40px 60px;
+	gap: 40px 50px;
 }
 
 .important-link {
@@ -157,6 +157,6 @@ body {
 	.important-links {
 		--columns: 1;
 		justify-content: center;
-		gap: 40px;
+		gap: 35px;
 	}
 }

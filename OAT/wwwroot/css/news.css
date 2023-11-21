@@ -2,6 +2,7 @@
 
 p {
 	margin-bottom: 15px;
+	word-break: break-word;
 }
 
 .news-title{

@@ -36,7 +36,7 @@
 	aspect-ratio: 1;
 	border: var(--border-width) solid transparent;
 	border-radius: inherit;
-	transition: outline-color 250ms ease, outline-offset 150ms 250ms;
+	transition: outline-color 250ms ease, outline-offset 50ms, border-color 250ms ease;
 }
 
 @keyframes another-play{
