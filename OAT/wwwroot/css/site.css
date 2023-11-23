@@ -1028,7 +1028,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	flex-direction: column;
 	min-height: 160px;
 	max-width: 210px;
-	border-radius: 10px;
+	border-radius: 15px;
 	background-color: var(--m-color);
 	color: hsl(200deg 35% 85%);
 	opacity: 0.8;
@@ -1248,118 +1248,55 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	}
 }
 
-/* people search */
-
-.search-people {
-	padding: 15px;
-	border-radius: 10px;
-	background: hsl(0 0% 25% / 1);
-	margin-bottom: 20px;
-	transition: background-color 500ms;
-}
-
-.search-people:hover {
-	background: hsl(0 0% 27% / 1);
-}
-
-.search-people-container {
-	position: relative;
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	height: 45px;
-	padding: 15px;
-}
-
-.search-people-container:hover button img {
-	transform: scale(1.1);
-}
-
-.search-people input[type="search"] {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	height: 100%;
-	padding: 5px 55px 5px 15px;
-	border-radius: 10px;
-	background-color: hsl(0 0% 20% / 1);
-	color: var(--light-white);
-	transition: 200ms outline-width, background-color 500ms;
-}
-
-.search-people input[type="search"]:focus {
-	outline: 3.5px outset black;
-	background-color: hsl(0 0% 18% / 1);
-}
-
-.search-people input[type="search"]::placeholder {
-	color: var(--light-white);
-	opacity: 0.6;
-}
-
-.search-people button {
-	position: absolute;
-	top: 0;
-	right: 0;
-	display: grid;
-	place-items: center;
-	height: 100%;
-	padding: 0 15px;
-	border-radius: 0 10px 10px 0;
-	background-color: hsl(0 0% 15% / 1);
-}
-
-.search-people button img {
-	transition: transform 500ms ease;
-}
-
-.search-people button:hover img {
-	transform: scale(1.15);
-}
-
 /* people */
 
 .people-list {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 20px;
+	gap: 50px 20px;
 	justify-content: space-between;
-	margin-bottom: 20px;
+	margin: 40px 0 20px 0;
 }
 
 .people-item {
-	display: flex;
+	display: grid;
+	grid-template-rows: 100px auto;
+	place-items: center;
 	gap: 15px;
-	height: 185px;
 	width: 100%;
-	max-width: 450px;
-	padding: 5px 10px;
-	background: linear-gradient(var(--deg), var(--m-l-color), var(--m-d-color) 45%, var(--m-d-color));
+	max-width: 420px;
+	padding: 0 10px 10px 10px;
+	background: linear-gradient(90deg, var(--m-color), var(--m-d-color) 50%);
 	color: var(--light-white);
-	border-radius: 15px;
+	border-radius: 20px;
 	opacity: 0.95;
-	transition: opacity 500ms;
-	--deg: 90deg;
+	perspective: 500px;
+	transition: 350ms ease;
 }
 
 .people-item:hover{
 	opacity: 1;
 }
 
+.people-item:hover .people-item-img-container{
+	transform: rotate3d(1, 0, 0, -10deg);
+}
+
 .people-item-img-container {
+	translate: 0 -20px;
+	transform: rotate3d(1, 0, 0, 10deg);
 	display: block;
 	min-height: 140px;
 	max-height: 140px;
 	min-width: 140px;
 	max-width: 140px;
 	align-self: center;
-	border: 5px solid #4090cdba;
+	border: 5px solid #3480be;
 	border-radius: 50%;
-	background-color: #1975bbba;
+	background-color: #125694;
+	box-shadow: 0 10px 40px -15px black;
 	overflow: hidden;
+	transition: 350ms ease;
 }
 
 .people-item-img-container img {
@@ -1368,9 +1305,9 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	height: 100%;
 	padding: 8px;
 	object-fit: cover;
-	border: 10px solid hsl(227.33deg 50.87% 22.12%);
+	border: 10px solid hsl(225 50% 22%);
 	border-radius: 50%;
-	transition: transform 500ms;
+	transition: transform 400ms ease;
 }
 
 .people-item-img-container:hover img {
@@ -1380,18 +1317,16 @@ table.two-column.second-column-low tr td:nth-child(2) {
 .people-item-body {
 	display: flex;
 	flex-direction: column;
-	row-gap: 15px;
-	margin-top: 20px;
+	row-gap: 8px;
+	justify-content: end;
+	text-align: center;
 }
 
 .people-item-body.more-info {
 	row-gap: 5px;
-	margin-top: 0;
-	justify-content: center;
 }
 
 .people-item-body-fio {
-	min-height: 40px;
 	font-weight: 700;
 	font-size: 1.05rem;
 }
@@ -1404,18 +1339,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	.people-item {
 		max-width: none;
 		padding: 5px;
-	}
-}
-
-@media (width < 450px) {
-	.people-item {
-		flex-direction: column;
-		height: auto;
-		text-align: center;
-		--deg: 180deg;
-	}
-	.people-item-body-fio{
-		min-height: auto;
 	}
 }
 
@@ -2318,11 +2241,11 @@ section.content::before{
 .footer-top-item-body a{
 	display: inline-block;
 	width: fit-content;
+	text-underline-offset: 3px;
 }
 
 .footer-top-item-body a:hover {
     text-decoration: underline;
-    text-underline-offset: 2px;
 }
 
 @media (width<1000px){
