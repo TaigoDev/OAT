@@ -43,5 +43,8 @@
 
         private static string GetMethodName(Func<Task> module) =>
             $"{module.Method.DeclaringType!.Name}.{module.Method.Name}";
+
+        public static void InThread(Action action) =>
+            new Task(() => { action.Invoke(); }).Start();
     }
 }

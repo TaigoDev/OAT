@@ -5,7 +5,6 @@ using OAT.Readers;
 using OAT.Utilities;
 using OAT.UtilsHelper;
 using OAT.UtilsHelper.ReCaptcha;
-using OAT.UtilsHelper.Recovery;
 using OAT.UtilsHelper.Telegram;
 using RepoDb;
 using System.Runtime.InteropServices; 
@@ -66,6 +65,7 @@ void SetupControllers()
         /* WARNING: Not support async methods */
         Runs.StartModules(
             TelegramBot.init,
+            TimeTableBot.init,
             UrlsContoller.init,
             DropTokens,
             HealthTables.init,

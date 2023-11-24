@@ -19,6 +19,12 @@ public class Config
     public string ldap_zone { get; set; }
     public bool bitrixProxy { get; set; }
 }
+
+public class TimeTableBotConfig
+{
+    public string token { get; set; } = "test";
+    public string url { get; set; } = "http://localhost:5127";
+}
 public class IPage
 {
     public string current { get; set; }

@@ -23,6 +23,7 @@ namespace OAT.Controllers
             using Stream fileStream = new FileStream(path, FileMode.Create);
             await file.CopyToAsync(fileStream);
             fileStream.Dispose();
+            Runs.InThread(async () => await TimeTableBot.onChangesInSchedule(building, path));
 
             Logger.Info($"Пользователь {User.GetUsername()} обновил файл с изменением расписания для {building}\nIP: {HttpContext.UserIP()}");
             return StatusCode(StatusCodes.Status200OK);

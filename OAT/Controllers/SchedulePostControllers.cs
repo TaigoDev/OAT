@@ -25,6 +25,7 @@ namespace OAT.Controllers
             await file.CopyToAsync(fileStream);
             fileStream.Dispose();
             Logger.Info($"Пользователь {User.GetUsername()} обновил расписание для {building}\nIP: {HttpContext.UserIP()}");
+            Runs.InThread(async () => await TimeTableBot.onChangeMainSchedule(building, path));
             await ScheduleReader.init();
             return StatusCode(StatusCodes.Status200OK);
         }
