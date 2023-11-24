@@ -21,7 +21,7 @@ namespace OAT.Utilities
                     $"{config.url}/api/alerts/changes/schedule/{building}");
                 using var content = new MultipartFormDataContent
                 {
-                    { new StringContent("test"), config.token },
+                    { new StringContent(config.token), "token" },
                     { new StreamContent(stream), "file", $"{building}.xlsx" }
                 };
 
@@ -47,7 +47,7 @@ namespace OAT.Utilities
                     $"{config.url}/api/alerts/schedule/{building}");
                 using var content = new MultipartFormDataContent
                 {
-                    { new StringContent("test"), config.token },
+                    { new StringContent(config.token), "token" },
                     { new StreamContent(stream), "file", $"{building}.xml" }
                 };
 

@@ -1,2 +1,2 @@
 token: test
-url: http://localhost:5127
+url: "http://localhost:5127"
