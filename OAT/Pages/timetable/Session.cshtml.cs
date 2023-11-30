@@ -23,9 +23,9 @@ namespace OAT.Pages.timetable
             for (int i = 1; i <= 4; i++)
             {
                 var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", $"b{i}");
-                var files = Directory.GetFiles(folder, "*.xls", SearchOption.TopDirectoryOnly).ToList();
-                GetList(i).AddRange(files.ConvertAll(e => new FileSession(StringUtils.ConvertHexToString(Path.GetFileName(e).Replace(".xls", "")),
-                    $"api/sessions/b{i}/{Path.GetFileName(e).Replace(".xls", "")}/download")));
+                var files = Directory.GetFiles(folder, "*.xlsx", SearchOption.TopDirectoryOnly).ToList();
+                GetList(i).AddRange(files.ConvertAll(e => new FileSession(StringUtils.ConvertHexToString(Path.GetFileNameWithoutExtension(e)),
+                    $"api/sessions/b{i}/{Path.GetFileNameWithoutExtension(e)}/download")));
 
             }
         }
