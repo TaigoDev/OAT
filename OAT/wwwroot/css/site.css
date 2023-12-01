@@ -28,16 +28,18 @@
 	--mobile-s: 320px;
 }
 
-:root::-webkit-scrollbar{
+::-webkit-scrollbar{
 	width: 5px;
+	border-radius: 4px;
 }
 
-:root::-webkit-scrollbar-track{
+::-webkit-scrollbar-track{
 	background-color: gray;
+	border-radius: 4px;
 }
 
-:root::-webkit-scrollbar-thumb{
-	width: 3px;
+::-webkit-scrollbar-thumb {
+	border-radius: 4px;
 	background-color: var(--matte-color);
 }
 
@@ -860,17 +862,16 @@ table.two-column tr {
 	justify-content: space-between;
 	column-gap: 60px;
 	padding: 7px;
-	border: 2px solid rgb(162 170 177);
+	border: 2px solid #00000010;
 	border-radius: 10px;
-	background-color: rgb(207 218 228);
+	background-color:#00000010;
 	overflow: hidden;
-	transition: 400ms background-color, color 500ms;
+	transition: 200ms ease;
 }
 
 table.two-column tr:hover {
-	background-color:hsl(233.09deg 3.11% 23.47%);
-	color: var(--light-white);
-	border-radius: 10px;
+	background-color: #00000005;
+	color: black;
 }
 
 table.two-column tr td:first-child {
@@ -1154,11 +1155,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	flex-direction: column;
 	max-width: 1000px;
 	margin-bottom: 20px;
-	padding: 17px 15px;
-	border: 2px solid;
-	border-radius: 15px;
-	background-color: hsl(230 35% 17% / 1);
-	background-color: var(--m-color);
 	overflow: hidden;
 }
 
@@ -1169,14 +1165,17 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	align-items: center;
 	column-gap: 10px;
 	text-align: left;
-	letter-spacing: 1px;
+	letter-spacing: 0.015em;
 	font-weight: 500;
 	color: var(--light-white);
+	background: var(--m-color);
+	padding: 17px 15px;
+	border: 2px solid;
+	border-radius: 15px;
 }
 
 .accordion-head-icon {
 	cursor: pointer;
-	transition: 400ms;
 }
 
 .accordion-head-icon:hover{
@@ -1184,28 +1183,30 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .accordion-body {
-	background-color: var(--light-white);
 	border-radius: 10px;
 	padding: 0;
 	max-height: 0px;
 	border: none;
-	visibility: hidden;
+	margin: 0 15px;
+	background-color: #00000015;
 	opacity: 0;
+	visibility: hidden;
 	overflow: auto;
-	transition: height 1500ms ease-out, max-height 1500ms ease-out, padding 500ms, border 250ms, visibility 1500ms ease-in, opacity 1500ms;
+	transition: height 1000ms ease, max-height 1000ms ease, padding 700ms 150ms, margin 700ms 150ms, border 250ms, visibility 1000ms ease-in, opacity 1000ms;
 }
 
 .accordion-body::-webkit-scrollbar{
-	width: 8px;
-	height: 8px;
+	width: 10px;
+	height: 10px;
 }
 
 .accordion-body::-webkit-scrollbar-track{
-	background-color: hsl(230, 30%, 70%);
+	border-radius: 10px;
 }
 
 .accordion-body::-webkit-scrollbar-thumb{
-	background-color: hsl(230, 30%, 50%);
+	background-color: #00000050;
+	border-radius: 10px;
 }
 
 .accordion-body::-webkit-scrollbar-corner{
@@ -1244,7 +1245,10 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	.accordions-list {
 		grid-template-columns: 100%;
 		grid-auto-rows: auto;
-		row-gap: 40px;
+		row-gap: 30px;
+	}
+	.accordion-body {
+		margin: 0;
 	}
 }
 
