@@ -43,7 +43,7 @@ body {
 	row-gap: 25px;
 	min-width: 300px;
 	padding: 25px 20px;
-	border-radius: 15px;
+	border-radius: var(--border-radius-xxl);
 	background-color: var(--matte-color);
 	color: var(--light-white);
 }
@@ -63,24 +63,9 @@ body {
 	row-gap: 10px;
 }
 
-.input-box {
-	display: flex;
-	flex-direction: column;
-	row-gap: 5px;
-}
-
-.input-box label {
-	font-weight: 500;
-}
-
 .input-box input {
-	padding: 5px;
-	border: 3.5px solid transparent;
-	border-radius: 7px;
 	background-color: hsl(0, 0%, 20%);
 	color: var(--light-white);
-	opacity: .95;
-	transition: opacity 300ms, border-color 300ms;
 }
 
 .input-box input:focus {
@@ -104,22 +89,20 @@ body {
 	text-transform: uppercase;
 	opacity: 0.95;
 	overflow: hidden;
-	transition: border-color 300ms, opacity 300ms;
+	transition: border-color 300ms ease, opacity 300ms ease;
 }
 
 .sign-in::after {
 	content: "";
-	position: absolute;
-	z-index: -1;
-	top: 0;
-	left: 0;
-	display: block;
-	width: 25px;
-	height: 110px;
-	rotate: -10deg;
-	translate: -35px -35px;
-	background-color: var(--matte-color);
-	transition: width 500ms ease-in-out;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, var(--matte-color) 80%, transparent 80%);
+    transition: width 450ms ease-in-out;
 }
 
 .sign-in:hover {
@@ -127,5 +110,5 @@ body {
 }
 
 .sign-in:hover::after {
-	width: 300px;
+	width: 150%;
 }

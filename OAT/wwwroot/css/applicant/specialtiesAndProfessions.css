@@ -13,17 +13,20 @@
 	column-gap: 15px;
 	min-height: 175px;
 	padding: 10px;
-	border: 5px solid var(--m-l-color);
+	border: var(--border-width) solid var(--m-l-color);
+	border-radius: var(--border-radius-l);
 	background-color: var(--m-color);
-	border-radius: 15px;
-	transition: scale 300ms;
+	transition: 250ms ease;
+}
+
+.specialities-item a, .specialities-item img{
+	border-radius: inherit;
 }
 
 .specialities-item img{
 	height: 130px;
-	border-radius: 15px;
-	/*border: 2px solid;*/
-	transition: scale 300ms;
+	opacity: 0.8;
+	transition: 250ms ease;
 }
 
 .specialities-item-text {
@@ -43,11 +46,11 @@
 }
 
 .specialities-item:hover{
-	scale: 1.05;
+	scale: 1.025;
 }
 
-.specialities-item img:hover {
-	scale: 1.05;
+.specialities-item:hover img{
+	opacity: 1;
 }
 
 @media (width<400px){

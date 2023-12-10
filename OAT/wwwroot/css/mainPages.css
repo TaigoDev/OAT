@@ -105,8 +105,8 @@ body {
 	position: relative;
 	height: 100px;
 	width: 100%;
-	border: 2.5px solid var(--light-white);
-	border-radius: 15px;
+	border: 2.5px solid;
+	border-radius: var(--border-radius-xl);
 	background-color: #23212199;
 	transition: background-color 600ms, border-color 600ms;
 }
