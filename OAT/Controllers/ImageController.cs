@@ -35,7 +35,7 @@ namespace OAT.Controllers
             if (FullName is null)
                 return Redirect("/images/basic/unnamed.jpg");
 
-            var workedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "workers", "photos");
+            var workedFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "people");
             var files = Directory.GetFiles(workedFolder, $"{FullName}.*");
             if(!files.Any())
                 return Redirect("/images/basic/unnamed.jpg");

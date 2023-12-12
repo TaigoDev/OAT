@@ -54,7 +54,7 @@ void SetupControllers()
             "Resources",
             "Resources/sessions", "Resources/sessions/b1", "Resources/sessions/b2", "Resources/sessions/b3", "Resources/sessions/b4",
             "Resources/workers",
-            "Resources/workers/photos",
+            "wwwroot/people",
             "Resources/schedule",
             "Resources/journal",
             "Resources/pay",
