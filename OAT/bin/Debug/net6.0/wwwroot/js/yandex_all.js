@@ -75,7 +75,7 @@
             serp: a + "//yandex.%tld%/search/site/",
             suggest_ru: "https://sitesearch-suggest.yandex.ru/v1/suggest?",
             suggest_com: "https://sitesearch-suggest.yandex.com/v1/suggest?",
-            jquery: a + "www.oat.ru/lib/jquery/dist/jquery.min.js",
+            jquery: a + "//www.oat.ru/js/JQueryYandex.js",
             serpStatic: a + "//yastatic.net/sitesearch2/0xcd62cb1/pages/",
             opensearch: "https://yandex.%tld%/search/site/opensearch.xml?"
         };
