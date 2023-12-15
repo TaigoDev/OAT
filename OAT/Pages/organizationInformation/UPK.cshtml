@@ -1,0 +1,194 @@
+﻿@page
+@model UPKModel
+@{
+    ViewData["Title"] = "Учебно-производственный комплекс";
+}
+
+<div class="container content-page">
+    <section class="content">
+        <a id="plane" class="plane" href="#sidebar"></a>
+        <h2 class="section-title">
+            Учебно-производственный комплекс
+        </h2>
+
+        <ul class="page-navigation">
+            <li>
+                <a href="#about-upk">
+                    Главное об УПК
+                </a>
+            </li>
+            <li>
+                <a href="#images">
+                    Фотографии
+                </a>
+            </li>
+            <li>
+                <a href="#documents">
+                    Документы
+                </a>
+            </li>
+        </ul>
+
+        <h3 id="about-upk" class="section-subtitle">
+            Главное об УПК
+        </h3>
+        <p>
+            Учебно-производственный комплекс создан в колледже в целях организации практической подготовки обучающихся, предоставления временной работы обучающимся и выпускникам, а также производства товаров, выполнения работ и оказания услуг.
+        </p>
+
+
+        <h3 id="images" class="section-subtitle">
+            Фотографии
+        </h3>
+        <h4 class="section-subtitle-small">
+            Автомат включения  механизмов сеялки
+        </h4>
+        <img class="customized" src="~/images/organizationInformation/UPK/Автомат включения механизмов сеялки.jpg" alt="">
+        <h4 class="section-subtitle-small">
+            Детали ручного тормоза железнодорожных составов
+        </h4>
+        <img class="customized" src="~/images/organizationInformation/UPK/Детали ручного тормоза железнодорожных составов.jpg" alt="">
+        <h4 class="section-subtitle-small">
+            Детали к сеялке
+        </h4>
+        <img class="customized" src="~/images/organizationInformation/UPK/Детали к сеялке.jpg" alt="">
+
+
+        <h3 id="documents" class="section-subtitle">
+            Документы
+        </h3>
+        <ul class="documents-list little">
+            <li class="document-item">
+                <div class="document-item-head">
+                    <a target="_blank" href="~/documents/organizationInformation/UPK/pologenieUPK.pdf">
+                    </a>
+                </div>
+                <div class="document-item-body">
+                    Положение об УПК
+                </div>
+            </li>
+            <li class="document-item">
+                <div class="document-item-head">
+                    <a target="_blank" href="https://rkig.edu.ru/doc/2023/upk/fz449.pdf">
+                    </a>
+                </div>
+                <div class="document-item-body">
+                    Федеральный закон от 21 ноября 2022 г. N 449-ФЗ "О внесении изменений в статьи 27 и 28 Федерального закона "Об образовании в Российской Федерации"
+                </div>
+            </li>
+            <li class="document-item">
+                <div class="document-item-head">
+                    <a target="_blank" href="https://rkig.edu.ru/doc/2023/upk/minpros05_2127.pdf">
+                    </a>
+                </div>
+                <div class="document-item-body">
+                    Письмо Министерства просвещения РФ от 23 ноября 2022 г. N 05-2127 "О внесении изменений в статьи 27 и 28 Федерального закона "Об образовании в Российской Федерации"
+                </div>
+            </li>
+        </ul>
+    </section>
+    <aside id="sidebar" class="sidebar long">
+        <h3 class="sidebar-title">
+            Сведения об образовательной организации
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li class="sidebar-link">
+                    <a href='@Url.Page("CommonIntelligence")'>
+                        Основные сведения
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Structure")'>
+                        Структура и органы управления образовательной организацией
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Documents")'>
+                        Документы
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Education")'>
+                        Образование
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("EducationalStandards")'>
+                        Образовательные стандарты
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("EducationalProcess")'>
+                        Организация воспитательного процесса
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("ManagementPedagogicalStaff")'>
+                        Руководство. Педагогический (научно-педагогический) состав
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Logistics")'>
+                        Материально-техническое обеспечение и оснащенность образовательного процесса
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("PaidEducationalServices")'>
+                        Платные образовательные услуги
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("FinancialEconomicActivity")'>
+                        Финансово-хозяйственная деятельность
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Jobs")'>
+                        Вакантные места для приема
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Vacancies")'>
+                        Вакансии
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("AccessibleEnvironment")'>
+                        Доступная среда
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("InternationalCooperation")'>
+                        Международное сотрудничество
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("StudentSupport")'>
+                        Стипендии и меры поддержки обучающихся
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Terrorism")'>
+                        Противодействие экстремизму и терроризму
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Corruption")'>
+                        Противодействие коррупции
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a href='@Url.Page("Library")'>
+                        Библиотека
+                    </a>
+                </li>
+                <li class="sidebar-link sidebar-link-selected">
+                    <a href='@Url.Page("UPK")'>
+                        Учебно-производственный комплекс
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>

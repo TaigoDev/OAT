@@ -8,6 +8,12 @@ setTimeout(() => {
     preloader.classList.add("end");
 }, 4000)
 
+document.onkeydown = function (e) {
+    if (e.keyCode === 27) {
+        document.querySelector(".site-search-container").classList.remove("site-search-container-active");
+    }
+};
+
 'use strict'
 window.addEventListener("load", () => {
     /* E L E M E N T S */
@@ -30,7 +36,7 @@ window.addEventListener("load", () => {
     /* search */
     siteSearch.classList.add("site-search");
     searchIcon.addEventListener("click", () => {
-        document.querySelector(".site-search-container").classList.toggle("site-search-container-active");
+        siteSearch.classList.toggle("site-search-container-active");
     });
 
     /* main menu */
