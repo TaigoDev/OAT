@@ -1387,6 +1387,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 .staff-person-basic-photo:hover::before {
 	translate: 0;
+	border-radius: 50%;
 }
 
 .staff-person-basic-photo::before {
@@ -1396,7 +1397,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
     top: -15px;
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+    border-radius: 50% 0 50% 50%;
     background-color: #2b50ac;
     background-size: 40px;
     background-position: center;
