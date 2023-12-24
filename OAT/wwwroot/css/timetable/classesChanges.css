@@ -1,4 +1,9 @@
-﻿.document-item, .document-item-head a {
+﻿
+.document-item {
+	cursor: pointer;
+}
+
+.document-item, .document-item-head a {
 	background-color: #0b1b41;
 }
 

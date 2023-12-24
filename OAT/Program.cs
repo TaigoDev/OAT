@@ -74,7 +74,7 @@ void SetupControllers()
             ScheduleReader.init,
             () => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),
             WorkersReader.init);
-
+        Runs.InThread(async () => await ChangesController.init());
     }
     catch (Exception ex)
     {

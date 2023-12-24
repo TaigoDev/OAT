@@ -1,4 +1,4 @@
-﻿using static Enums;
+﻿using OAT.Readers;
 
 namespace OAT.Utilities
 {
@@ -10,10 +10,11 @@ namespace OAT.Utilities
         public static async Task init() =>
             config = await FileUtils.SetupConfiguration("timetable_bot.yml", new TimeTableBotConfig());
 
-        public static async Task onChangesInSchedule(string building, string xlsx)
+        public static async Task onChangesInSchedule(string building, string xlsx, bool IsNext = false)
         {
             try
             {
+                await ChangesController.init();
                 var client = new HttpClient();
 
                 await using var stream = File.OpenRead(xlsx);
@@ -28,11 +29,12 @@ namespace OAT.Utilities
                 request.Content = content;
                 await client.SendAsync(request);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Logger.Error($"Ошибка при отправке запроса к боту расписания. Попробую ещё раз через 25 минут...\n{ex}");
-                await Task.Delay(new TimeSpan(0, 25, 0));
-                Runs.InThread(async () => await onChangesInSchedule(building, xlsx));
+                var time = IsNext ? 30 : 5;
+                Logger.Error($"Ошибка при отправке запроса к боту расписания. Попробую ещё раз через {time} минут...\n{ex}");
+                await Task.Delay(new TimeSpan(0, time, 0));
+                Runs.InThread(async () => await onChangesInSchedule(building, xlsx, true));
             }
         }
 
