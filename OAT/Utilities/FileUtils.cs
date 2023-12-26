@@ -15,5 +15,20 @@
             return StringUtils.DeserializeYML<T>(await File.ReadAllTextAsync($"{filename}"));
         }
 
+        public static bool IsFileLocked(string xlsx)
+        {
+            try
+            {
+                using FileStream stream = new FileStream(xlsx, FileMode.Open, FileAccess.Read);
+                stream.Close();
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
+
 }

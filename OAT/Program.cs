@@ -6,6 +6,7 @@ using OAT.Utilities;
 using OAT.UtilsHelper;
 using OAT.UtilsHelper.ReCaptcha;
 using OAT.UtilsHelper.Telegram;
+using OfficeOpenXml;
 using RepoDb;
 using System.Runtime.InteropServices; 
 using TAIGO.ZCore.DPC.Services;
@@ -14,11 +15,10 @@ using static ProxyController;
 config = await FileUtils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(),
     RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
 GlobalConfiguration.Setup().UseMySqlConnector();
-
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
-
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();

@@ -49,5 +49,23 @@
             }
 
         }
+
+        public static void Try(Func<Task> action, TimeSpan timeSpan, int attempt = 2) =>
+            new Task(async () => await Try(action, timeSpan, attempt, 0));
+
+        private static async Task Try(Func<Task> action, TimeSpan timeSpan, int attempt, int count)
+        {
+            if (count >= attempt)
+                return;
+            try
+            {
+                await action.Invoke();
+            }
+            catch
+            {
+                await Task.Delay(timeSpan);
+                await Try(action, timeSpan, attempt, count + 1);
+            }
+        }
     }
 }

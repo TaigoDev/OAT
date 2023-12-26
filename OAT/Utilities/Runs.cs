@@ -3,6 +3,7 @@
     public class Runs<T>
     {
         public delegate Task method(T parametr);
+        public delegate Task method2(T parametr, bool IsRepeat);
 
         public static async Task InTasks(method method, List<T> parametrs)
         {
@@ -11,6 +12,14 @@
                 tasks.Add(method.Invoke(parametr));
             await Task.WhenAll(tasks.Where(t => t != null).ToArray());
         }
+        public static async Task InTasks(method2 method, List<T> parametrs, bool IsRepeat)
+        {
+            var tasks = new List<Task>();
+            foreach (var parametr in parametrs)
+                tasks.Add(method.Invoke(parametr, IsRepeat));
+            await Task.WhenAll(tasks.Where(t => t != null).ToArray());
+        }
+
 
         public static async Task InTask(method method, List<T> parametrs)
         {

@@ -14,7 +14,7 @@ namespace OAT.Utilities
         {
             try
             {
-                await ChangesController.init();
+                await ChangesController.UpdateCorpusChanges(int.Parse(string.Join("", building.FirstOrDefault(char.IsDigit))));
                 var client = new HttpClient();
 
                 await using var stream = File.OpenRead(xlsx);

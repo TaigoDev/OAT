@@ -1,5 +1,12 @@
 ﻿using Ganss.Excel;
+using NPOI.SS.Formula.Functions;
+using OAT.Utilities;
+using OfficeOpenXml;
+using Org.BouncyCastle.Crypto;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using static OAT.Readers.ChangesController;
 
 
 namespace OAT.Readers
@@ -16,81 +23,76 @@ namespace OAT.Readers
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            for (int i = 1; i <= 4; i++)
+
+            var ids = new[] { 1, 2, 3, 4};
+            await Runs<int>.InTasks(UpdateCorpusChanges, ids.ToList(), false);
+            stopWatch.Stop();
+            Logger.Info($"Изменения загружены за {stopWatch.ElapsedMilliseconds} ms");    
+        }
+
+
+        public static Task GetTask(int index) =>
+            new Task(async () =>
+                {
+                    try
+                    {
+                        await UpdateCorpusChanges(index);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error($"Произошла ошибка при загрузке корпус {index}.\n {ex}");
+                    }
+                });
+
+        public static async Task UpdateCorpusChanges(int index, bool IsRepeat = false)
+        {
+            var xlsx = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"b{index}-changes.xlsx");
+            if (!File.Exists(xlsx))
+                return;
+
+            if (FileUtils.IsFileLocked(xlsx) && !IsRepeat)
+            {
+                RepeaterUtils.Try(() => UpdateCorpusChanges(index, true), TimeSpan.FromMinutes(10), 3);
+                return;
+            }
+
+           await using FileStream fileStream = new FileStream(xlsx, FileMode.Open, FileAccess.Read);
+            var excel = new ExcelPackage(fileStream);
+            var corpus = GetListChanges(index);
+            corpus.Clear();
+            var sheets = excel.Workbook.Worksheets.ToList();
+            foreach (var sheet in sheets.Count() >= 3 ? sheets.GetRange(sheets.Count() - 3, 3) : sheets.GetRange(0, sheets.Count()))
             {
                 try
                 {
-                    var xlsx = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"b{i}-changes.xlsx");
-                    if (!File.Exists(xlsx))
-                        continue;
-
-                    var sheets = GetSheetsName(xlsx);
-                    var corpus = GetListChanges(i);
-                    foreach (var sheet in sheets.Count() >= 3 ? sheets.GetRange(sheets.Count() - 3, 3) : sheets.GetRange(0, sheets.Count()))
-                    {
-                        try
-                        {
-                            var changes = await GetChangesAsync(xlsx, sheet);
-                            var bells = await GetBellsAsync(xlsx, sheet);
-                            if (changes != null)
-                                corpus.Add(new(sheet, bells, changes.Where(e => e.group is not null)));
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.Error($"Произошла ошибка при загрузке листа {sheet} корпус {i}.\n {ex}");
-                        }
-                    }
+                    var changes = GetChangesAsync(excel, sheet.Name);
+                    var bells = GetBellsAsync(excel, sheet.Name);
+                    if (changes != null)
+                        corpus.Add(new(sheet.Name, bells, changes.Where(e => e.group is not null)));
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error($"Произошла ошибка при загрузке корпус {i}.\n {ex}");
+                    Logger.Error($"Произошла ошибка при загрузке листа {sheet} корпус {index}.\n {ex}");
                 }
             }
-            stopWatch.Stop();
-            Logger.Info($"Изменения загружены за {stopWatch.ElapsedMilliseconds} ms");
-        
-        
         }
 
-
-        public static async Task<IEnumerable<ChangeRow>?> GetChangesAsync(string xlsx, string? sheet = null)
+        public static IEnumerable<ChangeRow> GetChangesAsync(ExcelPackage excel, string? sheet = null)
         {
-            var sheets = sheet is null ? GetSheetsName(xlsx) : null;
-            var excel = new ExcelMapper()
-            {
-                HeaderRow = true,
-                HeaderRowNumber = 9,
-                MinRowNumber = 10,
-                CreateMissingHeaders = true,
-                SkipBlankRows = true,
-                MaxRowNumber = 300
-            };
             if (sheet is null)
-                sheet = sheets!.Max(e => DateTime.ParseExact(e, "d.MM", null)).ToString("dd.MM");
-            return await excel.FetchAsync<ChangeRow>(xlsx, sheet.Replace(" ", ""));
+                sheet = excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
+            var workSheet = excel.Workbook.Worksheets[sheet];
+            var newcollection = workSheet.Fetch<ChangeRow>(11, 300);
+            return newcollection;
         }
 
-        public static async Task<IEnumerable<Bell>> GetBellsAsync(string xlsx, string? sheet = null)
+        public static IEnumerable<Bell> GetBellsAsync(ExcelPackage excel, string? sheet = null)
         {
-            var sheets = sheet is null ? GetSheetsName(xlsx) : null;
-            var excel = new ExcelMapper()
-            {
-                HeaderRow = false,
-                MinRowNumber = 10,
-                MaxRowNumber = 15,
-            };
-
             if (sheet is null)
-                sheet = sheets!.Max(e => DateTime.ParseExact(e, "d.MM", null)).ToString("dd.MM");
-
-            return await excel.FetchAsync<Bell>(xlsx, sheet.Replace(" ", ""));
-        }
-
-        public static List<string> GetSheetsName(string xlsx)
-        {
-            if (!File.Exists(xlsx))
-                return new();
-            return new ExcelMapper(xlsx).FetchSheetNames().ToList();
+                sheet = excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
+            var workSheet = excel.Workbook.Worksheets[sheet];
+            var newcollection = workSheet.Fetch<Bell>(11, 16);
+            return newcollection;
         }
 
 
@@ -105,6 +107,23 @@ namespace OAT.Readers
             };
 
 
+
+        [AttributeUsage(AttributeTargets.All)]
+        public class ColumnEPPlus : System.Attribute
+        {
+            public int ColumnIndex { get; set; }
+
+
+            public ColumnEPPlus(int column)
+            {
+                ColumnIndex = column;
+            }
+
+            public ColumnEPPlus(string letter)
+            {
+                ColumnIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".IndexOf(letter) + 1;
+            }
+        }
 
     }
 
@@ -125,23 +144,83 @@ namespace OAT.Readers
 
     public class Bell
     {
-        [Column(Letter = "M")] public string id { get; set; }
-        [Column(Letter = "N")] public string period { get; set; }
+        [ColumnEPPlus("M")] public string id { get; set; }
+        [ColumnEPPlus("N")] public string period { get; set; }
     }
+    public static class EPPLusExtensions
+    {
 
+        public static IEnumerable<T> Fetch<T>(this ExcelWorksheet worksheet, int start = 0, int end = 300) where T : new()
+        {
+           
+            Func<CustomAttributeData, bool> columnOnly = y => y.AttributeType == typeof(ColumnEPPlus);
+
+            var columns = typeof(T)
+                    .GetProperties()
+                    .Where(x => x.CustomAttributes.Any(columnOnly))
+            .Select(p => new
+            {
+                Property = p,
+                Column = p.GetCustomAttributes<ColumnEPPlus>().First().ColumnIndex //safe because if where above
+            }).ToList();
+
+
+            var rows = worksheet.Cells
+                .Select(cell => cell.Start.Row)
+                .Distinct()
+                .OrderBy(x => x);
+
+            var collection = rows.Where(e => e >= start && e <= end)
+                .Select(row =>
+                {
+                    var tnew = new T();
+                    columns.ForEach(col =>
+                    {
+                        var val = worksheet.Cells[row, col.Column];
+                        if (val.Value == null)
+                        {
+                            col.Property.SetValue(tnew, null);
+                            return;
+                        }
+                        if (col.Property.PropertyType == typeof(Int32))
+                        {
+                            col.Property.SetValue(tnew, val.GetValue<int>());
+                            return;
+                        }
+                        if (col.Property.PropertyType == typeof(double))
+                        {
+                            col.Property.SetValue(tnew, val.GetValue<double>());
+                            return;
+                        }
+                        if (col.Property.PropertyType == typeof(DateTime))
+                        {
+                            col.Property.SetValue(tnew, val.GetValue<DateTime>());
+                            return;
+                        }
+                        col.Property.SetValue(tnew, val.GetValue<string>());
+                    });
+
+                    return tnew;
+                });
+
+
+            //Send it back
+            return collection;
+        }
+    }
     public class ChangeRow
     {
-        [Column(Letter = "A")] public string cours { get; set; }
-        [Column("Группа")] public string group { get; set; }
-        [Column(Letter = "G")] public string reason { get; set; }
+        [ColumnEPPlus("A")] public string cours { get; set; }
+        [ColumnEPPlus("B")] public string group { get; set; }
+        [ColumnEPPlus("G")] public string reason { get; set; }
 
-        [Column(Letter = "C")] public string was_couple { get; set; }
-        [Column(Letter = "D")] public string was_cabinet { get; set; }
-        [Column(Letter = "E")] public string was_discipline { get; set; }
-        [Column(Letter = "F")] public string was_teacher { get; set; }
-        [Column(Letter = "H")] public string couple { get; set; }
-        [Column(Letter = "I")] public string cabinet { get; set; }
-        [Column(Letter = "J")] public string discipline { get; set; }
-        [Column(Letter = "K")] public string teacher { get; set; }
+        [ColumnEPPlus("C")] public string was_couple { get; set; }
+        [ColumnEPPlus("D")] public string was_cabinet { get; set; }
+        [ColumnEPPlus("E")] public string was_discipline { get; set; }
+        [ColumnEPPlus("F")] public string was_teacher { get; set; }
+        [ColumnEPPlus("H")] public string couple { get; set; }
+        [ColumnEPPlus("I")] public string cabinet { get; set; }
+        [ColumnEPPlus("J")] public string discipline { get; set; }
+        [ColumnEPPlus("K")] public string teacher { get; set; }
     }
 }
