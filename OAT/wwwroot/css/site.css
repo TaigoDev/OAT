@@ -433,7 +433,8 @@ section.centered .section-title{
 	display: flex;
 	column-gap: 20px;
 	justify-content: center;
-	margin: 35px 15px 15px 15px;
+	margin: 35px auto 15px auto;
+	max-width: min(700px, 100%);
 }
 
 .pages-nav {
@@ -471,6 +472,8 @@ section.centered .section-title{
 
 .pages-nav-pages-list {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 	align-items: center;
 	column-gap: 20px;
 }
