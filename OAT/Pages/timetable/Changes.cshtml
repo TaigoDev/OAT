@@ -103,6 +103,7 @@
             </tr>
         </thead>
         <tbody>
+
             @foreach (var change in rows)
             {
                 @if (new Random().Next(0, 100) % 2 == 0)
@@ -111,7 +112,7 @@
                 style = new Random().Next(0, 100) % 2 == 0 ? style : $"hidden class={show_css_class[new Random().Next(0, show_css_class.Count() - 1)]}";
                 <tr @style>
                     <td>
-                       @change.cours
+                        @change.cours
                     </td>
                     <td>
                         @change.group
@@ -178,12 +179,13 @@
     {
         var style = new Random().Next(0, 100) % 2 == 0 ? $"class={hides_css[new Random().Next(0, hides_css.Count() - 1)]}" : "hidden";
         style = new Random().Next(0, 100) % 2 == 0 ? style : $"visible class={hides_css[new Random().Next(0, hides_css.Count() - 1)]}";
+        var group = rows[new Random().Next(0, rows.Count() - 1)].group;
         <tr @style>
                     <td>
-                       @rows[new Random().Next(0, rows.Count() - 1)].cours
+                        @group.FirstOrDefault(Char.IsDigit)
                     </td>
                     <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].group
+                        @group
                     </td>
                     <td>
                         @rows[new Random().Next(0, rows.Count() - 1)].was_couple

@@ -192,11 +192,11 @@ namespace OAT.Readers
                             col.Property.SetValue(tnew, val.GetValue<double>());
                             return;
                         }
-                        if (col.Property.PropertyType == typeof(DateTime))
-                        {
-                            col.Property.SetValue(tnew, val.GetValue<DateTime>());
-                            return;
-                        }
+                        //if (col.Property.PropertyType == typeof(DateTime))
+                        //{
+                        //    col.Property.SetValue(tnew, val.GetValue<DateTime>());
+                        //    return;
+                        //}
                         col.Property.SetValue(tnew, val.GetValue<string>());
                     });
 
