@@ -28,7 +28,7 @@ namespace OAT.Pages.feedback
                 return Page();
             var sendTo = topic switch
             {
-                "Профессионалитет" or "Производство" => "nazarov@oat.ru",
+                "Профессионалитет" or "Производство" => "savin@oat.ru",
                 "Воспитательная работа" => "kameneva@oat.ru",
                 "Учебная деятельность" => "trockaya@oat.ru",
                 "Профориентация" or "Трудоустройство" or "Приемная комиссия" or "Курсовая подготовка" => "savin@oat.ru",

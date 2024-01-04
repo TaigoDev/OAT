@@ -1,5 +1,6 @@
 ﻿@page "{corpus?}/{sheet?}"
 @using OAT.Readers
+@using OAT.Utilities
 @model ChangesModel
 @{
     ViewData["Title"] = "Изменения в расписании";
@@ -22,6 +23,20 @@
             return "";
         return s.ToLower().Replace(" ", "");
     }
+}
+@{
+    var show_css_class = new List<string>();
+    for (int i = 0; i < new Random().Next(1, 8); i++)
+        show_css_class.Add(StringUtils.RandomString(15, true));
+
+    var hides_css = new List<string>();
+    for (int i = 0; i < new Random().Next(1, 8); i++)
+        hides_css.Add(StringUtils.RandomString(15, true));
+
+    var css = new List<string>();
+    css.AddRange(hides_css);
+    css.AddRange(show_css_class);
+    css = css.OrderBy(x => new Random().Next()).ToList();
 }
 <link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
 <link rel="stylesheet" href="~/css/timetable/changes.css" asp-append-version="true">
@@ -90,7 +105,11 @@
         <tbody>
             @foreach (var change in rows)
             {
-                <tr>
+                @if (new Random().Next(0, 100) % 2 == 0)
+                    CreateEmptyRow();
+                var style = new Random().Next(0, 100) % 2 == 0 ? $"visible class={StringUtils.RandomString(15, true)}" : $"class={show_css_class[new Random().Next(0, show_css_class.Count() - 1)]}";
+                style = new Random().Next(0, 100) % 2 == 0 ? style : $"hidden class={show_css_class[new Random().Next(0, show_css_class.Count() - 1)]}";
+                <tr @style>
                     <td>
                        @change.cours
                     </td>
@@ -152,3 +171,98 @@
         </tbody>
     </table>
 </section>
+    
+
+@{
+    void CreateEmptyRow()
+    {
+        var style = new Random().Next(0, 100) % 2 == 0 ? $"class={hides_css[new Random().Next(0, hides_css.Count() - 1)]}" : "hidden";
+        style = new Random().Next(0, 100) % 2 == 0 ? style : $"visible class={hides_css[new Random().Next(0, hides_css.Count() - 1)]}";
+        <tr @style>
+                    <td>
+                       @rows[new Random().Next(0, rows.Count() - 1)].cours
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].group
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].was_couple
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].was_discipline
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].was_teacher
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].reason
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].couple
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].cabinet
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].discipline
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].teacher
+                    </td>
+                </tr>
+    }
+}
+
+@foreach(var _css in css)
+{
+    @if (show_css_class.Contains(_css))
+    {
+        if (new Random().Next(0, 100) % 2 == 0)
+        {
+            <style>
+            .@(_css) {
+                display: none;
+                display: table-row;
+            }
+            </style>
+        }
+        else
+        {
+            <style>
+            .@(_css) {
+                display: table-row;
+            }
+            </style> 
+        }
+    }
+    else if (new Random().Next(0, 100) % 2 == 0)
+    {
+        <style>
+            .@(_css) {
+            display: none;
+            }
+        </style>
+    }
+    else if (new Random().Next(0, 100) % 2 == 0)
+    {
+        <style>
+            .@(_css) {
+            visibility: collapse;
+            }
+        </style>
+    }
+    else
+    {
+        <style>
+            .@(_css) {
+            display: table-row;
+            display: none;
+            }
+        </style>
+    }
+}
+
+
