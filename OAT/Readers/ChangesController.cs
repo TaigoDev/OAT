@@ -68,7 +68,7 @@ namespace OAT.Readers
                     var changes = GetChangesAsync(excel, sheet.Name);
                     var bells = GetBellsAsync(excel, sheet.Name);
                     if (changes != null)
-                        corpus.Add(new(sheet.Name, bells, changes.Where(e => e.group is not null)));
+                        corpus.Add(new(sheet.Name, GetSchoolWeek(excel, sheet.Name), GetDateText(excel, sheet.Name), bells, changes.Where(e => e.group is not null)));
                 }
                 catch (Exception ex)
                 {
@@ -93,6 +93,22 @@ namespace OAT.Readers
             var workSheet = excel.Workbook.Worksheets[sheet];
             var newcollection = workSheet.Fetch<Bell>(11, 16);
             return newcollection;
+        }
+
+        public static string GetSchoolWeek(ExcelPackage excel, string? sheet = null)
+        {
+            if (sheet is null)
+                sheet = excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
+            var workSheet = excel.Workbook.Worksheets[sheet];
+            return workSheet.GetValue<string>(7, 10);
+        }
+
+        public static string GetDateText(ExcelPackage excel, string? sheet = null)
+        {
+            if (sheet is null)
+                sheet = excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
+            var workSheet = excel.Workbook.Worksheets[sheet];
+            return workSheet.GetValue<string>(8, 1);
         }
 
 
@@ -129,14 +145,18 @@ namespace OAT.Readers
 
     public class Changes
     {
-        public Changes(string sheetName, IEnumerable<Bell> bells, IEnumerable<ChangeRow> rows)
+        public Changes(string sheetName, string SchoolWeek, string Date, IEnumerable<Bell> bells, IEnumerable<ChangeRow> rows)
         {
             SheetName = sheetName;
             this.bells = bells;
             this.rows = rows;
+            this.SchoolWeek = SchoolWeek;
+            this.Date = Date;
         }
 
         public string SheetName { get; set; }
+        public string SchoolWeek { get; set; }
+        public string Date { get; set; }
         public IEnumerable<Bell> bells { get; set; }
         public IEnumerable<ChangeRow> rows { get; set; }
 
