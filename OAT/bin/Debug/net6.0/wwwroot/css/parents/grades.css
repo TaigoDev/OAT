@@ -19,11 +19,12 @@
 	border-radius: 10px;
 	background: var(--m-l-color);
 	color: var(--light-white);
-	transition: scale 300ms, background 300ms;
+	opacity: 0.9;
+	transition: 250ms ease;
 }
 
-.months-choose-item:hover{
-	scale: 1.1;
+.months-choose-item:hover, .months-choose-item.active{
+	opacity: 1;
 	background: var(--m-color);
 	border-color: #0000004c;
 }

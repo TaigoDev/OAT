@@ -44,19 +44,16 @@
 
 <section class="centered timetable-container">
     <h2 class="section-title title-centered">
-        Изменения в расписании
-    </h2>
-    <h3 class="section-title title-centered">
         @changes.Date
-    </h3>
-    <h5 class="section-title title-centered">
+    </h2>
+    <h3 class="section-title title-centered" style="font-size: 1.4rem;">
         @changes.SchoolWeek
-    </h5>
+    </h3>
     <div class="months">
         <div class="months-choose">
             @foreach (var sheet in Model.changes)
             {
-                <a class="months-choose-item" href="/timetable/Changes/@Model.corpus/@sheet.SheetName">
+                <a class="months-choose-item active" href="/timetable/Changes/@Model.corpus/@sheet.SheetName">
                     @sheet.SheetName
                 </a>
             }
