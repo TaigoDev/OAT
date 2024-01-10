@@ -43,7 +43,8 @@ namespace OAT.UtilsHelper.Telegram
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                if(ex.HResult != -2146233088)
+                    Logger.Error(ex);
             }
         }
 
@@ -60,7 +61,8 @@ namespace OAT.UtilsHelper.Telegram
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                if (ex.HResult != -2146233088)
+                    Logger.Error(ex);
             }
         }
 
@@ -78,8 +80,8 @@ namespace OAT.UtilsHelper.Telegram
                     => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
                 _ => exception.ToString()
             };
-
-            Logger.Error(ErrorMessage);
+            if (exception.HResult != -2146233088)
+                Logger.Error(ErrorMessage);
             return Task.CompletedTask;
         }
 
