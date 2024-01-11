@@ -4,8 +4,11 @@
 @model ChangesModel
 @{
     ViewData["Title"] = "Изменения в расписании";
-
-
+    if (Model.changes is null || !Model.changes.Any() )
+    {
+        HttpContext.Response.Redirect("/timetable/ClassesChanges");
+        return;
+    }
     var changes = Model.changes.FirstOrDefault(e => e.SheetName == Model.sheet) ?? Model.changes.Last();
     var rows = new List<ChangeRow>();
     var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
@@ -53,7 +56,7 @@
         <div class="months-choose">
             @foreach (var sheet in Model.changes)
             {
-                <a class="months-choose-item active" href="/timetable/Changes/@Model.corpus/@sheet.SheetName">
+                <a class="months-choose-item @(changes.SheetName == sheet.SheetName ? "active" : "")" href="/timetable/Changes/@Model.corpus/@sheet.SheetName">
                     @sheet.SheetName
                 </a>
             }
