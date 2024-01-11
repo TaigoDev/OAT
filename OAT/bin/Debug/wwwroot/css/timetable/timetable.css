@@ -1,0 +1,42 @@
+﻿.timetable-container{
+	width: 95vw;
+	margin: 0 auto;
+}
+
+table.timetable tbody tr td:first-child {
+	text-align: center !important;
+}
+
+.subjectt{
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.subjectt-more {
+	display: flex;
+	gap: 10px;
+}
+
+.subjectt-more-item {
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
+}
+
+.subject {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.subject-more {
+	display: flex;
+	gap: 10px;
+}
+
+.subject-more-item {
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
+}

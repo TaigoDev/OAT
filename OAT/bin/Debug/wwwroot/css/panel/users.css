@@ -1,0 +1,55 @@
+﻿
+.change-password-container{
+	position: relative;
+}
+
+.change-password-input-container {
+	position: absolute;
+	top: 0px;
+	right: -240px;
+	z-index: -1;
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+	width: 225px;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 600ms, visibility 600ms, z-index 600ms;
+}
+
+.change-password-input {
+	width: 100%;
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 5px 8px;
+	background-color: var(--matte-color);
+	color: var(--light-white);
+}
+
+.change-password-input:focus {
+	border-color: rgb(20, 20, 20);
+	opacity: 1;
+	outline: none;
+}
+
+.change-password-container:hover .change-password-input-container {
+	opacity: 1;
+	visibility: visible;
+	z-index: 1;
+}
+
+.users{
+	max-height: unset!important;
+}
+
+@media (width<1050px) {
+	.change-password-input-container {
+		left: -240px;
+	}
+}
+
+@media (width>450px){
+	.users {
+		overflow: visible!important;
+	}
+}

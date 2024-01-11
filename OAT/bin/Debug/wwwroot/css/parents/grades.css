@@ -1,0 +1,36 @@
+﻿.months {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 50px;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.months-choose {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 25px;
+}
+
+.months-choose-item{
+	display: block;
+	padding: 5px 15px;
+	border-radius: 10px;
+	background: var(--m-l-color);
+	color: var(--light-white);
+	transition: scale 300ms, background 300ms;
+}
+
+.months-choose-item:hover{
+	scale: 1.1;
+	background: var(--m-color);
+	border-color: #0000004c;
+}
+
+.months-current{
+	font-size: 1.15rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	line-height: 1;
+}
