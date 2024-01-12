@@ -29,7 +29,7 @@ namespace OAT.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
-        [HttpGet("/changes/{building}/download"), NoCache]
+        [HttpGet("changes/{building}/download"), NoCache]
         public async Task<IActionResult> DownloadChanges(string building)
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
