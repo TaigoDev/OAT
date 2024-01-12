@@ -29,15 +29,15 @@ namespace OAT.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
-        //[HttpGet("api/schedule/changes/{building}/download"), NoCache]
-        //public async Task<IActionResult> DownloadChanges(string building)
-        //{
-        //    var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
-        //    if (!System.IO.File.Exists(path))
-        //        return Redirect("/timetable/ClassesChanges");
+        [HttpGet("/changes/{building}/download"), NoCache]
+        public async Task<IActionResult> DownloadChanges(string building)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
+            if (!System.IO.File.Exists(path))
+                return Redirect("/timetable/ClassesChanges");
 
-        //    return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Changes.xlsx");
-        //}
+            return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Changes.xlsx");
+        }
 
         #endregion
         #region Sessions
