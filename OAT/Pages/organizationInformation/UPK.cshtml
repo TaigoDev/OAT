@@ -4,6 +4,8 @@
     ViewData["Title"] = "Учебно-производственный комплекс";
 }
 
+<link rel="stylesheet" href="~/css/organizationInformation/UPK.css" asp-append-version="true">
+
 <div class="container content-page">
     <section class="content">
         <a id="plane" class="plane" href="#sidebar"></a>
@@ -14,7 +16,7 @@
         <ul class="page-navigation">
             <li>
                 <a href="#about-upk">
-                    Главное об УПК
+                    Общие сведения
                 </a>
             </li>
             <li>
@@ -30,7 +32,7 @@
         </ul>
 
         <h3 id="about-upk" class="section-subtitle">
-            Главное об УПК
+            Общие сведения
         </h3>
         <p>
             Учебно-производственный комплекс создан в колледже в целях организации практической подготовки обучающихся, предоставления временной работы обучающимся и выпускникам, а также производства товаров, выполнения работ и оказания услуг.
@@ -38,21 +40,24 @@
 
 
         <h3 id="images" class="section-subtitle">
-            Фотографии
+            Продукция УПК
         </h3>
-        <h4 class="section-subtitle-small">
-            Автомат включения  механизмов сеялки
-        </h4>
-        <img class="customized" src="~/images/organizationInformation/UPK/Автомат включения механизмов сеялки.jpg" alt="">
-        <h4 class="section-subtitle-small">
-            Детали ручного тормоза железнодорожных составов
-        </h4>
-        <img class="customized" src="~/images/organizationInformation/UPK/Детали ручного тормоза железнодорожных составов.jpg" alt="">
-        <h4 class="section-subtitle-small">
-            Детали к сеялке
-        </h4>
-        <img class="customized" src="~/images/organizationInformation/UPK/Детали к сеялке.jpg" alt="">
-
+        
+        <ul class="products">
+            <li class="product">
+                <img src="~/images/organizationInformation/UPK/Автомат включения механизмов сеялки.jpg" alt="">
+                <div>Муфта включения механизмов сеялки</div>
+            </li>
+            <li class="product">
+                <img src="~/images/organizationInformation/UPK/Детали ручного тормоза железнодорожных составов.jpg" alt="">
+                <div>Детали ручного тормоза железнодорожных вагонов</div>
+            </li>
+            <li class="product">
+                <img src="~/images/organizationInformation/UPK/Детали к сеялке.jpg" alt="">
+                <div>Детали сеялки</div>
+            </li>
+        </ul>
+        
 
         <h3 id="documents" class="section-subtitle">
             Документы
