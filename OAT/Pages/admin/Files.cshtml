@@ -8,8 +8,31 @@
     ViewData["Title"] = "Управление файлами";
 
 }
-<section class="container">
 
+<link rel="stylesheet" href="~/css/panel/files.css" asp-append-version="true">
+
+<script>
+    const window = document.getElementById("file-error");
+    const close = document.getElementById("file-error-close");
+    close.addEventListener("click", () => {
+        window.classList.Toggle("active");
+    });
+</script>
+
+<section class="container">
+    <aside id="file-error" class="file-error active">
+        <button id="file-error-close" class="file-error-close">
+            Х
+        </button>
+        <h3 class="file-error-title">
+            ⛔️Error⛔️
+            <br>
+            Расписание не было успешно загружено
+        </h3>
+        <p class="file-error-text">
+            Текст ошибки
+        </p>
+    </aside>
     <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
         <label for="news" class="panel-form-title">
             Управление изменением расписания
