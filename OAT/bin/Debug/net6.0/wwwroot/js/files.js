@@ -7,19 +7,22 @@ function UploadScheduleChanges(files_id) {
     var formData = new FormData();
     formData.append("file", GetFile(files_id));
     
-    POST(url, formData, 
+    POSTWithjqXHR(url, formData, 
         (response) => {
             MessageController("message-success");
         }, 
-        (code) => {
+        (jqXHR) => {
             console.log(`Your error code: ${code} ${url}`);
-            switch(code) {
+            switch (jqXHR.code) {
                 case 401: 
                     MessageController("message-fail-auth");
                     window.location = "https://www.oat.ru/api/logout";
                     break;
                 case 406 || 403: 
                     MessageController("message-fail-perms");
+                    break;
+                case 500:
+                    console.log(jqXHR.data)
                     break;
                 default:
                     MessageController("message-fail");

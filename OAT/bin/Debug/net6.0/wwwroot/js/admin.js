@@ -21,6 +21,24 @@ function POST(url, formData, success, error){
     });
 }
 
+
+function POSTWithjqXHR(url, formData, success, error) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: formData,
+        processData: false,
+        contentType: false,
+        mimeType: "multipart/form-data",
+        success: function (response) {
+            success(response);
+        },
+        error: function (jqXHR, exception) {
+            error(jqXHR);
+        }
+    });
+}
+
 function GetFile(tag){
     var fileUpload =  $("#" + tag).get(0);
     var files = fileUpload.files;

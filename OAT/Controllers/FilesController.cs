@@ -17,6 +17,9 @@ namespace OAT.Controllers
             if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
                 return StatusCode(StatusCodes.Status406NotAcceptable);
 
+            var response = await TestChanges(building, file);
+            if (response is not null)
+                return BadRequest(response);
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
             FileUtils.FileDelete(path);
 
@@ -39,6 +42,16 @@ namespace OAT.Controllers
             return File(await System.IO.File.ReadAllBytesAsync(path), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{building}Changes.xlsx");
         }
 
+        private async Task<string?> TestChanges(string building, IFormFile file)
+        {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{Path.GetRandomFileName()}-changes.xlsx");
+            using Stream fileStream = new FileStream(path, FileMode.Create);
+            await file.CopyToAsync(fileStream);
+            fileStream.Dispose();
+            var response = await TimeTableBot.TestChangesInSchedule(building, path);
+            System.IO.File.Delete(path);
+            return response;
+        }
         #endregion
         #region Sessions
 

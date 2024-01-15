@@ -38,6 +38,35 @@ namespace OAT.Utilities
             }
         }
 
+        public static async Task<string?> TestChangesInSchedule(string building, string xlsx)
+        {
+            try
+            {
+                var client = new HttpClient();
+
+                await using var stream = File.OpenRead(xlsx);
+                using var request = new HttpRequestMessage(HttpMethod.Post,
+                    $"{config.url}/api/alerts/changes/schedule/{building}");
+                using var content = new MultipartFormDataContent
+                {
+                    { new StringContent(config.token), "token" },
+                    { new StreamContent(stream), "file", $"{building}.xlsx" }
+                };
+
+                request.Content = content;
+                var response = await client.SendAsync(request);
+                if(response.StatusCode is System.Net.HttpStatusCode.BadGateway)
+                    return await response.Content.ReadAsStringAsync();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"Ошибка при отправке запроса к боту расписания.\n{ex}");
+            }
+            return null;
+
+        }
+
         public static async Task onChangeMainSchedule(string building, string xml)
         {
 
