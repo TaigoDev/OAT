@@ -1,45 +1,58 @@
-﻿.file-error{
+﻿.file-error {
     position: fixed;
+    z-index: 10;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    max-height: 400px;
     padding: 25px;
-    aspect-ratio: 1;
+    width: min(100%, 450px);
     border-radius: var(--border-radius-xxl);
     overflow-y: auto;
-    background: #00000090;
+    background: #0000009b;
     backdrop-filter: blur(15px);
-    box-shadow: 0 0 20px -10px #00000090;
+    box-shadow: 0 0 25px -5px #000000;
     opacity: 0;
+    visibility: hidden;
     transition: 350ms ease;
+    color: var(--light-white);
 }
 
 .file-error.active{
     opacity: 1;
+    visibility: visible;
 }
 
-.file-error-close{
+.file-error-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 10px;
-    aspect-ratio: 1;
+    top: 15px;
+    right: 15px;
     cursor: pointer;
     opacity: 0.5;
+    scale: 0.8;
+    color: inherit;
     transition: 250ms ease;
 }
 
 .file-error-close:hover{
-    scale: 1.1;
+    scale: 1;
     opacity: 1;
 }
 
-.file-error-title{
+.file-error-title {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #dd3636;
+    color: #c93030;
     margin-bottom: 20px;
     text-align: center;
 }
 
+.file-error-title .bigger{
+    font-size: 1.15em;
+}
+
+.file-error-text{
+    overflow-y: auto;
+    max-height: 150px;
+    padding-right: 5px;
+    margin: 0;
+}

@@ -1,4 +1,11 @@
-﻿
+﻿window.onload = () => {
+    const fileWindow = document.getElementById("file-error");
+    const close = document.getElementById("file-error-close");
+    close.addEventListener("click", () => {
+        fileWindow.classList.remove("active");
+    });
+}
+
 LoadSessionsFileByCorpus();
 LoadPracticeFileByCorpus();
 function UploadScheduleChanges(files_id) {
