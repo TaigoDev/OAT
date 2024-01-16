@@ -12,22 +12,22 @@
 <link rel="stylesheet" href="~/css/panel/files.css" asp-append-version="true">
 
 <section class="container">
-    <aside id="file-error" class="file-error active">
-        <button id="file-error-close" class="file-error-close">
+    <aside id="file-error" class="file-error">
+        <button id="file-error-close" class="file-error-close" onclick="document.getElementById('file-error').classList.remove('active');">
             <img class="icon" src="~/images/panel/closeWindow.svg" alt=""/>
         </button>
         <h3 class="file-error-title">
             <span class="bigger">
                 ⛔️
                 <span class="bigger">
-                    ERROR
+                    ОШИБКА
                 </span>
                 ⛔️
             </span>
             <br>
             Расписание не было успешно загружено
         </h3>
-        <p class="file-error-text">
+        <p class="file-error-text" id="error-text">
             Текст ошибки Текст ошибки Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки
         </p>
     </aside>
@@ -73,7 +73,7 @@
             </label>
             <input type="file" name="postedFiles" id="files-corpus" name="files" accept=".xlsx">
         </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadScheduleChanges('files-corpus');return false" multiple>
+        <button type="submit" id="files-change-btn" class="panel-form-send" value="Отправить" onclick="UploadScheduleChanges('files-corpus');return false" multiple>
             Обновить
         </button>
     </form>

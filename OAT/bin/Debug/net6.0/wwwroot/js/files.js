@@ -13,14 +13,15 @@ function UploadScheduleChanges(files_id) {
     var url = `/api/schedule/changes/${corpus}/upload`;
     var formData = new FormData();
     formData.append("file", GetFile(files_id));
-    
+    var button = document.getElementById("files-change-btn");
+    button.textContent = "ЖДИТЕ! Около 10-30 секунд";
     POSTWithjqXHR(url, formData, 
         (response) => {
             MessageController("message-success");
         }, 
         (jqXHR) => {
-            console.log(`Your error code: ${code} ${url}`);
-            switch (jqXHR.code) {
+            console.log(`Your error code: ${jqXHR.status} ${url}`);
+            switch (jqXHR.status) {
                 case 401: 
                     MessageController("message-fail-auth");
                     window.location = "https://www.oat.ru/api/logout";
@@ -28,13 +29,19 @@ function UploadScheduleChanges(files_id) {
                 case 406 || 403: 
                     MessageController("message-fail-perms");
                     break;
-                case 500:
-                    console.log(jqXHR.data)
+                case 400:
+                    console.log(jqXHR.responseText);
+                    var window = document.getElementById("file-error");
+                    window.classList.add("active");
+                    var text = document.getElementById("error-text");
+                    text.innerText = jqXHR.responseText;
                     break;
                 default:
                     MessageController("message-fail");
                     break;
             }
+            button.textContent = "Обновить";
+
         });
 }
 

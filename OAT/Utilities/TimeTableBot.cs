@@ -46,7 +46,7 @@ namespace OAT.Utilities
 
                 await using var stream = File.OpenRead(xlsx);
                 using var request = new HttpRequestMessage(HttpMethod.Post,
-                    $"{config.url}/api/alerts/changes/schedule/{building}");
+                    $"{config.url}/api/test/changes/{building}");
                 using var content = new MultipartFormDataContent
                 {
                     { new StringContent(config.token), "token" },
@@ -55,7 +55,7 @@ namespace OAT.Utilities
 
                 request.Content = content;
                 var response = await client.SendAsync(request);
-                if(response.StatusCode is System.Net.HttpStatusCode.BadGateway)
+                if(response.StatusCode is System.Net.HttpStatusCode.BadRequest)
                     return await response.Content.ReadAsStringAsync();
                 return null;
             }
