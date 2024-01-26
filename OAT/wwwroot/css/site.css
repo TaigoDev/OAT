@@ -347,7 +347,7 @@ section.centered .section-title{
 }
 
 .sidebar-link:not(.sidebar-link-selected):hover a::after {
-	opacity: 1;
+	opacity: 0.8;
 }
 
 .sidebar-link a{
@@ -363,11 +363,10 @@ section.centered .section-title{
     left: 0;
     display: block;
     width: 100%;
-    height: 2px;
+    border: 1px solid;
     border-radius: 2px;
-    background-color: #ffffff80;
-    opacity: 0.15;
-    transition: 75ms ease;
+    opacity: 0.2;
+    transition: 100ms ease;
 }
 
 .sidebar-link:last-child a::after {
@@ -380,8 +379,7 @@ section.centered .section-title{
 }
 
 .sidebar-link-selected a::after {
-	background-color: hsl(0 0% 70% / 1);
-	opacity: 1;
+	opacity: 0.8;
 }
 
 @media (width<900px){
@@ -1040,8 +1038,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	right: 83px;
 	bottom: 0;
 	width: 0;
-	height: 2.5px;
-	background-color: hsl(200deg 75% 40%);
+	border-top: 3px solid hsl(200deg 75% 40%);
 	opacity: 0;
 	transition: left 800ms, width 400ms, opacity 400ms;
 }
