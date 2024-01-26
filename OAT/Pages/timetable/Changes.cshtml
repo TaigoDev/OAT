@@ -28,18 +28,13 @@
     }
 }
 @{
-    var show_css_class = new List<string>();
-    for (int i = 0; i < new Random().Next(1, 8); i++)
-        show_css_class.Add(StringUtils.RandomString(15, true));
+    var show_css_class = RowChangesHelper.GetListCSS();
+    var hides_css = RowChangesHelper.GetListCSS();
+    var table_show_css_class = RowChangesHelper.GetListCSS();
+    var table_hide_css_class = RowChangesHelper.GetListCSS();
 
-    var hides_css = new List<string>();
-    for (int i = 0; i < new Random().Next(1, 8); i++)
-        hides_css.Add(StringUtils.RandomString(15, true));
-
-    var css = new List<string>();
-    css.AddRange(hides_css);
-    css.AddRange(show_css_class);
-    css = css.OrderBy(x => new Random().Next()).ToList();
+    var css = RowChangesHelper.ToCSSList(hides_css, show_css_class);
+    var table_css = RowChangesHelper.ToCSSList(table_show_css_class, table_hide_css_class);
 }
 <link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
 <link rel="stylesheet" href="~/css/timetable/changes.css" asp-append-version="true">
@@ -70,8 +65,11 @@
             </div>
         </form>
     </div>
-
-    <table class="customized timetable">
+    @{
+        PasteEmptyTables();
+        var table_style = $"table-{table_show_css_class[new Random().Next(0, table_show_css_class.Count() - 1)]}";
+    }
+    <table class="customized timetable @table_style">
         <thead>
             <tr>
                 <th>
@@ -154,6 +152,9 @@
             }
         </tbody>
     </table>
+    @{
+        PasteEmptyTables();
+    }  
     <table style="margin: 10px auto !important;" class="customized timetable">
         <thead>
             <tr>
@@ -220,7 +221,61 @@
                     <td>
                         @rows[new Random().Next(0, rows.Count() - 1)].teacher
                     </td>
-                </tr>
+        </tr>
+    }
+
+    void PasteEmptyTables()
+    {
+        for (var i = 0; i < new Random().Next(1, 5); i++)
+        {
+                PasteTable();
+            
+        }
+    }
+
+    void PasteTable()
+    {
+        var style = $"table-{table_hide_css_class[new Random().Next(0, table_hide_css_class.Count() - 1)]}";
+    <table class="customized timetable @style">
+        <thead>
+            <tr>
+                <th>
+                    Курс
+                </th>
+                <th>
+                    Группа
+                </th>
+                <th>
+                    Пара
+                </th>
+                <th>
+                    Аудит
+                </th>
+                <th>
+                    Учеб.дисциплина
+                </th>
+                <th>
+                    ФИО преподавателя
+                </th>
+                <th>
+                    причина
+                </th>
+                <th>
+                    пара
+                <th>
+                    Аудит
+                </th>
+                <th>
+                    Учеб.дисциплина
+                </th>
+                <th>
+                    ФИО преподавателя
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
     }
 }
 
@@ -273,4 +328,44 @@
     }
 }
 
-
+@foreach(var style in table_css)
+{
+    @if (table_show_css_class.Contains(style))
+    {
+        if (new Random().Next(0, 100) % 2 == 0)
+        {
+            <style>
+            .table-@(style) {
+                visibility: collapse;
+                visibility: visible;
+            }
+            </style>
+        }
+        else
+        {
+            <style>
+            .table-@(style) {
+                display: none;
+                display: table;
+            }
+            </style>
+        }
+    }
+    else if (new Random().Next(0, 100) % 2 == 0)
+    {
+            <style>
+            .table-@(style) {
+                visibility: collapse;
+            }
+        </style>
+    }
+    else
+    {
+            <style>
+            .table-@(style) {
+               position: fixed;
+               height: 0;
+            }
+            </style>
+    }
+}

@@ -18,6 +18,7 @@ function UploadScheduleChanges(files_id) {
     POSTWithjqXHR(url, formData, 
         (response) => {
             MessageController("message-success");
+            button.textContent = "Обновить";
         }, 
         (jqXHR) => {
             console.log(`Your error code: ${jqXHR.status} ${url}`);

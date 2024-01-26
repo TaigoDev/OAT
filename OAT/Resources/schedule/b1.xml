@@ -168,11 +168,11 @@
    <week number="1">
     <day number="1" name="Понедельник">
      <lesson number="1">
-      <group number="0" subject="Элементы высшей математики" short_subject="ВысМат" teacher="Подольская Е.М." cabinet="507" />
+      <group number="0" subject="Элементы высшей математики" short_subject="ВысМат222" teacher="Подольская Е.М." cabinet="507" />
      </lesson>
      <lesson number="2">
       <group number="1" subject="Архитектура аппаратных средств+" short_subject="АрхАС+" teacher="Богута Д.А." cabinet="510+" />
-      <group number="2" subject="Архитектура аппаратных средств+" short_subject="АрхАС+" teacher="Зинченко А.К." cabinet="510+" />
+      <group number="2" subject="Архитектура аппаратных средств2222" short_subject="АрхАС+" teacher="Зинченко А.К." cabinet="510+" />
      </lesson>
      <lesson number="3">
       <group number="0" subject="Основы алгоритмизации и программирования" short_subject="ОСАЛП" teacher="Прокопьева А.В." cabinet="120а" />
