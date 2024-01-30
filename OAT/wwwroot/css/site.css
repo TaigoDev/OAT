@@ -122,6 +122,11 @@ a:hover {
 	text-decoration: none;
 }
 
+a:focus, button:focus, input:focus{
+	outline: 3px solid var(--m-color);
+	outline-offset: 3px;
+}
+
 img{
 	max-width: 100%;
 }
@@ -2279,6 +2284,7 @@ section.content::before{
 }
 
 .footer-bottom-pages li a {
+	display: block;
     color: var(--light-white);
     transition: 200ms ease;
 }
