@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.students
+namespace OAT.Pages
 {
     public class AlumniEmploymentCenterOmaviatModel : PageModel
     {

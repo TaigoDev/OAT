@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/csv$tv"
 @model AlumniEmploymentCenterOmaviatModel
 @{
     ViewData["Title"] = "Центр содействия трудоустройству выпускников Омавиат";
@@ -303,7 +303,7 @@
                         Конюхова Ирина Евгеньевна
                     </div>
                     <div class="people-item-body-job">
-                        Методист
+                        Аналитик
                     </div>
                     <div class="people-item-body-phone">
                         8(3812)31-75-17
@@ -319,32 +319,32 @@
         <nav class="sidebar-body">
             <ul class="sidebar-links">
                 <li class="sidebar-link">
-                    <a href='@Url.Page("DistanceLearning")'>
+                    <a asp-page="/students/DistanceLearning">
                         Дистанционное обучение
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("DistanceFullTimeLearning")'>
+                    <a asp-page="/students/DistanceFullTimeLearning">
                         Дистанционное обучение - очная форма обучения
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("SportClub")'>
+                    <a asp-page="/students/SportClub">
                         Спортивный клуб
                     </a>
                 </li>
                 <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("AlumniEmploymentCenterOmaviat")'>
+                    <a asp-page="">
                         Центр содействия трудоустройству выпускников Омавиат
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("AlumniEmploymentCenterOmsk")'>
+                    <a asp-page="/students/AlumniEmploymentCenterOmsk">
                         Базовый центр содействия трудоустройству выпускников СПО Омской области
                     </a>
                 </li>
                 <li class="sidebar-link">
-                    <a href='@Url.Page("DailyRoutineRules")'>
+                    <a asp-page="/students/DailyRoutineRules">
                         Правила внутреннего распорядка
                     </a>
                 </li>
