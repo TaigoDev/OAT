@@ -274,7 +274,11 @@
             </tr>
         </thead>
         <tbody>
-        </tbody>
+                @for(var i = 0; i< new Random().Next(0, 120); i++)
+                {
+                    CreateEmptyRow();
+                }
+            </tbody>
     </table>
     }
 }
