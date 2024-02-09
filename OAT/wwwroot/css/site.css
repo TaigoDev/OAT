@@ -1812,13 +1812,12 @@ section.content::before{
 	.important-pages {
 		column-gap: 20px;
 	}
-}
 
-@media (width < 1050px) {
-	.important-pages li:nth-of-type(3) {
+	.important-pages li:nth-of-type(3), .important-pages li:nth-of-type(4) {
 		display: none;
 	}
 }
+
 
 @media (width < 950px) {
 	.important-pages li:nth-of-type(2) {
