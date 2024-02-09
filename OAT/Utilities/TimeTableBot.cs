@@ -40,7 +40,6 @@ namespace OAT.Utilities
 
         public static async Task<string?> TestChangesInSchedule(string building, string xlsx)
         {
-            return null; //TODO: Исправить. Наблюдаются проблемы с проверкой некоторых видов изменений
             try
             {
                 var client = new HttpClient();
