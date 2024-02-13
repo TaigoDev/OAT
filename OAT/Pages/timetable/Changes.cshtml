@@ -1,6 +1,8 @@
 ﻿@page "{corpus?}/{sheet?}"
 @using OAT.Readers
 @using OAT.Utilities
+@using OAT.Components;
+
 @model ChangesModel
 @{
     ViewData["Title"] = "Изменения в расписании";
@@ -9,23 +11,12 @@
         HttpContext.Response.Redirect("/timetable/ClassesChanges");
         return;
     }
-    var changes = Model.changes.FirstOrDefault(e => e.SheetName == Model.sheet) ?? Model.changes.Last();
-    var rows = new List<ChangeRow>();
+    var changes = ChangesController.changes_b1.FirstOrDefault();
     var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
-    if (!Request.Query.Any(e => e.Key == "search"))
+    var rows = new List<ChangeRow>();
+    if (changes is not null)
         rows = changes.rows.ToList();
-    else
-        rows = changes.rows.Where(e =>
-            ToSearch(e.group ?? "").Contains(ToSearch(search)) ||
-            ToSearch(e.teacher ?? "").Contains(ToSearch(search)) ||
-            ToSearch(e.was_teacher ?? "").Contains(ToSearch(search))).ToList();
 
-    string ToSearch(string? s)
-    {
-        if (s is null)
-            return "";
-        return s.ToLower().Replace(" ", "");
-    }
 }
 @{
     var show_css_class = RowChangesHelper.GetListCSS();
@@ -69,7 +60,8 @@
         PasteEmptyTables();
         var table_style = $"table-{table_show_css_class[new Random().Next(0, table_show_css_class.Count() - 1)]}";
     }
-    <table class="customized timetable @table_style">
+    
+        <table class="customized timetable">
         <thead>
             <tr>
                 <th>
@@ -95,6 +87,7 @@
                 </th>
                 <th>
                     пара
+                </th>
                 <th>
                     Аудит
                 </th>
@@ -107,49 +100,14 @@
             </tr>
         </thead>
         <tbody>
+        @(await Html.RenderComponentAsync<ChangesComponent>(RenderMode.Server, new
+        {
+            search = search,
 
-            @foreach (var change in rows)
-            {
-                @if (new Random().Next(0, 100) % 2 == 0)
-                    CreateEmptyRow();
-                var style = new Random().Next(0, 100) % 2 == 0 ? $"visible class={StringUtils.RandomString(15, true)}" : $"class={show_css_class[new Random().Next(0, show_css_class.Count() - 1)]}";
-                style = new Random().Next(0, 100) % 2 == 0 ? style : $"hidden class={show_css_class[new Random().Next(0, show_css_class.Count() - 1)]}";
-                <tr @style>
-                    <td>
-                        @change.cours
-                    </td>
-                    <td>
-                        @change.group
-                    </td>
-                    <td>
-                        @change.was_couple
-                    </td>
-                    <td>
-                        @change.was_cabinet
-                    </td>
-                    <td>
-                        @change.was_discipline
-                    </td>
-                    <td>
-                        @change.was_teacher
-                    </td>
-                    <td>
-                        @change.reason
-                    </td>
-                    <td>
-                        @change.couple
-                    </td>
-                    <td>
-                        @change.cabinet
-                    </td>
-                    <td>
-                        @change.discipline
-                    </td>
-                    <td>
-                        @change.teacher
-                    </td>
-                </tr>
-            }
+            sheet = Model.sheet,
+            corpus = Model.corpus
+        })
+        );
         </tbody>
     </table>
     @{
@@ -179,7 +137,8 @@
         </tbody>
     </table>
 </section>
-    
+    <base href="~/" />
+    <script src="~/_framework/blazor.server.js"></script>
 
 @{
     void CreateEmptyRow()
@@ -229,7 +188,6 @@
         for (var i = 0; i < new Random().Next(1, 5); i++)
         {
                 PasteTable();
-            
         }
     }
 

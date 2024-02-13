@@ -22,6 +22,7 @@ SetupControllers();
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
+app.MapBlazorHub();
 app.UseRouting();
 app.UseNoSniffHeaders();
 
@@ -88,6 +89,8 @@ void SetupServices(ref WebApplicationBuilder builder)
     builder.Services.AddRazorPages();
     builder.Services.AddControllersWithViews();
     builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddServerSideBlazor(o => o.DetailedErrors = true);
+
     builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
     {
         options.ExpireTimeSpan = TimeSpan.FromDays(31);
