@@ -3,11 +3,6 @@
 
 // Write your JavaScript code.
 
-const preloader = document.getElementById("preloader");
-setTimeout(() => {
-    preloader.classList.add("end");
-}, 4000)
-
 document.onkeydown = function (e) {
     if (e.keyCode === 27) {
         document.querySelector(".site-search-container").classList.remove("site-search-container-active");
@@ -18,7 +13,6 @@ document.onkeydown = function (e) {
 window.addEventListener("load", () => {
     /* E L E M E N T S */
     /* main */
-    preloader.classList.add("end");
     let mainMenuWindow = document.getElementById("main-menu-window");
     let mainMenu = document.getElementById("main-menu");
     let menuIcon = document.getElementById("menu-icon");
