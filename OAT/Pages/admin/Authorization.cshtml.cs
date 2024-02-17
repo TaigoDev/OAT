@@ -2,18 +2,18 @@
 
 namespace OAT.Pages
 {
-    [NoCache]
-    public class AuthorizationModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	[NoCache]
+	public class AuthorizationModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public AuthorizationModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public AuthorizationModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
-        }
-    }
+		public void OnGet()
+		{
+		}
+	}
 }

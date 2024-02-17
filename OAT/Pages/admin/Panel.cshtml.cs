@@ -3,18 +3,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages
 {
-    [NoCache, Authorize]
-    public class PanelModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	[NoCache, Authorize]
+	public class PanelModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public PanelModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public PanelModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
-        }
-    }
+		public void OnGet()
+		{
+		}
+	}
 }

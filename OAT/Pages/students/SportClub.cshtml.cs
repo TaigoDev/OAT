@@ -2,18 +2,18 @@
 
 namespace OAT.Pages.students
 {
-    public class SportClubModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class SportClubModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public SportClubModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public SportClubModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

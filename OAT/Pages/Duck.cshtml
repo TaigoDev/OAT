@@ -1,20 +1,20 @@
 ﻿@page
 @model DuckModel
 @{
-    ViewData["Title"] = "Ошибка";
+	ViewData["Title"] = "Ошибка";
 }
 
 <link rel="stylesheet" href="~/css/duck.css" asp-append-version="true">
 
 <section class="centered">
-    <h2 class="section-title">
-        О НЕТ, ОШИБКА!
-    </h2>
-    <h3 class="section-subtitle sorry">
-        Утка украла страницу! Поймайте утку и сообщите нам об ошибке
-    </h3>
+	<h2 class="section-title">
+		О НЕТ, ОШИБКА!
+	</h2>
+	<h3 class="section-subtitle sorry">
+		Утка украла страницу! Поймайте утку и сообщите нам об ошибке
+	</h3>
 
-    <a href='@Url.Page("/feedback/QuestionAnswer")' class="duck-container">
-        <img src="~/images/basic/duck.svg" class="duck" alt="утка">
-    </a>
+	<a href='@Url.Page("/feedback/QuestionAnswer")' class="duck-container">
+		<img src="~/images/basic/duck.svg" class="duck" alt="утка">
+	</a>
 </section>

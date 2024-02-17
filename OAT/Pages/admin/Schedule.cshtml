@@ -3,84 +3,84 @@
 @using OAT.UtilsHelper;
 @model OAT.Pages.admin.ScheduleModel
 @{
-    ViewData["Title"] = "Обновить расписание";
-    Layout = "_Panel";
+	ViewData["Title"] = "Обновить расписание";
+	Layout = "_Panel";
 }
 <section class="container">
 
-    @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_schedule_campus_1))
-    {
-        <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-            <label for="news" class="panel-form-title">
-                ул. Ленина, 24
-            </label>
-            <div class="input-box">
-                <label for="images">
-                    Файл
-                </label>
-                <input type="file" name="postedFiles" id="files-ul_lenina_24" name="files" accept=".xml">
-            </div>
-            <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('b1', 'files-ul_lenina_24');return false" multiple>
-                Обновить
-            </button>
-        </form>
-    }
+	@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_schedule_campus_1))
+	{
+		<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+			<label for="news" class="panel-form-title">
+				ул. Ленина, 24
+			</label>
+			<div class="input-box">
+				<label for="images">
+					Файл
+				</label>
+				<input type="file" name="postedFiles" id="files-ul_lenina_24" name="files" accept=".xml">
+			</div>
+			<button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('b1', 'files-ul_lenina_24');return false" multiple>
+				Обновить
+			</button>
+		</form>
+	}
 
-    @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_schedule_campus_2))
-    {
-        <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-            <label for="news" class="panel-form-title">
-                Б. Хмельницкого, 281а
-            </label>
-            <div class="input-box">
-                <label for="images">
-                    Файл
-                </label>
-                <input type="file" name="postedFiles" id="files-ul_b_khmelnickogo_281a" name="files" accept=".xml">
-            </div>
-            <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('b2', 'files-ul_b_khmelnickogo_281a');return false" multiple>
-                Обновить
-            </button>
+	@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_schedule_campus_2))
+	{
+		<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+			<label for="news" class="panel-form-title">
+				Б. Хмельницкого, 281а
+			</label>
+			<div class="input-box">
+				<label for="images">
+					Файл
+				</label>
+				<input type="file" name="postedFiles" id="files-ul_b_khmelnickogo_281a" name="files" accept=".xml">
+			</div>
+			<button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('b2', 'files-ul_b_khmelnickogo_281a');return false" multiple>
+				Обновить
+			</button>
 
-        </form>
-    }
-    @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_schedule_campus_3))
-    {
-        <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-            <label for="news" class="panel-form-title">
-                пр. Космический, 14а
-            </label>
-            <div class="input-box">
-                <label for="images">
-                    Файл
-                </label>
-                <input type="file" name="postedFiles" id="files-pr_kosmicheskij_14a" name="files" accept=".xml">
-            </div>
-            <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('b3', 'files-pr_kosmicheskij_14a');return false" multiple>
-                Обновить
-            </button>
+		</form>
+	}
+	@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_schedule_campus_3))
+	{
+		<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+			<label for="news" class="panel-form-title">
+				пр. Космический, 14а
+			</label>
+			<div class="input-box">
+				<label for="images">
+					Файл
+				</label>
+				<input type="file" name="postedFiles" id="files-pr_kosmicheskij_14a" name="files" accept=".xml">
+			</div>
+			<button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('b3', 'files-pr_kosmicheskij_14a');return false" multiple>
+				Обновить
+			</button>
 
-        </form>
-    }
+		</form>
+	}
 
-    @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_schedule_campus_4))
-    {
-        <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-            <label for="news" class="panel-form-title">
-                ул. Волховстроя, 5
-            </label>
-            <div class="input-box">
-                <label for="images">
-                    Файл
-                </label>
-                <input type="file" name="postedFiles" id="files-ul_volkhovstroya_5" name="files" accept=".xml">
-            </div>
-            <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('b4', 'files-ul_volkhovstroya_5');return false" multiple>
-                Обновить
-            </button>
+	@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_schedule_campus_4))
+	{
+		<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+			<label for="news" class="panel-form-title">
+				ул. Волховстроя, 5
+			</label>
+			<div class="input-box">
+				<label for="images">
+					Файл
+				</label>
+				<input type="file" name="postedFiles" id="files-ul_volkhovstroya_5" name="files" accept=".xml">
+			</div>
+			<button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSchedule('b4', 'files-ul_volkhovstroya_5');return false" multiple>
+				Обновить
+			</button>
 
-        </form>
-    }
+		</form>
+	}
 </section>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="/js/panel.js" charset="utf-8"></script>

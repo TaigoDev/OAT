@@ -1,108 +1,108 @@
 ﻿@page
 @model AdmissionRulesModel
 @{
-    ViewData["Title"] = "Правила приёма";
+	ViewData["Title"] = "Правила приёма";
 }
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Правила приёма
-        </h2>
-        <ul class="documents-list little">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/admissionRules/pravilaPriema.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Правила приёма в 2023/2024 учебном году
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/admissionRules/obshejitie2023.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Общежитие 2023
-                </div>
-            </li>
-        </ul>
+	<section class="content">
+		<h2 class="section-title">
+			Правила приёма
+		</h2>
+		<ul class="documents-list little">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/admissionRules/pravilaPriema.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Правила приёма в 2023/2024 учебном году
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/admissionRules/obshejitie2023.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Общежитие 2023
+				</div>
+			</li>
+		</ul>
 
 
-        <h3 id="have-question" class="section-subtitle">
-            По вопросам обращаться
-        </h3>
-        <div class="question-contact">
-            <div class="question-contact-head">
-                <a class="question-contact-head-img-container" href="">
-                    <img src="~/images/people/Савин Антон Викторович.png">
-                </a>
-                <p class="question-contact-head-fio">Савин<br>Антон Викторович</p>
-                <p class="question-contact-head-post">
-                    Заместитель директора, курирующий приемную кампанию
-                </p>
-            </div>
-            <div class="question-contact-body">
-                <p class="question-contact-body-address">г. Омск, ул. Ленина, 24. Каб. 227</p>
-                <p class="question-contact-body-phone">+7(3812)31-73-55</p>
-                <p class="question-contact-body-time">ПН-ПТ 9:00-18:00</p>
-            </div>
-        </div>
-    </section>
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Абитуриентам
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("SelectionCommittee")'>
-                        Приемная комиссия
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("SpecialtiesAndProfessions")'>
-                        Специальности и профессии
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("TrainingCourses")'>
-                        Подготовительные курсы
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("IndividualTraining")'>
-                        Индивидуальное обучение
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("AdmissionRules")'>
-                        Правила приема
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("QualificationIncrease")'>
-                        Повышение квалификации
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("DLinkCisco")'>
-                        Сертификация D-link, Cisco
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("SpecialtiesPartTimeEvening")'>
-                        Специальности очно-заочного (вечернего) отделения
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("CareerGuidanceEvents")'>
-                        Профориентационные мероприятия
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+		<h3 id="have-question" class="section-subtitle">
+			По вопросам обращаться
+		</h3>
+		<div class="question-contact">
+			<div class="question-contact-head">
+				<a class="question-contact-head-img-container" href="">
+					<img src="~/images/people/Савин Антон Викторович.png">
+				</a>
+				<p class="question-contact-head-fio">Савин<br>Антон Викторович</p>
+				<p class="question-contact-head-post">
+					Заместитель директора, курирующий приемную кампанию
+				</p>
+			</div>
+			<div class="question-contact-body">
+				<p class="question-contact-body-address">г. Омск, ул. Ленина, 24. Каб. 227</p>
+				<p class="question-contact-body-phone">+7(3812)31-73-55</p>
+				<p class="question-contact-body-time">ПН-ПТ 9:00-18:00</p>
+			</div>
+		</div>
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Абитуриентам
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("SelectionCommittee")'>
+						Приемная комиссия
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("SpecialtiesAndProfessions")'>
+						Специальности и профессии
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("TrainingCourses")'>
+						Подготовительные курсы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("IndividualTraining")'>
+						Индивидуальное обучение
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("AdmissionRules")'>
+						Правила приема
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("QualificationIncrease")'>
+						Повышение квалификации
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("DLinkCisco")'>
+						Сертификация D-link, Cisco
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("SpecialtiesPartTimeEvening")'>
+						Специальности очно-заочного (вечернего) отделения
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("CareerGuidanceEvents")'>
+						Профориентационные мероприятия
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

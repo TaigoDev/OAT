@@ -1,74 +1,74 @@
 ﻿@page
 @model GIAModel
 @{
-    ViewData["Title"] = "Расписание ГИА";
+	ViewData["Title"] = "Расписание ГИА";
 }
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Расписание ГИА
-        </h2>
+	<section class="content">
+		<h2 class="section-title">
+			Расписание ГИА
+		</h2>
 
-        <ul class="documents-list little">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/GIA/gia.xlsx">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    расписание государственной итоговой аттестации БПОУ омавиат
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/timetable/GIA/konsultacii.xls">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    консультации к ДП
-                </div>
-            </li>
-        </ul>
-        
-    </section>
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Расписание
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Classes")'>
-                        Расписание занятий
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("ClassesChanges")'>
-                        Изменения в расписании занятий
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Practice")'>
-                        Расписание практик
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("PODPO")'>
-                        Расписание ПО и ДПО
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Session")'>
-                        Расписание сессий
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("GIA")'>
-                        Расписание ГИА
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+		<ul class="documents-list little">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/timetable/GIA/gia.xlsx">
+					</a>
+				</div>
+				<div class="document-item-body">
+					расписание государственной итоговой аттестации БПОУ омавиат
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/timetable/GIA/konsultacii.xls">
+					</a>
+				</div>
+				<div class="document-item-body">
+					консультации к ДП
+				</div>
+			</li>
+		</ul>
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Расписание
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("Classes")'>
+						Расписание занятий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("ClassesChanges")'>
+						Изменения в расписании занятий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Practice")'>
+						Расписание практик
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("PODPO")'>
+						Расписание ПО и ДПО
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Session")'>
+						Расписание сессий
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("GIA")'>
+						Расписание ГИА
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

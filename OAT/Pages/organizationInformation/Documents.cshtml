@@ -1,456 +1,456 @@
 ﻿@page
 @model DocumentsModel
 @{
-    ViewData["Title"] = "Документы";
+	ViewData["Title"] = "Документы";
 }
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Документы
-        </h2>
+	<section class="content">
+		<h2 class="section-title">
+			Документы
+		</h2>
 
-        <ul class="page-navigation">
-            <li>
-                <a href="#pravo">
-                    Правоустанавливающие
-                </a>
-            </li>
-            <li>
-                <a href="#trud">
-                    Регулирующие трудовые отношения
-                </a>
-            </li>
-            <li>
-                <a href="#acreditacia">
-                    Свидетельства о государственной аккредитации
-                </a>
-            </li>
-            <li>
-                <a href="#samoobsledovanie">
-                    Отчеты о результатах самообследования
-                </a>
-            </li>
-            <li>
-                <a href="#local">
-                    Локальные нормативные акты
-                </a>
-            </li>
-        </ul>
+		<ul class="page-navigation">
+			<li>
+				<a href="#pravo">
+					Правоустанавливающие
+				</a>
+			</li>
+			<li>
+				<a href="#trud">
+					Регулирующие трудовые отношения
+				</a>
+			</li>
+			<li>
+				<a href="#acreditacia">
+					Свидетельства о государственной аккредитации
+				</a>
+			</li>
+			<li>
+				<a href="#samoobsledovanie">
+					Отчеты о результатах самообследования
+				</a>
+			</li>
+			<li>
+				<a href="#local">
+					Локальные нормативные акты
+				</a>
+			</li>
+		</ul>
 
-        <div class="accordions-list">
-            <div id="pravo" class="accordion">
-                <div class="accordion-head">
-                    Правоустанавливающие
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/Выписка лицензия 2024.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Выписка из реестра лицензий
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/ustavObrazOrg.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Устав образовательной организации
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2022.tiff">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Изменения в устав 2022
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2021.tiff">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Изменения в устав 2021
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2020.tiff">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Изменения в устав 2020
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2020-0.tiff">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Изменения в устав 2020.1
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2019.tiff">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Изменения в устав 2019
-                            </div>
-                        </li>
-                        <!--
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2015.tiff">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Изменения в устав 2015
-                            </div>
-                        </li>
-                        -->
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/pravilaVnutrRasp.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Правила внутреннего распорядка для обучающихся БПОУ «Омавиат»
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/collectivDogovor.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Коллективный договор
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/programaRazvitia.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Программа развития БПОУ "Омавиат" на 2020 - 2024 годы
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/programaModernizacii.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Программа модернизации БПОУ «Омавиат»
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="trud" class="accordion">
-                <div class="accordion-head">
-                    Регулирующие трудовые отношения
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list little">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieOConflicte.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Положение о конфликте интересов работников
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/normiProfEtiki.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Нормы профессиональной этики педагогических работников
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/specialnaiaOcenkaTruda.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Специальная оценка условий труда
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="acreditacia" class="accordion">
-                <div class="accordion-head">
-                    Свидетельства о государственной аккредитации
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list little">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/svidetelstvoAkredit2022.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Свидетельство о государственной аккредитации, 2022 год (СПО)
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/svidetelstvoAkredit2019.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Свидетельство о государственной аккредитации, 2019 год (СПО)
-                            </div>
-                        </li>
-                        <!--
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/svidetelstvoAkredit2015.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Свидетельство о государственной аккредитации, 2015 год (СОО)
-                            </div>
-                        </li>
-                        -->
-                    </ul>
-                </div>
-            </div>
-            <div id="samoobsledovanie" class="accordion">
-                <div class="accordion-head">
-                    Отчеты о результатах самообследования
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list little">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/otchetSamoobs2023.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Отчет о результатах самообследования на 1 апреля 2023 года
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/otchetSamoobs2022.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Отчет о результатах самообследования на 1 апреля 2022 года
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/otchetSamoobs2021.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Отчет о результатах самообследования на 1 апреля 2021 года
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="local" class="accordion">
-                <div class="accordion-head">
-                    Локальные нормативные акты
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/pravilaPriema2023-2024.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Правила приёма в 2023/2024 учебном году в бюджетное профессиональное образовательное учреждение Омской области "Омский авиационный колледж имени Н.Е. Жуковского"
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieOPoradkePriema.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Положение о порядке приема, перевода, отчисления студентов, восстановления в число студентов, перехода студентов с платного обучения на бесплатное, предоставления академического отпуска
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/poradokOformleniaVozniknivenia.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Порядок оформления возникновения, приостановления и прекращения отношений между образовательной организацией и обучающимися
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieORegime.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Положение о режиме занятий и расписании
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/Положение ГИА Омавиат 2024.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Положение о Государственной итоговой аттестации
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieOTekuchControle.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Положение о текущем контроле и промежуточной аттестации обучающихся БПОУ «Омавиат»
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieOSistemeVUK.pdf">
-                                </a>
-                            </div>
-                            <div class="document-item-body">
-                                Положение о системе ВУК
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+		<div class="accordions-list">
+			<div id="pravo" class="accordion">
+				<div class="accordion-head">
+					Правоустанавливающие
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/Выписка лицензия 2024.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Выписка из реестра лицензий
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/ustavObrazOrg.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Устав образовательной организации
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2022.tiff">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Изменения в устав 2022
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2021.tiff">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Изменения в устав 2021
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2020.tiff">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Изменения в устав 2020
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2020-0.tiff">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Изменения в устав 2020.1
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2019.tiff">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Изменения в устав 2019
+							</div>
+						</li>
+						<!--
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/izmeneniaVUstav2015.tiff">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Изменения в устав 2015
+							</div>
+						</li>
+						-->
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/pravilaVnutrRasp.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Правила внутреннего распорядка для обучающихся БПОУ «Омавиат»
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/collectivDogovor.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Коллективный договор
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/programaRazvitia.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Программа развития БПОУ "Омавиат" на 2020 - 2024 годы
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/programaModernizacii.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Программа модернизации БПОУ «Омавиат»
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="trud" class="accordion">
+				<div class="accordion-head">
+					Регулирующие трудовые отношения
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list little">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieOConflicte.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Положение о конфликте интересов работников
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/normiProfEtiki.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Нормы профессиональной этики педагогических работников
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/specialnaiaOcenkaTruda.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Специальная оценка условий труда
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="acreditacia" class="accordion">
+				<div class="accordion-head">
+					Свидетельства о государственной аккредитации
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list little">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/svidetelstvoAkredit2022.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Свидетельство о государственной аккредитации, 2022 год (СПО)
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/svidetelstvoAkredit2019.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Свидетельство о государственной аккредитации, 2019 год (СПО)
+							</div>
+						</li>
+						<!--
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/svidetelstvoAkredit2015.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Свидетельство о государственной аккредитации, 2015 год (СОО)
+							</div>
+						</li>
+						-->
+					</ul>
+				</div>
+			</div>
+			<div id="samoobsledovanie" class="accordion">
+				<div class="accordion-head">
+					Отчеты о результатах самообследования
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list little">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/otchetSamoobs2023.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Отчет о результатах самообследования на 1 апреля 2023 года
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/otchetSamoobs2022.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Отчет о результатах самообследования на 1 апреля 2022 года
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/otchetSamoobs2021.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Отчет о результатах самообследования на 1 апреля 2021 года
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="local" class="accordion">
+				<div class="accordion-head">
+					Локальные нормативные акты
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/pravilaPriema2023-2024.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Правила приёма в 2023/2024 учебном году в бюджетное профессиональное образовательное учреждение Омской области "Омский авиационный колледж имени Н.Е. Жуковского"
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieOPoradkePriema.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Положение о порядке приема, перевода, отчисления студентов, восстановления в число студентов, перехода студентов с платного обучения на бесплатное, предоставления академического отпуска
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/poradokOformleniaVozniknivenia.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Порядок оформления возникновения, приостановления и прекращения отношений между образовательной организацией и обучающимися
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieORegime.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Положение о режиме занятий и расписании
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/Положение ГИА Омавиат 2024.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Положение о Государственной итоговой аттестации
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieOTekuchControle.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Положение о текущем контроле и промежуточной аттестации обучающихся БПОУ «Омавиат»
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/organizationInformation/documentsPage/pologenieOSistemeVUK.pdf">
+								</a>
+							</div>
+							<div class="document-item-body">
+								Положение о системе ВУК
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
-        <p>
-            <b>
-                Предписания органов, осуществляющих контроль (надзор) в сфере образования, а также отчеты об исполнении предписаний <i>отсутствуют.</i>
-            </b>
-        </p>
+		<p>
+			<b>
+				Предписания органов, осуществляющих контроль (надзор) в сфере образования, а также отчеты об исполнении предписаний <i>отсутствуют.</i>
+			</b>
+		</p>
 
-    </section>
-    <aside id="sidebar" class="sidebar long">
-        <h3 class="sidebar-title">
-            Сведения об образовательной организации
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("CommonIntelligence")'>
-                        Основные сведения
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Structure")'>
-                        Структура и органы управления образовательной организацией
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("Documents")'>
-                        Документы
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Education")'>
-                        Образование
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("EducationalStandards")'>
-                        Образовательные стандарты
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("EducationalProcess")'>
-                        Организация воспитательного процесса
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("ManagementPedagogicalStaff")'>
-                        Руководство. Педагогический (научно-педагогический) состав
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Logistics")'>
-                        Материально-техническое обеспечение и оснащенность образовательного процесса
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("PaidEducationalServices")'>
-                        Платные образовательные услуги
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("FinancialEconomicActivity")'>
-                        Финансово-хозяйственная деятельность
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Jobs")'>
-                        Вакантные места для приема
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Vacancies")'>
-                        Вакансии
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("AccessibleEnvironment")'>
-                        Доступная среда
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("InternationalCooperation")'>
-                        Международное сотрудничество
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("StudentSupport")'>
-                        Стипендии и меры поддержки обучающихся
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Terrorism")'>
-                        Противодействие экстремизму и терроризму
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Corruption")'>
-                        Противодействие коррупции
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Library")'>
-                        Библиотека
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("UPK")'>
-                        Учебно-производственный комплекс
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+	</section>
+	<aside id="sidebar" class="sidebar long">
+		<h3 class="sidebar-title">
+			Сведения об образовательной организации
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("CommonIntelligence")'>
+						Основные сведения
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Structure")'>
+						Структура и органы управления образовательной организацией
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("Documents")'>
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Education")'>
+						Образование
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("EducationalStandards")'>
+						Образовательные стандарты
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("EducationalProcess")'>
+						Организация воспитательного процесса
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("ManagementPedagogicalStaff")'>
+						Руководство. Педагогический (научно-педагогический) состав
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Logistics")'>
+						Материально-техническое обеспечение и оснащенность образовательного процесса
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("PaidEducationalServices")'>
+						Платные образовательные услуги
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("FinancialEconomicActivity")'>
+						Финансово-хозяйственная деятельность
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Jobs")'>
+						Вакантные места для приема
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Vacancies")'>
+						Вакансии
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("AccessibleEnvironment")'>
+						Доступная среда
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("InternationalCooperation")'>
+						Международное сотрудничество
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("StudentSupport")'>
+						Стипендии и меры поддержки обучающихся
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Terrorism")'>
+						Противодействие экстремизму и терроризму
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Corruption")'>
+						Противодействие коррупции
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Library")'>
+						Библиотека
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("UPK")'>
+						Учебно-производственный комплекс
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

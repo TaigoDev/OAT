@@ -1,139 +1,139 @@
 ﻿@page
 @model PracticeModel
 @{
-    ViewData["Title"] = "Расписание практик";
+	ViewData["Title"] = "Расписание практик";
 }
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Расписание практик
-        </h2>
+	<section class="content">
+		<h2 class="section-title">
+			Расписание практик
+		</h2>
 
-        <h3 class="section-subtitle">
-            Расписание практик ул. Ленина, 24
-        </h3>
-        @if (Model.b1.Count() is not 0)
-        {
-            <ul class="documents-list">
+		<h3 class="section-subtitle">
+			Расписание практик ул. Ленина, 24
+		</h3>
+		@if (Model.b1.Count() is not 0)
+		{
+			<ul class="documents-list">
 
-                @foreach (var file in Model.b1)
-                {
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="/@file.url">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            @file.Filename
-                        </div>
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <p>
-                <b>
-                    ОТСУТСТВУЕТ
-                </b>
-            </p>
-        }
-
-
-        <h3 class="section-subtitle">
-            Расписание практик ул. Б. Хмельницкого, 281а
-        </h3>
-        <ul class="documents-list">
-            @foreach (var file in Model.b2)
-            {
-                <li class="document-item">
-                    <div class="document-item-head">
-                        <a target="_blank" href="/@file.url">
-                        </a>
-                    </div>
-                    <div class="document-item-body">
-                        @file.Filename
-                    </div>
-                </li>
-            }
-        </ul>
+				@foreach (var file in Model.b1)
+				{
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="/@file.url">
+							</a>
+						</div>
+						<div class="document-item-body">
+							@file.Filename
+						</div>
+					</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p>
+				<b>
+					ОТСУТСТВУЕТ
+				</b>
+			</p>
+		}
 
 
-        <h3 class="section-subtitle">
-            Расписание практик пр. Космический, 14а
-        </h3>
-        <ul class="documents-list">
-            @foreach (var file in Model.b3)
-            {
-                <li class="document-item">
-                    <div class="document-item-head">
-                        <a target="_blank" href="/@file.url">
-                        </a>
-                    </div>
-                    <div class="document-item-body">
-                        @file.Filename
-                    </div>
-                </li>
-            }
-        </ul>
+		<h3 class="section-subtitle">
+			Расписание практик ул. Б. Хмельницкого, 281а
+		</h3>
+		<ul class="documents-list">
+			@foreach (var file in Model.b2)
+			{
+				<li class="document-item">
+					<div class="document-item-head">
+						<a target="_blank" href="/@file.url">
+						</a>
+					</div>
+					<div class="document-item-body">
+						@file.Filename
+					</div>
+				</li>
+			}
+		</ul>
 
 
-        <h3 class="section-subtitle">
-            Расписание практик ул. Волховстроя, 5
-        </h3>
-        <ul class="documents-list">
-            @foreach (var file in Model.b4)
-            {
-                <li class="document-item">
-                    <div class="document-item-head">
-                        <a target="_blank" href="/@file.url">
-                        </a>
-                    </div>
-                    <div class="document-item-body">
-                        @file.Filename
-                    </div>
-                </li>
-            }
-        </ul>
-    </section>
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Расписание
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Classes")'>
-                        Расписание занятий
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("ClassesChanges")'>
-                        Изменения в расписании занятий
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("Practice")'>
-                        Расписание практик
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("PODPO")'>
-                        Расписание ПО и ДПО
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Session")'>
-                        Расписание сессий
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("GIA")'>
-                        Расписание ГИА
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+		<h3 class="section-subtitle">
+			Расписание практик пр. Космический, 14а
+		</h3>
+		<ul class="documents-list">
+			@foreach (var file in Model.b3)
+			{
+				<li class="document-item">
+					<div class="document-item-head">
+						<a target="_blank" href="/@file.url">
+						</a>
+					</div>
+					<div class="document-item-body">
+						@file.Filename
+					</div>
+				</li>
+			}
+		</ul>
+
+
+		<h3 class="section-subtitle">
+			Расписание практик ул. Волховстроя, 5
+		</h3>
+		<ul class="documents-list">
+			@foreach (var file in Model.b4)
+			{
+				<li class="document-item">
+					<div class="document-item-head">
+						<a target="_blank" href="/@file.url">
+						</a>
+					</div>
+					<div class="document-item-body">
+						@file.Filename
+					</div>
+				</li>
+			}
+		</ul>
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Расписание
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("Classes")'>
+						Расписание занятий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("ClassesChanges")'>
+						Изменения в расписании занятий
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("Practice")'>
+						Расписание практик
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("PODPO")'>
+						Расписание ПО и ДПО
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Session")'>
+						Расписание сессий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("GIA")'>
+						Расписание ГИА
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

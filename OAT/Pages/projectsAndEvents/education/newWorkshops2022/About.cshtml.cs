@@ -2,18 +2,18 @@
 
 namespace OAT.Pages.projectsAndEvents.education.newWorkshops2022
 {
-    public class AboutModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class AboutModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public AboutModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public AboutModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

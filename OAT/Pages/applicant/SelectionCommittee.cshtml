@@ -1,432 +1,432 @@
 ﻿@page
 @model SelectionCommitteeModel
 @{
-    ViewData["Title"] = "Приёмная комиссия";
+	ViewData["Title"] = "Приёмная комиссия";
 }
 
 <div class="container content-page">
-    <section class="content">
-        <a id="plane" class="plane" href="#sidebar"></a>
-        <h2 class="section-title">
-            Приёмная комиссия
-        </h2>
+	<section class="content">
+		<a id="plane" class="plane" href="#sidebar"></a>
+		<h2 class="section-title">
+			Приёмная комиссия
+		</h2>
 
-        <ul class="page-navigation">
-            <li>
-                <a href="#reception">
-                    Поступить к нам
-                </a>
-            </li>
-            <li>
-                <a href="#dates">
-                    Важные даты
-                </a>
-            </li>
-            <li>
-                <a href="#rating">
-                    Посмотреть рейтинги
-                </a>
-            </li>
-            <li>
-                <a href="#feedback">
-                    Связаться с нами
-                </a>
-            </li>
-            <li>
-                <a href="#documents">
-                    Документы и шаблоны
-                </a>
-            </li>
-            <li>
-                <a href="#have-question">
-                    Обратиться за помощью
-                </a>
-            </li>
-        </ul>
+		<ul class="page-navigation">
+			<li>
+				<a href="#reception">
+					Поступить к нам
+				</a>
+			</li>
+			<li>
+				<a href="#dates">
+					Важные даты
+				</a>
+			</li>
+			<li>
+				<a href="#rating">
+					Посмотреть рейтинги
+				</a>
+			</li>
+			<li>
+				<a href="#feedback">
+					Связаться с нами
+				</a>
+			</li>
+			<li>
+				<a href="#documents">
+					Документы и шаблоны
+				</a>
+			</li>
+			<li>
+				<a href="#have-question">
+					Обратиться за помощью
+				</a>
+			</li>
+		</ul>
 
-        <h3 id="reception" class="section-subtitle">
-            Приемная кампания 2023 - Списки зачисленных с указанием приказов на 18.08.23
-        </h3>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/spisok.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Списки зачисленных с указанием приказов на 18.08.23
-                </div>
-            </li>
-        </ul>
-
-
-        <h3 id="reception" class="section-subtitle">
-            Прием на обучение
-        </h3>
-        <p>
-            Прием на обучение по образовательным программам среднего профессионального образования за счет бюджетных средств бюджета Омской области осуществляется на общедоступной основе.
-        </p>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/planNabora2023.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    План набора 2023
-                </div>
-            </li>
-        </ul>
-        <h4 class="section-subtitle-small">
-            Документы, необходимые при поступлении (оригинал + копия)
-        </h4>
-        <ul class="customized">
-            <li>
-                Документ, удостоверяющий личность (паспорт)
-            </li>
-            <li>
-                Документ об образовании и (или) квалификации (аттестат, диплом)
-            </li>
-            <li>
-                СНИЛС
-            </li>
-            <li>
-                4 фотографии (формат 3х4)
-            </li>
-        </ul>
-        <h4 class="section-subtitle-small">
-            Подача документов в электронной форме
-        </h4>
-        <p>
-            <b>Возможность подачи поступающим документов в электронной форме</b> в соответствии с ФЗ «Об электронной подписи» от 06.04.2011 № 63-ФЗ, ФЗ «Об информации, информационных технологиях и о защите информации» от 27.07.2006 № 149-ФЗ, ФЗ «О связи» от 07.07.2003 № 126-ФЗ в Колледже <b>предусмотрена, при наличии у абитуриента электронной цифровой подписи.</b>
-        </p>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/vozmognostiElektronaiaForma.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Приём заявлений и необходимых документов в электронной форме
-                </div>
-            </li>
-        </ul>
-        <h4 class="section-subtitle-small">
-            Вступительные испытания
-        </h4>
-        <p>
-            Прием в колледж по всем образовательным программам, формам обучения проводится <b>БЕЗ вступительных испытаний.</b>
-        </p>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/informaciaObOtsutstviiVstupitelnixIspitani.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Отсутствие вступительных испытаний
-                </div>
-            </li>
-        </ul>
-        <h4 class="section-subtitle-small">
-            Прохождение абитуриентами медицинских осмотров
-        </h4>
-        <p>
-            После зачисления в число студентов колледжа до начала занятий поступающие на все специальности и профессии обязаны предоставить медицинскую справку о допуске до занятий физической культурой (основная медицинская группа) или (подготовительная и специальная медицинская группа), и при необходимости (для занятий в спортивных секциях).
-        </p>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/informaciaONeobxodimostiMedosmotra.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Информация о прохождении медицинского осмотра (обследования)
-                </div>
-            </li>
-        </ul>
-        <h4 class="section-subtitle-small">
-            Условия приема на обучение по договорам об оказании платных образовательных услуг
-        </h4>
-        <p>
-            Прием лиц на обучение за счет средств физических и (или) юридических лиц осуществляется по Правилам приёма в бюджетное профессиональное образовательное учреждение Омской области «Омский авиационный колледж имени Н.Е. Жуковского», утвержденным 17.02.2023 г. С поступающими данной категории заключается двухсторонний или трехсторонний договор об обучении по образовательным программам среднего профессионального образования. Формы договоров, Положение об оказании платных образовательных услуг и прочие документы размещены в разделе «Платные образовательные услуги»
-        </p>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/usloviaPriema.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Условия приёма на обучение по договорам об оказании платных образовательных услуг
-                </div>
-            </li>
-        </ul>
+		<h3 id="reception" class="section-subtitle">
+			Приемная кампания 2023 - Списки зачисленных с указанием приказов на 18.08.23
+		</h3>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/spisok.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Списки зачисленных с указанием приказов на 18.08.23
+				</div>
+			</li>
+		</ul>
 
 
-        <h3 id="dates" class="section-subtitle">
-            Важные даты для поступающих
-        </h3>
-        <ol class="customized">
-            <li>
-                <b>с 20 июня по 15 августа</b> на 2023-2024 учебный год осуществляется <b>прием документов</b>
-                <br>
-                <b>При наличии бюджетных мест</b> приём документов продолжается <b>до 25 ноября.</b>
-            </li>
-            <li>
-                <b>15 августа</b>
-                – последний день приема заявлений и оригиналов документов об образовании и (или) документов об образовании и о квалификации
-            </li>
-            <li>
-                <b>15 августа</b> Приёмная комиссия работает с 8:00 до 14:00
-            </li>
-        </ol>
+		<h3 id="reception" class="section-subtitle">
+			Прием на обучение
+		</h3>
+		<p>
+			Прием на обучение по образовательным программам среднего профессионального образования за счет бюджетных средств бюджета Омской области осуществляется на общедоступной основе.
+		</p>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/planNabora2023.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					План набора 2023
+				</div>
+			</li>
+		</ul>
+		<h4 class="section-subtitle-small">
+			Документы, необходимые при поступлении (оригинал + копия)
+		</h4>
+		<ul class="customized">
+			<li>
+				Документ, удостоверяющий личность (паспорт)
+			</li>
+			<li>
+				Документ об образовании и (или) квалификации (аттестат, диплом)
+			</li>
+			<li>
+				СНИЛС
+			</li>
+			<li>
+				4 фотографии (формат 3х4)
+			</li>
+		</ul>
+		<h4 class="section-subtitle-small">
+			Подача документов в электронной форме
+		</h4>
+		<p>
+			<b>Возможность подачи поступающим документов в электронной форме</b> в соответствии с ФЗ «Об электронной подписи» от 06.04.2011 № 63-ФЗ, ФЗ «Об информации, информационных технологиях и о защите информации» от 27.07.2006 № 149-ФЗ, ФЗ «О связи» от 07.07.2003 № 126-ФЗ в Колледже <b>предусмотрена, при наличии у абитуриента электронной цифровой подписи.</b>
+		</p>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/vozmognostiElektronaiaForma.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Приём заявлений и необходимых документов в электронной форме
+				</div>
+			</li>
+		</ul>
+		<h4 class="section-subtitle-small">
+			Вступительные испытания
+		</h4>
+		<p>
+			Прием в колледж по всем образовательным программам, формам обучения проводится <b>БЕЗ вступительных испытаний.</b>
+		</p>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/informaciaObOtsutstviiVstupitelnixIspitani.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Отсутствие вступительных испытаний
+				</div>
+			</li>
+		</ul>
+		<h4 class="section-subtitle-small">
+			Прохождение абитуриентами медицинских осмотров
+		</h4>
+		<p>
+			После зачисления в число студентов колледжа до начала занятий поступающие на все специальности и профессии обязаны предоставить медицинскую справку о допуске до занятий физической культурой (основная медицинская группа) или (подготовительная и специальная медицинская группа), и при необходимости (для занятий в спортивных секциях).
+		</p>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/informaciaONeobxodimostiMedosmotra.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Информация о прохождении медицинского осмотра (обследования)
+				</div>
+			</li>
+		</ul>
+		<h4 class="section-subtitle-small">
+			Условия приема на обучение по договорам об оказании платных образовательных услуг
+		</h4>
+		<p>
+			Прием лиц на обучение за счет средств физических и (или) юридических лиц осуществляется по Правилам приёма в бюджетное профессиональное образовательное учреждение Омской области «Омский авиационный колледж имени Н.Е. Жуковского», утвержденным 17.02.2023 г. С поступающими данной категории заключается двухсторонний или трехсторонний договор об обучении по образовательным программам среднего профессионального образования. Формы договоров, Положение об оказании платных образовательных услуг и прочие документы размещены в разделе «Платные образовательные услуги»
+		</p>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/usloviaPriema.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Условия приёма на обучение по договорам об оказании платных образовательных услуг
+				</div>
+			</li>
+		</ul>
 
 
-        <h3 id="rating" class="section-subtitle">
-            Рейтинги
-        </h3>
-        <ul class="customized">
-            <li>
-                <a href="https://rate.oat.ru/">Свой рейтинг среди поступающих</a> (данные появляются не сразу после подачи заявления, а после обработки в системе)
-            </li>
-            <li>
-                <a href="https://rate.oat.ru/stat">
-                    Общая статистика
-                </a>
-            </li>
-        </ul>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/proxodnieBalli2022.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Проходные баллы в 2022 году
-                </div>
-            </li>
-        </ul>
+		<h3 id="dates" class="section-subtitle">
+			Важные даты для поступающих
+		</h3>
+		<ol class="customized">
+			<li>
+				<b>с 20 июня по 15 августа</b> на 2023-2024 учебный год осуществляется <b>прием документов</b>
+				<br>
+				<b>При наличии бюджетных мест</b> приём документов продолжается <b>до 25 ноября.</b>
+			</li>
+			<li>
+				<b>15 августа</b>
+				– последний день приема заявлений и оригиналов документов об образовании и (или) документов об образовании и о квалификации
+			</li>
+			<li>
+				<b>15 августа</b> Приёмная комиссия работает с 8:00 до 14:00
+			</li>
+		</ol>
 
 
-        <h3 id="feedback" class="section-subtitle">
-            Связь с нами
-        </h3>
-        <h4 class="section-subtitle-small">
-            Режим работы приемной комиссии с 20.06.2023г. до 31.08.2023г.
-        </h4>
-        <p>
-            Пн — Пт: 8.00 - 18.00
-            <br>
-            Сб: 9.00 - 15.00
-            <br>
-            Вс - выходной
-        </p>
-        <h4 class="section-subtitle-small">
-            Контактная информация
-        </h4>
-        <p>
-            <b>Адрес:</b> г. Омск, ул. Ленина, д. 24
-            <br>
-            <b>Телефон:</b> (3812) 31-16-39
-            <br>
-            <b>Почта:</b> oat@oat.ru
-        </p>
+		<h3 id="rating" class="section-subtitle">
+			Рейтинги
+		</h3>
+		<ul class="customized">
+			<li>
+				<a href="https://rate.oat.ru/">Свой рейтинг среди поступающих</a> (данные появляются не сразу после подачи заявления, а после обработки в системе)
+			</li>
+			<li>
+				<a href="https://rate.oat.ru/stat">
+					Общая статистика
+				</a>
+			</li>
+		</ul>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/proxodnieBalli2022.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Проходные баллы в 2022 году
+				</div>
+			</li>
+		</ul>
 
 
-        <h3 id="documents" class="section-subtitle">
-            Документы и шаблоны
-        </h3>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/organizationInformation/documentsPage/pravilaPriema2023-2024.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Правила приёма в 2023/2024 учебном году
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/trebovaniaKUrovnuObrazovania.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Требования к уровню образования, которое необходимо для поступления (основное общее или среднее общее образование)
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/perecenSpetsialnosteiProfesii.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Перечень специальностей и профессий, по которым колледж объявляет приём
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/stoimostPlatnixUslug.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Утверждение перечня и стоимости платных образовательных услуг с 1 сентября 2023 года
-                </div>
-            </li>
-        </ul>
-        <h4 class="section-subtitle-small">
-            Шаблоны
-        </h4>
-        <ul class="documents-list">
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/templates/zaiavlenieNaSpecialnostProfessiu.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Заявление на специальность профессию 2023
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/templates/soglasieNaObrabotkuDannixSovershenoletnegp.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Согласие на обработку персональных данных совершеннолетнего 2023
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/templates/soglasieNaObrabotkuDannixNesovershenoletnegp.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Согласие на обработку персональных данных несовершеннолетнего 2023
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/templates/soglasieNaTrud.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    согласие на труд 2023
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/templates/dogovorOPlatnixUslugax2Storoni.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Образец договора об оказании платных образовательных услуг 2023 (2-сторонний)
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/templates/dogovorOPlatnixUslugax3Storoni.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Образец договора об оказании платных образовательных услуг 2023 (3-сторонний)
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/templates/kvitanciaDliaOplati.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Квитанция для оплаты образовательных услуг (платные группы)
-                </div>
-            </li>
-            <li class="document-item">
-                <div class="document-item-head">
-                    <a target="_blank" href="~/documents/applicant/selectionCommittee/templates/listPrioritetov.pdf">
-                    </a>
-                </div>
-                <div class="document-item-body">
-                    Лист приоритетов 2023
-                </div>
-            </li>
-        </ul>
+		<h3 id="feedback" class="section-subtitle">
+			Связь с нами
+		</h3>
+		<h4 class="section-subtitle-small">
+			Режим работы приемной комиссии с 20.06.2023г. до 31.08.2023г.
+		</h4>
+		<p>
+			Пн — Пт: 8.00 - 18.00
+			<br>
+			Сб: 9.00 - 15.00
+			<br>
+			Вс - выходной
+		</p>
+		<h4 class="section-subtitle-small">
+			Контактная информация
+		</h4>
+		<p>
+			<b>Адрес:</b> г. Омск, ул. Ленина, д. 24
+			<br>
+			<b>Телефон:</b> (3812) 31-16-39
+			<br>
+			<b>Почта:</b> oat@oat.ru
+		</p>
 
 
-        <h3 id="have-question" class="section-subtitle">
-            По вопросам обращаться
-        </h3>
-        <div class="question-contact">
-            <div class="question-contact-head">
-                <a class="question-contact-head-img-container" href="">
-                    <img src="~/images/people/Савин Антон Викторович.png">
-                </a>
-                <p class="question-contact-head-fio">Савин<br>Антон Викторович</p>
-                <p class="question-contact-head-post">
-                    Заместитель директора, курирующий приемную кампанию
-                </p>
-            </div>
-            <div class="question-contact-body">
-                <p class="question-contact-body-address">г. Омск, ул. Ленина, 24. Каб. 227</p>
-                <p class="question-contact-body-phone">+7(3812)31-73-55</p>
-                <p class="question-contact-body-time">ПН-ПТ 9:00-18:00</p>
-            </div>
-        </div>
-        
-    </section>
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Абитуриентам
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("SelectionCommittee")'>
-                        Приемная комиссия
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("SpecialtiesAndProfessions")'>
-                        Специальности и профессии
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("TrainingCourses")'>
-                        Подготовительные курсы
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("IndividualTraining")'>
-                        Индивидуальное обучение
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("AdmissionRules")'>
-                        Правила приема
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("QualificationIncrease")'>
-                        Повышение квалификации
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("DLinkCisco")'>
-                        Сертификация D-link, Cisco
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("SpecialtiesPartTimeEvening")'>
-                        Специальности очно-заочного (вечернего) отделения
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("CareerGuidanceEvents")'>
-                        Профориентационные мероприятия
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+		<h3 id="documents" class="section-subtitle">
+			Документы и шаблоны
+		</h3>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/organizationInformation/documentsPage/pravilaPriema2023-2024.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Правила приёма в 2023/2024 учебном году
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/trebovaniaKUrovnuObrazovania.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Требования к уровню образования, которое необходимо для поступления (основное общее или среднее общее образование)
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/perecenSpetsialnosteiProfesii.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Перечень специальностей и профессий, по которым колледж объявляет приём
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/stoimostPlatnixUslug.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Утверждение перечня и стоимости платных образовательных услуг с 1 сентября 2023 года
+				</div>
+			</li>
+		</ul>
+		<h4 class="section-subtitle-small">
+			Шаблоны
+		</h4>
+		<ul class="documents-list">
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/templates/zaiavlenieNaSpecialnostProfessiu.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Заявление на специальность профессию 2023
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/templates/soglasieNaObrabotkuDannixSovershenoletnegp.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Согласие на обработку персональных данных совершеннолетнего 2023
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/templates/soglasieNaObrabotkuDannixNesovershenoletnegp.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Согласие на обработку персональных данных несовершеннолетнего 2023
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/templates/soglasieNaTrud.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					согласие на труд 2023
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/templates/dogovorOPlatnixUslugax2Storoni.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Образец договора об оказании платных образовательных услуг 2023 (2-сторонний)
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/templates/dogovorOPlatnixUslugax3Storoni.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Образец договора об оказании платных образовательных услуг 2023 (3-сторонний)
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/templates/kvitanciaDliaOplati.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Квитанция для оплаты образовательных услуг (платные группы)
+				</div>
+			</li>
+			<li class="document-item">
+				<div class="document-item-head">
+					<a target="_blank" href="~/documents/applicant/selectionCommittee/templates/listPrioritetov.pdf">
+					</a>
+				</div>
+				<div class="document-item-body">
+					Лист приоритетов 2023
+				</div>
+			</li>
+		</ul>
+
+
+		<h3 id="have-question" class="section-subtitle">
+			По вопросам обращаться
+		</h3>
+		<div class="question-contact">
+			<div class="question-contact-head">
+				<a class="question-contact-head-img-container" href="">
+					<img src="~/images/people/Савин Антон Викторович.png">
+				</a>
+				<p class="question-contact-head-fio">Савин<br>Антон Викторович</p>
+				<p class="question-contact-head-post">
+					Заместитель директора, курирующий приемную кампанию
+				</p>
+			</div>
+			<div class="question-contact-body">
+				<p class="question-contact-body-address">г. Омск, ул. Ленина, 24. Каб. 227</p>
+				<p class="question-contact-body-phone">+7(3812)31-73-55</p>
+				<p class="question-contact-body-time">ПН-ПТ 9:00-18:00</p>
+			</div>
+		</div>
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Абитуриентам
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("SelectionCommittee")'>
+						Приемная комиссия
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("SpecialtiesAndProfessions")'>
+						Специальности и профессии
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("TrainingCourses")'>
+						Подготовительные курсы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("IndividualTraining")'>
+						Индивидуальное обучение
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("AdmissionRules")'>
+						Правила приема
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("QualificationIncrease")'>
+						Повышение квалификации
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("DLinkCisco")'>
+						Сертификация D-link, Cisco
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("SpecialtiesPartTimeEvening")'>
+						Специальности очно-заочного (вечернего) отделения
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("CareerGuidanceEvents")'>
+						Профориентационные мероприятия
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

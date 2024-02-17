@@ -2,18 +2,18 @@
 
 namespace OAT.Pages
 {
-    public class TicketToFutureModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class TicketToFutureModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public TicketToFutureModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public TicketToFutureModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

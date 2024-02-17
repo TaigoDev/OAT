@@ -2,18 +2,18 @@
 
 namespace OAT.Pages
 {
-    public class PPKRSModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class PPKRSModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public PPKRSModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public PPKRSModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

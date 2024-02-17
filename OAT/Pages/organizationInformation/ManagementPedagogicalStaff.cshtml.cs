@@ -2,20 +2,20 @@
 
 namespace OAT.Pages.organizationInformation
 {
-    public class ManagementPedagogicalStaffModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class ManagementPedagogicalStaffModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public ManagementPedagogicalStaffModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public ManagementPedagogicalStaffModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public int id { get; set; }
-        public void OnGet(int? id)
-        {
+		public int id { get; set; }
+		public void OnGet(int? id)
+		{
 
-            this.id = id - 1 ?? 0;
-        }
-    }
+			this.id = id - 1 ?? 0;
+		}
+	}
 }

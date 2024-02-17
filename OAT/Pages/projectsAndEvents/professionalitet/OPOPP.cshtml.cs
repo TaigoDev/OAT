@@ -2,18 +2,18 @@
 
 namespace OAT.Pages
 {
-    public class OPOPPModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class OPOPPModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public OPOPPModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public OPOPPModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

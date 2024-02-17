@@ -1,507 +1,507 @@
 ﻿@page
 @model SpecialitiesModel
 @{
-    ViewData["Title"] = "Перечень специальностей";
+	ViewData["Title"] = "Перечень специальностей";
 }
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Перечень специальностей
-        </h2>
+	<section class="content">
+		<h2 class="section-title">
+			Перечень специальностей
+		</h2>
 
-        <ul class="page-navigation">
-            <li>
-                <a href="#list">
-                    Список
-                </a>
-            </li>
-            <li>
-                <a href="#documents">
-                    Документы
-                </a>
-            </li>
-        </ul>
+		<ul class="page-navigation">
+			<li>
+				<a href="#list">
+					Список
+				</a>
+			</li>
+			<li>
+				<a href="#documents">
+					Документы
+				</a>
+			</li>
+		</ul>
 
-        <h3 id="list" class="section-subtitle">
-            Список
-        </h3>
-        <table class="customized">
-            <thead>
-                <tr>
-                    <th rowspan="2">
-                        Код профессии/специальности
-                    </th>
-                    <th rowspan="2">
-                        Наименование профессии/специальности
-                    </th>
-                    <th colspan="2">
-                        Количество бюджетных мест
-                        на очной форме обучения
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        на базе основного общего образования
-                        (9 кл.)
-                    </th>
-                    <th>
-                        на базе среднего (полного)  образования
-                        (11 кл.)
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        09.02.07
-                    </td>
-                    <td>
-                        Информационные системы и программирование
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 50;
-                        ОГКУиПТ<sup>2</sup> - 50;
-                        СПК<sup>5</sup> - 25
-                    </td>
-                    <td>
-                        СПК<sup>5</sup> - 25
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        10.02.05
-                    </td>
-                    <td>
-                        Обеспечение информационной безопасности автоматизированных систем
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 50;
-                        СПК<sup>5</sup> - 25;
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        11.01.01
-                    </td>
-                    <td>
-                        Монтажник радиоэлектронной аппаратуры и приборов
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 50;
-                        ОГКУиПТ<sup>2</sup> - 50;
-                        ТИПК<sup>4</sup> - 25
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        11.02.16
-                    </td>
-                    <td>
-                        Монтаж, техническое обслуживание и ремонт электронных приборов и устройств
-                    </td>
-                    <td>
-                        ОГКУиПТ<sup>2</sup> - 50
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        12.02.03
-                    </td>
-                    <td>
-                        Радиоэлектронные приборные устройства
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 50
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        13.01.10
-                    </td>
-                    <td>
-                        Электромонтер по ремонту и обслуживанию электрооборудования (по отраслям)
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 25
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        13.02.11
-                    </td>
-                    <td>
-                        Техническая эксплуатация и обслуживание электрического и электромеханического оборудования
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 25;
-                        ОПЭК<sup>6</sup> - 25
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        15.01.05
-                    </td>
-                    <td>
-                        Сварщик ручной и частично механизированной сварки (наплавки)
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 50;
-                        ОМТ<sup>3</sup> - 50;
-                        ТИПК<sup>4</sup> - 25;
-                        СПК<sup>5</sup> - 25;
-                        МТ<sup>7</sup> - 50;
-                        ОТСЛХ<sup>8</sup> - 25;
-                    </td>
-                    <td>
-                        МТ<sup>7</sup> - 25;
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        15.01.13
-                    </td>
-                    <td>
-                        Монтажник технологического оборудования (по видам оборудования)
-                    </td>
-                    <td>
-                        -
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        15.01.20
-                    </td>
-                    <td>
-                        Слесарь по контрольно-измерительным приборам и автоматике
-                    </td>
-                    <td>
-                        -
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        15.01.29
-                    </td>
-                    <td>
-                        Контролер станочных и слесарных работ
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 25
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        15.01.32
-                    </td>
-                    <td>
-                        Оператор станков с программным управлением
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 25
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        15.01.35
-                    </td>
-                    <td>
-                        Мастер слесарных работ
-                    </td>
-                    <td>
-                        ОМТ<sup>3</sup> - 25
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        15.02.16
-                    </td>
-                    <td>
-                        Технология машиностроения
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 50;
-                        СПК<sup>5</sup> - 25
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        22.02.06
-                    </td>
-                    <td>
-                        Сварочное производство
-                    </td>
-                    <td>
-                        Омавиат<sup>1</sup> - 50;
-                        СПК<sup>5</sup> - 25;
-                        ОПЭК<sup>6</sup> - 25;
-                        МТ<sup>7</sup> - 25
-                    </td>
-                    <td>
-                        -
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p>
-            <b>
-                Примечание:
-            </b>
-        </p>
-        <ul class="customized">
-            <li>
-                Бюджетное профессиональное образовательное учреждение Омской области «Омский авиационный колледж имени Н.Е. Жуковского» (<b>Омавиат<sup>1</sup></b>);
-            </li>
-            <li>
-                бюджетное профессиональное образовательное учреждение Омской области «Омский государственный колледж управления и профессиональных технологий» (<b>ОГКУиПТ<sup>2</sup></b>);
-            </li>
-            <li>
-                бюджетное профессиональное образовательное учреждение Омской области «Омский многопрофильный техникум» (<b>ОМТ<sup>3</sup></b>);
-            </li>
-            <li>
-                бюджетное профессиональное образовательное учреждение Омской области «Тарский индустриально-педагогический колледж» (<b>ТИПК<sup>4</sup></b>);
-            </li>
-            <li>
-                бюджетное профессиональное образовательное учреждение Омской области «Сибирский профессиональный колледж» (<b>СПК<sup>5</sup></b>);
-            </li>
-            <li>
-                бюджетное профессиональное образовательное учреждение Омской области «Омский промышленно-экономический колледж» (<b>ОПЭК<sup>6</sup></b>);
-            </li>
-            <li>
-                бюджетное профессиональное образовательное учреждение Омской области «Омский монтажный техникум» (<b>МТ<sup>7</sup></b>);
-            </li>
-            <li>
-                бюджетное профессиональное образовательное учреждение Омской области «Омский техникум строительства и лесного хозяйства» (<b>ОТСиЛХ<sup>8</sup></b>)
-            </li>
-        </ul>
+		<h3 id="list" class="section-subtitle">
+			Список
+		</h3>
+		<table class="customized">
+			<thead>
+				<tr>
+					<th rowspan="2">
+						Код профессии/специальности
+					</th>
+					<th rowspan="2">
+						Наименование профессии/специальности
+					</th>
+					<th colspan="2">
+						Количество бюджетных мест
+						на очной форме обучения
+					</th>
+				</tr>
+				<tr>
+					<th>
+						на базе основного общего образования
+						(9 кл.)
+					</th>
+					<th>
+						на базе среднего (полного)  образования
+						(11 кл.)
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						09.02.07
+					</td>
+					<td>
+						Информационные системы и программирование
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 50;
+						ОГКУиПТ<sup>2</sup> - 50;
+						СПК<sup>5</sup> - 25
+					</td>
+					<td>
+						СПК<sup>5</sup> - 25
+					</td>
+				</tr>
+				<tr>
+					<td>
+						10.02.05
+					</td>
+					<td>
+						Обеспечение информационной безопасности автоматизированных систем
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 50;
+						СПК<sup>5</sup> - 25;
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						11.01.01
+					</td>
+					<td>
+						Монтажник радиоэлектронной аппаратуры и приборов
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 50;
+						ОГКУиПТ<sup>2</sup> - 50;
+						ТИПК<sup>4</sup> - 25
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						11.02.16
+					</td>
+					<td>
+						Монтаж, техническое обслуживание и ремонт электронных приборов и устройств
+					</td>
+					<td>
+						ОГКУиПТ<sup>2</sup> - 50
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						12.02.03
+					</td>
+					<td>
+						Радиоэлектронные приборные устройства
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 50
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						13.01.10
+					</td>
+					<td>
+						Электромонтер по ремонту и обслуживанию электрооборудования (по отраслям)
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 25
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						13.02.11
+					</td>
+					<td>
+						Техническая эксплуатация и обслуживание электрического и электромеханического оборудования
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 25;
+						ОПЭК<sup>6</sup> - 25
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						15.01.05
+					</td>
+					<td>
+						Сварщик ручной и частично механизированной сварки (наплавки)
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 50;
+						ОМТ<sup>3</sup> - 50;
+						ТИПК<sup>4</sup> - 25;
+						СПК<sup>5</sup> - 25;
+						МТ<sup>7</sup> - 50;
+						ОТСЛХ<sup>8</sup> - 25;
+					</td>
+					<td>
+						МТ<sup>7</sup> - 25;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						15.01.13
+					</td>
+					<td>
+						Монтажник технологического оборудования (по видам оборудования)
+					</td>
+					<td>
+						-
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						15.01.20
+					</td>
+					<td>
+						Слесарь по контрольно-измерительным приборам и автоматике
+					</td>
+					<td>
+						-
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						15.01.29
+					</td>
+					<td>
+						Контролер станочных и слесарных работ
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 25
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						15.01.32
+					</td>
+					<td>
+						Оператор станков с программным управлением
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 25
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						15.01.35
+					</td>
+					<td>
+						Мастер слесарных работ
+					</td>
+					<td>
+						ОМТ<sup>3</sup> - 25
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						15.02.16
+					</td>
+					<td>
+						Технология машиностроения
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 50;
+						СПК<sup>5</sup> - 25
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						22.02.06
+					</td>
+					<td>
+						Сварочное производство
+					</td>
+					<td>
+						Омавиат<sup>1</sup> - 50;
+						СПК<sup>5</sup> - 25;
+						ОПЭК<sup>6</sup> - 25;
+						МТ<sup>7</sup> - 25
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>
+			<b>
+				Примечание:
+			</b>
+		</p>
+		<ul class="customized">
+			<li>
+				Бюджетное профессиональное образовательное учреждение Омской области «Омский авиационный колледж имени Н.Е. Жуковского» (<b>Омавиат<sup>1</sup></b>);
+			</li>
+			<li>
+				бюджетное профессиональное образовательное учреждение Омской области «Омский государственный колледж управления и профессиональных технологий» (<b>ОГКУиПТ<sup>2</sup></b>);
+			</li>
+			<li>
+				бюджетное профессиональное образовательное учреждение Омской области «Омский многопрофильный техникум» (<b>ОМТ<sup>3</sup></b>);
+			</li>
+			<li>
+				бюджетное профессиональное образовательное учреждение Омской области «Тарский индустриально-педагогический колледж» (<b>ТИПК<sup>4</sup></b>);
+			</li>
+			<li>
+				бюджетное профессиональное образовательное учреждение Омской области «Сибирский профессиональный колледж» (<b>СПК<sup>5</sup></b>);
+			</li>
+			<li>
+				бюджетное профессиональное образовательное учреждение Омской области «Омский промышленно-экономический колледж» (<b>ОПЭК<sup>6</sup></b>);
+			</li>
+			<li>
+				бюджетное профессиональное образовательное учреждение Омской области «Омский монтажный техникум» (<b>МТ<sup>7</sup></b>);
+			</li>
+			<li>
+				бюджетное профессиональное образовательное учреждение Омской области «Омский техникум строительства и лесного хозяйства» (<b>ОТСиЛХ<sup>8</sup></b>)
+			</li>
+		</ul>
 
 
-        <h3 id="documents" class="section-subtitle">
-            Документы
-        </h3>
-        <div class="accordions-list">
-            <div class="accordion">
-                <div class="accordion-head">
-                    Профориентационные карты
-                </div>
-                <div class="accordion-body">
-                    <ul class="documents-list little">
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/09.02.07ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                09.02.07
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/10.02.05ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                10.02.05
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/11.01.01ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                11.01.01
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/11.02.16ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                11.02.16
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/12.02.03ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                12.02.03
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/13.01.10ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                13.01.10
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/13.02.11ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                13.02.11
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.05ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                15.01.05
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.13ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                15.01.13
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.20ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                15.01.20
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.29ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                15.01.29
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.32ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                15.01.32
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.35ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                15.01.35
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.02.16ОЗФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                15.02.16 ОЗ
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.02.16ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                15.02.16
-                            </div>
-                        </li>
-                        <li class="document-item">
-                            <div class="document-item-head">
-                                <a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/22.02.06ФИНАЛ-min.pdf"></a>
-                            </div>
-                            <div class="document-item-body">
-                                22.02.06
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Профессионалитет
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("About")'>
-                        О профессионалитете
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("Specialities")'>
-                        Специальности
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("OPOPP")'>
-                        ОПОП-П
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Partners")'>
-                        Партнеры
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("ManagementCompany")'>
-                        Управляющая компания
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("RepairProgress")'>
-                        Ход ремонтных работ
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("/applicant/AdmissionRules")'>
-                        Правила приема
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("ProjectNews")'>
-                        Новости проекта
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+		<h3 id="documents" class="section-subtitle">
+			Документы
+		</h3>
+		<div class="accordions-list">
+			<div class="accordion">
+				<div class="accordion-head">
+					Профориентационные карты
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list little">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/09.02.07ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								09.02.07
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/10.02.05ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								10.02.05
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/11.01.01ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								11.01.01
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/11.02.16ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								11.02.16
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/12.02.03ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								12.02.03
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/13.01.10ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								13.01.10
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/13.02.11ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								13.02.11
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.05ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								15.01.05
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.13ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								15.01.13
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.20ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								15.01.20
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.29ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								15.01.29
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.32ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								15.01.32
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.01.35ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								15.01.35
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.02.16ОЗФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								15.02.16 ОЗ
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/15.02.16ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								15.02.16
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank" href="~/documents/projectsAndEvents/professionalitet/specialities/22.02.06ФИНАЛ-min.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								22.02.06
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Профессионалитет
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("About")'>
+						О профессионалитете
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("Specialities")'>
+						Специальности
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("OPOPP")'>
+						ОПОП-П
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Partners")'>
+						Партнеры
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("ManagementCompany")'>
+						Управляющая компания
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("RepairProgress")'>
+						Ход ремонтных работ
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("/applicant/AdmissionRules")'>
+						Правила приема
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("ProjectNews")'>
+						Новости проекта
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

@@ -1,89 +1,89 @@
 ﻿@page
 @model ClassesChangesModel
 @{
-    ViewData["Title"] = "Изменения в расписании занятий";
+	ViewData["Title"] = "Изменения в расписании занятий";
 }
 
 <link rel="stylesheet" href="~/css/timetable/classesChanges.css" asp-append-version="true">
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Изменения в расписании занятий
-        </h2>
+	<section class="content">
+		<h2 class="section-title">
+			Изменения в расписании занятий
+		</h2>
 
-        <ul class="documents-list">
-            <li class="document-item" onclick="window.location.href = '/timetable/Changes/1'">
-                <div class="document-item-head">
-                </div>
-                <div class="document-item-body">
-                    Ленина 24.xls
-                </div>
-            </li>
+		<ul class="documents-list">
+			<li class="document-item" onclick="window.location.href = '/timetable/Changes/1'">
+				<div class="document-item-head">
+				</div>
+				<div class="document-item-body">
+					Ленина 24.xls
+				</div>
+			</li>
 
 
-            <li class="document-item" onclick="window.location.href = '/timetable/Changes/2'">
-                <div class="document-item-head">
-                </div>
-                <div class="document-item-body">
-                    Б.Хмельницкого, 281а.xls
-                </div>
-            </li>
+			<li class="document-item" onclick="window.location.href = '/timetable/Changes/2'">
+				<div class="document-item-head">
+				</div>
+				<div class="document-item-body">
+					Б.Хмельницкого, 281а.xls
+				</div>
+			</li>
 
-            <li class="document-item" onclick="window.location.href = '/timetable/Changes/3'">
-                <div class="document-item-head">
-                </div>
-                <div class="document-item-body">
-                    Космический,14а.xls
-                </div>
-            </li>
-            <li class="document-item" onclick="window.location.href = '/timetable/Changes/4'">
-                <div class="document-item-head">
-                </div>
-                <div class="document-item-body">
-                    Волховстрой 5.xls
-                </div>
-            </li>
-        </ul>
-        
-    </section>
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Расписание
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Classes")'>
-                        Расписание занятий
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("ClassesChanges")'>
-                        Изменения в расписании занятий
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Practice")'>
-                        Расписание практик
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("PODPO")'>
-                        Расписание ПО и ДПО
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Session")'>
-                        Расписание сессий
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("GIA")'>
-                        Расписание ГИА
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+			<li class="document-item" onclick="window.location.href = '/timetable/Changes/3'">
+				<div class="document-item-head">
+				</div>
+				<div class="document-item-body">
+					Космический,14а.xls
+				</div>
+			</li>
+			<li class="document-item" onclick="window.location.href = '/timetable/Changes/4'">
+				<div class="document-item-head">
+				</div>
+				<div class="document-item-body">
+					Волховстрой 5.xls
+				</div>
+			</li>
+		</ul>
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Расписание
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("Classes")'>
+						Расписание занятий
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("ClassesChanges")'>
+						Изменения в расписании занятий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Practice")'>
+						Расписание практик
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("PODPO")'>
+						Расписание ПО и ДПО
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Session")'>
+						Расписание сессий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("GIA")'>
+						Расписание ГИА
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

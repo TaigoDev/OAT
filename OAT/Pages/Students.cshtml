@@ -1,302 +1,302 @@
 ﻿@page
 @model StudentsModel
 @{
-    ViewData["Title"] = "Студентам";
+	ViewData["Title"] = "Студентам";
 }
 
 <link rel="stylesheet" href="~/css/mainPages.css" asp-append-version="true">
 
 <section class="main-underheader">
-    
-    <video autoplay muted loop class="main-underheader-background" poster="images/studentsMainPage/poster.jpg">
-        <source src="/videos/students.mp4" type="video/mp4">
-    </video>
+	
+	<video autoplay muted loop class="main-underheader-background" poster="images/studentsMainPage/poster.jpg">
+		<source src="/videos/students.mp4" type="video/mp4">
+	</video>
 
-    <div class="container">
-        <div class="welcome">
-            <h1 class="main-page-title">
-                Обучающимся
-            </h1>
-            <h2 class="main-page-subtitle">
-                Это твоя взлётная полоса успеха
-            </h2>
-            <ul class="contacts-list">
-                <li>
-                    <a href="https://vk.com/omaviat_2020">
-                        <img class="icon" src="~/images/basic/socialLinks/vk.svg">
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.youtube.com/channel/UC-Ss6mzhYiKeGZaCBNyXo2w">
-                        <img class="icon" src="~/images/basic/socialLinks/youtube.svg">
-                    </a>
-                </li>
-                <li>
-                    <a href="https://t.me/omaviatomsk2021">
-                        <img class="icon" src="~/images/basic/socialLinks/telegram.svg">
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <ul class="important-links">
-            <li class="important-link">
-                <a href='@Url.Page("/students/DistanceLearning")'>
-                    <img src="~/images/studentsMainPage/distanceLearning.png" alt="">
-                    <span class="important-link-text">Дистанционное обучение</span>
-                </a>
-            </li>
-            <li class="important-link">
-                <a href="https://e.oat.ru/">
-                    <img src="~/images/studentsMainPage/floorPlan.png" alt="">
-                    <span class="important-link-text">Виртуальная экскурсия</span>
-                </a>
-            </li>
-            <li class="important-link">
-                <a href="https://t.me/oat_schedule_bot">
-                    <img src="~/images/studentsMainPage/botSchedule.png" alt="">
-                    <span class="important-link-text">Бот расписания</span>
-                </a>
-            </li>
-            <li class="important-link">
-                <a asp-page="/another/ImportantForStudents">
-                    <img src="~/images/studentsMainPage/attention.png" alt="">
-                    <span class="important-link-text">Безопасность студентов</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+	<div class="container">
+		<div class="welcome">
+			<h1 class="main-page-title">
+				Обучающимся
+			</h1>
+			<h2 class="main-page-subtitle">
+				Это твоя взлётная полоса успеха
+			</h2>
+			<ul class="contacts-list">
+				<li>
+					<a href="https://vk.com/omaviat_2020">
+						<img class="icon" src="~/images/basic/socialLinks/vk.svg">
+					</a>
+				</li>
+				<li>
+					<a href="https://www.youtube.com/channel/UC-Ss6mzhYiKeGZaCBNyXo2w">
+						<img class="icon" src="~/images/basic/socialLinks/youtube.svg">
+					</a>
+				</li>
+				<li>
+					<a href="https://t.me/omaviatomsk2021">
+						<img class="icon" src="~/images/basic/socialLinks/telegram.svg">
+					</a>
+				</li>
+			</ul>
+		</div>
+		<ul class="important-links">
+			<li class="important-link">
+				<a href='@Url.Page("/students/DistanceLearning")'>
+					<img src="~/images/studentsMainPage/distanceLearning.png" alt="">
+					<span class="important-link-text">Дистанционное обучение</span>
+				</a>
+			</li>
+			<li class="important-link">
+				<a href="https://e.oat.ru/">
+					<img src="~/images/studentsMainPage/floorPlan.png" alt="">
+					<span class="important-link-text">Виртуальная экскурсия</span>
+				</a>
+			</li>
+			<li class="important-link">
+				<a href="https://t.me/oat_schedule_bot">
+					<img src="~/images/studentsMainPage/botSchedule.png" alt="">
+					<span class="important-link-text">Бот расписания</span>
+				</a>
+			</li>
+			<li class="important-link">
+				<a asp-page="/another/ImportantForStudents">
+					<img src="~/images/studentsMainPage/attention.png" alt="">
+					<span class="important-link-text">Безопасность студентов</span>
+				</a>
+			</li>
+		</ul>
+	</div>
 </section>
 
 
 <!-- for students and parents -->
 
 <section>
-    <div class="container">
-        <h3 class="section-title">
-            Уважаемые студенты!
-        </h3>
-        <p>
-            Омский авиационный колледж имени Н.Е.Жуковского учебное заведение среднего профессионального образования, имеет давнюю 93-летнюю историю.
-        </p>
-        <p>
-            За эти годы в нашем учебном заведении сложились определенные традиции и правила поведения.
-        </p>
-        <p>
-            Берегите наши традиции и приумножайте их, будьте внимательны и вежливы с товарищами, педагогами, работниками колледжа.
-        </p>
-        <p>
-            Бережно относитесь к книгам, которые вы возьмете в библиотеке, инвентарю, с которым еще придется учиться вашим младшим товарищам, к лабораторному и стендовому оборудованию.
-        </p>
-        <p>
-            Вы можете получить своевременную помощь, обратившись к классному руководителю, педагогу-психологу, социальным педагогам. Дежурный преподаватель, выслушав вас, подскажет как поступить в той или иной ситуации, куда обратиться в случае необходимости.
-        </p>
-        <div class="accordion">
-            <div class="accordion-head">
-                Документы сессии
-            </div>
-            <div class="accordion-body">
-                <ul class="documents-list">
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia1.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 1
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia2.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 2
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia3.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 3
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia4.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 4
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia5.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 5
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia6.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 6
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia7.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 7
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia8.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 8
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia9.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 9
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia10.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 10
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia11.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 11
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia12.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 12
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia13.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 13
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia14.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 14
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia15.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 15
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia16.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 16
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia17.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 17
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia18.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 18
-                        </div>
-                    </li>
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="~/documents/studentsMainPage/sessia19.pdf">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            Сессия 19
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<h3 class="section-title">
+			Уважаемые студенты!
+		</h3>
+		<p>
+			Омский авиационный колледж имени Н.Е.Жуковского учебное заведение среднего профессионального образования, имеет давнюю 93-летнюю историю.
+		</p>
+		<p>
+			За эти годы в нашем учебном заведении сложились определенные традиции и правила поведения.
+		</p>
+		<p>
+			Берегите наши традиции и приумножайте их, будьте внимательны и вежливы с товарищами, педагогами, работниками колледжа.
+		</p>
+		<p>
+			Бережно относитесь к книгам, которые вы возьмете в библиотеке, инвентарю, с которым еще придется учиться вашим младшим товарищам, к лабораторному и стендовому оборудованию.
+		</p>
+		<p>
+			Вы можете получить своевременную помощь, обратившись к классному руководителю, педагогу-психологу, социальным педагогам. Дежурный преподаватель, выслушав вас, подскажет как поступить в той или иной ситуации, куда обратиться в случае необходимости.
+		</p>
+		<div class="accordion">
+			<div class="accordion-head">
+				Документы сессии
+			</div>
+			<div class="accordion-body">
+				<ul class="documents-list">
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia1.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 1
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia2.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 2
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia3.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 3
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia4.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 4
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia5.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 5
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia6.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 6
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia7.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 7
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia8.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 8
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia9.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 9
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia10.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 10
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia11.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 11
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia12.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 12
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia13.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 13
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia14.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 14
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia15.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 15
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia16.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 16
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia17.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 17
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia18.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 18
+						</div>
+					</li>
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="~/documents/studentsMainPage/sessia19.pdf">
+							</a>
+						</div>
+						<div class="document-item-body">
+							Сессия 19
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </section>
 
 <section>
-    <div class="container">
-        <h3 class="section-title">
-            Уважаемые родители!
-        </h3>
-        <p>
-            С целью адаптации студентов колледжа к условиям студенческой жизни и оказания им необходимой социальной, педагогической поддержки за каждой академической группой закрепляется классный руководитель из числа преподавателей и сотрудников колледжа.
-        </p>
-        <p>
-            Вы всегда можете обратиться к классному руководителю, председателю ЦМК, заведующему отделением, социальному педагогу, педагогу-психологу, заместителям директора (по учебной или воспитательной работе) по любым вопросам учебной, общественной, трудовой, культурной или спортивной деятельности вашего ребенка, а также при возникновении или во избежание возможных конфликтных ситуаций.
-        </p>
-        <p>
-            Студент может быть отчислен из колледжа только по следующим причинам:
-        </p>
-        <ul class="customized">
-            <li>
-                по собственному желанию на основании личного заявления
-            </li>
-            <li>
-                за академическую неуспеваемость, как не прошедший аттестацию в установленные сроки, как не сдавший три или более экзаменов без уважительной причины во время экзаменационной сессии или как не ликвидировавший задолженности
-            </li>
-            <li>
-                за грубые нарушения правил поведения
-            </li>
-        </ul>
-    </div>
+	<div class="container">
+		<h3 class="section-title">
+			Уважаемые родители!
+		</h3>
+		<p>
+			С целью адаптации студентов колледжа к условиям студенческой жизни и оказания им необходимой социальной, педагогической поддержки за каждой академической группой закрепляется классный руководитель из числа преподавателей и сотрудников колледжа.
+		</p>
+		<p>
+			Вы всегда можете обратиться к классному руководителю, председателю ЦМК, заведующему отделением, социальному педагогу, педагогу-психологу, заместителям директора (по учебной или воспитательной работе) по любым вопросам учебной, общественной, трудовой, культурной или спортивной деятельности вашего ребенка, а также при возникновении или во избежание возможных конфликтных ситуаций.
+		</p>
+		<p>
+			Студент может быть отчислен из колледжа только по следующим причинам:
+		</p>
+		<ul class="customized">
+			<li>
+				по собственному желанию на основании личного заявления
+			</li>
+			<li>
+				за академическую неуспеваемость, как не прошедший аттестацию в установленные сроки, как не сдавший три или более экзаменов без уважительной причины во время экзаменационной сессии или как не ликвидировавший задолженности
+			</li>
+			<li>
+				за грубые нарушения правил поведения
+			</li>
+		</ul>
+	</div>
 </section>

@@ -3,22 +3,22 @@ using static OAT.Readers.WorkersReader;
 
 namespace OAT.Pages.organizationInformation
 {
-    public class SearchWorkerModel : PageModel
-    {
+	public class SearchWorkerModel : PageModel
+	{
 
-        public List<Worker> Workers = new List<Worker>();
+		public List<Worker> Workers = new List<Worker>();
 
-        public void OnGet(string? text)
-        {
-            if (text is null || text is "undefined")
-            {
-                Response.Redirect("/organizationInformation/ManagementPedagogicalStaff");
-                return;
-            }
+		public void OnGet(string? text)
+		{
+			if (text is null || text is "undefined")
+			{
+				Response.Redirect("/organizationInformation/ManagementPedagogicalStaff");
+				return;
+			}
 
-            if (text.Length < 3)
-                return;
-            Workers = AllWorkers.Where(e => e.FullName.ToLower().Contains(text.ToLower())).ToList();
-        }
-    }
+			if (text.Length < 3)
+				return;
+			Workers = AllWorkers.Where(e => e.FullName.ToLower().Contains(text.ToLower())).ToList();
+		}
+	}
 }

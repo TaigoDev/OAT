@@ -2,107 +2,107 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
-    <link rel="stylesheet" href="~/css/panel/panel.css" asp-append-version="true">
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<title>@ViewData["Title"]</title>
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+	<link rel="stylesheet" href="~/css/panel/panel.css" asp-append-version="true">
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-    <header class="panel-header">
-        <ul class="panel-tabs">
-            <li>
-                <a href="panel">
-                    <span>
-                        News
-                    </span>
-                    <img class="icon" src="~/images/panel/news.svg" alt="">
-                </a>
-            </li>
-@*            <li>
-                <a href="">
-                    <span>
-                        Answers
-                    </span>
-                    <img class="icon" src="~/images/panel/answers.svg" alt="">
-                </a>
-            </li>*@
-            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin))
-            {
-                <li>
-                    <a href="MySQL">
-                    <span>
-                        Mysql
-                    </span>
-                    <img class="icon" src="~/images/panel/mysql.svg" alt="">
-                </a>
-            </li>
-            }
-            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_schedule_ALL))
-            {
-                <li>
-                    <a href="schedule">
-                        <span>
-                            Timetable
-                        </span>
-                        <img class="icon" src="~/images/panel/timetable.svg" alt="">
-                    </a>
-                </li>
+	<header class="panel-header">
+		<ul class="panel-tabs">
+			<li>
+				<a href="panel">
+					<span>
+						News
+					</span>
+					<img class="icon" src="~/images/panel/news.svg" alt="">
+				</a>
+			</li>
+@*			<li>
+				<a href="">
+					<span>
+						Answers
+					</span>
+					<img class="icon" src="~/images/panel/answers.svg" alt="">
+				</a>
+			</li>*@
+			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin))
+			{
+				<li>
+					<a href="MySQL">
+					<span>
+						Mysql
+					</span>
+					<img class="icon" src="~/images/panel/mysql.svg" alt="">
+				</a>
+			</li>
+			}
+			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_schedule_ALL))
+			{
+				<li>
+					<a href="schedule">
+						<span>
+							Timetable
+						</span>
+						<img class="icon" src="~/images/panel/timetable.svg" alt="">
+					</a>
+				</li>
 
-            }
+			}
 
-            @if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_manager_changes_ALL, Enums.Role.www_manager_files_practice_ALL))
-            {
-                <li>
-                    <a href="files">
-                        <span>
-                            Files
-                        </span>
-                        <img class="icon" src="~/images/panel/timetable.svg" alt="">
-                    </a>
-                </li>
-            }
+			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_manager_changes_ALL, Enums.Role.www_manager_files_practice_ALL))
+			{
+				<li>
+					<a href="files">
+						<span>
+							Files
+						</span>
+						<img class="icon" src="~/images/panel/timetable.svg" alt="">
+					</a>
+				</li>
+			}
 
 
-            <li>
-                <a href="/">
-                    <span>
-                        Site
-                    </span>
-                    <img class="icon" src="~/images/panel/site.svg" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="/api/logout">
-                    <span>
-                        Exit
-                    </span>
-                    <img class="icon" src="~/images/panel/exitBlack.svg" alt="">
-                </a>
-            </li>
-        </ul>
-    </header>
-    <main class="site-main" role="main">
-        @RenderBody()
-        <section class="container">
-            @if (User != null && User.Identity.IsAuthenticated)
-            {
-                <div class="current-user-info">
-                    <img class="current-user-info-head" src="~/images/panel/currentUser.svg">
-                    <div class="current-user-info-body">
-                        <p class="current-user-info-name"><b>Имя:</b> @User.GetUsername()</p>
-                        <p class="current-user-info-ip"><b>IP:</b> @Context.UserIP()</p>
-                    </div>
-                </div>
-            }
-        </section>
-    </main>
-    
+			<li>
+				<a href="/">
+					<span>
+						Site
+					</span>
+					<img class="icon" src="~/images/panel/site.svg" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="/api/logout">
+					<span>
+						Exit
+					</span>
+					<img class="icon" src="~/images/panel/exitBlack.svg" alt="">
+				</a>
+			</li>
+		</ul>
+	</header>
+	<main class="site-main" role="main">
+		@RenderBody()
+		<section class="container">
+			@if (User != null && User.Identity.IsAuthenticated)
+			{
+				<div class="current-user-info">
+					<img class="current-user-info-head" src="~/images/panel/currentUser.svg">
+					<div class="current-user-info-body">
+						<p class="current-user-info-name"><b>Имя:</b> @User.GetUsername()</p>
+						<p class="current-user-info-ip"><b>IP:</b> @Context.UserIP()</p>
+					</div>
+				</div>
+			}
+		</section>
+	</main>
+	
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

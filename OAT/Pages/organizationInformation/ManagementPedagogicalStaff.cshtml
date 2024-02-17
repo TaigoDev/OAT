@@ -2,279 +2,279 @@
 @using OAT.Readers;
 @model ManagementPedagogicalStaffModel
 @{
-    ViewData["Title"] = "Руководство. Педагогический (научно-педагогический) состав";
+	ViewData["Title"] = "Руководство. Педагогический (научно-педагогический) состав";
 }
 
 <link rel="stylesheet" href="~/css/organizationInformation/menagementPedagogicalStaff.css" asp-append-version="true">
 <script type="text/javascript" src="/js/WorkerSearch.js" charset="utf-8"></script>
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Руководство. Педагогический (научно-педагогический) состав
-        </h2>
+	<section class="content">
+		<h2 class="section-title">
+			Руководство. Педагогический (научно-педагогический) состав
+		</h2>
 
-        <form class="search-people">
-            <div class="search-people-container">
-                <input id="search" type="search" placeholder="Введите ФИО...">
-                <button onclick="onSearch();return false">
-                    <img class="icon" src="~/images/basic/search.svg" alt="искать">
-                </button>
-            </div>
-        </form>
-        @if (WorkersReader.administration.Count() is 3)
-        {
-            <h3 class="section-subtitle">
-                Руководство
-            </h3>
-            <ul class="people-list">
-                @foreach (var person in WorkersReader.administration[0])
-                {
-                    <li class="people-item">
-                        <a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-                            <img src="/api/images/teachers/@person.FullName" alt="">
-                        </a>
-                        <div class="people-item-body more-info">
-                            <div class="people-item-body-fio">
-                                @person.FullName
-                            </div>
-                            <div class="people-item-body-job">
-                                @person.Post
-                            </div>
-                            @*                         <div class="people-item-body-phone">
-                            +7-999-999-05
-                        </div>
-                        <div class="people-item-body-email">
-                            mail@mail.com
-                        </div> *@
-                        </div>
-                    </li>
-                }
-            </ul>
+		<form class="search-people">
+			<div class="search-people-container">
+				<input id="search" type="search" placeholder="Введите ФИО...">
+				<button onclick="onSearch();return false">
+					<img class="icon" src="~/images/basic/search.svg" alt="искать">
+				</button>
+			</div>
+		</form>
+		@if (WorkersReader.administration.Count() is 3)
+		{
+			<h3 class="section-subtitle">
+				Руководство
+			</h3>
+			<ul class="people-list">
+				@foreach (var person in WorkersReader.administration[0])
+				{
+					<li class="people-item">
+						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+							<img src="/api/images/teachers/@person.FullName" alt="">
+						</a>
+						<div class="people-item-body more-info">
+							<div class="people-item-body-fio">
+								@person.FullName
+							</div>
+							<div class="people-item-body-job">
+								@person.Post
+							</div>
+							@*						 <div class="people-item-body-phone">
+							+7-999-999-05
+						</div>
+						<div class="people-item-body-email">
+							mail@mail.com
+						</div> *@
+						</div>
+					</li>
+				}
+			</ul>
 
-            <h3 class="section-subtitle">
-                Заместители руководителя
-            </h3>
-            <ul class="people-list">
-                @foreach (var person in WorkersReader.administration[1])
-                {
-                    <li class="people-item">
-                        <a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-                            <img src="/api/images/teachers/@person.FullName" alt="">
-                        </a>
-                        <div class="people-item-body more-info">
-                            <div class="people-item-body-fio">
-                                @person.FullName
-                            </div>
-                            <div class="people-item-body-job">
-                                @person.Post
-                            </div>
-                        </div>
-                    </li>
-                }
-            </ul>
+			<h3 class="section-subtitle">
+				Заместители руководителя
+			</h3>
+			<ul class="people-list">
+				@foreach (var person in WorkersReader.administration[1])
+				{
+					<li class="people-item">
+						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+							<img src="/api/images/teachers/@person.FullName" alt="">
+						</a>
+						<div class="people-item-body more-info">
+							<div class="people-item-body-fio">
+								@person.FullName
+							</div>
+							<div class="people-item-body-job">
+								@person.Post
+							</div>
+						</div>
+					</li>
+				}
+			</ul>
 
-            <h3 class="section-subtitle">
-                Главный бухгалтер
-            </h3>
-            <ul class="people-list">
-                @foreach (var person in WorkersReader.administration[2])
-                {
-                    <li class="people-item">
-                        <a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-                            <img src="/api/images/teachers/@person.FullName" alt="">
-                        </a>
-                        <div class="people-item-body more-info">
-                            <div class="people-item-body-fio">
-                                @person.FullName
-                            </div>
-                            <div class="people-item-body-job">
-                                @person.Post
-                            </div>
-                        </div>
-                    </li>
-                }
-            </ul>
+			<h3 class="section-subtitle">
+				Главный бухгалтер
+			</h3>
+			<ul class="people-list">
+				@foreach (var person in WorkersReader.administration[2])
+				{
+					<li class="people-item">
+						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+							<img src="/api/images/teachers/@person.FullName" alt="">
+						</a>
+						<div class="people-item-body more-info">
+							<div class="people-item-body-fio">
+								@person.FullName
+							</div>
+							<div class="people-item-body-job">
+								@person.Post
+							</div>
+						</div>
+					</li>
+				}
+			</ul>
 
-            <h3 class="section-subtitle">
-                Персональный состав педагогических работников
-            </h3>
-            <ul class="people-list">
-                @if (Model.id < WorkersReader.Workers.Count())
-                    @foreach (var person in WorkersReader.Workers.ToList()[Model.id])
-                    {
-                        <li class="people-item">
-                            <a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-                                <img src="/api/images/teachers/@person.FullName" alt="">
-                            </a>
-                            <div class="people-item-body more-info">
-                                <div class="people-item-body-fio">
-                                    @person.FullName
-                                </div>
-                                <div class="people-item-body-job">
-                                    @person.Post
-                                </div>
-                            </div>
-                        </li>
-                    }
-            </ul>
-        }
-        <div class="pages-nav-container">
-            <div class="pages-nav">
-                @if (Model.id != 0)
-                {
-                    <a href="/organizationInformation/ManagementPedagogicalStaff/@Model.id" class="pages-nav-arrow pages-nav-prev">
-                        <img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
-                    </a>
-                }
+			<h3 class="section-subtitle">
+				Персональный состав педагогических работников
+			</h3>
+			<ul class="people-list">
+				@if (Model.id < WorkersReader.Workers.Count())
+					@foreach (var person in WorkersReader.Workers.ToList()[Model.id])
+					{
+						<li class="people-item">
+							<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+								<img src="/api/images/teachers/@person.FullName" alt="">
+							</a>
+							<div class="people-item-body more-info">
+								<div class="people-item-body-fio">
+									@person.FullName
+								</div>
+								<div class="people-item-body-job">
+									@person.Post
+								</div>
+							</div>
+						</li>
+					}
+			</ul>
+		}
+		<div class="pages-nav-container">
+			<div class="pages-nav">
+				@if (Model.id != 0)
+				{
+					<a href="/organizationInformation/ManagementPedagogicalStaff/@Model.id" class="pages-nav-arrow pages-nav-prev">
+						<img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
+					</a>
+				}
 
-                <div class="pages-nav-pages-list">
-                    @if (WorkersReader.Workers.Any())
-                    {
-                        var splitPages = WorkersReader.Workers.Count() > 10;
-                        var minPage = Model.id / 10 * 9;
-                        var maxKof = Model.id < 10 ? 11 : 12;
-                        var maxPage = minPage + 10 <= WorkersReader.Workers.Count() ? minPage + maxKof : WorkersReader.Workers.Count();
-                        @if (Model.id + 1 > 10)
-                        {
-                            <a>
-                                ...
-                            </a>
-                        }
-                        @for (int i = minPage + 1; i <= maxPage; i++)
-                            if (Model.id == i - 1)
-                            {
-                                <a href="/organizationInformation/ManagementPedagogicalStaff/@i" class="pages-nav-pages-list-item current">
-                                    @i
-                                </a>
-                            }
-                            else
-                            {
-                                <a href="/organizationInformation/ManagementPedagogicalStaff/@i" class="pages-nav-pages-list-item">
-                                    @i
-                                </a>
-                            }
-                        @if (maxPage < WorkersReader.Workers.Count())
-                        {
-                            <div class="pages-nav-pages-list-item points">
-                                ...
-                            </div>
-                        }
-                    }
-                </div>
+				<div class="pages-nav-pages-list">
+					@if (WorkersReader.Workers.Any())
+					{
+						var splitPages = WorkersReader.Workers.Count() > 10;
+						var minPage = Model.id / 10 * 9;
+						var maxKof = Model.id < 10 ? 11 : 12;
+						var maxPage = minPage + 10 <= WorkersReader.Workers.Count() ? minPage + maxKof : WorkersReader.Workers.Count();
+						@if (Model.id + 1 > 10)
+						{
+							<a>
+								...
+							</a>
+						}
+						@for (int i = minPage + 1; i <= maxPage; i++)
+							if (Model.id == i - 1)
+							{
+								<a href="/organizationInformation/ManagementPedagogicalStaff/@i" class="pages-nav-pages-list-item current">
+									@i
+								</a>
+							}
+							else
+							{
+								<a href="/organizationInformation/ManagementPedagogicalStaff/@i" class="pages-nav-pages-list-item">
+									@i
+								</a>
+							}
+						@if (maxPage < WorkersReader.Workers.Count())
+						{
+							<div class="pages-nav-pages-list-item points">
+								...
+							</div>
+						}
+					}
+				</div>
 
-                @if (Model.id + 1 != WorkersReader.Workers.Count())
-                {
-                    <a href="/organizationInformation/ManagementPedagogicalStaff/@(@Model.id + 2)" class="pages-nav-arrow pages-nav-next">
-                        <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
-                    </a>
-                }
-            </div>
-        </div>
-        
-    </section>
-    <aside id="sidebar" class="sidebar long">
-        <h3 class="sidebar-title">
-            Сведения об образовательной организации
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("CommonIntelligence")'>
-                        Основные сведения
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Structure")'>
-                        Структура и органы управления образовательной организацией
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Documents")'>
-                        Документы
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Education")'>
-                        Образование
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("EducationalStandards")'>
-                        Образовательные стандарты
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("EducationalProcess")'>
-                        Организация воспитательного процесса
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("ManagementPedagogicalStaff")'>
-                        Руководство. Педагогический (научно-педагогический) состав
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Logistics")'>
-                        Материально-техническое обеспечение и оснащенность образовательного процесса
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("PaidEducationalServices")'>
-                        Платные образовательные услуги
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("FinancialEconomicActivity")'>
-                        Финансово-хозяйственная деятельность
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Jobs")'>
-                        Вакантные места для приема
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Vacancies")'>
-                        Вакансии
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("AccessibleEnvironment")'>
-                        Доступная среда
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("InternationalCooperation")'>
-                        Международное сотрудничество
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("StudentSupport")'>
-                        Стипендии и меры поддержки обучающихся
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Terrorism")'>
-                        Противодействие экстремизму и терроризму
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Corruption")'>
-                        Противодействие коррупции
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Library")'>
-                        Библиотека
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("UPK")'>
-                        Учебно-производственный комплекс
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+				@if (Model.id + 1 != WorkersReader.Workers.Count())
+				{
+					<a href="/organizationInformation/ManagementPedagogicalStaff/@(@Model.id + 2)" class="pages-nav-arrow pages-nav-next">
+						<img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
+					</a>
+				}
+			</div>
+		</div>
+		
+	</section>
+	<aside id="sidebar" class="sidebar long">
+		<h3 class="sidebar-title">
+			Сведения об образовательной организации
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("CommonIntelligence")'>
+						Основные сведения
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Structure")'>
+						Структура и органы управления образовательной организацией
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Documents")'>
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Education")'>
+						Образование
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("EducationalStandards")'>
+						Образовательные стандарты
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("EducationalProcess")'>
+						Организация воспитательного процесса
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("ManagementPedagogicalStaff")'>
+						Руководство. Педагогический (научно-педагогический) состав
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Logistics")'>
+						Материально-техническое обеспечение и оснащенность образовательного процесса
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("PaidEducationalServices")'>
+						Платные образовательные услуги
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("FinancialEconomicActivity")'>
+						Финансово-хозяйственная деятельность
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Jobs")'>
+						Вакантные места для приема
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Vacancies")'>
+						Вакансии
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("AccessibleEnvironment")'>
+						Доступная среда
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("InternationalCooperation")'>
+						Международное сотрудничество
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("StudentSupport")'>
+						Стипендии и меры поддержки обучающихся
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Terrorism")'>
+						Противодействие экстремизму и терроризму
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Corruption")'>
+						Противодействие коррупции
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Library")'>
+						Библиотека
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("UPK")'>
+						Учебно-производственный комплекс
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

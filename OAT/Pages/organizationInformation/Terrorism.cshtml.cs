@@ -2,18 +2,18 @@
 
 namespace OAT.Pages.organizationInformation
 {
-    public class TerrorismModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class TerrorismModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public TerrorismModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public TerrorismModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

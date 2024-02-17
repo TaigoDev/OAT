@@ -3,160 +3,160 @@
 @using OAT.Readers;
 @model SearchWorkerModel
 @{
-    ViewData["Title"] = "Руководство. Педагогический (научно-педагогический) состав";
+	ViewData["Title"] = "Руководство. Педагогический (научно-педагогический) состав";
 }
 
 <link rel="stylesheet" href="~/css/organizationInformation/menagementPedagogicalStaff.css" asp-append-version="true">
 <script type="text/javascript" src="/js/WorkerSearch.js" charset="utf-8"></script>
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Руководство. Педагогический (научно-педагогический) состав
-        </h2>
+	<section class="content">
+		<h2 class="section-title">
+			Руководство. Педагогический (научно-педагогический) состав
+		</h2>
 
-        <form class="search-people">
-            <div class="search-people-container">
-                <input id="search" type="search" placeholder="Введите ФИО...">
-                <button onclick="onSearch();return false">
-                    <img class="icon" src="~/images/basic/search.svg" alt="искать">
-                </button>
-            </div>
-        </form>
+		<form class="search-people">
+			<div class="search-people-container">
+				<input id="search" type="search" placeholder="Введите ФИО...">
+				<button onclick="onSearch();return false">
+					<img class="icon" src="~/images/basic/search.svg" alt="искать">
+				</button>
+			</div>
+		</form>
 
-            <h3 class="section-subtitle">
-                Персональный состав педагогических работников
-            </h3>
-            <ul class="people-list">
-            @if (Model.Workers.Any())
-            {
-                @foreach (var person in Model.Workers)
-                {
-                    <li class="people-item">
-                        <a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-                            <img src="/api/images/teachers/@person.FullName" alt="">
-                        </a>
-                        <div class="people-item-body more-info">
-                            <div class="people-item-body-fio">
-                                @person.FullName
-                            </div>
-                            <div class="people-item-body-job">
-                                @person.Post
-                            </div>
-                        </div>
-                    </li>
-                }
-            }
-            else
-            {
-                <li>Работник с таким ФИО не найден</li>
-            }
-        </ul>
-        
+			<h3 class="section-subtitle">
+				Персональный состав педагогических работников
+			</h3>
+			<ul class="people-list">
+			@if (Model.Workers.Any())
+			{
+				@foreach (var person in Model.Workers)
+				{
+					<li class="people-item">
+						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+							<img src="/api/images/teachers/@person.FullName" alt="">
+						</a>
+						<div class="people-item-body more-info">
+							<div class="people-item-body-fio">
+								@person.FullName
+							</div>
+							<div class="people-item-body-job">
+								@person.Post
+							</div>
+						</div>
+					</li>
+				}
+			}
+			else
+			{
+				<li>Работник с таким ФИО не найден</li>
+			}
+		</ul>
+		
 
-    </section>
-    <aside id="sidebar" class="sidebar long">
-        <h3 class="sidebar-title">
-            Сведения об образовательной организации
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("CommonIntelligence")'>
-                        Основные сведения
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Structure")'>
-                        Структура и органы управления образовательной организацией
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Documents")'>
-                        Документы
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Education")'>
-                        Образование
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("EducationalStandards")'>
-                        Образовательные стандарты
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("EducationalProcess")'>
-                        Организация воспитательного процесса
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("ManagementPedagogicalStaff")'>
-                        Руководство. Педагогический (научно-педагогический) состав
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Logistics")'>
-                        Материально-техническое обеспечение и оснащенность образовательного процесса
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("PaidEducationalServices")'>
-                        Платные образовательные услуги
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("FinancialEconomicActivity")'>
-                        Финансово-хозяйственная деятельность
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Jobs")'>
-                        Вакантные места для приема
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Vacancies")'>
-                        Вакансии
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("AccessibleEnvironment")'>
-                        Доступная среда
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("InternationalCooperation")'>
-                        Международное сотрудничество
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("StudentSupport")'>
-                        Стипендии и меры поддержки обучающихся
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Terrorism")'>
-                        Противодействие экстремизму и терроризму
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Corruption")'>
-                        Противодействие коррупции
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Library")'>
-                        Библиотека
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("UPK")'>
-                        Учебно-производственный комплекс
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+	</section>
+	<aside id="sidebar" class="sidebar long">
+		<h3 class="sidebar-title">
+			Сведения об образовательной организации
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("CommonIntelligence")'>
+						Основные сведения
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Structure")'>
+						Структура и органы управления образовательной организацией
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Documents")'>
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Education")'>
+						Образование
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("EducationalStandards")'>
+						Образовательные стандарты
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("EducationalProcess")'>
+						Организация воспитательного процесса
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("ManagementPedagogicalStaff")'>
+						Руководство. Педагогический (научно-педагогический) состав
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Logistics")'>
+						Материально-техническое обеспечение и оснащенность образовательного процесса
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("PaidEducationalServices")'>
+						Платные образовательные услуги
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("FinancialEconomicActivity")'>
+						Финансово-хозяйственная деятельность
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Jobs")'>
+						Вакантные места для приема
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Vacancies")'>
+						Вакансии
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("AccessibleEnvironment")'>
+						Доступная среда
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("InternationalCooperation")'>
+						Международное сотрудничество
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("StudentSupport")'>
+						Стипендии и меры поддержки обучающихся
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Terrorism")'>
+						Противодействие экстремизму и терроризму
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Corruption")'>
+						Противодействие коррупции
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Library")'>
+						Библиотека
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("UPK")'>
+						Учебно-производственный комплекс
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>  

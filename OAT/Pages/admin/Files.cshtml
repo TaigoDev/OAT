@@ -4,228 +4,228 @@
 
 @model OAT.Pages.admin.FilesModel
 @{
-    Layout = "_Panel";
-    ViewData["Title"] = "Управление файлами";
+	Layout = "_Panel";
+	ViewData["Title"] = "Управление файлами";
 
 }
 
 <link rel="stylesheet" href="~/css/panel/files.css" asp-append-version="true">
 
 <section class="container">
-    <aside id="file-error" class="file-error">
-        <button id="file-error-close" class="file-error-close" onclick="document.getElementById('file-error').classList.remove('active');">
-            <img class="icon" src="~/images/panel/closeWindow.svg" alt=""/>
-        </button>
-        <h3 class="file-error-title">
-            <span class="bigger">
-                ⛔️
-                <span class="bigger">
-                    ОШИБКА
-                </span>
-                ⛔️
-            </span>
-            <br>
-            Расписание не было успешно загружено
-        </h3>
-        <p class="file-error-text" id="error-text">
-            Текст ошибки Текст ошибки Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки
-        </p>
-    </aside>
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-        <label for="news" class="panel-form-title">
-            Управление изменением расписания
-        </label>
-        <div class="input-box">
-            <label for="user-role">
-                Корпус
-            </label>
-            <select id="corpus">
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_1))
-                {
-                    <option value="b1">
-                        Ул. Ленина, 24
-                    </option>
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_2))
-                {
-                    <option value="b2">
-                        Б. Хмельницкого, 281А
-                    </option>
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_3))
-                {
-                    <option value="b3">
-                        Пр. Космический, 14А
-                    </option>
+	<aside id="file-error" class="file-error">
+		<button id="file-error-close" class="file-error-close" onclick="document.getElementById('file-error').classList.remove('active');">
+			<img class="icon" src="~/images/panel/closeWindow.svg" alt=""/>
+		</button>
+		<h3 class="file-error-title">
+			<span class="bigger">
+				⛔️
+				<span class="bigger">
+					ОШИБКА
+				</span>
+				⛔️
+			</span>
+			<br>
+			Расписание не было успешно загружено
+		</h3>
+		<p class="file-error-text" id="error-text">
+			Текст ошибки Текст ошибки Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки  Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки Текст ошибки
+		</p>
+	</aside>
+	<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+		<label for="news" class="panel-form-title">
+			Управление изменением расписания
+		</label>
+		<div class="input-box">
+			<label for="user-role">
+				Корпус
+			</label>
+			<select id="corpus">
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_1))
+				{
+					<option value="b1">
+						Ул. Ленина, 24
+					</option>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_2))
+				{
+					<option value="b2">
+						Б. Хмельницкого, 281А
+					</option>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_3))
+				{
+					<option value="b3">
+						Пр. Космический, 14А
+					</option>
 
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_4))
-                {
-                    <option value="b4">
-                        Ул. Волховстроя, 5
-                    </option>
-                }
-            </select>
-        </div>
-        <div class="input-box">
-            <label for="images">
-                Файл
-            </label>
-            <input type="file" name="postedFiles" id="files-corpus" name="files" accept=".xlsx">
-        </div>
-        <button type="submit" id="files-change-btn" class="panel-form-send" value="Отправить" onclick="UploadScheduleChanges('files-corpus');return false" multiple>
-            Обновить
-        </button>
-    </form>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_changes_campus_4))
+				{
+					<option value="b4">
+						Ул. Волховстроя, 5
+					</option>
+				}
+			</select>
+		</div>
+		<div class="input-box">
+			<label for="images">
+				Файл
+			</label>
+			<input type="file" name="postedFiles" id="files-corpus" name="files" accept=".xlsx">
+		</div>
+		<button type="submit" id="files-change-btn" class="panel-form-send" value="Отправить" onclick="UploadScheduleChanges('files-corpus');return false" multiple>
+			Обновить
+		</button>
+	</form>
   
-    <br/>
-    <br/>
-    <br/>
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-        
-        <label for="news" class="panel-form-title">
-            Документы сессий
-        </label>
-        <div class="input-box">
-            <label for="user-role">
-                Корпус
-            </label>
-            <select id="corpus-sessions" onchange="LoadSessionsFileByCorpus()">
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_1))
-                {
-                    <option value="b1">
-                        Ул. Ленина, 24
-                    </option>
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_2))
-                {
-                    <option value="b2">
-                        Б. Хмельницкого, 281А
-                    </option>
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_3))
-                {
-                    <option value="b3">
-                        Пр. Космический, 14А
-                    </option>
+	<br/>
+	<br/>
+	<br/>
+	<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+		
+		<label for="news" class="panel-form-title">
+			Документы сессий
+		</label>
+		<div class="input-box">
+			<label for="user-role">
+				Корпус
+			</label>
+			<select id="corpus-sessions" onchange="LoadSessionsFileByCorpus()">
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_1))
+				{
+					<option value="b1">
+						Ул. Ленина, 24
+					</option>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_2))
+				{
+					<option value="b2">
+						Б. Хмельницкого, 281А
+					</option>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_3))
+				{
+					<option value="b3">
+						Пр. Космический, 14А
+					</option>
 
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_4))
-                {
-                    <option value="b4">
-                        Ул. Волховстроя, 5
-                    </option>
-                }
-            </select>
-        </div>
-        <div class="input-box">
-            <label for="filename-display">
-                Имя файла, которое будет отображаться в описании
-            </label>
-            <input id="filename-display" type="text">
-        </div>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_sessions_campus_4))
+				{
+					<option value="b4">
+						Ул. Волховстроя, 5
+					</option>
+				}
+			</select>
+		</div>
+		<div class="input-box">
+			<label for="filename-display">
+				Имя файла, которое будет отображаться в описании
+			</label>
+			<input id="filename-display" type="text">
+		</div>
 
-        <div class="input-box">
-            <label for="images">
-                Файл
-            </label>
-            <input type="file" name="postedFiles" id="file-uploader" accept=".xlsx">
-        </div>
+		<div class="input-box">
+			<label for="images">
+				Файл
+			</label>
+			<input type="file" name="postedFiles" id="file-uploader" accept=".xlsx">
+		</div>
 
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSessionsChanges('file-uploader');return false" multiple>
-            Добавить
-        </button>
-    </form>
-    <table class="customized panel-table">
-        <thead>
-            <tr>
-                <th>
-                    Имя
-                </th>
-                <th>
-                    Управление
-                </th>
-            </tr>
-        </thead>
+		<button type="submit" class="panel-form-send" value="Отправить" onclick="UploadSessionsChanges('file-uploader');return false" multiple>
+			Добавить
+		</button>
+	</form>
+	<table class="customized panel-table">
+		<thead>
+			<tr>
+				<th>
+					Имя
+				</th>
+				<th>
+					Управление
+				</th>
+			</tr>
+		</thead>
 
-        <tbody id="session-tbody">
-       
-        </tbody>
-    </table>
+		<tbody id="session-tbody">
+	   
+		</tbody>
+	</table>
 
-    <br />
-    <br />
-    <br />
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+	<br />
+	<br />
+	<br />
+	<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
 
-        <label for="news" class="panel-form-title">
-            Документы практики
-        </label>
-        <div class="input-box">
-            <label for="user-role">
-                Корпус
-            </label>
-            <select id="corpus-practice" onchange="LoadPracticeFileByCorpus()">
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_1))
-                {
-                    <option value="b1">
-                        Ул. Ленина, 24
-                    </option>
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_2))
-                {
-                    <option value="b2">
-                        Б. Хмельницкого, 281А
-                    </option>
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_3))
-                {
-                    <option value="b3">
-                        Пр. Космический, 14А
-                    </option>
+		<label for="news" class="panel-form-title">
+			Документы практики
+		</label>
+		<div class="input-box">
+			<label for="user-role">
+				Корпус
+			</label>
+			<select id="corpus-practice" onchange="LoadPracticeFileByCorpus()">
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_1))
+				{
+					<option value="b1">
+						Ул. Ленина, 24
+					</option>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_2))
+				{
+					<option value="b2">
+						Б. Хмельницкого, 281А
+					</option>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_3))
+				{
+					<option value="b3">
+						Пр. Космический, 14А
+					</option>
 
-                }
-                @if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_4))
-                {
-                    <option value="b4">
-                        Ул. Волховстроя, 5
-                    </option>
-                }
-            </select>
-        </div>
-        <div class="input-box">
-            <label for="filename-display-practice">
-                Имя файла, которое будет отображаться в описании
-            </label>
-            <input id="filename-display-practice" type="text">
-        </div>
+				}
+				@if (await Permissions.RightsToBuilding(User.GetToken(), Enums.Role.www_manager_files_practice_campus_4))
+				{
+					<option value="b4">
+						Ул. Волховстроя, 5
+					</option>
+				}
+			</select>
+		</div>
+		<div class="input-box">
+			<label for="filename-display-practice">
+				Имя файла, которое будет отображаться в описании
+			</label>
+			<input id="filename-display-practice" type="text">
+		</div>
 
-        <div class="input-box">
-            <label for="images">
-                Файл
-            </label>
-            <input type="file" name="postedFiles" id="file-uploader-practice">
-        </div>
+		<div class="input-box">
+			<label for="images">
+				Файл
+			</label>
+			<input type="file" name="postedFiles" id="file-uploader-practice">
+		</div>
 
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadPracticeChanges('file-uploader-practice');return false" multiple>
-            Добавить
-        </button>
-    </form>
-    <table class="customized panel-table">
-        <thead>
-            <tr>
-                <th>
-                    Имя
-                </th>
-                <th>
-                    Управление
-                </th>
-            </tr>
-        </thead>
+		<button type="submit" class="panel-form-send" value="Отправить" onclick="UploadPracticeChanges('file-uploader-practice');return false" multiple>
+			Добавить
+		</button>
+	</form>
+	<table class="customized panel-table">
+		<thead>
+			<tr>
+				<th>
+					Имя
+				</th>
+				<th>
+					Управление
+				</th>
+			</tr>
+		</thead>
 
-        <tbody id="practice-tbody">
-        </tbody>
-    </table>
+		<tbody id="practice-tbody">
+		</tbody>
+	</table>
 </section>
 <script type="text/javascript" src="~/js/admin.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/files.js" charset="utf-8"></script>

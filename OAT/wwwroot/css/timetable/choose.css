@@ -10,7 +10,7 @@
 	padding: 12px 10px;
 	border: 4px solid #ffffff2f;
 	border-radius: 15px;
-    background-color: var(--m-color);
+	background-color: var(--m-color);
 	color: var(--light-white);
 	transition: background-color 400ms, border-color 400ms, outline-color 400ms, transform 400ms;
 }

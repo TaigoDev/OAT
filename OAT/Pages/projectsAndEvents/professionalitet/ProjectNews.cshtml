@@ -2,141 +2,141 @@
 @using OAT.Readers;
 @model ProjectNewsModel
 @{
-    ViewData["Title"] = "Новости проекта";
-    var query = HttpContext.Request.Query["id"].ToString();
-    var id = string.IsNullOrWhiteSpace(query) ? 1 : Convert.ToInt32(query);
+	ViewData["Title"] = "Новости проекта";
+	var query = HttpContext.Request.Query["id"].ToString();
+	var id = string.IsNullOrWhiteSpace(query) ? 1 : Convert.ToInt32(query);
 }
 
 <link rel="stylesheet" href="~/css/allNews.css">
 <script src="~/js/allNews.js" asp-append-version="true"></script>
 
 <div class="container content-page">
-    <section class="content">
-        <h2 class="section-title">
-            Новости проекта
-        </h2>
+	<section class="content">
+		<h2 class="section-title">
+			Новости проекта
+		</h2>
 
-        @if (ProfNewsReader.news.Count() != 0 && ProfNewsReader.pages.Count() >= id)
-        {
+		@if (ProfNewsReader.news.Count() != 0 && ProfNewsReader.pages.Count() >= id)
+		{
 
-            <div class="news-list" style="max-width: none;">
-                @foreach (var news in ProfNewsReader.pages.ToList()[id - 1])
-                {
-                    var photos = news.photos.toObject<List<string>>();
-                    <div class="news-item">
-                        <a class="news-item-img" href="news/@news.id">
-                            @if (photos.Count > 0)
-                            {
-                                <img src="/@photos[0]" alt="">
-                            }   
-                        </a>
-                        <div class="news-item-content">
-                            <div class="news-item-date">
-                                @news.date
-                            </div>
-                            <div class="news-item-title">
-                                @news.title
-                            </div>
-                            <div class="news-item-info">
-                                @Html.Raw(@news.short_description)
-                                <a href="news/@news.id">
-                                    ещё...
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
+			<div class="news-list" style="max-width: none;">
+				@foreach (var news in ProfNewsReader.pages.ToList()[id - 1])
+				{
+					var photos = news.photos.toObject<List<string>>();
+					<div class="news-item">
+						<a class="news-item-img" href="news/@news.id">
+							@if (photos.Count > 0)
+							{
+								<img src="/@photos[0]" alt="">
+							}   
+						</a>
+						<div class="news-item-content">
+							<div class="news-item-date">
+								@news.date
+							</div>
+							<div class="news-item-title">
+								@news.title
+							</div>
+							<div class="news-item-info">
+								@Html.Raw(@news.short_description)
+								<a href="news/@news.id">
+									ещё...
+								</a>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
 
-            <div class="pages-nav-container">
+			<div class="pages-nav-container">
 
-                <div class="pages-nav">
-                    @if(id != 1)
-                    {
-                        <a href="projectnews?id=@(id - 1)" class="pages-nav-arrow pages-nav-prev">
-                            <img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
-                        </a>
-                    }
+				<div class="pages-nav">
+					@if(id != 1)
+					{
+						<a href="projectnews?id=@(id - 1)" class="pages-nav-arrow pages-nav-prev">
+							<img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
+						</a>
+					}
 
-                    <div class="pages-nav-pages-list">
-                        @for (int i = 1; i <= ProfNewsReader.pages.Count(); i++)
-                            if (id == i)
-                            {
-                                <a href="projectnews?id=@i" class="pages-nav-pages-list-item current">
-                                    @i
-                                </a>
-                            }
-                            else
-                            {
-                                <a href="projectnews?id=@i" class="pages-nav-pages-list-item">
-                                    @i
-                                </a>
-                            }
-                    </div>
+					<div class="pages-nav-pages-list">
+						@for (int i = 1; i <= ProfNewsReader.pages.Count(); i++)
+							if (id == i)
+							{
+								<a href="projectnews?id=@i" class="pages-nav-pages-list-item current">
+									@i
+								</a>
+							}
+							else
+							{
+								<a href="projectnews?id=@i" class="pages-nav-pages-list-item">
+									@i
+								</a>
+							}
+					</div>
 
-                    @if(id != ProfNewsReader.pages.Count())
-                    {
-                        <a href="projectnews?id=@(id + 1)" class="pages-nav-arrow pages-nav-next">
-                            <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
-                        </a>
-                    }
-                </div>
+					@if(id != ProfNewsReader.pages.Count())
+					{
+						<a href="projectnews?id=@(id + 1)" class="pages-nav-arrow pages-nav-next">
+							<img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
+						</a>
+					}
+				</div>
 
-            </div>
-        }
-        else
-        {
-            <p>Новостей нет</p>
-        }
-    </section>
-          
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Профессионалитет
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a href='@Url.Page("About")'>
-                        О профессионалитете
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Specialities")'>
-                        Специальности
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("OPOPP")'>
-                        ОПОП-П
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("Partners")'>
-                        Партнеры
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("ManagementCompany")'>
-                        Управляющая компания
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("RepairProgress")'>
-                        Ход ремонтных работ
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("/applicant/AdmissionRules")'>
-                        Правила приема
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("ProjectNews")'>
-                        Новости проекта
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+			</div>
+		}
+		else
+		{
+			<p>Новостей нет</p>
+		}
+	</section>
+		  
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Профессионалитет
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a href='@Url.Page("About")'>
+						О профессионалитете
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Specialities")'>
+						Специальности
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("OPOPP")'>
+						ОПОП-П
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("Partners")'>
+						Партнеры
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("ManagementCompany")'>
+						Управляющая компания
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("RepairProgress")'>
+						Ход ремонтных работ
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("/applicant/AdmissionRules")'>
+						Правила приема
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("ProjectNews")'>
+						Новости проекта
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>

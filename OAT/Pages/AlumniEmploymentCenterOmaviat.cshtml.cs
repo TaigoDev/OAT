@@ -2,18 +2,18 @@
 
 namespace OAT.Pages
 {
-    public class AlumniEmploymentCenterOmaviatModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class AlumniEmploymentCenterOmaviatModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public AlumniEmploymentCenterOmaviatModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public AlumniEmploymentCenterOmaviatModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

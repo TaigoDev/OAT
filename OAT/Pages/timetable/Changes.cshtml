@@ -5,329 +5,329 @@
 
 @model ChangesModel
 @{
-    ViewData["Title"] = "Изменения в расписании";
-    if (Model.changes is null || !Model.changes.Any() )
-    {
-        HttpContext.Response.Redirect("/timetable/ClassesChanges");
-        return;
-    }
-    var changes = ChangesController.changes_b1.FirstOrDefault();
-    var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
-    var rows = new List<ChangeRow>();
-    if (changes is not null)
-        rows = changes.rows.ToList();
+	ViewData["Title"] = "Изменения в расписании";
+	if (Model.changes is null || !Model.changes.Any() )
+	{
+		HttpContext.Response.Redirect("/timetable/ClassesChanges");
+		return;
+	}
+	var changes = ChangesController.changes_b1.FirstOrDefault();
+	var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
+	var rows = new List<ChangeRow>();
+	if (changes is not null)
+		rows = changes.rows.ToList();
 
 }
 @{
-    var show_css_class = RowChangesHelper.GetListCSS();
-    var hides_css = RowChangesHelper.GetListCSS();
-    var table_show_css_class = RowChangesHelper.GetListCSS();
-    var table_hide_css_class = RowChangesHelper.GetListCSS();
+	var show_css_class = RowChangesHelper.GetListCSS();
+	var hides_css = RowChangesHelper.GetListCSS();
+	var table_show_css_class = RowChangesHelper.GetListCSS();
+	var table_hide_css_class = RowChangesHelper.GetListCSS();
 
-    var css = RowChangesHelper.ToCSSList(hides_css, show_css_class);
-    var table_css = RowChangesHelper.ToCSSList(table_show_css_class, table_hide_css_class);
+	var css = RowChangesHelper.ToCSSList(hides_css, show_css_class);
+	var table_css = RowChangesHelper.ToCSSList(table_show_css_class, table_hide_css_class);
 }
 <link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
 <link rel="stylesheet" href="~/css/timetable/changes.css" asp-append-version="true">
 <script src="~/js/changes.js" asp-append-version="true"></script>
 
 <section class="centered timetable-container">
-    <h2 class="section-title title-centered">
-        @changes.Date
-    </h2>
-    <h3 class="section-title title-centered" style="font-size: 1.4rem;">
-        @changes.SchoolWeek
-    </h3>
-    <div class="months">
-        <div class="months-choose">
-            @foreach (var sheet in Model.changes)
-            {
-                <a class="months-choose-item @(changes.SheetName == sheet.SheetName ? "active" : "")" href="/timetable/Changes/@Model.corpus/@sheet.SheetName">
-                    @sheet.SheetName
-                </a>
-            }
-        </div>
-        <form class="search-body">
-            <div class="search-body-container">
-                <input id="search" type="search" placeholder="Введите группу или преподавателя...">
-                <button onclick="onSearch('@Model.corpus', '@Model.sheet');return false">
-                    <img style="width: 20px;" class="icon" src="/images/basic/search.svg" alt="искать">
-                </button>
-            </div>
-        </form>
-    </div>
-    @{
-        PasteEmptyTables();
-        var table_style = $"table-{table_show_css_class[new Random().Next(0, table_show_css_class.Count() - 1)]}";
-    }
-    
-        <table class="customized timetable">
-        <thead>
-            <tr>
-                <th>
-                    Курс
-                </th>
-                <th>
-                    Группа
-                </th>
-                <th>
-                    Пара
-                </th>
-                <th>
-                    Аудит
-                </th>
-                <th>
-                    Учеб.дисциплина
-                </th>
-                <th>
-                    ФИО преподавателя
-                </th>
-                <th>
-                    причина
-                </th>
-                <th>
-                    пара
-                </th>
-                <th>
-                    Аудит
-                </th>
-                <th>
-                    Учеб.дисциплина
-                </th>
-                <th>
-                    ФИО преподавателя
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        @(await Html.RenderComponentAsync<ChangesComponent>(RenderMode.Server, new
-        {
-            search = search,
+	<h2 class="section-title title-centered">
+		@changes.Date
+	</h2>
+	<h3 class="section-title title-centered" style="font-size: 1.4rem;">
+		@changes.SchoolWeek
+	</h3>
+	<div class="months">
+		<div class="months-choose">
+			@foreach (var sheet in Model.changes)
+			{
+				<a class="months-choose-item @(changes.SheetName == sheet.SheetName ? "active" : "")" href="/timetable/Changes/@Model.corpus/@sheet.SheetName">
+					@sheet.SheetName
+				</a>
+			}
+		</div>
+		<form class="search-body">
+			<div class="search-body-container">
+				<input id="search" type="search" placeholder="Введите группу или преподавателя...">
+				<button onclick="onSearch('@Model.corpus', '@Model.sheet');return false">
+					<img style="width: 20px;" class="icon" src="/images/basic/search.svg" alt="искать">
+				</button>
+			</div>
+		</form>
+	</div>
+	@{
+		PasteEmptyTables();
+		var table_style = $"table-{table_show_css_class[new Random().Next(0, table_show_css_class.Count() - 1)]}";
+	}
+	
+		<table class="customized timetable">
+		<thead>
+			<tr>
+				<th>
+					Курс
+				</th>
+				<th>
+					Группа
+				</th>
+				<th>
+					Пара
+				</th>
+				<th>
+					Аудит
+				</th>
+				<th>
+					Учеб.дисциплина
+				</th>
+				<th>
+					ФИО преподавателя
+				</th>
+				<th>
+					причина
+				</th>
+				<th>
+					пара
+				</th>
+				<th>
+					Аудит
+				</th>
+				<th>
+					Учеб.дисциплина
+				</th>
+				<th>
+					ФИО преподавателя
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		@(await Html.RenderComponentAsync<ChangesComponent>(RenderMode.Server, new
+		{
+			search = search,
 
-            sheet = Model.sheet,
-            corpus = Model.corpus
-        })
-        );
-        </tbody>
-    </table>
-    @{
-        PasteEmptyTables();
-    }  
-    <table style="margin: 10px auto !important;" class="customized timetable">
-        <thead>
-            <tr>
-                <th colspan="2">
-                    Режим звонков
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var bell in changes.bells)
-            {
-            <tr>
-                <td>
-                    @bell.id
-                </td>
-                <td>
-                    @bell.period
-                </td>
-            </tr>
-            }
-           
-        </tbody>
-    </table>
+			sheet = Model.sheet,
+			corpus = Model.corpus
+		})
+		);
+		</tbody>
+	</table>
+	@{
+		PasteEmptyTables();
+	}  
+	<table style="margin: 10px auto !important;" class="customized timetable">
+		<thead>
+			<tr>
+				<th colspan="2">
+					Режим звонков
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var bell in changes.bells)
+			{
+			<tr>
+				<td>
+					@bell.id
+				</td>
+				<td>
+					@bell.period
+				</td>
+			</tr>
+			}
+		   
+		</tbody>
+	</table>
 </section>
-    <base href="~/" />
-    <script src="~/_framework/blazor.server.js"></script>
+	<base href="~/" />
+	<script src="~/_framework/blazor.server.js"></script>
 
 @{
-    void CreateEmptyRow()
-    {
-        var style = new Random().Next(0, 100) % 2 == 0 ? $"class={hides_css[new Random().Next(0, hides_css.Count() - 1)]}" : "hidden";
-        style = new Random().Next(0, 100) % 2 == 0 ? style : $"visible class={hides_css[new Random().Next(0, hides_css.Count() - 1)]}";
-        var group = rows[new Random().Next(0, rows.Count() - 1)].group;
-        <tr @style>
-                    <td>
-                        @group.FirstOrDefault(Char.IsDigit)
-                    </td>
-                    <td>
-                        @group
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].was_couple
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].was_discipline
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].was_teacher
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].reason
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].couple
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].cabinet
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].discipline
-                    </td>
-                    <td>
-                        @rows[new Random().Next(0, rows.Count() - 1)].teacher
-                    </td>
-        </tr>
-    }
+	void CreateEmptyRow()
+	{
+		var style = new Random().Next(0, 100) % 2 == 0 ? $"class={hides_css[new Random().Next(0, hides_css.Count() - 1)]}" : "hidden";
+		style = new Random().Next(0, 100) % 2 == 0 ? style : $"visible class={hides_css[new Random().Next(0, hides_css.Count() - 1)]}";
+		var group = rows[new Random().Next(0, rows.Count() - 1)].group;
+		<tr @style>
+					<td>
+						@group.FirstOrDefault(Char.IsDigit)
+					</td>
+					<td>
+						@group
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].was_couple
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].was_discipline
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].was_teacher
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].reason
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].couple
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].cabinet
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].discipline
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].teacher
+					</td>
+		</tr>
+	}
 
-    void PasteEmptyTables()
-    {
-        for (var i = 0; i < new Random().Next(1, 5); i++)
-        {
-                PasteTable();
-        }
-    }
+	void PasteEmptyTables()
+	{
+		for (var i = 0; i < new Random().Next(1, 5); i++)
+		{
+				PasteTable();
+		}
+	}
 
-    void PasteTable()
-    {
-        var style = $"table-{table_hide_css_class[new Random().Next(0, table_hide_css_class.Count() - 1)]}";
-    <table class="customized timetable @style">
-        <thead>
-            <tr>
-                <th>
-                    Курс
-                </th>
-                <th>
-                    Группа
-                </th>
-                <th>
-                    Пара
-                </th>
-                <th>
-                    Аудит
-                </th>
-                <th>
-                    Учеб.дисциплина
-                </th>
-                <th>
-                    ФИО преподавателя
-                </th>
-                <th>
-                    причина
-                </th>
-                <th>
-                    пара
-                <th>
-                    Аудит
-                </th>
-                <th>
-                    Учеб.дисциплина
-                </th>
-                <th>
-                    ФИО преподавателя
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-                @for(var i = 0; i< new Random().Next(0, 120); i++)
-                {
-                    CreateEmptyRow();
-                }
-            </tbody>
-    </table>
-    }
+	void PasteTable()
+	{
+		var style = $"table-{table_hide_css_class[new Random().Next(0, table_hide_css_class.Count() - 1)]}";
+	<table class="customized timetable @style">
+		<thead>
+			<tr>
+				<th>
+					Курс
+				</th>
+				<th>
+					Группа
+				</th>
+				<th>
+					Пара
+				</th>
+				<th>
+					Аудит
+				</th>
+				<th>
+					Учеб.дисциплина
+				</th>
+				<th>
+					ФИО преподавателя
+				</th>
+				<th>
+					причина
+				</th>
+				<th>
+					пара
+				<th>
+					Аудит
+				</th>
+				<th>
+					Учеб.дисциплина
+				</th>
+				<th>
+					ФИО преподавателя
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+				@for(var i = 0; i< new Random().Next(0, 120); i++)
+				{
+					CreateEmptyRow();
+				}
+			</tbody>
+	</table>
+	}
 }
 
 @foreach(var _css in css)
 {
-    @if (show_css_class.Contains(_css))
-    {
-        if (new Random().Next(0, 100) % 2 == 0)
-        {
-            <style>
-            .@(_css) {
-                display: none;
-                display: table-row;
-            }
-            </style>
-        }
-        else
-        {
-            <style>
-            .@(_css) {
-                display: table-row;
-            }
-            </style> 
-        }
-    }
-    else if (new Random().Next(0, 100) % 2 == 0)
-    {
-        <style>
-            .@(_css) {
-            display: none;
-            }
-        </style>
-    }
-    else if (new Random().Next(0, 100) % 2 == 0)
-    {
-        <style>
-            .@(_css) {
-            visibility: collapse;
-            }
-        </style>
-    }
-    else
-    {
-        <style>
-            .@(_css) {
-            display: table-row;
-            display: none;
-            }
-        </style>
-    }
+	@if (show_css_class.Contains(_css))
+	{
+		if (new Random().Next(0, 100) % 2 == 0)
+		{
+			<style>
+			.@(_css) {
+				display: none;
+				display: table-row;
+			}
+			</style>
+		}
+		else
+		{
+			<style>
+			.@(_css) {
+				display: table-row;
+			}
+			</style> 
+		}
+	}
+	else if (new Random().Next(0, 100) % 2 == 0)
+	{
+		<style>
+			.@(_css) {
+			display: none;
+			}
+		</style>
+	}
+	else if (new Random().Next(0, 100) % 2 == 0)
+	{
+		<style>
+			.@(_css) {
+			visibility: collapse;
+			}
+		</style>
+	}
+	else
+	{
+		<style>
+			.@(_css) {
+			display: table-row;
+			display: none;
+			}
+		</style>
+	}
 }
 
 @foreach(var style in table_css)
 {
-    @if (table_show_css_class.Contains(style))
-    {
-        if (new Random().Next(0, 100) % 2 == 0)
-        {
-            <style>
-            .table-@(style) {
-                visibility: collapse;
-                visibility: visible;
-            }
-            </style>
-        }
-        else
-        {
-            <style>
-            .table-@(style) {
-                display: none;
-                display: table;
-            }
-            </style>
-        }
-    }
-    else if (new Random().Next(0, 100) % 2 == 0)
-    {
-            <style>
-            .table-@(style) {
-                visibility: collapse;
-            }
-        </style>
-    }
-    else
-    {
-            <style>
-            .table-@(style) {
-               position: fixed;
-               height: 0;
-            }
-            </style>
-    }
+	@if (table_show_css_class.Contains(style))
+	{
+		if (new Random().Next(0, 100) % 2 == 0)
+		{
+			<style>
+			.table-@(style) {
+				visibility: collapse;
+				visibility: visible;
+			}
+			</style>
+		}
+		else
+		{
+			<style>
+			.table-@(style) {
+				display: none;
+				display: table;
+			}
+			</style>
+		}
+	}
+	else if (new Random().Next(0, 100) % 2 == 0)
+	{
+			<style>
+			.table-@(style) {
+				visibility: collapse;
+			}
+		</style>
+	}
+	else
+	{
+			<style>
+			.table-@(style) {
+			   position: fixed;
+			   height: 0;
+			}
+			</style>
+	}
 }

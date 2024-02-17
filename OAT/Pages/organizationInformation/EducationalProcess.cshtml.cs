@@ -2,18 +2,18 @@
 
 namespace OAT.Pages.organizationInformation
 {
-    public class EducationalProcessModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class EducationalProcessModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public EducationalProcessModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public EducationalProcessModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

@@ -2,18 +2,18 @@
 
 namespace OAT.Pages.parents
 {
-    public class ParentMeetingsModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class ParentMeetingsModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public ParentMeetingsModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public ParentMeetingsModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

@@ -3,7 +3,7 @@
 @using OAT.UtilsHelper;
 @model OAT.Pages.timetable.TeachersModel
 @{
-    ViewData["Title"] = "Расписание преподавателей";
+	ViewData["Title"] = "Расписание преподавателей";
 
 }
 
@@ -12,30 +12,30 @@
 <link rel="stylesheet" href="~/css/timetable/groups.css" asp-append-version="true">
 <section class="centered">
 
-     <h2 class="section-title title-centered">
-        Преподаватели
-    </h2>
-    <table class="customized timetable groups">
-        <thead>
-            <tr>
-                <th>
-                    ФИО
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var teacher in ScheduleUtils.GetTeacherScheduleByBuilding(Model.building))
-            {
-                <tr>
-                    <td>
-                        <a href="/timetable/TeacherSchedule/@Model.building/@teacher.FullName">@teacher.FullName</a>
-                    </td>
-                </tr>
-            }
-            
-        </tbody>
-        
-    </table>
-    
+	 <h2 class="section-title title-centered">
+		Преподаватели
+	</h2>
+	<table class="customized timetable groups">
+		<thead>
+			<tr>
+				<th>
+					ФИО
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var teacher in ScheduleUtils.GetTeacherScheduleByBuilding(Model.building))
+			{
+				<tr>
+					<td>
+						<a href="/timetable/TeacherSchedule/@Model.building/@teacher.FullName">@teacher.FullName</a>
+					</td>
+				</tr>
+			}
+			
+		</tbody>
+		
+	</table>
+	
 </section>
-    
+	

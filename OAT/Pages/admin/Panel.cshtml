@@ -2,164 +2,164 @@
 @using OAT.Readers;
 @model PanelModel
 @{
-    ViewData["Title"] = "Панель";
-    Layout = "_Panel";
+	ViewData["Title"] = "Панель";
+	Layout = "_Panel";
 }
 
 <section class="container">
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-        <label for="news" class="panel-form-title">
-            Новости
-        </label>
-        
+	<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+		<label for="news" class="panel-form-title">
+			Новости
+		</label>
+		
 
-        <div class="input-box">
-            <label for="news-title">
-                Название
-            </label>
-            <input id="news-title" type="text">
-        </div>
+		<div class="input-box">
+			<label for="news-title">
+				Название
+			</label>
+			<input id="news-title" type="text">
+		</div>
 
-        <div class="input-box">
-            <label for="news-date">
-                Дата
-            </label>
-            <input id="news-date" type="date">
-        </div>
+		<div class="input-box">
+			<label for="news-date">
+				Дата
+			</label>
+			<input id="news-date" type="date">
+		</div>
 
-        <div class="input-box">
-            <label for="news-text">
-                Текст
-            </label>
-            <textarea class="customized" id="news-text">Текст новости, её содержание.</textarea>
-        </div>
-        <div class="input-box">
-            <label for="images">
-                Фото
-            </label>
-            <input type="file" name="postedFiles" id="files" name="files" multiple="multiple">
-        </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="SendNews();return false" multiple>
-            Отправить
-        </button>
+		<div class="input-box">
+			<label for="news-text">
+				Текст
+			</label>
+			<textarea class="customized" id="news-text">Текст новости, её содержание.</textarea>
+		</div>
+		<div class="input-box">
+			<label for="images">
+				Фото
+			</label>
+			<input type="file" name="postedFiles" id="files" name="files" multiple="multiple">
+		</div>
+		<button type="submit" class="panel-form-send" value="Отправить" onclick="SendNews();return false" multiple>
+			Отправить
+		</button>
 
-    </form>
+	</form>
 
-    <table class="customized panel-table">
-        <thead>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Имя
-                </th>
-                <th>
-                    Дата
-                </th>
-                <th>
-                    Управление
-                </th>
-            </tr>
-        </thead>
-        @foreach (var news in NewsReader.news)
-        {
-            <tbody id="@news.id">
-                <tr>
-                    <td>
-                        @news.id
-                    </td>
-                    <td>
-                        @news.title
-                    </td>
-                    <td>
-                        @news.date
-                    </td>
-                    <td>
-                        <button onclick="DeleteNews(@news.id); return false" class="panel-table-button">удалить</button>
-                    </td>
-                </tr>
-            </tbody>
-        }
-    </table>
+	<table class="customized panel-table">
+		<thead>
+			<tr>
+				<th>
+					ID
+				</th>
+				<th>
+					Имя
+				</th>
+				<th>
+					Дата
+				</th>
+				<th>
+					Управление
+				</th>
+			</tr>
+		</thead>
+		@foreach (var news in NewsReader.news)
+		{
+			<tbody id="@news.id">
+				<tr>
+					<td>
+						@news.id
+					</td>
+					<td>
+						@news.title
+					</td>
+					<td>
+						@news.date
+					</td>
+					<td>
+						<button onclick="DeleteNews(@news.id); return false" class="panel-table-button">удалить</button>
+					</td>
+				</tr>
+			</tbody>
+		}
+	</table>
 </section>
 
 <section class="container">
-    <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-        <label for="news" class="panel-form-title">
-            Новости профессионалитет 
-        </label>
+	<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+		<label for="news" class="panel-form-title">
+			Новости профессионалитет 
+		</label>
 
 
-        <div class="input-box">
-            <label for="news-title-prof">
-                Название
-            </label>
-            <input id="news-title-prof" type="text">
-        </div>
+		<div class="input-box">
+			<label for="news-title-prof">
+				Название
+			</label>
+			<input id="news-title-prof" type="text">
+		</div>
 
-        <div class="input-box">
-            <label for="news-date-prof">
-                Дата
-            </label>
-            <input id="news-date-prof" type="date">
-        </div>
+		<div class="input-box">
+			<label for="news-date-prof">
+				Дата
+			</label>
+			<input id="news-date-prof" type="date">
+		</div>
 
-        <div class="input-box">
-            <label for="news-text-prof">
-                Текст
-            </label>
-            <textarea class="customized" id="news-text-prof">Текст новости, её содержание.</textarea>
-        </div>
-        <div class="input-box">
-            <label for="images">
-                Фото
-            </label>
-            <input type="file" name="postedFiles" id="files-prof" multiple="multiple">
-        </div>
-        <button type="submit" class="panel-form-send" value="Отправить" onclick="UploadProfNews();return false" multiple>
-            Отправить
-        </button>
+		<div class="input-box">
+			<label for="news-text-prof">
+				Текст
+			</label>
+			<textarea class="customized" id="news-text-prof">Текст новости, её содержание.</textarea>
+		</div>
+		<div class="input-box">
+			<label for="images">
+				Фото
+			</label>
+			<input type="file" name="postedFiles" id="files-prof" multiple="multiple">
+		</div>
+		<button type="submit" class="panel-form-send" value="Отправить" onclick="UploadProfNews();return false" multiple>
+			Отправить
+		</button>
 
-    </form>
+	</form>
 
-    <table class="customized panel-table">
-        <thead>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Имя
-                </th>
-                <th>
-                    Дата
-                </th>
-                <th>
-                    Управление
-                </th>
-            </tr>
-        </thead>
-        @foreach (var news in ProfNewsReader.news)
-        {
-            <tbody id="@news.id-prof">
-                <tr>
-                    <td>
-                        @news.id
-                    </td>
-                    <td>
-                        @news.title
-                    </td>
-                    <td>
-                        @news.date
-                    </td>
-                    <td>
-                        <button onclick="DeleteProfNews(@news.id); return false" class="panel-table-button">удалить</button>
-                    </td>
-                </tr>
-            </tbody>
-        }
-    </table>
+	<table class="customized panel-table">
+		<thead>
+			<tr>
+				<th>
+					ID
+				</th>
+				<th>
+					Имя
+				</th>
+				<th>
+					Дата
+				</th>
+				<th>
+					Управление
+				</th>
+			</tr>
+		</thead>
+		@foreach (var news in ProfNewsReader.news)
+		{
+			<tbody id="@news.id-prof">
+				<tr>
+					<td>
+						@news.id
+					</td>
+					<td>
+						@news.title
+					</td>
+					<td>
+						@news.date
+					</td>
+					<td>
+						<button onclick="DeleteProfNews(@news.id); return false" class="panel-table-button">удалить</button>
+					</td>
+				</tr>
+			</tbody>
+		}
+	</table>
 </section>
 
 <aside id="message-success" class="panel-message">👌 Новость успешно добавлена 👌</aside>

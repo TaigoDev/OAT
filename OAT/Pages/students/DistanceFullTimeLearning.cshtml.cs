@@ -2,18 +2,18 @@
 
 namespace OAT.Pages.students
 {
-    public class DistanceFullTimeLearningModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class DistanceFullTimeLearningModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public DistanceFullTimeLearningModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public DistanceFullTimeLearningModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

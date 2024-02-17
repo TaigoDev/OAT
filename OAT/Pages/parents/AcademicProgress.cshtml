@@ -1,70 +1,70 @@
 ﻿@page
 @model AcademicProgressModel
 @{
-    ViewData["Title"] = "Успеваемость";
+	ViewData["Title"] = "Успеваемость";
 }
 
 <link rel="stylesheet" href="~/css/parents/academicProgress.css" asp-append-version="true">
 <link rel="stylesheet" href="~/css/feedback/pay.css" asp-append-version="true">
 
 <div class="container content-page">
-    <section class="content">
-        <a id="plane" class="plane" href="#sidebar"></a>
-        <h2 class="section-title">
-            Успеваемость
-        </h2>
+	<section class="content">
+		<a id="plane" class="plane" href="#sidebar"></a>
+		<h2 class="section-title">
+			Успеваемость
+		</h2>
 
-        <form class="grades-form">
-            <h3 class="grades-form-title">
-                Посмотреть оценки
-            </h3>
-            <div class="input-box">
-                <label for="login">
-                    Логин
-                </label>
-                <input id="login" type="text"/>
-            </div>
-            <div class="input-box">
-                <label for="password">
-                    Пароль
-                </label>
-                <input id="password" type="password"/>
-            </div>
-            <button onclick="onAuth();return false" class="customized">
-                ВОЙТИ
-            </button>
-        </form>
-        
-    </section>
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Родителям
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link sidebar-link-selected">
-                    <a href='@Url.Page("AcademicProgress")'>
-                        Успеваемость
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("EducationalProcessOrganization")'>
-                        Организация учебного процесса в колледже
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("ParentMeetings")'>
-                        Прием родителей, родительские собрания
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a href='@Url.Page("PsychologicalPedagogicalSupport")'>
-                        Психолого-педагогическое сопровождение
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+		<form class="grades-form">
+			<h3 class="grades-form-title">
+				Посмотреть оценки
+			</h3>
+			<div class="input-box">
+				<label for="login">
+					Логин
+				</label>
+				<input id="login" type="text"/>
+			</div>
+			<div class="input-box">
+				<label for="password">
+					Пароль
+				</label>
+				<input id="password" type="password"/>
+			</div>
+			<button onclick="onAuth();return false" class="customized">
+				ВОЙТИ
+			</button>
+		</form>
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Родителям
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link sidebar-link-selected">
+					<a href='@Url.Page("AcademicProgress")'>
+						Успеваемость
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("EducationalProcessOrganization")'>
+						Организация учебного процесса в колледже
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("ParentMeetings")'>
+						Прием родителей, родительские собрания
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a href='@Url.Page("PsychologicalPedagogicalSupport")'>
+						Психолого-педагогическое сопровождение
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>
 <script type="text/javascript" src="~/js/admin.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/AcademicProgress.js" charset="utf-8"></script>

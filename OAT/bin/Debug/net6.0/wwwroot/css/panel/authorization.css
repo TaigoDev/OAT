@@ -13,16 +13,16 @@ body {
 /* exit */
 
 .exit {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: grid;
-    place-items: center;
-    width: 50px;
-    height: 50px;
-    background-color: var(--matte-color);
-    border-radius: 0 0 0 50%;
-    /*border-radius: 50% 0% 50% 50%;*/
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: grid;
+	place-items: center;
+	width: 50px;
+	height: 50px;
+	background-color: var(--matte-color);
+	border-radius: 0 0 0 50%;
+	/*border-radius: 50% 0% 50% 50%;*/
 }
 
 .exit img {
@@ -94,15 +94,15 @@ body {
 
 .sign-in::after {
 	content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(45deg, var(--matte-color) 80%, transparent 80%);
-    transition: width 450ms ease-in-out;
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 0;
+	height: 100%;
+	background: linear-gradient(45deg, var(--matte-color) 80%, transparent 80%);
+	transition: width 450ms ease-in-out;
 }
 
 .sign-in:hover {

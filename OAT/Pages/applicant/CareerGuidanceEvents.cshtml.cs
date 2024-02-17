@@ -2,18 +2,18 @@
 
 namespace OAT.Pages.applicant
 {
-    public class CareerGuidanceEventsModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class CareerGuidanceEventsModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public CareerGuidanceEventsModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public CareerGuidanceEventsModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

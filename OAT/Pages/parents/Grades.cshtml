@@ -3,81 +3,81 @@
 @using System.Globalization;
 @model GradesModel
 @{
-    ViewData["Title"] = $"Успеваемость студента {Model.FullName}";
-    var currentMonth = DateTime.ParseExact($"{Model.month}", "MMMM", CultureInfo.GetCultureInfo("ru-ru"));
-    var lastMonth = currentMonth.AddMonths(-1).ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
-    var nextMonth = currentMonth.AddMonths(1).ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
+	ViewData["Title"] = $"Успеваемость студента {Model.FullName}";
+	var currentMonth = DateTime.ParseExact($"{Model.month}", "MMMM", CultureInfo.GetCultureInfo("ru-ru"));
+	var lastMonth = currentMonth.AddMonths(-1).ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
+	var nextMonth = currentMonth.AddMonths(1).ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
 }
 <link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
 
 
 <section class="centered">
-    <h2 class="section-title">
-        Успеваемость студента @Model.FullName
-    </h2>
-    <div class="months">
-        <div class="months-choose">
-            @if (lastMonth != "август")
-            {
-                <a class="months-choose-item" href="/parents/grades/@lastMonth">
-                    Предыдущий месяц
-                </a>
-            }
-            @if (nextMonth != "июль")
-            {
-                <a class="months-choose-item" href="/parents/grades/@nextMonth">
-                    Следующий месяц
-                </a>
-            }   
-        </div>
-        <div class="months-current">
-            @Model.month
-        </div>
-    </div>
+	<h2 class="section-title">
+		Успеваемость студента @Model.FullName
+	</h2>
+	<div class="months">
+		<div class="months-choose">
+			@if (lastMonth != "август")
+			{
+				<a class="months-choose-item" href="/parents/grades/@lastMonth">
+					Предыдущий месяц
+				</a>
+			}
+			@if (nextMonth != "июль")
+			{
+				<a class="months-choose-item" href="/parents/grades/@nextMonth">
+					Следующий месяц
+				</a>
+			}   
+		</div>
+		<div class="months-current">
+			@Model.month
+		</div>
+	</div>
 
-    @if (Model.Disciplines is not null)
-    {
-        <table class="customized">
-            <thead>
-                <tr>
-                    <th>
-                        Дисциплина
-                    </th>
-                    @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", CultureInfo.GetCultureInfo("ru-ru")).Month); i++)
-                    {
-                        <th>
-                            @i
-                        </th>
-                    }
-                    <th>
-                       Рубежный контроль
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Disciplines is not null)
-                {
-                    @foreach (var discipline in Model.Disciplines.Disciplines)
-                    {
-                        <tr>
-                            <td>
-                                @discipline.discipline
-                            </td>
-                            @foreach (var mark in discipline.marks)
-                            {
-                                <td>
-                                    @mark
-                                </td>
-                            }
-                        </tr>
-                    }
+	@if (Model.Disciplines is not null)
+	{
+		<table class="customized">
+			<thead>
+				<tr>
+					<th>
+						Дисциплина
+					</th>
+					@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", CultureInfo.GetCultureInfo("ru-ru")).Month); i++)
+					{
+						<th>
+							@i
+						</th>
+					}
+					<th>
+					   Рубежный контроль
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if (Model.Disciplines is not null)
+				{
+					@foreach (var discipline in Model.Disciplines.Disciplines)
+					{
+						<tr>
+							<td>
+								@discipline.discipline
+							</td>
+							@foreach (var mark in discipline.marks)
+							{
+								<td>
+									@mark
+								</td>
+							}
+						</tr>
+					}
 
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <h3>Информация отсутствует. Журнал обновляется каждый месяц</h3>
-    }
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<h3>Информация отсутствует. Журнал обновляется каждый месяц</h3>
+	}
 </section>

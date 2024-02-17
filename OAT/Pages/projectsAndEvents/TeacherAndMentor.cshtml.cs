@@ -2,18 +2,18 @@
 
 namespace OAT.Pages
 {
-    public class TeacherAndMentorModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class TeacherAndMentorModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public TeacherAndMentorModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public TeacherAndMentorModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

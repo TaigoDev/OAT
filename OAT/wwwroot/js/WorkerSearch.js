@@ -1,3 +1,3 @@
 ﻿function onSearch(){
-    window.location.href = `/organizationInformation/SearchWorker/${$("#search").val()}`
+	window.location.href = `/organizationInformation/SearchWorker/${$("#search").val()}`
 }

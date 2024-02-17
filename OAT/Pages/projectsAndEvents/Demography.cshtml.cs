@@ -2,18 +2,18 @@
 
 namespace OAT.Pages
 {
-    public class DemographyModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class DemographyModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public DemographyModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+		public DemographyModel(ILogger<IndexModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
+		public void OnGet()
+		{
 
-        }
-    }
+		}
+	}
 }

@@ -2,17 +2,17 @@
 
 namespace OAT.Pages
 {
-    public class PrivacyModel : PageModel
-    {
-        private readonly ILogger<PrivacyModel> _logger;
+	public class PrivacyModel : PageModel
+	{
+		private readonly ILogger<PrivacyModel> _logger;
 
-        public PrivacyModel(ILogger<PrivacyModel> logger)
-        {
-            _logger = logger;
-        }
+		public PrivacyModel(ILogger<PrivacyModel> logger)
+		{
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
-        }
-    }
+		public void OnGet()
+		{
+		}
+	}
 }

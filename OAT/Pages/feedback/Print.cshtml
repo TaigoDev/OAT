@@ -2,439 +2,439 @@
 @using OAT.Pages.feedback;
 @model PrintModel
 @{
-    Layout = null;
-    ViewData["Title"] = "Печать";
+	Layout = null;
+	ViewData["Title"] = "Печать";
 }
 
 <style>
 
-    h3, h4{
-        text-align: center;
-    }
+	h3, h4{
+		text-align: center;
+	}
 
-    table, th, td {
-        border: 1px solid black;
-        border-spacing: 0px;
-    }
+	table, th, td {
+		border: 1px solid black;
+		border-spacing: 0px;
+	}
 
-    td{
-        vertical-align: top;
-    }
+	td{
+		vertical-align: top;
+	}
 
-    img{
-        width: 250px;
-        height: 250px;
-    }
+	img{
+		width: 250px;
+		height: 250px;
+	}
 
-    button {
-        position: relative;
-        display: block;
-        padding: 10px;
-        margin: 20px auto;
-        min-width: 200px;
-        border: 4px solid transparent;
-        border-radius: 15px;
-        background-color: hsl(0, 0%, 20%);
-        color: var(--light-white);
-        font-weight: 700;
-        text-align: center;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        opacity: 0.95;
-        overflow: hidden;
-        transition: border-color 300ms, opacity 300ms;
-        color: white;
-    }
+	button {
+		position: relative;
+		display: block;
+		padding: 10px;
+		margin: 20px auto;
+		min-width: 200px;
+		border: 4px solid transparent;
+		border-radius: 15px;
+		background-color: hsl(0, 0%, 20%);
+		color: var(--light-white);
+		font-weight: 700;
+		text-align: center;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		opacity: 0.95;
+		overflow: hidden;
+		transition: border-color 300ms, opacity 300ms;
+		color: white;
+	}
 
-    @@media print {
-        @@page {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
+	@@media print {
+		@@page {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
 
-        body {
-            padding-top: 72px;
-            padding-bottom: 72px;
-        }
+		body {
+			padding-top: 72px;
+			padding-bottom: 72px;
+		}
 
-        header, footer {
-            display: none;
-        }
+		header, footer {
+			display: none;
+		}
 
-        button:hover {
-            display: none;
-        }
-    }
+		button:hover {
+			display: none;
+		}
+	}
 
-    button:hover {
-        border-color: rgb(20, 20, 20);
-    }
+	button:hover {
+		border-color: rgb(20, 20, 20);
+	}
 </style>
 
 <div style="max-width: 950px; margin: 10px auto;">
-    @if (!string.IsNullOrEmpty(Model.M_Purpose))
-    {
-        <h3 style="text-align: center;">
-            ВНИМАТЕЛЬНО ПРОВЕРЬТЕ СВОИ ДАННЫЕ, КВИТАНЦИЯ СФОРМИРОВАНА АВТОМАТИЧЕСКИ
-        </h3>
-        <table>
-            <tr>
-                <td style="width: 250px; height: 250px;">
-                    <img src="/@Model.qrPathIzv" alt="qr код">
-                </td>
-                <td rowspan="2">
-                    Омский авиационный колледж имени Н.Е. Жуковского
-                    <br>
-                    <br>
-                    Получатель: Министерство финансов Омской области (БПОУ "Омавиат" л/c 010220608)
-                    <br>
-                    <b>ИНН </b>5504000055 <b>КПП </b>550401001 <b>БИК </b>015209001<b> <br/>КБК </b>01000000000000000130<b> ОКТМО </b> 52701000
-                    <table>
-                        <tr>
-                            <td>
-                                Р/С
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                6
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                К/С
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                8
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                7
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                4
-                            </td>
-                        </tr>
-                    </table>
-                    в Отделение Омск Банка России//УФК по Омской области г. Омск
-                    <br>
-                    Номер лицевого счёта: 010220608
-                    <br>
-                    <br>
-                    <b>Назначение платежа:</b>
-                    <br>
-                    @Model.M_Purpose
-                    <br>
-                    Суммма: <b>@Model.M_summa</b> руб.
-                    <br>
-                    ФИО (плательщик): <u>@Model.M_FullName</u>
-                    <br>
-                    <br>
-                    С условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен
-                    <br>
-                    <br>
-                    Подпись:____________________ дата "__" _________ 20___г.
-                    <br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br>
-                    <h4>ИЗВЕЩЕНИЕ</h4>
-                    <br>
-                </td>
-            </tr>
+	@if (!string.IsNullOrEmpty(Model.M_Purpose))
+	{
+		<h3 style="text-align: center;">
+			ВНИМАТЕЛЬНО ПРОВЕРЬТЕ СВОИ ДАННЫЕ, КВИТАНЦИЯ СФОРМИРОВАНА АВТОМАТИЧЕСКИ
+		</h3>
+		<table>
+			<tr>
+				<td style="width: 250px; height: 250px;">
+					<img src="/@Model.qrPathIzv" alt="qr код">
+				</td>
+				<td rowspan="2">
+					Омский авиационный колледж имени Н.Е. Жуковского
+					<br>
+					<br>
+					Получатель: Министерство финансов Омской области (БПОУ "Омавиат" л/c 010220608)
+					<br>
+					<b>ИНН </b>5504000055 <b>КПП </b>550401001 <b>БИК </b>015209001<b> <br/>КБК </b>01000000000000000130<b> ОКТМО </b> 52701000
+					<table>
+						<tr>
+							<td>
+								Р/С
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								3
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								6
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								3
+							</td>
+							<td>
+								5
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								5
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								1
+							</td>
+						</tr>
+						<tr>
+							<td>
+								К/С
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								1
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								8
+							</td>
+							<td>
+								1
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								5
+							</td>
+							<td>
+								3
+							</td>
+							<td>
+								7
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								4
+							</td>
+						</tr>
+					</table>
+					в Отделение Омск Банка России//УФК по Омской области г. Омск
+					<br>
+					Номер лицевого счёта: 010220608
+					<br>
+					<br>
+					<b>Назначение платежа:</b>
+					<br>
+					@Model.M_Purpose
+					<br>
+					Суммма: <b>@Model.M_summa</b> руб.
+					<br>
+					ФИО (плательщик): <u>@Model.M_FullName</u>
+					<br>
+					<br>
+					С условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен
+					<br>
+					<br>
+					Подпись:____________________ дата "__" _________ 20___г.
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br>
+					<h4>ИЗВЕЩЕНИЕ</h4>
+					<br>
+				</td>
+			</tr>
 
 
 
 
 
-            <tr>
-                <td style="width: 250px; height: 250px;">
-                    <img src="/@Model.qrPathQvit" alt="qr код">
-                </td>
-                <td rowspan="2">
-                    Омский авиационный колледж имени Н.Е. Жуковского
-                    <br>
-                    <br>
-                    Получатель: Министерство финансов Омской области (БПОУ "Омавиат" л/c 010220608)
-                    <br>
-                    <b>ИНН </b>5504000055 <b>КПП </b>550401001 <b>БИК </b>015209001<b> <br />КБК </b>01000000000000000130<b> ОКТМО </b> 52701000
-                    <table>
-                        <tr>
-                            <td>
-                                Р/С
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                6
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                К/С
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                8
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                7
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                4
-                            </td>
-                        </tr>
-                    </table>
-                    в Отделение Омск Банка России//УФК по Омской области г. Омск
-                    <br>
-                    Номер лицевого счёта: 010220608
-                    <br>
-                    <br>
-                    <b>Назначение платежа:</b>
-                    <br>
-                    @Model.M_Purpose
-                    <br>
-                    Суммма: <b>@Model.M_summa</b> руб.
-                    <br>
-                    ФИО (плательщик): <u>@Model.M_FullName</u>
-                    <br>
-                    <br>
-                    С условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен
-                    <br>
-                    <br>
-                    Подпись:____________________ дата "__" _________ 20___г.
-                    <br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br>
-                    <h4>КВИТАНЦИЯ</h4>
-                    <br>
-                </td>
-            </tr>
-        </table>
+			<tr>
+				<td style="width: 250px; height: 250px;">
+					<img src="/@Model.qrPathQvit" alt="qr код">
+				</td>
+				<td rowspan="2">
+					Омский авиационный колледж имени Н.Е. Жуковского
+					<br>
+					<br>
+					Получатель: Министерство финансов Омской области (БПОУ "Омавиат" л/c 010220608)
+					<br>
+					<b>ИНН </b>5504000055 <b>КПП </b>550401001 <b>БИК </b>015209001<b> <br />КБК </b>01000000000000000130<b> ОКТМО </b> 52701000
+					<table>
+						<tr>
+							<td>
+								Р/С
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								3
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								6
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								3
+							</td>
+							<td>
+								5
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								5
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								1
+							</td>
+						</tr>
+						<tr>
+							<td>
+								К/С
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								1
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								8
+							</td>
+							<td>
+								1
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								2
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								5
+							</td>
+							<td>
+								3
+							</td>
+							<td>
+								7
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								0
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								4
+							</td>
+						</tr>
+					</table>
+					в Отделение Омск Банка России//УФК по Омской области г. Омск
+					<br>
+					Номер лицевого счёта: 010220608
+					<br>
+					<br>
+					<b>Назначение платежа:</b>
+					<br>
+					@Model.M_Purpose
+					<br>
+					Суммма: <b>@Model.M_summa</b> руб.
+					<br>
+					ФИО (плательщик): <u>@Model.M_FullName</u>
+					<br>
+					<br>
+					С условиями приема указанной в платежном документе суммы, в т.ч. суммой оплаты за услуги банка ознакомлен и согласен
+					<br>
+					<br>
+					Подпись:____________________ дата "__" _________ 20___г.
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br>
+					<h4>КВИТАНЦИЯ</h4>
+					<br>
+				</td>
+			</tr>
+		</table>
 
-        <button onclick="window.print()">
-            Распечатать или сохранить PDF
-        </button>
-    }
-    else
-    {
-        <h3 style="text-align: center;">
-            ДОКУМЕНТ НЕ НАЙДЕН
-        </h3>
-    }
+		<button onclick="window.print()">
+			Распечатать или сохранить PDF
+		</button>
+	}
+	else
+	{
+		<h3 style="text-align: center;">
+			ДОКУМЕНТ НЕ НАЙДЕН
+		</h3>
+	}
 </div>
