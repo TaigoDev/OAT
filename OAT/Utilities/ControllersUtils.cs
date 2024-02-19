@@ -21,7 +21,7 @@
 		{
 			return builder.Use(async (context, next) =>
 			{
-				context.Response.Headers.Add("X-Content-Type-Options", "sniff");
+				context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
 				await next();
 			});
 		}
