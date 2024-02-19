@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using OAT.Changes;
 using OAT.Readers;
 using OAT.Utilities;
 
@@ -14,7 +15,6 @@ namespace OAT.Pages
 			_logger = logger;
 		}
 
-		public List<Changes>? changes { get; set; }
 		public string? sheet { get; set; }
 		public int? corpus { get; set; }
 
@@ -25,12 +25,7 @@ namespace OAT.Pages
 			
 
 			this.corpus = corpus;
-			changes = ChangesController.GetListChanges((int)corpus!);
-
-			if (!changes.Any())
-				return;
-			
-			this.sheet = sheet ?? changes.Last().SheetName;
+			this.sheet = sheet ?? ChangesHelper.GetSheetName((int)corpus);
 		}
 	}
 
