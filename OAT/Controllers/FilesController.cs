@@ -21,7 +21,10 @@ namespace OAT.Controllers
 			if (response is not null)
 				return BadRequest(response);
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
-			FileUtils.FileDelete(path);
+			var latest = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", "latest", $"{building}-changes.xlsx");
+
+			FileUtils.FileDelete(latest);
+			System.IO.File.Move(path, latest);
 
 			using Stream fileStream = new FileStream(path, FileMode.Create);
 			await file.CopyToAsync(fileStream);
@@ -32,7 +35,7 @@ namespace OAT.Controllers
 			return StatusCode(StatusCodes.Status200OK);
 		}
 
-		[HttpGet("changes/{building}/download"), NoCache]
+		[HttpGet("changes/{building}/09876635187285765187736186318263782/download"), NoCache]
 		public async Task<IActionResult> DownloadChanges(string building)
 		{
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}-changes.xlsx");
@@ -44,11 +47,12 @@ namespace OAT.Controllers
 
 		private async Task<string?> TestChanges(string building, IFormFile file)
 		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{Path.GetRandomFileName()}-changes.xlsx");
+			var filename = $"{Path.GetRandomFileName()}-changes.xlsx";
+			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", filename);
 			using Stream fileStream = new FileStream(path, FileMode.Create);
 			await file.CopyToAsync(fileStream);
 			fileStream.Dispose();
-			var response = await TimeTableBot.TestChangesInSchedule(building, path);
+			var response = await TimeTableBot.TestChangesInSchedule(building, path, filename);
 			System.IO.File.Delete(path);
 			return response;
 		}

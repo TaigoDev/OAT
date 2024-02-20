@@ -15,15 +15,13 @@ namespace OAT.Utilities
 			try
 			{
 				await ChangesController.UpdateCorpusChanges(int.Parse(string.Join("", building.FirstOrDefault(char.IsDigit))));
-				var client = new HttpClient();
 
-				await using var stream = File.OpenRead(xlsx);
+				var client = new HttpClient();
 				using var request = new HttpRequestMessage(HttpMethod.Post,
 					$"{config.url}/api/alerts/changes/schedule/{building}");
 				using var content = new MultipartFormDataContent
 				{
 					{ new StringContent(config.token), "token" },
-					{ new StreamContent(stream), "file", $"{building}.xlsx" }
 				};
 
 				request.Content = content;
@@ -38,7 +36,7 @@ namespace OAT.Utilities
 			}
 		}
 
-		public static async Task<string?> TestChangesInSchedule(string building, string xlsx)
+		public static async Task<string?> TestChangesInSchedule(string building, string xlsx, string filename)
 		{
 			try
 			{
@@ -50,7 +48,7 @@ namespace OAT.Utilities
 				using var content = new MultipartFormDataContent
 				{
 					{ new StringContent(config.token), "token" },
-					{ new StreamContent(stream), "file", $"{building}.xlsx" }
+					{ new StringContent(filename), "filename" },
 				};
 
 				request.Content = content;

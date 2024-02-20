@@ -19,7 +19,10 @@ namespace OAT.Controllers
 				return StatusCode(StatusCodes.Status406NotAcceptable);
 
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building}.xml");
-			FileUtils.FileDelete(path);
+			var latest = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", "latest", $"{building}.xml");
+
+			FileUtils.FileDelete(latest);
+			System.IO.File.Move(path, latest);
 
 			using Stream fileStream = new FileStream(path, FileMode.Create);
 			await file.CopyToAsync(fileStream);

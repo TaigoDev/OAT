@@ -57,6 +57,7 @@ void SetupControllers()
             "Resources/workers",
             "wwwroot/people",
             "Resources/schedule",
+            "Resources/schedule/latest",
             "Resources/journal",
             "Resources/pay",
             "Resources/static",
