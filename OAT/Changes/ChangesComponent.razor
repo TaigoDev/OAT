@@ -5,54 +5,54 @@
 @using static Enums;
 
 @{
-    var hide_css = FakeChangesController.GenerateCSS(10);
-    var show_css = FakeChangesController.GenerateCSS(10);
-    var fakeCSS = new FakeCSS(show_css, hide_css);
-    var url = $"/api/multi/css/{StringUtils.ConvertStringToHex(fakeCSS.toJson())}";
+	var hide_css = FakeChangesController.GenerateCSS(10);
+	var show_css = FakeChangesController.GenerateCSS(10);
+	var fakeCSS = new FakeCSS(show_css, hide_css);
+	var url = $"/api/multi/css/{StringUtils.ConvertStringToHex(fakeCSS.toJson())}";
 }
 <link rel="stylesheet" href="@url" asp-append-version="true">
 
 @foreach (var change in rows)
 {
-    @if(new Random().Next(0, 1) == 1)
-    {
-        <tr class="@fakeCSS.hide_css[new Random().Next(0, fakeCSS.hide_css.Count() - 1)]">
-            <td>
-                @change.cours
-            </td>
-            <td>
-                @change.group
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].was_couple
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].was_discipline
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].was_teacher
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].reason
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].couple
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].cabinet
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].discipline
-            </td>
-            <td>
-                @rows[new Random().Next(0, rows.Count() - 1)].teacher
-            </td>
-        </tr>
-    }
-    <tr class="@fakeCSS.show_css[new Random().Next(0, fakeCSS.show_css.Count() - 1)]">
+	@if(new Random().Next(0, 1) == 1)
+	{
+		<tr class="@fakeCSS.hide_css[new Random().Next(0, fakeCSS.hide_css.Count() - 1)]">
+			<td>
+				@change.cours
+			</td>
+			<td>
+				@change.group
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].was_couple
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].was_discipline
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].was_teacher
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].reason
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].couple
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].cabinet
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].discipline
+			</td>
+			<td>
+				@rows[new Random().Next(0, rows.Count() - 1)].teacher
+			</td>
+		</tr>
+	}
+	<tr class="@fakeCSS.show_css[new Random().Next(0, fakeCSS.show_css.Count() - 1)]">
 		<td>
 			@change.cours
 		</td>
@@ -88,41 +88,41 @@
 		</td>
 	</tr>
 
-    <tr class="@fakeCSS.hide_css[new Random().Next(0, fakeCSS.hide_css.Count() - 1)]">
-        <td>
-            @change.cours
-        </td>
-        <td>
-            @change.group
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].was_couple
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].was_discipline
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].was_teacher
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].reason
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].couple
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].cabinet
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].discipline
-        </td>
-        <td>
-            @rows[new Random().Next(0, rows.Count() - 1)].teacher
-        </td>
-    </tr>
+	<tr class="@fakeCSS.hide_css[new Random().Next(0, fakeCSS.hide_css.Count() - 1)]">
+		<td>
+			@change.cours
+		</td>
+		<td>
+			@change.group
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].was_couple
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].was_discipline
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].was_teacher
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].reason
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].couple
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].cabinet
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].discipline
+		</td>
+		<td>
+			@rows[new Random().Next(0, rows.Count() - 1)].teacher
+		</td>
+	</tr>
 }
 		 
 		
@@ -161,5 +161,5 @@
 		}
 	}
 
-    
+	
 }

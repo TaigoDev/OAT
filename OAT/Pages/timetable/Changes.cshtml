@@ -6,15 +6,15 @@
 
 @model ChangesModel
 @{
-    ViewData["Title"] = "Изменения в расписании";
-    if (Model.corpus is null)
-    {
-        HttpContext.Response.Redirect("/timetable/ClassesChanges");
-        return;
-    }
-    var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
-    var fakeCSS = new FakeCSS(FakeChangesController.GenerateCSS(10), FakeChangesController.GenerateCSS(10));
-    var url = $"/api/multi/css/tables/{StringUtils.ConvertStringToHex(fakeCSS.toJson())}";
+	ViewData["Title"] = "Изменения в расписании";
+	if (Model.corpus is null)
+	{
+		HttpContext.Response.Redirect("/timetable/ClassesChanges");
+		return;
+	}
+	var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
+	var fakeCSS = new FakeCSS(FakeChangesController.GenerateCSS(10), FakeChangesController.GenerateCSS(10));
+	var url = $"/api/multi/css/tables/{StringUtils.ConvertStringToHex(fakeCSS.toJson())}";
 }
 
 <link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
@@ -49,13 +49,13 @@
 	</div>
 
 
-    @for (var i = 0; i < new Random().Next(1, 3); i++)
-        @(await Html.RenderComponentAsync<FakeChangesComponent>(RenderMode.Server, new
-        {
-            fakeCSS = fakeCSS,
-        }))
+	@for (var i = 0; i < new Random().Next(1, 3); i++)
+		@(await Html.RenderComponentAsync<FakeChangesComponent>(RenderMode.Server, new
+		{
+			fakeCSS = fakeCSS,
+		}))
 
-    <table class="customized timetable @fakeCSS.show_css[new Random().Next(0, fakeCSS.show_css.Count() - 1)]">
+	<table class="customized timetable @fakeCSS.show_css[new Random().Next(0, fakeCSS.show_css.Count() - 1)]">
 		<thead>
 			<tr>
 				<th>
@@ -104,11 +104,11 @@
 		</tbody>
 	</table>
 
-    @for(var i = 0; i < new Random().Next(1, 3); i++)
-        @(await Html.RenderComponentAsync<FakeChangesComponent>(RenderMode.Server, new
-        {
-            fakeCSS = fakeCSS,
-        }))
+	@for(var i = 0; i < new Random().Next(1, 3); i++)
+		@(await Html.RenderComponentAsync<FakeChangesComponent>(RenderMode.Server, new
+		{
+			fakeCSS = fakeCSS,
+		}))
 
 	<table style="margin: 10px auto !important;" class="customized timetable">
 		<thead>
@@ -119,16 +119,16 @@
 			</tr>
 		</thead>
 		<tbody>
-            @foreach (var bell in ChangesHelper.GetBells((int)Model.corpus, Model.sheet))
+			@foreach (var bell in ChangesHelper.GetBells((int)Model.corpus, Model.sheet))
 			{
-			    <tr>
-				    <td>
-					    @bell.id
-				    </td>
-				    <td>
-					    @bell.period
-				    </td>
-			    </tr>
+				<tr>
+					<td>
+						@bell.id
+					</td>
+					<td>
+						@bell.period
+					</td>
+				</tr>
 			}
 		   
 		</tbody>
