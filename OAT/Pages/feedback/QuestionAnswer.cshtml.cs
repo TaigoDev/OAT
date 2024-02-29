@@ -34,6 +34,7 @@ namespace OAT.Pages.feedback
 				"Профориентация" or "Трудоустройство" or "Приемная комиссия" or "Курсовая подготовка" => "savin@oat.ru",
 				"Главная бухгалтерия" or "Бухгалтерия" or "Экономика" => "dolgusheva_ny@oat.ru",
 				"Директор школы" => "subbotin.sa@oat.ru",
+				"Инженерный лицей" => "elo@oat.ru",
 				_ => "post@oat.ru"
 			};
 
