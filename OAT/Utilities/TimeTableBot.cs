@@ -17,6 +17,7 @@ namespace OAT.Utilities
 				await ChangesController.UpdateCorpusChanges(int.Parse(string.Join("", building.FirstOrDefault(char.IsDigit))));
 
 				var client = new HttpClient();
+				client.Timeout = TimeSpan.FromMinutes(2);
 				using var request = new HttpRequestMessage(HttpMethod.Post,
 					$"{config.url}/api/alerts/changes/schedule/{building}");
 				using var content = new MultipartFormDataContent
@@ -41,7 +42,7 @@ namespace OAT.Utilities
 			try
 			{
 				var client = new HttpClient();
-
+				client.Timeout = TimeSpan.FromMinutes(2);
 				await using var stream = File.OpenRead(xlsx);
 				using var request = new HttpRequestMessage(HttpMethod.Post,
 					$"{config.url}/api/test/changes/{building}");
@@ -53,9 +54,13 @@ namespace OAT.Utilities
 
 				request.Content = content;
 				var response = await client.SendAsync(request);
+				if (response.StatusCode is System.Net.HttpStatusCode.OK)
+					return null;
+
 				if(response.StatusCode is System.Net.HttpStatusCode.BadRequest)
 					return await response.Content.ReadAsStringAsync();
-				return null;
+
+				return "❌ Произошла ошибка тестирования расписания. Обратитесь в службу информатизации вопрос к разработчикам сайта!";
 			}
 			catch (Exception ex)
 			{
