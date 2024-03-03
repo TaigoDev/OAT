@@ -82,5 +82,17 @@ namespace OAT.Utilities
 			Array.Resize(ref words, words.Length - 1);
 			return words;
 		}
+
+		public static string ConvertFullNameToShortName(string s)
+		{
+			if (string.IsNullOrEmpty(s = s.Trim()))
+				return string.Empty;
+			string[] sss = s.Split(" ");
+			StringBuilder sb = new StringBuilder(sss[0] + " ");
+			for (int i = 1; i < sss.Length; i++)
+				if (!string.IsNullOrEmpty(s = sss[i].Trim()))
+					sb.Append(s.Substring(0, 1).ToUpper() + ". ");
+			return sb.ToString();
+		}
 	}
 }
