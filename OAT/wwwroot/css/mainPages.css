@@ -23,10 +23,9 @@ body {
 	top: 0;
 	left: 0;
 	z-index: -1;
-	width: 100dvw;
+	min-width: 100dvw;
 	height: 100%;
 	object-fit: cover;
-	filter: brightness(0.8);
 }
 
 .main-underheader .container {
