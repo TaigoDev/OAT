@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.Changes;
-using OAT.Readers;
-using OAT.Utilities;
+using OAT.Modules.ReCaptchaV3;
 
 namespace OAT.Pages
 {
@@ -17,12 +17,14 @@ namespace OAT.Pages
 
 		public string? sheet { get; set; }
 		public int? corpus { get; set; }
+		public string captchaToken { get; set; }
 
 		public void OnGet(int? corpus, string? sheet)
 		{
-			if(corpus is null)
+
+			if (corpus is null)
 				return;
-			
+
 
 			this.corpus = corpus;
 			this.sheet = sheet ?? ChangesHelper.GetSheetName((int)corpus);

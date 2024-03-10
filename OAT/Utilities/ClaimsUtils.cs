@@ -1,5 +1,5 @@
-﻿using System.Security.Claims;
-using OAT.UtilsHelper;
+﻿using OAT.Modules.Security;
+using System.Security.Claims;
 
 namespace OAT.Utilities
 {

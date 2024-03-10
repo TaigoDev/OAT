@@ -1,5 +1,7 @@
 ﻿@page "{building?}/{group_name?}"
-@using OAT.Readers;
+@using OAT.Modules.Schedules.Readers
+@using OAT.Entities.Schedule
+
 @model TimetableModel
 @{
 	ViewData["Title"] = "Расписание группы " + Model.group_name;
@@ -74,11 +76,11 @@
 			<tbody>
 				@if(Model.group != null)
 				{
-					Week week = Model.group.weeks.Where(e => e.id == 1).First();
+					var week = Model.group.weeks.Where(e => e.id == 1).First();
 					@for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
 					{
-						List<Lesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
-						string[] ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
+						var lessons = Model.GetAllLessonsByNumber(lesson_id, week);
+						var ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
 
 						<tr>
 
@@ -209,11 +211,11 @@
 			<tbody>
 				@if (Model.group != null)
 				{
-					Week week = Model.group.weeks.Where(e => e.id == 2).First();
+					var week = Model.group.weeks.Where(e => e.id == 2).First();
 					@for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
 					{
-						List<Lesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
-						string[] ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
+						var lessons = Model.GetAllLessonsByNumber(lesson_id, week);
+						var ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
 
 						<tr>
 

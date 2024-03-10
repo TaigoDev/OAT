@@ -1,5 +1,5 @@
 ﻿@page "{building?}/{fullname?}"
-@using OAT.Readers;
+@using OAT.Modules.Schedules.Readers
 @model OAT.Pages.timetable.TeacherScheduleModel
 @{
 }
@@ -51,10 +51,10 @@
 			<tbody>
 				@if (Model.teacher != null)
 				{
-					TeacherWeek week = Model.teacher.weeks.Where(e => e.id == 1).First();
+					var week = Model.teacher.weeks.Where(e => e.id == 1).First();
 					@for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
 					{
-						List<TeacherLesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
+						var lessons = Model.GetAllLessonsByNumber(lesson_id, week);
 						string[] ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
 
 						<tr>
@@ -139,11 +139,11 @@
 			<tbody>
 				@if (Model.teacher != null)
 				{
-					TeacherWeek week = Model.teacher.weeks.Where(e => e.id == 2).First();
+					var week = Model.teacher.weeks.Where(e => e.id == 2).First();
 					@for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
 					{
-						List<TeacherLesson> lessons = Model.GetAllLessonsByNumber(lesson_id, week);
-						string[] ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
+						var lessons = Model.GetAllLessonsByNumber(lesson_id, week);
+						var ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
 
 						<tr>
 

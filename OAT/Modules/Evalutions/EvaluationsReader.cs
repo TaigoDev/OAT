@@ -1,0 +1,92 @@
+﻿using Ganss.Excel;
+using OAT.Entities.Journal;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text.RegularExpressions;
+
+namespace OAT.Modules.Evalutions
+{
+	public class EvaluationsReader
+	{
+
+		public static async Task<Student?> Search(string group, string FullName, string month)
+		{
+			var stopWatch = new Stopwatch();
+			stopWatch.Start();
+
+			var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "journal");
+
+			var xlsx = Path.Combine(folder, GetFileName(folder, group));
+			if (!File.Exists(xlsx))
+				return null;
+
+			var sheets = new ExcelMapper(xlsx).FetchSheetNames().ToList();
+			var excel = new ExcelMapper()
+			{
+				HeaderRow = true,
+				HeaderRowNumber = 0,
+				MinRowNumber = 1,
+				CreateMissingHeaders = true,
+				SkipBlankCells = false,
+			};
+			var monthName = sheets.FirstOrDefault(e => e.ToLower() == month.ToLower());
+			if (!DateTime.TryParseExact(month, "MMMM", CultureInfo.GetCultureInfo("ru-ru"), DateTimeStyles.None, out var dateTime) || monthName is null)
+				return null;
+			MappingDays(ref excel, DateTime.DaysInMonth(DateTime.Now.Year, dateTime.Month));
+
+			var rawRecords = await excel.FetchAsync<RawRecord>(xlsx, monthName);
+			var student = Student.Convert(FullName, rawRecords.ToList());
+			stopWatch.Stop();
+			Logger.InfoWithoutTelegram($"Оценки пользователя загружены за {stopWatch.ElapsedMilliseconds}ms");
+			return student;
+		}
+
+
+		private static string GetFileName(string folder, string group)
+		{
+			var matches = Regex.Matches(group, @"(\p{L}+)\s*([\d-]+)");
+			var letters = matches.First().Groups[1].Value;
+			var numbers = matches.First().Groups[2].Value.ToString().Remove(0, 1);
+
+			var files = Directory.GetFiles(folder, "*.xlsx").Where(e =>
+			{
+				var info = new FileInfo(e).Name;
+				return info.Contains(letters) && GetGroupNumbers(info).Contains(numbers);
+			});
+
+			if (files.Count() >= 1)
+				return files.FirstOrDefault(e =>
+				new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
+
+			return "";
+		}
+
+		private static string GetGroupNumbers(string name)
+		{
+			var matches = Regex.Matches(name, @"(\p{L}+)\s*([\d-]+)");
+			return matches.First().Groups[2].Value.ToString().Remove(0, 1);
+		}
+
+		private static void MappingDays(ref ExcelMapper excel, int days)
+		{
+			for (int i = 1; i <= days + 1; i++)
+				excel.AddMapping<RawRecord>(2 + i, e => e.cache);
+		}
+
+
+		public class RawRecord
+		{
+			[Column("Студент")]
+			public string FullName { get; set; }
+
+			[Column("Дисциплина")]
+			public string discipline { get; set; }
+
+			public List<string> marks = new List<string>();
+
+			public string? cache { get { return null; } set { marks.Add(value ?? ""); } }
+		}
+
+
+	}
+}

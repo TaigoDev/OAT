@@ -1,0 +1,269 @@
+﻿@using Microsoft.JSInterop
+@using OAT.Modules.ReCaptchaV3
+@using OAT.Modules.Schedules.Readers
+@using static Enums
+@using OAT.Components
+@using OAT.Utilities;
+@using Microsoft.AspNetCore.Components.Rendering;
+@using static Enums;
+@inject IJSRuntime JSRuntime;
+@inject ICaptchaV3Validator captcha;
+<link rel="stylesheet" href="/api/multi/css/@(StringUtils.ConvertStringToHex(new FakeCSS(show_css, hide_css).toJson()))" asp-append-version="true">
+@renderFragment
+		 
+		
+
+@code {
+
+    private DotNetObjectReference<ChangesComponent>? objRef;
+
+    private List<string> hide_css = FakeChangesController.GenerateCSS(10);
+    private List<string> show_css = FakeChangesController.GenerateCSS(10);
+    [Parameter]
+    public string? search { get; set; }
+
+    [Parameter]
+    public Building corpus { get; set; }
+
+    [Parameter]
+    public string sheet { get; set; }
+
+    public static List<ChangeRow> rows = new();
+    private RenderFragment renderFragment = (__builder) =>
+    {
+        <h3 class="section-title title-centered" style="font-size: 1.4rem;">
+            Пожалуйста, подождите. Идет проверка вашего устройства
+        </h3>
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        objRef = DotNetObjectReference.Create(this);
+        await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper",
+                objRef);
+
+        var all_changes = ChangesController.GetListChanges((int)corpus!);
+        var changes = all_changes.FirstOrDefault(e => e.SheetName == sheet) ?? all_changes.Last();
+        if (search is null)
+            rows = changes.rows.ToList();
+        else
+            rows = changes.rows.Where(e =>
+                ToSearch(e.group ?? "").Contains(ToSearch(search)) ||
+                ToSearch(e.teacher ?? "").Contains(ToSearch(search)) ||
+                ToSearch(e.was_teacher ?? "").Contains(ToSearch(search))).ToList();
+
+        string ToSearch(string? s)
+        {
+            if (s is null)
+                return "";
+            return s.ToLower().Replace(" ", "");
+        }
+        var token = await JSRuntime.InvokeAsync<string>("recaptchaCall");
+        if (!await captcha.IsCaptchaPassedAsync(token))
+        {
+            await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper", objRef);
+
+            renderFragment = (__builder) =>
+             {
+                <h3 class="section-title title-centered" style="font-size: 1.4rem;">
+                    Пройдите проверку на робота.
+                </h3>
+                 <div id="html_element" data-callback="OnComplete" class="g-recaptcha recaptcha-block" data-sitekey="@Configurator.ReCaptchaV2.WebSecretKey"></div>
+             };
+            await JSRuntime.InvokeVoidAsync("loadScript", "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit");
+
+            return;
+        }
+
+        OnRowDisplay();
+    }
+
+
+
+
+    [JSInvokable]
+    public async Task OnComplete(string token)
+    {
+        if (await CaptchaVerificationService.IsCaptchaValid(token))
+        {
+            OnRowDisplay();
+            this.StateHasChanged();
+            return;
+        }
+
+        renderFragment = (__builder) =>
+        {
+            <h3 class="section-title title-centered" style="font-size: 1.4rem;">
+                Произошла техническая ошибка. Попробуйте позже.
+            </h3>
+        };
+        this.StateHasChanged();
+    }
+
+    private void OnRowDisplay()
+    {
+
+        var fakeCSS = new FakeCSS(show_css, hide_css);
+        renderFragment = (__builder) =>
+        {
+            <table class="customized timetable @fakeCSS.show_css[new Random().Next(0, fakeCSS.show_css.Count() - 1)]">
+                <thead>
+                    <tr>
+                        <th>
+                            Курс
+                        </th>
+                        <th>
+                            Группа
+                        </th>
+                        <th>
+                            Пара
+                        </th>
+                        <th>
+                            Аудит
+                        </th>
+                        <th>
+                            Учеб.дисциплина
+                        </th>
+                        <th>
+                            ФИО преподавателя
+                        </th>
+                        <th>
+                            причина
+                        </th>
+                        <th>
+                            пара
+                        </th>
+                        <th>
+                            Аудит
+                        </th>
+                        <th>
+                            Учеб.дисциплина
+                        </th>
+                        <th>
+                            ФИО преподавателя
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var change in rows)
+            {
+                @if (new Random().Next(0, 1) == 1)
+                {
+                    <tr class="@fakeCSS.hide_css[new Random().Next(0, fakeCSS.hide_css.Count() - 1)]">
+                        <td>
+                            @change.cours
+                        </td>
+                        <td>
+                            @change.group
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].was_couple
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].was_discipline
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].was_teacher
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].reason
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].couple
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].cabinet
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].discipline
+                        </td>
+                        <td>
+                            @rows[new Random().Next(0, rows.Count() - 1)].teacher
+                        </td>
+                    </tr>
+                }
+                <tr class="@fakeCSS.show_css[new Random().Next(0, fakeCSS.show_css.Count() - 1)]">
+                    <td>
+                        @change.cours
+                    </td>
+                    <td>
+                        @change.group
+                    </td>
+                    <td>
+                        @change.was_couple
+                    </td>
+                    <td>
+                        @change.was_cabinet
+                    </td>
+                    <td>
+                        @change.was_discipline
+                    </td>
+                    <td>
+                        @change.was_teacher
+                    </td>
+                    <td>
+                        @change.reason
+                    </td>
+                    <td>
+                        @change.couple
+                    </td>
+                    <td>
+                        @change.cabinet
+                    </td>
+                    <td>
+                        @change.discipline
+                    </td>
+                    <td>
+                        @change.teacher
+                    </td>
+                </tr>
+
+                <tr class="@fakeCSS.hide_css[new Random().Next(0, fakeCSS.hide_css.Count() - 1)]">
+                    <td>
+                        @change.cours
+                    </td>
+                    <td>
+                        @change.group
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].was_couple
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].was_discipline
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].was_teacher
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].reason
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].couple
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].cabinet
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].discipline
+                    </td>
+                    <td>
+                        @rows[new Random().Next(0, rows.Count() - 1)].teacher
+                    </td>
+                </tr>
+            }
+            		</tbody>
+	</table>
+
+    };
+    }
+
+    public void Dispose() => objRef?.Dispose();
+
+}

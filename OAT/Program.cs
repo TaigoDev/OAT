@@ -1,43 +1,48 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Net.Http.Headers;
 using MySqlConnector;
-using OAT.Readers;
+using OAT;
+using OAT.Modules.MNews.Readers;
+using OAT.Modules.Payments.Readers;
+using OAT.Modules.ReCaptchaV3;
+using OAT.Modules.Recovery;
+using OAT.Modules.Schedules.Readers;
+using OAT.Modules.Security;
+using OAT.Modules.Telegram;
+using OAT.Modules.Workers;
 using OAT.Utilities;
-using OAT.UtilsHelper;
 using OAT.UtilsHelper.ReCaptcha;
-using OAT.UtilsHelper.Telegram;
 using OfficeOpenXml;
 using RepoDb;
-using System.Runtime.InteropServices; 
-using TAIGO.ZCore.DPC.Services;
-using static ProxyController;
 
-config = await FileUtils.SetupConfiguration(Path.Combine(Directory.GetCurrentDirectory(),
-	RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new Config());
+await Configurator.init();
 GlobalConfiguration.Setup().UseMySqlConnector();
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
 var builder = WebApplication.CreateBuilder(args);
 SetupServices(ref builder);
 SetupControllers();
+
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
 app.MapBlazorHub();
 app.UseRouting();
 app.UseNoSniffHeaders();
-
 app.Use((context, next) => CacheController(context, next));
-if (config.bitrixProxy)
+
+if (Configurator.config.bitrixProxy)
 	app.BitrixProxy();
 else
 {
-	app.Use(async (context, next) => 
+	app.Use(async (context, next) =>
 	{
 		await next();
 		if (context.Response.StatusCode == 404)
 			context.Response.Redirect("https://www.oat.ru/Duck");
 	});
 }
+
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
@@ -64,10 +69,8 @@ void SetupControllers()
 			"Resources/bitrix",
 			"Resources/practice", "Resources/practice/b1", "Resources/practice/b2", "Resources/practice/b3", "Resources/practice/b4",
 			"Resources/Logs");
-		/* WARNING: Not support async methods */
 		Runs.StartModules(
 			TelegramBot.init,
-			TimeTableBot.init,
 			UrlsContoller.init,
 			DropTokens,
 			HealthTables.init,
@@ -109,8 +112,10 @@ void SetupServices(ref WebApplicationBuilder builder)
 		options.Filters.Add<ValidationFilterForPages>();
 
 	});
+	builder.Services.AddScoped(typeof(ICaptchaV3Validator), typeof(ReCaptchaV3Validator));
+	builder.Services.AddHttpClient();
 	builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
-	builder.WebHost.UseUrls($"http://0.0.0.0:{config.bind_port}");
+	builder.WebHost.UseUrls($"http://0.0.0.0:{Configurator.config.bind_port}");
 
 }
 

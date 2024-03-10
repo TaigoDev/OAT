@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Readers;
+using OAT.Entities.Journal;
+using OAT.Modules.Evalutions;
+using OAT.Modules.Security;
 using OAT.Utilities;
-using OAT.UtilsHelper;
 using System.Globalization;
 
 namespace OAT.Pages.parents

@@ -1,7 +1,6 @@
 ﻿using MySqlConnector;
 using RepoDb;
 using RepoDb.Extensions;
-using static ProxyController;
 
 namespace OAT.Utilities
 {
@@ -10,10 +9,10 @@ namespace OAT.Utilities
 
 		public static string GetConnectionString() => new MySqlConnectionStringBuilder
 		{
-			Server = config.db_ip,
-			UserID = config.db_user,
-			Password = config.db_password,
-			Database = config.db_name,
+			Server = Configurator.config.db_ip,
+			UserID = Configurator.config.db_user,
+			Password = Configurator.config.db_password,
+			Database = Configurator.config.db_name,
 			MaximumPoolSize = 2000u,
 			AllowUserVariables = true
 		}.ConnectionString;

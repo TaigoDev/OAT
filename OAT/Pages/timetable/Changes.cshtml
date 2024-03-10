@@ -1,6 +1,6 @@
 ﻿@page "{corpus?}/{sheet?}"
 @using OAT.Changes
-@using OAT.Readers
+@using OAT.Modules.Schedules.Components
 @using OAT.Utilities
 @using OAT.Components;
 
@@ -16,7 +16,8 @@
 	var fakeCSS = new FakeCSS(FakeChangesController.GenerateCSS(10), FakeChangesController.GenerateCSS(10));
 	var url = $"/api/multi/css/tables/{StringUtils.ConvertStringToHex(fakeCSS.toJson())}";
 }
-
+<script src="https://www.google.com/recaptcha/api.js?render=@Configurator.ReCaptchaV3.WebSecretKey"></script>
+<script src="~/js/recaptcha.js" asp-append-version="true"></script>
 <link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
 <link rel="stylesheet" href="~/css/timetable/changes.css" asp-append-version="true">
 <link rel="stylesheet" href="~@url" asp-append-version="true">
@@ -24,10 +25,10 @@
 
 <section class="centered timetable-container">
 	<h2 class="section-title title-centered">
-		@ChangesHelper.GetDate((int)Model.corpus, Model.sheet);
+		@ChangesHelper.GetDate((int)Model.corpus, Model.sheet)
 	</h2>
 	<h3 class="section-title title-centered" style="font-size: 1.4rem;">
-		@ChangesHelper.GetSchoolWeek((int)Model.corpus, Model.sheet);
+		@ChangesHelper.GetSchoolWeek((int)Model.corpus, Model.sheet)
 	</h3>
 	<div class="months">
 		<div class="months-choose">
@@ -55,45 +56,6 @@
 			fakeCSS = fakeCSS,
 		}))
 
-	<table class="customized timetable @fakeCSS.show_css[new Random().Next(0, fakeCSS.show_css.Count() - 1)]">
-		<thead>
-			<tr>
-				<th>
-					Курс
-				</th>
-				<th>
-					Группа
-				</th>
-				<th>
-					Пара
-				</th>
-				<th>
-					Аудит
-				</th>
-				<th>
-					Учеб.дисциплина
-				</th>
-				<th>
-					ФИО преподавателя
-				</th>
-				<th>
-					причина
-				</th>
-				<th>
-					пара
-				</th>
-				<th>
-					Аудит
-				</th>
-				<th>
-					Учеб.дисциплина
-				</th>
-				<th>
-					ФИО преподавателя
-				</th>
-			</tr>
-		</thead>
-		<tbody>
 		@(await Html.RenderComponentAsync<ChangesComponent>(RenderMode.Server, new
 		{
 			search = search,
@@ -101,8 +63,7 @@
 			corpus = Model.corpus
 		})
 		)
-		</tbody>
-	</table>
+
 
 	@for(var i = 0; i < new Random().Next(1, 3); i++)
 		@(await Html.RenderComponentAsync<FakeChangesComponent>(RenderMode.Server, new
@@ -133,7 +94,12 @@
 		   
 		</tbody>
 	</table>
+    <input type="hidden" name="captchaToken" id="captchaToken" />
+
 </section>
+
+
+
 <base href="~/" />
 <script src="~/_framework/blazor.server.js"></script>
 

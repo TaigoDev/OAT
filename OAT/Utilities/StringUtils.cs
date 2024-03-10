@@ -1,7 +1,7 @@
-﻿using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Security.Cryptography;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace OAT.Utilities
 {
@@ -44,7 +44,7 @@ namespace OAT.Utilities
 			 => string.Join(" ", text.GetWordsLocal(count));
 
 		public static string Base64Encode(string plainText) =>
-			Convert.ToBase64String(Encoding.UTF8.GetBytes(plainText));	  
+			Convert.ToBase64String(Encoding.UTF8.GetBytes(plainText));
 
 		public static string Base64Decode(string base64EncodedData) =>
 			Encoding.UTF8.GetString(Convert.FromBase64String(base64EncodedData));
@@ -69,7 +69,7 @@ namespace OAT.Utilities
 
 		public static string[] GetWordsLocal(this string input, int count = -1, string[] wordDelimiter = null, StringSplitOptions options = StringSplitOptions.None)
 		{
-			if (string.IsNullOrEmpty(input)) 
+			if (string.IsNullOrEmpty(input))
 				return new string[] { };
 
 			if (count < 0)

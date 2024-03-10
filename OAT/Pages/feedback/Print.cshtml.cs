@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Codecrete.QrCodeGenerator;
-using OAT.Readers;
+using OAT.Entities;
+using OAT.Modules.Payments.Readers;
 using OAT.Utilities;
 using System.Text;
 

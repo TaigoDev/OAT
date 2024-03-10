@@ -1,0 +1,102 @@
+﻿@using OAT.Components
+@using OAT.Modules.Schedules.Readers
+@using OAT.Utilities
+@using Microsoft.AspNetCore.Components.Rendering
+
+<table class="customized timetable @fakeCSS.hide_css[new Random().Next(0, fakeCSS.hide_css.Count() - 1)]">
+	<thead>
+		<tr>
+			<th>
+				Курс
+			</th>
+			<th>
+				Группа
+			</th>
+			<th>
+				Пара
+			</th>
+			<th>
+				Аудит
+			</th>
+			<th>
+				Учеб.дисциплина
+			</th>
+			<th>
+				ФИО преподавателя
+			</th>
+			<th>
+				причина
+			</th>
+			<th>
+				пара
+			</th>
+			<th>
+				Аудит
+			</th>
+			<th>
+				Учеб.дисциплина
+			</th>
+			<th>
+				ФИО преподавателя
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@render
+	</tbody>
+</table>
+
+@code {
+	[Parameter]
+	public FakeCSS fakeCSS { get; set; }
+	public IList<ChangeRow> rows = ChangesController.changes_b1.Last().rows.ToList();
+
+	public RenderFragment render { get; set; }
+
+
+	protected override void OnInitialized()
+	{
+		render = (__builder) =>
+		{
+			@for (var i = 0; i < new Random().Next(10, 50); i++)
+			{
+				var group = rows[new Random().Next(0, rows.Count() - 1)].group;
+				<tr class="@StringUtils.RandomString(8, true)">
+					<td>
+						@group.FirstOrDefault(Char.IsDigit)
+					</td>
+					<td>
+						@group
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].was_couple
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].was_cabinet
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].was_discipline
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].was_teacher
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].reason
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].couple
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].cabinet
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].discipline
+					</td>
+					<td>
+						@rows[new Random().Next(0, rows.Count() - 1)].teacher
+					</td>
+				</tr>
+			}
+		};
+	}
+}

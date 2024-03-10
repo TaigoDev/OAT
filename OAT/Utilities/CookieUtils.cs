@@ -14,10 +14,10 @@
 			cookie.Expires = DateTime.Now.AddDays(days);
 			context.Response.Cookies.Append(key, value, cookie);
 		}
-		public static string? GetCookie(this HttpContext context, string key) => 
+		public static string? GetCookie(this HttpContext context, string key) =>
 			context.Request.Cookies[key];
 
-		public static void DeleteCookie(this HttpContext context, string key) => 
+		public static void DeleteCookie(this HttpContext context, string key) =>
 			context.Response.Cookies.Delete(key);
 	}
 }

@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 public static class Utils
 {
 
-	public static T toObject<T>(this string json) => 
+	public static T toObject<T>(this string json) =>
 		JsonConvert.DeserializeObject<T>(json) ?? throw new Exception("Ошибка toObject<T>()");
 
-	public static string toJson(this object json) => 
+	public static string toJson(this object json) =>
 		JsonConvert.SerializeObject(json);
 
 	public static List<T> Reverse<T>(this List<T> list)

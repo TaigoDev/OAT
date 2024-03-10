@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.Utilities;
-using static OAT.Readers.WorkersReader;
+using static OAT.Modules.Workers.WorkersReader;
 
 namespace OAT.Pages.organizationInformation
 {
@@ -17,7 +17,7 @@ namespace OAT.Pages.organizationInformation
 
 		public void OnGet(string? FullName)
 		{
-			worker = AllWorkers.FirstOrDefault(e => e.FullName == FullName || 
+			worker = AllWorkers.FirstOrDefault(e => e.FullName == FullName ||
 						StringUtils.ConvertFullNameToShortName(e.FullName).Replace(".", "").Replace(" ", "") == FullName.Replace(".", "").Replace(" ", ""));
 
 		}

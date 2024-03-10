@@ -39,7 +39,7 @@
 
 			@for (int i = 1; i <= Model.max_curse; i++)
 			{
-					List<Group> groups_in_curse = Model.groups!.Where(e => e.curse == i).ToList();
+					var groups_in_curse = Model.groups!.Where(e => e.curse == i).ToList();
 					if (groups_in_curse.Count == 0)
 						return;
 					<tr>
