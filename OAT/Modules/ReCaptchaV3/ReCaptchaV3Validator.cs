@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Net;
+using static System.Net.WebRequestMethods;
 
 namespace OAT.Modules.ReCaptchaV3
 {
@@ -29,19 +30,40 @@ namespace OAT.Modules.ReCaptchaV3
 
 		public async Task<JObject> GetCaptchaResultDataAsync(string token)
 		{
-			var content = new FormUrlEncodedContent(new[]
+			try
 			{
+				var content = new FormUrlEncodedContent(new[]
+				{
 				new KeyValuePair<string, string>("secret", _secretKey),
 				new KeyValuePair<string, string>("response", token)
 			});
-			using var httpClient = _httpClientFactory.CreateClient();
-			var res = await httpClient.PostAsync(RemoteAddress, content);
-			if (res.StatusCode != HttpStatusCode.OK)
-			{
-				throw new HttpRequestException(res.ReasonPhrase);
+
+				var proxy = new WebProxy
+				{
+					Address = new Uri($"http://10.0.55.52:3128"),
+					BypassProxyOnLocal = false,
+					UseDefaultCredentials = false,
+				};
+
+				var httpClientHandler = new HttpClientHandler
+				{
+					Proxy = proxy,
+				};
+				httpClientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+				using var httpClient = new HttpClient(httpClientHandler);
+				var res = await httpClient.PostAsync(RemoteAddress, content);
+				if (res.StatusCode != HttpStatusCode.OK)
+				{
+					throw new HttpRequestException(res.ReasonPhrase);
+				}
+				var jsonResult = await res.Content.ReadAsStringAsync();
+				return JObject.Parse(jsonResult);
 			}
-			var jsonResult = await res.Content.ReadAsStringAsync();
-			return JObject.Parse(jsonResult);
+			catch (Exception ex)
+			{
+				Logger.Error(ex);
+				return new();
+			}
 		}
 	}
 }

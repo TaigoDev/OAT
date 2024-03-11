@@ -8,6 +8,7 @@
 @using static Enums;
 @inject IJSRuntime JSRuntime;
 @inject ICaptchaV3Validator captcha;
+@inject IHttpContextAccessor httpContextAccessor;
 <link rel="stylesheet" href="/api/multi/css/@(StringUtils.ConvertStringToHex(new FakeCSS(show_css, hide_css).toJson()))" asp-append-version="true">
 @renderFragment
 		 
@@ -38,45 +39,68 @@
 
     protected override async Task OnInitializedAsync()
     {
-
-        objRef = DotNetObjectReference.Create(this);
-        await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper",
-                objRef);
-
-        var all_changes = ChangesController.GetListChanges((int)corpus!);
-        var changes = all_changes.FirstOrDefault(e => e.SheetName == sheet) ?? all_changes.Last();
-        if (search is null)
-            rows = changes.rows.ToList();
-        else
-            rows = changes.rows.Where(e =>
-                ToSearch(e.group ?? "").Contains(ToSearch(search)) ||
-                ToSearch(e.teacher ?? "").Contains(ToSearch(search)) ||
-                ToSearch(e.was_teacher ?? "").Contains(ToSearch(search))).ToList();
-
-        string ToSearch(string? s)
+        try
         {
-            if (s is null)
-                return "";
-            return s.ToLower().Replace(" ", "");
+            objRef = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper",
+                    objRef);
+
+
+            var all_changes = ChangesController.GetListChanges((int)corpus!);
+            var changes = all_changes.FirstOrDefault(e => e.SheetName == sheet) ?? all_changes.Last();
+            if (search is null)
+                rows = changes.rows.ToList();
+            else
+                rows = changes.rows.Where(e =>
+                    ToSearch(e.group ?? "").Contains(ToSearch(search)) ||
+                    ToSearch(e.teacher ?? "").Contains(ToSearch(search)) ||
+                    ToSearch(e.was_teacher ?? "").Contains(ToSearch(search))).ToList();
+
+            string ToSearch(string? s)
+            {
+                if (s is null)
+                    return "";
+                return s.ToLower().Replace(" ", "");
+            }
+
+            if (httpContextAccessor.HttpContext is not null &&
+    string.IsNullOrWhiteSpace(httpContextAccessor.HttpContext.Request.Headers["CF-Connecting-IP"]))
+            {
+                OnRowDisplay();
+                this.StateHasChanged();
+                return;
+            }
+
+            var token = await JSRuntime.InvokeAsync<string>("recaptchaCall");
+            if (!await captcha.IsCaptchaPassedAsync(token))
+            {
+                await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper", objRef);
+
+                renderFragment = (__builder) =>
+                 {
+                    <h3 class="section-title title-centered" style="font-size: 1.4rem;">
+                        Пройдите проверку на робота.
+                    </h3>
+                     <div id="html_element" data-callback="OnComplete" class="g-recaptcha recaptcha-block" data-sitekey="@Configurator.ReCaptchaV2.WebSecretKey"></div>
+                 };
+                this.StateHasChanged();
+                await JSRuntime.InvokeVoidAsync("loadScript", "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit");
+
+                return;
+            }
+            OnRowDisplay();
+            this.StateHasChanged();
         }
-        var token = await JSRuntime.InvokeAsync<string>("recaptchaCall");
-        if (!await captcha.IsCaptchaPassedAsync(token))
+        catch(Exception ex)
         {
-            await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper", objRef);
-
-            renderFragment = (__builder) =>
+             renderFragment = (__builder) =>
              {
-                <h3 class="section-title title-centered" style="font-size: 1.4rem;">
-                    Пройдите проверку на робота.
-                </h3>
-                 <div id="html_element" data-callback="OnComplete" class="g-recaptcha recaptcha-block" data-sitekey="@Configurator.ReCaptchaV2.WebSecretKey"></div>
+                 <h3 class="section-title title-centered" style="font-size: 1.4rem;">
+                     Произошла техническая ошибка! Сообщите разработчикам сайта через службу информатизации 
+                 </h3>
              };
-            await JSRuntime.InvokeVoidAsync("loadScript", "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit");
-
-            return;
+            
         }
-
-        OnRowDisplay();
     }
 
 
