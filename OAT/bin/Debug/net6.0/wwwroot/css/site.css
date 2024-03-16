@@ -1655,9 +1655,9 @@ section.content::before{
 	color: var(--light-white);
 }
 
-.important-pages{
+.important-pages {
 	display: flex;
-	column-gap: 40px;
+	column-gap: 35px;
 }
 
 .important-pages li a {

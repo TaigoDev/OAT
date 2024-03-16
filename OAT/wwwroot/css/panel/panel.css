@@ -24,7 +24,8 @@ section::before, section::after{
 	align-items: center;
 	height: 50px;
 	width: 100vw;
-	background-color: hsl(0deg 0% 5% / 80%);
+	background-color: hsl(0deg 0% 5% / 70%);
+	backdrop-filter: blur(10px);
 	box-shadow: 0 0 25px -5px;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -47,17 +48,24 @@ section::before, section::after{
 
 .panel-tabs {
 	display: flex;
-	column-gap: 3px;
+	column-gap: 2px;
 	height: 100%;
 	margin: 0 auto;
-	background-color: var(--matte-color);
 }
 
 .panel-tabs li {
 	height: 200%;
 	width: 100px;
-	background-color: hsl(0deg 0% 100% / 75%);
-	transition: transform 400ms ease-in-out, background-color 400ms ease;
+	background-color: hsl(0deg 0% 100% / 45%);
+	transition: transform 300ms ease-in-out, background-color 300ms ease;
+}
+
+.panel-tabs li:first-child{
+	border-radius: 25px 0 0 0;
+}
+
+.panel-tabs li:last-child{
+	border-radius: 0 25px 0 0;
 }
 
 .panel-tabs li:hover{
@@ -94,9 +102,9 @@ section::before, section::after{
 	align-items: center;
 	width: fit-content;
 	padding: 10px;
-	border: 4px solid;
-	border-radius: 5px;
-	background-color: gray;
+	border: var(--border-width) solid;
+	border-radius: var(--border-radius-l);
+	background-color: #ffffff20;
 	opacity: 0.9;
 	transition: 300ms opacity;
 }
@@ -133,7 +141,7 @@ section::before, section::after{
 	display: flex;
 	flex-direction: column;
 	row-gap: 15px;
-	max-width: 500px;
+	max-width: 555px;
 	margin: 0 auto 20px auto;
 }
 
@@ -176,15 +184,7 @@ section::before, section::after{
 	rotate: -15deg;
 	translate: -35px -45px;
 	background-color: var(--matte-color);
-	transition: width 500ms ease-in-out;
-}
-
-.panel-form-send:hover {
-	border-color: rgb(20, 20, 20);
-}
-
-.panel-form-send:hover::before {
-	width: 300px;
+	transition: 400ms ease-in-out;
 }
 
 .panel-form-send::after {
@@ -199,12 +199,17 @@ section::before, section::after{
 	rotate: 15deg;
 	translate: 35px -45px;
 	background-color: var(--matte-color);
-	transition: width 500ms ease-in-out;
+	transition: 400ms ease-in-out;
 }
 
-.panel-form-send:hover::after {
-	width: 300px;
+.panel-form-send:hover {
+	border-color: rgb(20, 20, 20);
 }
+
+.panel-form-send:hover::before, .panel-form-send:hover::after {
+	width: 350px;
+}
+
 
 /* panel table */
 

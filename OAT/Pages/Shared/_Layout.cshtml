@@ -19,17 +19,17 @@
 
 				<ul class="important-pages">
 					<li>
-						<a href='@Url.Page("/Applicant")'>
+						<a asp-page="/Applicant">
 							Абитуриентам
 						</a>
 					</li>
 					<li>
-						<a href='@Url.Page("/Students")'>
+						<a asp-page="/Students">
 							Обучающимся
 						</a>
 					</li>
 					<li>
-						<a href='@Url.Page("/timetable/Classes")'>
+						<a asp-page="/timetable/Classes">
 							Расписание
 						</a>
 					</li>
@@ -42,7 +42,7 @@
 
 				<div class="functional">
 					<a href="https://e.oat.ru/"><img class="icon" src="~/images/basic/sitemap.svg" alt="карта колледжа"></a>
-					<a href='@Url.Page("/feedback/Pay")'><img class="icon" src="~/images/basic/rubles.svg" alt="оплатить обучение"></a>
+					<a asp-page="/feedback/Pay"><img class="icon" src="~/images/basic/rubles.svg" alt="оплатить обучение"></a>
 					<img id="eye-icon" class="icon" src="~/images/basic/eyeOpen.svg" alt="версия для слабовидящих">
 					<img id="search-icon" class="icon" src="~/images/basic/search.svg" alt="поиск">
 				</div>
@@ -68,7 +68,7 @@
 						<!-- FOR APPLICANTS -->
 
 						<li class="main-menu-item">
-							<a asp-page="applicant/SelectionCommittee" class="main-menu-item-pictogram">
+							<a asp-page="/applicant/SelectionCommittee" class="main-menu-item-pictogram">
 								<img class="icon" src="~/images/basic/menu/applicant.svg" alt="">
 							</a>
 							<a asp-page="/applicant/SelectionCommittee">
@@ -355,22 +355,22 @@
 						отделения
 					</h5>
 					<div class="footer-top-item-body">
-						<a href="~/departments/IT">
+						<a asp-page="/departments/IT">
 							ИТ
 						</a>
-						<a href="~/departments/EiSR">
+						<a asp-page="/departments/EiSR">
 							ЭиСР
 						</a>
-						<a href="~/departments/OTM">
+						<a asp-page="/departments/OTM">
 							ОТМ
 						</a>
-						<a href="~/departments/PPKRS">
+						<a asp-page="/departments/PPKRS">
 							ППКРС
 						</a>
-						<a href="~/departments/RTS">
+						<a asp-page="/departments/RTS">
 							РТС
 						</a>
-						<a href="~/departments/TAKPiE">
+						<a asp-page="/departments/TAKPiE">
 							ТАКПиЭ
 						</a>
 					</div>
@@ -410,29 +410,22 @@
 				<div class="footer-bottom-row">
 					<ul class="footer-bottom-pages">
 						<li>
-							<a href='@Url.Page("/timetable/Classes")'>
+							<a asp-page="/timetable/Classes">
 								расписание
 							</a>
 						</li>
 						<li>
-							<a href='@Url.Page("/parents/AcademicProgress")'>
+							<a asp-page="/parents/AcademicProgress">
 								родителям
 							</a>
 						</li>
-						<!--
 						<li>
-							<a href="">
-								партнёры
-							</a>
-						</li>
-						-->
-						<li>
-							<a href='@Url.Page("/students/DistanceLearning")'>
+							<a asp-page="/students/DistanceLearning">
 								студентам
 							</a>
 						</li>
 						<li>
-							<a href='@Url.Page("/organizationInformation/CommonIntelligence")'>
+							<a asp-page="/organizationInformation/CommonIntelligence">
 								колледж
 							</a>
 						</li>
@@ -442,12 +435,12 @@
 							</a>
 						</li>
 						<li>
-							<a href='@Url.Page("/applicant/SelectionCommittee")'>
+							<a asp-page="/applicant/SelectionCommittee">
 								абитуриентам
 							</a>
 						</li>
 						<li>
-							<a href='@Url.Page("/feedback/Contacts")'>
+							<a asp-page="/feedback/Contacts">
 								контакты
 							</a>
 						</li>
