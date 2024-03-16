@@ -744,15 +744,11 @@ ol.customized li {
 	background-color: #b6c5dea8;
 	padding: 5px 5px 5px 18px;
 	border-radius: var(--border-radius-l);
-	transition: 150ms ease-in-out;
-}
-
-ol.customized li:hover {
-	background-color: #b6c5deff;
 }
 
 ol.customized li:hover::before {
-	transform: scale(1.15);
+	scale: 1.125;
+	color: white;
 }
 
 ol.customized li:before {
@@ -767,11 +763,12 @@ ol.customized li:before {
 	aspect-ratio: 1;
 	background: var(--m-l-color);
 	color: var(--light-white);
+	font-weight: 500;
 	text-align: center;
 	border-radius: 50%;
 	border: 2px solid transparent;
-	box-shadow: 0 0 0px 3px #f1f1f1;
-	transition: 200ms ease-in-out;
+	box-shadow: 0 0 0px 3px oklch(0.92 0 0);
+	transition: 175ms ease-in-out;
 }
 
 /* tables */
