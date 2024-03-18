@@ -39,8 +39,8 @@
 	:root {
 		--h: 200;
 		--s: 0.3;
-		--m-color: oklch(0.2 calc(var(--s) + 0.05) var(--h));
-		--m-d-color: oklch(0.1 var(--s) var(--h));
+		--m-color: oklch(0.25 calc(var(--s) + 0.05) var(--h));
+		--m-d-color: oklch(0.175 var(--s) var(--h));
 		--m-l-color: oklch(0.3 calc(var(--s) + 0.05) var(--h));
 		--matte-color: oklch(0.25 0 0);
 		--light-white: oklch(0.9 0 0);
@@ -413,7 +413,7 @@ section.centered .section-title{
 	width: fit-content;
 	margin: 0 0 5px 22px;
 	padding: 2px;
-	transition: transform 250ms ease;
+	transition: transform 200ms ease;
 }
 
 .page-navigation li::before{
@@ -958,7 +958,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	font-weight: 700;
 	letter-spacing: 0.015em;
 	margin-bottom: 0.25em;
-	margin-top: 0.5em;
+	margin-top: 0.725em;
 }
 
 .section-subtitle-small {
