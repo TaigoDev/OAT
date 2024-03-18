@@ -24,8 +24,8 @@ section::before, section::after{
 	align-items: center;
 	height: 50px;
 	width: 100vw;
-	background-color: hsl(0deg 0% 5% / 70%);
-	backdrop-filter: blur(10px);
+	background-color: #000000a1;
+	backdrop-filter: blur(5px);
 	box-shadow: 0 0 25px -5px;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -223,27 +223,18 @@ table.panel-table tbody tr td:first-child {
 	text-align: center !important;
 }
 
-/* bug fix */
-
-@media(width<380px) {
-	table.customized {
-		max-width: 95vw;
-	}
-}
-
-/* change user btn */
-
 .panel-table-button {
-	margin: 3px 0;
-	font-size: 0.8rem;
+	padding: 5px;
+	border-radius: 5px;
+	background: #00000010;
 	font-weight: 600;
-	text-decoration: underline;
-	text-align: left !important;
 	width: 100%;
-	text-align: left;
+	transition: 125ms ease;
 }
 
-/* panel message */
+.panel-table-button:hover{
+	background: #ffffff40;
+}
 
 .panel-message {
 	position: fixed;

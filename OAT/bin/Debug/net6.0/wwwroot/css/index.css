@@ -223,7 +223,6 @@
 	line-height: 1.45;
 	font-weight: 700;
 	text-align: center;
-	transition: transform 500ms ease-in-out;
 }
 
 .card-item-header > .lower{
@@ -243,12 +242,24 @@
 	text-align: center;
 	font-size: 1.25rem;
 	font-weight: 500;
-	transition: transform 500ms ease-in-out;
+}
+
+.card-item-header, .card-item-description {
+	opacity: 0;
+	transition: opacity 500ms 100ms ease-in-out, translate 500ms ease-in-out;
 }
 
 .card-item:hover .card-item-description,
 .card-item:hover .card-item-header {
-	transform: translateY(-100%);
+	translate: 0 -100%;
+}
+
+.card-item:hover .card-item-description{
+	opacity: 1;
+}
+
+.card-item:not(:hover) .card-item-header{
+	opacity: 1;
 }
 
 @media (width<1300px){

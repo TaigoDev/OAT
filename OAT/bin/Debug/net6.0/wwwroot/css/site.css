@@ -39,9 +39,9 @@
 	:root {
 		--h: 200;
 		--s: 0.3;
-		--m-color: oklch(0.25 calc(var(--s) + 0.05) var(--h));
+		--m-color: oklch(0.225 calc(var(--s) + 0.05) var(--h));
 		--m-d-color: oklch(0.175 var(--s) var(--h));
-		--m-l-color: oklch(0.3 calc(var(--s) + 0.05) var(--h));
+		--m-l-color: oklch(0.275 calc(var(--s) + 0.05) var(--h));
 		--matte-color: oklch(0.25 0 0);
 		--light-white: oklch(0.9 0 0);
 	}
@@ -316,13 +316,11 @@ section.centered .section-title{
 	position: sticky;
 	right: 10px;
 	top: 10px;
-	display: flex;
-	flex-direction: column;
 	min-width: 290px;
 	max-width: 290px;
 	height: fit-content;
 	background: var(--matte-color);
-	border: var(--border-width) solid;
+	border: 6px solid;
 	border-radius: var(--border-radius-l);
 }
 
@@ -331,18 +329,17 @@ section.centered .section-title{
 }
 
 .sidebar-title {
-	padding: 5px;
+	padding: 2px 5px 8px 5px;
 	font-size: 1.1rem;
 	font-weight: 700;
 	text-align: center;
-	background-color: #00000038;
 	color: var(--light-white);
 }
 
 .sidebar-body {
 	padding: 10px;
-	background-color: #8d8d8d0f;
-	color: var(--light-white);
+	background-color: #ffffff20;
+	border-radius: inherit;
 	font-size: 0.95rem;
 }
 
@@ -391,8 +388,8 @@ section.centered .section-title{
 @media (width<900px){
 	.sidebar {
 		position: static;
-		max-width: none;
-		min-width: none;
+		max-width: unset;
+		min-width: unset;
 	}
 	.content-page {
 		flex-direction: column;
@@ -1434,7 +1431,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	max-width: 310px;
 	padding-bottom: 10px;
 	border-radius: var(--border-radius-xl);
-	background-color: #050b36;
+	background-color: var(--m-d-color);
 	overflow: hidden;
 	color: var(--light-white);
 }
@@ -1470,7 +1467,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	align-items: center;
 	row-gap: 10px;
 	padding: 15px;
-	background-color: var(--m-d-color);
+	background-color: var(--m-color);
 	text-align: center;
 }
 
@@ -1478,8 +1475,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	display: grid;
 	place-items: center;
 	width: 70%;
-	padding: 5px;
-	background-color: var(--m-color);
 	border-radius: 50%;
 	overflow: hidden;
 }
@@ -1489,19 +1484,18 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .question-contact-head-img-container img{
-	padding: 10px;
 	border-radius: 50%;
 	transition: 500ms ease;
 }
 
 .question-contact-head-fio{
 	font-weight: 700;
-	font-size: 1.2rem;
+	font-size: 1.15rem;
 }
 
 .question-contact-head-post {
 	font-weight: 500;
-	font-size: 1.1rem;
+	font-size: 1.05rem;
 }
 
 .question-contact-body {
