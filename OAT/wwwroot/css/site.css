@@ -313,6 +313,8 @@ section.centered .section-title{
 }
 
 .sidebar {
+	--border-width-sidebar: 6px;
+	--border-radius-sidebar: var(--border-radius-l);
 	position: sticky;
 	right: 10px;
 	top: 10px;
@@ -320,8 +322,8 @@ section.centered .section-title{
 	max-width: 290px;
 	height: fit-content;
 	background: var(--matte-color);
-	border: 6px solid;
-	border-radius: var(--border-radius-l);
+	border: var(--border-width-sidebar) solid;
+	border-radius: var(--border-radius-sidebar);
 }
 
 .sidebar.long{
@@ -329,7 +331,7 @@ section.centered .section-title{
 }
 
 .sidebar-title {
-	padding: 2px 5px 8px 5px;
+	padding: calc(8px - var(--border-width-sidebar)) 5px 8px 5px;
 	font-size: 1.1rem;
 	font-weight: 700;
 	text-align: center;
@@ -339,7 +341,7 @@ section.centered .section-title{
 .sidebar-body {
 	padding: 10px;
 	background-color: #ffffff20;
-	border-radius: inherit;
+	border-radius: calc(var(--border-radius-sidebar) - var(--border-width-sidebar) / 2);
 	font-size: 0.95rem;
 }
 
