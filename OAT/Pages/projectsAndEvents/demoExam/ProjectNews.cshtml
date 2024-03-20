@@ -1,0 +1,57 @@
+﻿@page
+@using OAT.Modules.MNews.Readers
+
+@model ProjectNewsModel
+@{
+	ViewData["Title"] = "Новости проекта";
+	var query = HttpContext.Request.Query["id"].ToString();
+	var id = string.IsNullOrWhiteSpace(query) ? 1 : Convert.ToInt32(query);
+}
+
+<link rel="stylesheet" href="~/css/allNews.css">
+<script src="~/js/allNews.js" asp-append-version="true"></script>
+
+<div class="container content-page">
+	<section class="content">
+		<h2 class="section-title">
+			Новости проекта
+		</h2>
+
+		
+	</section>
+
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Демонстрационный экзамен
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="About">
+						О демонстрационном экзамене
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="ProjectNews">
+						Новости проекта
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Documents">
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="CPDE">
+						ЦПДЭ
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Gallery">
+						Галерея
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>

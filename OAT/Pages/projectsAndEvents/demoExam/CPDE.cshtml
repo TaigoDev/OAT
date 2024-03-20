@@ -1,0 +1,70 @@
+﻿@page
+@model CPDEModel
+@{
+	ViewData["Title"] = "ЦПДЭ";
+}
+
+<div class="container content-page">
+	<section class="content">
+		<h2 class="section-title">
+			ЦПДЭ
+		</h2>
+
+		<ul class="page-navigation">
+			<li>
+				<a href="#specialities">
+					Специальности
+				</a>
+			</li>
+			<li>
+				<a href="#professions">
+					Профессии
+				</a>
+			</li>
+		</ul>
+
+		<h3 id="specialities" class="section-subtitle">
+			Специальности
+		</h3>
+		
+
+		<h3 id="professions" class="section-subtitle">
+			Профессии
+		</h3>
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Демонстрационный экзамен
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="About">
+						О демонстрационном экзамене
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="ProjectNews">
+						Новости проекта
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Documents">
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="CPDE">
+						ЦПДЭ
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Gallery">
+						Галерея
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>
