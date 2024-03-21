@@ -93,6 +93,10 @@ input[type="button"] {
 	cursor: pointer;
 }
 
+input:-webkit-autofill{
+	background: var(--light-white);
+}
+
 button {
 	font: inherit;
 	cursor: pointer;
@@ -331,7 +335,8 @@ section.centered .section-title{
 }
 
 .sidebar-title {
-	padding: calc(8px - var(--border-width-sidebar)) 5px 8px 5px;
+	--vertical-padding: 10px;
+	padding: calc(var(--vertical-padding) - var(--border-width-sidebar)) 5px var(--vertical-padding) 5px;
 	font-size: 1.1rem;
 	font-weight: 700;
 	text-align: center;
@@ -339,8 +344,8 @@ section.centered .section-title{
 }
 
 .sidebar-body {
-	padding: 10px;
-	background-color: #ffffff20;
+	padding: 10px 5px;
+	background-color: #ffffff25;
 	border-radius: calc(var(--border-radius-sidebar) - var(--border-width-sidebar) / 2);
 	font-size: 0.95rem;
 }
@@ -348,43 +353,25 @@ section.centered .section-title{
 .sidebar-links {
 	display: flex;
 	flex-direction: column;
-	row-gap: 10px;
+	row-gap: 5px;
 }
 
-.sidebar-link:not(.sidebar-link-selected):hover a::after {
-	opacity: 0.8;
+.sidebar-link:not(.sidebar-link-selected):hover a{
+	background: #ffffff10;
 }
 
-.sidebar-link a{
-	position: relative;
+.sidebar-link a {
 	display: block;
+	padding: 5px;
 	color: var(--light-white);
+	border-radius: var(--border-radius-m);
+	transition: 75ms ease;
 }
 
-.sidebar-link a::after {
-	content: "";
-	position: absolute;
-	bottom: -4px;
-	left: 0;
-	display: block;
-	width: 100%;
-	border: 1px solid;
-	border-radius: 2px;
-	opacity: 0.2;
-	transition: 100ms ease;
-}
-
-.sidebar-link:last-child a::after {
-	display: none;
-}
-
-.sidebar-link-selected {
+.sidebar-link-selected a{
 	font-weight: 700;
 	letter-spacing: 0.01em;
-}
-
-.sidebar-link-selected a::after {
-	opacity: 0.8;
+	background: #ffffff20;
 }
 
 @media (width<900px){
@@ -970,7 +957,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 @media (width<600px) {
 	.section-title {
-		font-size: 1.75rem;
+		font-size: 1.6rem;
 	}
 	.section-subtitle{
 		font-size: 1.25rem;
@@ -1439,24 +1426,22 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .question-contact::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	translate: 100% -100%;
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
-	background-color: var(--m-color);
-	background-image: url("../images/basic/good.svg");
-	background-position: 30px 90px;
-	background-size: 30px;
-	background-repeat: no-repeat;
-	transition: 500ms ease;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    translate: 100% -100%;
+    width: 35px;
+    aspect-ratio: 1;
+    background: center / cover url(../images/basic/good.svg);
+    background-repeat: no-repeat;
+	opacity: 0;
+    transition: translate 350ms ease, opacity 600ms ease;
 }
 
 .question-contact:hover::before  {
-	translate: 50% -50%;
+	translate: -10px 10px;
+	opacity: 1;
 }
 
 .question-contact p{

@@ -174,7 +174,7 @@
 .cards-list {
 	--columns: 4;
 	display: grid;
-	grid-template-columns: repeat(var(--columns), minmax(250px, 320px));
+	grid-template-columns: repeat(var(--columns), minmax(240px, 320px));
 	justify-content: space-between;
 	gap: 50px;
 }
@@ -262,14 +262,20 @@
 	opacity: 1;
 }
 
-@media (width<1300px){
+@media (width<1200px){
 	.cards-list {
 		--columns: 2;
 		justify-content: center;
 	}
+	.card-item-header {
+		font-size: 1.45rem;
+	}
+	.card-item-description {
+		font-size: 1.15rem;
+	}
 }
 
-@media (width<650px) {
+@media (width<600px) {
 	.cards-list {
 		--columns: 1;
 	}
