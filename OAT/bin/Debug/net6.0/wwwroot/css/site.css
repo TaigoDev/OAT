@@ -685,13 +685,13 @@ ul.customized li{
 	margin-bottom: 10px;
 }
 
-ul.customized li::before{
+ul.customized li::before {
 	content: "";
 	position: absolute;
 	top: 9px;
-	left: -17.5px;
-	width: 7px;
-	height: 7px;
+	left: -15px;
+	width: 6px;
+	height: 6px;
 	border-radius: 50%;
 	background: #4F5151;
 	transition: 250ms ease-in-out;
@@ -700,7 +700,7 @@ ul.customized li::before{
 ul.customized li::after {
 	content: "";
 	position: absolute;
-	left: -15px;
+	left: -13px;
 	top: 13px;
 	bottom: 10px;
 	width: 1px;
@@ -1426,17 +1426,17 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .question-contact::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    translate: 100% -100%;
-    width: 35px;
-    aspect-ratio: 1;
-    background: center / cover url(../images/basic/good.svg);
-    background-repeat: no-repeat;
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	translate: 100% -100%;
+	width: 35px;
+	aspect-ratio: 1;
+	background: center / cover url(../images/basic/good.svg);
+	background-repeat: no-repeat;
 	opacity: 0;
-    transition: translate 350ms ease, opacity 600ms ease;
+	transition: translate 350ms ease, opacity 600ms ease;
 }
 
 .question-contact:hover::before  {

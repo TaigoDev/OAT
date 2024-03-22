@@ -21,6 +21,10 @@
 	line-height: 1.1;
 }
 
+.project-partners-item a{
+	color: inherit;
+}
+
 .project-partners-item-img {
 	width: 140px;
 	opacity: 0.5;
