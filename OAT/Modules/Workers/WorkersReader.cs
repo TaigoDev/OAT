@@ -50,10 +50,16 @@ namespace OAT.Modules.Workers
 				"Лаборант",
 				"Старший лаборант",
 				"Старший мастер",
-				"Уборщик производственных помещений"
+				"Уборщик производственных помещений",
+				"Инженер-программист (программист)",
+				"Заведующий лабораторией",
+				"Прокин Никита Григорьевич",
+				"Елкин Александр Андреевич",
+				"Елкин Иван Андреевич",
+				"Принцев Денис Игоревич",
 			};
 
-			workers.RemoveAll(e => ignoredPost.Contains(e.Post));
+			workers.RemoveAll(e => ignoredPost.Contains(e.Post) || ignoredPost.Contains(e.FullName));
 			AllWorkers = workers.ToList();
 			AdministrationByPost(ref workers, e => e is "Директор");
 			AdministrationByPost(ref workers, e => e.Contains("Заместитель директора"));
