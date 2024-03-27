@@ -44,58 +44,94 @@
 		<h3 class="section-subtitle">
 			Расписание практик ул. Б. Хмельницкого, 281а
 		</h3>
-		<ul class="documents-list">
-			@foreach (var file in Model.b2)
-			{
-				<li class="document-item">
-					<div class="document-item-head">
-						<a target="_blank" href="/@file.url">
-						</a>
-					</div>
-					<div class="document-item-body">
-						@file.Filename
-					</div>
-				</li>
-			}
-		</ul>
+        @if (Model.b2.Count() is not 0)
+        {
+            <ul class="documents-list">
+
+                @foreach (var file in Model.b2)
+                {
+                    <li class="document-item">
+                        <div class="document-item-head">
+                            <a target="_blank" href="/@file.url">
+                            </a>
+                        </div>
+                        <div class="document-item-body">
+                            @file.Filename
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>
+                <b>
+                    ОТСУТСТВУЕТ
+                </b>
+            </p>
+        }
 
 
 		<h3 class="section-subtitle">
 			Расписание практик пр. Космический, 14а
 		</h3>
-		<ul class="documents-list">
-			@foreach (var file in Model.b3)
-			{
-				<li class="document-item">
-					<div class="document-item-head">
-						<a target="_blank" href="/@file.url">
-						</a>
-					</div>
-					<div class="document-item-body">
-						@file.Filename
-					</div>
-				</li>
-			}
-		</ul>
+        @if (Model.b3.Count() is not 0)
+        {
+            <ul class="documents-list">
+
+                @foreach (var file in Model.b3)
+                {
+                    <li class="document-item">
+                        <div class="document-item-head">
+                            <a target="_blank" href="/@file.url">
+                            </a>
+                        </div>
+                        <div class="document-item-body">
+                            @file.Filename
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>
+                <b>
+                    ОТСУТСТВУЕТ
+                </b>
+            </p>
+        }
 
 
 		<h3 class="section-subtitle">
 			Расписание практик ул. Волховстроя, 5
 		</h3>
-		<ul class="documents-list">
-			@foreach (var file in Model.b4)
-			{
-				<li class="document-item">
-					<div class="document-item-head">
-						<a target="_blank" href="/@file.url">
-						</a>
-					</div>
-					<div class="document-item-body">
-						@file.Filename
-					</div>
-				</li>
-			}
-		</ul>
+        @if (Model.b4.Count() is not 0)
+        {
+            <ul class="documents-list">
+
+                @foreach (var file in Model.b4)
+                {
+                    <li class="document-item">
+                        <div class="document-item-head">
+                            <a target="_blank" href="/@file.url">
+                            </a>
+                        </div>
+                        <div class="document-item-body">
+                            @file.Filename
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>
+                <b>
+                    ОТСУТСТВУЕТ
+                </b>
+            </p>
+        }
 	</section>
 	<aside id="sidebar" class="sidebar">
 		<h3 class="sidebar-title">

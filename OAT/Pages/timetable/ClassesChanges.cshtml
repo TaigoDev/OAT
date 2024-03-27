@@ -6,13 +6,19 @@
 
 <link rel="stylesheet" href="~/css/timetable/classesChanges.css" asp-append-version="true">
 
+<style>
+    .document-item-head::after {
+        content: none !important;
+    }
+</style>
+
 <div class="container content-page">
 	<section class="content">
 		<h2 class="section-title">
 			Изменения в расписании занятий
 		</h2>
 
-		<ul class="documents-list">
+		<ul class="documents-list little">
 			<li class="document-item" onclick="window.location.href = '/timetable/Changes/1'">
 				<div class="document-item-head">
 				</div>
@@ -20,8 +26,6 @@
 					Ленина 24.xls
 				</div>
 			</li>
-
-
 			<li class="document-item" onclick="window.location.href = '/timetable/Changes/2'">
 				<div class="document-item-head">
 				</div>
@@ -29,7 +33,6 @@
 					Б.Хмельницкого, 281а.xls
 				</div>
 			</li>
-
 			<li class="document-item" onclick="window.location.href = '/timetable/Changes/3'">
 				<div class="document-item-head">
 				</div>
