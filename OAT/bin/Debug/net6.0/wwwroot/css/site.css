@@ -1303,7 +1303,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .people-item-body-job::first-letter {
-	text-transform: uppercase;
+	text-transform: lowercase;
 }
 
 @media(width<550px){
