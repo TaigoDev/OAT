@@ -151,8 +151,12 @@ h6 {
 }
 
 p {
-	margin-top: 15px;
-	line-height: 1.4;
+	margin-top: 10px;
+	line-height: 1.3;
+}
+
+.section-subtitle-small + p, .section-subtitle + p {
+	margin-top: 0;
 }
 
 tr,
@@ -596,7 +600,7 @@ button.customized:hover {
 img.customized {
 	display: block;
 	max-width: min(100%, 450px);
-	margin: 0 auto 20px auto;
+	margin: 10px auto 0 auto;
 	border-radius: var(--border-radius-xl);
 }
 
@@ -953,7 +957,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	font-weight: 700;
 	letter-spacing: 0.01em;
 	margin-bottom: 0.25em;
-	margin-top: 0.5em;
+	margin-top: 0.625em;
 }
 
 @media (width<600px) {
@@ -1152,8 +1156,14 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	cursor: pointer;
 }
 
-.accordion-head-icon:hover{
-	scale: 1.1;
+@media(hover:hover){
+	.accordion-head-icon {
+		opacity: 0.6;
+	}
+	.accordion-head-icon:hover, .accordion.open .accordion-head-icon{
+		opacity: 1;
+		filter: drop-shadow(0px 0px 1px white);
+	}
 }
 
 .accordion-body {
@@ -1165,7 +1175,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	opacity: 0;
 	visibility: hidden;
 	overflow: auto;
-	transition: height 1000ms ease, max-height 1000ms ease, padding 700ms 150ms, margin 700ms 150ms, border 250ms, visibility 1000ms ease-in, opacity 1000ms;
+	transition: height 900ms ease, max-height 900ms ease, padding 500ms 125ms, margin 500ms 125ms, border 200ms, visibility 900ms ease-in, opacity 900ms;
 }
 
 .accordion-body::-webkit-scrollbar{
@@ -1181,6 +1191,12 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	background-color:  transparent;
 }
 
+.accordion.open .accordion-head-icon {
+	rotate: -180deg;
+	filter: drop-shadow(0px 0px 1px white);
+	transition: 700ms ease;
+}
+
 .accordion.open .accordion-body {
 	visibility: visible;
 	opacity: 1;
@@ -1190,7 +1206,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .accordion-body p{
-	margin-bottom: 10px;
+	margin-top: 10px;
 }
 
 .accordion-body .documents-list {
