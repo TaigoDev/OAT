@@ -6,6 +6,8 @@
 	ViewData["Title"] = Model.worker is not null ? Model.worker.FullName : "Пользователь не найден";
 }
 
+<link rel="stylesheet" href="~/css/organizationInformation/worker.css" asp-append-version="true">
+
 <div class="container content-page">
 	<section class="content">
 		@if (Model.worker is not null)

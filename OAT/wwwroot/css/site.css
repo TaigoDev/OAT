@@ -155,7 +155,7 @@ p {
 	line-height: 1.3;
 }
 
-.section-subtitle-small + p, .section-subtitle + p {
+.section-subtitle-small + p, .section-subtitle + p, .section-subtitle + .section-subtitle-small, section.content .section-title, section.centered .section-title {
 	margin-top: 0;
 }
 
@@ -205,10 +205,6 @@ section.centered .section-title{
 	max-width: min(950px, calc(100dvw - 350px));
 	min-width: 300px;
 	width: 100%;
-}
-
-.content .section-title{
-	margin-top: 0;
 }
 
 @media (width<900px){
@@ -673,7 +669,7 @@ img.customized {
 
 video.customized {
 	display: block;
-	margin: 0px auto 20px auto;
+	margin: 10px auto 0px auto;
 	min-width: min(400px, 100%);
 	max-width: 550px;
 	border-radius: var(--border-radius-xl);
@@ -683,7 +679,7 @@ video.customized {
 
 ul.customized {
 	position: relative;
-	margin: 15px 0;
+	margin-top: 10px;
 }
 
 ul.customized li{
@@ -729,7 +725,7 @@ ol.customized {
 	flex-direction: column;
 	row-gap: 15px;
 	counter-reset: num;
-	margin: 15px 0 15px 15px;
+	margin: 10px 0 10px 15px;
 }
 
 ol.customized li {
@@ -934,7 +930,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 .section-title {
 	position: relative;
 	width: fit-content;
-	margin-top: 0.5em;
+	margin-top: 0.625em;
 	margin-bottom: 0.35em;
 	font-size: 2.25rem;
 	letter-spacing: 0.045em;
@@ -945,24 +941,24 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .section-subtitle {
-	font-size: 1.75rem;
+	font-size: 1.825rem;
 	font-weight: 700;
 	letter-spacing: 0.015em;
-	margin-bottom: 0.25em;
-	margin-top: 0.725em;
+	margin-bottom: 0.2em;
+	margin-top: 0.825em;
 }
 
 .section-subtitle-small {
-	font-size: 1.25rem;
+	font-size: 1.325rem;
 	font-weight: 700;
 	letter-spacing: 0.01em;
-	margin-bottom: 0.25em;
-	margin-top: 0.625em;
+	margin-bottom: 0.2em;
+	margin-top: 0.725em;
 }
 
 @media (width<600px) {
 	.section-title {
-		font-size: 1.6rem;
+		font-size: 1.5rem;
 	}
 	.section-subtitle{
 		font-size: 1.25rem;
@@ -1122,18 +1118,18 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	margin-top: 10px;
+	margin-top: 15px;
 }
 
 .accordions-list > .accordion{
-	margin-bottom: 0;
+	margin-top: 0;
 }
 
 .accordion {
 	display: flex;
 	flex-direction: column;
 	max-width: 1000px;
-	margin-bottom: 20px;
+	margin-top: 15px;
 	overflow: hidden;
 }
 
@@ -1327,104 +1323,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	.people-item {
 		max-width: none;
 		padding: 5px;
-	}
-}
-
-/* staff personal page */
-
-.staff-person-basic {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 20px;
-	margin-bottom: 20px;
-	padding: 25px;
-	background: linear-gradient(90deg, #111f3b, #08043bbf), linear-gradient(270deg, #111f3b, #4879ffbf);
-	border-radius: var(--border-radius-xl);
-	color: var(--light-white);
-	font-weight: 700;
-	font-size: 1.3rem;
-}
-
-.staff-person-basic-info {
-	display: flex;
-	flex-direction: column;
-	row-gap: 10px;
-}
-
-.staff-person-basic-job, .staff-person-basic-phone, .staff-person-basic-email {
-	display: flex;
-	align-items: center;
-	column-gap: 10px;
-}
-
-.staff-person-basic-job::before, .staff-person-basic-phone::before, .staff-person-basic-email::before{
-	content: "";
-	height: 25px;
-	min-width: 25px;
-	background-image: url("../images/basic/work.svg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
-
-.staff-person-basic-job::before {
-	background-image: url("../images/basic/work.svg");
-}
-
-.staff-person-basic-phone::before {
-	background-image: url("../images/basic/phone.svg");
-}
-
-.staff-person-basic-email::before {
-	background-image: url("../images/basic/mail.svg");
-}
-
-.staff-person-basic-photo {
-	position: relative;
-	max-width: 225px;
-}
-
-.staff-person-basic-photo img {
-	border-radius: 40% 5%;
-	border: var(--border-width) solid #2b50ac;
-	transition: 500ms ease;
-}
-
-.staff-person-basic-photo:hover img {
-	border-radius: 5%;
-}
-
-.staff-person-basic-photo:hover::before {
-	translate: 0;
-	border-radius: 50%;
-}
-
-.staff-person-basic-photo::before {
-	content: "";
-	position: absolute;
-	right: -15px;
-	top: -15px;
-	width: 60px;
-	height: 60px;
-	border-radius: 50% 15% 50% 50%;
-	background-color: #2b50ac;
-	background-size: 40px;
-	background-position: center;
-	background-repeat: no-repeat;
-	translate: -15px 15px;
-	transition: 400ms ease;
-}
-
-.staff-person-basic.director .staff-person-basic-photo::before {
-	background-image: url("../images/people/professions/worker.svg");
-}
-
-@media (width<600px){
-	.staff-person-basic {
-		flex-direction: column-reverse;
-	}
-	.staff-person-basic-info {
-		text-align: center;
 	}
 }
 
