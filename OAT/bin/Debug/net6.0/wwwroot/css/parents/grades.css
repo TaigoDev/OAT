@@ -1,32 +1,34 @@
 ﻿.months {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 50px;
+	gap: 20px;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 20px;
+	margin: 50px 0 15px 0;
 }
 
 .months-choose {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 25px;
+	justify-content: center;
+	gap: 15px;
 }
 
-.months-choose-item{
-	display: block;
-	padding: 5px 15px;
-	border-radius: 10px;
+.months-choose-item {
+	display: grid;
+	place-items: center;
+	padding: 8px 20px;
+	font-weight: 500;
+	border-radius: var(--border-radius-m);
 	background: var(--m-l-color);
 	color: var(--light-white);
 	opacity: 0.9;
-	transition: 250ms ease;
+	transition: 200ms ease;
 }
 
 .months-choose-item:hover, .months-choose-item.active{
 	opacity: 1;
 	background: var(--m-color);
-	border-color: #0000004c;
 }
 
 .months-current{
@@ -34,4 +36,11 @@
 	font-weight: 500;
 	text-transform: uppercase;
 	line-height: 1;
+}
+
+@media (width<800px){
+	.months {
+		flex-direction: column;
+		justify-content: center;
+	}
 }

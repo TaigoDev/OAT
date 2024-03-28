@@ -24,10 +24,10 @@
 <script src="~/js/changes.js" asp-append-version="true"></script>
 
 <section class="centered timetable-container">
-	<h2 class="section-title title-centered">
+	<h2 class="section-title">
 		@ChangesHelper.GetDate((int)Model.corpus, Model.sheet)
 	</h2>
-	<h3 class="section-title title-centered" style="font-size: 1.4rem;">
+    <h3 class="section-subtitle-small title-centered">
 		@ChangesHelper.GetSchoolWeek((int)Model.corpus, Model.sheet)
 	</h3>
 	<div class="months">

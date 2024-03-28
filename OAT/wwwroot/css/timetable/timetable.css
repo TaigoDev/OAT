@@ -1,5 +1,5 @@
-﻿.timetable-container{
-	width: 95vw;
+﻿.timetable-container {
+	width: min(95vw, 1500px);
 	margin: 0 auto;
 }
 
