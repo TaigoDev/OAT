@@ -1,0 +1,153 @@
+﻿@page
+@model StudentLifeModel
+@{
+    ViewData["Title"] = "Студенческая жизнь";
+}
+
+<div class="container content-page">
+	<section class="content">
+		<a id="plane" class="plane" href="#sidebar"></a>
+		<h2 class="section-title">
+            Студенческая жизнь
+		</h2>
+
+		<ul class="page-navigation">
+			<li>
+				<a href="#sport">
+                    Спортивное направление
+				</a>
+			</li>
+			<li>
+                <a href="#creation">
+                    Творческое направление
+				</a>
+			</li>
+            <li>
+                <a href="#tech">
+                    Техническое направление
+                </a>
+            </li>
+		</ul>
+
+		<h3 id="sport" class="section-subtitle">
+            Спортивное направление
+		</h3>
+		<ol class="customized">
+			<li>
+                Гиревой спорт
+            </li>
+			<li>
+                Шахматы
+			</li>
+			<li>
+                Легкая атлетика
+			</li>
+			<li>
+                Футбол юноши
+			</li>
+			<li>
+                Баскетбол
+			</li>
+			<li>
+                Тир (Спортивная стрельба)
+			</li>
+            <li>
+                Настольный теннис Лыжная гонка
+            </li>
+            <li>
+                ОФП (Общая физическая подготовка: штанга, спортивные игры)
+            </li>
+		</ol>
+        <p>
+            БПОУ «Омавиат» располагает  оборудованными тренажерными залами для ОФП и гиревого спорта (по адресу: ул.Ленина, 24), лыжной базой (по адресу: ул. Б. Хмельницкого, 281А), в каждом из корпусов имеются спортивные залы, отвечающие требованиям проведения занятий по физической культуре, организации студенческих спортивных состязаний, работы спортклубов и секций.
+        </p>
+   
+
+		<h3 id="creation" class="section-subtitle">
+            Творческое направление
+		</h3>
+		<p>
+            Творческое направление Омавиат представлено организацией работы Студенческого творческого центра, который включает:
+        </p>
+        <ol class="customized">
+            <li>
+                Вокальный коллектив
+            </li>
+            <li>
+                Хореографический коллектив «Ривьера»
+            </li>
+            <li>
+                Школа ведущих
+            </li>
+            <li>
+                Команда КВН
+            </li>
+            <li>
+                Школа экскурсовода при музее истории колледжа
+            </li>
+        </ol>
+
+
+        <h3 id="tech" class="section-subtitle">
+            Техническое направление
+        </h3>
+        <ol class="customized">
+            <li>
+                Студенческое конструкторское бюро «Альтаир» (на базе лаборатории «Двигатели летательных аппаратов»)
+            </li>
+            <li>
+                Технический кружок авиационного творчества (на базе лаборатории «Двигатели летательных аппаратов»)
+            </li>
+        </ol>
+
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Студентам
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="/AlumniEmploymentCenterOmaviat">
+						Центр содействия трудоустройству выпускников Омавиат
+					</a>
+				</li>
+				<li class="sidebar-link">
+                    <a asp-page="AlumniEmploymentCenterOmsk">
+						Базовый центр содействия трудоустройству выпускников СПО Омской области
+					</a>
+				</li>
+				<li class="sidebar-link">
+                    <a asp-page="DistanceLearning">
+						Дистанционное обучение
+					</a>
+				</li>
+				<li class="sidebar-link">
+                    <a asp-page="DistanceFullTimeLearning">
+						Дистанционное обучение - очная форма обучения
+					</a>
+				</li>
+				<li class="sidebar-link">
+                    <a asp-page="SportClub">
+						Спортивный клуб
+					</a>
+				</li>
+				<li class="sidebar-link">
+                    <a asp-page="DailyRoutineRules">
+						Правила внутреннего распорядка
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="ResearchWork">
+						Научно-исследовательская работа
+					</a>
+				</li>
+                <li class="sidebar-link sidebar-link-selected">
+                    <a asp-page="StudentLife">
+                        Студенческая жизнь
+                    </a>
+                </li>
+			</ul>
+		</nav>
+	</aside>
+</div>
