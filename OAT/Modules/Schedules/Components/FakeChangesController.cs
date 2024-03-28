@@ -61,11 +61,11 @@ namespace OAT.Components
 			foreach (var _css in css.hide_css)
 			{
 				if (IsChanceToUse())
-					style += $".{_css} {{ visibility: collapse;; }}\n";
+					style += $".{_css} {{ visibility: collapse; margin: 0 !important; }}\n";
 				else if (IsChanceToUse())
 				{
 					style += $".{_css} {{ visibility: visible; }}\n";
-					style += $".{_css} {{ visibility: collapse; }}\n";
+					style += $".{_css} {{ visibility: collapse; margin: 0 !important; }}\n";
 				}
 				else
 					style += $".{_css} {{ position: fixed; height: 0; }}\n";
