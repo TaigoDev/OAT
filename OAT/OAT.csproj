@@ -69,6 +69,7 @@
 	  <Content Remove="wwwroot\js\AcademicProgress.js" />
 	  <Content Remove="wwwroot\js\admin.js" />
 	  <Content Remove="wwwroot\js\allNews.js" />
+	  <Content Remove="wwwroot\js\auth.js" />
 	  <Content Remove="wwwroot\js\changes.js" />
 	  <Content Remove="wwwroot\js\files.js" />
 	  <Content Remove="wwwroot\js\help.js" />

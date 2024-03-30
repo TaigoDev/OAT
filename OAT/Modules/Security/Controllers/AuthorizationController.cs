@@ -13,15 +13,15 @@ namespace OAT.Modules.Security.Controllers
 {
 	public class AuthorizationController : Controller
 	{
-		[HttpGet, Route("/api/login"), NoCache]
-		public async Task<IActionResult> Login([FromQuery] string username, [FromQuery] string password)
+		[HttpPost("api/login"), NoCache]
+		public async Task<IActionResult> Login(string username, string password)
 		{
 			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 			using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
 			var IsValid = Ldap.Login(username, password, HttpContext.UserIP());
 
 			if (!IsValid)
-				return Redirect("/admin/authorization?status=fail");
+				return BadRequest();
 
 
 			ClearExpiredTokens(username);
