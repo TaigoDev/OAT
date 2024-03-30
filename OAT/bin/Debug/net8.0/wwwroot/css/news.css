@@ -1,0 +1,13 @@
+﻿/* current news */
+
+p {
+	margin-bottom: 15px;
+	word-break: break-word;
+}
+
+.news-title{
+	font-size: 2rem;
+	letter-spacing: 0.5px;
+	font-weight: 700;
+	margin-bottom: 30px;
+}

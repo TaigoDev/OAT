@@ -1,0 +1,102 @@
+﻿.library-logo {
+	max-width: min(100%, 250px) !important;
+	border-radius: 50% !important;
+	border: 12px solid #194b89 !important;
+	border-inline: 12px solid #1d3f6f !important;
+	background: radial-gradient(#e7e7e7 50%, #0500ff69 75%) !important;
+	/* background-color: #e4e4e4 !important; */
+}
+
+.library-main-text p{
+	margin-bottom: 20px;
+	font-size: 1.075rem;
+}
+
+.library-timetable {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+	justify-content: space-between;
+	margin: 20px auto;
+	max-width: 800px;
+}
+
+.library-timetable-item {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+	max-width: 320px;
+	width: 100%;
+	min-height: 140px;
+	padding: 10px;
+	border: 2px solid var(--c);
+	border-radius: 5px;
+	background: #d3d4ed;
+	transition: 500ms ease;
+	--c: black;
+}
+
+.library-timetable-item:hover {
+	background: #cad3f5;
+	--c: #151f70;
+}
+
+.library-timetable-item:nth-of-type(2n){
+	margin-left: auto;
+}
+
+.library-timetable-item:nth-child(1){
+	box-shadow: -6px -6px 0px -2px var(--c);
+}
+
+.library-timetable-item:nth-child(2){
+	box-shadow: 6px -6px 0px -2px var(--c);
+}
+
+.library-timetable-item:nth-child(3){
+	box-shadow: -6px 6px 0px -2px var(--c);
+}
+
+.library-timetable-item:nth-child(4){
+	box-shadow: 6px 6px 0px -2px var(--c);
+}
+
+.library-timetable-item-head {
+	font-size: 1.05rem;
+	font-weight: 500;
+	text-align: center;
+}
+
+.library-timetable-item-body {
+	display: flex;
+	flex-direction: column;
+	row-gap: 7px;
+}
+
+.library-timetable-item-body-row{
+	display: flex;
+	justify-content: space-between;
+}
+
+.library-timetable-item-body-row span:first-of-type {
+	width: 10ch;
+}
+
+@media(600px<width<1000px){
+	.library-timetable {
+		grid-template-columns: repeat(auto-fit, 300px);
+	}
+	.library-timetable-item {
+		box-shadow: 0px 7px 2px -2px var(--c)!important;
+	}
+}
+
+@media(width<600px) {
+	.library-timetable {
+		grid-template-columns: repeat(auto-fit, 270px);
+		justify-content: center;
+	}
+	.library-timetable-item {
+		box-shadow: 0px 7px 2px -2px var(--c) !important;
+	}
+}

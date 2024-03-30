@@ -1,0 +1,32 @@
+﻿.products {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 25px 40px;
+}
+
+.product {
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
+	font-size: 1.1rem;
+	font-weight: 600;
+	text-align: center;
+}
+
+@media(width>1000px){
+	.product:nth-of-type(3) {
+		grid-column: span 2;
+	}
+}
+
+.product img {
+	border-radius: var(--border-radius-xl);
+}
+
+@media(width<1000px){
+	.products {
+		grid-template-columns: min(100%, 450px);
+		gap: 30px;
+		justify-content: center;
+	}
+}

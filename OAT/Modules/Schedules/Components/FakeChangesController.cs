@@ -9,7 +9,7 @@ namespace OAT.Components
 	{
 
 		[HttpGet("api/multi/css/{hex}")]
-		public IActionResult Get(string hex)
+		public IActionResult GetRowStyle(string hex)
 		{
 			var json = StringUtils.ConvertHexToString(hex);
 			var css = json.toObject<FakeCSS>();
@@ -19,19 +19,55 @@ namespace OAT.Components
 			foreach (var _css in css.hide_css)
 			{
 				if (IsChanceToUse())
-					style += $".{_css} {{ display: none; }}\n";
+					style += $$"""
+						.{{_css}} {
+							position: fixed;
+							top: -100vw; 
+							height: 0;
+						}
+						""";
 				else if (IsChanceToUse())
 				{
-					style += $".{_css} {{ display: table-row; }}\n";
-					style += $".{_css} {{ display: none; }}\n";
+					style += $$"""
+						.{{_css}} {
+							padding: 0px;
+							display: none; 
+							top: -10000px; 
+							margin: none;
+						}
+						""";
+					style += $$"""
+						.{{_css}} {
+							padding: 0; 
+							position: fixed; 
+							top: 0; 
+							height: 0; 
+							margin: 0;
+						}
+						""";
 				}
 				else if (IsChanceToUse())
-					style += $".{_css} {{ visibility: collapse; }}\n";
+					style += $$"""
+						.{{_css}} {
+							position: fixed;
+							top: 0; 
+							height: 0;
+						    margin: 0;
+							display: none;
+						}
+						""";
 				else
-				{
-					style += $".{_css} {{ visibility: collapse; }}\n";
-					style += $".{_css} {{ visibility: none; }}\n";
-				}
+					style += $$"""
+						.{{_css}} {
+							padding: 0; 
+							position: fixed; 
+							top: -100vw;
+							height: 0; 
+							margin: 0;
+							visibility: hidden
+						}
+						""";
+
 			}
 
 			foreach (var _css in css.show_css)
@@ -51,7 +87,7 @@ namespace OAT.Components
 		}
 
 		[HttpGet("api/multi/css/tables/{hex}")]
-		public IActionResult GetTables(string hex)
+		public IActionResult GetTablesStyle(string hex)
 		{
 			var json = StringUtils.ConvertHexToString(hex);
 			var css = json.toObject<FakeCSS>();
@@ -61,14 +97,46 @@ namespace OAT.Components
 			foreach (var _css in css.hide_css)
 			{
 				if (IsChanceToUse())
-					style += $".{_css} {{ visibility: collapse; margin: 0 !important; }}\n";
+					style += $$"""
+						.{{_css}} {
+							padding: 0; 
+							position: fixed; 
+							top: -100vw;
+							height: 0; 
+							margin: 0;
+							visibility: hidden
+						}
+						""";
 				else if (IsChanceToUse())
 				{
-					style += $".{_css} {{ visibility: visible; }}\n";
-					style += $".{_css} {{ visibility: collapse; margin: 0 !important; }}\n";
+					style += $$"""
+						.{{_css}} {
+							padding: 0px;
+							display: none; 
+							top: -10000px; 
+							margin: none;
+						}
+						""";
+					style += $$"""
+						.{{_css}} {
+							padding: 0; 
+							position: fixed; 
+							top: 0; 
+							height: 0; 
+							margin: 0;
+						}
+						""";
 				}
 				else
-					style += $".{_css} {{ position: fixed; height: 0; }}\n";
+					style += $$"""
+						.{{_css}} {
+							padding: 0; 
+							position: fixed; 
+							top: 0; 
+							height: 0; 
+							margin: 0;
+						}
+						""";
 			}
 
 			foreach (var _css in css.show_css)

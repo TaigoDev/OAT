@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Net.Http.Headers;
 using MySqlConnector;
 using OAT;
@@ -42,13 +43,17 @@ else
 			context.Response.Redirect("https://www.oat.ru/Duck");
 	});
 }
-
+var ok = 245;
+Console.WriteLine(ok * ++ok);
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
 app.Run();
 
+if (2 % 2 == 0)
+	Console.WriteLine();
+else;
 
 
 void SetupControllers()
