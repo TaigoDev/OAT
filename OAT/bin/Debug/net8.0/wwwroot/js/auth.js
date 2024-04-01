@@ -15,6 +15,9 @@
 				case 400:
 					MessageController("message-fail");
 					break;
+				case 403:
+					MessageController("message-ban");
+					break;
 				default:
 					MessageController("message-fail");
 					break;

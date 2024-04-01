@@ -20,9 +20,32 @@ namespace OAT.Modules.Security.Controllers
 			using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
 			var IsValid = Ldap.Login(username, password, HttpContext.UserIP());
 
-			if (!IsValid)
-				return BadRequest();
+			var records = await connection.QueryAsync<IPTables>(e => e.IP == HttpContext.UserIP());
+			var record = records.FirstOrDefault();
+			if (record is null)
+			{
+				record = new IPTables(HttpContext.UserIP(), 0, DateTime.UtcNow.AddDays(-1), DateTime.UtcNow.AddDays(-1));
+				await connection.InsertAsync(record);
+			}
 
+			if (DateTime.UtcNow < record.BanTime)
+				return StatusCode(StatusCodes.Status403Forbidden);
+
+			if (!IsValid)
+			{
+				
+				if(DateTime.UtcNow.AddHours(-1) > record.LastFailAttempt)
+					record.attempts = 0;
+				record.attempts++;
+				record.LastFailAttempt = DateTime.UtcNow;
+				if(record.attempts >=3)
+				{
+					record.attempts = 0;
+					record.BanTime = DateTime.UtcNow.AddHours(1);
+				}
+				await connection.UpdateAsync(record);
+				return BadRequest();
+			}
 
 			ClearExpiredTokens(username);
 			var Token = StringUtils.RandomString(450);
