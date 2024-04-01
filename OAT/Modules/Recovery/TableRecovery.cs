@@ -28,6 +28,8 @@ namespace OAT.Modules.Recovery
 					}
 					else if (prop.PropertyType == typeof(bool))
 						cmd += $"{prop.Name} boolean, ";
+					else if (prop.PropertyType == typeof(DateTime))
+						cmd += $"{prop.Name} DATETIME, ";
 				}
 				cmd = primary_key != string.Empty ? cmd + $"PRIMARY KEY ({primary_key}));" : $"{cmd.Remove(cmd.Length - 2)});";
 				using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
