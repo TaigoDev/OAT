@@ -595,7 +595,7 @@ button.customized:hover {
 
 .icon {
 	width: 25px;
-	transition: 300ms ease;
+	transition: 250ms ease;
 }
 
 img.customized {
@@ -1502,7 +1502,7 @@ section.content::before{
 	z-index: 10;
 	width: 100%;
 	height: 100%;
-	min-width: 100dvw; /* MAYBY WILL FIX THE IPHONES */
+	min-width: 100dvw;
 	max-height: var(--max-header-heigth);
 	padding: 20px 0;
 	grid-area: header;
@@ -1519,7 +1519,7 @@ section.content::before{
 	position: absolute;
 	top: 0;
 	z-index: -1;
-	min-width: 100dvw; /* MAYBY WILL FIX THE IPHONES */
+	min-width: 100dvw;
 	width: 100%;
 	height: var(--max-header-heigth);
 	background-color: var(--matte-color);
@@ -1637,35 +1637,31 @@ section.content::before{
 /* bottom menu */
 
 .main-menu-icon {
+	--menu-icon-size: 55px;
 	position: fixed;
-	bottom: 10px;
-	left: calc(50% - 27.5px);
+	bottom: 15px;
+	left: calc(50% - (var(--menu-icon-size) / 2));
 	display: grid;
 	place-items: center;
-	width: 55px;
-	height: 55px;
+	width: var(--menu-icon-size);
+	height: var(--menu-icon-size);
 	border-radius: 50%;
 	background-color: var(--matte-color);
-	opacity: .8;
 	cursor: pointer;
-	box-shadow: 0 4px 8px 3px oklch(0.2 0 0/1);
-	transition: opacity 400ms, background-color 400ms;
-	animation-name: levitation;
-	animation-iteration-count: infinite;
-	animation-duration: 10s;
-	animation-direction: alternate;
-	animation-timing-function: ease-in-out;
+	box-shadow: 0 5px 30px -10px black;
+	transition: 250ms ease;
 }
 
-.main-menu-icon-active {
-	animation-play-state: paused;
-	opacity: 1;
-	background-color: #161616;
+.main-menu-icon:hover, .main-menu-icon-active{
+	box-shadow: 0 5px 30px -5px black;
 }
 
-.main-menu-icon:hover{
-	animation-play-state: paused;
+.main-menu-icon:hover .icon, .main-menu-icon-active .icon{
 	opacity: 1;
+}
+
+.main-menu-icon .icon{
+	opacity: 0.9;
 }
 
 @keyframes levitation {
@@ -1688,7 +1684,7 @@ section.content::before{
 
 .main-menu-window {
 	position: fixed;
-	bottom: 100px;
+	bottom: 80px;
 	left: 50%;
 	translate: -50%;
 	display: grid;
@@ -1697,23 +1693,11 @@ section.content::before{
 	max-width: 480px;
 	padding: 25px;
 	border-radius: var(--border-radius-xxl);
-	background-color: hsl(0, 0%, 8%, 90%);
+	background: var(--matte-color);
+	box-shadow: 0 0 35px -10px black;
 	visibility: hidden;
 	opacity: 0;
-	transition: opacity 400ms, visibility 400ms;
-}
-
-.main-menu-window::before {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	translate: -50%;
-	display: block;
-	width: 40px;
-	aspect-ratio: 1;
-	background: inherit;
-	clip-path: polygon(50% 50%, 0 0, 100% 0);
+	transition: 350ms ease;
 }
 
 .main-menu-window::after {
@@ -1727,7 +1711,7 @@ section.content::before{
 	background-size: cover;
 	visibility: hidden;
 	opacity: 0;
-	transition: opacity 400ms, visibility 400ms;
+	transition: 350ms ease;
 }
 
 .main-menu-window-open {
@@ -1744,7 +1728,7 @@ section.content::before{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	gap: 30px;
+	gap: 25px;
 	transition: opacity 1s;
 }
 
@@ -1757,44 +1741,51 @@ section.content::before{
 	width: 115px;
 	font-size: .8rem;
 	text-align: center;
-	opacity: 0.7;
-	transition: 300ms ease;
 }
 
-.main-menu-item:hover{
+.main-menu-item *{
+	opacity: 0.8;
+	transition: 200ms ease;
+}
+
+.main-menu-item:has(a:hover) *{
 	opacity: 1;
 }
 
 .main-menu-item a{
+	display: block;
 	color: var(--light-white);
 }
 
-.main-menu-item-pictogram {
+a.main-menu-item-pictogram {
 	display: grid;
 	place-items: center;
-	width: 55px;
+	padding: 12px;
 	aspect-ratio: 1;
-	border-radius: 50%;
-	background-color: #00000050;
+	border-radius: var(--border-radius-l);
+	background-color: #00000060;
 }
 
-.main-menu-item-pictogram img {
-	filter: drop-shadow(0px 0px 1.5px black);
+.main-menu-item:has(a:hover) a.main-menu-item-pictogram {
+	background-color: #00000090;
 }
 
-.main-menu-item-pictogram:hover img {
-	scale: 1.2;
+.main-menu-item:has(a:hover) .main-menu-item-pictogram img {
+	filter: drop-shadow(0 0 0.5px white);
+}
+
+@media(width>1600px) {
+	a.main-menu-item-pictogram .icon {
+		width: 28px;
+	}
 }
 
 @media(width<1600px) {
 	.main-menu-icon {
-		left: calc(50% - 22.5px);
-		width: 45px;
-		height: 45px;
+		--menu-icon-size: 50px;
 	}
-
-	.main-menu-icon img {
-		width: 23px;
+	.main-menu-window {
+		bottom: 75px;
 	}
 }
 
