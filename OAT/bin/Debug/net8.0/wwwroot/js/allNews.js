@@ -6,6 +6,7 @@
 'use strict'
 window.addEventListener("load", () => {
 	document.querySelectorAll(".news-item-img").forEach(element => {
-		element.style = `--block-width: ${element.offsetWidth / 2}px; --block-height: ${element.offsetHeight / 2}px;`;
+		let temp = element.offsetHeight / 2 > 25 ? `--block-height: ${element.offsetHeight / 2}px;` : "";
+		element.style = `--block-width: ${element.offsetWidth / 2}px; ${temp}`;
 	});
 });

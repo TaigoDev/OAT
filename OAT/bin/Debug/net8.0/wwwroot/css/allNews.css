@@ -6,13 +6,13 @@
 	justify-content: center;
 	gap: 40px 30px;
 	max-width: 800px;
-	margin: 0 auto;
+	margin: 30px auto;
 }
 
 .news-item {
 	display: flex;
 	justify-content: space-between; /* until the news is filled */
-	column-gap: 30px;
+	column-gap: 20px;
 	width: 100%;
 }
 
@@ -22,14 +22,14 @@
 
 .news-item-img {
 	position: relative;
-	display: block;
+	display: flex;
 	overflow: hidden;
 	height: fit-content;
-	max-height: 210px;
+	max-height: 200px;
 	min-width: 300px;
 	border-radius: 25px;
-	--block-width: -20px;
-	--block-height: -20px;
+	--block-width: 150px;
+	--block-height: 100px;
 }
 
 .news-item-img::before{
@@ -43,7 +43,7 @@
 	background: url("../images/news/plane.svg") no-repeat;
 	background-size: cover;
 	opacity: 0.7;
-	transition: transform 600ms ease-in-out;
+	transition: 500ms ease-in-out;
 }
 
 .news-item-img img {
@@ -51,7 +51,7 @@
 	width: 100%;
 	max-height: 210px;
 	border-radius: 25px;
-	transition: transform 600ms ease-in-out;
+	transition: 500ms ease-in-out;
 }
 
 .news-item-content {
@@ -71,6 +71,7 @@
 	font-weight: 500;
 	font-size: 1.4rem;
 	letter-spacing: -0.02em;
+	line-height: 1.25;
 }
 
 .news-item-info {
@@ -84,7 +85,7 @@
 }
 
 .news-item-img:hover img {
-	transform: scale(1.25);
+	scale: 1.25;
 }
 
 .news-item-img:hover::before {
@@ -103,6 +104,12 @@
 		margin: auto;
 		min-width: 0;
 		max-width: min(100%, 400px);
+	}
+
+	.news-item-content {
+		display: flex;
+		flex-direction: column;
+		row-gap: 5px;
 	}
 
 	.news-item-date, .news-item-title{
