@@ -26,7 +26,8 @@ namespace OAT.Modules.Security
 				if (WithError)
 					TelegramBot.SendMessage($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
 						$"L: {username}\n" +
-						$"IP-адрес отправителя: {IP}", ex);
+						$"IP-адрес отправителя: {IP}." +
+						$"Ошибка: {ex}", ex);
 				return false;
 			}
 		}
