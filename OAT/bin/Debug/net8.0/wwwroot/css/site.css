@@ -611,7 +611,7 @@ img.customized {
 .images-list-slider-container {
 	position: relative;
 	width: 440px;
-	margin: 0 auto 20px auto;
+	margin: 10px auto 0 auto;
 	border-radius: var(--border-radius-xxl);
 	overflow: hidden;
 }
@@ -966,10 +966,10 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 @media (width<600px) {
 	.section-title {
-		font-size: 1.5rem;
+		font-size: 1.525rem;
 	}
 	.section-subtitle{
-		font-size: 1.25rem;
+		font-size: 1.275rem;
 	}
 	.section-subtitle-small {
 		font-size: 1.125rem;
@@ -1953,7 +1953,7 @@ a.main-menu-item-pictogram {
 .footer-top-item {
 	display: flex;
 	flex-direction: column;
-	row-gap: 20px;
+	row-gap: 10px;
 	min-width: fit-content;
 }
 
@@ -2049,7 +2049,7 @@ a.main-menu-item-pictogram {
 .footer-bottom-pages {
 	display: grid;
 	align-items: center;
-	gap: 30px 200px;
+	gap: 20px 200px;
 	grid-template-columns: repeat(3, 1fr);
 	margin-bottom: 20px;
 }
