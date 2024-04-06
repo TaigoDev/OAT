@@ -11,9 +11,9 @@
 	display: block;
 	width: 100px;
 	opacity: 0.6;
-	--duck-time: 12s; 
+	--duck-time: 12s;
 	animation: var(--duck-time) infinite duckFly linear;
-	transition: opacity 500ms;
+	transition: opacity 250ms ease;
 }
 
 .duck-container:hover{

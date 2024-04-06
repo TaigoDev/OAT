@@ -1,20 +1,18 @@
-﻿.report-corruption {
-	display: block;
+﻿a.report-corruption {
+	display: grid;
+	place-items: center;
 	max-width: min(300px, 100%);
 	margin: 20px auto;
-	padding: 10px;
-	border-radius: 10px;
-	outline: 5px solid var(--m-color);
-	outline-offset: -3px;
-	background-color: var(--m-l-color);
-	color: var(--light-white) !important;
+	padding: 15px;
+	border-radius: var(--border-radius-m);
+	background-color: var(--m-color);
+	color: var(--light-white);
 	font-weight: 500;
 	text-transform: uppercase;
-	text-align: center;
-	transition: outline-color 400ms, letter-spacing 300ms;
+	transition: 100ms ease;
 }
 
-.report-corruption:hover{
-	outline-color: var(--m-d-color);
-	letter-spacing: 0.04em;
+a.report-corruption:hover{
+	background: var(--m-l-color);
+	color: white;
 }

@@ -952,6 +952,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	font-size: 1.825rem;
 	font-weight: 700;
 	letter-spacing: 0.015em;
+	line-height: 1.25;
 	margin-bottom: 0.2em;
 	margin-top: 0.825em;
 }
@@ -1011,11 +1012,16 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	justify-content: start;
 }
 
+.documents-list > .document-item{
+	margin-top: 0;
+}
+
 .document-item {
 	display: flex;
 	flex-direction: column;
 	min-height: 160px;
 	max-width: 210px;
+	margin-top: 10px;
 	border-radius: var(--border-radius-xl);
 	background-color: var(--m-color);
 	color: hsl(200deg 35% 85%);
@@ -1695,8 +1701,9 @@ section.content::before{
 	max-width: 480px;
 	padding: 25px;
 	border-radius: var(--border-radius-xxl);
-	background: var(--matte-color);
-	box-shadow: 0 0 35px -10px black;
+	background: oklch(0.25 0 0 / 0.8);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 0 35px -10px #000;
 	visibility: hidden;
 	opacity: 0;
 	transition: 350ms ease;
