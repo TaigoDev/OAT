@@ -1701,7 +1701,7 @@ section.content::before{
 	max-width: 480px;
 	padding: 25px;
 	border-radius: var(--border-radius-xxl);
-	background: oklch(0.25 0 0 / 0.8);
+	background: #242424d5;
 	backdrop-filter: blur(10px);
 	box-shadow: 0 0 35px -10px #000;
 	visibility: hidden;
