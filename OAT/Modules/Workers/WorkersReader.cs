@@ -62,7 +62,7 @@ namespace OAT.Modules.Workers
 			workers.RemoveAll(e => ignoredPost.Contains(e.Post) || ignoredPost.Contains(e.FullName));
 			AllWorkers = workers.ToList();
 			AdministrationByPost(ref workers, e => e is "Директор");
-			AdministrationByPost(ref workers, e => e.Contains("Заместитель директора"));
+			AdministrationByPost(ref workers, e => e.Contains("Заместитель директора") && !e.Contains("инженерного лицея"));
 			AdministrationByPost(ref workers, e => e is "Главный бухгалтер");
 
 			Workers = workers.PagesSplit(14);

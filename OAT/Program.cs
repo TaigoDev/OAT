@@ -51,9 +51,6 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.Run();
 
-if (2 % 2 == 0)
-	Console.WriteLine();
-else;
 
 
 void SetupControllers()
