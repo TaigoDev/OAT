@@ -285,6 +285,7 @@
 
 .code-of-future {
 	max-width: min(100%, 600px) !important;
+	margin: 0 auto !important;
 	box-shadow: 30px 0 70px -20px #e63a54, -30px 0 70px -20px #055ba6;
 }
 
