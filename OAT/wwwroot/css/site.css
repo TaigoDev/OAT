@@ -598,7 +598,7 @@ button.customized:hover {
 
 .icon {
 	width: 25px;
-	transition: 250ms ease;
+	transition: 200ms ease;
 }
 
 img.customized {
@@ -1572,7 +1572,7 @@ section.content::before{
 .important-pages li a {
 	color: var(--light-white);
     font-size: 1.1rem;
-	transition: 200ms ease;
+	transition: 150ms ease;
 }
 
 .important-pages li:hover a{
@@ -2045,7 +2045,7 @@ a.main-menu-item-pictogram {
 
 .footer-bottom-social img{
 	opacity: 0.8;
-	transition: 300ms ease;
+	transition: 250ms ease;
 }
 
 .footer-bottom-social img:hover{
@@ -2069,7 +2069,7 @@ a.main-menu-item-pictogram {
 .footer-bottom-pages li a {
 	display: block;
 	color: var(--light-white);
-	transition: 200ms ease;
+	transition: 150ms ease;
 }
 
 .footer-bottom-pages li a:hover {

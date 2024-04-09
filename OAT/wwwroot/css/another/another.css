@@ -14,29 +14,14 @@
 	aspect-ratio: 1;
 	padding: 15px;
 	background-image: repeating-linear-gradient(45deg, var(--m-color), var(--m-d-color) 10%, var(--m-l-color) 20%, var(--m-color) 30%);
-	border-radius: 20px;
-	outline: 5px solid transparent;
-	color: #ffffffb2;
+	border-radius: var(--border-radius-l);
+	color: #ffffff90;
 	text-align: center;
 	font-weight: 600;
 	font-size: 1.15rem;
 	letter-spacing: 0.05em;
 	animation: another-play 20s infinite linear;
-	animation-play-state: paused;
-	transition: 350ms ease;
-}
-
-.another-list-item::before{
-	content: "";
-	--border-width: 6px;
-	position: absolute;
-	top: calc(0 - var(--border-width));
-	left: calc(0 - var(--border-width));
-	width: calc(100% - var(--border-width));
-	aspect-ratio: 1;
-	border: var(--border-width) solid transparent;
-	border-radius: inherit;
-	transition: outline-color 250ms ease, outline-offset 50ms, border-color 250ms ease;
+	transition: 150ms ease;
 }
 
 @keyframes another-play{
@@ -49,12 +34,5 @@
 }
 
 .another-list-item:hover {
-	animation-play-state: running;
-	outline-color: var(--m-color);
-	outline-offset: 8px;
 	color: white;
-}
-
-.another-list-item:hover::before{
-	border-color: var(--m-d-color);
 }
