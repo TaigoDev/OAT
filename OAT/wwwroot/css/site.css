@@ -1754,7 +1754,7 @@ section.content::before{
 
 .main-menu-item *{
 	opacity: 0.8;
-	transition: 200ms ease;
+	transition: 150ms ease;
 }
 
 .main-menu-item:has(a:hover) *{
