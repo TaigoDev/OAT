@@ -12,7 +12,25 @@
 			Новости
 		</label>
 		
-
+        <!--
+        <div class="input-box">
+            <label for="type">
+                Тип
+            </label>
+            <select id="type">
+                <option value="main">
+                    Главный
+                </option>
+                <option value="professionalitet">
+                    Профессионалитет
+                </option>
+                <option value="demoExam">
+                    Демонстрационный экзамен
+                </option>
+            </select>
+        </div>
+        -->
+        
 		<div class="input-box">
 			<label for="news-title">
 				Название
@@ -33,16 +51,17 @@
 			</label>
 			<textarea class="customized" id="news-text">Текст новости, её содержание.</textarea>
 		</div>
+
 		<div class="input-box">
 			<label for="images">
 				Фото
 			</label>
 			<input type="file" name="postedFiles" id="files" name="files" multiple="multiple">
 		</div>
+
 		<button type="submit" class="panel-form-send" value="Отправить" onclick="SendNews();return false" multiple>
 			Отправить
 		</button>
-
 	</form>
 
 	<table class="customized panel-table">
@@ -51,6 +70,11 @@
 				<th>
 					ID
 				</th>
+                <!--
+                <th>
+                    Тип
+                </th>
+                -->
 				<th>
 					Имя
 				</th>
@@ -69,6 +93,11 @@
 					<td>
 						@news.id
 					</td>
+                    @*
+                    <td>
+                        Название типа
+                    </td>
+                    *@
 					<td>
 						@news.title
 					</td>

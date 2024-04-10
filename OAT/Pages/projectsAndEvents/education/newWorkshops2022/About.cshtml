@@ -5,20 +5,20 @@
 }
 
 <style>
-	.workshops-list{
-		display: grid;
-		grid-template-columns: repeat(auto-fit, max(45%, 300px));
-		gap: 40px;
-		justify-content: center;
-	}
+    .workshops-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
 
-	.workshops-list img{
-		border-radius: 10px;
-		transition: scale 450ms ease-in-out;
-	}
+	.workshops-list img {
+        border-radius: var(--border-radius-l);
+        width: 300px;
+        transition: 200ms ease;
+    }
 
 	.workshops-list img:hover{
-		scale: 1.1;
+		scale: 1.05;
 	}
 </style>
 

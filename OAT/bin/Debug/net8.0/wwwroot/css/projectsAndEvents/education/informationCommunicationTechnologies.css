@@ -10,19 +10,16 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 15px;
-	max-width: 310px;
-	border-radius: 10px;
-	background: #00bbd84d;
+	width: 320px;
+	border-radius: var(--border-radius-l);
+	background: #f1f1f1;
 	overflow: hidden;
-	transition: translate 500ms;
-}
-
-.workshops-list-item:hover {
-	translate: 0 -15px;
+	box-shadow: 0 15px 50px -30px gray;
 }
 
 .workshops-list-item img{
-	transform: scale(1.05);
+	height: 145px;
+    scale: 1.025;
 }
 
 .workshops-list-item-head{
