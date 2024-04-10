@@ -1,16 +1,17 @@
 ﻿@page "{id?}"
 @using OAT.Modules.MNews.Readers
 
-@model OAT.Pages.projectsAndEvents.professionalitet.NewsModel
+@model OAT.Pages.projectsAndEvents.demoExam.NewsModel
 @{
 	
 }
 <link rel="stylesheet" href="~/css/news.css">
 
 <article class="centered">
-	@if (!string.IsNullOrWhiteSpace(Model.id) && ProfNewsReader.news.Count() - 1 >= Convert.ToInt32(Model.id))
+	@if (!string.IsNullOrWhiteSpace(Model.id) && int.TryParse(Model.id, null, out var id) &&
+        DemoExamsNewsReader.news.Any(e => e.id == id))
 	{
-		var news = ProfNewsReader.news.First(e => e.id == Convert.ToInt32(Model.id));
+        var news = DemoExamsNewsReader.news.First(e => e.id == id);
 		<h3 class="news-title">
 			@news.title
 		</h3>

@@ -78,6 +78,7 @@ void SetupControllers()
 			HealthTables.init,
 			NewsReader.init,
 			ProfNewsReader.init,
+			DemoExamsNewsReader.init,
 			ScheduleReader.init,
 			() => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),
 			WorkersReader.init);
