@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.projectsAndEvents.professionalitet
+namespace OAT.Pages.projectsAndEvents.demoExam
 {
 	public class NewsModel : PageModel
 	{
@@ -8,7 +8,6 @@ namespace OAT.Pages.projectsAndEvents.professionalitet
 		public void OnGet(string? id)
 		{
 			this.id = id;
-
 		}
 	}
 }

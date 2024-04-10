@@ -1,5 +1,6 @@
 ﻿@page
 @using OAT.Modules.MNews.Readers
+@using OAT.Utilities
 
 @model ProjectNewsModel
 @{
@@ -13,10 +14,85 @@
 
 <div class="container content-page">
 	<section class="content">
-		<h2 class="section-title">
-			Новости проекта
-		</h2>
 
+        @if (DemoExamsNewsReader.pages.Count() >= id)
+        {
+            <h2 class="section-title">
+                Новости проекта
+            </h2>
+            <div class="news-list">
+
+                @foreach (var news in DemoExamsNewsReader.pages.ToList()[id - 1])
+                {
+                    <div class="news-item">
+                        <a class="news-item-img" href="/projectsAndEvents/demoExam/news/@news.id">
+                            <img loading="lazy" src="/@news.GetPhotos()[0]" alt="">
+                        </a>
+                        <div class="news-item-content">
+                            <div class="news-item-date">
+                                @news.date
+                            </div>
+                            <div class="news-item-title">
+                                @news.title
+                            </div>
+                            <div class="news-item-info">
+                                @Html.Raw(news.short_description)
+                                <a href="/projectsAndEvents/demoExam/news/@news.id">
+                                    ещё...
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="pages-nav-container">
+                <div class="pages-nav">
+
+                    @if (id != 1)
+                    {
+                        <a href="/AllNews?id=@(id - 1)" class="pages-nav-arrow pages-nav-prev">
+                            <img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
+                        </a>
+                    }
+
+                    <div class="pages-nav-pages-list">
+                        @foreach (var item in DemoExamsNewsReader.pages.Select((value, index) => new { index, value }))
+                        {
+                            var index = item.index + 1;
+                            if (id == index)
+                            {
+                                <a href="/projectsAndEvents/demoExam/ProjectNews?id=@index" class="pages-nav-pages-list-item current">
+                                    @index
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/projectsAndEvents/demoExam/ProjectNews?id=@index" class="pages-nav-pages-list-item">
+                                    @index
+                                </a>
+                            }
+
+                        }
+                    </div>
+                    @if (id != DemoExamsNewsReader.pages.Count())
+                    {
+                        <a href="/projectsAndEvents/demoExam/ProjectNews?id=@(id + 1)" class="pages-nav-arrow pages-nav-next">
+                            <img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
+                        </a>
+                    }
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <h3 class="section-title">
+                Упс, такой страницы нет...
+                <br>
+                Мы знаем о проблеме и уже решаем ее
+            </h3>
+        }
 		
 	</section>
 
