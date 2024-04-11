@@ -403,15 +403,16 @@ section.centered .section-title{
 	letter-spacing: 1px;
 }
 
-.page-navigation li {
+.page-navigation li a{
 	position: relative;
+	display: block;
 	width: fit-content;
-	margin: 0 0 5px 22px;
-	padding: 2px;
-	transition: 200ms ease;
+	margin: 0 0 4px 22px;
+	padding: 3px 2px;
+	transition: 25ms ease;
 }
 
-.page-navigation li::before{
+.page-navigation li a::before{
 	content: "";
 	position: absolute;
 	top: 2px;
@@ -422,8 +423,8 @@ section.centered .section-title{
 	background-size: cover;
 }
 
-.page-navigation li:hover {
-	transform: translateX(10px);
+.page-navigation li a:hover{
+	filter: brightness(0.7);
 }
 
 /* pages navigation */
@@ -1229,10 +1230,6 @@ table.two-column.second-column-low tr td:nth-child(2) {
 
 .accordion-body > *:first-child {
 	margin-top: 0;
-}
-
-.accordion-body > *:last-child {
-	margin-bottom: 0;
 }
 
 @media (width<675px){

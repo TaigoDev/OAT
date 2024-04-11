@@ -1,0 +1,171 @@
+﻿@page
+@model CMKModel
+@{
+    ViewData["Title"] = "Название ЦМК";
+}
+
+<section class="centered">
+	<h2 class="section-title">
+		Название ЦМК
+	</h2>
+	
+    <ul class="page-navigation">
+        <li>
+            <a href="#people">
+                Состав ЦМК
+            </a>
+        </li>
+        <li>
+            <a href="#history">
+                История ЦМК
+            </a>
+        </li>
+        <li>
+            <a href="#news">
+                Новости ЦМК
+            </a>
+        </li>
+        <li>
+            <a href="#documents">
+                Основная документация
+            </a>
+        </li>
+    </ul>
+
+
+    <h3 id="people" class="section-subtitle">
+        Состав ЦМК
+    </h3>
+    <ul class="people-list">
+        <li class="people-item">
+            <a class="people-item-img-container" href="">
+                <img src="~/images/basic/unnamed.jpg" alt="">
+            </a>
+            <div class="people-item-body">
+                <div class="people-item-body-fio">
+                    Фамилия Имя Отчество 1
+                </div>
+                <div class="people-item-body-job">
+                    Должность
+                </div>
+            </div>
+        </li>
+        <li class="people-item">
+            <a class="people-item-img-container" href="">
+                <img src="~/images/basic/unnamed.jpg" alt="">
+            </a>
+            <div class="people-item-body">
+                <div class="people-item-body-fio">
+                    Фамилия Имя Отчество 2
+                </div>
+                <div class="people-item-body-job">
+                    Должность
+                </div>
+            </div>
+        </li>
+        <li class="people-item">
+            <a class="people-item-img-container" href="">
+                <img src="~/images/basic/unnamed.jpg" alt="">
+            </a>
+            <div class="people-item-body">
+                <div class="people-item-body-fio">
+                    Фамилия Имя Отчество 3
+                </div>
+                <div class="people-item-body-job">
+                    Должность
+                </div>
+            </div>
+        </li>
+    </ul>
+    <p style="font-size: 2rem">
+        ЛИБО
+    </p>
+    <ul class="customized">
+        <li>
+            <a href="">
+                Фамилия Имя Отчество 1
+            </a>
+        </li>
+        <li>
+            <a href="">
+                Фамилия Имя Отчество 2
+            </a>
+        </li>
+        <li>
+            <a href="">
+                Фамилия Имя Отчество 3
+            </a>
+        </li>
+    </ul>
+
+
+    <h3 id="history" class="section-subtitle">
+        История ЦМК
+    </h3>
+    <p>
+        Какой-то очень важный текст, история ЦМК такого-то
+    </p>
+    <p>
+        Какой-то очень важный текст, история ЦМК такого-то
+    </p>
+    <p>
+        Какой-то очень важный текст, история ЦМК такого-то
+    </p>
+
+
+    <h3 id="news" class="section-subtitle">
+        Новости
+    </h3>
+    <p>
+        Варианты:
+        <br />
+        1. Список новостей (не подходит, т.к. их может быть слишком много)
+        <br />
+        2. Красиво оформленная ссылка на отдельную страницу, как https://www.oat.ru/AllNews
+    </p>
+
+    <h3 id="documents" class="section-subtitle">
+        Основная документация
+    </h3>
+    <ul class="documents-list little">
+        <li class="document-item">
+            <div class="document-item-head">
+                <a target="_blank" href="">
+                </a>
+            </div>
+            <div class="document-item-body">
+                Аннотации рабочих программ
+            </div>
+        </li>
+        <li class="document-item">
+            <div class="document-item-head">
+                <a target="_blank" href="">
+                </a>
+            </div>
+            <div class="document-item-body">
+                График учебного процесса для групп ПР и ИС
+            </div>
+        </li>
+        <li class="document-item">
+            <div class="document-item-head">
+                <a target="_blank" href="">
+                </a>
+            </div>
+            <div class="document-item-body">
+                Расписание консультаций
+            </div>
+        </li>
+        <li class="document-item">
+            <div class="document-item-head">
+                <a target="_blank" href="">
+                </a>
+            </div>
+            <div class="document-item-body">
+                Документация по курсовым и дипломным работам
+            </div>
+        </li>
+    </ul>
+
+
+
+</section>
