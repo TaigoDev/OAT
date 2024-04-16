@@ -31,7 +31,7 @@
 			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin))
 			{
 				<li>
-					<a href="MySQL">
+					<a href="/admin/MySQL">
 					<span>
 						Mysql
 					</span>
@@ -42,7 +42,7 @@
 			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_schedule_ALL))
 			{
 				<li>
-					<a href="schedule">
+                    <a href="/admin/schedule">
 						<span>
 							Timetable
 						</span>
@@ -55,7 +55,7 @@
 			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_manager_changes_ALL, Enums.Role.www_manager_files_practice_ALL))
 			{
 				<li>
-					<a href="files">
+                    <a href="/admin/files">
 						<span>
 							Files
 						</span>
