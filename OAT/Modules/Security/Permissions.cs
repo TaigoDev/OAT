@@ -129,6 +129,7 @@ public static class Enums
 		www_admin,
 		www_reporter_news,
 		www_reporter_prof_news,
+		www_reporter_demoexams,
 
 		www_manager_schedule_ALL,
 		www_manager_schedule_campus_1,

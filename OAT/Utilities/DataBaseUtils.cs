@@ -19,13 +19,21 @@ namespace OAT.Utilities
 
 		public static async Task<int> getLastId(string table, string parametr = "id")
 		{
-			var userId = 0;
-			using var connection = new MySqlConnection(GetConnectionString());
+			try
+			{
+				var userId = 0;
+				using var connection = new MySqlConnection(GetConnectionString());
 
-			var obj = await connection.ExecuteQueryAsync<dynamic>($"SELECT MAX({parametr}) AS max FROM `{table}`;");
-			if (obj.AsList()[0].max != null)
-				userId = obj.AsList()[0].max + 1;
-			return userId;
+				var obj = await connection.ExecuteQueryAsync<dynamic>($"SELECT MAX({parametr}) AS max FROM `{table}`;");
+				if (obj.AsList()[0].max != null)
+					userId = obj.AsList()[0].max + 1;
+				return userId;
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(ex);
+				return 0;
+			}
 		}
 	}
 }

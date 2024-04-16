@@ -1,11 +1,11 @@
-﻿using OAT.Utilities;
+﻿using OAT.Entities.Interfaces;
+using OAT.Utilities;
 
 namespace OAT.Entities.Database
 {
 	[MysqlTable]
-	public class DemoExamNews
+	public class DemoExamNews : INews
 	{
-
 
 		public DemoExamNews(string date, string title, string description, string short_description, List<string> photos)
 		{

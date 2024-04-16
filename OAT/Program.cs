@@ -28,9 +28,10 @@ var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
 app.MapBlazorHub();
+app.UseAntiforgery();
 app.UseRouting();
 app.UseNoSniffHeaders();
-app.Use((context, next) => CacheController(context, next));
+app.Use(CacheController);
 
 if (Configurator.config.bitrixProxy)
 	app.BitrixProxy();
@@ -43,8 +44,6 @@ else
 			context.Response.Redirect("https://www.oat.ru/Duck");
 	});
 }
-var ok = 245;
-Console.WriteLine(ok * ++ok);
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
@@ -93,8 +92,8 @@ void SetupControllers()
 void SetupServices(ref WebApplicationBuilder builder)
 {
 
-	builder.Services.AddRazorPages();
-	builder.Services.AddControllersWithViews();
+	builder.Services.AddRazorComponents()
+		.AddInteractiveServerComponents(); builder.Services.AddControllersWithViews();
 	builder.Services.AddEndpointsApiExplorer();
 	builder.Services.AddServerSideBlazor(o => o.DetailedErrors = true);
 

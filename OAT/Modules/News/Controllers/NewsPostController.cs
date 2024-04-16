@@ -26,7 +26,7 @@ namespace OAT.Modules.MNews.Controllers
 						await file.CopyToAsync(fileStream);
 					}
 				using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
-				var news = new News(date, title, text, photos);
+				var news = new News(date, title, text.GetWords(10), text, photos);
 				await connection.InsertAsync(news);
 
 				Logger.Info($"Пользователь опубликовал новую новость.\n" +

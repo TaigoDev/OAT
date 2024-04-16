@@ -1,0 +1,263 @@
+﻿@using MySqlConnector
+@using OAT.Entities.Database
+@using OAT.Entities.Interfaces
+@using OAT.Modules.MNews.Readers
+@using OAT.Modules.Security
+@using OAT.Utilities
+@using RepoDb
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
+
+<form class="panel-form">
+    <label for="news" class="panel-form-title">
+        Новости
+    </label>
+
+    <div class="input-box">
+        <label for="type">
+            Тип
+        </label>
+        <select id="type" @onchange="(r) => {
+            form.type = r.Value?.ToString()!;
+            OnChangeNews(r.Value?.ToString()!);
+    }">
+            <option value="main">
+                Новости сайта
+            </option>
+            <option value="professionalitet">
+                Новости профессионалитета
+            </option>
+            <option value="demoExam">
+                Новости демонстрационного экзамена
+            </option>
+        </select>
+    </div>
+
+    <div class="input-box">
+        <label for="news-title">
+            Название
+        </label>
+        <input @bind-value="form.name" id="news-title" type="text">
+    </div>
+
+    <div class="input-box">
+        <label for="news-date">
+            Дата
+        </label>
+        <input @bind-value="form.date" id="news-date" type="date">
+    </div>
+
+    <div class="input-box">
+        <label for="news-text">
+            Текст
+        </label>
+        <textarea @onchange='(t) => form.description = t.Value?.ToString()!' class="customized" id="news-text">Текст новости, её содержание.</textarea>
+    </div>
+
+    <div class="input-box">
+        <label for="images">
+            Фото
+        </label>
+        <InputFile multiple OnChange='(f) =>{
+            form.photos.Clear();
+            foreach(var file in f.GetMultipleFiles())
+                form.photos.Add(file);
+        }'/>
+    </div>
+
+    <button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await OnPublish()" multiple>
+        Отправить
+    </button>
+</form>
+
+<table class="customized panel-table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Имя
+            </th>
+            <th>
+                Дата
+            </th>
+            <th>
+                Управление
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @newsList
+    </tbody>
+</table>
+@code {
+
+    protected override void OnInitialized() => OnChangeNews("main");
+    private RenderFragment newsList { get; set; } = (__builder) => { };
+    private SubmitForm form { get; set; } = new SubmitForm();
+
+    private void OnChangeNews(string name)
+    {
+
+        var _news = name switch
+        {
+            "demoExam" => new List<INews>(DemoExamsNewsReader.news.Cast<INews>()),
+            "professionalitet" => new List<INews>(ProfNewsReader.news.Cast<INews>()),
+            _ => new List<INews>(NewsReader.news.Cast<INews>()),
+
+        };
+
+        newsList = (__builder) =>
+        {
+            foreach (var news in _news)
+            {
+                <tr>
+                    <td>
+                        @news.id
+                    </td>
+
+                    <td>
+                        @news.title
+                    </td>
+                    <td>
+                        @news.date
+                    </td>
+                    <td>
+                        <button class="panel-table-button" @onclick='async () => {
+                            await DeleteNews(name, news);
+                            OnChangeNews(name);
+                        }'>
+                            удалить
+                        </button>
+                    </td>
+                </tr>
+            }
+        };
+
+    }
+
+    private async Task DeleteNews(string name, INews news)
+    {
+        if (httpContextAccessor.HttpContext is null)
+        {
+            Logger.Error("httpContextAccessor.HttpContext is null");
+            return;
+        }
+
+        var permission = name switch
+        {
+            "demoExam" => Enums.Role.www_reporter_demoexams,
+            "professionalitet" => Enums.Role.www_reporter_prof_news,
+            _ => Enums.Role.www_reporter_news,
+        };
+
+        var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
+        if(roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+        {
+            //TODO: loggers
+            Logger.Info("Отказано в доступе");
+            return;
+        }
+
+        using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+
+        if(name is "demoExam")
+        {
+            await connection.DeleteAllAsync(await connection.QueryAsync<DemoExamNews>(e => e.id == news.id));
+            await DemoExamsNewsReader.init();
+        }
+        else if (name is "professionalitet")
+        {
+            await connection.DeleteAllAsync(await connection.QueryAsync<ProfNews>(e => e.id == news.id));
+            await ProfNewsReader.init();
+
+        }else
+        {
+            await connection.DeleteAllAsync(await connection.QueryAsync<News>(e => e.id == news.id));
+            await NewsReader.init();
+        }
+        Logger.Info($"Пользователь удалил новость.\n" +
+            $"ID: {news.id}\n" +
+            $"Пользователь: {httpContextAccessor.HttpContext.User.GetUsername()}\n" +
+            $"IP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
+    }
+
+    private async Task OnPublish()
+    {
+        try
+        {
+            if (httpContextAccessor.HttpContext is null)
+            {
+                Logger.Error("httpContextAccessor.HttpContext is null");
+                return;
+            }
+
+            var permission = form.type switch
+            {
+                "demoExam" => Enums.Role.www_reporter_demoexams,
+                "professionalitet" => Enums.Role.www_reporter_prof_news,
+                _ => Enums.Role.www_reporter_news,
+            };
+
+            var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
+            if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+            {
+                //TODO: loggers
+                Logger.Info("Отказано в доступе");
+                return;
+            }
+
+            var photos = new List<string>();
+            foreach (var file in form.photos)
+            {
+                var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
+                await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
+                await file.OpenReadStream().CopyToAsync(fs);
+                photos.Add(path);
+            }
+
+            using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+            if (form.type is "demoExam")
+            {
+                var id = await DataBaseUtils.getLastId("DemoExamNews");
+                var news = new DemoExamNews(id, form.date.ToString("dd.MM.yyyy"),
+                    form.name, form.description, form.description.GetWords(15), photos.toJson());
+                await connection.InsertAsync(news);
+                await DemoExamsNewsReader.init();
+            }
+            else if (form.type is "professionalitet")
+            {
+                var id = await DataBaseUtils.getLastId("ProfNews");
+                var news = new ProfNews(id, form.date.ToString("dd.MM.yyyy"),
+                    form.name, form.description, form.description.GetWords(15), photos);
+                await connection.InsertAsync(news);
+                await ProfNewsReader.init();
+            }
+            else
+            {
+                var id = await DataBaseUtils.getLastId("News");
+                var news = new News(id, form.date.ToString("dd.MM.yyyy"),
+                     form.name, form.description, form.description.GetWords(15), photos.toJson());
+                await connection.InsertAsync(news);
+                await NewsReader.init();
+            }
+
+            OnChangeNews(form.type);
+        }
+        catch(Exception ex)
+        {
+            Logger.Error(ex);
+        }
+    }
+
+    public class SubmitForm
+    {
+        public string type { get; set; } = "main";
+        public string name { get; set; } = "Тест новость";
+        public string description { get; set; } = "Текст новости, её содержание.";
+        public DateTime date { get; set; } = DateTime.Now;
+        public List<IBrowserFile> photos { get; set; } = [];
+    }
+}

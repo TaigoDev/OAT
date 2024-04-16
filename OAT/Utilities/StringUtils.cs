@@ -41,7 +41,7 @@ namespace OAT.Utilities
 		}
 
 		public static string GetWords(this string text, int count)
-			 => string.Join(" ", text.GetWordsLocal(count));
+			 => string.Join(" ", text.GetWordsLocal(text.Count(e => e is ' ') < count ? text.Count(e => e is ' ') : count));
 
 		public static string Base64Encode(string plainText) =>
 			Convert.ToBase64String(Encoding.UTF8.GetBytes(plainText));
