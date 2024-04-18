@@ -214,7 +214,7 @@
             {
                 var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
                 await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
-                await file.OpenReadStream().CopyToAsync(fs);
+                await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
                 photos.Add(path);
             }
 
