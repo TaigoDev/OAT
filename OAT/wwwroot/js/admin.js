@@ -3,6 +3,12 @@
 	element.classList.add("panel-message-active");
 	setTimeout("document.getElementById(\"" + tag + "\").classList.remove(\"panel-message-active\")", 2000);
 }
+function MessageController(tag, message) {
+	var element = document.getElementById(tag);
+	element.textContent = message;
+	element.classList.add("panel-message-active");
+	setTimeout("document.getElementById(\"" + tag + "\").classList.remove(\"panel-message-active\")", 2000);
+}
 
 function POST(url, formData, success, error){
 	$.ajax({
