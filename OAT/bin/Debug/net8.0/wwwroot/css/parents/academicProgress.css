@@ -2,8 +2,8 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 15px;
-	border-radius: 20px;
-	padding: 15px 20px;
+	border-radius: var(--border-radius-xl);
+	padding: 20px 15px;
 	background: var(--matte-color);
 	text-align: center;
 	color: var(--light-white);
@@ -15,7 +15,10 @@
 	font-size: 1.2rem;
 }
 
+.input-box input {
+	background-color: hsl(0, 0%, 20%);
+}
+
 .grades-form button.customized {
 	padding: 5px;
-	border-width: 3px;
 }

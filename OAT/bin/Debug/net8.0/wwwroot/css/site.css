@@ -575,7 +575,7 @@ input[type=file]::file-selector-button {
 	padding: 5px;
 	border-radius: var(--border-radius-l);
 	background-color: var(--light-white);
-	transition: 500ms ease;
+	transition: 200ms ease;
 }
 
 input[type=file]::file-selector-button:hover {
@@ -588,7 +588,7 @@ button.customized {
 	display: block;
 	padding: 10px;
 	border: var(--border-width) solid transparent;
-	border-radius: var(--border-radius-xl);
+	border-radius: var(--border-radius-m);
 	background-color: hsl(0, 0%, 20%);
 	color: var(--light-white);
 	font-weight: 700;
@@ -596,7 +596,7 @@ button.customized {
 	text-transform: uppercase;
 	opacity: 0.95;
 	overflow: hidden;
-	transition: border-color 250ms ease, opacity 250ms ease;
+	transition: border-color 225ms ease, opacity 225ms ease;
 }
 
 button.customized:hover {
