@@ -34,10 +34,31 @@
 	</aside>
 	<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
 		<label for="news" class="panel-form-title">
-			Управление изменением расписания
+            Управление изменениями расписания
 		</label>
+        <!--  
+        <div class="input-box">
+            <label for="type">
+                Тип документов
+            </label>
+            <select id="type">
+                <option value="schedule-changes">
+                    Изменения в расписании
+                </option>
+                <option value="schedule">
+                    Расписание
+                </option>
+                <option value="session">
+                    Сессия
+                </option>
+                <option value="practice">
+                    Практика
+                </option>
+            </select>
+        </div>
+        -->
 		<div class="input-box">
-			<label for="user-role">
+			<label for="corpus">
 				Корпус
 			</label>
 			<select id="corpus">
@@ -69,7 +90,7 @@
 			</select>
 		</div>
 		<div class="input-box">
-			<label for="images">
+            <label for="files-corpus">
 				Файл
 			</label>
 			<input type="file" name="postedFiles" id="files-corpus" name="files" accept=".xlsx">
@@ -79,16 +100,13 @@
 		</button>
 	</form>
   
-	<br/>
-	<br/>
-	<br/>
 	<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
 		
 		<label for="news" class="panel-form-title">
 			Документы сессий
 		</label>
 		<div class="input-box">
-			<label for="user-role">
+            <label for="corpus-sessions">
 				Корпус
 			</label>
 			<select id="corpus-sessions" onchange="LoadSessionsFileByCorpus()">
@@ -127,7 +145,7 @@
 		</div>
 
 		<div class="input-box">
-			<label for="images">
+            <label for="file-uploader">
 				Файл
 			</label>
 			<input type="file" name="postedFiles" id="file-uploader" accept=".xlsx">
@@ -154,16 +172,13 @@
 		</tbody>
 	</table>
 
-	<br />
-	<br />
-	<br />
 	<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
 
 		<label for="news" class="panel-form-title">
 			Документы практики
 		</label>
 		<div class="input-box">
-			<label for="user-role">
+            <label for="corpus-practice">
 				Корпус
 			</label>
 			<select id="corpus-practice" onchange="LoadPracticeFileByCorpus()">
@@ -202,7 +217,7 @@
 		</div>
 
 		<div class="input-box">
-			<label for="images">
+            <label for="file-uploader-practice">
 				Файл
 			</label>
 			<input type="file" name="postedFiles" id="file-uploader-practice">

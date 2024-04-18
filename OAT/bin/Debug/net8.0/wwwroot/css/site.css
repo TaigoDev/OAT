@@ -115,6 +115,14 @@ textarea {
 	resize: none;
 }
 
+textarea:focus-visible{
+	outline: none;
+}
+
+textarea[readonly], input[readonly]{
+	cursor: auto;
+}
+
 a {
 	display: contents;
 	color: #4D89E2;
@@ -514,7 +522,7 @@ section.centered .section-title{
 .input-box {
 	display: flex;
 	flex-direction: column;
-	row-gap: 5px;
+	row-gap: 4px;
 }
 
 .input-box label {
@@ -530,19 +538,19 @@ section.centered .section-title{
 	background: var(--matte-color);
 	color: var(--light-white);
 	letter-spacing: .075em;
-	opacity: .9;
-	transition: opacity 250ms ease, border-color 250ms ease;
+	opacity: .825;
+	transition: opacity 100ms ease, border-color 100ms ease;
 }
 
 .input-box textarea{
 	letter-spacing: 0.05em;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-	border-color: rgb(15, 15, 15);
-	opacity: 1;
+input:not([readonly]):focus-visible,
+textarea:not([readonly]):focus-visible,
+select:focus-visible {
+	border-color: #00000090;
+	opacity: .9;
 	outline: none;
 }
 

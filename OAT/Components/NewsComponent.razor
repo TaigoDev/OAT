@@ -58,7 +58,7 @@
         <label for="images">
             Фото
         </label>
-        <InputFile multiple OnChange='(f) =>{
+        <InputFile id="images" multiple OnChange='(f) =>{
             form.photos.Clear();
             foreach(var file in f.GetMultipleFiles())
                 form.photos.Add(file);

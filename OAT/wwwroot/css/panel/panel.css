@@ -57,15 +57,7 @@ section::before, section::after{
 	height: 200%;
 	width: 100px;
 	background-color: hsl(0deg 0% 100% / 45%);
-	transition: transform 300ms ease-in-out, background-color 300ms ease;
-}
-
-.panel-tabs li:first-child{
-	border-radius: 25px 0 0 0;
-}
-
-.panel-tabs li:last-child{
-	border-radius: 0 25px 0 0;
+	transition: transform 275ms ease-in-out, background-color 275ms ease;
 }
 
 .panel-tabs li:hover{
@@ -96,22 +88,20 @@ section::before, section::after{
 
 .current-user-info {
 	position: fixed;
-	top: 80px;
+	top: 70px;
 	display: flex;
 	gap: 15px;
 	align-items: center;
 	width: fit-content;
 	padding: 10px;
-	border: var(--border-width) solid;
 	border-radius: var(--border-radius-l);
-	background-color: #ffffff20;
-	opacity: 0.9;
-	transition: 300ms opacity;
+	background-color: #ffffff40;
 }
 
-.current-user-info-head{
+.current-user-info-head {
 	width: 50px;
 	height: 50px;
+	opacity: 0.9;
 }
 
 .current-user-info-body {
@@ -124,10 +114,6 @@ section::before, section::after{
 	margin: 0;
 }
 
-.current-user-info:hover{
-	opacity: 1;
-}
-
 @media(width<1200px){
 	.current-user-info{
 		position: static;
@@ -137,17 +123,21 @@ section::before, section::after{
 
 /* panel form */
 
+section.container .panel-form:first-of-type {
+	margin-top: 0;
+}
+
 .panel-form {
 	display: flex;
 	flex-direction: column;
 	row-gap: 15px;
 	max-width: 555px;
-	margin: 0 auto 20px auto;
+	margin: 50px auto 0 auto;
 }
 
 .panel-form-title {
 	width: 100%;
-	font-size: 1.6rem;
+	font-size: 1.75rem;
 	font-weight: 700;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -158,7 +148,6 @@ section::before, section::after{
 	position: relative;
 	z-index: 1;
 	display: block;
-	margin-top: 20px;
 	padding: 10px;
 	border: 4px solid transparent;
 	border-radius: 15px;
@@ -213,8 +202,9 @@ section::before, section::after{
 
 /* panel table */
 
-.panel-table {
+table.panel-table {
 	margin: 0 auto;
+	margin-top: 15px;
 	max-width: min(700px, 95vw) !important;
 	max-height: 400px;
 }

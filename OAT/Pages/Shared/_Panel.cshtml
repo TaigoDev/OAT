@@ -13,7 +13,7 @@
 	<header class="panel-header">
 		<ul class="panel-tabs">
 			<li>
-				<a href="panel">
+                <a asp-page="/admin/panel">
 					<span>
 						News
 					</span>
@@ -21,7 +21,7 @@
 				</a>
 			</li>
 @*			<li>
-				<a href="">
+            <a asp-page="">
 					<span>
 						Answers
 					</span>
@@ -31,7 +31,7 @@
 			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin))
 			{
 				<li>
-					<a href="/admin/MySQL">
+                    <a asp-page="/admin/MySQL">
 					<span>
 						Mysql
 					</span>
@@ -42,9 +42,9 @@
 			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_schedule_ALL))
 			{
 				<li>
-                    <a href="/admin/schedule">
+                    <a asp-page="/admin/schedule">
 						<span>
-							Timetable
+                            Schedule
 						</span>
 						<img class="icon" src="~/images/panel/timetable.svg" alt="">
 					</a>
@@ -55,7 +55,7 @@
 			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_manager_changes_ALL, Enums.Role.www_manager_files_practice_ALL))
 			{
 				<li>
-                    <a href="/admin/files">
+                    <a asp-page ="/admin/files">
 						<span>
 							Files
 						</span>
