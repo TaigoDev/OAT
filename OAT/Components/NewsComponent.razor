@@ -7,6 +7,7 @@
 @using RepoDb
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor httpContextAccessor
+@inject IJSRuntime JSRuntime;
 
 <form class="panel-form">
     <label for="news" class="panel-form-title">
@@ -182,6 +183,8 @@
             $"ID: {news.id}\n" +
             $"Пользователь: {httpContextAccessor.HttpContext.User.GetUsername()}\n" +
             $"IP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
+        await Log("✅ Новость удалена");
+
     }
 
     private async Task OnPublish()
@@ -204,8 +207,8 @@
             var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
             if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
             {
-                //TODO: loggers
-                Logger.Info("Отказано в доступе");
+                await Log("❌ Вам отказано в доступе. ");
+                Logger.Info($"Пользователю {httpContextAccessor.HttpContext.User.GetUsername()} отказано в доступе, т.к. право {permission} отсутсвует");
                 return;
             }
 
@@ -219,9 +222,10 @@
             }
 
             using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+            var id = 0;
             if (form.type is "demoExam")
             {
-                var id = await DataBaseUtils.getLastId("DemoExamNews");
+                id = await DataBaseUtils.getLastId("DemoExamNews");
                 var news = new DemoExamNews(id, form.date.ToString("dd.MM.yyyy"),
                     form.name, form.description, form.description.GetWords(15), photos.toJson());
                 await connection.InsertAsync(news);
@@ -229,7 +233,7 @@
             }
             else if (form.type is "professionalitet")
             {
-                var id = await DataBaseUtils.getLastId("ProfNews");
+                id = await DataBaseUtils.getLastId("ProfNews");
                 var news = new ProfNews(id, form.date.ToString("dd.MM.yyyy"),
                     form.name, form.description, form.description.GetWords(15), photos);
                 await connection.InsertAsync(news);
@@ -237,19 +241,27 @@
             }
             else
             {
-                var id = await DataBaseUtils.getLastId("News");
+                id = await DataBaseUtils.getLastId("News");
                 var news = new News(id, form.date.ToString("dd.MM.yyyy"),
                      form.name, form.description, form.description.GetWords(15), photos.toJson());
                 await connection.InsertAsync(news);
                 await NewsReader.init();
             }
 
+            Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nID Новости: {id}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
             OnChangeNews(form.type);
+            await Log("✅ Новость добавлена");
         }
         catch(Exception ex)
         {
             Logger.Error(ex);
+            await Log("❌ Произошла ошибка. Сообщите");
         }
+    }
+
+    private async Task Log(string message)
+    {
+        await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
     }
 
     public class SubmitForm
