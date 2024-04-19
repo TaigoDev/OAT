@@ -613,7 +613,7 @@ button.customized:hover {
 img.customized {
 	display: block;
 	max-width: min(100%, 450px);
-	margin: 10px auto 0 0;
+	margin: 10px 0 0 0;
 	border-radius: var(--border-radius-xl);
 }
 
@@ -1489,6 +1489,8 @@ body {
 
 section::before,
 section::after,
+article::before,
+article::after,
 .footer-bottom::before,
 .footer-bottom::after {
 	content: "";
