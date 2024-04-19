@@ -243,7 +243,7 @@
             {
                 id = await DataBaseUtils.getLastId("News");
                 var news = new News(id, form.date.ToString("dd.MM.yyyy"),
-                     form.name, form.description.GetWords(15), form.description, photos.toJson());
+                     form.name, form.description, form.description.GetWords(15), photos.toJson());
                 await connection.InsertAsync(news);
                 await NewsReader.init();
             }
