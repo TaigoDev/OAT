@@ -157,8 +157,7 @@
         var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
         if(roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
         {
-            //TODO: loggers
-            Logger.Info("Отказано в доступе");
+            await Log("❌ Вам отказано в доступе. ");
             return;
         }
 
@@ -226,7 +225,7 @@
             if (form.type is "demoExam")
             {
                 id = await DataBaseUtils.getLastId("DemoExamNews");
-                var news = new DemoExamNews(id, form.date.ToString("dd.MM.yyyy"),
+                var news = new DemoExamNews(id, form.date.ToString("yyyy-MM-dd"),
                     form.name, form.description, form.description.GetWords(15), photos.toJson());
                 await connection.InsertAsync(news);
                 await DemoExamsNewsReader.init();
@@ -234,7 +233,7 @@
             else if (form.type is "professionalitet")
             {
                 id = await DataBaseUtils.getLastId("ProfNews");
-                var news = new ProfNews(id, form.date.ToString("dd.MM.yyyy"),
+                var news = new ProfNews(id, form.date.ToString("yyyy-MM-dd"),
                     form.name, form.description, form.description.GetWords(15), photos);
                 await connection.InsertAsync(news);
                 await ProfNewsReader.init();
@@ -242,7 +241,7 @@
             else
             {
                 id = await DataBaseUtils.getLastId("News");
-                var news = new News(id, form.date.ToString("dd.MM.yyyy"),
+                var news = new News(id, form.date.ToString("yyyy-MM-dd"),
                      form.name, form.description.GetWords(15), form.description, photos.toJson());
                 await connection.InsertAsync(news);
                 await NewsReader.init();
