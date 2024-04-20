@@ -1,11 +1,9 @@
-﻿@page
+﻿@page "{id?}"
+@using OAT.Components
 @using OAT.Utilities;
 @model AllNewsModel
 @{
 	ViewData["Title"] = "Все новости";
-
-	var query = HttpContext.Request.Query["id"].ToString();
-	var id = string.IsNullOrWhiteSpace(query) ? 1 : Convert.ToInt32(query);
 }
 
 <link rel="stylesheet" href="~/css/allNews.css">
@@ -13,14 +11,14 @@
 
 <section class="centered">
 
-	@if (NewsReader.pages.Count() >= id)
+	@if (NewsReader.pages.Count() >= Model.id)
 	{
 		<h3 class="section-title">
 			Новости Омского авиационного колледжа имени Н.Е. Жуковского
 		</h3>
 		<div class="news-list">
-			
-			@foreach (var news in NewsReader.pages.ToList()[id - 1])
+
+            @foreach (var news in NewsReader.pages.ToList()[Model.id])
 			{
 				<div class="news-item">
 					<a class="news-item-img" href="~/news/@news.id">
@@ -43,44 +41,14 @@
 				</div>
 			}
 		</div>
-
-		<div class="pages-nav-container">
-			<div class="pages-nav">
-
-				@if (id != 1)
-				{
-					<a href="/AllNews?id=@(id - 1)" class="pages-nav-arrow pages-nav-prev">
-						<img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
-					</a>
-				}
-
-				<div class="pages-nav-pages-list">
-					@foreach (var item in NewsReader.pages.Select((value, index) => new { index, value }))
-					{
-						var index = item.index + 1;
-						if (id == index)
-						{
-							<a href="~/AllNews?id=@index" class="pages-nav-pages-list-item current">
-								@index
-							</a>
-						}
-						else
-						{
-							<a href="~/AllNews?id=@index" class="pages-nav-pages-list-item">
-								@index
-							</a>
-						}
-					
-					}
-				</div>
-				@if (id != NewsReader.pages.Count())
-				{
-					<a href="/AllNews?id=@(id + 1)" class="pages-nav-arrow pages-nav-next">
-						<img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
-					</a>
-				}
-			</div>
-		</div>
+        @(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+        {
+            CurrentPage = Model.id + 1,
+            count = NewsReader.news.Count(),
+            countInPage = 10,
+            UrlWithParameter = "/AllNews/{id}"
+        }))
+	
 
 	}   
 	else

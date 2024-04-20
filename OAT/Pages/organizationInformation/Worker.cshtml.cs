@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.Utilities;
-using static OAT.Modules.Workers.WorkersReader;
+using static OAT.Controllers.Workers.WorkersReader;
 
 namespace OAT.Pages.organizationInformation
 {

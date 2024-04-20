@@ -1,4 +1,4 @@
-﻿using OAT.Modules.Telegram;
+﻿using OAT.Utilities.Telegram;
 
 public class Logger
 {

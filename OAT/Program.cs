@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Net.Http.Headers;
 using MySqlConnector;
 using OAT;
-using OAT.Modules.MNews.Readers;
-using OAT.Modules.Payments.Readers;
-using OAT.Modules.ReCaptchaV3;
-using OAT.Modules.Recovery;
-using OAT.Modules.Schedules.Readers;
-using OAT.Modules.Security;
-using OAT.Modules.Telegram;
-using OAT.Modules.Workers;
+using OAT.Controllers.MNews.Readers;
+using OAT.Controllers.Payments.Readers;
+using OAT.Controllers.ReCaptchaV2;
+using OAT.Controllers.ReCaptchaV3;
+using OAT.Controllers.Schedules.Readers;
+using OAT.Controllers.Security;
+using OAT.Controllers.Workers;
 using OAT.Utilities;
-using OAT.UtilsHelper.ReCaptcha;
+using OAT.Utilities.Recovery;
+using OAT.Utilities.Telegram;
 using OfficeOpenXml;
 using RepoDb;
 

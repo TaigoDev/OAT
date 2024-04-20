@@ -12,9 +12,10 @@ namespace OAT.Pages.projectsAndEvents.demoExam
 			_logger = logger;
 		}
 
-		public void OnGet()
+		public int id { get; set; }
+		public void OnGet(int? id)
 		{
-
+			this.id = id - 1 ?? 0;
 		}
 	}
 }

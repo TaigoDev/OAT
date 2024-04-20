@@ -1,11 +1,10 @@
-﻿@page
-@using OAT.Modules.MNews.Readers
+﻿@page "{id?}"
+@using OAT.Components
+@using OAT.Controllers.MNews.Readers
 
 @model ProjectNewsModel
 @{
 	ViewData["Title"] = "Новости проекта";
-	var query = HttpContext.Request.Query["id"].ToString();
-	var id = string.IsNullOrWhiteSpace(query) ? 1 : Convert.ToInt32(query);
 }
 
 <link rel="stylesheet" href="~/css/allNews.css">
@@ -17,11 +16,11 @@
 			Новости проекта
 		</h2>
 
-		@if (ProfNewsReader.news.Count() != 0 && ProfNewsReader.pages.Count() >= id)
+		@if (ProfNewsReader.news.Count() != 0 && ProfNewsReader.pages.Count() >= Model.id)
 		{
 
 			<div class="news-list" style="max-width: none;">
-				@foreach (var news in ProfNewsReader.pages.ToList()[id - 1])
+				@foreach (var news in ProfNewsReader.pages.ToList()[Model.id])
 				{
 					var photos = news.photos.toObject<List<string>>();
 					<div class="news-item">
@@ -48,42 +47,14 @@
 					</div>
 				}
 			</div>
-
-			<div class="pages-nav-container">
-
-				<div class="pages-nav">
-					@if(id != 1)
-					{
-						<a href="projectnews?id=@(id - 1)" class="pages-nav-arrow pages-nav-prev">
-							<img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
-						</a>
-					}
-
-					<div class="pages-nav-pages-list">
-						@for (int i = 1; i <= ProfNewsReader.pages.Count(); i++)
-							if (id == i)
-							{
-								<a href="projectnews?id=@i" class="pages-nav-pages-list-item current">
-									@i
-								</a>
-							}
-							else
-							{
-								<a href="projectnews?id=@i" class="pages-nav-pages-list-item">
-									@i
-								</a>
-							}
-					</div>
-
-					@if(id != ProfNewsReader.pages.Count())
-					{
-						<a href="projectnews?id=@(id + 1)" class="pages-nav-arrow pages-nav-next">
-							<img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
-						</a>
-					}
-				</div>
-
-			</div>
+            @(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+            {
+                CurrentPage = Model.id + 1,
+                count = ProfNewsReader.news.Count(),
+                countInPage = 10,
+                UrlWithParameter = "/projectsAndEvents/professionalitet/ProjectNews/{id}"
+            }))
+			
 		}
 		else
 		{

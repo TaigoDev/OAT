@@ -11,7 +11,12 @@ namespace OAT.Pages
 		{
 			_logger = logger;
 		}
+		public int id { get; set; }
+		public void OnGet(int? id)
+		{
 
+			this.id = id - 1 ?? 0;
+		}
 
 	}
 }

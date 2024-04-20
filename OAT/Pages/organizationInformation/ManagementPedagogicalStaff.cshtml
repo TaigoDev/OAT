@@ -1,5 +1,6 @@
 ﻿@page "{id?}"
-@using OAT.Modules.Workers
+@using OAT.Controllers.Workers
+@using OAT.Components
 
 @model ManagementPedagogicalStaffModel
 @{
@@ -42,12 +43,6 @@
 							<div class="people-item-body-job">
 								@person.Post
 							</div>
-							@*						 <div class="people-item-body-phone">
-							+7-999-999-05
-						</div>
-						<div class="people-item-body-email">
-							mail@mail.com
-						</div> *@
 						</div>
 					</li>
 				}
@@ -120,60 +115,14 @@
 					}
 			</ul>
 		}
-		<div class="pages-nav-container">
-			<div class="pages-nav">
-				@if (Model.id != 0)
-				{
-					<a href="/organizationInformation/ManagementPedagogicalStaff/@Model.id" class="pages-nav-arrow pages-nav-prev">
-						<img class="icon" src="~/images/basic/longArrow.svg" alt="назад">
-					</a>
-				}
-
-				<div class="pages-nav-pages-list">
-					@if (WorkersReader.Workers.Any())
-					{
-						var splitPages = WorkersReader.Workers.Count() > 10;
-						var minPage = Model.id / 10 * 9;
-						var maxKof = Model.id < 10 ? 11 : 12;
-						var maxPage = minPage + 10 <= WorkersReader.Workers.Count() ? minPage + maxKof : WorkersReader.Workers.Count();
-						@if (Model.id + 1 > 10)
-						{
-                            <a class="pages-nav-pages-list-item points">
-								...
-							</a>
-						}
-						@for (int i = minPage + 1; i <= maxPage; i++)
-							if (Model.id == i - 1)
-							{
-								<a href="/organizationInformation/ManagementPedagogicalStaff/@i" class="pages-nav-pages-list-item current">
-									@i
-								</a>
-							}
-							else
-							{
-								<a href="/organizationInformation/ManagementPedagogicalStaff/@i" class="pages-nav-pages-list-item">
-									@i
-								</a>
-							}
-						@if (maxPage < WorkersReader.Workers.Count())
-						{
-							<div class="pages-nav-pages-list-item points">
-								...
-							</div>
-						}
-					}
-				</div>
-
-				@if (Model.id + 1 != WorkersReader.Workers.Count())
-				{
-					<a href="/organizationInformation/ManagementPedagogicalStaff/@(@Model.id + 2)" class="pages-nav-arrow pages-nav-next">
-						<img class="icon" src="~/images/basic/longArrow.svg" alt="вперед">
-					</a>
-				}
-			</div>
-		</div>
-		
-	</section>
+        @(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+        {
+             CurrentPage = Model.id + 1,
+            count = WorkersReader.AllWorkers.Count(),
+             countInPage= 14,
+             UrlWithParameter = "/organizationInformation/ManagementPedagogicalStaff/{id}"
+        }))
+    </section>
 	<aside id="sidebar" class="sidebar long">
 		<h3 class="sidebar-title">
 			Сведения об образовательной организации

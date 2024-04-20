@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using OAT.Controllers.Evalutions;
+using OAT.Controllers.Security;
 using OAT.Entities.Journal;
-using OAT.Modules.Evalutions;
-using OAT.Modules.Security;
 using OAT.Utilities;
 using System.Globalization;
 

@@ -8,10 +8,10 @@ namespace OAT.Entities.Database
 	{
 
 
-	
+
 		public News(string date, string title, string short_description, string description, List<string> photos)
 		{
-			
+
 			id = DataBaseUtils.getLastId("News").GetAwaiter().GetResult();
 			this.date = date;
 			this.title = title;

@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Changes;
-using OAT.Modules.ReCaptchaV3;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using OAT.Controllers.Schedules.Components;
 
 namespace OAT.Pages
 {

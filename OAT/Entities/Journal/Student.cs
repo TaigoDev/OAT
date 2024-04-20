@@ -1,4 +1,4 @@
-﻿using static OAT.Modules.Evalutions.EvaluationsReader;
+﻿using static OAT.Controllers.Evalutions.EvaluationsReader;
 
 namespace OAT.Entities.Journal
 {

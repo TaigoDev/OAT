@@ -1,4 +1,4 @@
-﻿using OAT.Modules.Security;
+﻿using OAT.Controllers.Security;
 using System.Security.Claims;
 
 namespace OAT.Utilities

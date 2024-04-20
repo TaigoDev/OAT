@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using OAT.Controllers.Schedules;
 using OAT.Entities.Schedule;
-using OAT.Modules.Schedules;
 
 namespace OAT.Pages.timetable
 {
