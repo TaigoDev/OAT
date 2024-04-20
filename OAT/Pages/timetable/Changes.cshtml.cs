@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Controllers.Schedules.Components;
+using OAT.Controllers.Schedules.Controllers;
 
 namespace OAT.Pages
 {

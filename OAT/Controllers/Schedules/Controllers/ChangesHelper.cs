@@ -1,6 +1,6 @@
 ﻿using OAT.Controllers.Schedules.Readers;
 
-namespace OAT.Controllers.Schedules.Components
+namespace OAT.Controllers.Schedules.Controllers
 {
 	public class ChangesHelper
 	{

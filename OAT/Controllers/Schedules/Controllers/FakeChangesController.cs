@@ -2,7 +2,7 @@
 using OAT.Utilities;
 using System.Text;
 
-namespace OAT.Controllers.Schedules.Components
+namespace OAT.Controllers.Schedules.Controllers
 {
 	[NoCache]
 	public class FakeChangesController : Controller
@@ -24,6 +24,7 @@ namespace OAT.Controllers.Schedules.Components
 							position: fixed;
 							top: -100vw; 
 							height: 0;
+						    display: none;
 						}
 						""";
 				else if (IsChanceToUse())
@@ -43,6 +44,7 @@ namespace OAT.Controllers.Schedules.Components
 							top: 0; 
 							height: 0; 
 							margin: 0;
+						    display: none;
 						}
 						""";
 				}
@@ -65,6 +67,7 @@ namespace OAT.Controllers.Schedules.Components
 							height: 0; 
 							margin: 0;
 							visibility: hidden
+						    display: none;
 						}
 						""";
 
