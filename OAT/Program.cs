@@ -20,6 +20,7 @@ GlobalConfiguration.Setup().UseMySqlConnector();
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 var builder = WebApplication.CreateBuilder(args);
+await DatabaseHelper.WaitStableConnection();
 SetupServices(ref builder);
 SetupControllers();
 
@@ -65,7 +66,7 @@ void SetupControllers()
 			"Resources/schedule/latest",
 			"Resources/journal",
 			"Resources/pay",
-			"Resources/static",
+			"Resources/static", "Resources/static/documents",
 			"Resources/bitrix",
 			"Resources/practice", "Resources/practice/b1", "Resources/practice/b2", "Resources/practice/b3", "Resources/practice/b4",
 			"Resources/Logs");

@@ -10,9 +10,10 @@ namespace OAT.Pages
 		{
 			_logger = logger;
 		}
-
-		public void OnGet()
+		public string? name { get ; set; }	
+		public void OnGet(string? name)
 		{
+			this.name = name;
 
 		}
 	}

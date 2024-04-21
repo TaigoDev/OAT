@@ -1,12 +1,23 @@
-﻿@page
+﻿@page "{name}"
+@using OAT.Components
+@using OAT.Controllers.Workers
 @model CMKModel
 @{
     ViewData["Title"] = "Название ЦМК";
+    using var context = new DatabaseContext();
+    var cmk = context.CMK.FirstOrDefault(e => e.name == Model.name);
+}
+@if(cmk is null)
+{
+    <h2 class="section-title">
+        ЦМК с таким именем не найден
+    </h2>
+    return;
 }
 
 <section class="centered">
 	<h2 class="section-title">
-		Название ЦМК
+		@cmk.name
 	</h2>
 	
     <ul class="page-navigation">
@@ -37,81 +48,52 @@
         Состав ЦМК
     </h3>
     <ul class="people-list">
-        <li class="people-item">
-            <a class="people-item-img-container" href="">
-                <img src="~/images/basic/unnamed.jpg" alt="">
-            </a>
-            <div class="people-item-body">
-                <div class="people-item-body-fio">
-                    Фамилия Имя Отчество 1
-                </div>
-                <div class="people-item-body-job">
-                    Должность
-                </div>
-            </div>
-        </li>
-        <li class="people-item">
-            <a class="people-item-img-container" href="">
-                <img src="~/images/basic/unnamed.jpg" alt="">
-            </a>
-            <div class="people-item-body">
-                <div class="people-item-body-fio">
-                    Фамилия Имя Отчество 2
-                </div>
-                <div class="people-item-body-job">
-                    Должность
-                </div>
-            </div>
-        </li>
-        <li class="people-item">
-            <a class="people-item-img-container" href="">
-                <img src="~/images/basic/unnamed.jpg" alt="">
-            </a>
-            <div class="people-item-body">
-                <div class="people-item-body-fio">
-                    Фамилия Имя Отчество 3
-                </div>
-                <div class="people-item-body-job">
-                    Должность
-                </div>
-            </div>
-        </li>
+        @foreach (var FullName in cmk.compositions)
+        {
+            var people = WorkersReader.AllWorkers.FirstOrDefault(e => e.FullName.ToSimpleText() == FullName.ToSimpleText());
+            if (people is null)
+            {
+                <li class="people-item">
+                    <a class="people-item-img-container" href="">
+                        <img src="~/images/basic/unnamed.jpg" alt="">
+                    </a>
+                    <div class="people-item-body">
+                        <div class="people-item-body-fio">
+                            @FullName
+                        </div>
+                        <div class="people-item-body-job">
+                            Информация не найдена. Сообщите в отдел кадров
+                        </div>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li class="people-item" href="/organizationInformation/worker/@people.FullName">
+                    <a class="people-item-img-container" href="">
+                        <img src="~/images/basic/unnamed.jpg" alt="">
+                    </a>
+                    <div class="people-item-body">
+                        <div class="people-item-body-fio">
+                            @people.FullName
+                        </div>
+                        <div class="people-item-body-job">
+                            @people.Post
+                        </div>
+                    </div>
+                </li>
+            }
+        }
     </ul>
-    <p style="font-size: 2rem">
-        ЛИБО
-    </p>
-    <ul class="customized">
-        <li>
-            <a href="">
-                Фамилия Имя Отчество 1
-            </a>
-        </li>
-        <li>
-            <a href="">
-                Фамилия Имя Отчество 2
-            </a>
-        </li>
-        <li>
-            <a href="">
-                Фамилия Имя Отчество 3
-            </a>
-        </li>
-    </ul>
-
 
     <h3 id="history" class="section-subtitle">
         История ЦМК
     </h3>
-    <p>
-        Какой-то очень важный текст, история ЦМК такого-то
-    </p>
-    <p>
-        Какой-то очень важный текст, история ЦМК такого-то
-    </p>
-    <p>
-        Какой-то очень важный текст, история ЦМК такого-то
-    </p>
 
+    @foreach (var t in cmk.history.Split("\n"))
+    {
+        <p>@Html.Raw(@t)</p>
+    }
 
     <h3 id="news" class="section-subtitle">
         Новости
@@ -128,42 +110,18 @@
         Основная документация
     </h3>
     <ul class="documents-list little">
-        <li class="document-item">
-            <div class="document-item-head">
-                <a target="_blank" href="">
-                </a>
-            </div>
-            <div class="document-item-body">
-                Аннотации рабочих программ
-            </div>
-        </li>
-        <li class="document-item">
-            <div class="document-item-head">
-                <a target="_blank" href="">
-                </a>
-            </div>
-            <div class="document-item-body">
-                График учебного процесса для групп ПР и ИС
-            </div>
-        </li>
-        <li class="document-item">
-            <div class="document-item-head">
-                <a target="_blank" href="">
-                </a>
-            </div>
-            <div class="document-item-body">
-                Расписание консультаций
-            </div>
-        </li>
-        <li class="document-item">
-            <div class="document-item-head">
-                <a target="_blank" href="">
-                </a>
-            </div>
-            <div class="document-item-body">
-                Документация по курсовым и дипломным работам
-            </div>
-        </li>
+        @foreach(var doc in cmk.documents)
+        {
+            <li class="document-item">
+                <div class="document-item-head">
+                    <a target="_blank" href="@doc.url">
+                    </a>
+                </div>
+                <div class="document-item-body">
+                    @doc.name
+                </div>
+            </li>
+        }
     </ul>
 
 

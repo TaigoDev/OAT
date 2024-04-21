@@ -94,5 +94,12 @@ namespace OAT.Utilities
 					sb.Append(s.Substring(0, 1).ToUpper() + ". ");
 			return sb.ToString();
 		}
+
+		public static string ToSimpleText(this string? s)
+		{
+			if (s is null)
+				return "-1";
+			return s.Replace(" ", "").Replace(".", "").ToLower();
+		}
 	}
 }
