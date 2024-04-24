@@ -1,10 +1,10 @@
-﻿@page "{name}"
+﻿@page "cmk/{name}"
 @using OAT.Components
 @using OAT.Controllers.Workers
 @using OAT.Utilities
 @model CMKModel
 @{
-    ViewData["Title"] = "Название ЦМК";
+    ViewData["Title"] = Model.name;
     using var context = new DatabaseContext();
     var cmk = context.CMK.FirstOrDefault(e => e.name == Model.name);
 }

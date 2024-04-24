@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages
+namespace OAT.Pages.CMK
 {
 	public class CMKModel : PageModel
 	{
@@ -10,7 +10,7 @@ namespace OAT.Pages
 		{
 			_logger = logger;
 		}
-		public string? name { get ; set; }	
+		public string? name { get; set; }
 		public void OnGet(string? name)
 		{
 			this.name = name;
