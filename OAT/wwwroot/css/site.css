@@ -612,7 +612,7 @@ button.customized:hover {
 
 img.customized {
 	display: block;
-	max-width: min(100%, 450px);
+	max-width: min(100%, 500px);
 	margin: 10px 0 0 0;
 	border-radius: var(--border-radius-xl);
 }
