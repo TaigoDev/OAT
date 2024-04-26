@@ -1,4 +1,4 @@
-﻿@page "cmk/{name}"
+﻿@page "/CMK/{name:regex(^([a-zA-Z0-9А-Яа-я .&'-]+)$)}"
 @using OAT.Components
 @using OAT.Controllers.Workers
 @using OAT.Utilities
@@ -70,8 +70,8 @@
             }
             else
             {
-                <li class="people-item" href="/organizationInformation/worker/@people.FullName">
-                    <a class="people-item-img-container" href="">
+                <li class="people-item" >
+                    <a class="people-item-img-container" href="/organizationInformation/worker/@people.FullName">
                         <img src="~/images/basic/unnamed.jpg" alt="">
                     </a>
                     <div class="people-item-body">
@@ -100,11 +100,7 @@
         Новости
     </h3>
     <p>
-        Варианты:
-        <br />
-        1. Список новостей (не подходит, т.к. их может быть слишком много)
-        <br />
-        2. Красиво оформленная ссылка на отдельную страницу, как https://www.oat.ru/AllNews
+        https://www.oat.ru/CMK/@cmk.name/AllNews
     </p>
 
     <h3 id="documents" class="section-subtitle">

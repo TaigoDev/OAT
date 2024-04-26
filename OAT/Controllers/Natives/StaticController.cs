@@ -11,7 +11,7 @@ namespace OAT.Controllers.Natives
 		public async Task<IActionResult> Download(string hex)
 		{
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources/static/documents", StringUtils.ConvertHexToString(hex));
-			if(System.IO.File.Exists(path))
+			if(!System.IO.File.Exists(path))
 				return NotFound("File not found");
 			return File(await System.IO.File.ReadAllBytesAsync(path), ContentType(StringUtils.ConvertHexToString(hex)));
 		}

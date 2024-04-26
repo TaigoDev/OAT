@@ -1,4 +1,4 @@
-﻿@page "cmk/{name}/AllNews/{id}"
+﻿@page "/CMK/{name:regex(^([a-zA-Z0-9А-Яа-я .&'-]+)$)}/AllNews/{id:int?}"
 @using OAT.Components
 @using OAT.Utilities
 @model OAT.Pages.CMK.AllNewsModel
@@ -14,35 +14,40 @@
     </h2>
     return;
 }
-
+@{
+    var news = cmk.news;
+    news = [.. news.OrderBy(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null))];
+    news.Reverse();
+    var pages = news.PagesSplit(10);
+}
 <link rel="stylesheet" href="~/css/allNews.css">
 <script src="~/js/allNews.js" asp-append-version="true"></script>
 
 <section class="centered">
 
-    @if (NewsReader.pages.Count() >= Model.id)
+    @if (pages.Count() >= (Model.id ?? 0))
     {
         <h3 class="section-title">
             Новости @Model.name
         </h3>
         <div class="news-list">
 
-            @foreach (var news in NewsReader.pages.ToList()[Model.id])
+            @foreach (var n in pages.ToList()[Model.id ?? 0])
             {
                 <div class="news-item">
-                    <a class="news-item-img" href="~/news/@news.id">
-                        <img loading="lazy" src="@news.GetPhotos()[0]" alt="">
+                    <a class="news-item-img" href="/CMK/@Model.name/news/@n.id">
+                        <img loading="lazy" src="/@n.GetPhotos()[0]" alt="">
                     </a>
                     <div class="news-item-content">
                         <div class="news-item-date">
-                            @news.date
+                            @n.date
                         </div>
                         <div class="news-item-title">
-                            @news.title
+                            @n.title
                         </div>
                         <div class="news-item-info">
-                            @Html.Raw(news.description.GetWords(10))
-                            <a href="~/news/@news.id">
+                            @Html.Raw(n.description.GetWords(10))
+                            <a href="/CMK/@Model.name/news/@n.id">
                                 ещё...
                             </a>
                         </div>
@@ -53,10 +58,10 @@
         @(
             await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
             {
-                CurrentPage = Model.id + 1,
-                count = NewsReader.news.Count(),
+                CurrentPage = Model.id ?? 0 + 1,
+                count = news.Count(),
                 countInPage = 10,
-                UrlWithParameter = $"/cmk/{Model.name}/AllNews/{{id}}"
+                UrlWithParameter = $"/CMK/{Model.name}/AllNews/{{id}}"
             })
          )
 

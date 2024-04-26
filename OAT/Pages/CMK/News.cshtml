@@ -1,4 +1,4 @@
-﻿@page "cmk/{name}/news/{id}"
+﻿@page "/CMK/{name:regex(^([a-zA-Z0-9А-Яа-я .&'-]+)$)}/news/{id}"
 @model OAT.Pages.CMK.NewsModel
 @{
     ViewData["Title"] = "Новость";

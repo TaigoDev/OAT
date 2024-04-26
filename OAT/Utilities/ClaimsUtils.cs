@@ -15,14 +15,14 @@ namespace OAT.Utilities
 		public static bool IsRole(this ClaimsPrincipal User, Enums.Role role)
 		{
 			var roles = Permissions.GetUserRoles(User.GetUsername());
-
+			
 			if (role.ToString().Contains("ALL"))
 				for (int i = 1; i <= 4; i++)
 					if (IsRole(User, Enum.Parse<Enums.Role>(role.ToString().Replace("ALL", $"campus_{i}"))))
 						return true;
 
 			foreach (var _role in roles)
-				if (_role == role)
+				if (_role == role || _role == Enums.Role.www_admin)
 					return true;
 			return false;
 		}
