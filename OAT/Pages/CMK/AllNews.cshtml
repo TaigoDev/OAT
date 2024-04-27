@@ -14,6 +14,13 @@
 	</h2>
 	return;
 }
+@if(cmk.news.Count == 0)
+{
+    <h2 class="section-title">
+        Новостей пока нет
+    </h2>
+    return;
+}
 @{
 	var news = cmk.news;
 	news = [.. news.OrderBy(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null))];
