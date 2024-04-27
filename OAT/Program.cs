@@ -9,6 +9,7 @@ using OAT.Controllers.ReCaptchaV3;
 using OAT.Controllers.Schedules.Readers;
 using OAT.Controllers.Security;
 using OAT.Controllers.Workers;
+using OAT.Merge;
 using OAT.Utilities;
 using OAT.Utilities.Recovery;
 using OAT.Utilities.Telegram;
@@ -21,6 +22,7 @@ ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 var builder = WebApplication.CreateBuilder(args);
 await DatabaseHelper.WaitStableConnection();
+await MergeController.MergeAsync();
 SetupServices(ref builder);
 SetupControllers();
 
