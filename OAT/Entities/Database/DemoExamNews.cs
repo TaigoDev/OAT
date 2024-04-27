@@ -1,23 +1,20 @@
 ﻿using OAT.Entities.Interfaces;
-using OAT.Utilities;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OAT.Entities.Database
 {
-	[MysqlTable]
 	public class DemoExamNews : INews
 	{
 
 		public DemoExamNews(string date, string title, string description, string short_description, List<string> photos)
 		{
-			id = DataBaseUtils.getLastId("DemoExamNews").GetAwaiter().GetResult();
 			this.date = date;
 			this.title = title;
 			this.description = description;
 			this.short_description = short_description;
 			this.photos = photos.toJson();
 		}
-		public DemoExamNews() { }
-
 		public DemoExamNews(int id, string date, string title, string description, string short_description, string photos)
 		{
 			this.id = id;
@@ -27,6 +24,16 @@ namespace OAT.Entities.Database
 			this.short_description = short_description;
 			this.photos = photos;
 		}
+
+		public DemoExamNews(string date, string title, string description, string short_description, string photos)
+		{
+			this.date = date;
+			this.title = title;
+			this.description = description;
+			this.short_description = short_description;
+			this.photos = photos;
+		}
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
 		public int id { get; set; }
 		public string date { get; set; }

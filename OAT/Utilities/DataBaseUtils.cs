@@ -9,10 +9,10 @@ namespace OAT.Utilities
 
 		public static string GetConnectionString() => new MySqlConnectionStringBuilder
 		{
-			Server = Configurator.config.db_ip,
-			UserID = Configurator.config.db_user,
-			Password = Configurator.config.db_password,
-			Database = Configurator.config.db_name,
+			Server = Configurator.old_mysql.db_ip,
+			UserID = Configurator.old_mysql.db_user,
+			Password = Configurator.old_mysql.db_password,
+			Database = Configurator.old_mysql.db_name,
 			MaximumPoolSize = 2000u,
 			AllowUserVariables = true
 		}.ConnectionString;

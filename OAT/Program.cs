@@ -19,9 +19,11 @@ using RepoDb;
 await Configurator.init();
 GlobalConfiguration.Setup().UseMySqlConnector();
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
+GlobalConfiguration.Setup().UseMySqlConnector();
 var builder = WebApplication.CreateBuilder(args);
 await DatabaseHelper.WaitStableConnection();
+using var db = new DatabaseContext();
+Console.WriteLine($"Количество новостей: {db.News.Count()}");
 await MergeController.MergeAsync();
 SetupServices(ref builder);
 SetupControllers();
