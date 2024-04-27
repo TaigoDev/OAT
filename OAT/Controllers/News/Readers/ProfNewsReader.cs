@@ -1,20 +1,19 @@
-﻿using MySqlConnector;
+﻿using Microsoft.EntityFrameworkCore;
 using OAT.Entities.Database;
-using OAT.Utilities;
-using RepoDb;
 
 namespace OAT.Controllers.MNews.Readers
 {
 	public class ProfNewsReader
 	{
-		public static List<ProfNews> news = new();
-		public static IEnumerable<IEnumerable<ProfNews>> pages = new List<List<ProfNews>>();
+		public static List<ProfNews> news = [];
+		public static IEnumerable<IEnumerable<ProfNews>> pages = [];
 
 		public static async Task init()
 		{
-			using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
-			var records = await connection.QueryAllAsync<ProfNews>();
-			news = records.ToList();
+			using var connection = new DatabaseContext();
+			var records = await connection.ProfNews.ToListAsync();
+			news = [.. records];
+			news = [.. news.OrderBy(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null))];
 			news.Reverse();
 			pages = news.PagesSplit(10);
 		}

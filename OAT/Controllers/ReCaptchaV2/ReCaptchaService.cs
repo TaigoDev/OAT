@@ -25,18 +25,22 @@ namespace OAT.Controllers.ReCaptchaV2
 				var httpClientHandler = new HttpClientHandler
 				{
 					Proxy = proxy,
+					ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 				};
-				httpClientHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
-				_client = new HttpClient(handler: httpClientHandler, disposeHandler: true);
-				_client.BaseAddress = client.BaseAddress;
+				_client = new HttpClient(handler: httpClientHandler, disposeHandler: true)
+				{
+					BaseAddress = client.BaseAddress
+				};
 				_logger = logger;
 				_reCaptchaSettings = reCaptchaSettings.Value;
 			}
 			else
 			{
-				_client = new HttpClient();
-				_client.BaseAddress = client.BaseAddress;
+				_client = new HttpClient
+				{
+					BaseAddress = client.BaseAddress
+				};
 				_logger = logger;
 				_reCaptchaSettings = reCaptchaSettings.Value;
 			}
@@ -86,7 +90,7 @@ namespace OAT.Controllers.ReCaptchaV2
 
 			var obj = JsonSerializer.Deserialize<ReCaptchaResponse>(stringResult);
 
-			if (obj.ErrorCodes?.Length > 0 && _logger?.IsEnabled(LogLevel.Warning) == true)
+			if (obj!.ErrorCodes?.Length > 0 && _logger?.IsEnabled(LogLevel.Warning) == true)
 			{
 				for (var i = 0; i < obj.ErrorCodes.Length; i++)
 				{

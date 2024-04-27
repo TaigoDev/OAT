@@ -243,3 +243,8 @@ table.panel-table tbody tr td:first-child {
 	opacity: 1;
 	transform: translateY(-40px);
 }
+
+
+.hide{
+	display: none;
+}

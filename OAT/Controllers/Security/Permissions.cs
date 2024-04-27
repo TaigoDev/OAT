@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using MySqlConnector;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using OAT.Entities.Database;
-using OAT.Utilities;
-using RepoDb;
 using System.Text;
 using static Enums;
 
@@ -19,10 +15,10 @@ namespace OAT.Controllers.Security
 			var attribute = Ldap.GetAttributeByTag(results, "memberOf");
 
 			if (attribute is null)
-				return new List<Role>();
+				return [];
 
 			var values = attribute!.GetValues(typeof(byte[]));
-			for (int id = 0; id < values.Count(); id++)
+			for (int id = 0; id < values.Length; id++)
 			{
 				var RoleName = Encoding.UTF8.GetString((values[id] as byte[])!).Split(',')[0].Replace("CN=", "");
 				var success = Enum.TryParse(RoleName, out Role Role);
@@ -46,9 +42,9 @@ namespace OAT.Controllers.Security
 			foreach (var role in roles)
 			{
 				var stringArray = role.ToString().Split('_');
-				var campusId = stringArray[stringArray.Length - 1].ToInt32();
+				var campusId = stringArray[^1].ToInt32();
 
-				if (stringArray[stringArray.Length - 2] != "campus")
+				if (stringArray[^2] != "campus")
 					continue;
 
 				var HavePermission = BuildingName switch
@@ -69,9 +65,8 @@ namespace OAT.Controllers.Security
 
 		public static async Task<bool> RightsToBuilding(string Token, Role role)
 		{
-			using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
-			var records = await connection.QueryAsync<Tokens>(e => e.Token == Token);
-			var record = records.FirstOrDefault();
+			using var connection = new DatabaseContext();
+			var record = await connection.Tokens.FirstOrDefaultAsync(e => e.Token == Token);
 			if (record is null)
 				return false;
 
@@ -87,94 +82,4 @@ namespace OAT.Controllers.Security
 
 
 
-}
-public class AuthorizeRolesAttribute : AuthorizeAttribute
-{
-	public AuthorizeRolesAttribute(params Role[] allowedRoles)
-	{
-		var allowedRolesAsStrings = GetUnderRoles(allowedRoles.ToList()).ConvertToString();
-		Roles = string.Join(",", allowedRolesAsStrings);
-	}
-
-	private List<Role> GetUnderRoles(Role role)
-	{
-		if (!role.ToString().Contains("ALL"))
-			return new List<Role>() { role };
-
-		var roles = new List<Role>();
-		for (int i = 1; i <= campus_count; i++)
-			roles.Add(Enum.Parse<Role>(role.ToString().Replace("ALL", $"campus_{i}")));
-		return roles;
-	}
-
-	private List<Role> GetUnderRoles(List<Role> roles)
-	{
-		var _roles = new List<Role>();
-		foreach (var role in roles)
-			_roles.AddRange(GetUnderRoles(role));
-		return _roles;
-	}
-}
-public static class Enums
-{
-
-	/*
-	admin - все ниже, а также управление пользователями и MySql
-	reporter - новости, новости професионалитета 
-	schedule_manager - расписание, изменение расписания, документы сессии
-	 */
-	public static readonly int campus_count = 4;
-	public enum Role
-	{
-		www_admin,
-		www_reporter_news,
-		www_reporter_prof_news,
-		www_reporter_demoexams,
-
-		www_manager_schedule_ALL,
-		www_manager_schedule_campus_1,
-		www_manager_schedule_campus_2,
-		www_manager_schedule_campus_3,
-		www_manager_schedule_campus_4,
-
-		www_manager_changes_ALL,
-		www_manager_changes_campus_1,
-		www_manager_changes_campus_2,
-		www_manager_changes_campus_3,
-		www_manager_changes_campus_4,
-
-		www_manager_files_sessions_ALL,
-		www_manager_files_sessions_campus_1,
-		www_manager_files_sessions_campus_2,
-		www_manager_files_sessions_campus_3,
-		www_manager_files_sessions_campus_4,
-
-		www_manager_files_practice_ALL,
-		www_manager_files_practice_campus_1,
-		www_manager_files_practice_campus_2,
-		www_manager_files_practice_campus_3,
-		www_manager_files_practice_campus_4,
-	}
-	public static List<string> ConvertToString(this List<Role> roles)
-	{
-		var _roles = new List<string>();
-		foreach (var role in roles)
-			_roles.Add(role.ToString());
-		return _roles;
-	}
-	public enum Building
-	{
-		all,
-		ul_lenina_24,
-		ul_b_khmelnickogo_281a,
-		pr_kosmicheskij_14a,
-		ul_volkhovstroya_5
-	}
-
-	public enum AuthResult
-	{
-		success,
-		token_expired,
-		fail
-	}
 }

@@ -1,0 +1,117 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using OAT.Entities.Database
+@using OAT.Utilities
+<div id="files-form" class="hide">
+    <form class="panel-form">
+        <div class="input-box">
+            <label for="FIO">
+                Имя файла, которое будет отображаться 
+            </label>
+            <input id="file-name" type="text" @bind-value="name">
+        </div>
+        <div class="input-box">
+            <label for="files">
+                Файл
+            </label>
+            <InputFile id="files" OnChange='(f) =>{
+                files.Clear();
+                foreach(var file in f.GetMultipleFiles())
+                    files.Add(file);
+            }'></InputFile>
+        </div>
+
+        <button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await Update()">
+            Добавить
+        </button>
+    </form>
+
+    <table class="customized panel-table">
+        <thead>
+            <tr>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Управление
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @documents
+        </tbody>
+    </table>
+</div>
+@code {
+    private RenderFragment? documents { get; set; }
+    [Parameter] public string? CMK { get; set; }
+    public List<IBrowserFile> files { get; set; } = [];
+    public string name { get; set; } = string.Empty;
+    private async Task Update()
+    {
+        using var db = new DatabaseContext();
+        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+        if (cmk is null || cmk.news is null)
+        {
+            await Log("❌ Выберите ЦМК!");
+            return;
+        }
+        if(files.Count is 0)
+        {
+            await Log("❌ Выберите файл!");
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            await Log("❌ Заполните имя файла!");
+            return;
+        }
+        var file = files.First();
+        var path = $"Resources/static/documents/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
+        await using FileStream fs = new(Path.Combine(Directory.GetCurrentDirectory(), path), FileMode.Create);
+        await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
+        var document = new Documents(name, $"/static/documents/{StringUtils.ConvertStringToHex($"{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}")}/download");
+        cmk.documents.Add(document);
+        db.Update(cmk);
+        await db.SaveChangesAsync();
+        await Log("✅ Файл успешно добавлен");
+        await OnParametersSetAsync();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        using var db = new DatabaseContext();
+        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+        if (cmk is null || cmk.documents is null)
+            return;
+        documents = (__builder) =>
+        {
+            foreach (var d in cmk.documents)
+            {
+                <tr>
+                    <td>
+                        @d.name
+                    </td>
+                    <td>
+                        <button class="panel-table-button" @onclick='async () => {
+                             using var context = new DatabaseContext();
+                             var cmk = await context.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+                             if (cmk is null)
+                                 return;
+                             context.documents.Remove(d);
+                             await context.SaveChangesAsync();
+                             await Log("✅ Файл успешно удален");
+                             await OnParametersSetAsync();
+                        }'>
+                            удалить
+                        </button>
+                    </td>
+                </tr>
+            }
+        };
+    }
+
+    private async Task Log(string message)
+    {
+        await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
+    }
+}

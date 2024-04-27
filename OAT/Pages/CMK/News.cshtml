@@ -1,0 +1,79 @@
+﻿@page "/CMK/{name:regex(^([a-zA-Z0-9А-Яа-я .&'-]+)$)}/news/{id}"
+@model OAT.Pages.CMK.NewsModel
+@{
+    ViewData["Title"] = "Новость";
+    using var context = new DatabaseContext();
+    var cmk = context.CMK.FirstOrDefault(e => e.name == Model.name);
+}
+@if (cmk is null)
+{
+    <h2 class="section-title">
+        ЦМК с таким именем не найден
+    </h2>
+    return;
+}
+@{
+    var news =  cmk.news.FirstOrDefault(e => e.id == Model.id);
+    if(news is null)
+    {
+        <h3 class="news-title">
+            Упс, такой страницы нет...
+            <br>
+            Мы знаем о проблеме и уже решаем ее
+        </h3>
+        return;
+    }
+}
+
+
+<link rel="stylesheet" href="~/css/news.css">
+
+<article class="centered">
+
+    <h3 class="news-title">
+        @news.title
+    </h3>
+    @foreach (var t in news.description.Split("\n"))
+    {
+        <p>@Html.Raw(@t)</p>
+    }
+
+
+    <div class="images-list-slider-container">
+        <div class="images-list-slider">
+            @foreach (var image in news.photos.toObject<List<string>>())
+            {
+                @if (!image.Contains(".mp4") && !image.Contains(".pdf"))
+                {
+                    <img src="/@image" alt="">
+                }
+                else if (image.Contains(".mp4"))
+                {
+                    <video class="customized" controls>
+                        <source src="/@image" type="video/mp4">
+                    </video>
+                }
+                else
+                {
+
+                }
+            }
+        </div>
+    </div>
+
+    @foreach (var pdf in news.photos.toObject<List<string>>().Where(e => e.Contains(".pdf")))
+    {
+        <ul class="document-item" style="width: 50%; margin: 0 auto;">
+            <div class="document-item-head">
+                <a target="_blank" href="/@pdf">
+                </a>
+            </div>
+            <div class="document-item-body">
+                @news.title
+            </div>
+        </ul>
+    }
+
+
+
+</article>

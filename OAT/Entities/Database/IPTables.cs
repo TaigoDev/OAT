@@ -1,8 +1,8 @@
-﻿using OAT.Utilities;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OAT.Entities.Database
 {
-	[MysqlTable]
 	public class IPTables
 	{
 		public IPTables()
@@ -11,7 +11,6 @@ namespace OAT.Entities.Database
 
 		public IPTables(string iP, int attempts, DateTime lastFailAttempt, DateTime banTime)
 		{
-			id = DataBaseUtils.getLastId("IPTables").GetAwaiter().GetResult();
 			IP = iP;
 			this.attempts = attempts;
 			LastFailAttempt = lastFailAttempt;
@@ -26,7 +25,7 @@ namespace OAT.Entities.Database
 			LastFailAttempt = lastFailAttempt;
 			BanTime = banTime;
 		}
-
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int id { get; set; }
 		public string IP { get; set; }
 		public int attempts { get; set; }

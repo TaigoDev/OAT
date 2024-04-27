@@ -1,0 +1,13 @@
+﻿@page
+@using OAT.Components.CMK
+@model OAT.Pages.admin.CMKModel
+@{
+	Layout = "_Panel";
+	ViewData["Title"] = "ЦМК";
+}
+
+@(await Html.RenderComponentAsync<CMKComponent>(RenderMode.Server))
+
+<aside id="logger" class="panel-message"></aside>
+<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/cmk.js" charset="utf-8"></script>

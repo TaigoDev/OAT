@@ -31,8 +31,7 @@ namespace OAT.Utilities.Telegram
 				{
 				}
 
-			using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
-			var message = await botClient.SendTextMessageAsync(chatId, text, MessageThreadId, parseMode, entities,
+			await botClient.SendTextMessageAsync(chatId, text, MessageThreadId, parseMode, entities,
 				disableWebPagePreview, disableNotification, ProtectContent, replyToMessageId, allowSendingWithoutReply,
 				replyMarkup, cancellationToken);
 		}

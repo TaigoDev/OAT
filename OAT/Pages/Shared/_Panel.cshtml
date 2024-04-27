@@ -13,22 +13,23 @@
 	<header class="panel-header">
 		<ul class="panel-tabs">
 			<li>
-                <a asp-page="/admin/panel">
+                <a asp-page="/admin/news">
 					<span>
 						News
 					</span>
 					<img class="icon" src="~/images/panel/news.svg" alt="">
 				</a>
-			</li>
-@*			<li>
-            <a asp-page="">
-					<span>
-						Answers
-					</span>
-					<img class="icon" src="~/images/panel/answers.svg" alt="">
-				</a>
-			</li>*@
-			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin))
+			</li>            
+            <li>
+                <a asp-page="/admin/cmk">
+                    <span>
+                        CMK
+                    </span>
+                    <img class="icon" src="~/images/panel/mysql.svg" alt="">
+                </a>
+            </li>
+            
+			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Enums.Role.www_admin))
 			{
 				<li>
                     <a asp-page="/admin/MySQL">
@@ -39,7 +40,7 @@
 				</a>
 			</li>
 			}
-			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_schedule_ALL))
+			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_schedule_ALL))
 			{
 				<li>
                     <a asp-page="/admin/schedule">
@@ -52,7 +53,7 @@
 
 			}
 
-			@if (User != null && User.Identity.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_manager_changes_ALL, Enums.Role.www_manager_files_practice_ALL))
+			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_manager_changes_ALL, Enums.Role.www_manager_files_practice_ALL))
 			{
 				<li>
                     <a asp-page ="/admin/files">
@@ -86,7 +87,7 @@
 	<main class="site-main" role="main">
 		@RenderBody()
 		<section class="container">
-			@if (User != null && User.Identity.IsAuthenticated)
+			@if (User is not null && User.Identity!.IsAuthenticated)
 			{
 				<div class="current-user-info">
 					<img class="current-user-info-head" src="~/images/panel/currentUser.svg">

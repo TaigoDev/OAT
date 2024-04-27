@@ -14,18 +14,13 @@ namespace OAT.Controllers.ReCaptchaV2
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = false)]
 	[ExcludeFromCodeCoverage]
-	public class ValidateReCaptchaAttribute : Attribute, IFilterFactory
+	public class ValidateReCaptchaAttribute(string action = null) : Attribute, IFilterFactory
 	{
 		internal const string DefaultErrorMessage = "Your request cannot be completed because you failed Recaptcha verification.";
 
-		public ValidateReCaptchaAttribute(string action = null)
-		{
-			Action = action;
-		}
-
 		public bool IsReusable => true;
 
-		public string Action { get; set; } = null;
+		public string Action { get; set; } = action;
 
 		public string ErrorMessage { get; set; } = null;
 
@@ -41,7 +36,7 @@ namespace OAT.Controllers.ReCaptchaV2
 
 	public class ValidateRecaptchaFilter : IAsyncActionFilter, IAsyncPageFilter
 	{
-		private static ResourceManager _resourceManager;
+		private static ResourceManager? _resourceManager;
 
 		private readonly IReCaptchaService _recaptcha;
 		private readonly string _action;
@@ -57,10 +52,7 @@ namespace OAT.Controllers.ReCaptchaV2
 			_formField = formField;
 			_modelErrorMessage = modelErrorMessage;
 
-			if (reCaptchaSettingsSnapshot is null)
-			{
-				throw new ArgumentNullException(nameof(reCaptchaSettingsSnapshot));
-			}
+			ArgumentNullException.ThrowIfNull(reCaptchaSettingsSnapshot);
 
 			_reCaptchaSettings = reCaptchaSettingsSnapshot.Value;
 		}
@@ -126,7 +118,7 @@ namespace OAT.Controllers.ReCaptchaV2
 			{
 				var settings = context.HttpContext.RequestServices.GetRequiredService<IOptions<ReCaptchaSettings>>();
 
-				IStringLocalizer localizer = null;
+				IStringLocalizer? localizer = null;
 				if (context.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor)
 				{
 					localizer = settings.Value.LocalizerProvider?.Invoke(controllerActionDescriptor.ControllerTypeInfo,
@@ -150,7 +142,7 @@ namespace OAT.Controllers.ReCaptchaV2
 		private static string GetDefaultErrorMessage()
 		{
 			_resourceManager ??= new ResourceManager("AspNetCore.ReCaptcha.Resources.strings", typeof(ValidateReCaptchaAttribute).Assembly);
-			return _resourceManager.GetString(ValidateReCaptchaAttribute.DefaultErrorMessage);
+			return _resourceManager.GetString(ValidateReCaptchaAttribute.DefaultErrorMessage)!;
 		}
 	}
 }

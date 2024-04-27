@@ -4,8 +4,6 @@
 @using OAT.Entities.Database
 @using OAT.Entities.Interfaces
 @using OAT.Utilities
-@using RepoDb
-
 @inject IHttpContextAccessor httpContextAccessor
 @inject IJSRuntime JSRuntime;
 
@@ -161,21 +159,24 @@
             return;
         }
 
-        using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+        using var connection = new DatabaseContext();
 
         if(name is "demoExam")
         {
-            await connection.DeleteAllAsync(await connection.QueryAsync<DemoExamNews>(e => e.id == news.id));
+            connection.DemoExamNews.RemoveRange(connection.DemoExamNews.Where(e => e.id == news.id));
+            await connection.SaveChangesAsync();
             await DemoExamsNewsReader.init();
         }
         else if (name is "professionalitet")
         {
-            await connection.DeleteAllAsync(await connection.QueryAsync<ProfNews>(e => e.id == news.id));
+            connection.ProfNews.RemoveRange(connection.ProfNews.Where(e => e.id == news.id));
+            await connection.SaveChangesAsync();
             await ProfNewsReader.init();
 
         }else
         {
-            await connection.DeleteAllAsync(await connection.QueryAsync<News>(e => e.id == news.id));
+            connection.News.RemoveRange(connection.News.Where(e => e.id == news.id));
+            await connection.SaveChangesAsync();
             await NewsReader.init();
         }
         Logger.Info($"Пользователь удалил новость.\n" +
@@ -207,7 +208,7 @@
             if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
             {
                 await Log("❌ Вам отказано в доступе. ");
-                Logger.Info($"Пользователю {httpContextAccessor.HttpContext.User.GetUsername()} отказано в доступе, т.к. право {permission} отсутсвует");
+                Logger.Info($"Пользователю {httpContextAccessor.HttpContext.User.GetUsername()} отказано в доступе, т.к. право {permission} отсутствует");
                 return;
             }
 
@@ -220,34 +221,35 @@
                 photos.Add(path);
             }
 
-            using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+            using var connection = new DatabaseContext();
             var id = 0;
             if (form.type is "demoExam")
             {
-                id = await DataBaseUtils.getLastId("DemoExamNews");
-                var news = new DemoExamNews(id, form.date.ToString("yyyy-MM-dd"),
-                    form.name, form.description, form.description.GetWords(15), photos.toJson());
-                await connection.InsertAsync(news);
+                var news = new DemoExamNews(form.date.ToString("yyyy-MM-dd"),
+                    form.name, form.description, form.description.GetWords(15), photos);
+                await connection.AddAsync(news);
+                await connection.SaveChangesAsync();
                 await DemoExamsNewsReader.init();
             }
             else if (form.type is "professionalitet")
             {
-                id = await DataBaseUtils.getLastId("ProfNews");
-                var news = new ProfNews(id, form.date.ToString("yyyy-MM-dd"),
+                var news = new ProfNews(form.date.ToString("yyyy-MM-dd"),
                     form.name, form.description, form.description.GetWords(15), photos);
-                await connection.InsertAsync(news);
+                await connection.AddAsync(news);
+                await connection.SaveChangesAsync();
                 await ProfNewsReader.init();
             }
             else
             {
-                id = await DataBaseUtils.getLastId("News");
-                var news = new News(id, form.date.ToString("yyyy-MM-dd"),
-                     form.name, form.description.GetWords(15), form.description, photos.toJson());
-                await connection.InsertAsync(news);
+                var news = new News(form.date.ToString("yyyy-MM-dd"),
+                     form.name, form.description, form.description.GetWords(15), photos);
+                await connection.AddAsync(news);
+                await connection.SaveChangesAsync();
                 await NewsReader.init();
             }
 
-            Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nID Новости: {id}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
+
+            Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nТекст Новости: {form.name}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
             OnChangeNews(form.type);
             await Log("✅ Новость добавлена");
         }
