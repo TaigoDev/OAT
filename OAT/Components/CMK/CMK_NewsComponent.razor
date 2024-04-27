@@ -1,148 +1,148 @@
 ﻿@using Microsoft.EntityFrameworkCore
 @using OAT.Utilities
 <div id="news-form" class="hide">
-    <form class="panel-form">
-        <div class="input-box">
-            <label for="news-title">
-                Название
-            </label>
-            <input @bind-value="form.name" id="news-title" type="text">
-        </div>
-        <div class="input-box">
-            <label for="news-date">
-                Дата
-            </label>
-            <input @bind-value="form.date" id="news-date" type="date">
-        </div>
-        <div class="input-box">
-            <label for="news-text">
-                Текст
-            </label>
-            <textarea @onchange='(t) => form.description = t.Value?.ToString()!'  class="customized" id="news-text">Текст новости, её содержание.</textarea>
-        </div>
-        <div class="input-box">
-            <label for="images">
-                Фото
-            </label>
-            <InputFile id="images" multiple OnChange='(f) =>{
-                form.photos.Clear();
-                foreach(var file in f.GetMultipleFiles())
-                    form.photos.Add(file);
-            }' />
-        </div>
+	<form class="panel-form">
+		<div class="input-box">
+			<label for="news-title">
+				Название
+			</label>
+			<input @bind-value="form.name" id="news-title" type="text">
+		</div>
+		<div class="input-box">
+			<label for="news-date">
+				Дата
+			</label>
+			<input @bind-value="form.date" id="news-date" type="date">
+		</div>
+		<div class="input-box">
+			<label for="news-text">
+				Текст
+			</label>
+			<textarea @onchange='(t) => form.description = t.Value?.ToString()!'  class="customized" id="news-text">Текст новости, её содержание.</textarea>
+		</div>
+		<div class="input-box">
+			<label for="images">
+				Фото
+			</label>
+			<InputFile id="images" multiple OnChange='(f) =>{
+				form.photos.Clear();
+				foreach(var file in f.GetMultipleFiles())
+					form.photos.Add(file);
+			}' />
+		</div>
 
-        <button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await Update()">
-            Отправить
-        </button>
-    </form>
+		<button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await Update()">
+			Отправить
+		</button>
+	</form>
 
-    <table class="customized panel-table">
-        <thead>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Имя
-                </th>
-                <th>
-                    Дата
-                </th>
-                <th>
-                    Управление
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @newsList
-        </tbody>
-    </table>
+	<table class="customized panel-table">
+		<thead>
+			<tr>
+				<th>
+					ID
+				</th>
+				<th>
+					Имя
+				</th>
+				<th>
+					Дата
+				</th>
+				<th>
+					Управление
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@newsList
+		</tbody>
+	</table>
 </div>
 
 
 @code {
-    [Parameter] public string? CMK { get; set; }
-    private RenderFragment? newsList { get; set; }
-    private SubmitForm form { get; set; } = new SubmitForm();
+	[Parameter] public string? CMK { get; set; }
+	private RenderFragment? newsList { get; set; }
+	private SubmitForm form { get; set; } = new SubmitForm();
 
-    private async Task Update()
-    {
-        using var db = new DatabaseContext();
-        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
-        if (cmk is null || cmk.news is null)
-        {
-            await Log("❌ Выберите ЦМК!");
-            return;
-        }
+	private async Task Update()
+	{
+		using var db = new DatabaseContext();
+		var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+		if (cmk is null || cmk.news is null)
+		{
+			await Log("❌ Выберите ЦМК!");
+			return;
+		}
 
-        var photos = new List<string>();
-        foreach (var file in form.photos)
-        {
-            var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
-            await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
-            await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
-            photos.Add(path);
-        }
+		var photos = new List<string>();
+		foreach (var file in form.photos)
+		{
+			var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
+			await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
+			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
+			photos.Add(path);
+		}
 
-        cmk.news.Add(new(form.date.ToString("yyyy-MM-dd"),
-                    form.name, form.description, form.description.GetWords(15), photos.toJson()));
-        db.Update(cmk);
-        await db.SaveChangesAsync();
-        await Log("✅ Новость успешно добавлена");
-        await OnParametersSetAsync();
-    }
+		cmk.news.Add(new(form.date.ToString("yyyy-MM-dd"),
+					form.name, form.description, form.description.GetWords(15), photos.toJson()));
+		db.Update(cmk);
+		await db.SaveChangesAsync();
+		await Log("✅ Новость успешно добавлена");
+		await OnParametersSetAsync();
+	}
 
-    protected override async Task OnParametersSetAsync()
-    {
-        using var db = new DatabaseContext();
-        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
-        if (cmk is null || cmk.news is null)
-            return;
-        newsList = (__builder) =>
-        {
-            foreach(var news in cmk.news)
-            {
-                <tr>
-                    <td>
-                        @news.id
-                    </td>
-                    <td>
-                        @news.title
-                    </td>
-                    <td>
-                        @news.date
-                    </td>
-                    <td>
+	protected override async Task OnParametersSetAsync()
+	{
+		using var db = new DatabaseContext();
+		var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+		if (cmk is null || cmk.news is null)
+			return;
+		newsList = (__builder) =>
+		{
+			foreach(var news in cmk.news)
+			{
+				<tr>
+					<td>
+						@news.id
+					</td>
+					<td>
+						@news.title
+					</td>
+					<td>
+						@news.date
+					</td>
+					<td>
 
-                        <button class="panel-table-button" @onclick='async () => {
-                             using var context = new DatabaseContext();
-                             var cmk = await context.CMK.FirstOrDefaultAsync(e => e.name == CMK);
-                             if (cmk is null)
-                                 return;
-                             context.Remove(news);
-                             await context.SaveChangesAsync();
-                             await Log("✅ Новость успешно удалена");
-                             await OnParametersSetAsync();
-                        }'>
-                            удалить
-                        </button>
-                    </td>
-                </tr>
-            }
-        };
-    }
+						<button class="panel-table-button" @onclick='async () => {
+							 using var context = new DatabaseContext();
+							 var cmk = await context.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+							 if (cmk is null)
+								 return;
+							 context.Remove(news);
+							 await context.SaveChangesAsync();
+							 await Log("✅ Новость успешно удалена");
+							 await OnParametersSetAsync();
+						}'>
+							удалить
+						</button>
+					</td>
+				</tr>
+			}
+		};
+	}
 
-    private async Task Log(string message)
-    {
-        await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
-    }
+	private async Task Log(string message)
+	{
+		await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
+	}
 
-    public class SubmitForm
-    {
-        public string type { get; set; } = "main";
-        public string name { get; set; } = "Тест новость";
-        public string description { get; set; } = "Текст новости, её содержание.";
-        public DateTime date { get; set; } = DateTime.Now;
-        public List<IBrowserFile> photos { get; set; } = [];
-    }
+	public class SubmitForm
+	{
+		public string type { get; set; } = "main";
+		public string name { get; set; } = "Тест новость";
+		public string description { get; set; } = "Текст новости, её содержание.";
+		public DateTime date { get; set; } = DateTime.Now;
+		public List<IBrowserFile> photos { get; set; } = [];
+	}
 }

@@ -47,13 +47,13 @@
 					</div>
 				}
 			</div>
-            @(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
-            {
-                CurrentPage = Model.id + 1,
-                count = ProfNewsReader.news.Count(),
-                countInPage = 10,
-                UrlWithParameter = "/projectsAndEvents/professionalitet/ProjectNews/{id}"
-            }))
+			@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+			{
+				CurrentPage = Model.id + 1,
+				count = ProfNewsReader.news.Count(),
+				countInPage = 10,
+				UrlWithParameter = "/projectsAndEvents/professionalitet/ProjectNews/{id}"
+			}))
 			
 		}
 		else

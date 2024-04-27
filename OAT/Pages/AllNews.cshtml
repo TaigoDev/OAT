@@ -18,7 +18,7 @@
 		</h3>
 		<div class="news-list">
 
-            @foreach (var news in NewsReader.pages.ToList()[Model.id])
+			@foreach (var news in NewsReader.pages.ToList()[Model.id])
 			{
 				<div class="news-item">
 					<a class="news-item-img" href="~/news/@news.id">
@@ -41,13 +41,13 @@
 				</div>
 			}
 		</div>
-        @(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
-        {
-            CurrentPage = Model.id + 1,
-            count = NewsReader.news.Count(),
-            countInPage = 10,
-            UrlWithParameter = "/AllNews/{id}"
-        }))
+		@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+		{
+			CurrentPage = Model.id + 1,
+			count = NewsReader.news.Count(),
+			countInPage = 10,
+			UrlWithParameter = "/AllNews/{id}"
+		}))
 	
 
 	}   

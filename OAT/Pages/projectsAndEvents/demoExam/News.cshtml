@@ -9,9 +9,9 @@
 
 <article class="centered">
 	@if (!string.IsNullOrWhiteSpace(Model.id) && int.TryParse(Model.id, null, out var id) &&
-        DemoExamsNewsReader.news.Any(e => e.id == id))
+		DemoExamsNewsReader.news.Any(e => e.id == id))
 	{
-        var news = DemoExamsNewsReader.news.First(e => e.id == id);
+		var news = DemoExamsNewsReader.news.First(e => e.id == id);
 		<h3 class="news-title">
 			@news.title
 		</h3>

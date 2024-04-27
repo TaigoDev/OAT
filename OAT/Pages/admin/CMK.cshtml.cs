@@ -6,9 +6,9 @@ namespace OAT.Pages.admin
 {
 	[NoCache, Authorize]
 	public class CMKModel : PageModel
-    {
-        public void OnGet()
-        {
-        }
-    }
+	{
+		public void OnGet()
+		{
+		}
+	}
 }

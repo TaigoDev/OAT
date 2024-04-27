@@ -24,7 +24,7 @@ namespace OAT.Controllers.Schedules.Controllers
 							position: fixed;
 							top: -100vw; 
 							height: 0;
-						    display: none;
+							display: none;
 						}
 						""";
 				else if (IsChanceToUse())
@@ -44,7 +44,7 @@ namespace OAT.Controllers.Schedules.Controllers
 							top: 0; 
 							height: 0; 
 							margin: 0;
-						    display: none;
+							display: none;
 						}
 						""";
 				}
@@ -54,7 +54,7 @@ namespace OAT.Controllers.Schedules.Controllers
 							position: fixed;
 							top: 0; 
 							height: 0;
-						    margin: 0;
+							margin: 0;
 							display: none;
 						}
 						""";
@@ -67,7 +67,7 @@ namespace OAT.Controllers.Schedules.Controllers
 							height: 0; 
 							margin: 0;
 							visibility: hidden
-						    display: none;
+							display: none;
 						}
 						""";
 

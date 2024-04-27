@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace OAT.Pages.CMK
 {
-    public class NewsModel : PageModel
-    {
+	public class NewsModel : PageModel
+	{
 		public string? name { get; set; }
 		public int id { get; set; }
 

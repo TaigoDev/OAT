@@ -115,14 +115,14 @@
 					}
 			</ul>
 		}
-        @(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
-        {
-             CurrentPage = Model.id + 1,
-            count = WorkersReader.AllWorkers.Count(),
-             countInPage= 14,
-             UrlWithParameter = "/organizationInformation/ManagementPedagogicalStaff/{id}"
-        }))
-    </section>
+		@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+		{
+			 CurrentPage = Model.id + 1,
+			count = WorkersReader.AllWorkers.Count(),
+			 countInPage= 14,
+			 UrlWithParameter = "/organizationInformation/ManagementPedagogicalStaff/{id}"
+		}))
+	</section>
 	<aside id="sidebar" class="sidebar long">
 		<h3 class="sidebar-title">
 			Сведения об образовательной организации

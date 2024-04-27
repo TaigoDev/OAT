@@ -64,7 +64,7 @@
 				var group = rows[new Random().Next(0, rows.Count() - 1)].group;
 				<tr class="@StringUtils.RandomString(8, true)">
 					<td>
-					    @group.FirstOrDefault(Char.IsDigit)
+						@group.FirstOrDefault(Char.IsDigit)
 					</td>
 					<td>
 						@group

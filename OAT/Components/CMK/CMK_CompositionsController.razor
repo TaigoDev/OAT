@@ -1,92 +1,92 @@
 ﻿@using Microsoft.EntityFrameworkCore
 
 <div id="people-form" class="hide">
-    <form class="panel-form">
-        <div class="input-box">
-            <label for="FIO">
-                ФИО
-            </label>
-            <input id="FIO" type="text" @bind-value="FullName">
-        </div>
+	<form class="panel-form">
+		<div class="input-box">
+			<label for="FIO">
+				ФИО
+			</label>
+			<input id="FIO" type="text" @bind-value="FullName">
+		</div>
 
-        <button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await Update()">
-            Добавить
-        </button>
-    </form>
+		<button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await Update()">
+			Добавить
+		</button>
+	</form>
 
-    <table class="customized panel-table">
-        <thead>
-            <tr>
-                <th>
-                    Имя
-                </th>
-                <th>
-                    Управление
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @people
-        </tbody>
-    </table>
+	<table class="customized panel-table">
+		<thead>
+			<tr>
+				<th>
+					Имя
+				</th>
+				<th>
+					Управление
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@people
+		</tbody>
+	</table>
 </div>
 @code {
-    [Parameter] public string? CMK { get; set; }
-    private string? FullName { get; set; }
-    private RenderFragment? people { get; set; }
+	[Parameter] public string? CMK { get; set; }
+	private string? FullName { get; set; }
+	private RenderFragment? people { get; set; }
 
-    protected override async Task OnParametersSetAsync()
-    {
-        using var db = new DatabaseContext();
-        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
-        if (cmk is null)
-            return;
-        people = (__builder) =>
-        {
-            foreach (var p in cmk.compositions)
-            {
-                <tr>
-                    <td>
-                        @p
-                    </td>
-                    <td>
-                        <button class="panel-table-button" @onclick='async () => {
-                             using var context = new DatabaseContext();
-                             var cmk = await context.CMK.FirstOrDefaultAsync(e => e.name == CMK);
-                             if (cmk is null)
-                                 return;
-                             cmk.compositions.Remove(p);
-                             context.Update(cmk);
-                             await context.SaveChangesAsync();
-                             await Log("✅ Пользователь успешно удален");
-                             await OnParametersSetAsync();
-                        }'>
-                            удалить
-                        </button>
-                    </td>
-                </tr>
-            }
-        };
-    }
+	protected override async Task OnParametersSetAsync()
+	{
+		using var db = new DatabaseContext();
+		var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+		if (cmk is null)
+			return;
+		people = (__builder) =>
+		{
+			foreach (var p in cmk.compositions)
+			{
+				<tr>
+					<td>
+						@p
+					</td>
+					<td>
+						<button class="panel-table-button" @onclick='async () => {
+							 using var context = new DatabaseContext();
+							 var cmk = await context.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+							 if (cmk is null)
+								 return;
+							 cmk.compositions.Remove(p);
+							 context.Update(cmk);
+							 await context.SaveChangesAsync();
+							 await Log("✅ Пользователь успешно удален");
+							 await OnParametersSetAsync();
+						}'>
+							удалить
+						</button>
+					</td>
+				</tr>
+			}
+		};
+	}
 
-    private async Task Update()
-    {
-        using var db = new DatabaseContext();
-        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
-        if (cmk is null)
-        {
-            await Log("❌ Выберите ЦМК!");
-            return;
-        }
-        cmk.compositions.Add(FullName ?? "Пользователь не найден");
-        db.Update(cmk);
-        await db.SaveChangesAsync();
-        await Log("✅ Пользователь успешно добавлен");
-        await OnParametersSetAsync();
-    }
+	private async Task Update()
+	{
+		using var db = new DatabaseContext();
+		var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+		if (cmk is null)
+		{
+			await Log("❌ Выберите ЦМК!");
+			return;
+		}
+		cmk.compositions.Add(FullName ?? "Пользователь не найден");
+		db.Update(cmk);
+		await db.SaveChangesAsync();
+		await Log("✅ Пользователь успешно добавлен");
+		await OnParametersSetAsync();
+	}
 
-    private async Task Log(string message)
-    {
-        await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
-    }
+	private async Task Log(string message)
+	{
+		await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
+	}
 }

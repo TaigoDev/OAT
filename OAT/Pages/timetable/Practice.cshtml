@@ -44,132 +44,132 @@
 		<h3 class="section-subtitle">
 			Расписание практик ул. Б. Хмельницкого, 281а
 		</h3>
-        @if (Model.b2.Count() is not 0)
-        {
-            <ul class="documents-list little">
+		@if (Model.b2.Count() is not 0)
+		{
+			<ul class="documents-list little">
 
-                @foreach (var file in Model.b2)
-                {
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="/@file.url">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            @file.Filename
-                        </div>
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <p>
-                <b>
-                    ОТСУТСТВУЕТ
-                </b>
-            </p>
-        }
+				@foreach (var file in Model.b2)
+				{
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="/@file.url">
+							</a>
+						</div>
+						<div class="document-item-body">
+							@file.Filename
+						</div>
+					</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p>
+				<b>
+					ОТСУТСТВУЕТ
+				</b>
+			</p>
+		}
 
 
 		<h3 class="section-subtitle">
 			Расписание практик пр. Космический, 14а
 		</h3>
-        @if (Model.b3.Count() is not 0)
-        {
-            <ul class="documents-list little">
+		@if (Model.b3.Count() is not 0)
+		{
+			<ul class="documents-list little">
 
-                @foreach (var file in Model.b3)
-                {
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="/@file.url">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            @file.Filename
-                        </div>
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <p>
-                <b>
-                    ОТСУТСТВУЕТ
-                </b>
-            </p>
-        }
+				@foreach (var file in Model.b3)
+				{
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="/@file.url">
+							</a>
+						</div>
+						<div class="document-item-body">
+							@file.Filename
+						</div>
+					</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p>
+				<b>
+					ОТСУТСТВУЕТ
+				</b>
+			</p>
+		}
 
 
 		<h3 class="section-subtitle">
 			Расписание практик ул. Волховстроя, 5
 		</h3>
-        @if (Model.b4.Count() is not 0)
-        {
-            <ul class="documents-list little">
+		@if (Model.b4.Count() is not 0)
+		{
+			<ul class="documents-list little">
 
-                @foreach (var file in Model.b4)
-                {
-                    <li class="document-item">
-                        <div class="document-item-head">
-                            <a target="_blank" href="/@file.url">
-                            </a>
-                        </div>
-                        <div class="document-item-body">
-                            @file.Filename
-                        </div>
-                    </li>
-                }
-            </ul>
-        }
-        else
-        {
-            <p>
-                <b>
-                    ОТСУТСТВУЕТ
-                </b>
-            </p>
-        }
+				@foreach (var file in Model.b4)
+				{
+					<li class="document-item">
+						<div class="document-item-head">
+							<a target="_blank" href="/@file.url">
+							</a>
+						</div>
+						<div class="document-item-body">
+							@file.Filename
+						</div>
+					</li>
+				}
+			</ul>
+		}
+		else
+		{
+			<p>
+				<b>
+					ОТСУТСТВУЕТ
+				</b>
+			</p>
+		}
 	</section>
-    <aside id="sidebar" class="sidebar">
-        <h3 class="sidebar-title">
-            Расписание
-        </h3>
-        <nav class="sidebar-body">
-            <ul class="sidebar-links">
-                <li class="sidebar-link">
-                    <a asp-page="Classes">
-                        Расписание занятий
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a asp-page="ClassesChanges">
-                        Изменения в расписании занятий
-                    </a>
-                </li>
-                <li class="sidebar-link sidebar-link-selected">
-                    <a asp-page="Practice">
-                        Расписание практик
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a asp-page="PODPO">
-                        Расписание ПО и ДПО
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a asp-page="Session">
-                        Расписание сессий
-                    </a>
-                </li>
-                <li class="sidebar-link">
-                    <a asp-page="GIA">
-                        Расписание ГИА
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Расписание
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="Classes">
+						Расписание занятий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="ClassesChanges">
+						Изменения в расписании занятий
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="Practice">
+						Расписание практик
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="PODPO">
+						Расписание ПО и ДПО
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Session">
+						Расписание сессий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="GIA">
+						Расписание ГИА
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
 </div>
