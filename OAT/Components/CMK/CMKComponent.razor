@@ -12,6 +12,10 @@
 
 <form class="panel-form">
 
+    <label for="news" class="panel-form-title">
+        @CMK @(type is null ? "" : $"- {type}")
+    </label>
+
 	<div class="input-box">
 		<label for="CMK">
 			Выбор ЦМК
@@ -21,7 +25,7 @@
 			await OnSelectCMK();
 			this.StateHasChanged();
 		}'>
-			<option value="Выберите ЦМК">
+            <option selected disabled value="Выберите ЦМК">
 				Выберите ЦМК
 			</option>
 			@if (User.IsRole(Enums.Role.www_POIT_owner))
@@ -130,9 +134,6 @@
 			</option>
 		</select>
 	</div>
-	<label for="news" class="panel-form-title">
-		@CMK @(type is null ? "" : $"- {type}")
-	</label>
 </form>
 
 <CMK_NewsComponent CMK="@CMK"/>

@@ -7,30 +7,32 @@
 	using var context = new DatabaseContext();
 	var cmk = context.CMK.FirstOrDefault(e => e.name == Model.name);
 }
-@if (cmk is null)
-{
-	<h2 class="section-title">
-		ЦМК с таким именем не найден
-	</h2>
-	return;
-}
-@if(cmk.news.Count == 0)
-{
-    <h2 class="section-title">
-        Новостей пока нет
-    </h2>
-    return;
-}
-@{
-	var news = cmk.news;
-	news = [.. news.OrderBy(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null))];
-	news.Reverse();
-	var pages = news.PagesSplit(10);
-}
+
 <link rel="stylesheet" href="~/css/allNews.css">
 <script src="~/js/allNews.js" asp-append-version="true"></script>
 
 <section class="centered">
+
+    @if (cmk is null)
+    {
+        <h2 class="section-title">
+            ЦМК с таким именем не найден
+        </h2>
+        return;
+    }
+    @if (cmk.news.Count == 0)
+    {
+        <h2 class="section-title">
+            Новостей пока нет
+        </h2>
+        return;
+    }
+    @{
+        var news = cmk.news;
+        news = [.. news.OrderBy(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null))];
+        news.Reverse();
+        var pages = news.PagesSplit(10);
+    }
 
 	@if (pages.Count() >= (Model.id ?? 0))
 	{
