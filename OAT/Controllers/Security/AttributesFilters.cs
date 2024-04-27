@@ -2,18 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
-using MySqlConnector;
 using Newtonsoft.Json;
+using OAT;
 using OAT.Controllers.Security.Controllers;
-using OAT.Entities.Database;
 using OAT.Utilities;
-using RepoDb;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 
-[AttributeUsage(AttributeTargets.Class)]
-public class MysqlTable : Attribute { }
 
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
@@ -55,8 +52,7 @@ public class ValidationFilter : IAsyncActionFilter
 {
 	public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
 	{
-		var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
-		if (controllerActionDescriptor == null)
+		if (context.ActionDescriptor is not ControllerActionDescriptor controllerActionDescriptor)
 		{
 			await next();
 			return;
@@ -65,18 +61,18 @@ public class ValidationFilter : IAsyncActionFilter
 		var isDefined = controllerActionDescriptor.MethodInfo.GetCustomAttributes(inherit: true).Any(a => a.GetType().Equals(typeof(AuthorizeRolesAttribute)) || a.GetType().Equals(typeof(AuthorizeAttribute)));
 		if (isDefined)
 		{
-			using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
-			var token = (await connection.QueryAsync<Tokens>(e => e.Token == context.HttpContext.User.GetToken())).FirstOrDefault();
+			using var connection = new DatabaseContext();
+			var token = await connection.Tokens.FirstOrDefaultAsync(e => e.Token == context.HttpContext.User.GetToken());
 			var authResult = await AuthorizationController.ValidateCredentials(context.HttpContext.User, context.HttpContext.UserIP());
 
 			if (authResult is Enums.AuthResult.success && token != null && token.username == context.HttpContext.User.GetUsername())
 			{
-				var identity = (ClaimsIdentity)context.HttpContext.User.Identity;
+				var identity = (ClaimsIdentity)context.HttpContext.User.Identity!;
 				var claims = identity.Claims.Where(e => e.Type == "Role");
 				foreach (var claim in claims)
 					identity.RemoveClaim(claim);
 				var db_roles = JsonConvert.DeserializeObject<List<Enums.Role>>(token.Roles);
-				foreach (var role in db_roles)
+				foreach (var role in db_roles ?? [])
 					identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
 				await next();
 			}
@@ -100,15 +96,15 @@ public class ValidationFilterForPages : IAsyncPageFilter
 			return;
 		}
 
-		if (context.HttpContext.User == null || !context.HttpContext.User.Identity.IsAuthenticated)
+		if (context.HttpContext.User == null || !context.HttpContext.User.Identity!.IsAuthenticated)
 		{
 			context.HttpContext.Response.Redirect("/admin/authorization");
 			await next();
 			return;
 		}
 
-		using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
-		var token = (await connection.QueryAsync<Tokens>(e => e.Token == context.HttpContext.User.GetToken())).FirstOrDefault();
+		using var connection = new DatabaseContext();
+		var token = await connection.Tokens.FirstOrDefaultAsync(e => e.Token == context.HttpContext.User.GetToken());
 		var authResult = await AuthorizationController.ValidateCredentials(context.HttpContext.User, context.HttpContext.UserIP());
 		if (authResult is Enums.AuthResult.success && token != null && token.username == context.HttpContext.User.GetUsername())
 		{
@@ -118,7 +114,7 @@ public class ValidationFilterForPages : IAsyncPageFilter
 				identity.RemoveClaim(claim);
 
 			var db_roles = JsonConvert.DeserializeObject<List<Enums.Role>>(token.Roles);
-			foreach (var role in db_roles)
+			foreach (var role in db_roles ?? [])
 				identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
 			await next();
 		}

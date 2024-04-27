@@ -2,15 +2,9 @@
 
 namespace OAT.Pages.projectsAndEvents.demoExam
 {
-	public class ProjectNewsModel : PageModel
+	public class ProjectNewsModel(ILogger<IndexModel> logger) : PageModel
 	{
-		private readonly ILogger<IndexModel> _logger;
-
-
-		public ProjectNewsModel(ILogger<IndexModel> logger)
-		{
-			_logger = logger;
-		}
+		private readonly ILogger<IndexModel> _logger = logger;
 
 		public int id { get; set; }
 		public void OnGet(int? id)

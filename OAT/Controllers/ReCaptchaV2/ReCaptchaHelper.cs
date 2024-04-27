@@ -112,24 +112,20 @@ namespace OAT.Controllers.ReCaptchaV2
 			if (string.IsNullOrEmpty(id))
 				throw new ArgumentException("id can't be null");
 
-			if (id.ToLower() == "submit")
+			if (id.Equals("submit", StringComparison.CurrentCultureIgnoreCase))
 				throw new ArgumentException("id can't be named submit");
 
 			language ??= helper.ViewContext.HttpContext.Features.Get<IRequestCultureFeature>()?.RequestCulture
-				.UICulture.TwoLetterISOLanguageName;
+				.UICulture.TwoLetterISOLanguageName!;
 
 			var settings = helper.ViewContext.HttpContext.RequestServices.GetRequiredService<IOptions<ReCaptchaSettings>>().Value;
 
-			switch (settings.Version)
+			return settings.Version switch
 			{
-				default:
-				case ReCaptchaVersion.V2:
-					return ReCaptchaGenerator.ReCaptchaV2(settings.RecaptchaBaseUrl, settings.SiteKey, size, theme, language, callback, errorCallback, expiredCallback, autoTheme);
-				case ReCaptchaVersion.V2Invisible:
-					return ReCaptchaGenerator.ReCaptchaV2Invisible(settings.RecaptchaBaseUrl, settings.SiteKey, text, className, language, callback, badge);
-				case ReCaptchaVersion.V3:
-					return ReCaptchaGenerator.ReCaptchaV3(settings.RecaptchaBaseUrl, settings.SiteKey, action, language, callback, ReCaptchaGenerator.GenerateId(helper.ViewContext));
-			}
+				ReCaptchaVersion.V2Invisible => ReCaptchaGenerator.ReCaptchaV2Invisible(settings.RecaptchaBaseUrl, settings.SiteKey, text, className, language, callback, badge),
+				ReCaptchaVersion.V3 => ReCaptchaGenerator.ReCaptchaV3(settings.RecaptchaBaseUrl, settings.SiteKey, action, language, callback, ReCaptchaGenerator.GenerateId(helper.ViewContext)),
+				_ => ReCaptchaGenerator.ReCaptchaV2(settings.RecaptchaBaseUrl, settings.SiteKey, size, theme, language, callback, errorCallback, expiredCallback, autoTheme),
+			};
 		}
 	}
 }

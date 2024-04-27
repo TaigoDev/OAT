@@ -9,10 +9,10 @@ namespace OAT.Controllers.Schedules.Readers
 {
 	public class ChangesController
 	{
-		public static List<Changes> changes_b1 = new List<Changes>();
-		public static List<Changes> changes_b2 = new List<Changes>();
-		public static List<Changes> changes_b3 = new List<Changes>();
-		public static List<Changes> changes_b4 = new List<Changes>();
+		public static List<Changes> changes_b1 = [];
+		public static List<Changes> changes_b2 = [];
+		public static List<Changes> changes_b3 = [];
+		public static List<Changes> changes_b4 = [];
 
 
 		public static async Task init()
@@ -21,14 +21,14 @@ namespace OAT.Controllers.Schedules.Readers
 			stopWatch.Start();
 
 			var ids = new[] { 1, 2, 3, 4 };
-			await Runs<int>.InTasks(UpdateCorpusChanges, ids.ToList(), false);
+			await Runs<int>.InTasks(UpdateCorpusChanges, [.. ids], false);
 			stopWatch.Stop();
 			Logger.Info($"Изменения загружены за {stopWatch.ElapsedMilliseconds} ms");
 		}
 
 
 		public static Task GetTask(int index) =>
-			new Task(async () =>
+			new(async () =>
 				{
 					try
 					{
@@ -52,12 +52,12 @@ namespace OAT.Controllers.Schedules.Readers
 				return;
 			}
 
-			await using FileStream fileStream = new FileStream(xlsx, FileMode.Open, FileAccess.Read);
+			await using var fileStream = new FileStream(xlsx, FileMode.Open, FileAccess.Read);
 			var excel = new ExcelPackage(fileStream);
 			var corpus = GetListChanges(index);
 			corpus.Clear();
 			var sheets = excel.Workbook.Worksheets.ToList();
-			foreach (var sheet in sheets.Count() >= 3 ? sheets.GetRange(sheets.Count() - 3, 3) : sheets.GetRange(0, sheets.Count()))
+			foreach (var sheet in sheets.Count >= 3 ? sheets.GetRange(sheets.Count - 3, 3) : sheets.GetRange(0, sheets.Count))
 			{
 				try
 				{
@@ -75,8 +75,7 @@ namespace OAT.Controllers.Schedules.Readers
 
 		public static IEnumerable<ChangeRow> GetChangesAsync(ExcelPackage excel, string? sheet = null)
 		{
-			if (sheet is null)
-				sheet = excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
+			sheet ??= excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
 			var workSheet = excel.Workbook.Worksheets[sheet];
 			var newcollection = workSheet.Fetch<ChangeRow>(11, 300);
 			return newcollection;
@@ -84,8 +83,7 @@ namespace OAT.Controllers.Schedules.Readers
 
 		public static IEnumerable<Bell> GetBellsAsync(ExcelPackage excel, string? sheet = null)
 		{
-			if (sheet is null)
-				sheet = excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
+			sheet ??= excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
 			var workSheet = excel.Workbook.Worksheets[sheet];
 			var newcollection = workSheet.Fetch<Bell>(11, 16);
 			return newcollection;
@@ -93,16 +91,14 @@ namespace OAT.Controllers.Schedules.Readers
 
 		public static string GetSchoolWeek(ExcelPackage excel, string? sheet = null)
 		{
-			if (sheet is null)
-				sheet = excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
+			sheet ??= excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
 			var workSheet = excel.Workbook.Worksheets[sheet];
 			return workSheet.GetValue<string>(7, 10);
 		}
 
 		public static string GetDateText(ExcelPackage excel, string? sheet = null)
 		{
-			if (sheet is null)
-				sheet = excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
+			sheet ??= excel.Workbook.Worksheets!.Max(e => DateTime.ParseExact(e.Name, "d.MM", null)).ToString("dd.MM");
 			var workSheet = excel.Workbook.Worksheets[sheet];
 			return workSheet.GetValue<string>(8, 1);
 		}
@@ -115,7 +111,7 @@ namespace OAT.Controllers.Schedules.Readers
 				2 => changes_b2,
 				3 => changes_b3,
 				4 => changes_b4,
-				_ => new List<Changes>()
+				_ => []
 			};
 
 
@@ -139,22 +135,13 @@ namespace OAT.Controllers.Schedules.Readers
 
 	}
 
-	public class Changes
+	public class Changes(string sheetName, string SchoolWeek, string Date, IEnumerable<Bell> bells, IEnumerable<ChangeRow> rows)
 	{
-		public Changes(string sheetName, string SchoolWeek, string Date, IEnumerable<Bell> bells, IEnumerable<ChangeRow> rows)
-		{
-			SheetName = sheetName;
-			this.bells = bells;
-			this.rows = rows;
-			this.SchoolWeek = SchoolWeek;
-			this.Date = Date;
-		}
-
-		public string SheetName { get; set; }
-		public string SchoolWeek { get; set; }
-		public string Date { get; set; }
-		public IEnumerable<Bell> bells { get; set; }
-		public IEnumerable<ChangeRow> rows { get; set; }
+		public string SheetName { get; set; } = sheetName;
+		public string SchoolWeek { get; set; } = SchoolWeek;
+		public string Date { get; set; } = Date;
+		public IEnumerable<Bell> bells { get; set; } = bells;
+		public IEnumerable<ChangeRow> rows { get; set; } = rows;
 
 	}
 
@@ -168,8 +155,7 @@ namespace OAT.Controllers.Schedules.Readers
 
 		public static IEnumerable<T> Fetch<T>(this ExcelWorksheet worksheet, int start = 0, int end = 300) where T : new()
 		{
-
-			Func<CustomAttributeData, bool> columnOnly = y => y.AttributeType == typeof(ColumnEPPlus);
+			static bool columnOnly(CustomAttributeData y) => y.AttributeType == typeof(ColumnEPPlus);
 
 			var columns = typeof(T)
 					.GetProperties()
@@ -208,11 +194,6 @@ namespace OAT.Controllers.Schedules.Readers
 							col.Property.SetValue(tnew, val.GetValue<double>());
 							return;
 						}
-						//if (col.Property.PropertyType == typeof(DateTime))
-						//{
-						//	col.Property.SetValue(tnew, val.GetValue<DateTime>());
-						//	return;
-						//}
 						col.Property.SetValue(tnew, val.GetValue<string>());
 					});
 
@@ -220,7 +201,6 @@ namespace OAT.Controllers.Schedules.Readers
 				});
 
 
-			//Send it back
 			return collection;
 		}
 	}

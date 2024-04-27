@@ -174,19 +174,13 @@ namespace OAT.Controllers.Schedules.Controllers
 			return css;
 		}
 
-		private bool IsChanceToUse() =>
+		private static bool IsChanceToUse() =>
 			new Random().Next(1, 100) % 3 == 0;
 	}
 
-	public class FakeCSS
+	public class FakeCSS(List<string> show_css, List<string> hide_css)
 	{
-		public FakeCSS(List<string> show_css, List<string> hide_css)
-		{
-			this.show_css = show_css;
-			this.hide_css = hide_css;
-		}
-
-		public List<string> show_css { get; set; }
-		public List<string> hide_css { get; set; }
+		public List<string> show_css { get; set; } = show_css;
+		public List<string> hide_css { get; set; } = hide_css;
 	}
 }

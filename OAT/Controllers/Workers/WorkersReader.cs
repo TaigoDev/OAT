@@ -5,9 +5,9 @@ namespace OAT.Controllers.Workers
 {
 	public class WorkersReader
 	{
-		public static List<List<Worker>> administration = new List<List<Worker>>();
+		public static List<List<Worker>> administration = [];
 		public static IEnumerable<IEnumerable<Worker>> Workers = new List<List<Worker>>();
-		public static List<Worker> AllWorkers = new List<Worker>();
+		public static List<Worker> AllWorkers = [];
 
 
 		public static async Task init()
@@ -60,7 +60,7 @@ namespace OAT.Controllers.Workers
 			};
 
 			workers.RemoveAll(e => ignoredPost.Contains(e.Post) || ignoredPost.Contains(e.FullName));
-			AllWorkers = workers.ToList();
+			AllWorkers = [.. workers];
 			AdministrationByPost(ref workers, e => e is "Директор");
 			AdministrationByPost(ref workers, e => e.Contains("Заместитель директора") && !e.Contains("инженерного лицея"));
 			AdministrationByPost(ref workers, e => e is "Главный бухгалтер");

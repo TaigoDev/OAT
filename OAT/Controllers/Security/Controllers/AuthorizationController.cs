@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using OAT.Entities.Database;
 using OAT.Utilities;
-using RepoDb;
 using System.Security.Claims;
 using static Enums;
 
@@ -17,15 +16,15 @@ namespace OAT.Controllers.Security.Controllers
 		public async Task<IActionResult> Login(string username, string password)
 		{
 			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-			using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+			using var connection = new DatabaseContext();
 			var IsValid = Ldap.Login(username, password, HttpContext.UserIP());
 
-			var records = await connection.QueryAsync<IPTables>(e => e.IP == HttpContext.UserIP());
-			var record = records.FirstOrDefault();
+			var record = await connection.IPTables.FirstOrDefaultAsync(e => e.IP == HttpContext.UserIP());
 			if (record is null)
 			{
-				record = new IPTables(HttpContext.UserIP(), 0, DateTime.UtcNow.AddDays(-1), DateTime.UtcNow.AddDays(-1));
-				await connection.InsertAsync(record);
+				record = new IPTables(HttpContext.UserIP() ?? "LOCAL", 0, DateTime.UtcNow.AddDays(-1), DateTime.UtcNow.AddDays(-1));
+				await connection.AddAsync(record);
+				await connection.SaveChangesAsync();
 			}
 
 			if (DateTime.UtcNow < record.BanTime)
@@ -43,7 +42,8 @@ namespace OAT.Controllers.Security.Controllers
 					record.attempts = 0;
 					record.BanTime = DateTime.UtcNow.AddHours(1);
 				}
-				await connection.UpdateAsync(record);
+				connection.Update(record);
+				await connection.SaveChangesAsync();
 				return BadRequest();
 			}
 
@@ -55,14 +55,14 @@ namespace OAT.Controllers.Security.Controllers
 				Logger.Info($"Запрос на авторизацию через аккаунт {username} отклонен, т.к. пользователь не имеет ни одного права связанного сайтом.\n IP: {HttpContext.UserIP()}");
 				return Redirect("/admin/authorization?status=fail");
 			}
-			await connection.InsertAsync(new Tokens(username, Token, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"), JsonConvert.SerializeObject(roles, new Newtonsoft.Json.Converters.StringEnumConverter())));
-
+			await connection.AddAsync(new Tokens(username, Token, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"), JsonConvert.SerializeObject(roles, new Newtonsoft.Json.Converters.StringEnumConverter())));
+			await connection.SaveChangesAsync();
 			var claims = new List<Claim>() {
-				new Claim("username", username),
-				new Claim("Token", Token),
+				new("username", username),
+				new("Token", Token),
 			};
 			foreach (var role in roles)
-				claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+				claims.Add(new(ClaimTypes.Role, role.ToString()));
 
 
 			var identity = new ClaimsIdentity(claims.ToArray(), CookieAuthenticationDefaults.AuthenticationScheme);
@@ -97,10 +97,10 @@ namespace OAT.Controllers.Security.Controllers
 			try
 			{
 				var Token = user.GetToken();
-				using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
+				using var connection = new DatabaseContext();
 
-				var records = await connection.QueryAsync<Tokens>(e => e.Token == Token);
-				if (!records.Any())
+				var records = await connection.Tokens.Where(e => e.Token == Token).ToListAsync();
+				if (records.Count == 0)
 					return AuthResult.fail;
 
 				var IsSuccess = false;
@@ -124,11 +124,13 @@ namespace OAT.Controllers.Security.Controllers
 
 		private static async void ClearExpiredTokens(string username)
 		{
-			using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
-			var records = await connection.QueryAsync<Tokens>(e => e.username == username);
+			using var connection = new DatabaseContext();
+			var records = connection.Tokens.Where(e => e.username == username);
 			foreach (var record in records)
 				if (DateTime.ParseExact(record.issued, "dd.MM.yyyy HH:mm:ss", null).AddMinutes(30) < DateTime.Now)
-					await connection.DeleteAsync(record);
+					connection.Remove(record);
+
+			await connection.SaveChangesAsync();
 		}
 	}
 }

@@ -27,16 +27,16 @@ namespace OAT.Controllers.ReCaptchaV3
 				var httpClientHandler = new HttpClientHandler
 				{
 					Proxy = proxy,
+					ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
 				};
-				httpClientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
 				using var client = new HttpClient(httpClientHandler);
 
 				var response = await client.PostAsync($"{googleVerificationUrl}?secret={Configurator.ReCaptchaV2.CodeSecretKey}&response={token}", null);
 				var jsonString = await response.Content.ReadAsStringAsync();
 				var captchaVerfication = JsonConvert.DeserializeObject<ReCaptchaResponse>(jsonString);
-
-				result = captchaVerfication.Success;
+				
+				result = captchaVerfication is not null && captchaVerfication.Success;
 			}
 			catch (Exception e)
 			{

@@ -1,26 +1,27 @@
-﻿
-using OAT.Entities;
+﻿using OAT.Entities;
 
-public class UrlsContoller
+namespace OAT.Controllers.Bitrix.Controllers
 {
-	private static List<IPage> pages = new List<IPage>();
-	public static void Add(IPage page) => pages.Add(page);
-
-	public static string? Redirect(string path)
+	public class UrlsContoller
 	{
-		var cPage = pages.Where(p => $"/{p.current}" == path);
-		if (cPage.Count() != 0)
-			return cPage.FirstOrDefault()?.current;
+		private static List<IPage> pages = [];
+		public static void Add(IPage page) => pages.Add(page);
 
-		var page = pages.Where(p => $"/{p.map}" == path || $"/{p.map}/" == path).FirstOrDefault();
-		if (path.Contains("raspisanie"))
-			page = new IPage("raspisanie/*", "timetable/Classes");
-		return page == null ? null : page.current;
-	}
+		public static string? Redirect(string path)
+		{
+			var cPage = pages.Where(p => $"/{p.current}" == path);
+			if (cPage.Count() != 0)
+				return cPage.FirstOrDefault()?.current;
 
-	public static Task init()
-	{
-		var urls = new List<IPage>()
+			var page = pages.Where(p => $"/{p.map}" == path || $"/{p.map}/" == path).FirstOrDefault();
+			if (path.Contains("raspisanie"))
+				page = new IPage("raspisanie/*", "timetable/Classes");
+			return page == null ? null : page.current;
+		}
+
+		public static Task init()
+		{
+			var urls = new List<IPage>()
 		{
 			/*
 			 * 1) Если страница готова, то в первом аргументе прописываем  относительную ссылку битрикса, 
@@ -36,68 +37,68 @@ public class UrlsContoller
 			 */ 
 
 			// main links
-			new IPage("novosti", "AllNews"),
-			new IPage("abitur", "Applicant"),
-			new IPage("students", "Students"),
+			new("novosti", "AllNews"),
+			new("admin/panel", "admin/news"),
+			new("abitur", "Applicant"),
+			new("students", "Students"),
 			// organization information
-			new IPage("sveden/ovz", "organizationInformation/AccessibleEnvironment"),
-			new IPage("sveden/common", "organizationInformation/CommonIntelligence"),
-			new IPage("sveden", "organizationInformation/CommonIntelligence"),
-			new IPage("sveden/corup/index.php", "organizationInformation/Corruption"),
-			new IPage("sveden/document", "organizationInformation/Documents"),
-			new IPage("sveden/education", "organizationInformation/Education"),
-			new IPage("parents/organizatsiya-vospitatelnogo-protsessa-v-kolledzhe", "organizationInformation/EducationalProcess"),
-			new IPage("sveden/obrStandart.php", "organizationInformation/EducationalStandards"),
-			new IPage("sveden/budget", "organizationInformation/FinancialEconomicActivity"),
-			new IPage("sveden/inter", "organizationInformation/InternationalCooperation"),
-			new IPage("sveden/inter", "organizationInformation/InternationalCooperation"),
-			new IPage("sveden/vacant", "organizationInformation/Jobs"),
-			new IPage("sveden/biblioteka", "organizationInformation/Library"),
-			new IPage("sveden/objects", "organizationInformation/Logistics"),
-			new IPage("sveden/paid_edu", "organizationInformation/PaidEducationalServices"),
-			new IPage("sveden/struct", "organizationInformation/Structure"),
-			new IPage("sveden/grants", "organizationInformation/StudentSupport"),
-			new IPage("sveden/terror/index.php", "organizationInformation/Terrorism"),
-			new IPage("sveden/vacancy", "organizationInformation/Vacancies"),
+			new("sveden/ovz", "organizationInformation/AccessibleEnvironment"),
+			new("sveden/common", "organizationInformation/CommonIntelligence"),
+			new("sveden", "organizationInformation/CommonIntelligence"),
+			new("sveden/corup/index.php", "organizationInformation/Corruption"),
+			new("sveden/document", "organizationInformation/Documents"),
+			new("sveden/education", "organizationInformation/Education"),
+			new("parents/organizatsiya-vospitatelnogo-protsessa-v-kolledzhe", "organizationInformation/EducationalProcess"),
+			new("sveden/obrStandart.php", "organizationInformation/EducationalStandards"),
+			new("sveden/budget", "organizationInformation/FinancialEconomicActivity"),
+			new("sveden/inter", "organizationInformation/InternationalCooperation"),
+			new("sveden/inter", "organizationInformation/InternationalCooperation"),
+			new("sveden/vacant", "organizationInformation/Jobs"),
+			new("sveden/biblioteka", "organizationInformation/Library"),
+			new("sveden/objects", "organizationInformation/Logistics"),
+			new("sveden/paid_edu", "organizationInformation/PaidEducationalServices"),
+			new("sveden/struct", "organizationInformation/Structure"),
+			new("sveden/grants", "organizationInformation/StudentSupport"),
+			new("sveden/terror/index.php", "organizationInformation/Terrorism"),
+			new("sveden/vacancy", "organizationInformation/Vacancies"),
 
 			// applicants
-			new IPage("abitur/priemnaya-komissiya", "applicant/SelectionCommittee"),
-			new IPage("abitur/spetsialnosti", "applicant/SpecialtiesAndProfessions"),
-			new IPage("abitur/podgotovitelnye-kursy", "applicant/TrainingCourses"),
-			new IPage("abitur/individualnoe-obuchenie", "applicant/IndividualTraining"),
-			new IPage("abitur/pravila-priema", "applicant/AdmissionRules"),
-			new IPage("abitur/povyshenie-kvalifikatsii", "applicant/QualificationIncrease"),
-			new IPage("abitur/sertifikatsiya-d-link-cisco", "applicant/DLinkCisco"),
-			new IPage("abitur/spetsialnosti-ochno-zaochnogo-vechernego-otdeleniya/", "applicant/SpecialtiesPartTimeEvening"),
-			new IPage("abitur/prof.php", "applicant/CareerGuidanceEvents"),
+			new("abitur/priemnaya-komissiya", "applicant/SelectionCommittee"),
+			new("abitur/spetsialnosti", "applicant/SpecialtiesAndProfessions"),
+			new("abitur/podgotovitelnye-kursy", "applicant/TrainingCourses"),
+			new("abitur/individualnoe-obuchenie", "applicant/IndividualTraining"),
+			new("abitur/pravila-priema", "applicant/AdmissionRules"),
+			new("abitur/povyshenie-kvalifikatsii", "applicant/QualificationIncrease"),
+			new("abitur/sertifikatsiya-d-link-cisco", "applicant/DLinkCisco"),
+			new("abitur/spetsialnosti-ochno-zaochnogo-vechernego-otdeleniya/", "applicant/SpecialtiesPartTimeEvening"),
+			new("abitur/prof.php", "applicant/CareerGuidanceEvents"),
 
 			// students
-			new IPage("students/distant", "students/DistanceFullTimeLearning"),
-			new IPage("students/distantsionnoe-obuchenie", "students/DistanceLearning"),
-			new IPage("students/sport/index.php", "students/SportClub"),
-			new IPage("sveden/Employment/Employment.php", "students/AlumniEmploymentCenterOmaviat"),
-			new IPage("sveden/Employment/center.php", "students/AlumniEmploymentCenterOmsk"),
-			new IPage("parents/pravila-vnutrennego-rasporyadka-dnya-studentov", "students/DailyRoutineRules"),
+			new("students/distant", "students/DistanceFullTimeLearning"),
+			new("students/distantsionnoe-obuchenie", "students/DistanceLearning"),
+			new("students/sport/index.php", "students/SportClub"),
+			new("sveden/Employment/Employment.php", "students/AlumniEmploymentCenterOmaviat"),
+			new("sveden/Employment/center.php", "students/AlumniEmploymentCenterOmsk"),
+			new("parents/pravila-vnutrennego-rasporyadka-dnya-studentov", "students/DailyRoutineRules"),
 
 			// parents
-			new IPage("parents/organizatsiya-uchebnogo-protsessa-v-kolledzhe", "parents/EducationalProcessOrganization"),
+			new("parents/organizatsiya-uchebnogo-protsessa-v-kolledzhe", "parents/EducationalProcessOrganization"),
 
 			// feedback
-			new IPage("contacts/kak-dobratsya", "feedback/Location"),
-			new IPage("contacts/", "feedback/Contacts"),
-			new IPage("contacts/vopros-otvet/", "feedback/QuestionAnswer"),
-			new IPage("pay/", "feedback/Pay"),
+			new("contacts/kak-dobratsya", "feedback/Location"),
+			new("contacts/", "feedback/Contacts"),
+			new("contacts/vopros-otvet/", "feedback/QuestionAnswer"),
+			new("pay/", "feedback/Pay"),
 			// PROJECTS AND EVENTS
 			// professionalitet
 
 			// limitation
 			//new IPage("organizationInformation/ManagementPedagogicalStaff", "sveden/employees/"),
-			new IPage("feedback/Map", "skhema-kolledzha/"),
+			new("feedback/Map", "skhema-kolledzha/"),
 		   // new IPage("parents/AcademicProgress", "parents/uspevaemost/"),
 		};
-		pages = urls;
-		return Task.CompletedTask;
+			pages = urls;
+			return Task.CompletedTask;
+		}
 	}
 }
-
-

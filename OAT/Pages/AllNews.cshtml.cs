@@ -2,15 +2,10 @@
 
 namespace OAT.Pages
 {
-	public class AllNewsModel : PageModel
+	public class AllNewsModel(ILogger<IndexModel> logger) : PageModel
 	{
-		private readonly ILogger<IndexModel> _logger;
+		private readonly ILogger<IndexModel> _logger = logger;
 
-
-		public AllNewsModel(ILogger<IndexModel> logger)
-		{
-			_logger = logger;
-		}
 		public int id { get; set; }
 		public void OnGet(int? id)
 		{

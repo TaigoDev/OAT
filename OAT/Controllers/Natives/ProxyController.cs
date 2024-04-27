@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8604
 using HtmlAgilityPack;
 using OAT;
+using OAT.Controllers.Bitrix.Controllers;
 using System.Text;
 
 public static class ProxyController
@@ -36,8 +37,10 @@ public static class ProxyController
 	{
 		var path = context.Request.Path.Value;
 		var BaseUrl = $"{Configurator.config.BaseUrl}{path}{context.Request.QueryString.Value}";
-		HttpClientHandler clientHandler = new HttpClientHandler();
-		clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+		HttpClientHandler clientHandler = new()
+		{
+			ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+		};
 		var client = new HttpClient(clientHandler);
 
 		if (IsImage(path, ".PNG", ".png", ".JPG", ".jpg", ".JPEG", ".jpg", ".PDF", ".pdf", ".jpeg"))
@@ -46,11 +49,11 @@ public static class ProxyController
 			return;
 		}
 
-		HttpResponseMessage response = null;
+		HttpResponseMessage? response = null;
 		if (context.Request.Method == "GET")
 		{
-			if (path.Contains("students/perfomance") && !string.IsNullOrEmpty(context.Request.Headers["Authorization"].ToString()))
-				client.DefaultRequestHeaders.Add("Authorization", context.Request.Headers["Authorization"].ToString());
+			if (path.Contains("students/perfomance") && !string.IsNullOrEmpty(context.Request.Headers.Authorization.ToString()))
+				client.DefaultRequestHeaders.Add("Authorization", context.Request.Headers.Authorization.ToString());
 			response = await client.GetAsync(BaseUrl);
 		}
 		else if (context.Request.Method == "POST")
@@ -58,9 +61,9 @@ public static class ProxyController
 			try
 			{
 				string documentContents;
-				using (Stream receiveStream = context.Request.Body)
-				using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
-					documentContents = readStream.ReadToEnd();
+				using Stream receiveStream = context.Request.Body;
+				using StreamReader readStream = new(receiveStream, Encoding.UTF8);
+				documentContents = readStream.ReadToEnd();
 				HttpContent content = new StringContent(documentContents, Encoding.UTF8, "application/json");
 				response = await client.PostAsync(BaseUrl, content);
 			}
@@ -84,9 +87,9 @@ public static class ProxyController
 
 		if (path.Contains("students/perfomance") && string.IsNullOrEmpty(context.Request.Headers["Authorization"].ToString()))
 		{
-			context.Response.Headers.Add("Www-Authenticate", "Basic realm=\"Enter your credentials in domain oat.local\"");
-			context.Response.Headers.Add("Vary", "Accept-Encoding");
-			context.Response.Headers.Add("Strict-Transport-Security", "max-age=2592000; includeSubDomains; preload");
+			context.Response.Headers.TryAdd("Www-Authenticate", "Basic realm=\"Enter your credentials in domain oat.local\"");
+			context.Response.Headers.TryAdd("Vary", "Accept-Encoding");
+			context.Response.Headers.TryAdd("Strict-Transport-Security", "max-age=2592000; includeSubDomains; preload");
 		}
 
 		if (head != null)

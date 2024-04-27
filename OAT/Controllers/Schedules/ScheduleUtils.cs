@@ -24,15 +24,15 @@ namespace OAT.Controllers.Schedules
 		{
 			try
 			{
-				using FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-				using StreamReader reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251)!);
+				using var fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+				using var reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251)!);
 				return await reader_encoding.ReadToEndAsync();
 			}
 			catch
 			{
 				await Task.Delay(2000);
-				using FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-				using StreamReader reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251)!);
+				using var fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+				using var reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251)!);
 				return await reader_encoding.ReadToEndAsync();
 			}
 		}
@@ -41,11 +41,21 @@ namespace OAT.Controllers.Schedules
 		{
 			var xDoc = new XmlDocument();
 			var xml = await LoadXml($"b{i}");
+			if (xml is null)
+			{
+				Logger.Error("ScheduleUtils.GetLessonsTime: Размытие пустой ссылки у xml");
+				return [];
+			}
 			xDoc.LoadXml(xml);
 			var rings = xDoc.GetElementsByTagName("rings").Item(0);
 			var lessons_time = new List<string>();
+			if (rings is null)
+			{
+				Logger.Error("ScheduleUtils.GetLessonsTime: Размытие пустой ссылки у lessons_time");
+				return [];
+			}
 			foreach (XmlNode ring in rings)
-				lessons_time.Add($"{ring.GetAttributeValue("begin_time")} - {ring.GetAttributeValue("end_time")}");
+					lessons_time.Add($"{ring.GetAttributeValue("begin_time")} - {ring.GetAttributeValue("end_time")}");
 			return lessons_time;
 		}
 
@@ -56,7 +66,7 @@ namespace OAT.Controllers.Schedules
 				2 => ScheduleReader.ul_b_khmelnickogo_281a,
 				3 => ScheduleReader.pr_kosmicheskij_14a,
 				4 => ScheduleReader.ul_volkhovstroya_5,
-				_ => new List<Group>()
+				_ => []
 			};
 
 		public static List<TeacherSchedule> GetTeacherScheduleListByBuildingId(int i) =>
@@ -66,7 +76,7 @@ namespace OAT.Controllers.Schedules
 				2 => ScheduleReader.teachers_ul_b_khmelnickogo_281a,
 				3 => ScheduleReader.teachers_pr_kosmicheskij_14a,
 				4 => ScheduleReader.teachers_ul_volkhovstroya_5,
-				_ => new List<TeacherSchedule>(),
+				_ => [],
 			};
 
 		public static List<Group>? GetGroupsByBuilding(string? name) =>
@@ -86,7 +96,7 @@ namespace OAT.Controllers.Schedules
 				"ul_b_khmelnickogo_281a" => ScheduleReader.teachers_ul_b_khmelnickogo_281a,
 				"pr_kosmicheskij_14a" => ScheduleReader.teachers_pr_kosmicheskij_14a,
 				"ul_volkhovstroya_5" => ScheduleReader.teachers_ul_volkhovstroya_5,
-				_ => new List<TeacherSchedule>()
+				_ => []
 			};
 
 		public static string GetFilenameByBuilding(string name) =>

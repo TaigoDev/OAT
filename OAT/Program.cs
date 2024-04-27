@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
-using MySqlConnector;
 using OAT;
+using OAT.Controllers.Bitrix.Controllers;
 using OAT.Controllers.MNews.Readers;
 using OAT.Controllers.Payments.Readers;
 using OAT.Controllers.ReCaptchaV2;
@@ -11,13 +12,11 @@ using OAT.Controllers.Security;
 using OAT.Controllers.Workers;
 using OAT.Merge;
 using OAT.Utilities;
-using OAT.Utilities.Recovery;
 using OAT.Utilities.Telegram;
 using OfficeOpenXml;
 using RepoDb;
 
 await Configurator.init();
-GlobalConfiguration.Setup().UseMySqlConnector();
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 GlobalConfiguration.Setup().UseMySqlConnector();
 var builder = WebApplication.CreateBuilder(args);
@@ -44,8 +43,12 @@ else
 	app.Use(async (context, next) =>
 	{
 		await next();
+
 		if (context.Response.StatusCode == 404)
-			context.Response.Redirect("https://www.oat.ru/Duck");
+			if (context.Request.Path == "/admin/panel")
+				context.Response.Redirect("/admin/news");
+			else
+				context.Response.Redirect("/Duck");
 	});
 }
 app.UseCors("AllowAll");
@@ -78,7 +81,6 @@ void SetupControllers()
 			TelegramBot.init,
 			UrlsContoller.init,
 			DropTokens,
-			HealthTables.init,
 			NewsReader.init,
 			ProfNewsReader.init,
 			DemoExamsNewsReader.init,
@@ -153,6 +155,8 @@ async Task CacheController(HttpContext context, Func<Task> next)
 
 async Task DropTokens()
 {
-	using var connection = new MySqlConnection(DataBaseUtils.GetConnectionString());
-	await connection.ExecuteNonQueryAsync($"DROP TABLE Tokens;");
+	using var connection = new DatabaseContext();
+	Console.WriteLine($"{await connection.Tokens.CountAsync()}");
+	connection.RemoveRange(connection.Tokens);
+	await connection.SaveChangesAsync();
 }
