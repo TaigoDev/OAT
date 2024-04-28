@@ -61,21 +61,25 @@
 
 
 @code {
-	[Parameter] public string? CMK { get; set; }
-	private RenderFragment? newsList { get; set; }
-	private SubmitForm form { get; set; } = new SubmitForm();
+    [Parameter] public string? CMK { get; set; }
+    private RenderFragment? newsList { get; set; }
+    private SubmitForm form { get; set; } = new SubmitForm();
 
-	private async Task Update()
-	{
-		using var db = new DatabaseContext();
-		var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
-		if (cmk is null || cmk.news is null)
-		{
-			await Log("❌ Выберите ЦМК!");
-			return;
-		}
-
-		var photos = new List<string>();
+    private async Task Update()
+    {
+        using var db = new DatabaseContext();
+        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+        if (cmk is null || cmk.news is null)
+        {
+            await Log("❌ Выберите ЦМК!");
+            return;
+        }
+        if (form.photos.Count == 0)
+        {
+            await Log("❌ Добавьте хотя бы одно фото!");
+            return;
+        }
+        var photos = new List<string>();
 		foreach (var file in form.photos)
 		{
 			var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
