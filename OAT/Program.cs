@@ -18,12 +18,11 @@ using RepoDb;
 
 await Configurator.init();
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-GlobalConfiguration.Setup().UseMySqlConnector();
 var builder = WebApplication.CreateBuilder(args);
+await TelegramBot.init();
 await DatabaseHelper.WaitStableConnection();
 using var db = new DatabaseContext();
 Console.WriteLine($"Количество новостей: {db.News.Count()}");
-await MergeController.MergeAsync();
 SetupServices(ref builder);
 SetupControllers();
 
@@ -78,7 +77,6 @@ void SetupControllers()
 			"Resources/practice", "Resources/practice/b1", "Resources/practice/b2", "Resources/practice/b3", "Resources/practice/b4",
 			"Resources/Logs");
 		Runs.StartModules(
-			TelegramBot.init,
 			UrlsContoller.init,
 			DropTokens,
 			NewsReader.init,

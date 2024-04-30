@@ -14,18 +14,25 @@ namespace OAT.Utilities.Telegram
 
 		public static async Task init()
 		{
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-				return;
-			botClient = new TelegramBotClient(Configurator.telegram.token, new HttpClient());
-			var me = await botClient.GetMeAsync();
-			var receiverOptions = new ReceiverOptions() { AllowedUpdates = Array.Empty<UpdateType>() };
-			botClient.StartReceiving(
-			updateHandler: HandleUpdateAsync,
-				pollingErrorHandler: HandlePollingErrorAsync,
-				receiverOptions: receiverOptions,
-				cancellationToken: new CancellationTokenSource().Token
-			);
-			Logger.InfoWithoutTelegram($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
+			try
+			{
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+					return;
+				botClient = new TelegramBotClient(Configurator.telegram.token, new HttpClient());
+				var me = await botClient.GetMeAsync();
+				var receiverOptions = new ReceiverOptions() { AllowedUpdates = Array.Empty<UpdateType>() };
+				botClient.StartReceiving(
+				updateHandler: HandleUpdateAsync,
+					pollingErrorHandler: HandlePollingErrorAsync,
+					receiverOptions: receiverOptions,
+					cancellationToken: new CancellationTokenSource().Token
+				);
+				Logger.InfoWithoutTelegram($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
 		}
 
 
