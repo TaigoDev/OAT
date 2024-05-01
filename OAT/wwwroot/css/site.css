@@ -1480,12 +1480,12 @@ table.two-column.second-column-low tr td:nth-child(2) {
 /* MAIN STRUCTURE */
 
 body {
-	display: grid;
-	grid-template-rows: 1fr auto;
+	display: table;
 	padding-top: calc(var(--max-header-heigth) + 50px);
 	--max-header-heigth: 110px;
 	background-color: oklch(0.92 0 0);
 }
+
 section::before,
 section::after,
 article::before,
@@ -1949,6 +1949,7 @@ a.main-menu-item-pictogram {
 }
 
 .site-footer {
+	display: table-row;
 	background-color: #00000015;
 	text-transform: uppercase;
 	font-weight: 700;
