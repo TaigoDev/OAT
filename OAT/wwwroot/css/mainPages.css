@@ -126,7 +126,7 @@ body {
 	.important-links {
 		--columns: 1;
 		justify-content: center;
-		gap: 35px;
+		gap: 20px;
 	}
 	.welcome {
 		margin-top: 25vh;

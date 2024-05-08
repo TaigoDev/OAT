@@ -706,6 +706,12 @@ ul.customized li{
 	margin-bottom: 10px;
 }
 
+@media(width<600px){
+	ul.customized li {
+		width: auto;
+	}
+}
+
 ul.customized li::before {
 	content: "";
 	position: absolute;
@@ -1125,7 +1131,7 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	}
 }
 
-@media(width<360px){
+@media(width<340px){
 	.documents-list {
 		grid-template-columns: 1fr;
 	}
@@ -1461,16 +1467,10 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	background-image: url("../images/basic/mail.svg");
 }
 
-@media (width<480px){
+@media (width<340px){
 	.question-contact {
-		margin-left: auto;
-		margin-right: auto;
-	}
-}
-
-@media (width<340px) {
-	.question-contact {
-		max-width: 280px;
+		max-width: unset;
+		width: 100%;
 	}
 	.question-contact-body {
 		padding: 10px;
@@ -1651,7 +1651,7 @@ section.content::before{
 /* bottom menu */
 
 .main-menu-icon {
-	--menu-icon-size: 55px;
+	--menu-icon-size: 58px;
 	position: fixed;
 	bottom: 15px;
 	left: calc(50% - (var(--menu-icon-size) / 2));
@@ -1797,10 +1797,16 @@ a.main-menu-item-pictogram {
 
 @media(width<1600px) {
 	.main-menu-icon {
-		--menu-icon-size: 50px;
+		--menu-icon-size: 55px;
 	}
 	.main-menu-window {
 		bottom: 75px;
+	}
+}
+
+@media(width<1000px) {
+	.main-menu-icon {
+		--menu-icon-size: 50px;
 	}
 }
 

@@ -4,14 +4,14 @@
 	justify-content: center;
 	gap: 50px;
 	max-width: min(100%, 900px);
-	margin: 0 auto;
+	margin: 25px auto 0 auto;
 }
 
 .projects-list-item {
 	display: grid;
 	place-items: center;
 	border-radius: 50%;
-	transition: box-shadow 500ms ease, background-color 500ms ease;
+	transition: 300ms ease;
 }
 
 .projects-list-item:has(img:hover) {
