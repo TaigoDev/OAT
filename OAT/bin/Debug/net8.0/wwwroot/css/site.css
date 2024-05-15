@@ -2035,7 +2035,6 @@ a.main-menu-item-pictogram {
 	justify-content: space-between;
 	gap: 40px;
 	align-items: center;
-	max-width: 95%;
 	margin-bottom: 30px;
 }
 
@@ -2099,6 +2098,14 @@ a.main-menu-item-pictogram {
 	opacity: 0.7;
 }
 
+.created-by {
+	display: flex;
+	margin-left: auto;
+	width: fit-content;
+	font-size: 1.4rem;
+	opacity: 0.7;
+}
+
 @media (width<1100px){
 	.footer-bottom-logo {
 		max-width: 700px;
@@ -2124,6 +2131,9 @@ a.main-menu-item-pictogram {
 	.footer-bottom-row {
 		flex-direction: column;
 		max-width: none;
+	}
+	.created-by {
+		margin: 0px auto 35px auto;
 	}
 }
 
