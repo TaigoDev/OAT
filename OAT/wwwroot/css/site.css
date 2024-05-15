@@ -21,18 +21,19 @@
 }
 
 ::-webkit-scrollbar {
-	width: 5px;
+	width: 6px;
+	height: 6px;
 	border-radius: var(--border-radius-m);
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
 	background-color: gray;
 	border-radius: var(--border-radius-m);
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: var(--border-radius-m);
 	background-color: var(--matte-color);
+	border-radius: var(--border-radius-m);
 }
 
 @supports(color: oklch(0.25 0 0)) {
@@ -69,6 +70,10 @@ body {
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	overflow-x: hidden;
+}
+
+body::-webkit-scrollbar, body::-webkit-scrollbar-track, body::-webkit-scrollbar-thumb {
+	border-radius: 2px;
 }
 
 label{
@@ -607,7 +612,7 @@ button.customized:hover {
 
 .icon {
 	width: 25px;
-	transition: 200ms ease;
+	transition: 175ms ease;
 }
 
 img.customized {
@@ -849,51 +854,27 @@ table.two-column {
 	min-width: 100%;
 }
 
-table.two-column tbody{
-	display: flex;
-	flex-direction: column;
-	row-gap: 15px;
-}
-
 table.two-column tr {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	column-gap: 60px;
-	padding: 7px;
-	border: 2px solid #00000010;
-	border-radius: var(--border-radius-l);
-	background-color: #00000010;
-	overflow: hidden;
-	transition: 200ms ease;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px;
+    border-radius: 0;
+    border-bottom: 1px solid #00000015;
 }
 
-table.two-column tr:hover {
-	background-color: #00000005;
-	color: black;
+table.two-column tr:first-child{
+	padding-top: 0;
+}
+
+table.two-column tr:last-child{
+	border-bottom: none;
+	padding-bottom: 0;
 }
 
 table.two-column tr td:first-child {
-	min-width: 15ch;
-	max-width: 50ch;
-	width: 100%;
-	font-weight: 700;
-}
-
-table.two-column tr td:nth-child(2) {
-	max-width: 25ch;
-	width: 100%;
-}
-
-table.two-column.second-column-low tr td:nth-child(2) {
-	max-width: 8ch;
-	width: 100%;
-}
-
-@media (width<600px){
-	table.two-column tr {
-		column-gap: 30px;
-	}
+    font-weight: 700;
+    line-height: 1.15;
 }
 
 /* text */
@@ -1168,15 +1149,12 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	align-items: center;
 	column-gap: 10px;
 	padding: 15px;
-	border-radius: var(--border-radius-xl);
+	border-radius: var(--border-radius-l);
 	background: var(--m-color);
 	color: var(--light-white);
 	font-size: 1.05rem;
 	letter-spacing: 0.015em;
 	font-weight: 500;
-}
-
-.accordion-head-icon {
 	cursor: pointer;
 }
 
@@ -1184,18 +1162,17 @@ table.two-column.second-column-low tr td:nth-child(2) {
 	.accordion-head-icon {
 		opacity: 0.6;
 	}
-	.accordion-head-icon:hover, .accordion.open .accordion-head-icon{
+	.accordion-head:hover .accordion-head-icon, .accordion.open .accordion-head-icon{
 		opacity: 1;
 		filter: drop-shadow(0px 0px 1px white);
 	}
 }
 
 .accordion-body {
-	max-height: 0px;
+	max-height: 0;
 	padding: 0;
-	margin: 0 15px;
 	border-radius: var(--border-radius-l);
-	background-color: #00000015;
+	background-color: #00000010;
 	opacity: 0;
 	visibility: hidden;
 	overflow: auto;
@@ -1203,8 +1180,8 @@ table.two-column.second-column-low tr td:nth-child(2) {
 }
 
 .accordion-body::-webkit-scrollbar{
-	width: 10px;
-	height: 10px;
+	width: 8px;
+	height: 8px;
 }
 
 .accordion-body::-webkit-scrollbar-thumb{
@@ -2073,7 +2050,7 @@ a.main-menu-item-pictogram {
 .footer-bottom-pages {
 	display: grid;
 	align-items: center;
-	gap: 20px 200px;
+	gap: 5px 175px;
 	grid-template-columns: repeat(3, 1fr);
 	margin-bottom: 20px;
 }
@@ -2085,6 +2062,7 @@ a.main-menu-item-pictogram {
 
 .footer-bottom-pages li a {
 	display: block;
+	padding: 8px 0;
 	color: var(--light-white);
 	transition: 150ms ease;
 }
@@ -2099,11 +2077,14 @@ a.main-menu-item-pictogram {
 }
 
 .created-by {
+	position: relative;
+	z-index: 1;
 	display: flex;
 	margin-left: auto;
 	width: fit-content;
-	font-size: 1.4rem;
+	text-align: right;
 	opacity: 0.7;
+	translate: 0 22px;
 }
 
 @media (width<1100px){
@@ -2123,7 +2104,7 @@ a.main-menu-item-pictogram {
 		font-size: 0.7rem;
 	}
 	.footer-bottom-pages {
-		gap: 20px;
+		gap: 5px 20px;
 		grid-template-columns: repeat(2, 1fr);
 		place-items: center;
 		text-align: center;
@@ -2133,7 +2114,9 @@ a.main-menu-item-pictogram {
 		max-width: none;
 	}
 	.created-by {
-		margin: 0px auto 35px auto;
+		margin: 0px auto 40px auto;
+		translate: 0;
+		text-align: center;
 	}
 }
 

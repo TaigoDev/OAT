@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
 	/* accordion */
 	for (let i = 0; i < accordionsList.length; i++) {
 		accordionsList[i].querySelector(".accordion-head").insertAdjacentHTML("beforeend", `<img class="icon accordion-head-icon" src="/images/basic/accordionMore.svg" alt="версия для слабовидящих">`);
-		accordionsList[i].querySelector(".accordion-head-icon").addEventListener("click", () => {
+		accordionsList[i].querySelector(".accordion-head").addEventListener("click", () => {
 			if (accordionsList[i].classList.contains("open")) {
 				accordionsList[i].classList.remove("open");
 			}
