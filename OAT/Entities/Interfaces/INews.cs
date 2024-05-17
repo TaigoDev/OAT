@@ -8,5 +8,6 @@
 		public string description { get; set; }
 		public string short_description { get; set; }
 		public string photos { get; set; }
+		public bool IsFixed { get; set; }
 	}
 }

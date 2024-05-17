@@ -29,8 +29,8 @@
     }
     @{
         var news = cmk.news;
-        news = [.. news.OrderBy(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null))];
-        news.Reverse();
+        news = news.OrderByDescending(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null)).ToList();
+        news = [.. news.Where(e => e.IsFixed), .. news.Where(e => !e.IsFixed)];
         var pages = news.PagesSplit(10);
     }
 

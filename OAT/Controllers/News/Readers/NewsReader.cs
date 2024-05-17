@@ -12,8 +12,8 @@ public class NewsReader
 	{
 		using var connection = new DatabaseContext();
 		news = await connection.News.ToListAsync();
-		news = [.. news.OrderBy(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null))];
-		news.Reverse();
+		news = news.OrderByDescending(e => DateTime.ParseExact(e.date, "yyyy-MM-dd", null)).ToList();
+		news = [.. news.Where(e => e.IsFixed), .. news.Where(e => !e.IsFixed)];
 		pages = news.PagesSplit(10);
 	}
 

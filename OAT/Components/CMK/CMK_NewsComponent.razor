@@ -14,6 +14,12 @@
 			</label>
 			<input @bind-value="form.date" id="news-date" type="date">
 		</div>
+        <div class="input-box">
+            <label for="news-date">
+                Зафиксировать новость
+            </label>
+            <input @bind-value="form.IsFixed" id="news-date" type="checkbox">
+        </div>
 		<div class="input-box">
 			<label for="news-text">
 				Текст
@@ -89,7 +95,7 @@
 		}
 
 		cmk.news.Add(new(form.date.ToString("yyyy-MM-dd"),
-					form.name, form.description, form.description.GetWords(15), photos.toJson()));
+					form.name, form.description, form.description.GetWords(15), photos.toJson(), form.IsFixed));
 		db.Update(cmk);
 		await db.SaveChangesAsync();
 		await Log("✅ Новость успешно добавлена");
@@ -147,6 +153,7 @@
 		public string name { get; set; } = "Тест новость";
 		public string description { get; set; } = "Текст новости, её содержание.";
 		public DateTime date { get; set; } = DateTime.Now;
+		public bool IsFixed { get; set; } = false;
 		public List<IBrowserFile> photos { get; set; } = [];
 	}
 }

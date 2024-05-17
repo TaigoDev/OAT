@@ -7,7 +7,7 @@ namespace OAT.Entities.Database
 	public class News : INews
 	{
 
-		public News(int id, string date, string title, string short_description, string description, string photos)
+		public News(int id, string date, string title, string short_description, string description, string photos, bool IsFixed)
 		{
 			this.id = id;
 			this.date = date;
@@ -15,9 +15,10 @@ namespace OAT.Entities.Database
 			this.short_description = short_description;
 			this.description = description;
 			this.photos = photos;
+			this.IsFixed = IsFixed;
 		}
 
-		public News(string date, string title, string description, string short_description, List<string> photos)
+		public News(string date, string title, string description, string short_description, List<string> photos, bool IsFixed)
 		{
 			this.id = id;
 			this.date = date;
@@ -25,9 +26,10 @@ namespace OAT.Entities.Database
 			this.short_description = short_description;
 			this.description = description;
 			this.photos = photos.toJson();
+			this.IsFixed = IsFixed;
 		}
 
-		public News(string date, string title, string description, string short_description, string photos)
+		public News(string date, string title, string description, string short_description, string photos, bool IsFixed)
 		{
 			this.id = id;
 			this.date = date;
@@ -35,6 +37,7 @@ namespace OAT.Entities.Database
 			this.short_description = short_description;
 			this.description = description;
 			this.photos = photos;
+			this.IsFixed = IsFixed;
 		}
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
@@ -44,6 +47,7 @@ namespace OAT.Entities.Database
 		public string short_description { get; set; }
 		public string description { get; set; }
 		public string photos { get; set; }
+		public bool IsFixed { get; set; }
 
 		public List<string> GetPhotos() =>
 			photos.toObject<List<string>>();

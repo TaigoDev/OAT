@@ -7,15 +7,16 @@ namespace OAT.Entities.Database
 	public class DemoExamNews : INews
 	{
 
-		public DemoExamNews(string date, string title, string description, string short_description, List<string> photos)
+		public DemoExamNews(string date, string title, string description, string short_description, List<string> photos, bool IsFixed)
 		{
 			this.date = date;
 			this.title = title;
 			this.description = description;
 			this.short_description = short_description;
 			this.photos = photos.toJson();
+			this.IsFixed = IsFixed;
 		}
-		public DemoExamNews(int id, string date, string title, string description, string short_description, string photos)
+		public DemoExamNews(int id, string date, string title, string description, string short_description, string photos, bool IsFixed)
 		{
 			this.id = id;
 			this.date = date;
@@ -23,15 +24,17 @@ namespace OAT.Entities.Database
 			this.description = description;
 			this.short_description = short_description;
 			this.photos = photos;
+			this.IsFixed = IsFixed;
 		}
 
-		public DemoExamNews(string date, string title, string description, string short_description, string photos)
+		public DemoExamNews(string date, string title, string description, string short_description, string photos, bool IsFixed)
 		{
 			this.date = date;
 			this.title = title;
 			this.description = description;
 			this.short_description = short_description;
 			this.photos = photos;
+			this.IsFixed = IsFixed;
 		}
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
@@ -41,6 +44,7 @@ namespace OAT.Entities.Database
 		public string description { get; set; }
 		public string short_description { get; set; }
 		public string photos { get; set; }
+		public bool IsFixed { get; set; }
 
 
 		public List<string> GetPhotos() =>

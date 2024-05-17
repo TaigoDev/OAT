@@ -1,4 +1,5 @@
-﻿@using MySqlConnector
+﻿@using Microsoft.EntityFrameworkCore
+@using MySqlConnector
 @using OAT.Controllers.MNews.Readers
 @using OAT.Controllers.Security
 @using OAT.Entities.Database
@@ -45,12 +46,17 @@
 		</label>
 		<input @bind-value="form.date" id="news-date" type="date">
 	</div>
-
+    <div class="input-box">
+        <label for="news-date">
+            Зафиксировать новость
+        </label>
+        <input @bind="form.IsFixed" @bind:event="oninput" id="news-date" type="checkbox">
+    </div>
 	<div class="input-box">
 		<label for="news-text">
 			Текст
 		</label>
-		<textarea @onchange='(t) => form.description = t.Value?.ToString()!' class="customized" id="news-text">Текст новости, её содержание.</textarea>
+        <textarea @bind="form.description" @bind:event="oninput" class="customized" id="news-text">Текст новости, её содержание.</textarea>
 	</div>
 
 	<div class="input-box">
@@ -63,10 +69,7 @@
 				form.photos.Add(file);
 		}'/>
 	</div>
-
-	<button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await OnPublish()" multiple>
-		Отправить
-	</button>
+    @button
 </form>
 
 <table class="customized panel-table">
@@ -93,8 +96,13 @@
 </table>
 @code {
 
-	protected override void OnInitialized() => OnChangeNews("main");
-	private RenderFragment newsList { get; set; } = (__builder) => { };
+    protected override void OnInitialized()
+    {
+        OnChangeNews("main");
+        SetAddButton();
+    }
+    private RenderFragment newsList { get; set; } = (__builder) => { };
+    private RenderFragment button { get; set; } = (__builder) => { };
 	private SubmitForm form { get; set; } = new SubmitForm();
 
 	private void OnChangeNews(string name)
@@ -124,6 +132,11 @@
 						@news.date
 					</td>
 					<td>
+                        <button class="panel-table-button" @onclick='async () => {
+							await GetNews(name, news);
+						}'>
+                            изменить
+                        </button>
 						<button class="panel-table-button" @onclick='async () => {
 							await DeleteNews(name, news);
 							OnChangeNews(name);
@@ -131,137 +144,277 @@
 							удалить
 						</button>
 					</td>
-				</tr>
-			}
-		};
+                </tr>
+            }
+        };
 
-	}
+    }
 
-	private async Task DeleteNews(string name, INews news)
-	{
-		if (httpContextAccessor.HttpContext is null)
-		{
-			Logger.Error("httpContextAccessor.HttpContext is null");
-			return;
-		}
+    private async Task DeleteNews(string name, INews news)
+    {
+        if (httpContextAccessor.HttpContext is null)
+        {
+            Logger.Error("httpContextAccessor.HttpContext is null");
+            return;
+        }
 
-		var permission = name switch
-		{
-			"demoExam" => Enums.Role.www_reporter_demoexams,
-			"professionalitet" => Enums.Role.www_reporter_prof_news,
-			_ => Enums.Role.www_reporter_news,
-		};
+        var permission = name switch
+        {
+            "demoExam" => Enums.Role.www_reporter_demoexams,
+            "professionalitet" => Enums.Role.www_reporter_prof_news,
+            _ => Enums.Role.www_reporter_news,
+        };
 
-		var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
-		if(roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
-		{
-			await Log("❌ Вам отказано в доступе. ");
-			return;
-		}
+        var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
+        if(roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+        {
+            await Log("❌ Вам отказано в доступе. ");
+            return;
+        }
 
-		using var connection = new DatabaseContext();
+        using var connection = new DatabaseContext();
 
-		if(name is "demoExam")
-		{
-			connection.DemoExamNews.RemoveRange(connection.DemoExamNews.Where(e => e.id == news.id));
-			await connection.SaveChangesAsync();
-			await DemoExamsNewsReader.init();
-		}
-		else if (name is "professionalitet")
-		{
-			connection.ProfNews.RemoveRange(connection.ProfNews.Where(e => e.id == news.id));
-			await connection.SaveChangesAsync();
-			await ProfNewsReader.init();
+        if(name is "demoExam")
+        {
+            connection.DemoExamNews.RemoveRange(connection.DemoExamNews.Where(e => e.id == news.id));
+            await connection.SaveChangesAsync();
+            await DemoExamsNewsReader.init();
+        }
+        else if (name is "professionalitet")
+        {
+            connection.ProfNews.RemoveRange(connection.ProfNews.Where(e => e.id == news.id));
+            await connection.SaveChangesAsync();
+            await ProfNewsReader.init();
 
-		}else
-		{
-			connection.News.RemoveRange(connection.News.Where(e => e.id == news.id));
-			await connection.SaveChangesAsync();
-			await NewsReader.init();
-		}
-		Logger.Info($"Пользователь удалил новость.\n" +
-			$"ID: {news.id}\n" +
-			$"Пользователь: {httpContextAccessor.HttpContext.User.GetUsername()}\n" +
-			$"IP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
-		await Log("✅ Новость удалена");
+        }else
+        {
+            connection.News.RemoveRange(connection.News.Where(e => e.id == news.id));
+            await connection.SaveChangesAsync();
+            await NewsReader.init();
+        }
+        Logger.Info($"Пользователь удалил новость.\n" +
+            $"ID: {news.id}\n" +
+            $"Пользователь: {httpContextAccessor.HttpContext.User.GetUsername()}\n" +
+            $"IP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
+        await Log("✅ Новость удалена");
 
-	}
+    }
 
-	private async Task OnPublish()
-	{
-		try
-		{
-			if (httpContextAccessor.HttpContext is null)
-			{
-				Logger.Error("httpContextAccessor.HttpContext is null");
-				return;
-			}
+    private async Task OnPublish()
+    {
+        try
+        {
+            if (httpContextAccessor.HttpContext is null)
+            {
+                Logger.Error("httpContextAccessor.HttpContext is null");
+                return;
+            }
 
-			var permission = form.type switch
-			{
-				"demoExam" => Enums.Role.www_reporter_demoexams,
-				"professionalitet" => Enums.Role.www_reporter_prof_news,
-				_ => Enums.Role.www_reporter_news,
-			};
+            var permission = form.type switch
+            {
+                "demoExam" => Enums.Role.www_reporter_demoexams,
+                "professionalitet" => Enums.Role.www_reporter_prof_news,
+                _ => Enums.Role.www_reporter_news,
+            };
 
-			var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
-			if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
-			{
-				await Log("❌ Вам отказано в доступе. ");
-				Logger.Info($"Пользователю {httpContextAccessor.HttpContext.User.GetUsername()} отказано в доступе, т.к. право {permission} отсутствует");
-				return;
-			}
+            var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
+            if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+            {
+                await Log("❌ Вам отказано в доступе. ");
+                Logger.Info($"Пользователю {httpContextAccessor.HttpContext.User.GetUsername()} отказано в доступе, т.к. право {permission} отсутствует");
+                return;
+            }
 
-			var photos = new List<string>();
-			foreach (var file in form.photos)
-			{
-				var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
-				await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
-				await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
-				photos.Add(path);
-			}
+            var photos = new List<string>();
+            foreach (var file in form.photos)
+            {
+                var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
+                await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
+                await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
+                photos.Add(path);
+            }
 
-			using var connection = new DatabaseContext();
-			var id = 0;
-			if (form.type is "demoExam")
-			{
-				var news = new DemoExamNews(form.date.ToString("yyyy-MM-dd"),
-					form.name, form.description, form.description.GetWords(15), photos);
-				await connection.AddAsync(news);
-				await connection.SaveChangesAsync();
-				await DemoExamsNewsReader.init();
-			}
-			else if (form.type is "professionalitet")
-			{
-				var news = new ProfNews(form.date.ToString("yyyy-MM-dd"),
-					form.name, form.description, form.description.GetWords(15), photos);
-				await connection.AddAsync(news);
-				await connection.SaveChangesAsync();
-				await ProfNewsReader.init();
-			}
-			else
-			{
-				var news = new News(form.date.ToString("yyyy-MM-dd"),
-					 form.name, form.description, form.description.GetWords(15), photos);
-				await connection.AddAsync(news);
-				await connection.SaveChangesAsync();
-				await NewsReader.init();
-			}
+            using var connection = new DatabaseContext();
+            if (form.type is "demoExam")
+            {
+                var news = new DemoExamNews(form.date.ToString("yyyy-MM-dd"),
+                    form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+                await connection.AddAsync(news);
+                await connection.SaveChangesAsync();
+                await DemoExamsNewsReader.init();
+            }
+            else if (form.type is "professionalitet")
+            {
+                var news = new ProfNews(form.date.ToString("yyyy-MM-dd"),
+                    form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+                await connection.AddAsync(news);
+                await connection.SaveChangesAsync();
+                await ProfNewsReader.init();
+            }
+            else
+            {
+                var news = new News(form.date.ToString("yyyy-MM-dd"),
+                     form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+                await connection.AddAsync(news);
+                await connection.SaveChangesAsync();
+                await NewsReader.init();
+            }
 
 
-			Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nТекст Новости: {form.name}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
-			OnChangeNews(form.type);
-			await Log("✅ Новость добавлена");
-		}
-		catch(Exception ex)
-		{
-			Logger.Error(ex);
-			await Log("❌ Произошла ошибка. Сообщите");
-		}
-	}
+            Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nТекст Новости: {form.name}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
+            OnChangeNews(form.type);
+            await Log("✅ Новость добавлена");
+            form = new();
+        }
+        catch(Exception ex)
+        {
+            Logger.Error(ex);
+            await Log("❌ Произошла ошибка. Сообщите");
+        }
+    }
 
-	private async Task Log(string message)
-	{
+    private async Task GetNews(string name, INews news)
+    {
+        if (httpContextAccessor.HttpContext is null)
+        {
+            Logger.Error("httpContextAccessor.HttpContext is null");
+            return;
+        }
+
+        var permission = name switch
+        {
+            "demoExam" => Enums.Role.www_reporter_demoexams,
+            "professionalitet" => Enums.Role.www_reporter_prof_news,
+            _ => Enums.Role.www_reporter_news,
+        };
+
+        var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
+        if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+        {
+            await Log("❌ Вам отказано в доступе. ");
+            return;
+        }
+
+        form.date = DateTime.ParseExact(news.date, "yyyy-MM-dd", null);
+        form.description = news.description;
+        form.IsFixed = news.IsFixed;
+        form.name = news.title;
+        form.photos = new();
+        SetUpdateButton(news);
+        await Log("⚠️ Включен режим редактирование новости");
+
+    }
+
+    private async Task UpdateNews(INews Inews)
+    {
+        if (httpContextAccessor.HttpContext is null)
+        {
+            Logger.Error("httpContextAccessor.HttpContext is null");
+            return;
+        }
+
+
+        var permission = form.type switch
+        {
+            "demoExam" => Enums.Role.www_reporter_demoexams,
+            "professionalitet" => Enums.Role.www_reporter_prof_news,
+            _ => Enums.Role.www_reporter_news,
+        };
+
+        var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
+        if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+        {
+            await Log("❌ Вам отказано в доступе. ");
+            Logger.Info($"Пользователю {httpContextAccessor.HttpContext.User.GetUsername()} отказано в доступе, т.к. право {permission} отсутствует");
+            return;
+        }
+
+        var photos = new List<string>();
+        if(form.photos.Count is not 0)
+            foreach (var file in form.photos)
+            {
+                var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
+                await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
+                await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
+                photos.Add(path);
+            }
+
+        using var connection = new DatabaseContext();
+        if (form.type is "demoExam")
+        {
+            var news = await connection.DemoExamNews.FirstAsync(e => e.id == Inews.id);
+            news.IsFixed = form.IsFixed;
+            news.title = form.name;
+            news.date = form.date.ToString("yyyy-MM-dd");
+            news.description = form.description;
+            news.short_description = form.description.GetWords(15);
+            if(photos.Count is not 0)
+                news.photos = photos.toJson();
+            connection.Update(news);
+            await connection.SaveChangesAsync();
+            await DemoExamsNewsReader.init();
+        }
+        else if (form.type is "professionalitet")
+        {
+            var news = await connection.ProfNews.FirstAsync(e => e.id == Inews.id);
+            news.IsFixed = form.IsFixed;
+            news.title = form.name;
+            news.date = form.date.ToString("yyyy-MM-dd");
+            news.description = form.description;
+            news.short_description = form.description.GetWords(15);
+            if (photos.Count is not 0)
+                news.photos = photos.toJson();
+            connection.Update(news);
+            await connection.SaveChangesAsync();
+            await ProfNewsReader.init();
+        }
+        else
+        {
+            var news = await connection.News.FirstAsync(e => e.id == Inews.id);
+            news.IsFixed = form.IsFixed;
+            news.title = form.name;
+            news.date = form.date.ToString("yyyy-MM-dd");
+            news.description = form.description;
+            news.short_description = form.description.GetWords(15);
+            if (photos.Count is not 0)
+                news.photos = photos.toJson();
+            connection.Update(news);
+            await connection.SaveChangesAsync();
+            await NewsReader.init();
+        }
+
+
+        Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nТекст Новости: {form.name}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
+        OnChangeNews(form.type);
+        await Log("✅ Новость обновил");
+        SetAddButton();
+        form = new();
+    }
+
+    private void SetAddButton()
+    {
+        button = (__builder) =>
+        {
+            <button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await OnPublish()" multiple>
+                Отправить
+            </button>
+        };
+    }
+
+    private void SetUpdateButton(INews news)
+    {
+        button = (__builder) =>
+        {
+            <p>⚠️ Частичное изменение фотографий недоступно. Вы можете только обновить все фотографии сразу. Если вы хотите оставить текущие фотографии, то просто не выбирайте другие и они сохраняться автоматически.</p>
+            <button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await UpdateNews(news)" multiple>
+                Обновить новость
+            </button>
+        };
+    }
+
+
+    private async Task Log(string message)
+    {
 		await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
 	}
 
@@ -271,6 +424,7 @@
 		public string name { get; set; } = "Тест новость";
 		public string description { get; set; } = "Текст новости, её содержание.";
 		public DateTime date { get; set; } = DateTime.Now;
+		public bool IsFixed { get; set; } = false;
 		public List<IBrowserFile> photos { get; set; } = [];
 	}
 }
