@@ -264,7 +264,7 @@
             Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nТекст Новости: {form.name}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
             OnChangeNews(form.type);
             await Log("✅ Новость добавлена");
-            form = new();
+            form = new(form.type);
         }
         catch(Exception ex)
         {
@@ -386,9 +386,9 @@
 
         Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nТекст Новости: {form.name}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
         OnChangeNews(form.type);
-        await Log("✅ Новость обновил");
+        await Log("✅ Новость обновлена");
         SetAddButton();
-        form = new();
+        form = new(form.type);
     }
 
     private void SetAddButton()
@@ -415,16 +415,19 @@
 
     private async Task Log(string message)
     {
-		await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
-	}
+        await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
+    }
 
-	public class SubmitForm
-	{
-		public string type { get; set; } = "main";
-		public string name { get; set; } = "Тест новость";
-		public string description { get; set; } = "Текст новости, её содержание.";
-		public DateTime date { get; set; } = DateTime.Now;
-		public bool IsFixed { get; set; } = false;
-		public List<IBrowserFile> photos { get; set; } = [];
-	}
+    public class SubmitForm
+    {
+        public string type { get; set; } = "main";
+        public string name { get; set; } = "Тест новость";
+        public string description { get; set; } = "Текст новости, её содержание.";
+        public DateTime date { get; set; } = DateTime.Now;
+        public bool IsFixed { get; set; } = false;
+        public List<IBrowserFile> photos { get; set; } = [];
+        public SubmitForm(string type) =>
+            this.type = type;
+        public SubmitForm() {}
+    }
 }
