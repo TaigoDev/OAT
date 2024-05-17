@@ -199,7 +199,6 @@ section.container .panel-form:first-of-type {
 	width: 350px;
 }
 
-
 /* panel table */
 
 table.panel-table {
@@ -211,6 +210,12 @@ table.panel-table {
 
 table.panel-table tbody tr td:first-child {
 	text-align: center !important;
+}
+
+.panel-table-buttons{
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
 }
 
 .panel-table-button {

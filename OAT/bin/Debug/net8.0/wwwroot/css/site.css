@@ -527,7 +527,7 @@ section.centered .section-title{
 .input-box {
 	display: flex;
 	flex-direction: column;
-	row-gap: 4px;
+	gap: 4px;
 }
 
 .input-box label {
@@ -545,6 +545,11 @@ section.centered .section-title{
 	letter-spacing: .075em;
 	opacity: .825;
 	transition: opacity 100ms ease, border-color 100ms ease;
+}
+
+.input-box:has(input[type="checkbox"]){
+	gap: 6px;
+	flex-direction: row;
 }
 
 .input-box textarea{

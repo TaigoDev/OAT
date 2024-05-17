@@ -47,10 +47,10 @@
 		<input @bind-value="form.date" id="news-date" type="date">
 	</div>
     <div class="input-box">
-        <label for="news-date">
-            Зафиксировать новость
+        <input @bind="form.IsFixed" @bind:event="oninput" id="news-fixed" type="checkbox">
+        <label for="news-fixed">
+            зафиксировать новость
         </label>
-        <input @bind="form.IsFixed" @bind:event="oninput" id="news-date" type="checkbox">
     </div>
 	<div class="input-box">
 		<label for="news-text">
@@ -132,17 +132,19 @@
 						@news.date
 					</td>
 					<td>
-                        <button class="panel-table-button" @onclick='async () => {
+                        <div class="panel-table-buttons">
+                            <button class="panel-table-button" @onclick='async () => {
 							await GetNews(name, news);
 						}'>
-                            изменить
-                        </button>
-						<button class="panel-table-button" @onclick='async () => {
+                                изменить
+                            </button>
+                            <button class="panel-table-button" @onclick='async () => {
 							await DeleteNews(name, news);
 							OnChangeNews(name);
 						}'>
-							удалить
-						</button>
+                                удалить
+                            </button>
+                        </div>
 					</td>
                 </tr>
             }
