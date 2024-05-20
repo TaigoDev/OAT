@@ -38,7 +38,11 @@ namespace OAT
 			var options = new DbContextOptionsBuilder();
 			options.UseLazyLoadingProxies();
 			options.ConfigureWarnings(builder => builder.Ignore(CoreEventId.LazyLoadOnDisposedContextWarning));
-			return SqliteDbContextOptionsBuilderExtensions.UseSqlite(options, "Data Source=database.db").Options;
+			if (OperatingSystem.IsWindows())
+				return SqliteDbContextOptionsBuilderExtensions.UseSqlite(options, "Data Source=database.db").Options;
+
+			var builder = MySqlDbContextOptionsBuilderExtensions.UseMySql(options, $"server={Configurator.config.db_ip};port=3306;user={Configurator.config.db_user};password={Configurator.config.db_password};database={Configurator.config.db_name};", new MySqlServerVersion(new Version(8, 0, 25)));
+			return builder.Options;
 		}
 	}
 }

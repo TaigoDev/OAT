@@ -10,6 +10,7 @@ using OAT.Controllers.ReCaptchaV3;
 using OAT.Controllers.Schedules.Readers;
 using OAT.Controllers.Security;
 using OAT.Controllers.Workers;
+using OAT.Merge;
 using OAT.Utilities;
 using OAT.Utilities.Telegram;
 using OfficeOpenXml;
@@ -22,6 +23,7 @@ await TelegramBot.init();
 await DatabaseHelper.WaitStableConnection();
 using var db = new DatabaseContext();
 Console.WriteLine($"Количество новостей: {db.News.Count()}");
+await MergeController.MergeAsync();
 SetupServices(ref builder);
 SetupControllers();
 
