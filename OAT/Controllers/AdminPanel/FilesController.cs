@@ -63,6 +63,9 @@ namespace OAT.Controllers.AdminPanel
 		[HttpPost("api/sessions/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
 		public async Task<IActionResult> UploadSessionsFile(string building, string filename, IFormFile file)
 		{
+			if (string.IsNullOrEmpty(filename))
+				return StatusCode(StatusCodes.Status406NotAcceptable);
+
 			if (file is null || file.Length == 0 || Path.GetExtension(file.FileName) is not ".xlsx")
 				return StatusCode(StatusCodes.Status400BadRequest);
 
@@ -81,7 +84,7 @@ namespace OAT.Controllers.AdminPanel
 		}
 
 		[HttpGet("api/sessions/{building}/files"), NoCache]
-		public async Task<IActionResult> GetSessionsFiles(string building)
+		public IActionResult GetSessionsFiles(string building)
 		{
 			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
 				return StatusCode(StatusCodes.Status406NotAcceptable);
@@ -94,7 +97,7 @@ namespace OAT.Controllers.AdminPanel
 		}
 
 		[HttpDelete("api/sessions/{building}/delete"), AuthorizeRoles(Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_admin), NoCache]
-		public async Task<IActionResult> RemoveSessionsFile(string building, string filename)
+		public IActionResult RemoveSessionsFile(string building, string filename)
 		{
 			if (!Permissions.RightsToBuildingById(User.GetUsername(), building))
 				return StatusCode(StatusCodes.Status406NotAcceptable);
@@ -120,6 +123,9 @@ namespace OAT.Controllers.AdminPanel
 		[HttpPost("api/practice/{building}/upload"), AuthorizeRoles(Enums.Role.www_manager_files_practice_ALL, Enums.Role.www_admin), NoCache]
 		public async Task<IActionResult> UploadPracticeFile(string building, string filename, IFormFile file)
 		{
+			if (string.IsNullOrEmpty(filename))
+				return StatusCode(StatusCodes.Status406NotAcceptable);
+
 			if (!ControllersUtils.IsCorrectFile(file, ".xlsx", ".docx"))
 				return StatusCode(StatusCodes.Status400BadRequest);
 

@@ -228,6 +228,11 @@
             }
 
             var photos = new List<string>();
+            if(form.photos.Count is 0)
+            {
+                await Log("❌ Прикрепите фотографии");
+                return;
+            }
             foreach (var file in form.photos)
             {
                 var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";

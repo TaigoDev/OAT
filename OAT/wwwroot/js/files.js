@@ -27,8 +27,11 @@ function UploadScheduleChanges(files_id) {
 					MessageController("message-fail-auth");
 					window.location = "https://www.oat.ru/api/logout";
 					break;
-				case 406 || 403: 
+				case 403: 
 					MessageController("message-fail-perms");
+					break;
+				case 406:
+					MessageController("message-not-accept")
 					break;
 				case 400:
 					console.log(jqXHR.responseText);
@@ -68,8 +71,11 @@ function UploadSessionsChanges(files_id) {
 					MessageController("message-fail-auth");
 					window.location = "https://www.oat.ru/api/logout";
 					break;
-				case 406 || 403: 
+				case 403: 
 					MessageController("message-fail-perms");
+					break;
+				case 406:
+					MessageController("message-not-accept")
 					break;
 				case 400:
 					MessageController("message-fail-extension");
@@ -153,8 +159,11 @@ function UploadPracticeChanges(files_id) {
 					MessageController("message-fail-auth");
 					window.location = "https://www.oat.ru/api/logout";
 					break;
-				case 406 || 403: 
+				case 403: 
 					MessageController("message-fail-perms");
+					break;
+				case 406:
+					MessageController("message-not-accept")
 					break;
 				case 400:
 					MessageController("message-fail-extension");

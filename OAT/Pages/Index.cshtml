@@ -143,8 +143,11 @@
 			<ul id="news-slider" class="news-slider">
 				@foreach (var news in Model.News)
 				{
-					<li class="news-item">
-						<img src="@news.GetPhotos()[0]" alt="">
+                    var photos = news.GetPhotos();
+                    if (photos.Count is 0)
+                        continue;
+                    <li class="news-item">
+                        <img src="@photos.FirstOrDefault()" alt="">
 						<a tabindex="-1" href="~/news/@news.id" class="news-content">
 							<div class="news-date">
 								@news.date
