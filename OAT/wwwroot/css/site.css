@@ -436,6 +436,12 @@ section.centered .section-title{
 	background-size: cover;
 }
 
+@media(width<600px) {
+	.page-navigation li a {
+		width: auto;
+	}
+}
+
 .page-navigation li a:hover{
 	filter: brightness(0.7);
 }
