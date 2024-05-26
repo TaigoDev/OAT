@@ -120,14 +120,17 @@
 			<option>
 				Выберите материал
 			</option>
-			<option value="Новости">
-				Новости
+            <option value="Описание работы ЦМК">
+				Описание работы ЦМК
 			</option>
 			<option value="Члены ЦМК">
 				Члены ЦМК
 			</option>
-			<option value="Документы">
-				Документы
+            <option value="Достижения ЦМК">
+				Достижения ЦМК
+			</option>
+            <option value="Решаемые задачи и планы">
+                Решаемые задачи и планы
 			</option>
 			<option value="История">
 				История
@@ -136,10 +139,11 @@
 	</div>
 </form>
 
-<CMK_NewsComponent CMK="@CMK"/>
+<CMK_DescriptionOfWorkComponent CMK="@CMK"/>
 <CMK_HistoryComponent CMK="@CMK"/>
 <CMK_CompositionsController CMK="@CMK"/>
-<CMK_DocumentsComponent CMK="@CMK"/>
+<CMK_AchievementsComponent CMK="@CMK"/>
+<CMK_PlansComponent CMK="@CMK"/>
 
 
 @code {
@@ -151,7 +155,7 @@
 		using var db = new DatabaseContext();
 		if (CMK != "Выберите ЦМК" && !await db.CMK.AnyAsync(e => e.name == CMK))
 		{
-			var cmk = new OAT.Entities.Database.CMK(CMK, new(), "Истории пока нет", new(), new());
+			var cmk = new OAT.Entities.Database.CMK(CMK, new(), "Истории пока нет", "Описание работы ЦМК", "Достижения ЦМК", "Решаемые задачи и планы");
 			await db.AddAsync(cmk);
 			await db.SaveChangesAsync();
 		}

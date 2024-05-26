@@ -94,6 +94,10 @@
 	  <PackageReference Include="ExcelMapper" Version="5.2.581" />
 	  <PackageReference Include="HtmlAgilityPack" Version="1.11.60" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	    <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
 	  <PackageReference Include="MimeTypeMapOfficial" Version="1.0.17" />
 	  <PackageReference Include="Net.Codecrete.QrCodeGenerator" Version="2.0.5" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

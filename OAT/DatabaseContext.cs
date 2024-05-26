@@ -13,7 +13,6 @@ namespace OAT
 		public virtual DbSet<IPTables> IPTables { get; set; }
 		public virtual DbSet<Documents> documents { get; set; }
 		public virtual DbSet<CMK> CMK { get; set; }
-		public virtual DbSet<CMK_News> CMK_News { get; set; }
 
 
 

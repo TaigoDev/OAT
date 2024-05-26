@@ -10,23 +10,25 @@ namespace OAT.Entities.Database
 		{
 		}
 
-		public CMK(string name, List<string> compositions, string history, List<Documents> documents, List<CMK_News> news)
-		{
-			this.name = name;
-			this.compositions = compositions;
-			this.history = history;
-			this.documents = documents;
-			this.news = news;
-		}
-
-		public CMK(int id, string name, List<string> compositions, string history, List<Documents> documents, List<CMK_News> news)
+		public CMK(int id, string name, List<string> compositions, string history, string descriptionOfWork, string achievements, string plans)
 		{
 			this.id = id;
 			this.name = name;
 			this.compositions = compositions;
 			this.history = history;
-			this.documents = documents;
-			this.news = news;
+			this.descriptionOfWork = descriptionOfWork;
+			this.achievements = achievements;
+			this.plans = plans;
+		}
+
+		public CMK(string name, List<string> compositions, string history, string descriptionOfWork, string achievements, string plans)
+		{
+			this.name = name;
+			this.compositions = compositions;
+			this.history = history;
+			this.descriptionOfWork = descriptionOfWork;
+			this.achievements = achievements;
+			this.plans = plans;
 		}
 
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -34,7 +36,8 @@ namespace OAT.Entities.Database
 		public string name { get; set; } = "ЦМК";
 		public List<string> compositions { get; set; } = [];
 		public string history { get; set; } = "История ЦМК";
-		public virtual IList<Documents> documents { get; set; }
-		public virtual IList<CMK_News> news { get; set; }
+		public string descriptionOfWork { get; set; } = "Описание работы ЦМК";
+		public string achievements { get; set; } = "Достижения ЦМК";
+		public string plans { get; set; } = "Планы и задачи, которые решает ЦМК";
 	}
 }

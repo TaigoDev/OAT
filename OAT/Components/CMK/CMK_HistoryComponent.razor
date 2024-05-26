@@ -45,6 +45,6 @@
 
 	private async Task Log(string message)
 	{
-		await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
+        await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
 	}
 }

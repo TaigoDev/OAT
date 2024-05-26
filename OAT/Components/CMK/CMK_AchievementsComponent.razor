@@ -1,0 +1,50 @@
+﻿@using Microsoft.EntityFrameworkCore
+<div id="achievements-form" class="hide">
+    <form class="panel-form">
+        <div class="input-box">
+            <label for="news-text">
+                Текст
+            </label>
+            <textarea class="customized" id="news-text" @onchange="(e) => text = e.Value!.ToString()!">@text</textarea>
+        </div>
+
+        <button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await Update()">
+            Отправить
+        </button>
+    </form>
+</div>
+
+
+@code {
+    [Parameter] public string? CMK { get; set; }
+    private string? text { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        using var db = new DatabaseContext();
+        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+        if (cmk is null)
+            return;
+        text = cmk.achievements;
+    }
+
+    private async Task Update()
+    {
+        using var db = new DatabaseContext();
+        var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
+        if (cmk is null)
+        {
+            await Log("❌ Выберите ЦМК!");
+            return;
+        }
+        cmk.achievements = text ?? "Истории ещё нет";
+        db.Update(cmk);
+        await db.SaveChangesAsync();
+        await Log("✅ Достижения успешно обновлены");
+    }
+
+    private async Task Log(string message)
+    {
+        await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
+    }
+}
