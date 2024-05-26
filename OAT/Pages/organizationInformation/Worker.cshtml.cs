@@ -17,6 +17,8 @@ namespace OAT.Pages.organizationInformation
 
 		public void OnGet(string? FullName)
 		{
+			if (FullName is null)
+				return;
 			worker = AllWorkers.FirstOrDefault(e => e.FullName == FullName ||
 						StringUtils.ConvertFullNameToShortName(e.FullName).Replace(".", "").Replace(" ", "") == FullName.Replace(".", "").Replace(" ", ""));
 
