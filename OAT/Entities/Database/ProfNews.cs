@@ -54,6 +54,7 @@ namespace OAT.Entities.Database
 		public string short_description { get; set; }
 		public string photos { get; set; }
 		public bool IsFixed { get; set; }
-
+		public List<string> GetPhotos() =>
+			photos.toObject<List<string>>();
 	}
 }
