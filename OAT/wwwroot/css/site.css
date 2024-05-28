@@ -2170,16 +2170,49 @@ html.special .icon {
 	height: 35px;
 }
 
-html.special:not(.special-color-2) .icon{
+html.special:not(.special-color-2,.special-color-5) .icon{
 	 filter: invert(1) !important;
 }
 
-html.special .important-links {
-	display: flex !important;
-	flex-direction: column !important;
-	gap: 40px;
+html.special .sidebar {
+    position: static !important;
+	min-width: 320px;
+    max-width: 320px;
 }
 
-html.special .important-link{
-	border-radius: 0 !important;
+html.special .plane{
+	display: none !important;
+}
+
+html.special .content {
+	max-width: min(950px, calc(100dvw - 400px));
+}
+
+html.special:not(.special-color-2,.special-color-5) .logo img, html.special:not(.special-color-2,.special-color-5) .footer-bottom-logo img {
+	filter: invert(1) !important;
+	background: none !important;
+}
+
+html.special:not(.special-font-size-1) .navigation{
+	display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+}
+
+html.special .welcome {
+	margin: 10vh auto 0 auto !important;
+}
+
+html.special .footer-top{
+	display: flex !important;
+	flex-wrap: wrap !important;
+}
+
+html.special .main-menu-item img{
+	display: none !important;
+}
+
+html.special:not(.special-font-size-1) .created-by{
+	translate: 0 !important;
 }

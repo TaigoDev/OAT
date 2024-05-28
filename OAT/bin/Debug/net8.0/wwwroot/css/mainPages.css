@@ -132,3 +132,24 @@ body {
 		margin-top: 25vh;
 	}
 }
+
+/* BAD SEE VERSION OF SITE */
+
+html.special .important-links {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 40px;
+}
+
+html.special .important-link {
+	border-radius: 0 !important;
+}
+
+html.special:not(.special-color-2,.special-color-5) .important-link img {
+	filter: invert(1);
+	background: none !important;
+}
+
+html.special .main-underheader-background {
+	display: none !important;
+}

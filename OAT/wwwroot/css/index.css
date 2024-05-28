@@ -390,3 +390,8 @@
 html.special .news-date, html.special .news-header, html.special .news-item img {
 	z-index: 1;
 }
+
+html.special.special-color-2 .news-slider-arrow img, html.special.special-color-5 .news-slider-arrow img {
+	background: none !important;
+	filter: invert(1) !important;
+}
