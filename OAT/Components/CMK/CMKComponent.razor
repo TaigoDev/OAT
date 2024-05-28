@@ -34,10 +34,10 @@
 					ЦМК ПОИТ
 				</option>
 			}
-			@if (User.IsRole(Enums.Role.www_KSZS_owner))
+			@if (User.IsRole(Enums.Role.www_KTZS_owner))
 			{
-				<option value="ЦМК КСЗС">
-					ЦМК КСЗС
+				<option value="ЦМК КТЗС">
+					ЦМК КTЗС
 				</option>
 			}
 			@if (User.IsRole(Enums.Role.www_TehREM_owner))
@@ -70,6 +70,12 @@
 					ЦМК СГД
 				</option>
 			}
+            @if (User.IsRole(Enums.Role.www_GD_owner))
+            {
+                <option value="ЦМК ГД">
+                    ЦМК ГД
+                </option>
+            }
 			@if (User.IsRole(Enums.Role.www_END_owner))
 			{
 				<option value="ЦМК ЕНД">
@@ -88,6 +94,24 @@
 					ЦМК ФКД
 				</option>
 			}
+            @if (User.IsRole(Enums.Role.www_Tehmash_owner))
+            {
+                <option value="ЦМК ТехМаш">
+                    ЦМК ТехМаш
+                </option>
+            }
+            @if (User.IsRole(Enums.Role.www_TehREO_owner))
+            {
+                <option value="ЦМК ТехРЭО">
+                    ЦМК ТехРЭО
+                </option>
+            }
+            @if (User.IsRole(Enums.Role.www_inostYaz_owner))
+            {
+                <option value="ЦМК Иностранный язык">
+                    ЦМК Иностранный язык
+                </option>
+            }
 			@if (User.IsRole(Enums.Role.www_informatiki_owner))
 			{
 				<option value="ЦМК Информатики">
