@@ -18,6 +18,8 @@
 	--border-radius-l: 10px;
 	--border-radius-xl: 15px;
 	--border-radius-xxl: 20px;
+	/* fix for bad see version trouble */
+	opacity: 1 !important;
 }
 
 ::-webkit-scrollbar {
