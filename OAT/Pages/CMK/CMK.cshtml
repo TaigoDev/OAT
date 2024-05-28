@@ -6,7 +6,7 @@
 @{
 	ViewData["Title"] = Model.name;
 	using var context = new DatabaseContext();
-	var cmk = context.CMK.FirstOrDefault(e => e.name == Model.name);
+	var cmk = context.CMK.FirstOrDefault(e => e.name.Replace("ЦМК ", "") == Model.name);
 }
 @if(cmk is null)
 {
