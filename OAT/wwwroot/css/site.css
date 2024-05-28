@@ -2137,3 +2137,49 @@ a.main-menu-item-pictogram {
 		font-size: 0.9rem;
 	}
 }
+
+/* BAD SEE VERSION OF SITE */
+
+html.special body {
+	padding-top: 0;
+}
+
+html.special .site-header {
+	position: relative !important;
+	max-height: none !important;
+}
+
+html.special, html.special body {
+	overflow-x: auto;
+}
+
+html.special .main-menu {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 25px;
+}
+
+html.special .main-menu-item {
+	gap: 5px;
+	width: auto;
+}
+
+html.special .icon {
+    background: none !important;
+	width: 35px;
+	height: 35px;
+}
+
+html.special:not(.special-color-2) .icon{
+	 filter: invert(1) !important;
+}
+
+html.special .important-links {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 40px;
+}
+
+html.special .important-link{
+	border-radius: 0 !important;
+}

@@ -384,3 +384,9 @@
 		rotate: 360deg;
 	}
 }
+
+/* BAD SEE VERSION OF SITE */
+
+html.special .news-date, html.special .news-header, html.special .news-item img {
+	z-index: 1;
+}
