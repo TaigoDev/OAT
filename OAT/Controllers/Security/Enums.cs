@@ -53,7 +53,7 @@
 		www_TehOPit_owner,
 		www_FKD_owner,
 		www_informatiki_owner,
-		www_inostYaz_owner,
+		www_Angliyskiy_owner,
 		www_matematiki_owner,
 		www_russYaz_owner,
 	}
