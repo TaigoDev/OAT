@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
+using static Enums;
 
 public static class Utils
 {
@@ -49,6 +50,15 @@ public static class Utils
 		if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 			smtpClient.Send(m);
 	}
+
+	public static string ConvertToString(this Building? building) =>
+		building switch
+		{
+			Building.ul_b_khmelnickogo_281a => "b2",
+			Building.pr_kosmicheskij_14a => "b3",
+			Building.ul_volkhovstroya_5 => "b4",
+			_ => "b1"
+		};
 }
 
 

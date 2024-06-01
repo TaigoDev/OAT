@@ -1,0 +1,25 @@
+﻿<aside id="file-error" class="file-error active">
+    <button class="file-error-close" onclick="document.getElementById('file-error').classList.remove('active');">
+        <img class="icon" src="/images/panel/closeWindow.svg" alt="" />
+    </button>
+    <h3 class="file-error-title">
+        <span class="bigger">
+            ⛔️
+            <span class="bigger">
+                ОШИБКА
+            </span>
+            ⛔️
+        </span>
+        <br>
+        @header
+    </h3>
+    <p class="file-error-text" id="error-text">
+        @description
+    </p>
+</aside>
+
+
+@code {
+    [Parameter] public string? header { get; set; }
+    [Parameter] public string? description { get; set; }
+}

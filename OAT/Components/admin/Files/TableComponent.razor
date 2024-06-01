@@ -1,0 +1,85 @@
+﻿@using OAT.Controllers.Security
+@using OAT.Utilities
+@using static Enums
+@inject IHttpContextAccessor httpContextAccessor;
+
+@{
+    var User = httpContextAccessor!.HttpContext!.User;
+    if (User is null)
+        return;
+}
+<table class="customized panel-table">
+    <thead>
+        <tr>
+            <th>
+                Имя
+            </th>
+            <th>
+                Управление
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @items
+    </tbody>
+</table>
+
+
+@code {
+    [Parameter] public Building? building { get; set; }
+    [Parameter] public string path { get; set; } = Directory.GetCurrentDirectory();
+    private RenderFragment? items { get; set; }
+
+    protected override async Task OnParametersSetAsync() => await LoadFiles();
+
+    private async Task LoadFiles()
+    {
+        var User = httpContextAccessor!.HttpContext!.User;
+        if (User is null || building is null)
+        {
+            await Log("❌ Произошла ошибка. Сообщите: TableComponent");
+            return;
+        }
+        if (building is Building.all)
+        {
+            await Log("❌ Выберите корпус");
+            return;
+        }
+        if (!Permissions.RightsToBuildingById(User.GetUsername(), building.ConvertToString()))
+        {
+            await Log("❌ У вас нет прав");
+            return;
+        }
+        var files = Directory.GetFiles(path!, "*.*", SearchOption.TopDirectoryOnly).ToList();
+        var names = files.ConvertAll(e => StringUtils.ConvertHexToString(Path.GetFileName(e).Replace(Path.GetExtension(e), "")));
+        items = (__builder) =>
+        {
+            @foreach (var name in names)
+            {
+                <tr>
+                    <td>@name</td>
+                    <td>
+                        <button type="button" class="panel-table-button" @onclick="async () => await DeleteFile(name)">удалить</button>
+                    </td>
+                </tr>
+            }
+        };
+    }
+
+    private async Task DeleteFile(string filename)
+    {
+        var file = Directory.GetFiles(path, $"{StringUtils.ConvertStringToHex(filename)}.*").FirstOrDefault();
+        if (file is null)
+            return;
+        FileUtils.FileDelete(file);
+        var User = httpContextAccessor!.HttpContext!.User;
+        Logger.Info($"{User.GetUsername()} удалил файл практики {filename}");
+        await Log($"✅ Вы успешно удалили файл {filename}");
+        await LoadFiles();
+    }
+
+    private async Task Log(string message) =>
+        await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
+    
+}

@@ -62,7 +62,7 @@ namespace OAT.Controllers.Security
 			return false;
 
 		}
-
+		public static bool RightsToBuildingSync(string Token, Role role) => RightsToBuilding(Token, role).GetAwaiter().GetResult();
 		public static async Task<bool> RightsToBuilding(string Token, Role role)
 		{
 			using var connection = new DatabaseContext();
