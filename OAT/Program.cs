@@ -33,6 +33,7 @@ app.MapBlazorHub();
 app.UseAntiforgery();
 app.UseRouting();
 app.UseNoSniffHeaders();
+
 app.Use(CacheController);
 
 if (Configurator.config.bitrixProxy)
