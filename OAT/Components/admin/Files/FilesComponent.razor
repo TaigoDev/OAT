@@ -6,13 +6,13 @@
 @using OAT.Utilities.Telegram
 @using static Enums
 @inject IHttpContextAccessor httpContextAccessor;
-
 @{
-    if (httpContextAccessor is null || httpContextAccessor.HttpContext is null)
-        return;
-    var User = httpContextAccessor.HttpContext.User;
+    var User = httpContextAccessor!.HttpContext!.User;
     if (User is null)
+    {
+        Logger.Info("User is null");
         return;
+    }
 }
 
 @error
@@ -327,6 +327,7 @@
     }
     private async Task Log(string message) => await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
     protected override void OnInitialized() => OnChangeType("schedule-changes");
+    
 
     public class Submit
     {

@@ -2,23 +2,16 @@
 @using OAT.Components.admin.Files
 @using OAT.Controllers.Security
 @using OAT.Utilities
-
-
-
 @model OAT.Pages.admin.FilesModel
 @{
 	Layout = "_Panel";
 	ViewData["Title"] = "Управление файлами";
-
 }
 
 <link rel="stylesheet" href="~/css/panel/files.css" asp-append-version="true">
 
 <section class="container">
-
     @(await Html.RenderComponentAsync<FilesComponent>(RenderMode.Server))
-
-
 </section>
 <script type="text/javascript" src="~/js/admin.js" charset="utf-8"></script>
 <script type="text/javascript" src="/js/files.js" charset="utf-8"></script>

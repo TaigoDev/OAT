@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 using OAT;
@@ -29,8 +30,10 @@ SetupControllers();
 var app = builder.Build();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Get}/{id?}");
 app.UseStaticFiles();
-app.MapBlazorHub();
-app.UseAntiforgery();
+app.MapBlazorHub(configureOptions: options =>
+{
+	options.Transports = HttpTransportType.WebSockets | HttpTransportType.LongPolling;
+}); app.UseAntiforgery();
 app.UseRouting();
 app.UseNoSniffHeaders();
 app.Use(CacheController);
@@ -53,6 +56,7 @@ else
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 app.MapRazorPages();
 app.Run();
 
@@ -100,6 +104,7 @@ void SetupServices(ref WebApplicationBuilder builder)
 		.AddInteractiveServerComponents(); builder.Services.AddControllersWithViews();
 	builder.Services.AddEndpointsApiExplorer();
 	builder.Services.AddServerSideBlazor(o => o.DetailedErrors = true);
+	builder.Services.AddDistributedMemoryCache();
 
 	builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 	{
@@ -121,6 +126,9 @@ void SetupServices(ref WebApplicationBuilder builder)
 	builder.Services.AddScoped(typeof(ICaptchaV3Validator), typeof(ReCaptchaV3Validator));
 	builder.Services.AddHttpClient();
 	builder.Services.AddHttpContextAccessor();
+	builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+	builder.Services.AddSession();
+
 	builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
 	builder.WebHost.UseUrls($"http://0.0.0.0:{Configurator.config.bind_port}");
 
