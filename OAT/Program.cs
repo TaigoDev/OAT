@@ -22,7 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 await TelegramBot.init();
 await DatabaseHelper.WaitStableConnection();
 using var db = new DatabaseContext();
-Console.WriteLine($"Количество новостей: {db.News.Count()}");
+Console.WriteLine($"Количество новостей: {db.News.Count()} ");
 db.Database.Migrate();
 SetupServices(ref builder);
 SetupControllers();
