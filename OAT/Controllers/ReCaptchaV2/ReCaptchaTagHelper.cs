@@ -49,7 +49,7 @@ namespace OAT.Controllers.ReCaptchaV2
 				return;
 			}
 
-			Language ??= ViewContext.HttpContext.Features.Get<IRequestCultureFeature>()?.RequestCulture.UICulture.TwoLetterISOLanguageName;
+			Language ??= ViewContext.HttpContext.Features.Get<IRequestCultureFeature>()?.RequestCulture.UICulture.TwoLetterISOLanguageName!;
 
 			var content = settings.Version switch
 			{

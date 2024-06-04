@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using System.Text;
-using static Enums;
+﻿using System.Text;
 
 namespace OAT.Controllers.Security
 {
@@ -62,21 +59,6 @@ namespace OAT.Controllers.Security
 			return false;
 
 		}
-		public static bool RightsToBuildingSync(string Token, Role role) => RightsToBuilding(Token, role).GetAwaiter().GetResult();
-		public static async Task<bool> RightsToBuilding(string Token, Role role)
-		{
-			using var connection = new DatabaseContext();
-			var record = await connection.Tokens.FirstOrDefaultAsync(e => e.Token == Token);
-			if (record is null)
-				return false;
-
-			var db_roles = JsonConvert.DeserializeObject<List<Role>>(record.Roles);
-			if (db_roles == null)
-				return false;
-
-			return db_roles.Any(e => e == role || e == Role.www_admin);
-		}
-
 
 	}
 

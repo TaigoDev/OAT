@@ -27,7 +27,7 @@ namespace OAT.Controllers.Schedules.Readers
 
 			var stopWatch = new Stopwatch();
 			stopWatch.Start();
-			for (int i = 1; i <= Enums.campus_count; i++)
+			for (int i = 1; i <= 4; i++)
 			{
 				try
 				{

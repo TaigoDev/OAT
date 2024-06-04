@@ -55,7 +55,7 @@ namespace OAT.Controllers.Schedules
 				return [];
 			}
 			foreach (XmlNode ring in rings)
-					lessons_time.Add($"{ring.GetAttributeValue("begin_time")} - {ring.GetAttributeValue("end_time")}");
+				lessons_time.Add($"{ring.GetAttributeValue("begin_time")} - {ring.GetAttributeValue("end_time")}");
 			return lessons_time;
 		}
 
@@ -99,20 +99,9 @@ namespace OAT.Controllers.Schedules
 				_ => []
 			};
 
-		public static string GetFilenameByBuilding(string name) =>
-			name switch
-			{
-				"ul_lenina_24" => "b1",
-				"ul_b_khmelnickogo_281a" => "b2",
-				"pr_kosmicheskij_14a" => "b3",
-				"ul_volkhovstroya_5" => "b4",
-				_ => "error_load"
-			};
-
-
 		public static void IterateTeacherList(Func<List<TeacherSchedule>, List<TeacherSchedule>> func)
 		{
-			for (int i = 1; i <= Enums.campus_count; i++)
+			for (int i = 1; i <= 4; i++)
 			{
 				var list = func.Invoke(GetTeacherScheduleListByBuildingId(i));
 				GetTeacherScheduleListByBuildingId(i).Clear();
@@ -122,7 +111,7 @@ namespace OAT.Controllers.Schedules
 
 		public static void IterateGroupList(Func<List<Group>, List<Group>> func)
 		{
-			for (int i = 1; i <= Enums.campus_count; i++)
+			for (int i = 1; i <= 4; i++)
 			{
 				var list = func.Invoke(GetBuilding(i));
 				GetBuilding(i).Clear();

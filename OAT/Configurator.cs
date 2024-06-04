@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using OAT.Entities.Configs;
+﻿using OAT.Entities.Configs;
 using OAT.Utilities;
 using System.Runtime.InteropServices;
 

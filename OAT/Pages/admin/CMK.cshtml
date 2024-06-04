@@ -1,11 +1,11 @@
 ﻿@page
 @using OAT.Components.admin.CMK
+@using OAT.Components.admin.Files
 @model OAT.Pages.admin.CMKModel
 @{
 	Layout = "_Panel";
 	ViewData["Title"] = "ЦМК";
 }
-
 @(await Html.RenderComponentAsync<CMKComponent>(RenderMode.Server))
 
 <aside id="logger" class="panel-message"></aside>

@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
+using OAT.Entities.Enums;
 using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
-using static Enums;
 
 public static class Utils
 {
