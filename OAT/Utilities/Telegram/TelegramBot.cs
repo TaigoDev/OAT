@@ -40,7 +40,7 @@ namespace OAT.Utilities.Telegram
 		{
 			try
 			{
-				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 					await botClient.SendTextMessageAsync(new ChatId(long.Parse(Configurator.telegram.chat_id)), message);
 				else
 					Console.WriteLine(message);
