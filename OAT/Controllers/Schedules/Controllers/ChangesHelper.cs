@@ -1,4 +1,5 @@
 ﻿using OAT.Controllers.Schedules.Readers;
+using OAT.Entities.Schedule;
 
 namespace OAT.Controllers.Schedules.Controllers
 {

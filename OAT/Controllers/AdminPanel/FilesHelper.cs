@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using OAT.Controllers.Schedules.Readers;
+using OAT.Entities.Enums;
 using OAT.Utilities;
 using OAT.Utilities.Telegram;
-using static Enums;
 
 namespace OAT.Controllers.AdminPanel
 {
@@ -51,7 +51,7 @@ namespace OAT.Controllers.AdminPanel
 			var latest = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", "latest", $"{building.ConvertToString()}.xml");
 
 			FileUtils.FileDelete(latest);
-		    File.Move(path, latest);
+			File.Move(path, latest);
 
 			await using FileStream fs = new(path, FileMode.Create);
 			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
@@ -59,7 +59,7 @@ namespace OAT.Controllers.AdminPanel
 			Runs.InThread(async () => await TimeTableBot.onChangeMainSchedule(building.ConvertToString(), path));
 			Runs.InThread(async () => await ScheduleReader.init());
 		}
-		
+
 		public static async Task SessionSaveFile(string filename, Building? building, IBrowserFile file)
 		{
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", building.ConvertToString(), $"{StringUtils.ConvertStringToHex(filename)}.xlsx");

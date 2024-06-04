@@ -29,7 +29,7 @@ namespace OAT.Utilities.Telegram
 				);
 				Logger.InfoWithoutTelegram($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Console.WriteLine(ex);
 			}

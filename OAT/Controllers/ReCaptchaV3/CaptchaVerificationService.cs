@@ -35,7 +35,7 @@ namespace OAT.Controllers.ReCaptchaV3
 				var response = await client.PostAsync($"{googleVerificationUrl}?secret={Configurator.ReCaptchaV2.CodeSecretKey}&response={token}", null);
 				var jsonString = await response.Content.ReadAsStringAsync();
 				var captchaVerfication = JsonConvert.DeserializeObject<ReCaptchaResponse>(jsonString);
-				
+
 				result = captchaVerfication is not null && captchaVerfication.Success;
 			}
 			catch (Exception e)
