@@ -29,7 +29,7 @@ namespace OAT.Utilities.Telegram
 				);
 				Logger.InfoWithoutTelegram($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Console.WriteLine(ex);
 			}
@@ -40,7 +40,7 @@ namespace OAT.Utilities.Telegram
 		{
 			try
 			{
-				if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 					await botClient.SendTextMessageAsync(new ChatId(long.Parse(Configurator.telegram.chat_id)), message);
 				else
 					Console.WriteLine(message);

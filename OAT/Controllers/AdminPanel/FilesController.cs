@@ -2,7 +2,6 @@
 using MimeTypes;
 using OAT.Controllers.Security;
 using OAT.Utilities;
-using OAT.Utilities.Telegram;
 
 namespace OAT.Controllers.AdminPanel
 {
@@ -22,7 +21,7 @@ namespace OAT.Controllers.AdminPanel
 		#endregion
 		#region Sessions
 
-	
+
 		[HttpGet("api/sessions/{building}/files"), NoCache]
 		public IActionResult GetSessionsFiles(string building)
 		{

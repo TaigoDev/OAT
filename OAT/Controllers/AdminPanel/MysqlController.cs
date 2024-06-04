@@ -7,7 +7,7 @@ namespace OAT.Controllers.AdminPanel
 {
 	public class MysqlController : Controller
 	{
-		[HttpPost, Route("api/mysql/cmd"), AuthorizeRoles(Enums.Role.www_admin), NoCache]
+		[HttpPost, Route("api/mysql/cmd"), AuthorizeRoles(Role.www_admin), NoCache]
 		public async Task<IActionResult> SendCmd(string command)
 		{
 			var answer = new object();
@@ -39,7 +39,7 @@ namespace OAT.Controllers.AdminPanel
 				var fieldValues = new Dictionary<string, object>();
 				for (int i = 0; i < result.FieldCount; i++)
 					fieldValues.Add(result.GetName(i), result[i]);
-			
+
 				entities.Add(fieldValues.toJson());
 			}
 

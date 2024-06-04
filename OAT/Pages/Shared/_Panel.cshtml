@@ -29,7 +29,7 @@
 				</a>
 			</li>
 			
-			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Enums.Role.www_admin))
+			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Role.www_admin))
 			{
 				<li>
 					<a asp-page="/admin/MySQL">
@@ -41,7 +41,7 @@
 			</li>
 			}
 
-			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Enums.Role.www_admin, Enums.Role.www_manager_files_sessions_ALL, Enums.Role.www_manager_changes_ALL, Enums.Role.www_manager_files_practice_ALL))
+			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Role.www_admin, Role.www_manager_files_sessions_ALL, Role.www_manager_changes_ALL, Role.www_manager_files_practice_ALL))
 			{
 				<li>
 					<a asp-page ="/admin/files">

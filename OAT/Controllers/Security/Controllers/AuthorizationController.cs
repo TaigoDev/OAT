@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using OAT.Entities.Database;
+using OAT.Entities.Enums;
 using OAT.Utilities;
 using System.Security.Claims;
-using static Enums;
 
 namespace OAT.Controllers.Security.Controllers
 {

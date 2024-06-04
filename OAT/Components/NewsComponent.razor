@@ -162,13 +162,13 @@
 
         var permission = name switch
         {
-            "demoExam" => Enums.Role.www_reporter_demoexams,
-            "professionalitet" => Enums.Role.www_reporter_prof_news,
-            _ => Enums.Role.www_reporter_news,
+            "demoExam" => Role.www_reporter_demoexams,
+            "professionalitet" => Role.www_reporter_prof_news,
+            _ => Role.www_reporter_news,
         };
 
         var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
-        if(roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+        if(roles.IndexOf(permission) < 0 && roles.IndexOf(Role.www_admin) < 0)
         {
             await Log("❌ Вам отказано в доступе. ");
             return;
@@ -214,13 +214,13 @@
 
             var permission = form.type switch
             {
-                "demoExam" => Enums.Role.www_reporter_demoexams,
-                "professionalitet" => Enums.Role.www_reporter_prof_news,
-                _ => Enums.Role.www_reporter_news,
+                "demoExam" => Role.www_reporter_demoexams,
+                "professionalitet" => Role.www_reporter_prof_news,
+                _ =>Role.www_reporter_news,
             };
 
             var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
-            if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+            if (roles.IndexOf(permission) < 0 && roles.IndexOf(Role.www_admin) < 0)
             {
                 await Log("❌ Вам отказано в доступе. ");
                 Logger.Info($"Пользователю {httpContextAccessor.HttpContext.User.GetUsername()} отказано в доступе, т.к. право {permission} отсутствует");
@@ -290,13 +290,13 @@
 
         var permission = name switch
         {
-            "demoExam" => Enums.Role.www_reporter_demoexams,
-            "professionalitet" => Enums.Role.www_reporter_prof_news,
-            _ => Enums.Role.www_reporter_news,
+            "demoExam" => Role.www_reporter_demoexams,
+            "professionalitet" => Role.www_reporter_prof_news,
+            _ => Role.www_reporter_news,
         };
 
         var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
-        if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+        if (roles.IndexOf(permission) < 0 && roles.IndexOf(Role.www_admin) < 0)
         {
             await Log("❌ Вам отказано в доступе. ");
             return;
@@ -323,13 +323,13 @@
 
         var permission = form.type switch
         {
-            "demoExam" => Enums.Role.www_reporter_demoexams,
-            "professionalitet" => Enums.Role.www_reporter_prof_news,
-            _ => Enums.Role.www_reporter_news,
+            "demoExam" => Role.www_reporter_demoexams,
+            "professionalitet" => Role.www_reporter_prof_news,
+            _ => Role.www_reporter_news,
         };
 
         var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
-        if (roles.IndexOf(permission) < 0 && roles.IndexOf(Enums.Role.www_admin) < 0)
+        if (roles.IndexOf(permission) < 0 && roles.IndexOf(Role.www_admin) < 0)
         {
             await Log("❌ Вам отказано в доступе. ");
             Logger.Info($"Пользователю {httpContextAccessor.HttpContext.User.GetUsername()} отказано в доступе, т.к. право {permission} отсутствует");

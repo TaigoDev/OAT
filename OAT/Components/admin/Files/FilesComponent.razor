@@ -2,17 +2,21 @@
 @using OAT.Controllers.AdminPanel
 @using OAT.Controllers.Schedules.Readers
 @using OAT.Controllers.Security
+@using OAT.Entities.Enums
 @using OAT.Utilities
 @using OAT.Utilities.Telegram
-@using static Enums
 @inject IHttpContextAccessor httpContextAccessor;
 
 @{
     if (httpContextAccessor is null || httpContextAccessor.HttpContext is null)
         return;
+    
+
     var User = httpContextAccessor.HttpContext.User;
     if (User is null)
         return;
+
+    
 }
 
 @error
@@ -29,31 +33,24 @@
                 Выберите корпус
             </option>
 
-            @if (Permissions.RightsToBuildingSync(User.GetToken(), Enums.Role.www_manager_changes_campus_1))
-            {
-                <option value="ul_lenina_24">
-                    Ул. Ленина, 24
-                </option>
-            }
-            @if (Permissions.RightsToBuildingSync(User.GetToken(), Enums.Role.www_manager_changes_campus_2))
-            {
-                <option value="ul_b_khmelnickogo_281a">
-                    Б. Хмельницкого, 281А
-                </option>
-            }
-            @if (Permissions.RightsToBuildingSync(User.GetToken(), Enums.Role.www_manager_changes_campus_3))
-            {
-                <option value="pr_kosmicheskij_14a">
-                    Пр. Космический, 14А
-                </option>
 
-            }
-            @if (Permissions.RightsToBuildingSync(User.GetToken(), Enums.Role.www_manager_changes_campus_4))
-            {
-                <option value="ul_volkhovstroya_5">
-                    Ул. Волховстроя, 5
-                </option>
-            }
+            <option value="ul_lenina_24">
+                Ул. Ленина, 24
+            </option>
+
+            <option value="ul_b_khmelnickogo_281a">
+                Б. Хмельницкого, 281А
+            </option>
+
+            <option value="pr_kosmicheskij_14a">
+                Пр. Космический, 14А
+            </option>
+
+
+            <option value="ul_volkhovstroya_5">
+                Ул. Волховстроя, 5
+            </option>
+            
         </InputSelect>
 
     </div>
