@@ -15,7 +15,7 @@ namespace OAT.Controllers.AdminPanel
 			await using FileStream fs = new(path, FileMode.Create);
 			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
 			await fs.DisposeAsync();
-			var response = await TimeTableBot.TestPractice(building.ConvertToString(), path, filename);
+			var response = await TimeTableBot.TestChangesInSchedule(building.ConvertToString(), path, filename);
 			File.Delete(path);
 			return response;
 		}
@@ -27,7 +27,7 @@ namespace OAT.Controllers.AdminPanel
 			await using FileStream fs = new(path, FileMode.Create);
 			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
 			await fs.DisposeAsync();
-			var response = await TimeTableBot.TestChangesInSchedule(building.ConvertToString(), path, filename);
+			var response = await TimeTableBot.TestPractice(building.ConvertToString(), path, filename);
 			File.Delete(path);
 			return response;
 		}

@@ -114,13 +114,14 @@
             return;
         }
 
-        var response = await FilesHelper.ChangesTestFile(submit.building, submit.file);
+        var response = await FilesHelper.PracticeTestFile(submit.building, submit.file);
         if (response is not null)
         {
             error = (__builder) =>
             {
                 <ErrorComponent header="Не удалось обновить изменения" description="@response" />
             };
+            await JSRuntime.InvokeVoidAsync("StopAnim");
             return;
         }
 
@@ -239,6 +240,7 @@
             {
                 <ErrorComponent header="Не удалось обновить изменения" description="@response"/>
             };
+            await JSRuntime.InvokeVoidAsync("StopAnim");
             return;
         }
 
