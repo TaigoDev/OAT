@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Net;
+using System.Runtime.InteropServices;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -11,14 +12,44 @@ namespace OAT.Utilities.Telegram
 	{
 
 		protected static TelegramBotClient botClient;
-
+		public static bool IsProxy = false;
+		public static CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
 		public static async Task init()
 		{
 			try
 			{
+
+				cancelTokenSource = new CancellationTokenSource();
+				if (!await IsWorkWithoutProxy())
+				{
+					var proxy = new WebProxy
+					{
+						Address = new Uri($"http://10.0.55.52:3128"),
+						BypassProxyOnLocal = false,
+						UseDefaultCredentials = false,
+					};
+
+					var httpClientHandler = new HttpClientHandler
+					{
+						Proxy = proxy,
+						ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+					};
+					IsProxy = true;
+					botClient = new TelegramBotClient(Configurator.telegram.token, new HttpClient(httpClientHandler));
+					try
+					{
+						Logger.Info("⚠️ ПОДКЛЮЧЕНИЕ ЧЕРЕЗ РЕЗЕРВНЫЙ КАНАЛ СВЯЗИ");
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine(ex.ToString());
+					}
+				}
+				else
+					botClient = new TelegramBotClient(Configurator.telegram.token, new HttpClient());
+
 				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 					return;
-				botClient = new TelegramBotClient(Configurator.telegram.token, new HttpClient());
 				var me = await botClient.GetMeAsync();
 				var receiverOptions = new ReceiverOptions() { AllowedUpdates = Array.Empty<UpdateType>() };
 				botClient.StartReceiving(
@@ -35,7 +66,22 @@ namespace OAT.Utilities.Telegram
 			}
 		}
 
-
+		private static async Task<bool> IsWorkWithoutProxy()
+		{
+			try
+			{
+				using var client = new HttpClient();
+				var response = await client.GetAsync("https://telegram.org");
+				if (response.StatusCode is not System.Net.HttpStatusCode.OK)
+					return false;
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				return false;
+			}
+		}
 		public static async void SendMessage(string message)
 		{
 			try
