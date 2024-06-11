@@ -705,8 +705,7 @@ img.customized {
 video.customized {
 	display: block;
 	margin: 10px auto 0 0;
-	min-width: min(400px, 100%);
-	max-width: 550px;
+	max-width: min(100%,500px);
 	border-radius: var(--border-radius-xl);
 }
 
