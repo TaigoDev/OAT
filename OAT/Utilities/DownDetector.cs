@@ -50,8 +50,8 @@ namespace OAT.Utilities
 						ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
 					};
 					using var client = new HttpClient(httpClientHandler);
-					var response = await client.GetAsync("https://telegram.org");
-					if (response.StatusCode is not System.Net.HttpStatusCode.OK)
+					var response = await client.GetAsync($"https://api.telegram.org/bot{Configurator.telegram.token}/getMe");
+					if (response.StatusCode is not System.Net.HttpStatusCode.OK && response.StatusCode is not HttpStatusCode.NotFound && response.StatusCode is not HttpStatusCode.Unauthorized)
 						return false;
 					return true;
 
@@ -59,8 +59,8 @@ namespace OAT.Utilities
 				else
 				{
 					using var client = new HttpClient();
-					var response = await client.GetAsync("https://telegram.org");
-					if (response.StatusCode is not System.Net.HttpStatusCode.OK)
+					var response = await client.GetAsync($"https://api.telegram.org/bot{Configurator.telegram.token}/getMe");
+					if (response.StatusCode is not System.Net.HttpStatusCode.OK && response.StatusCode is not HttpStatusCode.NotFound && response.StatusCode is not HttpStatusCode.Unauthorized)
 						return false;
 					return true;
 				}

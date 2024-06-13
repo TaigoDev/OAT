@@ -16,7 +16,7 @@ ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 var builder = WebApplication.CreateBuilder(args);
 
 await TelegramBot.init();
-//DownDetector.init();
+DownDetector.init();
 await DatabaseHelper.WaitStableConnection();
 using var db = new DatabaseContext();
 Console.WriteLine($"Количество новостей: {db.News.Count()} ");
