@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Utilities;
 
 namespace OAT.Pages.CMK
 {
@@ -14,7 +13,8 @@ namespace OAT.Pages.CMK
 		public string? name { get; set; }
 		public void OnGet(string? name)
 		{
-			this.name = Translit.TranslitEnToRus(name);
+			this.name = name;
+
 		}
 	}
 }
