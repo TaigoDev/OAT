@@ -10,7 +10,9 @@ using OAT.Utilities;
 using OAT.Utilities.Telegram;
 using OfficeOpenXml;
 using RepoDb;
-
+List<string> s = ["ПОИТ", "КTЗС", "ТехРЭМ", "ТехСвар", "ТехАРС", "ЭКУП", "СГД", "ГД", "ЕНД", "ТехОПИТ", "ФКД", "ТехМаш", "ТехРЭО", "Ин.яз", "Информатики", "Математики", "РусЯз"];
+foreach (var item in s)
+	Console.WriteLine(item + " - " + Translit.TranslitRusToEn(item));
 await Configurator.init();
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 var builder = WebApplication.CreateBuilder(args);
