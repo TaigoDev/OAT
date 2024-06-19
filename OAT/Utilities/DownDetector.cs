@@ -67,7 +67,7 @@ namespace OAT.Utilities
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+				Console.WriteLine($"Произошла ошибка подключения к https://api.telegram.org/bot{Configurator.telegram.token}/getMe. Прокси: {TelegramBot.IsProxy}. Ошибка: {ex}");
 				return false;
 			}
 		}

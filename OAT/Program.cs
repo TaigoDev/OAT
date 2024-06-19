@@ -19,6 +19,7 @@ DownDetector.init();
 await DatabaseHelper.WaitStableConnection();
 using var db = new DatabaseContext();
 Console.WriteLine($"Количество новостей: {db.News.Count()} ");
+
 //db.Database.Migrate();
 
 WebBuilderConfigurator.SetupServices(ref builder);

@@ -4,9 +4,10 @@
 @using OAT.Utilities
 @model CMKModel
 @{
-	ViewData["Title"] = Model.name;
 	using var context = new DatabaseContext();
-	var cmk = context.CMK.FirstOrDefault(e => e.name.Replace("ЦМК ", "") == Model.name);
+	var cmk = context.CMK.FirstOrDefault(e => e.url == Model.name);
+    ViewData["Title"] = cmk is not null ? cmk.name : "ЦМК не найден";
+
 }
 @if(cmk is null)
 {

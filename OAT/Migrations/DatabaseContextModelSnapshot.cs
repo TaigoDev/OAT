@@ -51,6 +51,10 @@ namespace OAT.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("id");
 
                     b.ToTable("CMK");

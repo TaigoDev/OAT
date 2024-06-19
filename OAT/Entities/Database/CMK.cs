@@ -33,6 +33,7 @@ namespace OAT.Entities.Database
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int id { get; set; }
 		public string name { get; set; } = "ЦМК";
+		public string url { get; set; } = "CMK";
 		public List<string> compositions { get; set; } = [];
 		public string history { get; set; } = "История ЦМК";
 		public string descriptionOfWork { get; set; } = "Описание работы ЦМК";
