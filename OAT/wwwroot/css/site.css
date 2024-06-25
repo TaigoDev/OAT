@@ -897,10 +897,9 @@ table.two-column tr td:first-child {
 .person::before {
 	content: "";
 	display: inline-block;
-	min-width: 20px;
-	min-height: 20px;
-	max-width: 20px;
-	max-height: 20px;
+	width: 18px;
+	height: 18px;
+	translate: 0 2px;
 	margin-right: 2px;
 	background-size: cover;
 }
