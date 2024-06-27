@@ -6,7 +6,7 @@ namespace OAT.Controllers.App
 	{
 		public static async Task Setup(HttpContext context, Func<Task> next)
 		{
-			if (!context.Request.Path.Value!.Contains("admin") && !context.Request.Path.Value!.Contains("blazor"))
+			if (!context.Request.Path.Value!.Contains("admin") && !context.Request.Path.Value!.Contains("blazor") && !context.Request.Path.Value!.Contains("blazor.server.js"))
 			{
 				context.Response.GetTypedHeaders().CacheControl =
 					new CacheControlHeaderValue()
