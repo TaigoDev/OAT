@@ -5,18 +5,9 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>@ViewData["Title"]</title>
-    <base href="~/" />
-    <script src="~/_framework/blazor.server.js" autostart="false"></script>
-    <script>
-        (function start() {
-            Blazor.start({
-                configureSignalR: builder => builder.withUrl('_blazor', 1 | 4) // WebSockets and Long Polling
-            });
-        })()
-    </script>
+
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
 	<link rel="stylesheet" href="~/css/panel/panel.css" asp-append-version="true">
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 	<header class="panel-header">
@@ -96,8 +87,17 @@
 			}
 		</section>
 	</main>
-	
 
+    <base href="~/" />
+    <script src="~/_framework/blazor.server.js" autostart="false"></script>
+    <script>
+        (function start() {
+            Blazor.start({
+                configureSignalR: builder => builder.withUrl('_blazor', 1 | 4) // WebSockets and Long Polling
+            });
+        })()
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 

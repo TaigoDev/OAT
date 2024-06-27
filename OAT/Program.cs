@@ -18,7 +18,6 @@ await TelegramBot.init();
 DownDetector.init();
 await DatabaseHelper.WaitStableConnection();
 using var db = new DatabaseContext();
-Logger.Info("Test");
 Console.WriteLine($"Количество новостей: {db.News.Count()} ");
 
 //db.Database.Migrate();
