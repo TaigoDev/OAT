@@ -6,7 +6,7 @@ namespace OAT.Controllers.App
 	{
 		public static async Task Setup(HttpContext context, Func<Task> next)
 		{
-			if (context.Request.Path.Value!.Contains("blazor.server.js"))
+			if (context.Request.Path.Value!.Contains("blazor.server.js") || context.Request.Path.Value!.Contains("_blazor/initializers"))
 			{
 				context.Response.GetTypedHeaders().CacheControl =
 				new CacheControlHeaderValue()
