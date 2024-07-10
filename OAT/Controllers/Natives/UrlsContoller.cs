@@ -55,7 +55,7 @@ namespace OAT.Controllers.Bitrix.Controllers
 			new("sveden/inter", "organizationInformation/InternationalCooperation"),
 			new("sveden/vacant", "organizationInformation/Jobs"),
 			new("sveden/biblioteka", "organizationInformation/Library"),
-			new("sveden/objects", "organizationInformation/Logistics"),
+			new("sveden/objects", "organizationInformation/LogisticsAndAccessibleEnvironment"),
 			new("sveden/paid_edu", "organizationInformation/PaidEducationalServices"),
 			new("sveden/struct", "organizationInformation/Structure"),
 			new("sveden/grants", "organizationInformation/StudentSupport"),

@@ -1,0 +1,157 @@
+﻿@page
+@model FoodModel
+@{
+    ViewData["Title"] = "Организация питания в образовательной организации";
+}
+
+<div class="container content-page">
+    <section class="content">
+        <a id="plane" class="plane" href="#sidebar"></a>
+        <h2 class="section-title">
+            Организация питания в образовательной организации
+        </h2>
+
+        <ul class="page-navigation">
+            <li>
+                <a href="#about-upk">
+                    Условия питания и охраны здоровья обучающихся
+                </a>
+            </li>
+        </ul>
+
+        <h3 id="about-upk" class="section-subtitle">
+            Условия питания и охраны здоровья обучающихся
+        </h3>
+        <!-- 
+        Подпункт "и" пункта 1 части 2 статьи 29, часть 1 статья 37 Федерального закона №273-ФЗ
+        -->
+        <h4 class="section-subtitle-small">
+            Питание
+        </h4>
+        <p>
+            Сведения об условиях питания обучающихся, в том числе приспособленных для использования инвалидами и лицами с ограниченными возможностями здоровья.
+        </p>
+        <h4 class="section-subtitle-small">
+            Охрана здоровья
+        </h4>
+        <p>
+            Сведения об условиях охраны здоровья обучающихся, в том числе приспособленных для использования инвалидами и лицами с ограниченными возможностями здоровья.
+        </p>
+        <p>
+            Для соблюдения условий охраны здоровья обучающихся в техникуме имеется:
+        </p>
+        <ul class="customized">
+            <li>
+                буфет
+            </li>
+            <li>
+                медпункт
+            </li>
+        </ul>
+
+    </section>
+    <aside id="sidebar" class="sidebar long">
+        <h3 class="sidebar-title">
+            Сведения об образовательной организации
+        </h3>
+        <nav class="sidebar-body">
+            <ul class="sidebar-links">
+                <li class="sidebar-link">
+                    <a asp-page="CommonIntelligence">
+                        Основные сведения
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="Structure">
+                        Структура и органы управления образовательной организацией
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="Documents">
+                        Документы
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="Education">
+                        Образование
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="EducationalStandards">
+                        Образовательные стандарты
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="EducationalProcess">
+                        Организация воспитательного процесса
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="ManagementPedagogicalStaff">
+                        Руководство. Педагогический (научно-педагогический) состав
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="LogisticsAndAccessibleEnvironment">
+                        Материально-техническое обеспечение и оснащенность образовательного процесса. Доступная среда
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="PaidEducationalServices">
+                        Платные образовательные услуги
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="FinancialEconomicActivity">
+                        Финансово-хозяйственная деятельность
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="Jobs">
+                        Вакантные места для приема (перевода) обучающихся
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="Vacancies">
+                        Вакансии
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="InternationalCooperation">
+                        Международное сотрудничество
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="StudentSupport">
+                        Стипендии и меры поддержки обучающихся
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="Terrorism">
+                        Противодействие экстремизму и терроризму
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="Corruption">
+                        Противодействие коррупции
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="Library">
+                        Библиотека
+                    </a>
+                </li>
+                <li class="sidebar-link">
+                    <a asp-page="UPK">
+                        Учебно-производственный комплекс
+                    </a>
+                </li>
+                <li class="sidebar-link sidebar-link-selected">
+                    <a asp-page="Food">
+                        Организация питания в образовательной организации
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+</div>

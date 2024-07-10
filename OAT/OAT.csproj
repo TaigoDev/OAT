@@ -131,6 +131,12 @@
 	  <Folder Include="wwwroot\videos\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Update="Pages\organizationInformation\Food.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+	<ItemGroup>
 	  <None Update="wwwroot\js\help.js">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
