@@ -1001,10 +1001,6 @@ table.two-column tr td:first-child {
 	width: 100%;
 }
 
-.hide-title {
-	display: none;
-}
-
 /* documents */
 
 .documents-list {
@@ -2215,4 +2211,10 @@ html.special .main-menu-item img{
 
 html.special:not(.special-font-size-1) .created-by{
 	translate: 0 !important;
+}
+
+/* very special */
+
+.hide {
+	display: none !important;
 }

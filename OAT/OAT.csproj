@@ -40,6 +40,7 @@
 	  <Content Remove="wwwroot\css\duck.css" />
 	  <Content Remove="wwwroot\css\feedback\classesChanges.css" />
 	  <Content Remove="wwwroot\css\feedback\contacts.css" />
+	  <Content Remove="wwwroot\css\feedback\map.css" />
 	  <Content Remove="wwwroot\css\feedback\pay.css" />
 	  <Content Remove="wwwroot\css\feedback\questionAnswer.css" />
 	  <Content Remove="wwwroot\css\news.css" />
@@ -75,6 +76,7 @@
 	  <Content Remove="wwwroot\js\files.js" />
 	  <Content Remove="wwwroot\js\help.js" />
 	  <Content Remove="wwwroot\js\JQueryYandex.js" />
+	  <Content Remove="wwwroot\js\map.js" />
 	  <Content Remove="wwwroot\js\mysql.js" />
 	  <Content Remove="wwwroot\js\panel.js" />
 	  <Content Remove="wwwroot\js\pay.js" />
@@ -131,6 +133,10 @@
 	  <Folder Include="wwwroot\videos\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Update="Pages\feedback\Map.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
 	  <Content Update="Pages\organizationInformation\Food.cshtml">
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

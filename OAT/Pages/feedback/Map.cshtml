@@ -1,0 +1,157 @@
+﻿@page
+@model MapModel
+@{
+    ViewData["Title"] = "Карта";
+}
+
+<link rel="stylesheet" href="~/css/feedback/map.css" asp-append-version="true">
+
+<div class="container content-page">
+	<section class="content">
+		<a id="plane" class="plane" href="#sidebar"></a>
+		<h2 class="section-title">
+			Карта
+		</h2>
+
+
+        <div class="selectors">
+            <div class="selector">
+                <h3 class="selector-title">
+                    Выберите корпус
+                </h3>
+                <ul class="selector-items corpuses">
+                    <li data-target-corpus-name="Ленина">
+                        Ленина
+                    </li>
+                    <li data-target-corpus-name="Волховстроя">
+                        Волховстроя
+                    </li>
+                    <li data-target-corpus-name="Хмельницкого">
+                        Хмельницкого
+                    </li>
+                    <li data-target-corpus-name="Космический">
+                        Космический
+                    </li>
+                </ul>
+            </div>
+            <div id="choose-floor" class="selector hide">
+                <h3 class="selector-title">
+                    Выберите этаж
+                </h3>
+                <ul class="selector-items floors">
+                    <li data-target-corpus-floor="1">
+                        1
+                    </li>
+                    <li data-target-corpus-floor="2">
+                        2
+                    </li>
+                    <li data-target-corpus-floor="3">
+                        3
+                    </li>
+                    <li data-target-corpus-floor="4">
+                        4
+                    </li>
+                    <li data-target-corpus-floor="5">
+                        5
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <div class="map-corpus" data-corpus-name="Ленина">
+                <div class="map-corpus-floor" data-corpus-floor="1">
+                    ЛЕНИНА 1
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="2">
+                    ЛЕНИНА 2
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="3">
+                    ЛЕНИНА 3
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="4">
+                    ЛЕНИНА 4
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="5">
+                    ЛЕНИНА 5
+                </div>
+            </div>
+            <div class="map-corpus" data-corpus-name="Волховстроя">
+                <div class="map-corpus-floor" data-corpus-floor="1">
+                    ВОЛХОВСТРОЯ 1
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="2">
+                    ВОЛХОВСТРОЯ 2
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="3">
+                    ВОЛХОВСТРОЯ 3
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="4">
+                    ВОЛХОВСТРОЯ 4
+                </div>
+            </div>
+            <div class="map-corpus" data-corpus-name="Хмельницкого">
+                <div class="map-corpus-floor" data-corpus-floor="1">
+                    ХМЕЛЬНИЦКОГО 1
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="2">
+                    ХМЕЛЬНИЦКОГО 2
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="3">
+                    ХМЕЛЬНИЦКОГО 3
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="4">
+                    ХМЕЛЬНИЦКОГО 4
+                </div>
+            </div>
+            <div class="map-corpus" data-corpus-name="Космический">
+                <div class="map-corpus-floor" data-corpus-floor="1">
+                    КОСМИЧЕСКОГО 1
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="2">
+                    КОСМИЧЕСКОГО 2
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="3">
+                    КОСМИЧЕСКОГО 3
+                </div>
+                <div class="map-corpus-floor" data-corpus-floor="4">
+                    КОСМИЧЕСКОГО 4
+                </div>
+            </div>
+        </div>
+
+
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Обратная связь
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="Location">
+						Как добраться
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Contacts">
+						Контакты
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="QuestionAnswer">
+						Вопрос-ответ
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Pay">
+						Электронные платежи
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>
+
+<script type="text/javascript" src="/js/map.js" charset="utf-8"></script>
