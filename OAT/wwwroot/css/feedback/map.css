@@ -57,20 +57,44 @@
 
 .map-container {
 	position: relative;
-	width: 200px;
-	height: 200px;
+	height: 500px;
 	border: 2px solid;
-	padding: 5px;
+	border-radius: var(--border-radius-m);
 	margin-top: 20px;
 	overflow: auto;
+}
+
+/* :has(> .map-corpus-floor.active) */
+
+/*
+.map-container:has(> .map-corpus[data-corpus-name="Ленина"]):has(> .map-corpus[data-corpus-name="Ленина"]> .map-corpus-floor.active){
+	height: 1426px;
+}
+*/
+
+.map-container::-webkit-scrollbar {
+	width: 20px;
+	height: 20px;
+}
+
+.map-container::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.map-container::-webkit-scrollbar-thumb {
+	background-clip: content-box;
+	border: 5px solid transparent;
+	border-radius: 10px;
+}
+
+.map-container::-webkit-scrollbar-corner {
+	background-color: transparent;
 }
 
 .map-corpus-floor {
 	position: absolute;
 	top: 5px;
 	left: 5px;
-	width: 1000px;
-	height: 1000px;
 	visibility: hidden;
 	opacity: 0;
 }
