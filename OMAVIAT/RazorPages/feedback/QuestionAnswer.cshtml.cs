@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Controllers.ReCaptchaV2;
+using OMAVIAT.Services.ReCaptchaV2;
 using System.ComponentModel.DataAnnotations;
 
 namespace OAT.Pages.feedback

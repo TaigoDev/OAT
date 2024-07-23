@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using OAT.Controllers.ReCaptchaV2;
-using OAT.Controllers.ReCaptchaV3;
 using OAT.Controllers.Security;
+using OMAVIAT.Services.ReCaptchaV2;
+using OMAVIAT.Services.ReCaptchaV3;
 
 namespace OAT.Controllers.App
 {

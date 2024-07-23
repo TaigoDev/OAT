@@ -1,7 +1,7 @@
 ﻿@page "/CMK/{name:regex(^([a-zA-Z0-9А-Яа-я .&'-]+)$)}"
 @using OMAVIAT.RazorPages.Components
-@using OAT.Controllers.Workers
 @using OAT.Utilities
+@using OMAVIAT.Services.Workers
 @model CMKModel
 @{
 	using var context = new DatabaseContext();

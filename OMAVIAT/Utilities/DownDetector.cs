@@ -6,7 +6,7 @@ namespace OAT.Utilities
 {
 	public class DownDetector
 	{
-		public static void init()
+		public static Task init()
 		{
 			new Task(async () =>
 			{
@@ -28,6 +28,7 @@ namespace OAT.Utilities
 					Logger.Error(e);
 				}
 			}).Start();
+			return Task.CompletedTask;
 		}
 
 

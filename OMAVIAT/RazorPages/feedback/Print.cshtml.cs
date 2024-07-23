@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Codecrete.QrCodeGenerator;
-using OAT.Controllers.Payments.Readers;
 using OAT.Entities;
 using OAT.Utilities;
+using OMAVIAT.Services.Payments;
 using System.Text;
 
 namespace OAT.Pages.feedback
