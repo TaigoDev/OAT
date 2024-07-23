@@ -1,0 +1,105 @@
+﻿@page "{corpus?}/{sheet?}"
+@using OMAVIAT.RazorPages.Components
+@using OAT.Controllers.Schedules.Controllers
+@using OAT.Utilities
+
+
+@model ChangesModel
+@{
+	ViewData["Title"] = "Изменения в расписании";
+	if (Model.corpus is null)
+	{
+		HttpContext.Response.Redirect("/timetable/ClassesChanges");
+		return;
+	}
+	var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
+	var fakeCSS = new FakeCSS(FakeChangesController.GenerateCSS(10), FakeChangesController.GenerateCSS(10));
+	var url = $"/api/multi/css/tables/{StringUtils.ConvertStringToHex(fakeCSS.toJson())}";
+}
+<script src="https://www.google.com/recaptcha/api.js?render=@Configurator.ReCaptchaV3.WebSecretKey"></script>
+<script src="~/js/recaptcha.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/timetable/changes.css" asp-append-version="true">
+<link rel="stylesheet" href="~@url" asp-append-version="true">
+<script src="~/js/changes.js" asp-append-version="true"></script>
+
+<section class="centered timetable-container">
+	<h2 class="section-title">
+		@ChangesHelper.GetDate((int)Model.corpus, Model.sheet)
+	</h2>
+	<h3 class="section-subtitle-small title-centered">
+		@ChangesHelper.GetSchoolWeek((int)Model.corpus, Model.sheet)
+	</h3>
+	<div class="months">
+		<div class="months-choose">
+			@foreach (var sheet in ChangesHelper.GetDaysList((int)Model.corpus))
+			{
+				<a class="months-choose-item @(Model.sheet == sheet ? "active" : "")" href="/timetable/Changes/@Model.corpus/@sheet">
+					@sheet
+				</a>
+			}
+		</div>
+		<form class="search-body">
+			<div class="search-body-container">
+				<input id="search" type="search" placeholder="Введите группу или преподавателя...">
+				<button onclick="onSearch('@Model.corpus', '@Model.sheet');return false">
+					<img style="width: 20px;" class="icon" src="/images/basic/search.svg" alt="искать">
+				</button>
+			</div>
+		</form>
+	</div>
+
+
+	@for (var i = 0; i < new Random().Next(1, 3); i++)
+		@(await Html.RenderComponentAsync<FakeChangesComponent>(RenderMode.Server, new
+		{
+			fakeCSS = fakeCSS,
+		}))
+
+		@(await Html.RenderComponentAsync<ChangesComponent>(RenderMode.Server, new
+		{
+			search = search,
+			sheet = Model.sheet,
+			corpus = Model.corpus
+		})
+		)
+
+
+	@for(var i = 0; i < new Random().Next(1, 3); i++)
+		@(await Html.RenderComponentAsync<FakeChangesComponent>(RenderMode.Server, new
+		{
+			fakeCSS = fakeCSS,
+		}))
+
+	<table style="margin: 10px auto !important;" class="customized timetable">
+		<thead>
+			<tr>
+				<th colspan="2">
+					Режим звонков
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var bell in ChangesHelper.GetBells((int)Model.corpus, Model.sheet))
+			{
+				<tr>
+					<td>
+						@bell.id
+					</td>
+					<td>
+						@bell.period
+					</td>
+				</tr>
+			}
+		   
+		</tbody>
+	</table>
+	<input type="hidden" name="captchaToken" id="captchaToken" />
+
+</section>
+
+
+
+<base href="~/" />
+<script src="~/_framework/blazor.server.js"></script>
+

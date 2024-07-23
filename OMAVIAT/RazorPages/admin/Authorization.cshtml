@@ -1,0 +1,38 @@
+﻿@page
+@using OMAVIAT.RazorPages.Components
+@model AuthorizationModel
+@{
+	ViewData["Title"] = "Авторизация";
+	Layout = "_Panel";
+}
+
+<link rel="stylesheet" href="~/css/panel/authorization.css">
+<script src="~/js/admin.js" asp-append-version="true" charset="utf-8"></script>
+<script src="~/js/auth.js" asp-append-version="true" charset="utf-8"></script>
+
+<a href='@Url.Page("/Index")' class="exit">
+	<img class="icon" src="~/images/panel/exit.svg" alt="выход">
+</a>
+
+<div id="login-form" class="login-form">
+	@if (HttpContext.Request.Query["status"] == "fail")
+	{
+		<div>Логин или пароль от аккаунта неверный!</div>
+	}
+	@if (HttpContext.Request.Query["type"] == "token_expired")
+	{
+		<div>Ваша сессия истекла, авторизуйтесь</div>
+	}
+	<label for="login-form" class="form-title">Вход в аккаунт</label>
+	<div class="input-box">
+		<label for="login">Логин</label>
+		<input id="login" name="username" type="text">
+	</div>
+	<div class="input-box">
+		<label for="password">Пароль</label>
+		<input id="password" name="password" type="password">
+	</div>
+	<button type="submit" class="sign-in" onclick="onLogin(); return false" value="Войти в профиль">Войти в профиль</button>
+</div>
+<aside id="message-fail" class="panel-message">❌ Логин или пароль неверный</aside>
+<aside id="message-ban" class="panel-message">❌ Ваш IP адрес заблокирован на 1 час</aside>

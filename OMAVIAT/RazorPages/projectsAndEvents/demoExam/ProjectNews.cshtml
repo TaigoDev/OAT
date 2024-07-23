@@ -1,0 +1,105 @@
+﻿@page "{id?}"
+@using OAT.Controllers.MNews.Readers
+@using OAT.Utilities
+@using OMAVIAT.RazorPages.Components
+
+@model ProjectNewsModel
+@{
+	ViewData["Title"] = "Новости проекта";
+}
+
+<link rel="stylesheet" href="~/css/allNews.css">
+<script src="~/js/allNews.js" asp-append-version="true"></script>
+
+<div class="container content-page">
+	<section class="content">
+
+		@if (DemoExamsNewsReader.pages.Count() >= Model.id)
+		{
+			<h2 class="section-title">
+				Новости проекта
+			</h2>
+			<div class="news-list">
+
+				@foreach (var news in DemoExamsNewsReader.pages.ToList()[Model.id])
+                {
+                    var photos = news.GetPhotos();
+                    if (photos.Count is 0)
+                        continue;
+					<div class="news-item">
+						<a class="news-item-img" href="/projectsAndEvents/demoExam/news/@news.id">
+                            <img loading="lazy" src="/@photos.FirstOrDefault()" alt="">
+						</a>
+						<div class="news-item-content">
+							<div class="news-item-date">
+								@news.date
+							</div>
+							<div class="news-item-title">
+								@news.title
+							</div>
+							<div class="news-item-info">
+								@Html.Raw(news.short_description)
+								<a href="/projectsAndEvents/demoExam/news/@news.id">
+									ещё...
+								</a>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+			@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+			{
+				CurrentPage = Model.id + 1,
+				count = DemoExamsNewsReader.news.Count(),
+				countInPage = 10,
+				UrlWithParameter = "/projectsAndEvents/demoExam/ProjectNews/{id}"
+			}))
+		  
+
+		}
+		else
+		{
+			<h3 class="section-title">
+				Упс, такой страницы нет...
+				<br>
+				Мы знаем о проблеме и уже решаем ее
+			</h3>
+		}
+		
+	</section>
+
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Демонстрационный экзамен
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="About">
+						О демонстрационном экзамене
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="ProjectNews">
+						Новости проекта
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Documents">
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="CPDE">
+						ЦПДЭ
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Gallery">
+						Галерея
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>

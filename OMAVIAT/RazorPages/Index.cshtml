@@ -1,0 +1,224 @@
+﻿@page
+@model IndexModel
+@{
+	ViewData["Title"] = "Омский авиационный колледж";
+}
+
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/mainPages.css" asp-append-version="true">
+<script src="~/js/newsSlider.js" asp-append-version="true"></script>
+
+<!-- underheader -->
+
+<section class="main-underheader">
+
+	<video autoplay muted loop class="main-underheader-background" poster="images/mainPage/poster.jpg">
+		<source src="/videos/fly.webm" type="video/webm">
+		<source src="/videos/fly.mp4" type="video/mp4">
+	</video>
+
+	<div class="container">
+		<div class="welcome">
+			<h1 class="main-page-title">
+				Взлётная полоса твоего успеха
+			</h1>
+			<h2 class="main-page-subtitle">
+				Сделай шаг навстречу своему будущему!
+			</h2>
+			<ul class="contacts-list">
+				<li>
+					<a href="https://vk.com/omaviat_2020">
+						<img class="icon" src="~/images/basic/socialLinks/vk.svg">
+					</a>
+				</li>
+				<li>
+					<a href="https://www.youtube.com/channel/UC-Ss6mzhYiKeGZaCBNyXo2w">
+						<img class="icon" src="~/images/basic/socialLinks/youtube.svg">
+					</a>
+				</li>
+				<li>
+					<a href="https://t.me/omaviatomsk2021">
+						<img class="icon" src="~/images/basic/socialLinks/telegram.svg">
+					</a>
+				</li>
+			</ul>
+		</div>
+		<ul class="important-links">
+			<li class="important-link">
+				<a asp-page="/organizationInformation/CommonIntelligence">
+					<img src="~/images/mainPage/info.png">
+					<span class="important-link-text">Сведения об образовательной организации</span>
+				</a>
+			</li>
+			<li class="important-link">
+				<a asp-page="students/AlumniEmploymentCenterOmaviat">
+					<img src="~/images/mainPage/workshop.png">
+					<span class="important-link-text">Трудоустройство</span>
+				</a>
+			</li>
+			<li class="important-link">
+				<a href="https://www.copp55.ru/">
+					<img src="~/images/mainPage/copp.png">
+					<span class="important-link-text">Центр опережающей профессиональной подготовки</span>
+				</a>
+			</li>
+			<li class="important-link">
+				<a asp-page="projectsAndEvents/professionalitet/About">
+					<img src="~/images/mainPage/professionalitet.png">
+					<span class="important-link-text">Профессионалитет</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</section>
+
+<!-- important cards -->
+
+<section>
+	<div class="container">
+		<h3 class="section-title">
+			Обучение с нами
+		</h3>
+		<ul class="cards-list">
+			<li>
+				<a class="card-item" href='@Url.Page("/applicant/SpecialtiesAndProfessions")'>
+					<div class="card-item-header">
+						Специальности
+						<br>
+						<span class="lower">и</span>
+						профессии
+					</div>
+					<div class="card-item-description">
+						Узнай больше про наши программы обучения
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="card-item" href='@Url.Page("projectsAndEvents/ProjectsAndEvents")'>
+					<div class="card-item-header">
+						Проекты
+						<br>
+						<span class="lower">и</span>
+						события
+					</div>
+					<div class="card-item-description">
+						Войди в историю колледжа
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="card-item" href='@Url.Page("/applicant/QualificationIncrease")'>
+					<div class="card-item-header">
+						Повышение
+						<br>
+						квалификации
+					</div>
+					<div class="card-item-description">
+						Улучши свои профессиональные навыки
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="card-item" href='@Url.Page("/feedback/QuestionAnswer")'>
+					<div class="card-item-header">
+						Вопрос-ответ
+					</div>
+					<div class="card-item-description">
+						Мы дадим ответ на любой твой вопрос
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</section>
+
+<!-- news -->
+
+<section>
+	<div class="container">
+		<h3 class="section-title">
+			Новости
+		</h3>
+		<div class="news-slider-container">
+			<ul id="news-slider" class="news-slider">
+				@foreach (var news in Model.News)
+				{
+                    var photos = news.GetPhotos();
+                    if (photos.Count is 0)
+                        continue;
+                    <li class="news-item">
+                        <img src="@photos.FirstOrDefault()" alt="">
+						<a tabindex="-1" href="~/news/@news.id" class="news-content">
+							<div class="news-date">
+								@news.date
+							</div>
+							<div class="news-header">
+								@news.title
+							</div>
+						</a>
+					</li>
+				}
+			</ul>
+			<div class="news-slider-footer">
+				<a class="all-news" href='@Url.Page("AllNews")'>
+					Все новости
+				</a>
+				<div class="news-slider-btns">
+					<div id="slider-prev" class="news-slider-arrow inactive news-slider-prev">
+						<img src="~/images/basic/arrowBlack.svg" alt="">
+					</div>
+					<div id="slider-next" class="news-slider-arrow news-slider-next">
+						<img src="~/images/basic/arrowBlack.svg" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section>
+	<div class="container">
+		<h3 class="section-title">
+			Код будущего
+		</h3>
+		<a href="~/documents/mainPage/codeOfFuture.pdf" target="_blank">
+            <img src="~/images/mainPage/codeOfFuture.jpg" class="customized code-of-future" alt="баннер код будущего">
+		</a>
+
+	</div>
+</section>
+
+<section>
+    <div class="container">
+        <h3 class="section-title">
+            Оцените нашу работу
+        </h3>
+        <a href="https://bus.gov.ru/qrcode/rate/378012?agencyId=169761" target="_blank">
+            <img src="~/images/mainPage/rateOurWork2.jpg" class="customized rate-our-work" alt="баннер оцените нашу работу">
+        </a>
+
+    </div>
+</section>
+
+<section>
+	<div class="container">
+		<h3 class="section-title">
+			Другие сферы деятельности колледжа
+		</h3>
+
+		<a class="another" asp-page="/another/another">
+			<span class="another-text">
+				Прожить
+			</span>
+			<span class="another-text">
+				Узнать
+			</span>
+			<span class="another-text">
+				Увидеть
+				<!-- увидеть... любить и ненавидеть -->
+			</span>
+		</a>
+
+	</div>
+</section>

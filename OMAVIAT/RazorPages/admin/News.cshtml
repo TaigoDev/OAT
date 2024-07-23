@@ -1,0 +1,24 @@
+﻿@page
+@using OMAVIAT.RazorPages.Components
+@model PanelModel
+@{
+	ViewData["Title"] = "Панель";
+	Layout = "_Panel";
+}
+
+<section class="container">
+	@(await Html.RenderComponentAsync<NewsComponent>(RenderMode.Server))
+</section>
+
+
+<aside id="logger" class="panel-message">👌 Новость успешно добавлена 👌</aside>
+<aside id="message-fail-auth" class="panel-message">❌ Cессия истекла</aside>
+<aside id="message-fail" class="panel-message">❌ Ошибка при добавлении новости</aside>
+<aside id="message-success-delete" class="panel-message">👌 Новость успешно удалена 👌</aside>
+<aside id="message-fail-delete" class="panel-message">❌ Новость для удаления не найдена</aside>
+<aside id="message-fail-perms" class="panel-message">❌ У вас нет прав или сессия истекла</aside>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="/js/panel.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/admin.js" charset="utf-8"></script>
+
