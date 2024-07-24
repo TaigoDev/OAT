@@ -16,28 +16,20 @@
         </h2>
         return;
     }
-
+    <h2 class="section-title title-centered">
+        Расписание группы @Model.group_name
+    </h2>
     @for (var week_id = 1; week_id <= Model.group.Weeks.Count; week_id++)
     {
-        <h2 class="section-title title-centered">
-            Расписание группы @Model.group_name
-        </h2>
+
         <table class="customized timetable" style="display: none;">
             <thead>
                 <tr>
-                    <th>
-                        №
-                    </th>
-                    <th>
-                        Время
-                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <div class="teacher">
-                        </div>
                     </td>
                 </tr>
             </tbody>

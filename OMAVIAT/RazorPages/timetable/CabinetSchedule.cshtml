@@ -1,6 +1,8 @@
 ﻿@page "{building?}/{cabinet_text?}"
 @model OMAVIAT.RazorPages.timetable.CabinetScheduleModel
-@{
+@{	
+    ViewData["Title"] = $"Расписание кабинета {Model.cabinet_text}";
+
 }
 <link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
 <section class="timetable-container">
@@ -11,29 +13,21 @@
         </h2>
         return;
     }
-
+    <h2 class="section-title title-centered">
+        Расписание кабинета @Model.cabinet.name
+    </h2
 
     @for (var week_id = 1; week_id <= Model.cabinet.Weeks.Count; week_id++)
     {
-        <h2 class="section-title title-centered">
-            Расписание кабинета @Model.cabinet.name
-        </h2>
+
         <table class="customized timetable" style="display: none;">
             <thead>
                 <tr>
-                    <th>
-                        №
-                    </th>
-                    <th>
-                        Время
-                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <div class="teacher">
-                        </div>
                     </td>
                 </tr>
             </tbody>
