@@ -3,6 +3,7 @@ using OAT.Controllers.Schedules.Readers;
 using OAT.Entities.Enums;
 using OAT.Utilities;
 using OAT.Utilities.Telegram;
+using OMAVIAT.Services.Schedule.MainSchedule;
 
 namespace OMAVIAT.Services.AdminPanel
 {
@@ -57,7 +58,7 @@ namespace OMAVIAT.Services.AdminPanel
 			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
 			await fs.DisposeAsync();
 			Runs.InThread(async () => await TimeTableBot.onChangeMainSchedule(building.ConvertToString(), path));
-			Runs.InThread(async () => await ScheduleReader.init());
+			Runs.InThread(async () => await ScheduleReader.ReadAllAsync());
 		}
 
 		public static async Task SessionSaveFile(string filename, Building? building, IBrowserFile file)

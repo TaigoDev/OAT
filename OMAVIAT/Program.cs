@@ -9,11 +9,9 @@ using OfficeOpenXml;
 using OMAVIAT.Services.Workers;
 using OMAVIAT.Services.Payments;
 using OMAVIAT.Services.News;
+using OMAVIAT.Services.Schedule.MainSchedule;
 
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-var builder = WebApplication.CreateBuilder(args);
-WebBuilderConfigurator.SetupServices(ref builder);
-
 Runs.StartModules(
 	   //Получаем информация из конфигов
 	   Configurator.init,
@@ -32,14 +30,15 @@ Runs.StartModules(
 	   NewsReader.init,
 	   ProfNewsReader.init,
 	   DemoExamsNewsReader.init,
-	   ScheduleReader.init,
+	   ScheduleReader.ReadAllAsync,
 
 	   //Запускаем другие службы
 	   () => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),
 	   WorkersReader.init
 );
 Runs.InThread(async () => await ChangesController.init());
-
+var builder = WebApplication.CreateBuilder(args);
+WebBuilderConfigurator.SetupServices(ref builder);
 var app = builder.Build();
 app.UseStaticFiles();
 app.UseRouting();

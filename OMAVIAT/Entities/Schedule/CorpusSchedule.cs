@@ -1,7 +1,4 @@
-﻿using OAT.Entities.Enums;
-using OAT.Entities.Schedule;
-
-namespace OMAVIAT.Entities.Schedule
+﻿namespace OMAVIAT.Entities.Schedule
 {
 	public class CorpusSchedule
 	{
@@ -9,6 +6,6 @@ namespace OMAVIAT.Entities.Schedule
 		public List<Schedule> groups { get; set; } = [];
 		public List<Schedule> teachers { get; set; } = [];
 		public List<Schedule> cabinets { get; set; } = [];
-		public List<Bell> bells { get; set; } = [];
+		public List<ScheduleBell> bells { get; set; } = [];
 	}
 }

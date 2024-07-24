@@ -11,9 +11,9 @@
  </rings>
  <timetable>
   <cls name="КС212">
-   <week number="1">
+   <week number="1" type="week">
 	<day number="1" name="Понедельник">
-	 <lesson number="1">
+	 <lesson number="1" type="lesson">
 	  <group number="1" subject="Архитектура аппаратных средств+" short_subject="АрхАС+" teacher="Богута Д.А." cabinet="318+" />
 	  <group number="2" subject="Архитектура аппаратных средств+" short_subject="АрхАС+" teacher="Зинченко А.К." cabinet="315+" />
 	 </lesson>

@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OAT.Controllers.Schedules;
+using OAT.Entities.Enums;
 using OAT.Entities.Schedule;
+using OMAVIAT.Entities.Schedule;
+using OMAVIAT.Services.Schedule.MainSchedule;
 
 namespace OAT.Pages.timetable
 {
@@ -8,28 +11,39 @@ namespace OAT.Pages.timetable
 	public class TeacherScheduleModel : PageModel
 	{
 
-		public TeacherSchedule? teacher;
-		public string fullname;
+		public Schedule? teacher;
+		public CorpusSchedule? corpus;
+		public string? fullname;
 		public void OnGet(string building, string fullname)
 		{
 			this.fullname = fullname;
 			if (fullname is null)
 				return;
-			teacher = ScheduleUtils.GetTeacherScheduleByBuilding(building).FirstOrDefault(e => e.FullName.ToLower() == fullname.ToLower());
+			if (!Enum.TryParse<Building>(building, true, out var result))
+				return;
+
+			corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
+			if (corpus == null)
+				return;
+			teacher = corpus.teachers.FirstOrDefault(e => e.name.ToSearchView() == fullname.ToSearchView());
 		}
 
-		public List<TeacherLesson> GetAllLessonsByNumber(int id, TeacherWeek week)
+		public List<ScheduleLesson> GetAllLessonsByNumber(int id, ScheduleWeek week)
 		{
-			var lessons = new List<TeacherLesson>();
-			foreach (var day in week.days)
-				lessons.Add(day.lessons.FirstOrDefault(e => e.id == id)!);
+			var lessons = new List<ScheduleLesson>();
+			foreach (var day in week.Days)
+			{
+				var lesson = day.lessons.FirstOrDefault(e => e.Id == id);
+				if (lesson is not null)
+					lessons.Add(lesson);
+			}
 			return lessons;
 		}
 
-		public int GetMaxLessonsInDay(TeacherWeek week) =>
-			week.days.Max(e => e.lessons.Count == 0 ? 0 : e.lessons.Max(l => l.id));
+		public int GetMaxLessonsInDay(ScheduleWeek week) =>
+			week.Days.Max(e => e.lessons.Count == 0 ? 0 : e.lessons.Max(l => l.Id));
 
-		public int GetMinLessonsInDay(TeacherWeek week) =>
-			week.days.Min(e => e.lessons.Count == 0 ? 100 : e.lessons.Min(l => l.id));
+		public int GetMinLessonsInDay(ScheduleWeek week) =>
+			week.Days.Min(e => e.lessons.Count == 0 ? 100 : e.lessons.Min(l => l.Id));
 	}
 }

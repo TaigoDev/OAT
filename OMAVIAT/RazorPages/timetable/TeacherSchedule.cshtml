@@ -5,191 +5,145 @@
 }
 <link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
 <section class="timetable-container">
-	@if (Model.teacher is null)
+	@if (Model.teacher is null || Model.corpus is null)
 	{
-		<h2 class="section-title title-centered">
-			Такого учителя нет
-		</h2>
-	}
-	else
-	{
-		<h2 class="section-title title-centered">
-			Расписание @Model.fullname
-		</h2>
-		<table class="customized timetable">
-			<thead>
-				<tr>
-					<th>
-						№
-					</th>
-					<th>
-						Время
-					</th>
-					<th>
-						Понедельник-1
-					</th>
-					<th>
-						Вторник-1
-					</th>
-					<th>
-						Среда-1
-					</th>
-					<th>
-						Четверг-1
-					</th>
-					<th>
-						Пятница-1
-					</th>
-					<th>
-						Суббота-1
-					</th>
-					<th>
-						Воскресенье-1
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				@if (Model.teacher != null)
-				{
-					var week = Model.teacher.weeks.Where(e => e.id == 1).First();
-					@for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
-					{
-						var lessons = Model.GetAllLessonsByNumber(lesson_id, week);
-						string[] ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
+        <h2 class="section-title title-centered">
+            Такого учителя нет
+        </h2>
+        return;
+    }
 
-						<tr>
 
-							<td>
-								@lesson_id
-							</td>
-							<td>
-								@ring[0]
-								<br />
-								@ring[1]
-							</td>
+    @for (var week_id = 1; week_id <= Model.teacher.Weeks.Count; week_id++)
+    {
+        <h2 class="section-title title-centered">
+            Расписание @Model.teacher.name
+        </h2>
+        <table class="customized timetable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>
+                        №
+                    </th>
+                    <th>
+                        Время
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="teacher">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="customized timetable">
+            <thead>
+                <tr>
+                    <th>
+                        №
+                    </th>
+                    <th>
+                        Время
+                    </th>
+                    <th>
+                        Понедельник-@week_id
+                    </th>
+                    <th>
+                        Вторник-@week_id
+                    </th>
+                    <th>
+                        Среда-@week_id
+                    </th>
+                    <th>
+                        Четверг-@week_id
+                    </th>
+                    <th>
+                        Пятница-@week_id
+                    </th>
+                    <th>
+                        Суббота-@week_id
+                    </th>
+                    <th>
+                        Воскресенье-@week_id
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var week = Model.teacher.Weeks.Where(e => e.Type == (week_id == 1 ? OMAVIAT.Entities.Enums.ScheduleWeekType.First : OMAVIAT.Entities.Enums.ScheduleWeekType.Second)).First();
+                }
 
-							@foreach (var lesson in lessons)
-							{
-								if (lesson is null)
-								{
-									<td></td>
-								}
-								else
-								{
-									<td>
-										<div class="subject">
-											<div class="subject-name">
-												@lesson.short_subject
-											</div>
-											<div class="subject-more">
-	  
-													<div class="subject-more-item">
-														<div class="subject-teacher">
-															@lesson.group
-														</div>
-														<div class="subject-teacher">
-															@lesson.cabinet
-														</div>
-													</div>
-											  
-											</div>
-										</div>
-									</td>
-								}
-							}
-						</tr>
+                @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
+                {
+                    var days = Model.GetAllLessonsByNumber(lesson_id, week);
+                    var ring = Model.corpus.bells.FirstOrDefault(e => e.Id == lesson_id);
 
-					}
-				}
-			</tbody>
-		</table>
+                    <tr>
 
-		<table class="customized timetable">
-			<thead>
-				<tr>
-					<th>
-						№
-					</th>
-					<th>
-						Время
-					</th>
-					<th>
-						Понедельник-2
-					</th>
-					<th>
-						Вторник-2
-					</th>
-					<th>
-						Среда-2
-					</th>
-					<th>
-						Четверг-2
-					</th>
-					<th>
-						Пятница-2
-					</th>
-					<th>
-						Суббота-2
-					</th>
-					<th>
-						Воскресенье-2
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				@if (Model.teacher != null)
-				{
-					var week = Model.teacher.weeks.Where(e => e.id == 2).First();
-					@for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
-					{
-						var lessons = Model.GetAllLessonsByNumber(lesson_id, week);
-						var ring = ScheduleReader.lesson_times[lesson_id - 1].Split(" - ");
+                        <td>
+                            @lesson_id
+                        </td>
+                        <td>
+                            @if (ring is not null)
+                            {
+                                @ring.start
+                                <br />
+                                @ring.end
+                            }
+                        </td>
 
-						<tr>
+                        @foreach (var lesson in days)
+                        {
+                            if (lesson is null)
+                            {
+                                <td></td>
+                                continue;
+                            }
 
-							<td>
-								@lesson_id
-							</td>
-							<td>
-									@ring[0]
-									<br />
-									@ring[1]
-							</td>
+                            <td>
+                                <div class="subjectt">
+                                    <div class="subjectt-name">
+                                        @lesson.Name
+                                    </div>
+                                    <div class="subjectt-more">
+                                        <div class="subjectt-more-item">
+                                            @if(lesson.subGroupId != 0 )
+                                        {
+                                            <div class="subject-teacher">
+                                                Подгруппа @lesson.subGroupId
+                                            </div>
+                                        }
+                                        <div class="subject-teacher">
+                                                @lesson.Group
+                                            </div>
+                                            <div class="subjectt-teacher">
+                                                @lesson.Cabinet
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </td>
 
-							@foreach (var lesson in lessons)
-							{
-								if (lesson is null)
-								{
-									<td></td>
-								}
-								else
-								{
-									<td>
-										<div class="subject">
-											<div class="subject-name">
-												@lesson.short_subject
-											</div>
-											<div class="subject-more">
+                        }
 
-												<div class="subject-more-item">
-													<div class="subject-teacher">
-														@lesson.group
-													</div>
-													<div class="subject-teacher">
-														@lesson.cabinet
-													</div>
-												</div>
+                        @for(var i = 0; i < 7 - days.Count(); i++)
+                        {
+                            <td></td>
 
-											</div>
-										</div>
-									</td>
-								}
-							}
-						</tr>
+                        }
+                    </tr>
 
-					}
-				}
-			</tbody>
-		</table>
-	}
+                }
+
+            </tbody>
+        </table>
+    }
+
+
+
+	
+	
 </section>

@@ -1,5 +1,7 @@
 ﻿@page "{building?}"
 @using OAT.Controllers.Schedules
+@using OAT.Entities.Enums
+@using OMAVIAT.Services.Schedule.MainSchedule
 
 @model OAT.Pages.timetable.TeachersModel
 @{
@@ -24,11 +26,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var teacher in ScheduleUtils.GetTeacherScheduleByBuilding(Model.building))
+            @{
+                if (!Enum.TryParse<Building>(Model.building, true, out var result))
+                    return;
+                var corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
+                if (corpus is null)
+                    return;
+
+            }
+            @foreach (var teacher in corpus.teachers.OrderBy(e => e.name))
 			{
 				<tr>
 					<td>
-						<a href="/timetable/TeacherSchedule/@Model.building/@teacher.FullName">@teacher.FullName</a>
+						<a href="/timetable/TeacherSchedule/@Model.building/@teacher.name">@teacher.name</a>
 					</td>
 				</tr>
 			}

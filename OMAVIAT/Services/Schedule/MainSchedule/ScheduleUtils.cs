@@ -39,5 +39,8 @@ namespace OMAVIAT.Services.Schedule.MainSchedule
 			if (value is null) return null;
 			return value.ToString();
 		}
+
+		public static List<XmlNode> GetChilds(this XmlNode node) =>
+			node.ChildNodes.Cast<XmlNode>().ToList();
 	}
 }
