@@ -40,8 +40,8 @@ namespace OAT.Controllers.App
             builder.Services.AddRazorComponents().AddInteractiveServerComponents();
             builder.Services.AddControllersWithViews();
             builder.Services.AddMvc().AddRazorPagesOptions(opt => opt.RootDirectory = "/RazorPages");
+			
 
-
-        }
-    }
+		}
+	}
 }

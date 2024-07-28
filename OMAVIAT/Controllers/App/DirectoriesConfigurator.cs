@@ -2,7 +2,7 @@
 {
 	public class DirectoriesConfigurator
 	{
-		public static void Create()
+		public static Task Create()
 		{
 			Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "news"));
 			Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Resources"));
@@ -36,6 +36,7 @@
 			Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", "b4"));
 
 			Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Logs"));
+			return Task.CompletedTask;
 
 		}
 	}

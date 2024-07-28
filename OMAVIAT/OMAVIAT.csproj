@@ -4,11 +4,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ScopedCssEnabled>true</ScopedCssEnabled>
+	<ScopedCssEnabled>true</ScopedCssEnabled>
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="CsvHelper" Version="33.0.1" />
-		<PackageReference Include="EPPlus" Version="7.2.1" />
+		<PackageReference Include="EPPlus" Version="7.2.2" />
 		<PackageReference Include="ExcelMapper" Version="5.2.592" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
@@ -31,6 +31,8 @@
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Services\Schedule\ChangesSchedule\" />
-	</ItemGroup>
+		<None Include="wwwroot\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+   </ItemGroup>
 </Project>

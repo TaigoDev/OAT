@@ -13,8 +13,9 @@ using OMAVIAT.Services.Schedule.MainSchedule;
 
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 Runs.StartModules(
-	   //Получаем информация из конфигов
-	   Configurator.init,
+		//Получаем информация из конфигов
+		DirectoriesConfigurator.Create,
+        Configurator.init,
 
 	   //Запускаем сервис ТГ
 	   TelegramBot.init,
