@@ -1,0 +1,77 @@
+﻿@page "{building?}"
+@model GroupsModel
+@{
+    ViewData["Title"] = "Группы";
+}
+
+<link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/timetable/groups.css" asp-append-version="true">
+<section class="centered">
+    @if (string.IsNullOrEmpty(Model.building) || Model.groups is null)
+    {
+        <h2 class="section-title">
+            Здание не найдено
+        </h2>
+        return;
+    }
+
+    <h2 class="section-title title-centered">
+        Группы
+    </h2>
+    <table class="customized timetable groups">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    Группа
+                </th>
+                <th>
+                    Численность
+                </th>
+                <th>
+                    Юношей
+                </th>
+                <th>
+                    Девушек
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 1; i <= Model.max_curse; i++)
+            {
+                var groups = Model.groups.Where(e => e.Curs == i);
+                if (groups.Count() == 0)
+                    continue;
+                var firstGroup = true;
+                @foreach (var group in groups)
+                {
+
+                    <tr>
+                        @if (firstGroup)
+                        {
+                            firstGroup = false;
+                            <td rowspan="@groups.Count()">
+                                @i
+                            </td>
+                        }
+                        <td>
+                            <a href="/timetable/timetable/@Model.building/@group.name">@group.name</a>
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                        <td>
+                            0
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+
+    </table>
+
+</section>

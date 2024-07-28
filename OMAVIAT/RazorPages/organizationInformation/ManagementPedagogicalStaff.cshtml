@@ -1,0 +1,230 @@
+﻿@page "{id?}"
+@using OMAVIAT.RazorPages.Components
+@using OMAVIAT.Services.Workers
+
+@model ManagementPedagogicalStaffModel
+@{
+	ViewData["Title"] = "Руководство. Педагогический (научно-педагогический) состав";
+}
+
+<link rel="stylesheet" href="~/css/organizationInformation/menagementPedagogicalStaff.css" asp-append-version="true">
+<script type="text/javascript" src="/js/WorkerSearch.js" charset="utf-8"></script>
+
+<div class="container content-page">
+	<section class="content">
+		<h2 class="section-title">
+			Руководство. Педагогический (научно-педагогический) состав
+		</h2>
+
+		<form class="search-people">
+			<div class="search-people-container">
+				<input id="search" type="search" placeholder="Введите ФИО...">
+				<button onclick="onSearch();return false">
+					<img class="icon" src="~/images/basic/search.svg" alt="искать">
+				</button>
+			</div>
+		</form>
+		@if (WorkersReader.administration.Count() is 3)
+		{
+			<h3 class="section-subtitle">
+				Руководство
+			</h3>
+			<ul class="people-list">
+				@foreach (var person in WorkersReader.administration[0])
+				{
+					<li class="people-item">
+						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+                            <img src="/api/images/teachers/@person.FullName" loading="lazy" alt="">
+						</a>
+						<div class="people-item-body more-info">
+							<div class="people-item-body-fio">
+								@person.FullName
+							</div>
+							<div class="people-item-body-job">
+								@person.Post
+							</div>
+						</div>
+					</li>
+				}
+			</ul>
+
+			<h3 class="section-subtitle">
+				Заместители руководителя
+			</h3>
+			<ul class="people-list">
+				@foreach (var person in WorkersReader.administration[1])
+				{
+					<li class="people-item">
+						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+							<img src="/api/images/teachers/@person.FullName" alt="">
+						</a>
+						<div class="people-item-body more-info">
+							<div class="people-item-body-fio">
+								@person.FullName
+							</div>
+							<div class="people-item-body-job">
+								@person.Post
+							</div>
+						</div>
+					</li>
+				}
+			</ul>
+
+			<h3 class="section-subtitle">
+				Главный бухгалтер
+			</h3>
+			<ul class="people-list">
+				@foreach (var person in WorkersReader.administration[2])
+				{
+					<li class="people-item">
+						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+							<img src="/api/images/teachers/@person.FullName" alt="">
+						</a>
+						<div class="people-item-body more-info">
+							<div class="people-item-body-fio">
+								@person.FullName
+							</div>
+							<div class="people-item-body-job">
+								@person.Post
+							</div>
+						</div>
+					</li>
+				}
+			</ul>
+
+			<h3 class="section-subtitle">
+				Персональный состав педагогических работников
+			</h3>
+			<ul class="people-list">
+				@if (Model.id < WorkersReader.Workers.Count())
+					@foreach (var person in WorkersReader.Workers.ToList()[Model.id])
+					{
+						<li class="people-item">
+							<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+								<img src="/api/images/teachers/@person.FullName" loading="lazy" alt="">
+							</a>
+							<div class="people-item-body more-info">
+								<div class="people-item-body-fio">
+									@person.FullName
+								</div>
+								<div class="people-item-body-job">
+									@person.Post
+								</div>
+							</div>
+						</li>
+					}
+			</ul>
+		}
+		@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+		{
+			 CurrentPage = Model.id + 1,
+			count = WorkersReader.AllWorkers.Count(),
+			 countInPage= 14,
+			 UrlWithParameter = "/organizationInformation/ManagementPedagogicalStaff/{id}"
+		}))
+	</section>
+	<aside id="sidebar" class="sidebar long">
+		<h3 class="sidebar-title">
+			Сведения об образовательной организации
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="CommonIntelligence">
+						Основные сведения
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Structure">
+						Структура и органы управления образовательной организацией
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Documents">
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Education">
+						Образование
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="EducationalStandards">
+						Образовательные стандарты и требования
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="EducationalProcess">
+						Организация воспитательного процесса
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="ManagementPedagogicalStaff">
+						Руководство. Педагогический (научно-педагогический) состав
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="LogisticsAndAccessibleEnvironment">
+						Материально-техническое обеспечение и оснащенность образовательного процесса. Доступная среда
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="PaidEducationalServices">
+						Платные образовательные услуги
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="FinancialEconomicActivity">
+						Финансово-хозяйственная деятельность
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Jobs">
+						Вакантные места для приема (перевода) обучающихся
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Vacancies">
+						Вакансии
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="InternationalCooperation">
+						Международное сотрудничество
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="StudentSupport">
+						Стипендии и меры поддержки обучающихся
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Terrorism">
+						Противодействие экстремизму и терроризму
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Corruption">
+						Противодействие коррупции
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Library">
+						Библиотека
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="UPK">
+						Учебно-производственный комплекс
+					</a>
+				</li>
+                <li class="sidebar-link">
+                    <a asp-page="Food">
+                        Организация питания в образовательной организации
+                    </a>
+                </li>
+			</ul>
+		</nav>
+	</aside>
+</div>

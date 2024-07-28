@@ -1,0 +1,104 @@
+﻿@page
+@using OMAVIAT.Services.ReCaptchaV2
+
+@model QuestionAnswerModel
+@{
+	ViewData["Title"] = "Вопрос-ответ";
+}
+
+<link rel="stylesheet" href="~/css/feedback/questionAnswer.css" asp-append-version="true">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<div class="container content-page">
+	<section class="content">
+		<h2 class="section-title">
+			Вопрос-ответ
+		</h2>
+
+		<form class="questions" method="post">
+			<div asp-validation-summary="All"></div>
+
+			<div class="basic-data">
+				<div class="input-box">
+					<label for="name">Имя</label>
+					<input asp-for="name" id="name" type="text" placeholder="Введите имя">
+				</div>
+				<div class="input-box">
+					<label for="email">E-mail</label>
+					<input asp-for="email" id="email" type="email" placeholder="Введите почту">
+				</div>
+				<div class="input-box">
+					<label for="telephone">Телефон</label>
+					<input asp-for="telephone" id="telephone" type="tel" placeholder="Введите телефон">
+				</div>
+				<div class="input-box">
+					<label for="topic">Тема вопроса</label>
+					<select asp-for="topic" id="topic">
+						<option>Профессионалитет</option>
+						<option>Производство</option>
+						<option>Воспитательная работа</option>
+						<option>Учебная деятельность</option>
+						<option>Профориентация</option>
+						<option>Трудоустройство</option>
+						<option>Приемная комиссия</option>
+						<option>Курсовая подготовка</option>
+						<option>Главная бухгалтерия</option>
+						<option>Бухгалтерия</option>
+						<option>Экономика</option>
+						<option>Директор школы</option>
+						<option>Инженерный лицей</option>
+					</select>
+				</div>
+			</div>
+			<div class="input-box">
+				<label for="description">Вопрос</label>
+				<textarea asp-for="description" id="description" class="customized" placeholder="Введите вопрос"></textarea>
+			</div>
+			<div class="captcha-container">
+				@Html.ReCaptcha()
+			</div>
+			<p class="question-warning">
+				Нажимая на кнопку "Отправить", вы даете согласие на обработку персональных данных
+			</p>
+			<button type="submit" class="customized question-send">Отправить</button>
+		</form>
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Обратная связь
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="Location">
+						Как добраться
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Contacts">
+						Контакты
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="QuestionAnswer">
+						Вопрос-ответ
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Pay">
+						Электронные платежи
+					</a>
+				</li>
+                <li class="sidebar-link">
+                    <a asp-page="Map">
+                        Карта
+                    </a>
+                </li>
+			</ul>
+		</nav>
+	</aside>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+		async defer></script>

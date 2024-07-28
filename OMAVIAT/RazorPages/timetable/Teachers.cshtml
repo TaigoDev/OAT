@@ -1,0 +1,51 @@
+﻿@page "{building?}"
+@using OAT.Controllers.Schedules
+@using OAT.Entities.Enums
+@using OMAVIAT.Services.Schedule.MainSchedule
+
+@model OAT.Pages.timetable.TeachersModel
+@{
+	ViewData["Title"] = "Расписание преподавателей";
+
+}
+
+
+<link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
+<link rel="stylesheet" href="~/css/timetable/groups.css" asp-append-version="true">
+<section class="centered">
+
+	 <h2 class="section-title title-centered">
+		Преподаватели
+	</h2>
+	<table class="customized timetable groups">
+		<thead>
+			<tr>
+				<th>
+					ФИО
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+            @{
+                if (!Enum.TryParse<Building>(Model.building, true, out var result))
+                    return;
+                var corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
+                if (corpus is null)
+                    return;
+
+            }
+            @foreach (var teacher in corpus.teachers.OrderBy(e => e.name))
+			{
+				<tr>
+					<td>
+						<a href="/timetable/TeacherSchedule/@Model.building/@teacher.name">@teacher.name</a>
+					</td>
+				</tr>
+			}
+			
+		</tbody>
+		
+	</table>
+	
+</section>
+	

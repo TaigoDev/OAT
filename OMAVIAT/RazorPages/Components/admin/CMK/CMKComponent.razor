@@ -1,0 +1,193 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using OAT
+@using OMAVIAT.RazorPages.Components.admin.CMK;
+@using OAT.Utilities
+@inject IHttpContextAccessor httpContextAccessor;
+
+@{
+	var User = httpContextAccessor!.HttpContext!.User;
+	if (User is null)
+		return;
+}
+
+
+<form class="panel-form">
+
+    <label for="news" class="panel-form-title">
+        @CMK @(type is null ? "" : $"- {type}")
+    </label>
+
+	<div class="input-box">
+		<label for="CMK">
+			Выбор ЦМК
+		</label>
+		<select id="CMK" @onchange='async (e) => {
+			CMK = e.Value?.ToString()!;
+			await OnSelectCMK();
+			this.StateHasChanged();
+		}'>
+            <option selected disabled value="Выберите ЦМК">
+				Выберите ЦМК
+			</option>
+			@if (User.IsRole(Role.www_POIT_owner))
+			{
+				<option value="ЦМК ПОИТ">
+					ЦМК ПОИТ
+				</option>
+			}
+			@if (User.IsRole(Role.www_KTZS_owner))
+			{
+				<option value="ЦМК КТЗС">
+					ЦМК КTЗС
+				</option>
+			}
+			@if (User.IsRole(Role.www_TehREM_owner))
+			{
+				<option value="ЦМК ТехРЭМ">
+					ЦМК ТехРЭМ
+				</option>
+			}
+			@if (User.IsRole(Role.www_TehSvar_owner))
+			{
+				<option value="ЦМК ТехСвар">
+					ЦМК ТехСвар
+				</option>
+			}
+			@if (User.IsRole(Role.www_TehARS_owner))
+			{
+				<option value="ЦМК ТехАРС">
+					ЦМК ТехАРС
+				</option>
+			}
+			@if (User.IsRole(Role.www_EKUP_owner))
+			{
+				<option value="ЦМК ЭКУП">
+					ЦМК ЭКУП
+				</option>
+			}
+			@if (User.IsRole(Role.www_SGD_owner))
+			{
+				<option value="ЦМК СГД">
+					ЦМК СГД
+				</option>
+			}
+            @if (User.IsRole(Role.www_GD_owner))
+            {
+                <option value="ЦМК ГД">
+                    ЦМК ГД
+                </option>
+            }
+			@if (User.IsRole(Role.www_END_owner))
+			{
+				<option value="ЦМК ЕНД">
+					ЦМК ЕНД
+				</option>
+			}
+			@if (User.IsRole(Role.www_TehOPit_owner))
+			{
+				<option value="ЦМК ТехОПИТ">
+					ЦМК ТехОПИТ
+				</option>
+			}
+			@if (User.IsRole(Role.www_FKD_owner))
+			{
+				<option value="ЦМК ФКД">
+					ЦМК ФКД
+				</option>
+			}
+            @if (User.IsRole(Role.www_Tehmash_owner))
+            {
+                <option value="ЦМК ТехМаш">
+                    ЦМК ТехМаш
+                </option>
+            }
+            @if (User.IsRole(Role.www_TehREO_owner))
+            {
+                <option value="ЦМК ТехРЭО">
+                    ЦМК ТехРЭО
+                </option>
+            }
+            @if (User.IsRole(Role.www_Angliyskiy_owner))
+            {
+                <option value="ЦМК Ин.яз">
+                    ЦМК Ин.яз
+                </option>
+            }
+			@if (User.IsRole(Role.www_informatiki_owner))
+			{
+				<option value="ЦМК Информатики">
+					ЦМК Информатики
+				</option>
+			}
+			@if (User.IsRole(Role.www_matematiki_owner))
+			{
+				<option value="ЦМК Математики">
+					ЦМК Математики
+				</option>
+			}
+			@if (User.IsRole(Role.www_russYaz_owner))
+			{
+				<option value="ЦМК РусЯз">
+                    ЦМК РусЯз
+				</option>
+			}
+		</select>
+	</div>
+	<div class="input-box">
+		<label for="material">
+			Редактируемый материал
+		</label>
+		<select id="material" @onchange='async (e) => {
+			type = e.Value?.ToString()!;
+			await UpdateType();
+			this.StateHasChanged();
+		}'>
+			<option>
+				Выберите материал
+			</option>
+            <option value="Описание работы ЦМК">
+				Описание работы ЦМК
+			</option>
+			<option value="Члены ЦМК">
+				Члены ЦМК
+			</option>
+            <option value="Достижения ЦМК">
+				Достижения ЦМК
+			</option>
+            <option value="Решаемые задачи и планы">
+                Решаемые задачи и планы
+			</option>
+			<option value="История">
+				История
+			</option>
+		</select>
+	</div>
+</form>
+
+<CMK_DescriptionOfWorkComponent CMK="@CMK"/>
+<CMK_HistoryComponent CMK="@CMK"/>
+<CMK_CompositionsController CMK="@CMK"/>
+<CMK_AchievementsComponent CMK="@CMK"/>
+<CMK_PlansComponent CMK="@CMK"/>
+
+
+@code {
+	public string CMK { get; set; } = "Выберите ЦМК";
+	public string? type { get; set; }
+
+	private async Task OnSelectCMK()
+	{
+		using var db = new DatabaseContext();
+		if (CMK != "Выберите ЦМК" && !await db.CMK.AnyAsync(e => e.name == CMK))
+		{
+			var cmk = new OAT.Entities.Database.CMK(CMK, new(), "Истории пока нет", "Описание работы ЦМК", "Достижения ЦМК", "Решаемые задачи и планы");
+			await db.AddAsync(cmk);
+			await db.SaveChangesAsync();
+		}
+	}
+
+	private async Task UpdateType(){
+		await JSRuntime.InvokeVoidAsync("ShowForm", type);
+	}
+}
+

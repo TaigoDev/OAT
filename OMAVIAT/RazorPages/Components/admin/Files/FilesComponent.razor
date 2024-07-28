@@ -1,0 +1,336 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using OAT.Controllers.Schedules.Readers
+@using OAT.Controllers.Security
+@using OAT.Entities.Enums
+@using OAT.Utilities
+@using OAT.Utilities.Telegram
+@using OMAVIAT.Services.AdminPanel
+@inject IHttpContextAccessor httpContextAccessor;
+
+@{
+    if (httpContextAccessor is null || httpContextAccessor.HttpContext is null)
+        return;
+    
+
+    var User = httpContextAccessor.HttpContext.User;
+    if (User is null)
+        return;
+
+    
+}
+
+@error
+<form id="news" class="panel-form" method="post" enctype="multipart/form-data">
+    <label for="news" class="panel-form-title">
+        Управление файлами
+    </label>
+    <div class="input-box">
+        <label for="corpus">
+            Корпус
+        </label>
+        <InputSelect @bind-Value="submit.building">
+            <option value="all">
+                Выберите корпус
+            </option>
+
+
+            <option value="ul_lenina_24">
+                Ул. Ленина, 24
+            </option>
+
+            <option value="ul_b_khmelnickogo_281a">
+                Б. Хмельницкого, 281А
+            </option>
+
+            <option value="pr_kosmicheskij_14a">
+                Пр. Космический, 14А
+            </option>
+
+
+            <option value="ul_volkhovstroya_5">
+                Ул. Волховстроя, 5
+            </option>
+            
+        </InputSelect>
+
+    </div>
+    <div class="input-box">
+        <label for="type">
+            Тип документов
+        </label>
+        <select id="type" @onchange="(x) => OnChangeType(x.Value!.ToString()!)">
+            <option value="schedule-changes">
+                Изменения в расписании
+            </option>
+            <option value="schedule">
+                Расписание
+            </option>
+            <option value="session">
+                Сессия
+            </option>
+            <option value="practice">
+                Практика
+            </option>
+        </select>
+    </div>
+
+    @button
+</form>
+@code {
+    private Submit submit = new Submit();
+    private RenderFragment? button { get; set; }
+    private RenderFragment? error { get; set; }
+
+    private async Task SubmitPractice()
+    {
+
+        if (submit.building is Building.all)
+        {
+            await Log("❌ Выберите корпус!");
+            return;
+        }
+        var User = httpContextAccessor!.HttpContext!.User;
+        if (User is null)
+        {
+            await Log("❌ Произошла ошибка. Сообщите: SubmitPractice()");
+            return;
+        }
+
+        if (submit.file is null || submit.file.Size == 0 || Path.GetExtension(submit.file.Name) is not ".xlsx")
+        {
+            await Log("❌ Добавьте корректный файл");
+            return;
+        }
+
+        if (!Permissions.RightsToBuildingById(User.GetUsername(), submit.building.ConvertToString()))
+        {
+            await Log("❌ У вас недостаточно прав");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(submit.filename))
+        {
+            await Log("❌ Заполните имя файла!");
+            return;
+        }
+
+        var response = await FilesHelper.PracticeTestFile(submit.building, submit.file);
+        if (response is not null)
+        {
+            error = (__builder) =>
+            {
+                <ErrorComponent header="Не удалось обновить изменения" description="@response" />
+            };
+            await JSRuntime.InvokeVoidAsync("StopAnim");
+            return;
+        }
+
+        await JSRuntime.InvokeVoidAsync("StartAnim");
+        await FilesHelper.PracticeSaveFile(submit.filename, submit.building, submit.file);
+        Logger.Info($"Пользователь {User.GetUsername()} добавил файл {submit.filename} практики {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
+        await Log($"✅ Файл {submit.filename} успешно добавлен");
+        button = null;
+        this.StateHasChanged();
+        OnChangeType("practice");
+    }
+
+    private async Task SubmitSession()
+    {
+
+        if (submit.building is Building.all)
+        {
+            await Log("❌ Выберите корпус!");
+            return;
+        }
+        var User = httpContextAccessor!.HttpContext!.User;
+        if (User is null)
+        {
+            await Log("❌ Произошла ошибка. Сообщите: SubmitSession()");
+            return;
+        }
+
+        if (submit.file is null || submit.file.Size == 0 || Path.GetExtension(submit.file.Name) is not ".xlsx")
+        {
+            await Log("❌ Добавьте корректный файл");
+            return;
+        }
+
+        if (!Permissions.RightsToBuildingById(User.GetUsername(), submit.building.ConvertToString()))
+        {
+            await Log("❌ У вас недостаточно прав");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(submit.filename))
+        {
+            await Log("❌ Заполните имя файла!");
+            return;
+        }
+        await JSRuntime.InvokeVoidAsync("StartAnim");
+        await FilesHelper.SessionSaveFile(submit.filename, submit.building, submit.file);
+        await Log($"✅ Файл {submit.filename} успешно добавлен");
+        Logger.Info($"Пользователь {User.GetUsername()} добавил файл {submit.filename} сессии {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
+        button = null;
+        this.StateHasChanged();
+        OnChangeType("session");
+    }
+
+    private async Task SubmitSchedule()
+    {
+        if (submit.building is Building.all)
+        {
+            await Log("❌ Выберите корпус!");
+            return;
+        }
+        var User = httpContextAccessor!.HttpContext!.User;
+        if (User is null)
+        {
+            await Log("❌ Произошла ошибка. Сообщите: SubmitSchedule()");
+            return;
+        }
+
+        if (submit.file is null || submit.file.Size == 0 || Path.GetExtension(submit.file.Name) is not ".xml")
+        {
+            await Log("❌ Добавьте корректный файл");
+            return;
+        }
+
+        if (!Permissions.RightsToBuildingById(User.GetUsername(), submit.building.ConvertToString()))
+        {
+            await Log("❌ У вас недостаточно прав");
+            return;
+        }
+        await JSRuntime.InvokeVoidAsync("StartAnim");
+        await FilesHelper.ScheduleSaveFile(submit.building, submit.file);
+        Logger.Info($"Пользователь {User.GetUsername()} обновил расписание для {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
+        await Log("✅ Файл успешно обновлен");
+        await JSRuntime.InvokeVoidAsync("StopAnim");
+    }
+
+    private async Task SubmitChanges()
+    {
+        if (submit.building is Building.all)
+        {
+            await Log("❌ Выберите корпус!");
+            return;
+        }
+        var User = httpContextAccessor!.HttpContext!.User;
+        if (User is null)
+        {
+            await Log("❌ Произошла ошибка. Сообщите: SubmitChanges()");
+            return;
+        }
+
+        if (submit.file is null || submit.file.Size == 0 || Path.GetExtension(submit.file.Name) is not ".xlsx")
+        {
+            await Log("❌ Добавьте корректный файл");
+            return;
+        }
+
+        if (!Permissions.RightsToBuildingById(User.GetUsername(), submit.building.ConvertToString()))
+        {
+            await Log("❌ У вас недостаточно прав");
+            return;
+        }
+        await JSRuntime.InvokeVoidAsync("StartAnim");
+        var response = await FilesHelper.ChangesTestFile(submit.building, submit.file);
+        if (response is not null)
+        {
+            error = (__builder) =>
+            {
+                <ErrorComponent header="Не удалось обновить изменения" description="@response"/>
+            };
+            await JSRuntime.InvokeVoidAsync("StopAnim");
+            return;
+        }
+
+        await FilesHelper.ChangesSaveFile(submit.building, submit.file);
+        Logger.Info($"Пользователь {User.GetUsername()} обновил файл с изменением расписания для {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
+        await Log("✅ Файл успешно обновлен");
+        await JSRuntime.InvokeVoidAsync("StopAnim");
+    }
+
+    private void OnChangeType(string type)
+    {
+        button = type switch
+        {
+            "schedule-changes" => (__builder) =>
+            {
+                <div class="input-box">
+                    <label for="files-corpus">
+                        Файл
+                    </label>
+                    <InputFile type="file" name="files" accept=".xlsx" OnChange="(x) => submit.file = x.File" />
+                </div>
+                <button type="button" class="panel-form-send button-process" value="Отправить" @onclick="async () => await SubmitChanges()">
+                    <span id="ring" class="hide btn-ring btn-process"></span>
+                    Обновить изменения
+                </button>
+            },
+            "schedule" => (__builder) =>
+            {
+                <div class="input-box">
+                    <label for="files-corpus">
+                        Файл
+                    </label>
+                    <InputFile type="file" name="files" accept=".xml" OnChange="(x) => submit.file = x.File" />
+                </div>
+                <button type="button" class="panel-form-send button-process" value="Отправить" @onclick="async () => await SubmitSchedule()">
+                    <span id="ring" class="hide btn-ring btn-process"></span>
+                    Обновить расписание
+                </button>
+            },
+            "session" => (__builder) =>
+            {
+                <div class="input-box">
+                    <label for="filename-display-practice">
+                        Имя файла, которое будет отображаться в описании
+                    </label>
+                    <input type="text" @bind-value="@submit.filename">
+                </div>
+                <div class="input-box">
+                    <label for="files-corpus">
+                        Файл
+                    </label>
+                    <InputFile type="file" name="files" accept=".xlsx" OnChange="(x) => submit.file = x.File" />
+                </div>
+                <button type="button" class="panel-form-send button-process" value="Отправить" @onclick="async () => await SubmitSession()">
+                    <span id="ring" class="hide btn-ring btn-process"></span>
+                    Добавить файл сессии
+                </button>
+                <TableComponent building="@submit.building" path="@Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", submit.building.ConvertToString())" />
+
+            },
+            _ => (__builder) =>
+            {
+                <div class="input-box">
+                    <label for="filename-display-practice">
+                        Имя файла, которое будет отображаться в описании
+                    </label>
+                    <input type="text" @bind-value="@submit.filename">
+                </div>
+                <div class="input-box">
+                    <label for="files-corpus">
+                        Файл
+                    </label>
+                    <InputFile type="file" name="files" accept=".xlsx" OnChange="(x) => submit.file = x.File" />
+                </div>
+                <button type="button" class="panel-form-send button-process" value="Отправить" @onclick="async () => await SubmitPractice()">
+                    <span id="ring" class="hide btn-ring btn-process"></span>
+                    Добавить файл практики
+                </button>
+                <TableComponent building="@submit.building" path="@Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", submit.building.ConvertToString())" />
+            }
+
+        };
+    }
+    private async Task Log(string message) => await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
+    protected override void OnInitialized() => OnChangeType("schedule-changes");
+
+    public class Submit
+    {
+        public string? filename { get; set; } 
+        public IBrowserFile? file { get; set; }
+        public Building? building { get; set; } = Building.all;
+    }
+}

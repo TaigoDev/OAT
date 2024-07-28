@@ -1,0 +1,135 @@
+﻿@page "/CMK/{name:regex(^([a-zA-Z0-9А-Яа-я .&'-]+)$)}"
+@using OMAVIAT.RazorPages.Components
+@using OAT.Utilities
+@using OMAVIAT.Services.Workers
+@model CMKModel
+@{
+	using var context = new DatabaseContext();
+	var cmk = context.CMK.FirstOrDefault(e => e.url == Model.name);
+    ViewData["Title"] = cmk is not null ? cmk.name : "ЦМК не найден";
+
+}
+@if(cmk is null)
+{
+    <section class="centered">
+	    <h2 class="section-title">
+	    	ЦМК с таким именем не найден
+	    </h2>
+    </section>
+    return;
+}
+
+<section class="centered">
+	<h2 class="section-title">
+		@cmk.name
+	</h2>
+	
+	<ul class="page-navigation">
+		<li>
+			<a href="#people">
+				Состав
+			</a>
+		</li>
+		<li>
+			<a href="#history">
+				История
+			</a>
+		</li>
+		<li>
+			<a href="#work">
+                Описание работы
+			</a>
+		</li>
+		<li>
+            <a href="#tasks">
+                Решаемые задачи и планы
+			</a>
+		</li>
+        <li>
+            <a href="#achievements">
+                Достижения
+            </a>
+        </li>
+	</ul>
+
+
+	<h3 id="people" class="section-subtitle">
+		Состав ЦМК
+	</h3>
+	<ul class="people-list">
+		@foreach (var FullName in cmk.compositions)
+		{
+			var people = WorkersReader.AllWorkers.FirstOrDefault(e => e.FullName.ToSimpleText() == FullName.ToSimpleText());
+			if (people is null)
+			{
+				<li class="people-item">
+					<a class="people-item-img-container" href="">
+						<img src="~/images/basic/unnamed.jpg" alt="">
+					</a>
+					<div class="people-item-body">
+						<div class="people-item-body-fio">
+							@FullName
+						</div>
+						<div class="people-item-body-job">
+							Информация не найдена. Сообщите в отдел кадров
+						</div>
+					</div>
+				</li>
+			}
+			else
+			{
+				<li class="people-item" >
+					<a class="people-item-img-container" href="/organizationInformation/worker/@people.FullName">
+                        <img src="/api/images/teachers/@people.FullName" alt="">
+					</a>
+					<div class="people-item-body">
+						<div class="people-item-body-fio">
+							@people.FullName
+						</div>
+						<div class="people-item-body-job">
+							@people.Post
+						</div>
+					</div>
+				</li>
+			}
+		}
+	</ul>
+
+	<h3 id="history" class="section-subtitle">
+		История ЦМК
+	</h3>
+
+	@foreach (var t in cmk.history.Split("\n"))
+	{
+		<p>@Html.Raw(@t)</p>
+	}
+
+
+    <h3 id="work" class="section-subtitle">
+        Описание работы ЦМК
+    </h3>
+
+    @foreach (var t in cmk.descriptionOfWork.Split("\n"))
+    {
+        <p>@Html.Raw(@t)</p>
+    }
+
+    <h3 id="tasks" class="section-subtitle">
+        Решаемые задачи и планы ЦМК
+    </h3>
+
+    @foreach (var t in cmk.plans.Split("\n"))
+    {
+        <p>@Html.Raw(@t)</p>
+    }
+
+    <h3 id="achievements" class="section-subtitle">
+        Достижения ЦМК
+    </h3>
+
+    @foreach (var t in cmk.achievements.Split("\n"))
+    {
+        <p>@Html.Raw(@t)</p>
+    }
+
+</section>

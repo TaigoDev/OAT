@@ -1,0 +1,108 @@
+﻿@page
+@model ClassesModel
+@{
+	ViewData["Title"] = "Расписание занятий";
+}
+
+<link rel="stylesheet" href="~/css/timetable/choose.css" asp-append-version="true">
+
+<div class="container content-page">
+	<section class="content">
+		<h2 class="section-title">
+			Расписание занятий
+		</h2>
+
+		<h3 class="section-subtitle">
+			По группам
+		</h3>
+		<div class="choose-corpus">
+			<a href="groups/ul_lenina_24" class="corpus">
+				Корпус 1 | ул. Ленина, 24
+			</a>
+			<a href="groups/ul_b_khmelnickogo_281a" class="corpus">
+				Корпус 2 | ул. Б. Хмельницкого, 281а
+			</a>
+			<a href="groups/pr_kosmicheskij_14a" class="corpus">
+				Корпус 3 | пр. Космический, 14а
+			</a>
+			<a href="groups/ul_volkhovstroya_5" class="corpus">
+				Корпус 4 | ул. Волховстроя, 5
+			</a>
+		</div>
+
+		<h3 class="section-subtitle">
+			По преподавателям
+		</h3>
+		<div class="choose-corpus">
+			<a href="teachers/ul_lenina_24" class="corpus">
+				Корпус 1 | ул. Ленина, 24
+			</a>
+			<a href="teachers/ul_b_khmelnickogo_281a" class="corpus">
+				Корпус 2 | ул. Б. Хмельницкого, 281а
+			</a>
+			<a href="teachers/pr_kosmicheskij_14a" class="corpus">
+				Корпус 3 | пр. Космический, 14а
+			</a>
+			<a href="teachers/ul_volkhovstroya_5" class="corpus">
+				Корпус 4 | ул. Волховстроя, 5
+			</a>
+		</div>
+
+        <h3 class="section-subtitle">
+            По кабинетам
+        </h3>
+        <div class="choose-corpus">
+            <a href="cabinets/ul_lenina_24" class="corpus">
+                Корпус 1 | ул. Ленина, 24
+            </a>
+            <a href="cabinets/ul_b_khmelnickogo_281a" class="corpus">
+                Корпус 2 | ул. Б. Хмельницкого, 281а
+            </a>
+            <a href="cabinets/pr_kosmicheskij_14a" class="corpus">
+                Корпус 3 | пр. Космический, 14а
+            </a>
+            <a href="cabinets/ul_volkhovstroya_5" class="corpus">
+                Корпус 4 | ул. Волховстроя, 5
+            </a>
+        </div>
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Расписание
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="Classes">
+						Расписание занятий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="ClassesChanges">
+						Изменения в расписании занятий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Practice">
+						Расписание практик
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="PODPO">
+						Расписание ПО и ДПО
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Session">
+						Расписание сессий
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="GIA">
+						Расписание ГИА
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>
