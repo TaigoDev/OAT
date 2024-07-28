@@ -13,10 +13,6 @@ jobs:
           with:
             dotnet-version: '8.0.x'
            
- 
-        - name: Install dependencies
-          run: dotnet restore
-          
         - name: Publish project
           run: dotnet publish -c Release
 
@@ -27,8 +23,25 @@ jobs:
             github_token: ${{ secrets.git_token }}
             tag_prefix: ''
 
-        - name: Upload dotnet results
-          uses: actions/upload-artifact@v4
+        - name: Create Zip File
+          uses: papeloto/action-zip@v1
           with:
-            name: ${{ steps.generate_release_tag.outputs.release_tag }}
-            path: OAT/OMAVIAT/bin/Release/net8.0/linux-x64/publish/
+            files: "OAT/OMAVIAT/bin/Release/net8.0/linux-x64/publish/*"
+            dest: "OAT/OMAVIAT/bin/Release/net8.0/linux-x64/publish/release.zip"
+          
+        - name: Initialize Release
+          uses: actions/create-release@v1
+          id: create_release
+          env:
+            GITHUB_TOKEN: ${{ secrets.git_token }}
+          with:
+            tag_name: ${{ steps.generate_release_tag.outputs.release_tag }}
+            release_name: ${{ steps.generate_release_tag.outputs.release_tag }}
+      
+        - name: Create Release    
+          uses: csexton/release-asset-action@v2
+          with:
+            github-token: ${{ secrets.git_token }}
+            file: "OAT/OMAVIAT/bin/Release/net8.0/linux-x64/publish/release.zip"
+            release-url: ${{ steps.create_release.outputs.upload_url }} 
+
