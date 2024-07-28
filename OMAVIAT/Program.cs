@@ -63,7 +63,6 @@ else
     });
 }
 
-app.MapBlazorHub();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("AllowAll");
