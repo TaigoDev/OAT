@@ -36,11 +36,9 @@ jobs:
             GH_TOKEN: ${{ secrets.git_token }}
           with:
             title: ${{ steps.generate_release_tag.outputs.release_tag }}
-      
-        - name: Create Release    
-          uses: csexton/release-asset-action@v2
+        - name: Release
+          uses: softprops/action-gh-release@v2
           with:
-            github-token: ${{ secrets.git_token }}
-            file: "OMAVIAT/bin/Release/net8.0/linux-x64/publish/release.zip"
-            release-url: ${{ steps.create_release.outputs.upload_url }} 
+            files: "OMAVIAT/bin/Release/net8.0/linux-x64/publish/release.zip"
+
 
