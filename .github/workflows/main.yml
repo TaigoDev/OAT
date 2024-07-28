@@ -36,4 +36,12 @@ jobs:
             tag_name: ${{ steps.generate_release_tag.outputs.release_tag }}
             token: ${{ secrets.git_token }}
 
-
+        - name: Telegram
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            message: |
+              ${{ github.actor }} создал новый релиз            
+              Репозиторий ${{ github.repository }}
+              Скачать релиз - https://github.com/TaigoDev/OAT/releases/tag/${{ steps.generate_release_tag.outputs.release_tag }}
