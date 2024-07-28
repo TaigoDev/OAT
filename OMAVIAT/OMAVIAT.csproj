@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<ScopedCssEnabled>true</ScopedCssEnabled>
+	<PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="CsvHelper" Version="33.0.1" />
