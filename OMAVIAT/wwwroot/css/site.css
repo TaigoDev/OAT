@@ -1001,10 +1001,6 @@ table.two-column tr td:first-child {
 	width: 100%;
 }
 
-.hide-title {
-	display: none;
-}
-
 /* documents */
 
 .documents-list {
@@ -2136,6 +2132,12 @@ a.main-menu-item-pictogram {
 		grid-template-columns: 1fr;
 		font-size: 0.9rem;
 	}
+}
+
+/* SPECIAL */
+
+.hide {
+	display: none !important;
 }
 
 /* BAD SEE VERSION OF SITE */

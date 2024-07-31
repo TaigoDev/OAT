@@ -1,0 +1,113 @@
+﻿.selectors {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.selector{
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.selector-title{
+	font-weight: 500;
+	font-size: 1.25rem;
+}
+
+.selector-items {
+	gap: 10px;
+}
+
+.selector-items li{
+	color: var(--light-white);
+	background: var(--m-l-color);
+	border-radius: var(--border-radius-m);
+	cursor: pointer;
+	text-align: center;
+	transition: 75ms ease;
+}
+
+.selector-items li:hover, .selector-items li.active{
+	background: var(--m-d-color);
+	color: #ffffff;
+}
+
+.selector-items.floors{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.selector-items.floors li{
+	display: grid;
+	place-items: center;
+	border-radius: 50%;
+	aspect-ratio: 1;
+	width: 40px;
+}
+
+.selector-items.corpuses{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.selector-items.corpuses li{
+	padding: 5px 10px;
+}
+
+.map-container {
+	position: relative;
+	height: 500px;
+	border: 2px solid;
+	border-radius: var(--border-radius-m);
+	margin-top: 20px;
+	overflow: auto;
+}
+
+.map-container:not(:has( .map-corpus-floor.active)){
+	display: none;
+}
+
+/* :has(> .map-corpus-floor.active) */
+
+/*
+.map-container:has(> .map-corpus[data-corpus-name="Ленина"]):has(> .map-corpus[data-corpus-name="Ленина"]> .map-corpus-floor.active){
+	height: 1426px;
+}
+*/
+
+.map-container::-webkit-scrollbar {
+	width: 20px;
+	height: 20px;
+}
+
+.map-container::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.map-container::-webkit-scrollbar-thumb {
+	background-clip: content-box;
+	border: 5px solid transparent;
+	border-radius: 10px;
+	background-color: var(--m-color);
+}
+
+.map-container::-webkit-scrollbar-corner {
+	background-color: transparent;
+}
+
+
+.map-corpus-floor {
+	display: none;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.map-corpus-floor.active{
+	visibility: visible;
+	opacity: 1;
+	display: block;
+}
