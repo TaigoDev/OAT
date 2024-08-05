@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using OAT;
-using OAT.Controllers.Security.Controllers;
-using OAT.Entities.Enums;
-using OAT.Utilities;
+using OMAVIAT;
+using OMAVIAT.Controllers.Security.Controllers;
+using OMAVIAT.Entities.Enums;
+using OMAVIAT.Utilities;
 using System.Security.Claims;
 
 public class ValidationFilter : IAsyncActionFilter

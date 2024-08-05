@@ -1,8 +1,8 @@
-﻿using OAT.Entities;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
+using OMAVIAT.Entities;
 using System.Reflection;
 
-namespace OAT.Utilities
+namespace OMAVIAT.Utilities
 {
 	public static class EPPLusExtensions
 	{

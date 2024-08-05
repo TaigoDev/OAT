@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
-using OAT.Utilities;
+using OMAVIAT.Utilities;
 using System.Net;
 
-namespace OAT.Controllers.Bitrix.Controllers
+namespace OMAVIAT.Controllers.Bitrix.Controllers
 {
 	public class ImageController : Controller
 	{

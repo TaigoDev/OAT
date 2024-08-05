@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.RazorPages.projectsAndEvents.professionalitet
+namespace OMAVIAT.Pages.organizationInformation
 {
 	public class UPKModel : PageModel
 	{

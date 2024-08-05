@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using OAT.Entities.Enums;
+using OMAVIAT.Entities.Enums;
 using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;

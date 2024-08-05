@@ -1,4 +1,4 @@
-﻿namespace OAT.Entities
+﻿namespace OMAVIAT.Entities
 {
 	public class IPage
 	{

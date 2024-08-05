@@ -1,6 +1,4 @@
-﻿using OMAVIAT.Entities.Enums;
-
-namespace OMAVIAT.Entities.Schedule
+﻿namespace OMAVIAT.Entities.Schedule
 {
 	public class ScheduleDay
 	{

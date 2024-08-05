@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages
+namespace OMAVIAT.Pages
 {
 	public class SearchModel : PageModel
 	{

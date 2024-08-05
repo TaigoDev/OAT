@@ -1,5 +1,4 @@
-﻿using OAT.Controllers.Schedules;
-using OMAVIAT.Entities.Enums;
+﻿using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
 using System.Xml;
 
@@ -178,8 +177,8 @@ namespace OMAVIAT.Services.Schedule.MainSchedule
 
 				SetTeacherSchedule(Id, schedule, subject, teacherFullName, cabinet, week_id, day_id, groupName, lesson_id);
 				SetCabinetSchedule(Id, schedule, subject, teacherFullName, cabinet, week_id, day_id, groupName, lesson_id);
-				return new ScheduleLesson 
-				{ 
+				return new ScheduleLesson
+				{
 					Cabinet = cabinet,
 					Group = groupName,
 					Name = subject,

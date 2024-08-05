@@ -1,4 +1,4 @@
-﻿namespace OAT.Controllers.App
+﻿namespace OMAVIAT.Controllers.App
 {
 	public class DirectoriesConfigurator
 	{

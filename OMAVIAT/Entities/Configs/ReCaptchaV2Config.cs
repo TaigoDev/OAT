@@ -1,4 +1,4 @@
-﻿namespace OAT.Entities.Configs
+﻿namespace OMAVIAT.Entities.Configs
 {
 	public class ReCaptchaV2Config
 	{

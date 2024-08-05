@@ -1,13 +1,17 @@
-﻿namespace OAT.Entities.Schedule
+﻿using OMAVIAT.Entities.Enums;
+
+namespace OMAVIAT.Entities.Schedule
 {
 
-	public class Changes(string sheetName, string SchoolWeek, string Date, IEnumerable<Bell> bells, IEnumerable<ChangeRow> rows)
+	public class Changes
 	{
-		public string SheetName { get; set; } = sheetName;
-		public string SchoolWeek { get; set; } = SchoolWeek;
-		public string Date { get; set; } = Date;
-		public IEnumerable<Bell> bells { get; set; } = bells;
-		public IEnumerable<ChangeRow> rows { get; set; } = rows;
+		public required Corpus corpus { get; set; }
+		public required string SheetName { get; set; }
+		public required string SchoolWeek { get; set; }
+		public required string Date { get; set; }
+		public required string dayType { get; set; }
+		public required List<Bell> bells { get; set; }
+		public required List<ChangeRow> rows { get; set; }
 
 	}
 }

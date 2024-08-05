@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Controllers.Evalutions;
-using OAT.Controllers.Security;
-using OAT.Entities.Journal;
-using OAT.Utilities;
+using OMAVIAT.Controllers.Evalutions;
+using OMAVIAT.Controllers.Security;
+using OMAVIAT.Entities.Journal;
+using OMAVIAT.Utilities;
 using System.Globalization;
 
-namespace OAT.Pages.parents
+namespace OMAVIAT.Pages.parents
 {
 	[NoCache]
 	public class GradesModel : PageModel

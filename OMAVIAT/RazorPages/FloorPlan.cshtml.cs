@@ -1,12 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages
+namespace OMAVIAT.Pages
 {
-    public class FloorPlanModel : PageModel
-    {
-        public void OnGet()
-        {
-        }
-    }
+	public class FloorPlanModel : PageModel
+	{
+		public void OnGet()
+		{
+		}
+	}
 }

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Models;
 using static OMAVIAT.Services.Workers.WorkersReader;
 
-namespace OAT.Pages.organizationInformation
+namespace OMAVIAT.Pages.organizationInformation
 {
 	public class SearchWorkerModel : PageModel
 	{

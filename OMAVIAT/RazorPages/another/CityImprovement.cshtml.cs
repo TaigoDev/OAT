@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.another
+namespace OMAVIAT.Pages.another
 {
 	public class CityImprovementModel : PageModel
 	{

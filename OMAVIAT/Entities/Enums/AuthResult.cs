@@ -1,4 +1,4 @@
-﻿namespace OAT.Entities.Enums
+﻿namespace OMAVIAT.Entities.Enums
 {
 	public enum AuthResult
 	{

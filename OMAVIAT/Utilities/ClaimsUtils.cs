@@ -1,7 +1,7 @@
-﻿using OAT.Controllers.Security;
+﻿using OMAVIAT.Controllers.Security;
 using System.Security.Claims;
 
-namespace OAT.Utilities
+namespace OMAVIAT.Utilities
 {
 	public static class ClaimsUtils
 	{

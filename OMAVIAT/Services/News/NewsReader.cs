@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OAT;
-using OAT.Entities.Database;
+using OMAVIAT;
+using OMAVIAT.Entities.Database;
 
 
 public class NewsReader

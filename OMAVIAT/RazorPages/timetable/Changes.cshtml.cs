@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Controllers.Schedules.Controllers;
+using OMAVIAT.Entities.Database;
+using OMAVIAT.Entities.Enums;
 
-namespace OAT.Pages
+namespace OMAVIAT.Pages
 {
 	[NoCache]
 	public class ChangesModel : PageModel
@@ -13,19 +14,34 @@ namespace OAT.Pages
 			_logger = logger;
 		}
 
-		public string? sheet { get; set; }
-		public int? corpus { get; set; }
+		public DateOnly? sheet { get; set; }
+		public Corpus? corpus { get; set; }
 		public string captchaToken { get; set; }
-
-		public void OnGet(int? corpus, string? sheet)
+		public DaysChangesTable? daysChanges { get; set; }
+		public void OnGet(string? corpus, string? sheet)
 		{
 
 			if (corpus is null)
 				return;
 
+			if (!Enum.TryParse<Corpus>(corpus, true, out var result))
+				return;
+			using var db = new DatabaseContext();
 
-			this.corpus = corpus;
-			this.sheet = sheet ?? ChangesHelper.GetSheetName((int)corpus);
+			this.corpus = result;
+			if (DateOnly.TryParseExact(sheet, "dd.MM.yyyy", out var date))
+			{
+				this.sheet = date;
+				daysChanges = db.daysChanges.FirstOrDefault(e => e.corpus == result && e.date == date);
+				return;
+			}
+
+			var search = db.daysChanges.Where(e => e.corpus == result).ToList().MaxBy(e => e.date);
+			if (search is not null)
+			{
+				this.sheet = search.date;
+				daysChanges = search;
+			}
 		}
 	}
 

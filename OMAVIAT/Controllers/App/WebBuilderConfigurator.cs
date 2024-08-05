@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using OAT.Controllers.Security;
+using OMAVIAT.Controllers.Security;
 using OMAVIAT.Services.ReCaptchaV2;
 using OMAVIAT.Services.ReCaptchaV3;
 
-namespace OAT.Controllers.App
+namespace OMAVIAT.Controllers.App
 {
 	public class WebBuilderConfigurator
 	{
@@ -37,10 +37,10 @@ namespace OAT.Controllers.App
 			builder.Services.AddHttpContextAccessor();
 			builder.Services.AddReCaptcha(builder.Configuration.GetSection("ReCaptcha"));
 			builder.WebHost.UseUrls($"http://0.0.0.0:{Configurator.config.bind_port}");
-            builder.Services.AddRazorComponents().AddInteractiveServerComponents();
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddMvc().AddRazorPagesOptions(opt => opt.RootDirectory = "/RazorPages");
-			
+			builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+			builder.Services.AddControllersWithViews();
+			builder.Services.AddMvc().AddRazorPagesOptions(opt => opt.RootDirectory = "/RazorPages");
+
 
 		}
 	}

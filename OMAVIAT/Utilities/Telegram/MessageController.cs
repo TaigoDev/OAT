@@ -3,7 +3,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace OAT.Utilities.Telegram
+namespace OMAVIAT.Utilities.Telegram
 {
 	public static class MessageController
 	{

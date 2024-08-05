@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.feedback
+namespace OMAVIAT.Pages.feedback
 {
 	public class LocationModel : PageModel
 	{

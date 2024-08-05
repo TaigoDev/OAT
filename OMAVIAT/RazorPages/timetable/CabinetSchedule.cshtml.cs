@@ -1,14 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Entities.Enums;
+using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
 using OMAVIAT.Services.Schedule.MainSchedule;
 
 namespace OMAVIAT.RazorPages.timetable
 {
 	[NoCache]
-    public class CabinetScheduleModel : PageModel
-    {
+	public class CabinetScheduleModel : PageModel
+	{
 		public Schedule? cabinet;
 		public CorpusSchedule? corpus;
 		public string? cabinet_text;

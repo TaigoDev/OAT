@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages
+namespace OMAVIAT.Pages
 {
 	[NoCache, Authorize]
 	public class PanelModel : PageModel

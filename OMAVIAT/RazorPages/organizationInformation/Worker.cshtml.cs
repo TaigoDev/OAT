@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Utilities;
 using OMAVIAT.Entities.Models;
+using OMAVIAT.Utilities;
 using static OMAVIAT.Services.Workers.WorkersReader;
 
-namespace OAT.Pages.organizationInformation
+namespace OMAVIAT.Pages.organizationInformation
 {
 	public class WorkerModel : PageModel
 	{

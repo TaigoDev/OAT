@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages
+namespace OMAVIAT.Pages
 {
 	public class PartnersModel : PageModel
 	{
 		private readonly ILogger<PartnersModel> _logger;
-        public PartnersModel(ILogger<PartnersModel> logger)
+		public PartnersModel(ILogger<PartnersModel> logger)
 		{
 			_logger = logger;
 		}

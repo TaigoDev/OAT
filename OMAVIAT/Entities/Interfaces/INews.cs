@@ -1,4 +1,4 @@
-﻿namespace OAT.Entities.Interfaces
+﻿namespace OMAVIAT.Entities.Interfaces
 {
 	public interface INews
 	{

@@ -6,7 +6,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace OAT.Utilities.Telegram
+namespace OMAVIAT.Utilities.Telegram
 {
 	public class TelegramBot
 	{

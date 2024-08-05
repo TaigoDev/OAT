@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.parents
+namespace OMAVIAT.Pages.parents
 {
 	public class AcademicProgressModel : PageModel
 	{

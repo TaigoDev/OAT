@@ -1,10 +1,10 @@
 ﻿using Ganss.Excel;
-using OAT.Entities.Journal;
+using OMAVIAT.Entities.Journal;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace OAT.Controllers.Evalutions
+namespace OMAVIAT.Controllers.Evalutions
 {
 	public class EvaluationsReader
 	{

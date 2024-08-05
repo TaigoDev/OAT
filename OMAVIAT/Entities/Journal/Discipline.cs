@@ -1,4 +1,4 @@
-﻿namespace OAT.Entities.Journal
+﻿namespace OMAVIAT.Entities.Journal
 {
 	public class Discipline
 	{

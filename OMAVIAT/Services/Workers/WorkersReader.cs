@@ -80,7 +80,7 @@ namespace OMAVIAT.Services.Workers
 			workers.RemoveAll(e => predicate.Invoke(e.Post));
 		}
 
-		
+
 
 	}
 }

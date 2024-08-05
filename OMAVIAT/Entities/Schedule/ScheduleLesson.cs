@@ -8,6 +8,6 @@
 		public required int subGroupId { get; set; }
 		public required string Teacher { get; set; }
 		public required string Cabinet { get; set; }
-		
+
 	}
 }

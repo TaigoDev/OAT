@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using OAT.Entities.Database;
+using Newtonsoft.Json;
+using OMAVIAT.Entities.Database;
+using OMAVIAT.Entities.Schedule;
 
-namespace OAT
+namespace OMAVIAT
 {
 	public class DatabaseContext : DbContext
 	{
@@ -13,6 +15,8 @@ namespace OAT
 		public virtual DbSet<IPTables> IPTables { get; set; }
 		public virtual DbSet<Documents> documents { get; set; }
 		public virtual DbSet<CMK> CMK { get; set; }
+		public virtual DbSet<ChangesTable> changes { get; set; }
+		public virtual DbSet<DaysChangesTable> daysChanges { get; set; }
 
 
 
@@ -29,6 +33,9 @@ namespace OAT
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
+			builder.Entity<DaysChangesTable>().Property(e => e.bells).HasConversion(
+				v => JsonConvert.SerializeObject(v),
+				v => JsonConvert.DeserializeObject<List<Bell>>(v) ?? new());
 			base.OnModelCreating(builder);
 		}
 

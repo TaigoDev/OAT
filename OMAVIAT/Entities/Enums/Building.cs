@@ -1,4 +1,4 @@
-﻿namespace OAT.Entities.Enums
+﻿namespace OMAVIAT.Entities.Enums
 {
 	public enum Building
 	{
@@ -8,5 +8,6 @@
 		pr_kosmicheskij_14a,
 		ul_volkhovstroya_5
 	}
+	public enum Corpus { b1, b2, b3, b4 }
 
 }

@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Net.Codecrete.QrCodeGenerator;
-using OAT.Entities;
-using OAT.Utilities;
+using OMAVIAT.Entities;
 using OMAVIAT.Services.Payments;
+using OMAVIAT.Utilities;
 using System.Text;
 
-namespace OAT.Pages.feedback
+namespace OMAVIAT.Pages.feedback
 {
 	public class PrintModel : PageModel
 	{

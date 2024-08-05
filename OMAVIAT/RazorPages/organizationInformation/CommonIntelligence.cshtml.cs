@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.organizationInformation
+namespace OMAVIAT.Pages.organizationInformation
 {
 	public class CommonIntelligenceModel : PageModel
 	{

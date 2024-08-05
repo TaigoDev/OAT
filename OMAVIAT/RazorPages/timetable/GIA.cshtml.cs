@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.timetable
+namespace OMAVIAT.Pages.timetable
 {
 	public class GIAModel : PageModel
 	{
