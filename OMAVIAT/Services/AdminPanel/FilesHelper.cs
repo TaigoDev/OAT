@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
-using OAT.Controllers.Schedules.Readers;
-using OAT.Entities.Enums;
-using OAT.Utilities;
-using OAT.Utilities.Telegram;
+using OMAVIAT.Entities.Enums;
 using OMAVIAT.Services.Schedule.MainSchedule;
+using OMAVIAT.Utilities;
+using OMAVIAT.Utilities.Telegram;
 
 namespace OMAVIAT.Services.AdminPanel
 {

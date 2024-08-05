@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Entities.Database;
+using OMAVIAT.Entities.Database;
 
-namespace OAT.Pages
+namespace OMAVIAT.Pages
 {
 	public class IndexModel : PageModel
 	{

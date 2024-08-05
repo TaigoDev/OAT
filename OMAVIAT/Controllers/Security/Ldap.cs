@@ -1,9 +1,9 @@
-﻿using OAT.Utilities.Telegram;
+﻿using OMAVIAT.Utilities.Telegram;
 using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Text;
 
-namespace OAT.Controllers.Security
+namespace OMAVIAT.Controllers.Security
 {
 	public class Ldap
 	{

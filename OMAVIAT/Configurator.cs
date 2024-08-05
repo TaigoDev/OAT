@@ -1,8 +1,8 @@
-﻿using OAT.Entities.Configs;
-using OAT.Utilities;
+﻿using OMAVIAT.Entities.Configs;
+using OMAVIAT.Utilities;
 using System.Runtime.InteropServices;
 
-namespace OAT
+namespace OMAVIAT
 {
 	public class Configurator
 	{

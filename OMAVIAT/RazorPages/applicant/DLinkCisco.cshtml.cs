@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.applicant
+namespace OMAVIAT.Pages.applicant
 {
 	public class DLinkCiscoModel : PageModel
 	{

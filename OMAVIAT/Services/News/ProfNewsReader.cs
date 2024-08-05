@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OAT;
-using OAT.Entities.Database;
+using OMAVIAT.Entities.Database;
 
 namespace OMAVIAT.Services.News
 {

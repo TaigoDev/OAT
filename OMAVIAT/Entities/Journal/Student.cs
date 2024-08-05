@@ -1,6 +1,6 @@
-﻿using static OAT.Controllers.Evalutions.EvaluationsReader;
+﻿using static OMAVIAT.Controllers.Evalutions.EvaluationsReader;
 
-namespace OAT.Entities.Journal
+namespace OMAVIAT.Entities.Journal
 {
 	public class Student
 	{

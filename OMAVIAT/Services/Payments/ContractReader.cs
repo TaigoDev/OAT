@@ -1,6 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
-using OAT.Entities;
+using OMAVIAT.Entities;
 using System.Globalization;
 
 namespace OMAVIAT.Services.Payments

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace OAT.Controllers.Security
+namespace OMAVIAT.Controllers.Security
 {
 	public class Permissions
 	{

@@ -3,7 +3,7 @@ using System.Text;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace OAT.Utilities
+namespace OMAVIAT.Utilities
 {
 	public static class StringUtils
 	{

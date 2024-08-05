@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.projectsAndEvents.demoExam
+namespace OMAVIAT.Pages.projectsAndEvents.demoExam
 {
 	public class NewsModel : PageModel
 	{

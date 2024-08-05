@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.projectsAndEvents.professionalitet
+namespace OMAVIAT.Pages.projectsAndEvents.professionalitet
 {
 	public class NewsModel : PageModel
 	{

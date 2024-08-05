@@ -1,8 +1,8 @@
-﻿using OAT.Entities.Interfaces;
+﻿using OMAVIAT.Entities.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OAT.Entities.Database
+namespace OMAVIAT.Entities.Database
 {
 	public class News : INews
 	{

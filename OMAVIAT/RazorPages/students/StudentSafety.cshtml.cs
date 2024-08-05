@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.students
+namespace OMAVIAT.Pages.students
 {
 	public class StudentSafetyModel : PageModel
 	{

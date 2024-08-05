@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.projectsAndEvents.education
+namespace OMAVIAT.Pages.projectsAndEvents.education
 {
 	public class InformationCommunicationTechnologiesModel : PageModel
 	{

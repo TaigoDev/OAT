@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot.Types.ReplyMarkups;
 
-namespace OAT.Utilities.Telegram
+namespace OMAVIAT.Utilities.Telegram
 {
 	public class Buttons
 	{

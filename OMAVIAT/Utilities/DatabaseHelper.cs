@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace OAT.Utilities
+namespace OMAVIAT.Utilities
 {
 	public class DatabaseHelper
 	{
@@ -19,6 +19,7 @@ namespace OAT.Utilities
 					Logger.Info($"✅ Подключение с базой данных успешно установлено!");
 					using var db = new DatabaseContext();
 					Console.WriteLine($"Количество новостей: {db.News.Count()} ");
+					await db.Database.MigrateAsync();
 					await DropTokens();
 					return;
 				}

@@ -1,4 +1,4 @@
-﻿namespace OAT.Utilities
+﻿namespace OMAVIAT.Utilities
 {
 	public static class ControllersUtils
 	{

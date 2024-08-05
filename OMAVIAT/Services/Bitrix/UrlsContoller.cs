@@ -1,6 +1,6 @@
-﻿using OAT.Entities;
+﻿using OMAVIAT.Entities;
 
-namespace OAT.Controllers.Bitrix.Controllers
+namespace OMAVIAT.Controllers.Bitrix.Controllers
 {
 	public class UrlsContoller
 	{

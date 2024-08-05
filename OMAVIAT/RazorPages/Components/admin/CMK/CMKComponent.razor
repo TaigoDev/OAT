@@ -1,7 +1,7 @@
 ﻿@using Microsoft.EntityFrameworkCore
-@using OAT
+@using OMAVIAT
 @using OMAVIAT.RazorPages.Components.admin.CMK;
-@using OAT.Utilities
+@using OMAVIAT.Utilities
 @inject IHttpContextAccessor httpContextAccessor;
 
 @{
@@ -180,7 +180,7 @@
 		using var db = new DatabaseContext();
 		if (CMK != "Выберите ЦМК" && !await db.CMK.AnyAsync(e => e.name == CMK))
 		{
-			var cmk = new OAT.Entities.Database.CMK(CMK, new(), "Истории пока нет", "Описание работы ЦМК", "Достижения ЦМК", "Решаемые задачи и планы");
+			var cmk = new OMAVIAT.Entities.Database.CMK(CMK, new(), "Истории пока нет", "Описание работы ЦМК", "Достижения ЦМК", "Решаемые задачи и планы");
 			await db.AddAsync(cmk);
 			await db.SaveChangesAsync();
 		}

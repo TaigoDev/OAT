@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MimeTypes;
-using OAT.Controllers.Security;
-using OAT.Utilities;
+using OMAVIAT.Controllers.Security;
+using OMAVIAT.Utilities;
 
 namespace OMAVIAT.Services.AdminPanel
 {

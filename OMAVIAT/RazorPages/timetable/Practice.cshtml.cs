@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Utilities;
+using OMAVIAT.Utilities;
 
-namespace OAT.Pages.timetable
+namespace OMAVIAT.Pages.timetable
 {
 	[NoCache]
 	public class PracticeModel : PageModel

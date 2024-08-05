@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Controllers.Schedules;
-using OAT.Entities.Enums;
-using OAT.Entities.Schedule;
+using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
 using OMAVIAT.Services.Schedule.MainSchedule;
-using System.Collections.Generic;
 
-namespace OAT.Pages.timetable
+namespace OMAVIAT.Pages.timetable
 {
 	[NoCache]
 	public class TimetableModel : PageModel
@@ -29,10 +26,10 @@ namespace OAT.Pages.timetable
 			if (!Enum.TryParse<Building>(building, true, out var result))
 				return;
 
-		    corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int) result);
+			corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
 			if (corpus is null)
 				return;
-		    group = corpus.groups.FirstOrDefault(e => e.name == group_name);
+			group = corpus.groups.FirstOrDefault(e => e.name == group_name);
 		}
 
 		public List<List<ScheduleLesson>> GetAllLessonsByNumber(int id, ScheduleWeek week)
@@ -40,7 +37,7 @@ namespace OAT.Pages.timetable
 			var lessons = new List<List<ScheduleLesson>>();
 			foreach (var day in week.Days)
 				lessons.Add(day.lessons.Where(e => e.Id == id).ToList());
-			
+
 			return lessons;
 		}
 

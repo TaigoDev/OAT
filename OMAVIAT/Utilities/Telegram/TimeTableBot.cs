@@ -1,6 +1,6 @@
-﻿using OAT.Controllers.Schedules.Readers;
+﻿using OMAVIAT.Services.Schedule.ScheduleChanges;
 
-namespace OAT.Utilities.Telegram
+namespace OMAVIAT.Utilities.Telegram
 {
 	public class TimeTableBot
 	{
@@ -10,7 +10,7 @@ namespace OAT.Utilities.Telegram
 		{
 			try
 			{
-				await ChangesController.UpdateCorpusChanges(int.Parse(string.Join("", building.FirstOrDefault(char.IsDigit))));
+				await ChangesService.LoadChangesAsync(int.Parse(string.Join("", building.FirstOrDefault(char.IsDigit))));
 
 				var client = new HttpClient();
 				client.Timeout = TimeSpan.FromMinutes(2);

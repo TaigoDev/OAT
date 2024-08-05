@@ -1,4 +1,4 @@
-﻿namespace OAT.Entities.Schedule
+﻿namespace OMAVIAT.Entities.Schedule
 {
 
 	public class Bell

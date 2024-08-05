@@ -7,14 +7,14 @@ namespace OMAVIAT.Services.Schedule.MainSchedule
 	{
 		public static async Task<string?> ReadFileAsync(string path)
 		{
-			for(var i = 0; i < 4; i++)
+			for (var i = 0; i < 4; i++)
 				try
 				{
 					using var fs = new FileStream(path, FileMode.Open, FileAccess.Read);
 					using var reader_encoding = new StreamReader(fs, CodePagesEncodingProvider.Instance.GetEncoding(1251)!);
 					return await reader_encoding.ReadToEndAsync();
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					await Task.Delay(5000);
 					Logger.Error(ex);

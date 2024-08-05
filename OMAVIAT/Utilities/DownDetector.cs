@@ -1,8 +1,7 @@
-﻿using NPOI.SS.Formula.Functions;
-using OAT.Utilities.Telegram;
+﻿using OMAVIAT.Utilities.Telegram;
 using System.Net;
 
-namespace OAT.Utilities
+namespace OMAVIAT.Utilities
 {
 	public class DownDetector
 	{

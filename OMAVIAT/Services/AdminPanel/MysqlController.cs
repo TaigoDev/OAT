@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OAT;
-using OAT.Utilities;
+using OMAVIAT.Utilities;
 using System.Data;
 
 namespace OMAVIAT.Services.AdminPanel

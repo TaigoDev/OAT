@@ -3,7 +3,7 @@
 	public enum ScheduleDayType
 	{
 		Monday,
-		Tuesday, 
+		Tuesday,
 		Wednesday,
 		Thursday,
 		Friday,

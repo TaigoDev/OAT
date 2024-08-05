@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Services.ReCaptchaV2;
 using System.ComponentModel.DataAnnotations;
 
-namespace OAT.Pages.feedback
+namespace OMAVIAT.Pages.feedback
 {
 	[ValidateReCaptcha("questionanswer", ErrorMessage = "Вы не прошли капчу")]
 	public class QuestionAnswerModel : PageModel

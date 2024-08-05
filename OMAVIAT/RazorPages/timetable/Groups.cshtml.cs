@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using OAT.Controllers.Schedules;
-using OAT.Entities.Enums;
-using OAT.Entities.Schedule;
+using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
 using OMAVIAT.Services.Schedule.MainSchedule;
 
-namespace OAT.Pages.timetable
+namespace OMAVIAT.Pages.timetable
 {
 	[NoCache]
 	public class GroupsModel : PageModel

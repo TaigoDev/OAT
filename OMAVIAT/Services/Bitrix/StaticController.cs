@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
-using OAT.Utilities;
+using OMAVIAT.Utilities;
 
-namespace OAT.Controllers.Natives
+namespace OMAVIAT.Controllers.Natives
 {
 	public class StaticController : Controller
 	{

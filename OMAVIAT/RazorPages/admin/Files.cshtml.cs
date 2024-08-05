@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.admin
+namespace OMAVIAT.Pages.admin
 {
 	[NoCache]
 	public class FilesModel : PageModel

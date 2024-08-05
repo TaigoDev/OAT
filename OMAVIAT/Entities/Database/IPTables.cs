@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OAT.Entities.Database
+namespace OMAVIAT.Entities.Database
 {
 	public class IPTables
 	{

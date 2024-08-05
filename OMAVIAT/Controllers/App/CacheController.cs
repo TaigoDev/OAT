@@ -1,6 +1,6 @@
 ﻿using Microsoft.Net.Http.Headers;
 
-namespace OAT.Controllers.App
+namespace OMAVIAT.Controllers.App
 {
 	public class CacheController
 	{

@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS8604
 using HtmlAgilityPack;
-using OAT;
-using OAT.Controllers.Bitrix.Controllers;
+using OMAVIAT;
+using OMAVIAT.Controllers.Bitrix.Controllers;
 using System.Text;
 
 public static class ProxyController

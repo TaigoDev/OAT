@@ -25,6 +25,6 @@ namespace OMAVIAT.Services.Payments
 				 e.studentFullName.ToSearchView() == studentFullName.ToSearchView() &&
 				 e.Group.ToSearchView() == group.ToSearchView() &&
 				 e.FullName.ToSearchView() == FullName.ToSearchView()));
-		
+
 	}
 }

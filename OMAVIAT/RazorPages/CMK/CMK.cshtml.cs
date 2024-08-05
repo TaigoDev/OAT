@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.CMK
+namespace OMAVIAT.Pages.CMK
 {
 	public class CMKModel : PageModel
 	{

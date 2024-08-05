@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OAT.Pages.departments
+namespace OMAVIAT.Pages.departments
 {
 	public class ITModel : PageModel
 	{

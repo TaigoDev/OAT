@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using OAT.Entities.Database;
-using OAT.Entities.Enums;
-using OAT.Utilities;
+using OMAVIAT.Entities.Database;
+using OMAVIAT.Entities.Enums;
+using OMAVIAT.Utilities;
 using System.Security.Claims;
 
-namespace OAT.Controllers.Security.Controllers
+namespace OMAVIAT.Controllers.Security.Controllers
 {
 	public class AuthorizationController : Controller
 	{
