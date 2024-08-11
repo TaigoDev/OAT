@@ -12,29 +12,29 @@ using OMAVIAT.Utilities;
 using OMAVIAT.Utilities.Telegram;
 
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+await Configurator.init();
 Runs.StartModules(
-		//Ïîëó÷àåì èíôîðìàöèÿ èç êîíôèãîâ
+		//ÃÃ®Ã«Ã³Ã·Ã Ã¥Ã¬ Ã¨Ã­Ã´Ã®Ã°Ã¬Ã Ã¶Ã¨Ã¿ Ã¨Ã§ ÃªÃ®Ã­Ã´Ã¨Ã£Ã®Ã¢
 		DirectoriesConfigurator.Create,
-		Configurator.init,
 
-	   //Çàïóñêàåì ñåðâèñ ÒÃ
+	   //Ã‡Ã Ã¯Ã³Ã±ÃªÃ Ã¥Ã¬ Ã±Ã¥Ã°Ã¢Ã¨Ã± Ã’Ãƒ
 	   TelegramBot.init,
 	   DownDetector.init,
 
-	   //Çàïóñêàåì áàçó äàííûõ 
+	   //Ã‡Ã Ã¯Ã³Ã±ÃªÃ Ã¥Ã¬ Ã¡Ã Ã§Ã³ Ã¤Ã Ã­Ã­Ã»Ãµ 
 	   DatabaseHelper.WaitStableConnection,
 
-	   //Íàñòðàèâàåì ïåðåàäðåñàöèþ ñ áèòðèêñà
+	   //ÃÃ Ã±Ã²Ã°Ã Ã¨Ã¢Ã Ã¥Ã¬ Ã¯Ã¥Ã°Ã¥Ã Ã¤Ã°Ã¥Ã±Ã Ã¶Ã¨Ã¾ Ã± Ã¡Ã¨Ã²Ã°Ã¨ÃªÃ±Ã 
 	   UrlsContoller.init,
 
-	   //Çàïóñêàåì íîâîñòè
+	   //Ã‡Ã Ã¯Ã³Ã±ÃªÃ Ã¥Ã¬ Ã­Ã®Ã¢Ã®Ã±Ã²Ã¨
 	   NewsReader.init,
 	   ProfNewsReader.init,
 	   DemoExamsNewsReader.init,
 	   ScheduleReader.ReadAllAsync,
 	   ChangesService.InitAsync,
 
-	   //Çàïóñêàåì äðóãèå ñëóæáû
+	   //Ã‡Ã Ã¯Ã³Ã±ÃªÃ Ã¥Ã¬ Ã¤Ã°Ã³Ã£Ã¨Ã¥ Ã±Ã«Ã³Ã¦Ã¡Ã»
 	   () => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),
 	   WorkersReader.init
 );
