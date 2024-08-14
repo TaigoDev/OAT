@@ -46,7 +46,10 @@ namespace OMAVIAT.Utilities.Telegram
 					}
 				}
 				else
+				{ 
 					botClient = new TelegramBotClient(Configurator.telegram.token, new HttpClient());
+					IsProxy = false;
+				}
 
 				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 					return;
