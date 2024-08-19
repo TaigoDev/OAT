@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
+using OMAVIAT.Schedule.Schedule.MainSchedule;
 using OMAVIAT.Services.Schedule.MainSchedule;
 
 namespace OMAVIAT.Pages.timetable
@@ -16,7 +17,7 @@ namespace OMAVIAT.Pages.timetable
 		}
 		public string? building { get; set; }
 		public string? group_name { get; set; }
-		public Schedule? group { get; set; }
+		public Entities.Schedule.Schedule? group { get; set; }
 		public CorpusSchedule? corpus { get; set; }
 
 		public void OnGet(string? building, string? group_name)

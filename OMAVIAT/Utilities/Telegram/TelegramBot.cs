@@ -46,7 +46,10 @@ namespace OMAVIAT.Utilities.Telegram
 					}
 				}
 				else
+				{ 
 					botClient = new TelegramBotClient(Configurator.telegram.token, new HttpClient());
+					IsProxy = false;
+				}
 
 				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 					return;
@@ -82,7 +85,7 @@ namespace OMAVIAT.Utilities.Telegram
 				return false;
 			}
 		}
-		public static async void SendMessage(string message)
+		public static async Task SendMessage(string message)
 		{
 			try
 			{

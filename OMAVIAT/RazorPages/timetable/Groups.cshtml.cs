@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
+using OMAVIAT.Schedule.Schedule.MainSchedule;
 using OMAVIAT.Services.Schedule.MainSchedule;
 
 namespace OMAVIAT.Pages.timetable
@@ -16,7 +17,7 @@ namespace OMAVIAT.Pages.timetable
 		}
 
 		public string? building { get; set; }
-		public List<Schedule>? groups { get; set; }
+		public List<Entities.Schedule.Schedule>? groups { get; set; }
 		public int max_curse { get; set; }
 
 		public void OnGet(string? building)

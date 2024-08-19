@@ -113,16 +113,16 @@
             return;
         }
 
-        var response = await FilesHelper.PracticeTestFile(submit.building, submit.file);
-        if (response is not null)
-        {
-            error = (__builder) =>
-            {
-                <ErrorComponent header="Не удалось обновить изменения" description="@response" />
-            };
-            await JSRuntime.InvokeVoidAsync("StopAnim");
-            return;
-        }
+        // var response = await FilesHelper.PracticeTestFile(submit.building, submit.file);
+        // if (response is not null)
+        // {
+        //     error = (__builder) =>
+        //     {
+        //         <ErrorComponent header="Не удалось обновить изменения" description="@response" />
+        //     };
+        //     await JSRuntime.InvokeVoidAsync("StopAnim");
+        //     return;
+        // }
 
         await JSRuntime.InvokeVoidAsync("StartAnim");
         await FilesHelper.PracticeSaveFile(submit.filename, submit.building, submit.file);
@@ -199,8 +199,19 @@
             await Log("❌ У вас недостаточно прав");
             return;
         }
+
         await JSRuntime.InvokeVoidAsync("StartAnim");
-        await FilesHelper.ScheduleSaveFile(submit.building, submit.file);
+        var response = await FilesHelper.ScheduleSaveFile(submit.building, submit.file);
+        if (!response.IsSuccess)
+        {
+            error = (__builder) =>
+            {
+                <ErrorComponent header="Не удалось обновить изменения" description="@response.Details" />
+            };
+            await JSRuntime.InvokeVoidAsync("StopAnim");
+            return;
+        }
+
         Logger.Info($"Пользователь {User.GetUsername()} обновил расписание для {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
         await Log("✅ Файл успешно обновлен");
         await JSRuntime.InvokeVoidAsync("StopAnim");
@@ -232,18 +243,17 @@
             return;
         }
         await JSRuntime.InvokeVoidAsync("StartAnim");
-        var response = await FilesHelper.ChangesTestFile(submit.building, submit.file);
-        if (response is not null)
+        var response = await FilesHelper.ChangesSaveFile(submit.building, submit.file);
+        if (!response.IsSuccess)
         {
             error = (__builder) =>
             {
-                <ErrorComponent header="Не удалось обновить изменения" description="@response"/>
+                <ErrorComponent header="Не удалось обновить изменения" description="@response.Details"/>
             };
             await JSRuntime.InvokeVoidAsync("StopAnim");
             return;
         }
 
-        await FilesHelper.ChangesSaveFile(submit.building, submit.file);
         Logger.Info($"Пользователь {User.GetUsername()} обновил файл с изменением расписания для {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
         await Log("✅ Файл успешно обновлен");
         await JSRuntime.InvokeVoidAsync("StopAnim");

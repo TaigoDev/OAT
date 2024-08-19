@@ -1,4 +1,5 @@
 ﻿@page "{building?}/{cabinet_text?}"
+@using OMAVIAT.Schedule.Entities.Enums
 @model OMAVIAT.RazorPages.timetable.CabinetScheduleModel
 @{	
     ViewData["Title"] = $"Расписание кабинета {Model.cabinet_text}";
@@ -66,7 +67,7 @@
             </thead>
             <tbody>
                 @{
-                    var week = Model.cabinet.Weeks.Where(e => e.Type == (week_id == 1 ? OMAVIAT.Entities.Enums.ScheduleWeekType.First : OMAVIAT.Entities.Enums.ScheduleWeekType.Second)).First();
+                    var week = Model.cabinet.Weeks.Where(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second)).First();
                 }
 
                 @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)

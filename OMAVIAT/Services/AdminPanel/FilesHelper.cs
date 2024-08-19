@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using OMAVIAT.Entities.Enums;
+using OMAVIAT.Schedule.Entities.Enums;
+using OMAVIAT.Schedule.Entities.Models;
+using OMAVIAT.Schedule.Schedule.MainSchedule;
+using OMAVIAT.Schedule.Testers;
 using OMAVIAT.Services.Schedule.MainSchedule;
 using OMAVIAT.Utilities;
 using OMAVIAT.Utilities.Telegram;
@@ -8,16 +12,20 @@ namespace OMAVIAT.Services.AdminPanel
 {
 	public class FilesHelper
 	{
-		public static async Task<string?> ChangesTestFile(Building? building, IBrowserFile file)
+		public static async Task<TestResponseModel> ChangesSaveFile(Building? building, IBrowserFile file)
 		{
 			var filename = $"{Path.GetRandomFileName()}-changes.xlsx";
 			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", filename);
 			await using FileStream fs = new(path, FileMode.Create);
 			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
 			await fs.DisposeAsync();
-			var response = await TimeTableBot.TestChangesInSchedule(building.ConvertToString(), path, filename);
-			File.Delete(path);
-			return response;
+			if (building is null) return new TestResponseModel()
+			{
+				Details = "Произошла ошибка. Обратитесь в службу информатизации",
+				IsUploaded = false,
+				IsSuccess = false,
+			};
+			return await ScheduleChangesTester.LoadAndTestAsync(path, (Corpus)((int)building - 1));
 		}
 
 		public static async Task<string?> PracticeTestFile(Building? building, IBrowserFile file)
@@ -32,32 +40,21 @@ namespace OMAVIAT.Services.AdminPanel
 			return response;
 		}
 
-		public static async Task ChangesSaveFile(Building? building, IBrowserFile file)
+		public static async Task<TestResponseModel> ScheduleSaveFile(Building? building, IBrowserFile file)
 		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building.ConvertToString()}-changes.xlsx");
-			var latest = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", "latest", $"{building.ConvertToString()}-changes.xlsx");
-			FileUtils.FileDelete(latest);
-			File.Move(path, latest);
 
+			var filename = $"{Path.GetRandomFileName()}-schedule.xml";
+			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", filename);
 			await using FileStream fs = new(path, FileMode.Create);
 			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
 			await fs.DisposeAsync();
-			Runs.InThread(async () => await TimeTableBot.onChangesInSchedule(building.ConvertToString(), path));
-		}
-
-		public static async Task ScheduleSaveFile(Building? building, IBrowserFile file)
-		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", $"{building.ConvertToString()}.xml");
-			var latest = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "schedule", "latest", $"{building.ConvertToString()}.xml");
-
-			FileUtils.FileDelete(latest);
-			File.Move(path, latest);
-
-			await using FileStream fs = new(path, FileMode.Create);
-			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
-			await fs.DisposeAsync();
-			Runs.InThread(async () => await TimeTableBot.onChangeMainSchedule(building.ConvertToString(), path));
-			Runs.InThread(async () => await ScheduleReader.ReadAllAsync());
+			if (building is null) return new TestResponseModel()
+			{
+				Details = "Произошла ошибка. Обратитесь в службу информатизации",
+				IsUploaded = false,
+				IsSuccess = false,
+			};
+			return await MainScheduleTester.LoadAndTestAsync(path, (Corpus)((int)building - 1));
 		}
 
 		public static async Task SessionSaveFile(string filename, Building? building, IBrowserFile file)

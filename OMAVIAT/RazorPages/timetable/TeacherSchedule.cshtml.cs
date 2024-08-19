@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
-using OMAVIAT.Services.Schedule.MainSchedule;
+using OMAVIAT.Schedule.Schedule.MainSchedule;
 
 namespace OMAVIAT.Pages.timetable
 {
@@ -9,7 +9,7 @@ namespace OMAVIAT.Pages.timetable
 	public class TeacherScheduleModel : PageModel
 	{
 
-		public Schedule? teacher;
+		public Entities.Schedule.Schedule? teacher;
 		public CorpusSchedule? corpus;
 		public string? fullname;
 		public void OnGet(string building, string fullname)
