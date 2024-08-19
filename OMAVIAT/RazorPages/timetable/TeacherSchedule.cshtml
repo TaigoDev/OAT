@@ -1,4 +1,5 @@
 ﻿@page "{building?}/{fullname?}"
+@using OMAVIAT.Schedule.Entities.Enums
 @model OMAVIAT.Pages.timetable.TeacherScheduleModel
 @{
 }
@@ -63,7 +64,7 @@
             </thead>
             <tbody>
                 @{
-                    var week = Model.teacher.Weeks.Where(e => e.Type == (week_id == 1 ? OMAVIAT.Entities.Enums.ScheduleWeekType.First : OMAVIAT.Entities.Enums.ScheduleWeekType.Second)).First();
+                    var week = Model.teacher.Weeks.Where(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second)).First();
                 }
 
                 @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)

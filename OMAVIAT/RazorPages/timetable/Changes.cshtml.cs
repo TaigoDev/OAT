@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Database;
 using OMAVIAT.Entities.Enums;
+using OMAVIAT.Entities.Schedule.Database;
+using OMAVIAT.Schedule.Entities.Enums;
 
 namespace OMAVIAT.Pages
 {

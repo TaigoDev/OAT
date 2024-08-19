@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
+using OMAVIAT.Schedule.Schedule.MainSchedule;
 using OMAVIAT.Services.Schedule.MainSchedule;
 
 namespace OMAVIAT.RazorPages.timetable
@@ -8,7 +9,7 @@ namespace OMAVIAT.RazorPages.timetable
 	[NoCache]
 	public class CabinetScheduleModel : PageModel
 	{
-		public Schedule? cabinet;
+		public Entities.Schedule.Schedule? cabinet;
 		public CorpusSchedule? corpus;
 		public string? cabinet_text;
 		public void OnGet(string building, string cabinet_text)

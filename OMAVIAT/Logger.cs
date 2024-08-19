@@ -29,7 +29,7 @@ public class Logger
 			else
 				await File.WriteAllTextAsync(path, $"{message}\n");
 			if (!disableTelegram)
-				TelegramBot.SendMessage(message);
+				await TelegramBot.SendMessage(message);
 			else
 				Console.WriteLine(message);
 		}

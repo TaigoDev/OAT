@@ -3,19 +3,28 @@ using OMAVIAT;
 using OMAVIAT.Components;
 using OMAVIAT.Controllers.App;
 using OMAVIAT.Controllers.Bitrix.Controllers;
+using OMAVIAT.Schedule;
 using OMAVIAT.Services.News;
 using OMAVIAT.Services.Payments;
-using OMAVIAT.Services.Schedule.MainSchedule;
-using OMAVIAT.Services.Schedule.ScheduleChanges;
 using OMAVIAT.Services.Workers;
 using OMAVIAT.Utilities;
 using OMAVIAT.Utilities.Telegram;
 
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+await DirectoriesConfigurator.Create();
 await Configurator.init();
+await ScheduleLib.Init(TelegramBot.SendMessage, new OMAVIAT.Schedule.Entities.DatabaseConfig
+{
+	db_ip = Configurator.config.db_ip,
+	db_name = Configurator.config.db_name,
+	db_password = Configurator.config.db_password,
+	db_port = Configurator.config.db_port,
+	db_user = Configurator.config.db_user,
+	IsLocalDB = OperatingSystem.IsWindows(),
+});
 Runs.StartModules(
 		//Ïîëó÷àåì èíôîðìàöèÿ èç êîíôèãîâ
-		DirectoriesConfigurator.Create,
+		
 
 	   //Çàïóñêàåì ñåðâèñ ÒÃ
 	   TelegramBot.init,
@@ -31,8 +40,6 @@ Runs.StartModules(
 	   NewsReader.init,
 	   ProfNewsReader.init,
 	   DemoExamsNewsReader.init,
-	   ScheduleReader.ReadAllAsync,
-	   ChangesService.InitAsync,
 
 	   //Çàïóñêàåì äðóãèå ñëóæáû
 	   () => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),

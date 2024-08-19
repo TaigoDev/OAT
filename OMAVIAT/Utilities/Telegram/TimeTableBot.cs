@@ -1,4 +1,5 @@
-﻿using OMAVIAT.Services.Schedule.ScheduleChanges;
+﻿using OMAVIAT.Schedule.Schedule.ScheduleChanges;
+using OMAVIAT.Services.Schedule.ScheduleChanges;
 
 namespace OMAVIAT.Utilities.Telegram
 {

@@ -85,7 +85,7 @@ namespace OMAVIAT.Utilities.Telegram
 				return false;
 			}
 		}
-		public static async void SendMessage(string message)
+		public static async Task SendMessage(string message)
 		{
 			try
 			{

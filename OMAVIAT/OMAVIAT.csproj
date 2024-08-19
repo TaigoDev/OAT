@@ -39,4 +39,9 @@
 	<ItemGroup>
 	  <Folder Include="Controllers\Schedules\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="OMAVIAT.Schedule">
+	    <HintPath>OMAVIAT.Schedule.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
 </Project>
