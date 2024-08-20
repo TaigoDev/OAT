@@ -3,7 +3,7 @@
 @using OMAVIAT.RazorPages.Components.admin.Files
 @model OMAVIAT.Pages.admin.CMKModel
 @{
-	Layout = "_Panel";
+	Layout = "/RazorPages/Shared/Panel.cshtml";
 	ViewData["Title"] = "ЦМК";
 }
 @(await Html.RenderComponentAsync<CMKComponent>(RenderMode.Server))
