@@ -18,8 +18,8 @@ namespace OMAVIAT.Utilities
 					await context.Database.CloseConnectionAsync();
 					Logger.Info($"✅ Подключение с базой данных успешно установлено!");
 					using var db = new DatabaseContext();
-					Console.WriteLine($"Количество новостей: {db.News.Count()} ");
-					await db.Database.MigrateAsync();
+					Console.WriteLine($"Количество новостей: {db.News.Count()} "); 
+					//await db.Database.MigrateAsync();
 					await DropTokens();
 					return;
 				}
