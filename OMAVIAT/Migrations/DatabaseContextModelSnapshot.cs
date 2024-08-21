@@ -66,87 +66,6 @@ namespace OMAVIAT.Migrations
                     b.ToTable("CMK");
                 });
 
-            modelBuilder.Entity("OMAVIAT.Entities.Database.ChangesTable", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("cabinet")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("corpus")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("couple")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
-
-                    b.Property<string>("discipline")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("group")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("reason")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("teacher")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("was_cabinet")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("was_couple")
-                        .HasColumnType("int");
-
-                    b.Property<string>("was_discipline")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("was_teacher")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("changes");
-                });
-
-            modelBuilder.Entity("OMAVIAT.Entities.Database.DaysChangesTable", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("DateText")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("SchoolWeek")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("bells")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("corpus")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
-
-                    b.Property<string>("type")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("daysChanges");
-                });
-
             modelBuilder.Entity("OMAVIAT.Entities.Database.DemoExamNews", b =>
                 {
                     b.Property<int>("id")
@@ -329,6 +248,152 @@ namespace OMAVIAT.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Tokens");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Schedule.Bell", b =>
+                {
+                    b.Property<int>("TableId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("TableId"));
+
+                    b.Property<int?>("DaysChangesTableid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("id")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("period")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("TableId");
+
+                    b.HasIndex("DaysChangesTableid");
+
+                    b.ToTable("Bell");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Schedule.Database.AcademicLoad", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<double>("CompletedHours")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Discipline")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Group")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Semester")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalHours")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AcademicLoads");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Schedule.Database.ChangesTable", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("cabinet")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("corpus")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("couple")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("discipline")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("group")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("reason")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("teacher")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("was_cabinet")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("was_couple")
+                        .HasColumnType("int");
+
+                    b.Property<string>("was_discipline")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("was_teacher")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("changes");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Schedule.Database.DaysChangesTable", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("DateText")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SchoolWeek")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("corpus")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("type")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("daysChanges");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Schedule.Bell", b =>
+                {
+                    b.HasOne("OMAVIAT.Entities.Schedule.Database.DaysChangesTable", null)
+                        .WithMany("bells")
+                        .HasForeignKey("DaysChangesTableid");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Schedule.Database.DaysChangesTable", b =>
+                {
+                    b.Navigation("bells");
                 });
 #pragma warning restore 612, 618
         }

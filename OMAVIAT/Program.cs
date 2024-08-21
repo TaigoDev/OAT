@@ -20,11 +20,10 @@ await ScheduleLib.Init(TelegramBot.SendMessage, new OMAVIAT.Schedule.Entities.Da
 	db_password = Configurator.config.db_password,
 	db_port = Configurator.config.db_port,
 	db_user = Configurator.config.db_user,
-	IsLocalDB = OperatingSystem.IsWindows(),
+	IsLocalDB = !OperatingSystem.IsWindows(),
 });
+
 Runs.StartModules(
-		//Ïîëó÷àåì èíôîðìàöèÿ èç êîíôèãîâ
-		
 
 	   //Çàïóñêàåì ñåðâèñ ÒÃ
 	   TelegramBot.init,
@@ -32,7 +31,7 @@ Runs.StartModules(
 
 	   //Çàïóñêàåì áàçó äàííûõ 
 	   DatabaseHelper.WaitStableConnection,
-
+	   async () => await ScheduleLib.Start(false),
 	   //Íàñòðàèâàåì ïåðåàäðåñàöèþ ñ áèòðèêñà
 	   UrlsContoller.init,
 
@@ -63,10 +62,7 @@ else
 		await next();
 
 		if (context.Response.StatusCode == 404)
-			if (context.Request.Path == "/admin/panel")
-				context.Response.Redirect("/admin/news");
-			else
-				context.Response.Redirect("/Duck");
+			context.Response.Redirect(context.Request.Path == "/admin/panel" ? "/admin/news" : "/Duck");
 	});
 }
 

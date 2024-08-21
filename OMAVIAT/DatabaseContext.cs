@@ -20,9 +20,6 @@ namespace OMAVIAT
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-			builder.Entity<DaysChangesTable>().Property(e => e.bells).HasConversion(
-				v => JsonConvert.SerializeObject(v),
-				v => JsonConvert.DeserializeObject<List<Bell>>(v) ?? new());
 			base.OnModelCreating(builder);
 		}
 
