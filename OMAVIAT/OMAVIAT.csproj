@@ -38,6 +38,8 @@
    </ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Controllers\Schedules\" />
+	  <Folder Include="wwwroot\images\students\alumniEmploymentCenterOmaviat\" />
+	  <Folder Include="wwwroot\images\students\alumniEmploymentCenterOmsk\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="OMAVIAT.Schedule">
