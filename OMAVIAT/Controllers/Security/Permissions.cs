@@ -7,6 +7,8 @@ namespace OMAVIAT.Controllers.Security
 
 		public static List<Role> GetUserRoles(string username)
 		{
+			if(Configurator.IsLocal)
+				return [Role.www_admin];
 			var results = Ldap.SearchByUsername(username);
 			var roles = new List<Role>();
 			var attribute = Ldap.GetAttributeByTag(results, "memberOf");
@@ -15,7 +17,7 @@ namespace OMAVIAT.Controllers.Security
 				return [];
 
 			var values = attribute!.GetValues(typeof(byte[]));
-			for (int id = 0; id < values.Length; id++)
+			for (var id = 0; id < values.Length; id++)
 			{
 				var RoleName = Encoding.UTF8.GetString((values[id] as byte[])!).Split(',')[0].Replace("CN=", "");
 				var success = Enum.TryParse(RoleName, out Role Role);
@@ -29,6 +31,8 @@ namespace OMAVIAT.Controllers.Security
 
 		public static bool RightsToBuildingById(string username, string BuildingName)
 		{
+			if(Configurator.IsLocal)
+				return true;
 			var roles = GetUserRoles(username);
 			if (roles is null)
 				return false;

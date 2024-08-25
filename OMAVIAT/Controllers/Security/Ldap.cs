@@ -10,6 +10,9 @@ namespace OMAVIAT.Controllers.Security
 
 		public static bool Login(string username, string password, string IP, bool WithError = true)
 		{
+			if(Configurator.IsLocal)
+				return true;
+
 			try
 			{
 				if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -49,6 +52,8 @@ namespace OMAVIAT.Controllers.Security
 
 		public static string? GetFullName(string username)
 		{
+			if(Configurator.IsLocal)
+				return "Admin Admin Admin";
 			var response = SearchByUsername(username);
 			var attributes = GetValuesAttributeByTag(response, "cn");
 			return attributes is not null ? attributes.First().Replace("{", "").Replace("}", "") : null;

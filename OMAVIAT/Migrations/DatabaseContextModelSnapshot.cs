@@ -302,6 +302,10 @@ namespace OMAVIAT.Migrations
                     b.Property<double>("TotalHours")
                         .HasColumnType("double");
 
+                    b.Property<string>("TypeOfLoad")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.ToTable("AcademicLoads");

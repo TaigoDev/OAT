@@ -22,9 +22,12 @@
 
 @error
 <form id="news" class="panel-form" method="post" enctype="multipart/form-data">
-    <label for="news" class="panel-form-title">
-        Управление файлами
-    </label>
+	<label for="news" class="panel-form-title">
+		Управление файлами
+	</label>
+	<p>
+		⚠️ Сайт использует новую систему тестирования расписания и изменений в расписании. Тестирование может происходить в течение 1.5 минут. Не закрывайте вкладку в это время.
+	</p>
     <div class="input-box">
         <label for="corpus">
             Корпус
@@ -210,6 +213,7 @@
             {
                 <ErrorComponent header="Не удалось обновить изменения" description="@response.Details" />
             };
+            StateHasChanged();
             await JSRuntime.InvokeVoidAsync("StopAnim");
             return;
         }
@@ -252,6 +256,7 @@
             {
                 <ErrorComponent header="Не удалось обновить изменения" description="@response.Details"/>
             };
+            StateHasChanged();
             await JSRuntime.InvokeVoidAsync("StopAnim");
             return;
         }
