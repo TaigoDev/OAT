@@ -10,6 +10,7 @@ namespace OMAVIAT
 		public static Config config = new();
 		public static TelegramConfig telegram = new();
 		public static TimeTableBotConfig timetable = new();
+		public static TimeTableBotConfig myoat = new();
 		public static ReCaptchaV3Config ReCaptchaV3 = new();
 		public static ReCaptchaV2Config ReCaptchaV2 = new();
 		public static OldMysql old_mysql = new();
@@ -21,7 +22,8 @@ namespace OMAVIAT
 			telegram = await FileUtils.SetupConfiguration<TelegramConfig>(
 				Path.Combine(Directory.GetCurrentDirectory(), "Resources", "telegram.yml"), new());
 			timetable = await FileUtils.SetupConfiguration<TimeTableBotConfig>(
-				Path.Combine(Directory.GetCurrentDirectory(), "Resources", "timetable_bot.yml"), new());
+				Path.Combine(Directory.GetCurrentDirectory(), "Resources", "timetable_bot.yml"), new());	
+			myoat = await FileUtils.SetupConfiguration<TimeTableBotConfig>(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "myoat.yml"), new());
 			ReCaptchaV3 = await FileUtils.SetupConfiguration<ReCaptchaV3Config>(
 				Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ReCaptchaV3.yml"), new());
 			ReCaptchaV2 = await FileUtils.SetupConfiguration<ReCaptchaV2Config>(

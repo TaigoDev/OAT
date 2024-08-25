@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using OMAVIAT.Entities.Enums;
+using OMAVIAT.Schedule.Entities;
 using OMAVIAT.Schedule.Entities.Enums;
 using OMAVIAT.Schedule.Entities.Models;
 using OMAVIAT.Schedule.Schedule.MainSchedule;
 using OMAVIAT.Schedule.Testers;
 using OMAVIAT.Services.Schedule.MainSchedule;
+using OMAVIAT.Services.ScheduleLoggers;
 using OMAVIAT.Utilities;
 using OMAVIAT.Utilities.Telegram;
 
@@ -25,7 +27,7 @@ namespace OMAVIAT.Services.AdminPanel
 				IsUploaded = false,
 				IsSuccess = false,
 			};
-			return await ScheduleChangesTester.LoadAndTestAsync(path, (Corpus)((int)building - 1));
+			return await ScheduleChangesTester.LoadAndTestAsync(path, (Corpus)((int)building - 1), new MyOATChangesLogger(), new TimeTableBotChangesLogger());
 		}
 
 		public static async Task<string?> PracticeTestFile(Building? building, IBrowserFile file)
@@ -54,7 +56,7 @@ namespace OMAVIAT.Services.AdminPanel
 				IsUploaded = false,
 				IsSuccess = false,
 			};
-			return await MainScheduleTester.LoadAndTestAsync(path, (Corpus)((int)building - 1));
+			return await MainScheduleTester.LoadAndTestAsync(path, (Corpus)((int)building - 1), new MyOATMainScheduleLogger(), new TimeTableBotMainScheduleLogger());
 		}
 
 		public static async Task SessionSaveFile(string filename, Building? building, IBrowserFile file)
