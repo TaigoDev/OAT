@@ -282,9 +282,6 @@ namespace OMAVIAT.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<double>("CompletedHours")
-                        .HasColumnType("double");
-
                     b.Property<string>("Discipline")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -386,6 +383,60 @@ namespace OMAVIAT.Migrations
                     b.HasKey("id");
 
                     b.ToTable("daysChanges");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Schedule.Database.PastCouples", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CompletedHours")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Group")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("corpus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("subGroupId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PastCouples");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Schedule.Database.ScheduleHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Group")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Schedule")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Histories");
                 });
 
             modelBuilder.Entity("OMAVIAT.Entities.Schedule.Bell", b =>

@@ -3,19 +3,39 @@
         <img class="icon" src="/images/panel/closeWindow.svg" alt="" />
     </button>
     <h3 class="file-error-title">
-	    <span class="bigger">
-		    ⛔️
+	    @if (!IsUpload)
+	    {
 		    <span class="bigger">
-			    ОШИБКА
+			    ⛔️
+			    <span class="bigger">
+				    ОШИБКА
+			    </span>
+			    ⛔️
 		    </span>
-		    ⛔️
-	    </span>
-	    <br>
-	    @header
+		    <br>
+		    <p>Произошла ошибка во время выгрузки расписания</p>
+	    }
+	    else
+	    {
+		    <span class="bigger">
+			    ⚠️
+			    <span class="bigger">
+				    Предупреждение
+			    </span>
+			    ⚠️
+		    </span>
+		    <br>
+		    <p>Во время тестирования выявлены нарушения</p>
+	    }
     </h3>
     
 
     <p class="file-error-text" id="error-text">
+	    @if (IsUpload)
+	    {
+		    <p>Во время тестирования расписания были выявлены не серьезные ошибки, которые не помешали выгрузить файл. Файл был обновлен. Рекомендуется устранить все ошибки.</p>
+	    }
+
 	    @foreach (var d in description.Split("\n"))
 	    {
 		    <p>@d</p>
@@ -27,6 +47,6 @@
 
 
 @code {
-    [Parameter] public string? header { get; set; }
     [Parameter] public string? description { get; set; }
+    [Parameter] public bool IsUpload { get; set; }
 }

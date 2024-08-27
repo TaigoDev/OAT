@@ -16,13 +16,7 @@ namespace OMAVIAT
 		public virtual DbSet<IPTables> IPTables { get; set; }
 		public virtual DbSet<Documents> documents { get; set; }
 		public virtual DbSet<CMK> CMK { get; set; }
-
-
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			base.OnModelCreating(builder);
-		}
-
+		
 
 	}
 }

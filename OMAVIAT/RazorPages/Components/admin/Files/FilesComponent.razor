@@ -211,13 +211,16 @@
         {
             error = (__builder) =>
             {
-                <ErrorComponent header="Не удалось обновить изменения" description="@response.Details" />
+                <ErrorComponent IsUpload="@response.IsUploaded" description="@response.Details" />
             };
-            StateHasChanged();
-            await JSRuntime.InvokeVoidAsync("StopAnim");
-            return;
+            if (!response.IsUploaded)
+            {
+	            StateHasChanged();
+	            await JSRuntime.InvokeVoidAsync("StopAnim");
+	            return;
+            }
         }
-
+        
         Logger.Info($"Пользователь {User.GetUsername()} обновил расписание для {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
         await Log("✅ Файл успешно обновлен");
         await JSRuntime.InvokeVoidAsync("StopAnim");
@@ -254,11 +257,14 @@
         {
             error = (__builder) =>
             {
-                <ErrorComponent header="Не удалось обновить изменения" description="@response.Details"/>
+                <ErrorComponent IsUpload="@response.IsUploaded" description="@response.Details"/>
             };
-            StateHasChanged();
-            await JSRuntime.InvokeVoidAsync("StopAnim");
-            return;
+            if (!response.IsUploaded)
+            {
+	            StateHasChanged();
+	            await JSRuntime.InvokeVoidAsync("StopAnim");
+	            return;
+            }
         }
 
         Logger.Info($"Пользователь {User.GetUsername()} обновил файл с изменением расписания для {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");

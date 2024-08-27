@@ -31,7 +31,7 @@ Runs.StartModules(
 
 	   //Çàïóñêàåì áàçó äàííûõ 
 	   DatabaseHelper.WaitStableConnection,
-	   async () => await ScheduleLib.Start(false),
+	   async () => await ScheduleLib.Start(false, false),
 	   //Íàñòðàèâàåì ïåðåàäðåñàöèþ ñ áèòðèêñà
 	   UrlsContoller.init,
 
