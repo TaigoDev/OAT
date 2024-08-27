@@ -100,7 +100,7 @@
  
                             <td>
                                 <div class="subjectt">
-                                    @if (lessons.Count == 1)
+                                    @if (lessons.Count == 1 && lessons.First().subGroupId == 0)
                                     {
                                         var lesson = lessons.First();
                                         <div class="subjectt-name">
