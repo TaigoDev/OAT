@@ -29,10 +29,16 @@ namespace OMAVIAT.Pages.timetable
 		public List<ScheduleLesson?> GetAllLessonsByNumber(int id, ScheduleWeek week)
 		{
 			var lessons = new List<ScheduleLesson?>();
+			for(var i = 1; i <= 6; i++)
+				lessons.Add(null);
 			foreach (var day in week.Days.OrderBy(e => e.Type))
 			{
-				var lesson = day.lessons.FirstOrDefault(e => e.Id == id);
-				lessons.Add(lesson);
+				var lesson = day.lessons.Where(e => e.Id == id).ToList();
+				if(lesson.Count == 1)
+					lessons[day.Type] = lesson.First();
+				else
+					lessons[day.Type] = lesson.FirstOrDefault(e => e.Name.ToSearchView() != "Разгово".ToSearchView());
+
 			}
 			return lessons;
 		}
