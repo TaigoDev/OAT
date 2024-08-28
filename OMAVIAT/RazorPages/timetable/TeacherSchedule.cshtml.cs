@@ -26,14 +26,13 @@ namespace OMAVIAT.Pages.timetable
 			teacher = corpus.teachers.FirstOrDefault(e => e.name.ToSearchView() == fullname.ToSearchView());
 		}
 
-		public List<ScheduleLesson> GetAllLessonsByNumber(int id, ScheduleWeek week)
+		public List<ScheduleLesson?> GetAllLessonsByNumber(int id, ScheduleWeek week)
 		{
-			var lessons = new List<ScheduleLesson>();
-			foreach (var day in week.Days)
+			var lessons = new List<ScheduleLesson?>();
+			foreach (var day in week.Days.OrderBy(e => e.Type))
 			{
 				var lesson = day.lessons.FirstOrDefault(e => e.Id == id);
-				if (lesson is not null)
-					lessons.Add(lesson);
+				lessons.Add(lesson);
 			}
 			return lessons;
 		}
