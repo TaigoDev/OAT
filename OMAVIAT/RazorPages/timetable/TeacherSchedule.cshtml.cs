@@ -36,8 +36,16 @@ namespace OMAVIAT.Pages.timetable
 				var lesson = day.lessons.Where(e => e.Id == id).ToList();
 				if(lesson.Count == 1)
 					lessons[day.Type] = lesson.First();
-				else
-					lessons[day.Type] = lesson.FirstOrDefault(e => e.Name.ToSearchView() != "Разгово".ToSearchView());
+				else if (lesson.Any(e => e.Name.ToSearchView() == "Разгово".ToSearchView()))
+				{
+					var less = lesson.FirstOrDefault(e => e.Name.ToSearchView() != "Разгово".ToSearchView());
+					var raz = lesson.FirstOrDefault(e => e.Name.ToSearchView() == "Разгово".ToSearchView());
+					if(less is null || raz is null) continue;
+					less.Name = $"{less.Name}/Разговор";
+					less.Cabinet = $"{less.Cabinet}/{raz.Cabinet}";
+					less.Group = $"{less.Group}/{raz.Group}";
+					lessons[day.Type] = less;
+				}
 
 			}
 			return lessons;
