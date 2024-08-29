@@ -1,0 +1,124 @@
+﻿@page
+@model VacanciesForAdmissionModel
+@{
+	ViewData["Title"] = "Вакантные места для приема (перевода) обучающихся";
+}
+
+<link rel="stylesheet" href="~/css/organizationInformation/vacancies.css">
+
+<div class="container content-page">
+	<section class="content">
+		<h2 class="section-title">
+			Вакантные места для приема (перевода) обучающихся
+		</h2>
+
+		<div class="document-item">
+			<div class="document-item-head">
+				<a target="_blank" href="~/documents/organizationInformation/vacanciesForAdmission/vacanciesOn_26-03-2024.xlsx">
+				</a>
+			</div>
+			<div class="document-item-body">
+				Вакантные места
+			</div>
+		</div>
+	</section>
+	<aside id="sidebar" class="sidebar long">
+		<h3 class="sidebar-title">
+			Сведения об образовательной организации
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="CommonIntelligence">
+						Основные сведения
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Structure">
+						Структура и органы управления образовательной организацией
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Documents">
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Education">
+						Образование
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="EducationalStandards">
+						Образовательные стандарты и требования
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="EducationalProcess">
+						Организация воспитательного процесса
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="ManagementPedagogicalStaff">
+						Руководство. Педагогический (научно-педагогический) состав
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="LogisticsAndAccessibleEnvironment">
+						Материально-техническое обеспечение и оснащенность образовательного процесса. Доступная среда
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="PaidEducationalServices">
+						Платные образовательные услуги
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="FinancialEconomicActivity">
+						Финансово-хозяйственная деятельность
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="VacanciesForAdmission">
+						Вакантные места для приема (перевода) обучающихся
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Vacancies">
+						Вакансии
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="InternationalCooperation">
+						Международное сотрудничество
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="StudentSupport">
+						Стипендии и меры поддержки обучающихся
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Terrorism">
+						Противодействие экстремизму и терроризму
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Corruption">
+						Противодействие коррупции
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Library">
+						Библиотека
+					</a>
+				</li>
+                <li class="sidebar-link">
+                    <a asp-page="Food">
+                        Организация питания в образовательной организации
+                    </a>
+                </li>
+			</ul>
+		</nav>
+	</aside>
+</div>
