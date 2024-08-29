@@ -1,0 +1,23 @@
+.button {
+    display: grid;
+    place-items: center;
+    padding: 10px 25px;
+    background-color: var(--blue-c);
+    transition: background-color var(--ttf) var(--td-s);
+    font-weight: var(--text-fw);
+    font-size: var(--text-fs);
+    text-align: center;
+    color: var(--white-c);
+}
+
+.button:hover {
+    background-color: var(--light-blue-c);
+}
+
+.button.like-input {
+    border-radius: var(--br-s);
+}
+
+.button.rounded {
+    border-radius: var(--br-max);
+}
