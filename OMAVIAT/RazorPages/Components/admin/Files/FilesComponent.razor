@@ -207,7 +207,7 @@
 
         await JSRuntime.InvokeVoidAsync("StartAnim");
         var response = await FilesHelper.ScheduleSaveFile(submit.building, submit.file);
-        if (!response.IsSuccess)
+        if (!response.IsSuccess || !response.IsUploaded)
         {
             error = (__builder) =>
             {
@@ -253,7 +253,7 @@
         }
         await JSRuntime.InvokeVoidAsync("StartAnim");
         var response = await FilesHelper.ChangesSaveFile(submit.building, submit.file);
-        if (!response.IsSuccess)
+        if (!response.IsSuccess || !response.IsUploaded)
         {
             error = (__builder) =>
             {
