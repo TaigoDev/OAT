@@ -16,8 +16,12 @@
         Расписание @Model.teacher.name
     </h2>
 
-    @for (var week_id = 1; week_id <= Model.teacher.Weeks.Count; week_id++)
+    @for (var week_id = 1; week_id <= 2; week_id++)
     {
+	    var week = Model.teacher.Weeks.FirstOrDefault(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second));
+	    if(week is null)
+		    continue;
+	    
         <table class="customized timetable" style="display: none;">
             <thead>
                 <tr>
@@ -63,9 +67,7 @@
                 </tr>
             </thead>
             <tbody>
-                @{
-                    var week = Model.teacher.Weeks.First(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second));
-                }
+
 
                 @for (var lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
                 {
