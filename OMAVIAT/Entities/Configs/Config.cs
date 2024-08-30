@@ -16,6 +16,9 @@
 		public string ldap_password { get; set; }
 		public string ldap_domain { get; set; }
 		public string ldap_zone { get; set; }
-		public bool bitrixProxy { get; set; }
+		public bool bitrixProxy { get; set; } 
+		public string redis_ip { get; set; } = "PASTE REDIS IP";
+		public int redis_port { get; set; } = 0;
+		public string redis_password { get; set; } = "PASTE REDIS PASSWORD";
 	}
 }
