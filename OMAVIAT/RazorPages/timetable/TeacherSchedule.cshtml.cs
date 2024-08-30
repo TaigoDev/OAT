@@ -44,10 +44,18 @@ namespace OMAVIAT.Pages.timetable
 						var less = lesson.FirstOrDefault();
 						var raz = lesson.LastOrDefault();
 						if(less is null || raz is null) continue;
-						less.Name = $"{less.Name}/{raz.Name}";
-						less.Cabinet = $"{less.Cabinet}/{raz.Cabinet}";
-						less.Group = $"{less.Group}/{raz.Group}";
-						lessons[day.Type] = less;
+						var combine = new ScheduleLesson()
+						{
+							Id = less.Id,
+							Cabinet =  $"{less.Cabinet}/{raz.Cabinet}",
+							subGroupId = less.subGroupId,
+							FullName = less.FullName,
+							Teacher = less.Teacher,
+							Corpus = less.Corpus,
+							Group = $"{less.Group}/{raz.Group}",
+							Name = $"{less.Name}/{raz.Name}",
+						};
+						lessons[day.Type] = combine;
 						break;
 					}
 					default:
