@@ -13,7 +13,7 @@ namespace OMAVIAT.Controllers.App
 			builder.Services.AddRazorComponents()
 				.AddInteractiveServerComponents(); builder.Services.AddControllersWithViews();
 			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddServerSideBlazor(o => o.DetailedErrors = true);
+			builder.Services.AddServerSideBlazor(o =>o.DetailedErrors = true);
 
 			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 			{
