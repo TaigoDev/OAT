@@ -18,10 +18,13 @@
         Расписание кабинета @Model.cabinet.name
     </h2>
 
-    @for (var week_id = 1; week_id <= Model.cabinet.Weeks.Count; week_id++)
-    {
+	@for (var week_id = 1; week_id <= 2; week_id++)
+	{
+		var week = Model.cabinet.Weeks.FirstOrDefault(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second));
+		if(week is null)
+		continue;
 
-        <table class="customized timetable" style="display: none;">
+		<table class="customized timetable" style="display: none;">
             <thead>
                 <tr>
                 </tr>
@@ -66,12 +69,8 @@
                 </tr>
             </thead>
             <tbody>
-                @{
-                    var week = Model.cabinet.Weeks.Where(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second)).First();
-                }
-
-                @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
-                {
+            @for (var lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
+            {
                     var days = Model.GetAllLessonsByNumber(lesson_id, week);
                     var ring = Model.corpus.bells.FirstOrDefault(e => e.Id == lesson_id);
 

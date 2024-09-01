@@ -26,14 +26,48 @@ namespace OMAVIAT.RazorPages.timetable
 			cabinet = corpus.cabinets.FirstOrDefault(e => e.name.ToSearchView() == cabinet_text.ToSearchView());
 		}
 
-		public List<ScheduleLesson> GetAllLessonsByNumber(int id, ScheduleWeek week)
+		public List<ScheduleLesson?> GetAllLessonsByNumber(int id, ScheduleWeek week)
 		{
-			var lessons = new List<ScheduleLesson>();
-			foreach (var day in week.Days)
+			var lessons = new List<ScheduleLesson?>();
+			for(var i = 1; i <= 6; i++)
+				lessons.Add(null);
+			foreach (var day in week.Days.OrderBy(e => e.Type))
 			{
-				var lesson = day.lessons.FirstOrDefault(e => e.Id == id);
-				if (lesson is not null)
-					lessons.Add(lesson);
+				var lesson = day.lessons.Where(e => e.Id == id).ToList();
+				switch (lesson.Count)
+				{
+					case 1:
+						lessons[day.Type] = lesson.First();
+						break;
+					case 2:
+					{
+						var less = lesson.FirstOrDefault();
+						var raz = lesson.LastOrDefault();
+						if(less is null || raz is null) continue;
+						var combine = new ScheduleLesson()
+						{
+							Id = less.Id,
+							Cabinet =  $"{less.Cabinet}/{raz.Cabinet}",
+							subGroupId = less.subGroupId,
+							FullName = less.FullName,
+							Teacher = less.Teacher,
+							Corpus = less.Corpus,
+							Group = $"{less.Group}/{raz.Group}",
+							Name = $"{less.Name}/{raz.Name}",
+						};
+						lessons[day.Type] = combine;
+						break;
+					}
+					default:
+					{
+						if(lesson.Count != 0)
+						{
+							lessons[day.Type] = lesson.First();
+						}
+
+						break;
+					}
+				}
 			}
 			return lessons;
 		}

@@ -42,15 +42,15 @@
             }
             @foreach (var sheet in days.OrderBy(e => e.date))
             {
-                <a class="months-choose-item @(Model.sheet == sheet.date ? "active" : "")" href="/timetable/Changes/@Model.corpus/@sheet.date">
-                    @sheet.date
+                <a class="months-choose-item @(Model.sheet == sheet.date ? "active" : "")" href="/timetable/Changes/@Model.corpus/@sheet.date.ToString("dd.MM.yyyy")">
+	                @sheet.date.ToString("dd.MM.yyyy")
                 </a>
             }
         </div>
         <form class="search-body">
             <div class="search-body-container">
                 <input id="search" type="search" placeholder="Введите группу или преподавателя...">
-                <button onclick="onSearch('@Model.corpus', '@Model.sheet');return false">
+                <button onclick="onSearch('@Model.corpus', '@Model.sheet?.ToString("dd.MM.yyyy")');return false">
                     <img style="width: 20px;" class="icon" src="/images/basic/search.svg" alt="искать">
                 </button>
             </div>
