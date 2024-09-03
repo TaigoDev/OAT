@@ -1,0 +1,8 @@
+﻿<PageTitleComponent text="@PageTitle"/>
+
+@ChildContent
+
+@code {
+	[Parameter] public string PageTitle { get; set; } = "Название страницы";
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+}

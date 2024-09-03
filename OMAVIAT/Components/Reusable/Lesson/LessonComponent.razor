@@ -1,0 +1,46 @@
+<div @onclick="OnClick" style="--lesson-id: @ColorId;">
+	<ZoneComponent CanChangeState="true" ClassList="lesson">
+		<ZoneTitleComponent ClassList="one-line">
+			@LessonName
+		</ZoneTitleComponent>
+		<IconizedListComponent>
+			<IconizedListItemComponent Type="Тип" Value="@LessonType">
+				<StateIconComponent ClassList="in-text"/>
+			</IconizedListItemComponent>
+			<IconizedListItemComponent Type="Кабинет" Value="@LessonCabinet">
+				<PlaceIconComponent ClassList="in-text"/>
+			</IconizedListItemComponent>
+			@if (IsGroup)
+			{
+				<IconizedListItemComponent Type="Препод" Value="@LessonTeacher" Href="@GetTeacherLink(LessonTeacher)">
+					<PersonIconComponent ClassList="in-text"/>
+				</IconizedListItemComponent>
+			}
+			else
+			{
+				<IconizedListItemComponent Type="Группа" Value="@LessonTeacher">
+					<PersonIconComponent ClassList="in-text"/>
+				</IconizedListItemComponent>
+			}
+		</IconizedListComponent>
+		@if (LessonLength != 0 || LessonFinished != 0)
+		{
+			<LessonProgressComponent LessonLength="LessonLength"
+									 LessonFinished="LessonFinished"/>
+		}
+	</ZoneComponent>
+</div>
+
+@code {
+	[Parameter] public string LessonName { get; set; } = "ТСИ"; // сокращенное имя предмета
+	[Parameter] public string LessonType { get; set; } = "лекция";
+	[Parameter] public string LessonCabinet { get; set; } = "000";
+	[Parameter] public string LessonTeacher { get; set; } = "Фамилия И.О.";
+	[Parameter] public int LessonFinished { get; set; } = 17;
+	[Parameter] public int LessonLength { get; set; } = 25;
+	[Parameter] public bool IsGroup { get; set; } = true;
+	[Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+	[Parameter] public int ColorId { get; set; }
+	private string GetTeacherLink(string? fullName) => $"https://www.oat.ru/organizationInformation/worker/{fullName}";
+
+}

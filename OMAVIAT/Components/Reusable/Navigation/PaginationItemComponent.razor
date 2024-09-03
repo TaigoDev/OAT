@@ -1,0 +1,13 @@
+<div>
+	<li class="pagination-item">
+		<div @onclick="OnClick" class="@Class">
+			@PageNumber
+		</div>
+	</li>
+</div>
+
+@code {
+	[Parameter] public string PageNumber { get; set; } = "0";
+	[Parameter] public string? Class { get; set; }
+	[Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+}

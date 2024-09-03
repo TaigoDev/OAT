@@ -1,11 +1,11 @@
 ﻿<div class="window-background">
-    <aside class="window @ClassList">
-        @ChildContent
-    </aside>
+	<aside class="window @ClassList">
+		@ChildContent
+	</aside>
 </div>
 
 
 @code {
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-    [Parameter] public string ClassList { get; set; } = "";
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+	[Parameter] public string ClassList { get; set; } = "";
 }

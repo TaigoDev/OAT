@@ -1,0 +1,32 @@
+<aside class="notification @State">
+	<span class="emoji">@_emoji</span>
+	@Text
+</aside>
+
+@code {
+	[Parameter] public string Text { get; set; } = "Текст уведомления";
+	[Parameter] public string State { get; set; } = "inactive";
+
+	private string _emoji = "🤖";
+
+	[Parameter] public string Type
+	{
+		get => Type;
+		set
+		{
+			switch (value)
+			{
+				case "error":
+					_emoji = "❌";
+					break;
+				case "warning":
+					_emoji = "⚠️";
+					break;
+				case "success":
+					_emoji = "✅";
+					break;
+			}
+		}
+	}
+
+}

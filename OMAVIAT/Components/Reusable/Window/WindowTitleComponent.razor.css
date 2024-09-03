@@ -1,0 +1,5 @@
+.window-title {
+	font-weight: var(--subtitle-fw);
+	font-size: var(--subtitle-fs);
+	color: var(--white-c);
+}

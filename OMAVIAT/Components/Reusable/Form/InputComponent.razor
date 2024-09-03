@@ -1,0 +1,35 @@
+@if (LabelText == "")
+{
+	<input type="@InputType" class="input" id="@InputId" placeholder="@PlaceholderText" @bind-value="Value"/>
+}
+else
+{
+	<div class="input-box">
+		<label for="@InputId">@LabelText</label>
+		<input class="input" id="@InputId" type="@InputType" placeholder="@PlaceholderText" @bind-value="Value"/>
+	</div>
+}
+
+
+@code{
+	[Parameter] public string LabelText { get; set; } = "";
+	[Parameter] public string PlaceholderText { get; set; } = "";
+	[Parameter] public string InputType { get; set; } = "";
+	[Parameter] public string InputId { get; set; } = "";
+	public string _Value { get; set; } = "";
+
+	[Parameter]
+	public string Value
+	{
+		get => _Value;
+		set
+		{
+			if (_Value == value) return;
+
+			_Value = value;
+			ValueChanged.InvokeAsync(value);
+		}
+	}
+
+	[Parameter] public EventCallback<string> ValueChanged { get; set; }
+}

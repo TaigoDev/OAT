@@ -1,0 +1,28 @@
+.pagination-item {
+	--size: 40px;
+}
+
+::deep .pagination-item div{
+	display: grid;
+	place-items: center;
+	width: var(--size);
+	height: var(--size);
+	line-height: 0;
+	border-radius: var(--br-max);
+	background-color: var(--zone-bgc);
+	border: var(--zone-bw) solid var(--zone-bc);
+	color: var(--gray-c);
+	font-weight: var(--subtitle-fw);
+	font-size: var(--small-subtitle-fs);
+	transition: var(--td-s) var(--ttf);
+	cursor: pointer;
+}
+
+::deep .pagination-item div:not(.active):hover{
+	color: var(--text-c);
+}
+
+::deep .pagination-item div.active {
+	background-color: var(--zone-active-bgc);
+	border-color: var(--zone-active-bc);
+}

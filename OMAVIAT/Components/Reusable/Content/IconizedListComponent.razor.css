@@ -1,0 +1,10 @@
+.iconized-list {
+	--icon-color: var(--white-c);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+::deep li .icon * {
+	stroke: var(--icon-color);
+}

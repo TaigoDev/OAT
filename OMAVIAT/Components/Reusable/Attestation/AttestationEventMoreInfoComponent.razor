@@ -1,0 +1,82 @@
+﻿<div>
+	<MoreInfoComponent>
+		<ZoneTitleComponent>@EventName</ZoneTitleComponent>
+		<div class="more-info-body">
+			<div class="more-info-body-item">
+				<h4 class="more-info-body-item-title">
+					<PersonIconComponent ClassList="in-text"/>
+					<b>Экзаменатор:</b>
+				</h4>
+				<a href="" class="more-info-body-item-content">
+					@EventExaminer
+				</a>
+			</div>
+			<div class="more-info-body-item">
+				<h4 class="more-info-body-item-title">
+					<PlaceIconComponent ClassList="in-text"/>
+					<b>Экзамен:</b>
+				</h4>
+				<ul class="more-info-body-item-content customized">
+					<li>
+						Дисциплина - @EventExamDiscipline
+					</li>
+					<li>
+						Кабинет - @EventExamPlace
+					</li>
+					<li>
+						Дата - @EventExamDate
+					</li>
+					<li>
+						Время - @EventExamTime
+					</li>
+				</ul>
+			</div>
+			<div class="more-info-body-item">
+				<h4 class="more-info-body-item-title">
+					<ConsultationIconComponent ClassList="in-text"/>
+					<b>Консультация:</b>
+				</h4>
+				<ul class="more-info-body-item-content customized">
+					<li>
+						Кабинет - @EventConsultationPlace
+					</li>
+					<li>
+						Дата - @EventConsultationDate
+					</li>
+					<li>
+						Время - @EventConsultationTime
+					</li>
+				</ul>
+			</div>
+			<div class="more-info-body-item">
+				<h4 class="more-info-body-item-title">
+					<FolderIconComponent ClassList="in-text"/>
+					<b>Полезные файлы:</b>
+				</h4>
+				<ul class="more-info-body-item-content customized files">
+					<li>
+						<a href="">
+							билеты 1пг
+							<FileIconComponent ClassList="in-text"/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</MoreInfoComponent>
+</div>
+
+
+@code{
+	[Parameter] public string EventName { get; set; } = "Название события";
+	[Parameter] public string EventExaminer { get; set; } = "Фамилия Имя Отчество";
+	[Parameter] public string EventExaminerLink { get; set; } = "";
+	[Parameter] public string EventExamDiscipline { get; set; } = "дисциплина";
+	[Parameter] public string EventExamDate { get; set; } = DateTime.Today.ToString();
+	[Parameter] public string EventExamTime { get; set; } = "8:00";
+	[Parameter] public string EventExamPlace { get; set; } = "000";
+
+	[Parameter] public string EventConsultationDate { get; set; } = DateTime.Today.ToString();
+	[Parameter] public string EventConsultationTime { get; set; } = "8:00";
+	[Parameter] public string EventConsultationPlace { get; set; } = "000";
+}

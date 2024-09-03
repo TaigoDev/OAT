@@ -1,0 +1,38 @@
+.notification {
+	position: fixed;
+	z-index: 100;
+	bottom: 20px;
+	right: 20px;
+	translate: 0 20px;
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	max-width: min(90%, 400px);
+	background-color: var(--matte-c);
+	padding: 10px 20px;
+	border: var(--zone-bw) solid var(--zone-bc);
+	border-radius: var(--br-s);
+	opacity: 0;
+	visibility: hidden;
+}
+
+.emoji {
+	font-size: 1.5em;
+}
+
+@keyframes notification {
+	0%, 100% {
+		opacity: 0;
+		visibility: hidden;
+		translate: 0 20px;
+	}
+	10%, 95% {
+		opacity: 1;
+		visibility: visible;
+		translate: 0;
+	}
+}
+
+.notification.active {
+	animation: notification 5s var(--ttf) forwards;
+}

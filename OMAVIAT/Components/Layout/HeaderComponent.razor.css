@@ -1,0 +1,10 @@
+.site-header {
+	--header-column-w: 330px;
+	position: relative;
+	z-index: 10;
+	display: grid;
+	justify-content: space-between;
+	align-items: center;
+	grid-template-columns: var(--header-column-w) 1fr var(--header-column-w);
+	gap: 30px;
+}

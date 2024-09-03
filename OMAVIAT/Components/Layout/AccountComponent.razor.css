@@ -1,0 +1,84 @@
+.account {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 10px;
+	margin-left: auto;
+}
+
+.account:hover .account-fio, .account:hover .account-avatar {
+	filter: brightness(1);
+}
+
+.account-fio {
+	font-weight: 600;
+	font-size: var(--subtext-fs);
+	text-align: right;
+	color: var(--white-c);
+	filter: brightness(0.9);
+	transition: var(--td-s) var(--ttf);
+}
+
+.account-avatar {
+	display: grid;
+	place-items: center;
+	width: 70px;
+	aspect-ratio: 1;
+	border-radius: var(--br-max);
+	background: var(--white-c);
+	overflow: hidden;
+	filter: brightness(0.9);
+	transition: var(--td-s) var(--ttf);
+}
+
+::deep .exit {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	padding: 0 !important;
+	width: 25px;
+	height: 25px;
+	opacity: 0;
+	visibility: hidden;
+	transition: all var(--td-s) var(--ttf), opacity var(--td-m) var(--ttf), visibility var(--td-m) var(--ttf) !important;
+}
+
+::deep .exit .icon {
+	scale: 0.6;
+}
+
+.account:hover ::deep .exit {
+	opacity: 1;
+	visibility: visible;
+}
+
+@media (width < 1000px) {
+	::deep .exit {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+/* before account page not will be completed */
+
+.account {
+	position: relative;
+}
+
+.account::after {
+	content: "";
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.account:hover .account-fio, .account:hover .account-avatar {
+	filter: brightness(0.9);
+}
+
+::deep .exit {
+	z-index: 5;
+}

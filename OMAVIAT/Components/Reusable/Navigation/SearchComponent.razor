@@ -1,0 +1,33 @@
+<div>
+	<form class="search">
+		<input type="search" placeholder="@Placeholder" @bind-value="Value"/>
+		<ActionButtonComponent OnClick="OnClick">
+			<SearchIconComponent/>
+		</ActionButtonComponent>
+	</form>
+</div>
+
+@code {
+	[Parameter] public string Placeholder { get; set; } = "Строка поиска...";
+	
+	[Parameter]
+	public string? Value
+	{
+		get => _Value;
+		set
+		{
+			if (_Value == value) return;
+
+			_Value = value;
+			ValueChanged.InvokeAsync(value);
+		}
+	}
+
+	[Parameter]
+	public EventCallback<string> ValueChanged { get; set; }
+	
+	[Parameter]
+	public EventCallback<MouseEventArgs> OnClick { get; set; }
+	
+	private string? _Value;
+}

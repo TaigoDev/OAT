@@ -1,0 +1,8 @@
+<ul class="iconized-list @ClassList">
+	@ChildContent
+</ul>
+
+@code {
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public string ClassList { get; set; } = "";
+}

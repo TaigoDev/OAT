@@ -1,0 +1,88 @@
+﻿<nav class="navigation-container">
+	<div @onclick="ChangeState" id="mobile-version" class="navigation-mobile">
+	</div>
+	<ul class="navigation @State">
+		<!--
+		<HeaderLinkComponent OnClick="() => ChangeState()" Tooltip="главная" Link="/home">
+			<svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M9.89575 2.95842L4.28117 7.33342C3.34367 8.06259 2.58325 9.61467 2.58325 10.7918V18.5105C2.58325 20.9272 4.552 22.9063 6.96867 22.9063H19.0312C21.4478 22.9063 23.4166 20.9272 23.4166 18.5209V10.9376C23.4166 9.67717 22.5728 8.06259 21.5416 7.34384L15.1041 2.83342C13.6458 1.81259 11.302 1.86467 9.89575 2.95842Z"
+					  stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M13 18.7397V15.6147" stroke="white" stroke-width="1.5" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+			</svg>
+		</HeaderLinkComponent>
+		-->
+		<HeaderLinkComponent OnClick="() => ChangeState()" Tooltip="расписание" Link="/" IsMainLink="yes">
+			<svg width="25" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M8.07143 4.125C4.44213 4.125 1.5 6.92322 1.5 10.375L1.5 19.75C1.5 23.2018 4.44213 26 8.07143 26H17.9286C21.5579 26 24.5 23.2018 24.5 19.75V10.375C24.5 6.92322 21.5579 4.125 17.9286 4.125M8.07143 4.125L17.9286 4.125M8.07143 4.125V5.6875M8.07143 4.125V1M17.9286 4.125L17.9286 5.6875M17.9286 4.125V1M8.07143 12.3839C8.07143 9.70536 13 9.70536 13 12.3839C13 14.5268 10.8095 15.0625 9.71429 15.0625C10.8095 15.0625 13 15.5982 13 17.7411C13 20.4196 8.07143 20.4196 8.07143 17.7411M16.2857 11.7143L17.9286 10.375V19.75"
+					  stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</HeaderLinkComponent>
+		<!--
+		<HeaderLinkComponent OnClick="() => ChangeState()" Tooltip="успеваемость" Link="/grades">
+			<svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M22.9166 17.4376V4.86468C22.9166 3.61468 21.8958 2.68759 20.6562 2.79176H20.5937C18.4062 2.97926 15.0833 4.09385 13.2291 5.26051L13.052 5.3751C12.7499 5.5626 12.2499 5.5626 11.9478 5.3751L11.6874 5.21885C9.83325 4.0626 6.52075 2.95843 4.33325 2.78135C3.09367 2.67718 2.08325 3.61468 2.08325 4.85426V17.4376C2.08325 18.4376 2.89575 19.3751 3.89575 19.5001L4.19784 19.5418C6.45825 19.8438 9.94784 20.9897 11.9478 22.0834L11.9895 22.1043C12.2708 22.2605 12.7187 22.2605 12.9895 22.1043C14.9895 21.0001 18.4895 19.8438 20.7603 19.5418L21.1041 19.5001C22.1041 19.3751 22.9166 18.4376 22.9166 17.4376Z"
+					  stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M12.5 5.71875V21.3437" stroke="white" stroke-width="1.5" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+				<path d="M8.073 8.84375H5.72925" stroke="white" stroke-width="1.5" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+				<path d="M8.85425 11.9688H5.72925" stroke="white" stroke-width="1.5" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+			</svg>
+		</HeaderLinkComponent>
+		<HeaderLinkComponent OnClick="() => ChangeState()" Tooltip="практики и сессии" Link="/practicesAndSessions">
+			<svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M10.9691 2.63542L4.69824 6.72917C2.68783 8.04167 2.68783 10.9792 4.69824 12.2917L10.9691 16.3854C12.0941 17.125 13.9482 17.125 15.0732 16.3854L21.3128 12.2917C23.3128 10.9792 23.3128 8.05209 21.3128 6.73959L15.0732 2.64584C13.9482 1.89584 12.0941 1.89584 10.9691 2.63542Z"
+					  stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M6.36491 13.625L6.35449 18.5104C6.35449 19.8333 7.37533 21.25 8.62533 21.6667L11.9482 22.7708C12.5212 22.9583 13.4691 22.9583 14.0524 22.7708L17.3753 21.6667C18.6253 21.25 19.6462 19.8333 19.6462 18.5104V13.6771"
+					  stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M22.792 15.625V9.375" stroke="white" stroke-width="1.5" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+			</svg>
+		</HeaderLinkComponent>
+		<HeaderLinkComponent OnClick="() => ChangeState()" Tooltip="доска объявлений" Link="/adsBoard">
+			<svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M12.0357 2.91003C8.72571 2.91003 6.03571 5.60003 6.03571 8.91003V11.8C6.03571 12.41 5.77571 13.34 5.46571 13.86L4.31571 15.77C3.60571 16.95 4.09571 18.26 5.39571 18.7C9.70571 20.14 14.3557 20.14 18.6657 18.7C19.8757 18.3 20.4057 16.87 19.7457 15.77L18.5957 13.86C18.2957 13.34 18.0357 12.41 18.0357 11.8V8.91003C18.0357 5.61003 15.3357 2.91003 12.0357 2.91003Z"
+					  stroke="#171717" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
+				<path d="M13.8855 3.19994C13.5755 3.10994 13.2555 3.03994 12.9255 2.99994C11.9655 2.87994 11.0455 2.94994 10.1855 3.19994C10.4755 2.45994 11.1955 1.93994 12.0355 1.93994C12.8755 1.93994 13.5955 2.45994 13.8855 3.19994Z"
+					  stroke="#171717" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+					  stroke-linejoin="round"/>
+				<path d="M15.0356 19.0601C15.0356 20.7101 13.6856 22.0601 12.0356 22.0601C11.2156 22.0601 10.4556 21.7201 9.91564 21.1801C9.37564 20.6401 9.03564 19.8801 9.03564 19.0601"
+					  stroke="#171717" stroke-width="1.5" stroke-miterlimit="10"/>
+			</svg>
+		</HeaderLinkComponent>
+		-->
+		<HeaderLinkComponent OnClick="() => ChangeState()" Tooltip="вопрос-ответ" Link="/QA">
+			<svg viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M13.0001 8.21875L11.8855 10.1563C11.6355 10.5833 11.8438 10.9375 12.3334 10.9375H13.6563C14.1563 10.9375 14.3542 11.2917 14.1042 11.7188L13.0001 13.6563"
+					  stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M9.14583 18.7917V17.5833C6.75 16.1354 4.78125 13.3125 4.78125 10.3125C4.78125 5.15624 9.52083 1.11457 14.875 2.28124C17.2292 2.80207 19.2917 4.36457 20.3646 6.52082C22.5417 10.8958 20.25 15.5417 16.8854 17.5729V18.7812C16.8854 19.0833 17 19.7812 15.8854 19.7812H10.1458C9 19.7917 9.14583 19.3437 9.14583 18.7917Z"
+					  stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M9.35449 22.9167C11.7399 22.2396 14.2607 22.2396 16.6462 22.9167" stroke="white"
+					  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</HeaderLinkComponent>
+		
+	</ul>
+	<div class="navigation-backdrop">
+
+	</div>
+</nav>
+
+@code {
+	[Parameter] public string State { get; set; } = "";
+
+	public void ChangeState()
+	{
+		if (State == "active")
+		{
+			State = "";
+		}
+		else
+		{
+			State = "active";
+		}
+	}
+
+}
