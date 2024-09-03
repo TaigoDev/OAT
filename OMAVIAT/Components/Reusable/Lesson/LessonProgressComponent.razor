@@ -1,0 +1,33 @@
+<div class="lesson-progress @Orientation"
+	 style="--percent: @GetPercent();">
+	<label for="lesson-progress">@LessonFinished пар / @LessonLength пар</label>
+	<progress id="lesson-progress" max="@LessonLength" value="@LessonFinished"></progress>
+	<div class="progress">
+
+	</div>
+</div>
+
+@code {
+	[Parameter] public int? LessonFinished { get; set; } = 17;
+	[Parameter] public int? LessonLength { get; set; } = 25;
+	[Parameter] public string? Orientation { get; set; } = "horizontal";
+
+	private string GetPercent()
+	{
+		try
+		{
+			return $"{LessonLength / LessonFinished}%";
+		}
+		catch
+		{
+			return "0%";
+		}
+	}
+
+	/*
+	protected override void OnAfterRender(bool firstRender)
+	{
+		Procent = $"{LessonLength / LessonFinished}%";
+	}
+	*/
+}

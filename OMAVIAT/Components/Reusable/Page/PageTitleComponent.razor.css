@@ -1,0 +1,8 @@
+﻿.page-title {
+	display: block;
+	width: fit-content;
+	margin: 20px auto 25px auto;
+	font-weight: 600;
+	font-size: var(--title-fs);
+	color: var(--white-c);
+}

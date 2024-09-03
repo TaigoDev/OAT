@@ -1,0 +1,57 @@
+.navigation-item {
+	position: relative;
+}
+
+::deep .navigation-item * {
+	transition: var(--ttf) var(--td-s);
+}
+
+::deep .navigation-item a {
+	display: grid;
+	place-items: center;
+	padding: 15px;
+	border: var(--zone-bw) solid var(--zone-bc);
+	border-radius: var(--br-max);
+}
+
+::deep .navigation-item svg {
+	width: 25px;
+	height: 25px;
+}
+
+::deep .navigation-item path {
+	stroke: var(--white-c);
+}
+
+.navigation-item-tooltip {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	translate: -50% 5px;
+	width: max-content;
+	padding: 5px 10px;
+	background: var(--zone-bgc);
+	font-size: var(--subtext-fs);
+	border-radius: var(--br-s);
+	opacity: 0;
+	visibility: hidden;
+}
+
+::deep .navigation-item a:hover {
+	background: var(--zone-bgc);
+	border-color: var(--zone-active-bc);
+}
+
+::deep .navigation-item a:hover + .navigation-item-tooltip {
+	visibility: visible;
+	opacity: 1;
+}
+
+::deep .navigation-item:has(a.active) a {
+	background: var(--white-c);
+	border-color: var(--zone-active-bc);
+}
+
+::deep .navigation-item:has(a.active) path {
+	stroke: var(--black-c);
+}

@@ -1,5 +1,6 @@
 ﻿@using System.Net.Http
 @using System.Net.Http.Json
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
@@ -9,3 +10,12 @@
 @using OMAVIAT
 @using OMAVIAT.Components
 @using OMAVIAT.Components.Reusable
+@using OMAVIAT.Components.Reusable.Window
+@using OMAVIAT.Components.Reusable.Icon
+@using OMAVIAT.Components.Reusable.Page
+@using OMAVIAT.Components.Reusable.Content
+@using OMAVIAT.Components.Reusable.Form
+@using OMAVIAT.Components.Reusable.Navigation
+@inject IJSRuntime JSRuntime;
+@inject NavigationManager NavigationManager
+@attribute [Authorize]

@@ -1,0 +1,18 @@
+<li>
+	@ChildContent <b>@Type:</b>
+	@if (Href != "")
+	{
+		<a class="one-line" href="@Href">@Value</a>
+	}
+	else
+	{
+		<span class="one-line">@Value</span>
+	}
+</li>
+
+@code {
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public string Type { get; set; } = "параметр";
+	[Parameter] public string Value { get; set; } = "значение";
+	[Parameter] public string Href { get; set; } = "";
+}

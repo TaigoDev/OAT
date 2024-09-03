@@ -1,0 +1,24 @@
+::deep .zone {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-template-rows: auto auto;
+	gap: 10px;
+}
+
+::deep .zone {
+	grid-row-start: 1;
+	grid-column-start: 1;
+}
+
+.grades {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+	grid-row-start: 2;
+	grid-column-start: 1;
+}
+
+.middle {
+	grid-row-start: 1;
+	grid-column-start: 2;
+}

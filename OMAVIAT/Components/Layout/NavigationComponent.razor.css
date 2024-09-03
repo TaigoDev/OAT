@@ -1,0 +1,48 @@
+.navigation-container {
+	--current-page: url(images/main/header/main.svg);
+}
+
+.navigation {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+.navigation-mobile {
+	display: grid;
+	place-items: center;
+	width: fit-content;
+	aspect-ratio: 1;
+	padding: 25px;
+	margin: auto;
+	border: var(--zone-bw) solid var(--zone-bc);
+	border-radius: var(--br-max);
+	transition: var(--td-s) var(--ttf);
+	background: center var(--current-page) no-repeat;
+	background-size: 45%;
+}
+
+.navigation-container:has(a[href="/"].active) {
+	--current-page: url(images/main/header/main.svg);
+}
+
+.navigation-container:has(a[href="/timetable"].active) {
+	--current-page: url(images/main/header/timetable.svg);
+}
+
+.navigation-container:has(a[href="/grades"].active) {
+	--current-page: url(images/main/header/grades.svg);
+}
+
+.navigation-container:has(a[href="/practicesAndSessions"].active) {
+	--current-page: url(images/main/header/practicesAndSessions.svg);
+}
+
+.navigation-container:has(a[href="/adsBoard"].active) {
+	--current-page: url(images/main/header/adsBoard.svg);
+}
+
+.navigation-container:has(a[href="/QA"].active) {
+	--current-page: url(images/main/header/QA.svg);
+}

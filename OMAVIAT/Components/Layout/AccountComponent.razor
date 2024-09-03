@@ -1,0 +1,27 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using OMAVIAT.Utilities
+@inject IHttpContextAccessor httpContextAccessor;
+
+<div class="account">
+	<NavLink href="/Profile">
+		<span class="account-fio">
+			@LastName
+			<br>
+			@FirstName
+			<br>
+			@SecondName
+		</span>
+		<div class="account-avatar">
+			<img src="images/avatar.png" alt="фото профиля">
+		</div>
+	</NavLink>
+	<ActionButtonComponent ClassList="rounded exit">
+		<CrossIconComponent/>
+	</ActionButtonComponent>
+</div>
+
+@code {
+	[Parameter] public string FirstName { get; set; } = "Имя";
+	[Parameter] public string SecondName { get; set; } = "Отчество";
+	[Parameter] public string LastName { get; set; } = "Фамилия";
+}

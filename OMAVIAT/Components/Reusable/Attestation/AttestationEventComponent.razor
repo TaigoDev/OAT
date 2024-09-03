@@ -1,0 +1,31 @@
+﻿<ZoneComponent ClassList="practices-list-item">
+	<ZoneTitleComponent>
+		<StateIconComponent ClassList="in-text"/> @EventName
+	</ZoneTitleComponent>
+	<IconizedListComponent>
+		<IconizedListItemComponent Type="Экзаменатор" Value="@EventExaminer" Href="@EventExaminerLink">
+			<PersonIconComponent ClassList="in-text"/>
+		</IconizedListItemComponent>
+		<IconizedListItemComponent Type="Дата" Value="@GetDate()">
+			<DateIconComponent ClassList="in-text"/>
+		</IconizedListItemComponent>
+		<IconizedListItemComponent Type="Кабинет" Value="@EventPlace">
+			<PlaceIconComponent ClassList="in-text"/>
+		</IconizedListItemComponent>
+	</IconizedListComponent>
+</ZoneComponent>
+
+@code{
+	[Parameter] public string EventName { get; set; } = "Название события";
+	[Parameter] public string EventExaminer { get; set; } = "Фамилия И.О.";
+	[Parameter] public string EventExaminerLink { get; set; } = "";
+	[Parameter] public string EventDate { get; set; } = DateTime.Today.ToString();
+	[Parameter] public string EventTime { get; set; } = "8:00";
+	[Parameter] public string EventPlace { get; set; } = "000";
+
+	private string GetDate()
+	{
+		return $"{EventDate} в {EventTime}";
+	}
+
+}

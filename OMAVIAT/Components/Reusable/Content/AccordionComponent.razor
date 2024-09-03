@@ -1,0 +1,25 @@
+<div>
+	<div class="accordion @State">
+		<div @onclick="ChangeState" class="accordion-header">
+			<h3 class="accordion-header-title">
+				@Title
+			</h3>
+			<DownArrowIconComponent/>
+		</div>
+		<div class="accordion-body">
+			@ChildContent
+		</div>
+	</div>
+</div>
+
+@code {
+	public string State { get; set; } = "inactive";
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public string Title { get; set; }
+
+	public void ChangeState()
+	{
+		State = State == "active" ? "inactive" : "active";
+	}
+
+}

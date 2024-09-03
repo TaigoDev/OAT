@@ -1,0 +1,30 @@
+﻿@rendermode @(new InteractiveServerRenderMode(false))
+
+<div>
+	<li @onclick="OnClick" class="navigation-item">
+		@if (IsMainLink == "yes")
+		{
+			<NavLink href="@Link" Match="NavLinkMatch.All">
+				@ChildContent
+			</NavLink>
+		}
+		else
+		{
+			<NavLink href="@Link">
+				@ChildContent
+			</NavLink>
+		}
+
+		<div class="navigation-item-tooltip">
+			@Tooltip
+		</div>
+	</li>
+</div>
+
+@code {
+	[Parameter] public string Tooltip { get; set; } = "текст подсказки";
+	[Parameter] public string Link { get; set; } = "/";
+	[Parameter] public string? IsMainLink { get; set; } = "no";
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+	[Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+}
