@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using OMAVIAT.Entities.Database;
 using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule.Database;
@@ -34,16 +35,16 @@ namespace OMAVIAT.Pages
 			if (DateOnly.TryParseExact(sheet, "dd.MM.yyyy", out var date))
 			{
 				this.sheet = date;
-				daysChanges = db.daysChanges.FirstOrDefault(e => e.corpus == result && e.date == date);
+				daysChanges = db.daysChanges.Include(e => e.bells).
+					FirstOrDefault(e => e.corpus == result && e.date == date);
 				return;
 			}
 
-			var search = db.daysChanges.Where(e => e.corpus == result).ToList().MaxBy(e => e.date);
-			if (search is not null)
-			{
-				this.sheet = search.date;
-				daysChanges = search;
-			}
+			var search = db.daysChanges.Include(e => e.bells).
+				Where(e => e.corpus == result).ToList().MaxBy(e => e.date);
+			if (search is null) return;
+			this.sheet = search.date;
+			daysChanges = search;
 		}
 	}
 
