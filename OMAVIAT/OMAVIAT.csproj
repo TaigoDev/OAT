@@ -48,4 +48,10 @@
 	    <HintPath>OMAVIAT.Schedule.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Components\Reusable\Grades\GradesComponent.razor" />
+	  <_ContentIncludedByDefault Remove="Components\Reusable\Grades\SelectCourseComponent.razor" />
+	  <_ContentIncludedByDefault Remove="Components\Reusable\Attestation\AttestationEventComponent.razor" />
+	  <_ContentIncludedByDefault Remove="Components\Reusable\Attestation\AttestationEventMoreInfoComponent.razor" />
+	</ItemGroup>
 </Project>

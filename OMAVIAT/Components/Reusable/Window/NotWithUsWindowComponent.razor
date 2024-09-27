@@ -1,13 +1,20 @@
 ﻿<div>
-	<WindowComponent>
-		<WindowTitleComponent Text="Еще не с нами?"/>
-		<p>
-			Войдите в свою учетную запись, чтобы получить доступ ко всему функционалу сайта.
-		</p>
-		<ActionButtonComponent>Авторизация</ActionButtonComponent>
-		<p>
-			Позже
-		</p>
+	<WindowComponent ClassList="active">
+		<img src="images/windows/notWithUs.png" alt=""/>
+		<div class="window-body">
+			<header>
+				<WindowTitleComponent Text="Еще не с нами?"/>
+				<p class="rule">
+					Войдите в свою учетную запись, чтобы получить доступ ко всему функционалу сайта.
+				</p>
+			</header>
+			<footer>
+				<ActionButtonComponent ClassList="rounded">Авторизация</ActionButtonComponent>
+				<ActionButtonComponent ClassList="cleared later">
+					позже
+				</ActionButtonComponent>
+			</footer>
+		</div>
 	</WindowComponent>	
 </div>
 
