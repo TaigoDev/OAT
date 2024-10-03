@@ -14,20 +14,25 @@ public class Logger
 		=> Write($"[WARNING {GetTimeUTC()}]: {message}");
 
 	public static void Error(string message)
-		=> Write($"[ERROR {GetTimeUTC()}]: {message}");
+		=> Write($"[ERROR {GetTimeUTC()}]: {message}", disableLogInFile: true);
 
 	public static void Error(Exception message)
-		=> Write($"[ERROR {GetTimeUTC()}]: {message}");
+		=> Write($"[ERROR {GetTimeUTC()}]: {message}", disableLogInFile: true);
 
-	private static async void Write(string message, bool disableTelegram = false)
+	private static async void Write(string message, bool disableTelegram = false, bool disableLogInFile = false)
 	{
 		try
 		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Logs", $"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log");
-			if (File.Exists(path))
-				await File.AppendAllTextAsync(path, $"{message}\n");
-			else
-				await File.WriteAllTextAsync(path, $"{message}\n");
+			if (!disableLogInFile)
+			{
+				var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Logs",
+					$"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log");
+				if (File.Exists(path))
+					await File.AppendAllTextAsync(path, $"{message}\n");
+				else
+					await File.WriteAllTextAsync(path, $"{message}\n");
+			}
+
 			if (!disableTelegram)
 				await TelegramBot.SendMessage(message);
 			else
