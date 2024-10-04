@@ -12,6 +12,11 @@
 	text-align: center;
 }
 
+::deep .window-body p{
+	color: var(--light-white-c);
+	margin-top: 0;
+}
+
 ::deep .window-body header{
 	display: flex;
 	flex-direction: column;
