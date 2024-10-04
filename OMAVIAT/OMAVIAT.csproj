@@ -3,8 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-	<ScopedCssEnabled>true</ScopedCssEnabled>
+    <ImplicitUsings>enable</ImplicitUsings><ScopedCssEnabled>true</ScopedCssEnabled>
 	<PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
 	<ItemGroup>
