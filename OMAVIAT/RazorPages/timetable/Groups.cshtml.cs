@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Enums;
-using OMAVIAT.Entities.Schedule;
-using OMAVIAT.Schedule.Schedule.MainSchedule;
-using OMAVIAT.Services.Schedule.MainSchedule;
+using OMAVIAT.Schedule.Services.MainSchedule;
 
 namespace OMAVIAT.Pages.timetable
 {

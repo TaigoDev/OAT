@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
-using OMAVIAT.Schedule.Schedule.MainSchedule;
+using OMAVIAT.Schedule.Services.MainSchedule;
 using OMAVIAT.Services.Schedule.MainSchedule;
 
 namespace OMAVIAT.RazorPages.timetable
@@ -37,7 +37,7 @@ namespace OMAVIAT.RazorPages.timetable
 				switch (lesson.Count)
 				{
 					case 1:
-						lessons[day.Type] = lesson.First();
+						lessons[day.Type - 1] = lesson.First();
 						break;
 					case 2:
 					{

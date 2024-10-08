@@ -3,7 +3,6 @@ using OMAVIAT.Entities.Enums;
 using OMAVIAT.Schedule.Entities;
 using OMAVIAT.Schedule.Entities.Enums;
 using OMAVIAT.Schedule.Entities.Models;
-using OMAVIAT.Schedule.Schedule.MainSchedule;
 using OMAVIAT.Schedule.Testers;
 using OMAVIAT.Services.Schedule.MainSchedule;
 using OMAVIAT.Services.ScheduleLoggers;

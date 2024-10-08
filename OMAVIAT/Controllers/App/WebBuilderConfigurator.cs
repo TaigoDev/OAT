@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using MyOAT.Utilities.Cookies;
 using OMAVIAT.Controllers.Security;
 using OMAVIAT.Services.ReCaptchaV2;
 using OMAVIAT.Services.ReCaptchaV3;
@@ -14,6 +15,7 @@ namespace OMAVIAT.Controllers.App
 				.AddInteractiveServerComponents(); builder.Services.AddControllersWithViews();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddServerSideBlazor(o =>o.DetailedErrors = true);
+			builder.Services.AddScoped<ICookie, Cookie>();
 
 			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 			{

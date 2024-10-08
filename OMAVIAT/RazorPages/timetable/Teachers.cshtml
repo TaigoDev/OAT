@@ -1,7 +1,8 @@
 ﻿@page "{building?}"
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using OMAVIAT.Entities.Enums
-@using OMAVIAT.Schedule.Schedule.MainSchedule
-@using OMAVIAT.Services.Schedule.MainSchedule
+@using OMAVIAT.Schedule.Entities.Enums
+@using OMAVIAT.Schedule.Services.MainSchedule
 
 @model OMAVIAT.Pages.timetable.TeachersModel
 @{
@@ -29,12 +30,9 @@
             @{
                 if (!Enum.TryParse<Building>(Model.building, true, out var result))
                     return;
-                var corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
-                if (corpus is null)
-                    return;
-
+                var schedules = ScheduleReader.teachers.Where(e => e.Corpus == (Corpus)(int)result - 1);
             }
-            @foreach (var teacher in corpus.teachers.OrderBy(e => e.name))
+            @foreach (var teacher in schedules.OrderBy(e => e.name))
 			{
 				<tr>
 					<td>
