@@ -678,13 +678,13 @@
     </day>
     <day number="3" name="Среда">
      <lesson number="1">
-      <group number="0" subject="Основы проектной деятельности" short_subject="ОПД" teacher="Вакансия ТехАРС" cabinet="Сатурн" />
+      <group number="0" subject="Основы проектной деятельности" short_subject="ОПД" teacher="Вакансия ТехАРС" cabinet="ОДК" />
      </lesson>
      <lesson number="2">
-      <group number="0" subject="Технология выполнения слесарных работ" short_subject="ТСР" teacher="Вакансия ТехАРС" cabinet="Сатурн" />
+      <group number="0" subject="Технология выполнения слесарных работ" short_subject="ТСР" teacher="Вакансия ТехАРС" cabinet="ОДК" />
      </lesson>
      <lesson number="3">
-      <group number="0" subject="Технология выполнения слесарных работ" short_subject="ТСР" teacher="Вакансия ТехАРС" cabinet="Сатурн" />
+      <group number="0" subject="Технология выполнения слесарных работ" short_subject="ТСР" teacher="Вакансия ТехАРС" cabinet="ОДК" />
      </lesson>
     </day>
     <day number="4" name="Четверг">

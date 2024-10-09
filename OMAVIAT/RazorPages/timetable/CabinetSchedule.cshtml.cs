@@ -55,14 +55,14 @@ namespace OMAVIAT.RazorPages.timetable
 							Group = $"{less.Group}/{raz.Group}",
 							Name = $"{less.Name}/{raz.Name}",
 						};
-						lessons[day.Type] = combine;
+						lessons[day.Type - 1] = combine;
 						break;
 					}
 					default:
 					{
 						if(lesson.Count != 0)
 						{
-							lessons[day.Type] = lesson.First();
+							lessons[day.Type - 1] = lesson.First();
 						}
 
 						break;
