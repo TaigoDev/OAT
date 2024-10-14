@@ -13,7 +13,6 @@
     }
     var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
 }
-<script src="https://www.google.com/recaptcha/api.js?render=@Configurator.ReCaptchaV3.WebSecretKey"></script>
 <script src="~/js/recaptcha.js" asp-append-version="true"></script>
 <link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
 <link rel="stylesheet" href="~/css/timetable/changes.css" asp-append-version="true">

@@ -1,4 +1,6 @@
-﻿@using Microsoft.EntityFrameworkCore
+﻿@using System.Net
+@using Microsoft.EntityFrameworkCore
+@using Newtonsoft.Json.Linq
 @using OMAVIAT
 
 @using OMAVIAT.Entities.Database
@@ -7,11 +9,9 @@
 @using OMAVIAT.Entities.Schedule.Database
 @using OMAVIAT.Schedule.Entities.Enums
 @using OMAVIAT.Utilities
-@using OMAVIAT.Services.ReCaptchaV3
 
 
 @inject IJSRuntime JSRuntime;
-@inject ICaptchaV3Validator captcha;
 @inject IHttpContextAccessor httpContextAccessor;
 @renderFragment
 
@@ -46,7 +46,7 @@
             await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper",
                     objRef);
 
-            using var db = new DatabaseContext();
+            await using var db = new DatabaseContext();
             var changes = await db.changes.Where(e => e.corpus == corpus && e.date == date).ToListAsync();
             if (search is not null)
                 rows = changes.Where(e =>
@@ -56,9 +56,7 @@
 
             string ToSearch(string? s)
             {
-                if (s is null)
-                    return "";
-                return s.ToLower().Replace(" ", "");
+	            return s is null ? "" : s.ToLower().Replace(" ", "");
             }
 
             if (httpContextAccessor.HttpContext is not null && string.IsNullOrWhiteSpace(httpContextAccessor.HttpContext.Request.Headers["CF-Connecting-IP"]))
@@ -68,25 +66,21 @@
                 return;
             }
 
-            var token = await JSRuntime.InvokeAsync<string>("recaptchaCall");
-            if (!await captcha.IsCaptchaPassedAsync(token))
-            {
-                await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper", objRef);
+			await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper", objRef);
 
-                renderFragment = (__builder) =>
-                 {
-                     <h3 class="section-title title-centered" style="font-size: 1.4rem;">
-                         Пройдите проверку на робота.
-                     </h3>
-                     <div id="html_element" data-callback="OnComplete" class="g-recaptcha recaptcha-block" data-sitekey="@Configurator.ReCaptchaV2.WebSecretKey"></div>
-                 };
-                this.StateHasChanged();
-                await JSRuntime.InvokeVoidAsync("loadScript", "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit");
-
-                return;
-            }
-            OnRowDisplay();
+             renderFragment = (__builder) =>
+             {
+	             <h3 class="section-title title-centered" style="font-size: 1.4rem;">
+		             Пройдите проверку на робота.
+	             </h3>
+	             <div
+		             id="captcha-container"
+		             class="smart-captcha"
+		             data-sitekey="@Configurator.SmartCaptcha.WebSecretKey"
+	             ></div>
+             };
             this.StateHasChanged();
+            await JSRuntime.InvokeVoidAsync("loadScript", "https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=onloadFunction");
         }
         catch (Exception ex)
         {
@@ -106,7 +100,7 @@
     [JSInvokable]
     public async Task OnComplete(string token)
     {
-        if (await CaptchaVerificationService.IsCaptchaValid(token))
+        if (await ValidateToken(token))
         {
             OnRowDisplay();
             this.StateHasChanged();
@@ -120,6 +114,38 @@
             </h3>
         };
         this.StateHasChanged();
+    }
+
+    private static async Task<bool> ValidateToken(string token)
+    {
+	    try
+	    {
+		    var proxy = new WebProxy
+		    {
+			    Address = new Uri($"http://10.0.55.52:3128"),
+			    BypassProxyOnLocal = false,
+			    UseDefaultCredentials = false,
+		    };
+
+		    var httpClientHandler = new HttpClientHandler
+		    {
+			    Proxy = proxy,
+			    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+		    };
+
+		    using var httpClient = OperatingSystem.IsWindows() ? new HttpClient() : new HttpClient(httpClientHandler);
+		    var response = await httpClient.PostAsync(
+			    $"https://smartcaptcha.yandexcloud.net/validate?secret={Configurator.SmartCaptcha.CodeSecretKey}&token={token}", null);
+		    var content = await response.Content.ReadAsStringAsync();
+		    var parsed = JObject.Parse(content);
+		    return parsed["status"]?.Value<string>() == "ok";
+	    }
+	    catch (Exception e)
+	    {
+			Logger.Error(e);
+	    }
+
+	    return false;
     }
 
     private void OnRowDisplay()

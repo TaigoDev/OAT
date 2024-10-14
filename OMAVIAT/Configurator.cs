@@ -11,8 +11,7 @@ namespace OMAVIAT
 		public static TelegramConfig telegram = new();
 		public static TimeTableBotConfig timetable = new();
 		public static TimeTableBotConfig myoat = new();
-		public static ReCaptchaV3Config ReCaptchaV3 = new();
-		public static ReCaptchaV2Config ReCaptchaV2 = new();
+		public static YandexSmartCaptchaConfig SmartCaptcha = new();
 		public static bool IsLocal = OperatingSystem.IsWindows();
 
 		public static async Task init()
@@ -24,10 +23,9 @@ namespace OMAVIAT
 			timetable = await FileUtils.SetupConfiguration<TimeTableBotConfig>(
 				Path.Combine(Directory.GetCurrentDirectory(), "Resources", "timetable_bot.yml"), new());	
 			myoat = await FileUtils.SetupConfiguration<TimeTableBotConfig>(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "myoat.yml"), new());
-			ReCaptchaV3 = await FileUtils.SetupConfiguration<ReCaptchaV3Config>(
-				Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ReCaptchaV3.yml"), new());
-			ReCaptchaV2 = await FileUtils.SetupConfiguration<ReCaptchaV2Config>(
-				Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ReCaptchaV2.yml"), new());
+			
+			SmartCaptcha =  await FileUtils.SetupConfiguration<YandexSmartCaptchaConfig>(
+				Path.Combine(Directory.GetCurrentDirectory(), "Resources", "smartcaptcha.yml"), new());	
 		}
 
 

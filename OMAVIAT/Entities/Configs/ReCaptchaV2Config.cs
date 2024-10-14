@@ -1,8 +1,8 @@
 ﻿namespace OMAVIAT.Entities.Configs
 {
-	public class ReCaptchaV2Config
+	public class YandexSmartCaptchaConfig
 	{
-		public string CodeSecretKey { get; set; } = "6Lc1bnAnAAAAAIEPI-yEKGx91cioLLGUOCny4EEU";
-		public string WebSecretKey { get; set; } = "6Lc1bnAnAAAAAJB01ppdO-PryHlM0PJZa9u5lKD9";
+		public string CodeSecretKey { get; set; } = "ysc2_I9g75xZMUZMaxIq7RxnaZRFItPGhTu6VQUfZuGKZ5c09504f";
+		public string WebSecretKey { get; set; } = "ysc1_I9g75xZMUZMaxIq7RxnauDYz5QP3UwZPMpFcIWg657404671";
 	}
 }

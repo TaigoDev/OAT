@@ -38,21 +38,19 @@ window.loadScript = function (scriptPath) {
 	});
 }
 
-async function recaptchaCall() {
-	var recaptcha_token = '';
-	grecaptcha.ready(() => {
-		grecaptcha.execute("6Lc1GpMpAAAAAB_4lNiPzuIGmQ6Zrb8gEgms4Gd9", { action: 'submit' }).then((token) => {
-			recaptcha_token = token;
+function onloadFunction() {
+	if (window.smartCaptcha) {
+		const container = document.getElementById('captcha-container');
+		const widgetId = window.smartCaptcha.render(container, {
+			sitekey: "ysc1_I9g75xZMUZMaxIq7RxnauDYz5QP3UwZPMpFcIWg657404671"
 		});
-	});
-	while (recaptcha_token == '') {
-		await new Promise(r => setTimeout(r, 100));
-	}
-	return recaptcha_token;
-}
 
-function onloadCallback() {
-	grecaptcha.render('html_element');
+		const unsubscribe = window.smartCaptcha.subscribe(
+			widgetId,
+			'success',
+			() => GreetingHelpers.OnComplete()
+		);
+	}
 }
 class GreetingHelpers {
 	static dotNetHelper;
@@ -63,7 +61,7 @@ class GreetingHelpers {
 	static async OnComplete() {
 
 		console.log("User complete passed ReCaptcha");
-		var response = grecaptcha.getResponse();
+		var response = window.smartCaptcha.getResponse();
 		await GreetingHelpers.dotNetHelper.invokeMethodAsync('OnComplete', response);
 	}
 

@@ -1,5 +1,4 @@
 ﻿@page
-@using OMAVIAT.Services.ReCaptchaV2
 
 @model QuestionAnswerModel
 @{
@@ -53,9 +52,6 @@
 			<div class="input-box">
 				<label for="description">Вопрос</label>
 				<textarea asp-for="description" id="description" class="customized" placeholder="Введите вопрос"></textarea>
-			</div>
-			<div class="captcha-container">
-				@Html.ReCaptcha()
 			</div>
 			<p class="question-warning">
 				Нажимая на кнопку "Отправить", вы даете согласие на обработку персональных данных

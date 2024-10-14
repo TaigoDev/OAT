@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using OMAVIAT.Services.ReCaptchaV2;
 using System.ComponentModel.DataAnnotations;
 
 namespace OMAVIAT.Pages.feedback
 {
-	[ValidateReCaptcha("questionanswer", ErrorMessage = "Вы не прошли капчу")]
 	public class QuestionAnswerModel : PageModel
 	{
 		private readonly ILogger<QuestionAnswerModel> _logger;
