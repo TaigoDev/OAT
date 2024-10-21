@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
+using OMAVIAT.Schedule.Entities.Enums;
 using OMAVIAT.Schedule.Services.MainSchedule;
 
 namespace OMAVIAT.Pages.timetable
@@ -23,7 +24,7 @@ namespace OMAVIAT.Pages.timetable
 			corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
 			if (corpus == null)
 				return;
-			teacher = ScheduleReader.teachers.FirstOrDefault(e => e.name.ToSearchView() == fullname.ToSearchView());
+			teacher = ScheduleReader.teachers.FirstOrDefault(e => e.name.ToSearchView() == fullname.ToSearchView() && e.Corpus == (Corpus) result - 1);
 		}
 
 		public List<ScheduleLesson?> GetAllLessonsByNumber(int id, ScheduleWeek week)
