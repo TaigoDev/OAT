@@ -42,7 +42,7 @@ Runs.StartModules(
 
 	   //Çàïóñêàåì äðóãèå ñëóæáû
 	   () => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),
-	   WorkersReader.init
+	   WorkersReader.Init
 );
 var builder = WebApplication.CreateBuilder(args);
 WebBuilderConfigurator.SetupServices(ref builder);

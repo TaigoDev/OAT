@@ -126,6 +126,16 @@
 					@worker.AcademicDegree
 				</p>
 			}
+			
+			@if (worker.Сategory is not null)
+			{
+				<h4 class="section-subtitle-small">
+					Категория
+				</h4>
+				<p>
+					@worker.Сategory
+				</p>
+			}
 
 			@*
 			<h4 class="section-subtitle-small">
@@ -135,6 +145,25 @@
 				Информация не указана
 			</p>
 			*@
+			
+			@if (worker.Subjects is not null)
+			{
+				var subjects = worker.Subjects.Split(";");
+				@if (subjects.Count() is not 0)
+				{
+					<h4 class="section-subtitle-small">
+						Преподаваемые учебные дисциплины
+					</h4>
+					@foreach (var element in subjects)
+					{
+						<p>
+							@element
+						</p>
+					}
+
+				}
+			}
+			
 			@if (worker.ProfessionalDevelopment is not null)
 			{
 				var ProfessionalDevelopment = worker.ProfessionalDevelopment.Split("\n");

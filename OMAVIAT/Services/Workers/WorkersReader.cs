@@ -1,16 +1,16 @@
 ﻿using Ganss.Excel;
 using OMAVIAT.Entities.Models;
+using RepoDb.Extensions;
 
 namespace OMAVIAT.Services.Workers
 {
-	public class WorkersReader
+	public static class WorkersReader
 	{
 		public static List<List<Worker>> administration = [];
 		public static IEnumerable<IEnumerable<Worker>> Workers = new List<List<Worker>>();
 		public static List<Worker> AllWorkers = [];
-
-
-		public static async Task init()
+		
+		public static async Task Init()
 		{
 			var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "workers", "workers.xlsx");
 			if (!File.Exists(file))
@@ -19,7 +19,7 @@ namespace OMAVIAT.Services.Workers
 				return;
 			}
 
-			using var stream = File.Open(file, FileMode.Open, FileAccess.Read);
+		    await using var stream = File.Open(file, FileMode.Open, FileAccess.Read);
 
 			var excel = new ExcelMapper()
 			{
@@ -67,13 +67,34 @@ namespace OMAVIAT.Services.Workers
 			};
 
 			workers.RemoveAll(e => ignoredPost.Contains(e.Post) || ignoredPost.Contains(e.FullName));
-			AllWorkers = [.. workers];
 			AdministrationByPost(ref workers, e => e is "Директор");
 			AdministrationByPost(ref workers, e => e.Contains("Заместитель директора") && !e.Contains("инженерного лицея"));
 			AdministrationByPost(ref workers, e => e is "Главный бухгалтер");
-			Workers = workers.PagesSplit(14);
+			await ReadPedagogicalWorkersAsync();
 		}
 
+		private static async Task ReadPedagogicalWorkersAsync()
+		{
+			var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "workers", "pedagogica-workers.xlsx");
+			if (!File.Exists(file))
+			{
+				Logger.Warning($"[WorkersReader]: Не удалось найти файл с работниками (pedagogica-workers.xlsx)");
+				return;
+			}
+			await using var stream = File.Open(file, FileMode.Open, FileAccess.Read);
+
+			var excel = new ExcelMapper()
+			{
+				HeaderRow = true,
+				CreateMissingHeaders = true,
+			};
+
+			var reader = await excel.FetchAsync<Worker>(stream);
+			var workers = reader.ToList();
+			AllWorkers.AddRange(workers);
+			Workers = workers.Split(14);
+		}
+		
 		private static void AdministrationByPost(ref List<Worker> workers, Func<string, bool> predicate)
 		{
 			administration.Add(workers.Where(e => predicate.Invoke(e.Post)).ToList());
