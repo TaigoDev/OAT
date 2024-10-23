@@ -154,12 +154,14 @@
 					<h4 class="section-subtitle-small">
 						Преподаваемые учебные дисциплины
 					</h4>
-					@foreach (var element in subjects)
-					{
-						<p>
-							@element
-						</p>
-					}
+					<ul class="customized">
+						@foreach (var element in subjects)
+						{
+							<li>
+								@element
+							</li>
+						}
+					</ul>
 
 				}
 			}
@@ -213,14 +215,6 @@
 					@worker.TeacherExperience
 				</p>
 			}
-			@*			 
-			<h4 class="section-subtitle-small">
-				Преподаваемые учебные предметы, курсы, дисциплины(модули)
-			</h4>
-			<p>
-				Информация не указана
-			</p>
-			*@
 		}
 		else
 		{
