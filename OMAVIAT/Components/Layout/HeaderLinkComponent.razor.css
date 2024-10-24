@@ -9,7 +9,9 @@
 ::deep .navigation-item a {
 	display: grid;
 	place-items: center;
-	padding: 15px;
+	width: var(--item-size);
+	height: var(--item-size);
+	padding: 5px;
 	border: var(--zone-bw) solid var(--zone-bc);
 	border-radius: var(--br-max);
 }
@@ -19,8 +21,8 @@
 	height: 25px;
 }
 
-::deep .navigation-item path {
-	stroke: var(--white-c);
+::deep .navigation-item .icon * {
+	stroke: var(--purpur-c);
 }
 
 .navigation-item-tooltip {
@@ -30,7 +32,7 @@
 	translate: -50% 5px;
 	width: max-content;
 	padding: 5px 10px;
-	background: var(--zone-bgc);
+	background: var(--white-c);
 	font-size: var(--subtext-fs);
 	border-radius: var(--br-s);
 	opacity: 0;
@@ -38,7 +40,7 @@
 }
 
 ::deep .navigation-item a:hover {
-	background: var(--zone-bgc);
+	background: var(--zone-active-bgc);
 	border-color: var(--zone-active-bc);
 }
 

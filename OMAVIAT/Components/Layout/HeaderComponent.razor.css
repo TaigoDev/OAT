@@ -1,10 +1,77 @@
 .site-header {
-	--header-column-w: 330px;
-	position: relative;
+	--header-column-w: 350px;
+	--item-size: 60px;
+	position: sticky;
 	z-index: 10;
+	top: 0;
 	display: grid;
 	justify-content: space-between;
 	align-items: center;
 	grid-template-columns: var(--header-column-w) 1fr var(--header-column-w);
 	gap: 30px;
+	background-color: var(--zone-active-bgc);
+	border-radius: var(--br-xl);
+	padding: 20px;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 20px 60px -40px var(--purpur-c);
+	color: var(--purpur-c)
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	transition: var(--td-s) var(--ttf);
+}
+
+::deep .logo-container .logo {
+	height: 3lh;
+}
+
+::deep .logo-container .logo *{
+	fill: currentColor;
+}
+
+::deep .logo-container:hover {
+	color: var(--light-purpur-c);
+}
+
+.logo-container .logo-text {
+	font-style: normal;
+	font-weight: 600;
+	font-size: var(--subtext-fs);
+}
+
+.menu{
+	display: flex;
+	margin-left: auto;
+	gap: 10px;
+}
+
+.menu-item{
+	display: grid;
+	place-items: center;
+	width: var(--item-size);
+	height: var(--item-size);
+	padding: 5px;
+	border: var(--zone-bw) solid var(--zone-bc);
+	border-radius: var(--br-s);
+	transition: var(--td-s) var(--ttf);
+}
+
+.menu-item:hover{
+	border-color: var(--zone-active-bc);
+	background-color: var(--zone-active-bgc);
+}
+
+::deep .menu-item .icon *{
+	stroke: var(--purpur-c);
+}
+
+@media(width<1200px){
+	.site-header {
+		--header-column-w: 310px;
+		--item-size: 50px;
+		padding: 15px;
+	}
 }

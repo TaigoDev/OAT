@@ -1,0 +1,6 @@
+.site-footer{
+	backdrop-filter: blur(10px);
+	border-radius: var(--br-l);
+	padding: 20px;
+	background-color: var(--zone-active-bgc);
+}

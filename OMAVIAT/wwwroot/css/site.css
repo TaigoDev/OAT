@@ -1,9 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* VARIABLES */
-/*
-	m - main
-	d - dark
-	l - light
+
+/* 
+-c color
+-fs font size
+-fw font weight
+-br border radius
+-bw border width
+-bc border color
+-bg background
+-bgc backgrond color
+-p padding
+-td transition duration
+-ttf transition timing function
+-an animation name
 */
+
+:root {
+	/* colors */
+	--black-c: #000000;
+	--matte-c: #202020;
+	--gray-c: #909090;
+	--white-c: #FFFFFF;
+	--light-white-c: #EBEBEB;
+	--blue-c: #0250e0;
+	--light-blue-c: #3367c9;
+	--green-c: #439d57;
+	--light-green-c: #5eb171;
+	--orange-c: #FD8368;
+	--light-orange-c: #d26f5a;
+	--purpur-c: #4F61BE;
+	--light-purpur-c: #6a7ac6;
+	--red-c: #d05252;
+	--light-red-c: #e87171;
+	--yellow-c: #efcf80;
+	--light-yellow-c: #CDAF65;
+	--text-c: var(--matte-c);
+	/* borders */
+	--br-s: 5px;
+	--br-m: 10px;
+	--br-l: 15px;
+	--br-xl: 20px;
+	--br-max: 1000px;
+	/* animations */
+	--td-s: 80ms;
+	--td-m: 150ms;
+	--td-l: 300ms;
+	--td-xl: 450ms;
+	--ttf: ease;
+	/* text */
+	--text-fs: 1rem;
+	--subtext-fs: 0.92rem;
+	--title-fs: 2.25rem;
+	--subtitle-fs: 1.4rem;
+	--small-subtitle-fs: 1.15rem;
+	--text-fw: 400;
+	--subtext-fw: 400;
+	--title-fw: 600;
+	--subtitle-fw: 600;
+	--small-subtitle-fw: 500;
+	--text-lh: 1;
+	--subtext-lh: 1;
+	--title-lh: 1;
+	--subtitle-lh: 1.1;
+	--small-subtitle-lh: 1;
+	/* zones */
+	--zone-bw: 2px;
+	--zone-br: var(--br-xl);
+	--zone-bgc: rgba(255, 255, 255, 0.05);
+	--zone-bc: rgba(255, 255, 255, 0.15);
+	--zone-active-bgc: var(--light-white-c);
+	--zone-active-bc: rgba(255, 255, 255, 0.3);
+	/* windows */
+	--window-bgc: var(--matte-c);
+	--window-br: 40px;
+	--window-td: var(--td-xl);
+	--window-an: show;
+	--window-p: 20px;
+	/* more info window */
+	--more-info-ad: var(--td-l);
+}
+
+@media (width < 1920px) {
+	:root {
+		--title-fs: 2rem;
+		--subtitle-fs: 1.3rem;
+		--small-subtitle-fs: 1.1rem;
+	}
+}
+
+@media (width < 1200px) {
+	html, body {
+		font-size: 15px;
+	}
+}
 
 :root {
 	/* colors */
