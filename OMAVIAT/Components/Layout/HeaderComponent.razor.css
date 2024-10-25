@@ -21,6 +21,7 @@
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	color: inherit;
 	transition: var(--td-s) var(--ttf);
 }
 

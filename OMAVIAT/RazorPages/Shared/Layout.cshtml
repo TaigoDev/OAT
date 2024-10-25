@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using OMAVIAT.Components.Layout
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 	<meta charset="utf-8">
@@ -15,8 +16,8 @@
 	<header id="site-header" class="site-header">
 		<div class="container">
 			<nav class="navigation">
-				<a class="logo" href="/">
-					<img src="~/images/basic/logo.svg" alt="логотип">
+				<a class="logo-container" href="/">
+					@(await Html.RenderComponentAsync<LogoComponent>(RenderMode.Server))
 					<span class="logo-text">Омский авиационный колледж имени<br>Н.Е. жуковского</span>
 				</a>
 
@@ -369,7 +370,7 @@
 			<div class="container">
 				<div class="footer-bottom-row">
 					<div class="footer-bottom-logo">
-						<img src="~/images/basic/logo.svg" alt="">
+						@(await Html.RenderComponentAsync<LogoComponent>(RenderMode.Server))
 						<span class="footer-bottom-logo-text">
 							Бюджетное профессиональное образовательное учреждение
 							Омской области «Омский авиационный колледж имени Н.Е. Жуковского»

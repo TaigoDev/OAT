@@ -4,3 +4,76 @@
 	padding: 20px;
 	background-color: var(--zone-active-bgc);
 }
+
+.footer-contacts{
+	display: flex;
+	justify-content: space-between;
+	gap: 40px;
+}
+
+.splitter{
+	background-color: var(--purpur-c);
+	opacity: 0.3;
+}
+
+.footer-contacts .splitter{
+	width: 2px;
+	height: 4lh;
+	margin: auto 0;
+}
+
+.footer-contacts-item {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+	min-width: fit-content;
+}
+
+.footer-contacts-item.departments .footer-contacts-item-body{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 5px 15px;
+}
+
+.footer-contacts-item-title {
+	font-size: 1.1rem;
+	font-weight: 700;
+}
+
+.footer-contacts-item-body {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	text-transform: none;
+	font-weight: 500;
+}
+
+.footer-contacts-item-body a{
+	display: inline-block;
+	width: fit-content;
+	text-underline-offset: 3px;
+}
+
+.footer-contacts-item-body a:hover {
+	text-decoration: underline;
+}
+
+@media (width<1000px){
+	.footer-contacts {
+		display: grid;
+		grid-template-columns: repeat(2, auto);
+		gap: 40px;
+	}
+}
+
+@media (width<550px) {
+	.footer-contacts {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+
+	.footer-contacts-item.departments .footer-contacts-item-body {
+		grid-template-columns: repeat(2, 8ch);
+	}
+}

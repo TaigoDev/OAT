@@ -105,8 +105,6 @@ body {
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	overflow-x: hidden;
-	-webkit-user-select: none;
-	user-select: none;
 }
 
 @media (width < 1200px) {
@@ -166,7 +164,7 @@ input[readonly] {
 
 a {
 	display: contents;
-	color: inherit;
+	color: var(--light-blue-c);
 	cursor: pointer;
 }
 
@@ -218,7 +216,7 @@ th {
 .app {
 	position: relative;
 	z-index: 1;
-	max-width: 1400px;
+	max-width: 1500px;
 	min-height: calc(100dvh - var(--main-padding) * 2);
 	display: grid;
 	grid-template-rows: auto 1fr auto;
