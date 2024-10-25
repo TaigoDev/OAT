@@ -16,11 +16,6 @@
 	border-radius: var(--br-max);
 }
 
-::deep .navigation-item svg {
-	width: 25px;
-	height: 25px;
-}
-
 ::deep .navigation-item .icon * {
 	stroke: var(--purpur-c);
 }

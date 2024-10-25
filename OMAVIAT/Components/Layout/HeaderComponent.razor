@@ -1,7 +1,7 @@
 ﻿@using NPOI.SS.Formula.Functions
 @rendermode @(new InteractiveServerRenderMode(false))
 
-<header class="site-header">
+<header class="site-header @State">
 	<a href="/" class="logo-container">
 		<LogoComponent/>
 		<span class="logo-text">
@@ -16,13 +16,13 @@
 			<SearchIconComponent/>
 		</button>
 		<button class="menu-item">
-			<svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="icon" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M15.2291 9.99992C15.2291 12.0624 13.5625 13.7291 11.5 13.7291C9.43748 13.7291 7.77081 12.0624 7.77081 9.99992C7.77081 7.93742 9.43748 6.27075 11.5 6.27075C13.5625 6.27075 15.2291 7.93742 15.2291 9.99992Z" stroke="#4F61BE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				<path d="M11.5 18.6146C15.1771 18.6146 18.6042 16.4479 20.9896 12.6979C21.9271 11.2292 21.9271 8.76042 20.9896 7.29167C18.6042 3.54167 15.1771 1.375 11.5 1.375C7.82294 1.375 4.39585 3.54167 2.01044 7.29167C1.07294 8.76042 1.07294 11.2292 2.01044 12.6979C4.39585 16.4479 7.82294 18.6146 11.5 18.6146Z" stroke="#4F61BE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 			</svg>
 		</button>
-		<a href="" class="menu-item">
-			<svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<a href="" class="menu-item money">
+			<svg class="icon" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M12.1875 2.12298L12.1562 2.19589L9.13538 9.20631H6.16663C5.45829 9.20631 4.78121 9.35214 4.16663 9.61256L5.98954 5.25839L6.03121 5.15423L6.10413 4.98756C6.12496 4.92506 6.14579 4.86256 6.17704 4.81048C7.54163 1.65423 9.08329 0.935477 12.1875 2.12298Z" stroke="#4F61BE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				<path d="M17.802 9.41471C17.3333 9.26888 16.8333 9.20638 16.3333 9.20638H9.13538L12.1562 2.19596L12.1875 2.12305C12.3437 2.17513 12.4895 2.24805 12.6458 2.31055L14.9479 3.2793C16.2291 3.81055 17.125 4.36263 17.6666 5.0293C17.7708 5.1543 17.8541 5.26888 17.927 5.4043C18.0208 5.55013 18.0937 5.69596 18.1354 5.85221C18.177 5.94596 18.2083 6.03971 18.2291 6.12305C18.5104 6.99805 18.3437 8.07096 17.802 9.41471Z" stroke="#4F61BE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				<path d="M21.4185 14.2899V16.3211C21.4185 16.5295 21.4081 16.7378 21.3977 16.9461C21.1997 20.5815 19.1685 22.4149 15.3143 22.4149H7.18933C6.93933 22.4149 6.68933 22.394 6.44975 22.3628C3.13725 22.144 1.36641 20.3732 1.14766 17.0607C1.11641 16.8211 1.09558 16.5711 1.09558 16.3211V14.2899C1.09558 12.1961 2.36641 10.394 4.17891 9.61279C4.80391 9.35238 5.47058 9.20654 6.17891 9.20654H16.3456C16.856 9.20654 17.356 9.27946 17.8143 9.41488C19.8872 10.0503 21.4185 11.9878 21.4185 14.2899Z" stroke="#4F61BE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -31,14 +31,26 @@
 			</svg>
 		</a>
 		<button class="menu-item">
-			<svg width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="icon" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M8.66667 10.8228C8.5625 10.8124 8.4375 10.8124 8.32292 10.8228C5.84375 10.7395 3.875 8.70825 3.875 6.20825C3.875 3.65617 5.9375 1.58325 8.5 1.58325C11.0521 1.58325 13.125 3.65617 13.125 6.20825C13.1146 8.70825 11.1458 10.7395 8.66667 10.8228Z" stroke="#4F61BE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				<path d="M3.45837 14.6667C0.937541 16.3542 0.937541 19.1042 3.45837 20.7813C6.32296 22.698 11.0209 22.698 13.8855 20.7813C16.4063 19.0938 16.4063 16.3438 13.8855 14.6667C11.0313 12.7605 6.33337 12.7605 3.45837 14.6667Z" stroke="#4F61BE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</button>
+		<button class="menu-item burger" @onclick="Burger">
+			<svg class="icon" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M1 13H17M1 7H17M1 1H17" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 			</svg>
 		</button>
 	</div>
 </header>
 
-@code {
+<div class="site-backdrop">
+</div>
 
+@code {
+	private string State = "";
+	private void Burger()
+	{
+		State = State == "open" ? "" : "open";
+	}
 }
