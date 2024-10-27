@@ -1,3 +1,14 @@
+.site-backdrop{
+	position: fixed;
+	inset: 0;
+	z-index: 1;
+	background-color: #00000030;
+	backdrop-filter: blur(10px);
+	visibility: hidden;
+	opacity: 0;
+	transition: var(--td-l) var(--ttf);
+}
+
 .site-header {
 	--header-column-w: 350px;
 	--item-size: 60px;
@@ -79,7 +90,7 @@
 
 @media(width<1100px){
 	.site-header {
-		--header-column-w: 140px;
+		--header-column-w: 200px;
 		--item-size: 40px;
 	}
 	
@@ -88,41 +99,16 @@
 	}
 }
 
-@media(width<750px){
-	.site-header {
-		--header-column-w: auto;
-	}
-	::deep .navigation{
-		gap: 10px !important;
-	}
-}
-
-@media(width>600px){
+@media(width>900px){
 	.menu-item.burger{
 		display: none;
 	}
 }
 
-@media(width<1100px) and (width>600px){
-	.menu-item.money{
-		display: none;
-	}
-}
-
-.site-backdrop{
-	position: fixed;
-	inset: 0;
-	z-index: 1;
-	background-color: #00000030;
-	backdrop-filter: blur(10px);
-	visibility: hidden;
-	opacity: 0;
-	transition: var(--td-l) var(--ttf);
-}
-
-@media(width<600px){
+@media(width<900px){
 	.site-header{
 		grid-template-columns: auto auto;
+		padding: 10px 15px;
 	}
 
 	::deep .navigation-container{
@@ -138,12 +124,13 @@
 		visibility: hidden;
 		transition: var(--td-m) var(--ttf);
 	}
-	
+
 	::deep .navigation{
 		flex-direction: column;
 		align-items: start !important;
+		gap: 10px !important;
 	}
-	
+
 	::deep .navigation-item-tooltip {
 		top: 50% !important;
 		left: 100% !important;
@@ -157,9 +144,23 @@
 		opacity: 1;
 		visibility: visible;
 	}
-	
+
 	.site-header.open + .site-backdrop{
 		visibility: visible;
 		opacity: 1;
+	}
+}
+
+@media(width<500px){
+	.menu-item.money{
+		display: none;
+	}
+
+	::deep .logo{
+		height: 2.5lh;
+	}
+
+	.menu{
+		--item-size: 35px;
 	}
 }
