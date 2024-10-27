@@ -22,8 +22,9 @@ namespace OMAVIAT.Controllers.App
 				context.Response.GetTypedHeaders().CacheControl =
 					new CacheControlHeaderValue()
 					{
-						Public = true,
-						MaxAge = TimeSpan.FromHours(24),
+						NoCache = true,
+						NoStore = true,
+						MaxAge = TimeSpan.FromHours(0),
 					};
 				await next();
 				return;
