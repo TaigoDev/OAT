@@ -1,5 +1,8 @@
 ﻿@page "{FullName?}"
 @using OMAVIAT.Pages.organizationInformation;
+@using OMAVIAT.Schedule.Utilities
+@using OMAVIAT.Services.Workers
+@using OMAVIAT.Utilities
 
 @model WorkerModel
 @{
@@ -13,6 +16,7 @@
 		@if (Model.worker is not null)
 		{
 			var worker = Model.worker;
+			var management = ManagementReader.Managements.FirstOrDefault(e => e.FullName.ToSimpleText() == worker.FullName.ToSimpleString());
 			<h2 class="section-title">
 				@worker.FullName
 			</h2>
@@ -21,20 +25,39 @@
 					<div class="staff-person-basic-job">
 						@Model.worker.Post
 					</div>
-					@*				  
-					<div class="staff-person-basic-phone">
-						30-52-98
-					</div>
-					<div class="staff-person-basic-email">
-						koltsov@oat.ru
-					</div>
-					*@
+		
+					@if (management is not null)
+					{
+						<div class="staff-person-basic-phone">
+							@management.Telephone
+						</div>
+						<div class="staff-person-basic-email">
+							@management.Email
+						</div>
+					}
+					
+					
 				</div>
 				<div class="staff-person-basic-photo">
 					<img src="/api/images/teachers/@Model.worker.FullName" alt="">
 				</div>
 			</div>
 
+			@if (management is not null)
+			{
+				<h2 class="section-subtitle">
+					Должность
+				</h2>
+				<p>
+					@worker.Post
+				</p>
+				<h2 class="section-subtitle">
+					Адрес структурного подразделения
+				</h2>
+				<p>
+					@management.StructureDivision
+				</p>
+			}
 
 			<h3 class="section-subtitle">
 				Образование
@@ -260,9 +283,15 @@
 						Организация воспитательного процесса
 					</a>
 				</li>
+
+				<li class="sidebar-link">
+					<a asp-page="Management">
+						Руководство
+					</a>
+				</li>
 				<li class="sidebar-link sidebar-link-selected">
 					<a asp-page="ManagementPedagogicalStaff">
-						Руководство. Педагогический (научно-педагогический) состав
+						Педагогический (научно-педагогический) состав
 					</a>
 				</li>
 				<li class="sidebar-link">
