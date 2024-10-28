@@ -4,7 +4,7 @@
 
 @model ManagementPedagogicalStaffModel
 @{
-	ViewData["Title"] = "Руководство. Педагогический (научно-педагогический) состав";
+	ViewData["Title"] = "Педагогический (научно-педагогический) состав";
 }
 
 <link rel="stylesheet" href="~/css/organizationInformation/menagementPedagogicalStaff.css" asp-append-version="true">
@@ -13,7 +13,7 @@
 <div class="container content-page">
 	<section class="content">
 		<h2 class="section-title">
-			Руководство. Педагогический (научно-педагогический) состав
+			Педагогический (научно-педагогический) состав
 		</h2>
 
 		<form class="search-people">
@@ -26,72 +26,6 @@
 		</form>
 		@if (WorkersReader.administration.Count() is 3)
 		{
-			<h3 class="section-subtitle">
-				Руководство
-			</h3>
-			<ul class="people-list">
-				@foreach (var person in WorkersReader.administration[0])
-				{
-					<li class="people-item">
-						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-                            <img src="/api/images/teachers/@person.FullName" loading="lazy" alt="">
-						</a>
-						<div class="people-item-body more-info">
-							<div class="people-item-body-fio">
-								@person.FullName
-							</div>
-							<div class="people-item-body-job">
-								@person.Post
-							</div>
-						</div>
-					</li>
-				}
-			</ul>
-
-			<h3 class="section-subtitle">
-				Заместители руководителя
-			</h3>
-			<ul class="people-list">
-				@foreach (var person in WorkersReader.administration[1])
-				{
-					<li class="people-item">
-						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-							<img src="/api/images/teachers/@person.FullName" alt="">
-						</a>
-						<div class="people-item-body more-info">
-							<div class="people-item-body-fio">
-								@person.FullName
-							</div>
-							<div class="people-item-body-job">
-								@person.Post
-							</div>
-						</div>
-					</li>
-				}
-			</ul>
-
-			<h3 class="section-subtitle">
-				Главный бухгалтер
-			</h3>
-			<ul class="people-list">
-				@foreach (var person in WorkersReader.administration[2])
-				{
-					<li class="people-item">
-						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-							<img src="/api/images/teachers/@person.FullName" alt="">
-						</a>
-						<div class="people-item-body more-info">
-							<div class="people-item-body-fio">
-								@person.FullName
-							</div>
-							<div class="people-item-body-job">
-								@person.Post
-							</div>
-						</div>
-					</li>
-				}
-			</ul>
-
 			<h3 class="section-subtitle">
 				Персональный состав педагогических работников
 			</h3>
@@ -159,9 +93,14 @@
 						Организация воспитательного процесса
 					</a>
 				</li>
+				<li class="sidebar-link">
+					<a asp-page="Management">
+						Руководство
+					</a>
+				</li>
 				<li class="sidebar-link sidebar-link-selected">
 					<a asp-page="ManagementPedagogicalStaff">
-						Руководство. Педагогический (научно-педагогический) состав
+						Педагогический (научно-педагогический) состав
 					</a>
 				</li>
 				<li class="sidebar-link">
