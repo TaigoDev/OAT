@@ -293,7 +293,7 @@
 
 .rate-our-work {
 	max-width: min(100%, 500px) !important;
-	margin: 0 auto !important;
+	margin: 20px auto !important;
 	box-shadow: -30px 30px 100px -50px #4599ef, 30px 30px 100px -50px #b0ddf5;
 }
 
