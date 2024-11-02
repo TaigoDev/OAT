@@ -24,13 +24,12 @@
 				</button>
 			</div>
 		</form>
-		@if (WorkersReader.administration.Count() is 3)
-		{
 			<h3 class="section-subtitle">
 				Персональный состав педагогических работников
 			</h3>
 			<ul class="people-list">
 				@if (Model.id < WorkersReader.Workers.Count())
+				{
 					@foreach (var person in WorkersReader.Workers.ToList()[Model.id])
 					{
 						<li class="people-item">
@@ -47,12 +46,12 @@
 							</div>
 						</li>
 					}
+				}
 			</ul>
-		}
 		@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
 		{
 			 CurrentPage = Model.id + 1,
-			count = WorkersReader.AllWorkers.Count(),
+			count = WorkersReader.Workers.Sum(e => e.Count()),
 			 countInPage= 14,
 			 UrlWithParameter = "/organizationInformation/ManagementPedagogicalStaff/{id}"
 		}))
