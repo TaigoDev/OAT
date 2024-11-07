@@ -55,5 +55,6 @@
 	  <_ContentIncludedByDefault Remove="Components\Reusable\Grades\SelectCourseComponent.razor" />
 	  <_ContentIncludedByDefault Remove="Components\Reusable\Attestation\AttestationEventComponent.razor" />
 	  <_ContentIncludedByDefault Remove="Components\Reusable\Attestation\AttestationEventMoreInfoComponent.razor" />
+	  <_ContentIncludedByDefault Remove="RazorPages\targetedTraining\GeneralInformation.cshtml" />
 	</ItemGroup>
 </Project>
