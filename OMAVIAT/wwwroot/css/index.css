@@ -298,9 +298,9 @@
 }
 
 .rate-our-work {
-	max-width: min(100%, 500px) !important;
+	max-width: min(100%, 400px) !important;
 	margin: 0 auto !important;
-	box-shadow: -30px 30px 100px -50px #4599ef, 30px 30px 100px -50px #b0ddf5;
+	box-shadow: -30px 30px 100px -70px #4599ef, 30px 30px 100px -90px #b0ddf5;
 }
 
 /* another directions of college */
