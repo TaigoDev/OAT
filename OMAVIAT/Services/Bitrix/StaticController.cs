@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.StaticFiles;
 using OMAVIAT.Utilities;
 
-namespace OMAVIAT.Controllers.Natives
-{
-	public class StaticController : Controller
-	{
+namespace OMAVIAT.Controllers.Natives {
+	public class StaticController : Controller {
 
 		[HttpGet("static/documents/{hex}/download")]
 		public async Task<IActionResult> Download(string hex)

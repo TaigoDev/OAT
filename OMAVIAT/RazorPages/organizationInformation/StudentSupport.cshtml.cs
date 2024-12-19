@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation
-{
-	public class StudentSupportModel : PageModel
-	{
+namespace OMAVIAT.Pages.organizationInformation {
+	public class StudentSupportModel : PageModel {
 		private readonly ILogger<StudentSupportModel> _logger;
 
 		public StudentSupportModel(ILogger<StudentSupportModel> logger)

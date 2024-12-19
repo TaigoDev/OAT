@@ -2,11 +2,9 @@
 using OMAVIAT.Entities.Enums;
 using OMAVIAT.Schedule.Services.MainSchedule;
 
-namespace OMAVIAT.Pages.timetable
-{
+namespace OMAVIAT.Pages.timetable {
 	[NoCache]
-	public class GroupsModel : PageModel
-	{
+	public class GroupsModel : PageModel {
 		private readonly ILogger<GroupsModel> _logger;
 
 		public GroupsModel(ILogger<GroupsModel> logger)

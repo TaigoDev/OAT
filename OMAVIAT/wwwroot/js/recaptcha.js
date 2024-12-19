@@ -1,5 +1,4 @@
-﻿
-loaded = [];
+﻿loaded = [];
 
 window.loadScript = function (scriptPath) {
 	// check list - if already loaded we can ignore
@@ -52,12 +51,14 @@ function onloadFunction() {
 		);
 	}
 }
+
 class GreetingHelpers {
 	static dotNetHelper;
 
 	static setDotNetHelper(value) {
 		GreetingHelpers.dotNetHelper = value;
 	}
+
 	static async OnComplete() {
 
 		console.log("User complete passed ReCaptcha");

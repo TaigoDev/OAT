@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation
-{
-	public class TerrorismModel : PageModel
-	{
+namespace OMAVIAT.Pages.organizationInformation {
+	public class TerrorismModel : PageModel {
 		private readonly ILogger<TerrorismModel> _logger;
 
 		public TerrorismModel(ILogger<TerrorismModel> logger)

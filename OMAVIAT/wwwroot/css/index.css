@@ -46,7 +46,7 @@
 	transition: 275ms ease;
 }
 
-.news-slider-btns{
+.news-slider-btns {
 	display: flex;
 	column-gap: 10px;
 }
@@ -65,12 +65,12 @@
 	transition: 275ms ease;
 }
 
-.news-slider-arrow:hover{
+.news-slider-arrow:hover {
 	border-color: black;
 	opacity: 1;
 }
 
-.news-slider-arrow:hover img{
+.news-slider-arrow:hover img {
 	scale: 1.2;
 }
 
@@ -83,7 +83,7 @@
 	transition: 276ms ease;
 }
 
-.news-slider-arrow.inactive{
+.news-slider-arrow.inactive {
 	opacity: 0;
 	cursor: default;
 	visibility: hidden;
@@ -109,7 +109,7 @@
 	transition: 250ms ease;
 }
 
-.news-item img{
+.news-item img {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -134,11 +134,11 @@
 	color: var(--light-white);
 }
 
-.news-header{
+.news-header {
 	line-height: 1.2;
 }
 
-.news-item:hover{
+.news-item:hover {
 	color: white;
 }
 
@@ -147,20 +147,20 @@
 	filter: brightness(0.4);
 }
 
-@media (width<1100px){
+@media (width < 1100px) {
 	.news-item {
 		min-width: calc(50% - 15px);
 		border-radius: 15px;
 	}
 }
 
-@media (width<600px) {
+@media (width < 600px) {
 	.news-item {
 		min-width: 100%;
 		border-radius: 20px;
 	}
 
-	.news-item img {	
+	.news-item img {
 		transform: scale(1.15);
 	}
 
@@ -191,7 +191,7 @@
 	transition: 250ms ease;
 }
 
-.card-item:hover{
+.card-item:hover {
 	background-color: #4D89E2;
 }
 
@@ -208,7 +208,7 @@
 	transition: 400ms ease-in-out;
 }
 
-.card-item:hover::after{
+.card-item:hover::after {
 	opacity: 0.25;
 	translate: -50% -50%;
 }
@@ -225,7 +225,7 @@
 	text-align: center;
 }
 
-.card-item-header > .lower{
+.card-item-header > .lower {
 	font-size: 90%;
 }
 
@@ -254,28 +254,30 @@
 	translate: 0 -100%;
 }
 
-.card-item:hover .card-item-description{
+.card-item:hover .card-item-description {
 	opacity: 1;
 }
 
-.card-item:not(:hover) .card-item-header{
+.card-item:not(:hover) .card-item-header {
 	opacity: 1;
 }
 
-@media (width<1200px){
+@media (width < 1200px) {
 	.cards-list {
 		--columns: 2;
 		justify-content: center;
 	}
+
 	.card-item-header {
 		font-size: 1.45rem;
 	}
+
 	.card-item-description {
 		font-size: 1.15rem;
 	}
 }
 
-@media (width<600px) {
+@media (width < 600px) {
 	.cards-list {
 		--columns: 1;
 	}
@@ -291,7 +293,7 @@
 
 /* rate our work */
 
-.tessda{
+.tessda {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 40px;
@@ -326,34 +328,34 @@
 	overflow: hidden;
 }
 
-.another-text{
+.another-text {
 	z-index: 1;
 	--opacity: 1;
 	opacity: var(--opacity);
 	transition: opacity 300ms ease;
 }
 
-.another-text:nth-child(1){
+.another-text:nth-child(1) {
 	--opacity: 0.7;
 }
 
-.another-text:nth-child(2){
+.another-text:nth-child(2) {
 	--opacity: 0.5;
 }
 
-.another-text:nth-child(3){
+.another-text:nth-child(3) {
 	--opacity: 0.3;
 }
 
-.another:hover .another-text{
+.another:hover .another-text {
 	opacity: calc(var(--opacity) + 0.2);
 }
 
-.another-text:hover{
+.another-text:hover {
 	--opacity: calc(var(--opacity) + 0.3);
 }
 
-.another:hover::before, .another:hover::after{
+.another:hover::before, .another:hover::after {
 	opacity: 1;
 }
 
@@ -364,7 +366,7 @@
 	left: 50%;
 	translate: -50% -50%;
 	width: 150%;
-	background: repeating-conic-gradient(var(--m-color) 10%,color-mix(in srgb,var(--m-color) 80%,black) 20%,var(--m-color) 30%);
+	background: repeating-conic-gradient(var(--m-color) 10%, color-mix(in srgb, var(--m-color) 80%, black) 20%, var(--m-color) 30%);
 	aspect-ratio: 1;
 	opacity: 0;
 	animation: 30s rotate infinite linear normal;
@@ -382,11 +384,11 @@
 	transition: opacity 450ms ease;
 }
 
-@keyframes rotate{
-	from{
+@keyframes rotate {
+	from {
 		rotate: 0deg;
 	}
-	to{
+	to {
 		rotate: 360deg;
 	}
 }

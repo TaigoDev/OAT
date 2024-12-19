@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Entities.Interfaces
-{
-	public interface INews
-	{
+﻿namespace OMAVIAT.Entities.Interfaces {
+	public interface INews {
 		public int id { get; set; }
 		public string date { get; set; }
 		public string title { get; set; }

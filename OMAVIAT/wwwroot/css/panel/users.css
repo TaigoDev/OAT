@@ -1,5 +1,5 @@
 ﻿
-.change-password-container{
+.change-password-container {
 	position: relative;
 }
 
@@ -38,18 +38,18 @@
 	z-index: 1;
 }
 
-.users{
-	max-height: unset!important;
+.users {
+	max-height: unset !important;
 }
 
-@media (width<1050px) {
+@media (width < 1050px) {
 	.change-password-input-container {
 		left: -240px;
 	}
 }
 
-@media (width>450px){
+@media (width > 450px) {
 	.users {
-		overflow: visible!important;
+		overflow: visible !important;
 	}
 }

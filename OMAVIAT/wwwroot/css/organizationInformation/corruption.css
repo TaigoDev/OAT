@@ -12,7 +12,7 @@
 	transition: 100ms ease;
 }
 
-a.report-corruption:hover{
+a.report-corruption:hover {
 	background: var(--m-l-color);
 	color: white;
 }

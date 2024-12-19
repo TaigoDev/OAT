@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation
-{
-	public class DocumentsModel : PageModel
-	{
+namespace OMAVIAT.Pages.organizationInformation {
+	public class DocumentsModel : PageModel {
 		private readonly ILogger<DocumentsModel> _logger;
 
 		public DocumentsModel(ILogger<DocumentsModel> logger)

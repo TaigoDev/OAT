@@ -1,21 +1,19 @@
 ﻿using Ganss.Excel;
 
-namespace OMAVIAT.Entities.Models
-{
-	public class Worker
-	{
+namespace OMAVIAT.Entities.Models {
+	public class Worker {
 		[Column("Сотрудник")]
 		public string? FullName { get; set; }
 
 		[Column("Должность")]
 		public string? Post { get; set; }
-		
+
 		[Column("Ученая степень.Наименование")]
 		public string? AcademicDegree { get; set; }
 
 		[Column("Дисциплины")]
 		public string? Subjects { get; set; }
-		
+
 		[Column("Категория")]
 		public string? Сategory { get; set; }
 
@@ -23,7 +21,7 @@ namespace OMAVIAT.Entities.Models
 		public string? Education1_Type { get; set; }
 
 		[Column("Образование 1 учебное заведение")]
-		public string? Education1_EducationalInstitution { get; set; } 
+		public string? Education1_EducationalInstitution { get; set; }
 
 		[Column("Образование 1 дата выдачи")]
 		public string? Education1_issued { get; set; }
@@ -48,14 +46,14 @@ namespace OMAVIAT.Entities.Models
 
 
 		[Column("Повышение квалификации")]
-		public string? Qualification { get; set; } 
+		public string? Qualification { get; set; }
 
 		[Column("Переподготовка")]
 		public string? ProfessionalDevelopment { get; set; }
 
 
 		[Column("Стаж работы на предприятии лет")]
-		public string? ExperienceInOAT { get; set; } 
+		public string? ExperienceInOAT { get; set; }
 
 		[Column("Общий стаж лет")]
 		public string? AllExperience { get; set; }

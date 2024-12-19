@@ -6,24 +6,24 @@
 @{
 	using var context = new DatabaseContext();
 	var cmk = context.CMK.FirstOrDefault(e => e.url == Model.name);
-    ViewData["Title"] = cmk is not null ? cmk.name : "ЦМК не найден";
+	ViewData["Title"] = cmk is not null ? cmk.name : "ЦМК не найден";
 
 }
-@if(cmk is null)
+@if (cmk is null)
 {
-    <section class="centered">
-	    <h2 class="section-title">
-	    	ЦМК с таким именем не найден
-	    </h2>
-    </section>
-    return;
+	<section class="centered">
+		<h2 class="section-title">
+			ЦМК с таким именем не найден
+		</h2>
+	</section>
+	return;
 }
 
 <section class="centered">
 	<h2 class="section-title">
 		@cmk.name
 	</h2>
-	
+
 	<ul class="page-navigation">
 		<li>
 			<a href="#people">
@@ -37,19 +37,19 @@
 		</li>
 		<li>
 			<a href="#work">
-                Описание работы
+				Описание работы
 			</a>
 		</li>
 		<li>
-            <a href="#tasks">
-                Решаемые задачи и планы
+			<a href="#tasks">
+				Решаемые задачи и планы
 			</a>
 		</li>
-        <li>
-            <a href="#achievements">
-                Достижения
-            </a>
-        </li>
+		<li>
+			<a href="#achievements">
+				Достижения
+			</a>
+		</li>
 	</ul>
 
 
@@ -78,9 +78,9 @@
 			}
 			else
 			{
-				<li class="people-item" >
+				<li class="people-item">
 					<a class="people-item-img-container" href="/organizationInformation/worker/@people.FullName">
-                        <img src="/api/images/teachers/@people.FullName" alt="">
+						<img src="/api/images/teachers/@people.FullName" alt="">
 					</a>
 					<div class="people-item-body">
 						<div class="people-item-body-fio">
@@ -105,31 +105,31 @@
 	}
 
 
-    <h3 id="work" class="section-subtitle">
-        Описание работы ЦМК
-    </h3>
+	<h3 id="work" class="section-subtitle">
+		Описание работы ЦМК
+	</h3>
 
-    @foreach (var t in cmk.descriptionOfWork.Split("\n"))
-    {
-        <p>@Html.Raw(@t)</p>
-    }
+	@foreach (var t in cmk.descriptionOfWork.Split("\n"))
+	{
+		<p>@Html.Raw(@t)</p>
+	}
 
-    <h3 id="tasks" class="section-subtitle">
-        Решаемые задачи и планы ЦМК
-    </h3>
+	<h3 id="tasks" class="section-subtitle">
+		Решаемые задачи и планы ЦМК
+	</h3>
 
-    @foreach (var t in cmk.plans.Split("\n"))
-    {
-        <p>@Html.Raw(@t)</p>
-    }
+	@foreach (var t in cmk.plans.Split("\n"))
+	{
+		<p>@Html.Raw(@t)</p>
+	}
 
-    <h3 id="achievements" class="section-subtitle">
-        Достижения ЦМК
-    </h3>
+	<h3 id="achievements" class="section-subtitle">
+		Достижения ЦМК
+	</h3>
 
-    @foreach (var t in cmk.achievements.Split("\n"))
-    {
-        <p>@Html.Raw(@t)</p>
-    }
+	@foreach (var t in cmk.achievements.Split("\n"))
+	{
+		<p>@Html.Raw(@t)</p>
+	}
 
 </section>

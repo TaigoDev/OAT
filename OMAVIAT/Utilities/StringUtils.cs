@@ -3,10 +3,8 @@ using System.Text;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace OMAVIAT.Utilities
-{
-	public static class StringUtils
-	{
+namespace OMAVIAT.Utilities {
+	public static class StringUtils {
 		public static string SerializeYML(this object obj) => new SerializerBuilder()
 			.WithNamingConvention(CamelCaseNamingConvention.Instance).Build().Serialize(obj);
 
@@ -41,7 +39,7 @@ namespace OMAVIAT.Utilities
 		}
 
 		public static string GetWords(this string text, int count)
-			 => string.Join(" ", text.GetWordsLocal(text.Count(e => e is ' ') < count ? text.Count(e => e is ' ') : count));
+			=> string.Join(" ", text.GetWordsLocal(text.Count(e => e is ' ') < count ? text.Count(e => e is ' ') : count));
 
 		public static string Base64Encode(string plainText) =>
 			Convert.ToBase64String(Encoding.UTF8.GetBytes(plainText));
@@ -70,7 +68,9 @@ namespace OMAVIAT.Utilities
 		public static string[] GetWordsLocal(this string input, int count = -1, string[] wordDelimiter = null, StringSplitOptions options = StringSplitOptions.None)
 		{
 			if (string.IsNullOrEmpty(input))
-				return new string[] { };
+				return new string[]
+				{
+				};
 
 			if (count < 0)
 				return input.Split(wordDelimiter, options);

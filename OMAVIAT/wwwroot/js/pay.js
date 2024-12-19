@@ -1,5 +1,4 @@
-﻿
-function onSelectPurpose() {
+﻿function onSelectPurpose() {
 	var myselect = document.getElementById("appointment");
 	if (myselect.selectedIndex == 4) {
 
@@ -8,8 +7,7 @@ function onSelectPurpose() {
 		$("#container-documentDate").css("display", "none");
 		$("#container-studentFullName").css("display", "none");
 		$("#container-group").css("display", "none");
-	}
-	else {
+	} else {
 		$("#container-donationt").css("display", "none");
 		$("#container-documentId").css("display", "");
 		$("#container-documentDate").css("display", "");
@@ -36,8 +34,7 @@ function RedirectToPrint() {
 				"&summa=" + document.getElementById("cost").value +
 				"&email=" + document.getElementById("email").value +
 				"&phone=" + document.getElementById("phone").value;
-		}
-		else {
+		} else {
 			if (!Check("FullName", "cost", "email", "phone", "documentId", "documentDate", "studentFullName", "group")) {
 				SendMessage("message-fail-fields");
 				return;
@@ -48,7 +45,7 @@ function RedirectToPrint() {
 				return;
 			}
 
-			window.location.href = "print?purpose=" +myselect.selectedIndex +
+			window.location.href = "print?purpose=" + myselect.selectedIndex +
 				"&documentId=" + document.getElementById("documentId").value +
 				"&documentDate=" + ConvertData(document.getElementById("documentDate").value) +
 				"&studentFullName=" + document.getElementById("studentFullName").value +
@@ -96,7 +93,7 @@ function IsContract() {
 		},
 		error: function (jqXHR, exception) {
 			alert(jqXHR.status);
-			answer =  false;
+			answer = false;
 		}
 	});
 	return answer;
@@ -108,5 +105,6 @@ function ConvertData(date) {
 	const arr = oldDate.split('-');
 	return arr[2] + '.' + arr[1] + '.' + arr[0];
 }
+
 onSelectPurpose();
 

@@ -2,23 +2,21 @@
 using OMAVIAT.Entities;
 using System.Reflection;
 
-namespace OMAVIAT.Utilities
-{
-	public static class EPPLusExtensions
-	{
+namespace OMAVIAT.Utilities {
+	public static class EPPLusExtensions {
 
 		public static IEnumerable<T> Fetch<T>(this ExcelWorksheet worksheet, int start = 0, int end = 300) where T : new()
 		{
 			static bool columnOnly(CustomAttributeData y) => y.AttributeType == typeof(ColumnEPPlus);
 
 			var columns = typeof(T)
-					.GetProperties()
-					.Where(x => x.CustomAttributes.Any(columnOnly))
-			.Select(p => new
-			{
-				Property = p,
-				Column = p.GetCustomAttributes<ColumnEPPlus>().First().ColumnIndex //safe because if where above
-			}).ToList();
+				.GetProperties()
+				.Where(x => x.CustomAttributes.Any(columnOnly))
+				.Select(p => new
+				{
+					Property = p,
+					Column = p.GetCustomAttributes<ColumnEPPlus>().First().ColumnIndex//safe because if where above
+				}).ToList();
 
 
 			var rows = worksheet.Cells
@@ -27,11 +25,9 @@ namespace OMAVIAT.Utilities
 				.OrderBy(x => x);
 
 			var collection = rows.Where(e => e >= start && e <= end)
-				.Select(row =>
-				{
+				.Select(row => {
 					var tnew = new T();
-					columns.ForEach(col =>
-					{
+					columns.ForEach(col => {
 						var val = worksheet.Cells[row, col.Column];
 						if (val.Value == null)
 						{

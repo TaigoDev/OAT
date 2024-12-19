@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-public class AuthorizeRolesAttribute : AuthorizeAttribute
-{
+public class AuthorizeRolesAttribute : AuthorizeAttribute {
 	public AuthorizeRolesAttribute(params Role[] allowedRoles)
 	{
 
@@ -15,7 +14,10 @@ public class AuthorizeRolesAttribute : AuthorizeAttribute
 	private List<Role> GetUnderRoles(Role role)
 	{
 		if (!role.ToString().Contains("ALL"))
-			return new List<Role>() { role };
+			return new List<Role>()
+			{
+				role
+			};
 
 		var roles = new List<Role>();
 		for (int i = 1; i <= 4; i++)

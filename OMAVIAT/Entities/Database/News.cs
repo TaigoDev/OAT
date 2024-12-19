@@ -2,10 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OMAVIAT.Entities.Database
-{
-	public class News : INews
-	{
+namespace OMAVIAT.Entities.Database {
+	public class News : INews {
 
 		public News(int id, string date, string title, string short_description, string description, string photos, bool IsFixed)
 		{

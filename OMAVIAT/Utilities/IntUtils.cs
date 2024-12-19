@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Utilities
-{
-	public static class IntUtils
-	{
+﻿namespace OMAVIAT.Utilities {
+	public static class IntUtils {
 		public static bool HasDigit(this string? s)
 		{
 			s ??= string.Empty;

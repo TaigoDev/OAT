@@ -1,9 +1,10 @@
 <button class="button @ClassList" @onclick="async e => await OnClick.InvokeAsync(e)" tabindex="@TabIndex" type="button">
 	@if (Text != "")
 	{
-		@Text   
+		@Text
 	}
-	else{
+	else
+	{
 		@ChildContent
 	}
 </button>

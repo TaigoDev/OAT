@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
-namespace OMAVIAT.Pages.feedback
-{
-	public class QuestionAnswerModel : PageModel
-	{
+namespace OMAVIAT.Pages.feedback {
+	public class QuestionAnswerModel : PageModel {
 		private readonly ILogger<QuestionAnswerModel> _logger;
 
 		public QuestionAnswerModel(ILogger<QuestionAnswerModel> logger)
@@ -13,7 +11,7 @@ namespace OMAVIAT.Pages.feedback
 			_logger = logger;
 		}
 
-		public void OnGet() { }
+		public void OnGet() {}
 		[BindProperty, Required(ErrorMessage = "Вы не заполнили ваше имя")] public string name { get; set; }
 		[BindProperty, Required(ErrorMessage = "Вы не заполнили вашу почту")] public string email { get; set; }
 		[BindProperty, Required(ErrorMessage = "Вы не заполнили ваш телефон")] public string telephone { get; set; }
@@ -37,11 +35,11 @@ namespace OMAVIAT.Pages.feedback
 			};
 
 			Utils.SendEmail(email, sendTo, $"" +
-				$"Имя: {name}\n" +
-				$"Почта для ответа: {email}\n" +
-				$"Телефон: {telephone}\n" +
-				$"Тема: {topic}\n" +
-				$"Вопрос: {description}");
+			                               $"Имя: {name}\n" +
+			                               $"Почта для ответа: {email}\n" +
+			                               $"Телефон: {telephone}\n" +
+			                               $"Тема: {topic}\n" +
+			                               $"Вопрос: {description}");
 
 			return RedirectToPage();
 		}

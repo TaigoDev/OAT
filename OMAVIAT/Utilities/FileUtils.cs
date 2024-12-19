@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Utilities
-{
-	public class FileUtils
-	{
+﻿namespace OMAVIAT.Utilities {
+	public class FileUtils {
 		public static void FileDelete(string? path)
 		{
 			if (File.Exists(path))

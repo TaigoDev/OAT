@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Entities.Journal
-{
-	public class Discipline
-	{
+﻿namespace OMAVIAT.Entities.Journal {
+	public class Discipline {
 		public string discipline { get; set; }
 		public List<string> marks = new List<string>();
 

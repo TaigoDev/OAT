@@ -3,10 +3,8 @@ using OMAVIAT.Entities.Models;
 using OMAVIAT.Utilities;
 using static OMAVIAT.Services.Workers.WorkersReader;
 
-namespace OMAVIAT.Pages.organizationInformation
-{
-	public class WorkerModel : PageModel
-	{
+namespace OMAVIAT.Pages.organizationInformation {
+	public class WorkerModel : PageModel {
 		private readonly ILogger<WorkerModel> _logger;
 
 		public WorkerModel(ILogger<WorkerModel> logger)
@@ -21,7 +19,7 @@ namespace OMAVIAT.Pages.organizationInformation
 			if (FullName is null)
 				return;
 			worker = AllWorkers.FirstOrDefault(e => e.FullName == FullName ||
-						StringUtils.ConvertFullNameToShortName(e.FullName).Replace(".", "").Replace(" ", "") == FullName.Replace(".", "").Replace(" ", ""));
+			                                        StringUtils.ConvertFullNameToShortName(e.FullName).Replace(".", "").Replace(" ", "") == FullName.Replace(".", "").Replace(" ", ""));
 
 		}
 	}

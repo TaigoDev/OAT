@@ -9,7 +9,7 @@ body {
 	padding-top: 50px;
 }
 
-section::before, section::after{
+section::before, section::after {
 	height: 20px;
 }
 
@@ -60,7 +60,7 @@ section::before, section::after{
 	transition: transform 275ms ease-in-out, background-color 275ms ease;
 }
 
-.panel-tabs li:hover{
+.panel-tabs li:hover {
 	background-color: hsl(0deg 0% 100% / 90%);
 	transform: translateY(-49%);
 }
@@ -72,7 +72,7 @@ section::before, section::after{
 	color: var(--matte-color);
 }
 
-.panel-tabs span{
+.panel-tabs span {
 	display: grid;
 	place-items: center;
 	height: 50%;
@@ -110,12 +110,12 @@ section::before, section::after{
 	row-gap: 5px;
 }
 
-.current-user-info p{
+.current-user-info p {
 	margin: 0;
 }
 
-@media(width<1200px){
-	.current-user-info{
+@media (width < 1200px) {
+	.current-user-info {
 		position: static;
 		margin: 0 auto;
 	}
@@ -212,7 +212,7 @@ table.panel-table tbody tr td:first-child {
 	text-align: center !important;
 }
 
-.panel-table-buttons{
+.panel-table-buttons {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
@@ -227,7 +227,7 @@ table.panel-table tbody tr td:first-child {
 	transition: 125ms ease;
 }
 
-.panel-table-button:hover{
+.panel-table-button:hover {
 	background: #ffffff40;
 }
 
@@ -243,13 +243,13 @@ table.panel-table tbody tr td:first-child {
 	color: var(--light-white);
 }
 
-.panel-message-active{
+.panel-message-active {
 	visibility: visible;
 	opacity: 1;
 	transform: translateY(-40px);
 }
 
 
-.hide{
+.hide {
 	display: none;
 }

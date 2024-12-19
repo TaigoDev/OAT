@@ -3,10 +3,9 @@ using OMAVIAT.Entities.Models;
 
 namespace OMAVIAT.Services.Workers;
 
-public static class ManagementReader
-{
+public static class ManagementReader {
 	public static List<ManagementModel> Managements = [];
-	
+
 	public static async Task Init()
 	{
 		var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "workers", "management.xlsx");
@@ -16,7 +15,7 @@ public static class ManagementReader
 			return;
 		}
 
-	    await using var stream = File.Open(file, FileMode.Open, FileAccess.Read);
+		await using var stream = File.Open(file, FileMode.Open, FileAccess.Read);
 
 		var excel = new ExcelMapper()
 		{

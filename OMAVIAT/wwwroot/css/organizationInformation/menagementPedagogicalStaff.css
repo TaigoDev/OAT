@@ -29,7 +29,7 @@
 	padding: 15px;
 }
 
-.search-people-container:hover button img,  .search-people:has(input[type="search"]:focus) button img{
+.search-people-container:hover button img, .search-people:has(input[type="search"]:focus) button img {
 	transform: scale(1.1);
 }
 

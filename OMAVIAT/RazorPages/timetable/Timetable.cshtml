@@ -11,170 +11,170 @@
 <section class="timetable-container">
 	@if (string.IsNullOrWhiteSpace(Model.building) || string.IsNullOrWhiteSpace(Model.group_name) || Model.group is null || Model.corpus is null)
 	{
-        <h2 class="section-title title-centered">
-            Здания или группы не существует
-        </h2>
-        return;
-    }
-    <h2 class="section-title title-centered">
-        Расписание группы @Model.group_name
-    </h2>
-    @for (var week_id = 1; week_id <= Model.group.Weeks.Count; week_id++)
-    {
+		<h2 class="section-title title-centered">
+			Здания или группы не существует
+		</h2>
+		return;
+	}
+	<h2 class="section-title title-centered">
+		Расписание группы @Model.group_name
+	</h2>
+	@for (var week_id = 1; week_id <= Model.group.Weeks.Count; week_id++)
+	{
 
-        <table class="customized timetable" style="display: none;">
-            <thead>
-                <tr>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="customized timetable">
-            <thead>
-                <tr>
-                    <th>
-                        №
-                    </th>
-                    <th>
-                        Время
-                    </th>
-                    <th>
-                        Понедельник-@week_id
-                    </th>
-                    <th>
-                        Вторник-@week_id
-                    </th>
-                    <th>
-                        Среда-@week_id
-                    </th>
-                    <th>
-                        Четверг-@week_id
-                    </th>
-                    <th>
-                        Пятница-@week_id
-                    </th>
-                    <th>
-                        Суббота-@week_id
-                    </th>
-                    <th>
-                        Воскресенье-@week_id
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    var week = Model.group.Weeks.Where(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second)).First();
-                }
+		<table class="customized timetable" style="display: none;">
+			<thead>
+			<tr>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<table class="customized timetable">
+			<thead>
+			<tr>
+				<th>
+					№
+				</th>
+				<th>
+					Время
+				</th>
+				<th>
+					Понедельник-@week_id
+				</th>
+				<th>
+					Вторник-@week_id
+				</th>
+				<th>
+					Среда-@week_id
+				</th>
+				<th>
+					Четверг-@week_id
+				</th>
+				<th>
+					Пятница-@week_id
+				</th>
+				<th>
+					Суббота-@week_id
+				</th>
+				<th>
+					Воскресенье-@week_id
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			@{
+				var week = Model.group.Weeks.Where(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second)).First();
+			}
 
-                @for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
-                {
-                    var days = Model.GetAllLessonsByNumber(lesson_id, week);
-                    var ring = Model.corpus.bells.FirstOrDefault(e => e.Id == lesson_id);
+			@for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
+			{
+				var days = Model.GetAllLessonsByNumber(lesson_id, week);
+				var ring = Model.corpus.bells.FirstOrDefault(e => e.Id == lesson_id);
 
-                    <tr>
+				<tr>
 
-                        <td>
-                            @lesson_id
-                        </td>
-                        <td>
-                            @if(ring is not null)
-                            {
-                                @ring.start
-                                <br />
-                                @ring.end
-                            }
-                        </td>
+					<td>
+						@lesson_id
+					</td>
+					<td>
+						@if (ring is not null)
+						{
+							@ring.start
+							<br/>
+							@ring.end
+						}
+					</td>
 
-                        @foreach (var lessons in days)
-                        {
-                            if (lessons is null || lessons.Count == 0) 
-                            {
-                                <td></td>
-                                continue;
-                            }
- 
-                            <td>
-                                <div class="subjectt">
-                                    @if (lessons.Count == 1 && lessons.First().subGroupId == 0)
-                                    {
-                                        var lesson = lessons.First();
-                                        <div class="subjectt-name">
-                                            @lesson.Name
-                                        </div>
-                                        <div class="subjectt-more">
-                                            <div class="subjectt-more-item">
-                                                <div class="subject-teacher">
-                                                    @lesson.Teacher
-                                                </div>
-                                                <div class="subjectt-teacher">
-                                                    @lesson.Cabinet
-                                                </div>
-                                            </div>
-                                        </div>
+					@foreach (var lessons in days)
+					{
+						if (lessons is null || lessons.Count == 0)
+						{
+							<td></td>
+							continue;
+						}
 
-                                    }
-                                    else if (lessons.First().Name.ToSearchView() == lessons.Last().Name.ToSearchView())
-                                    {
-                                        var lesson = lessons.First();
-                                        <div class="subjectt-name">
-                                            @lesson.Name
-                                        </div>
-                                        <div class="subjectt-more">
-                                            @foreach(var group in lessons)
-                                            {
-                                                <div class="subjectt-more-item">
-                                                    <div class="subject-teacher">
-                                                        Подгруппа @group.subGroupId
-                                                    </div>
-                                                    <div class="subject-teacher">
-                                                        @group.Teacher
-                                                    </div>
-                                                    <div class="subjectt-teacher">
-                                                        @group.Cabinet
-                                                    </div>
-                                                </div>
-                                            }
-                                        </div>
-                                    }
-                                    else
-                                    {                                            
-                                        @foreach (var group in lessons)
-                                        {
-                                            <div class="subjectt-more">
-                                                <div class="subjectt-name">
-                                                    @group.Name
-                                                </div>
+						<td>
+							<div class="subjectt">
+								@if (lessons.Count == 1 && lessons.First().subGroupId == 0)
+								{
+									var lesson = lessons.First();
+									<div class="subjectt-name">
+										@lesson.Name
+									</div>
+									<div class="subjectt-more">
+										<div class="subjectt-more-item">
+											<div class="subject-teacher">
+												@lesson.Teacher
+											</div>
+											<div class="subjectt-teacher">
+												@lesson.Cabinet
+											</div>
+										</div>
+									</div>
 
-                                                <div class="subjectt-more-item">
-                                                    <div class="subject-teacher">
-                                                        Подгруппа @group.subGroupId
-                                                    </div>
-                                                    <div class="subjectt-teacher">
-                                                        @group.Teacher
-                                                    </div>
-                                                    <div class="subjectt-teacher">
-                                                        @group.Cabinet
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                    }
-                                </div>
-                            </td>
-                            
-                        }
-                    </tr>
+								}
+								else if (lessons.First().Name.ToSearchView() == lessons.Last().Name.ToSearchView())
+								{
+									var lesson = lessons.First();
+									<div class="subjectt-name">
+										@lesson.Name
+									</div>
+									<div class="subjectt-more">
+										@foreach (var group in lessons)
+										{
+											<div class="subjectt-more-item">
+												<div class="subject-teacher">
+													Подгруппа @group.subGroupId
+												</div>
+												<div class="subject-teacher">
+													@group.Teacher
+												</div>
+												<div class="subjectt-teacher">
+													@group.Cabinet
+												</div>
+											</div>
+										}
+									</div>
+								}
+								else
+								{
+									@foreach (var group in lessons)
+									{
+										<div class="subjectt-more">
+											<div class="subjectt-name">
+												@group.Name
+											</div>
 
-                }
-                
-            </tbody>
-        </table>
-    }
-  
+											<div class="subjectt-more-item">
+												<div class="subject-teacher">
+													Подгруппа @group.subGroupId
+												</div>
+												<div class="subjectt-teacher">
+													@group.Teacher
+												</div>
+												<div class="subjectt-teacher">
+													@group.Cabinet
+												</div>
+											</div>
+										</div>
+									}
+								}
+							</div>
+						</td>
+
+					}
+				</tr>
+
+			}
+
+			</tbody>
+		</table>
+	}
+
 </section>
 	

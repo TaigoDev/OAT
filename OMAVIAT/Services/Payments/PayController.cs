@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace OMAVIAT.Services.Payments
-{
-	public class PayController : Controller
-	{
+namespace OMAVIAT.Services.Payments {
+	public class PayController : Controller {
 		[HttpGet("pay/download/{filename}"), NoCache]
 		public IActionResult DownloadFile(string filename)
 		{
@@ -20,11 +18,11 @@ namespace OMAVIAT.Services.Payments
 		public IActionResult Search([FromQuery] string documentId, [FromQuery] string documentDate,
 			[FromQuery] string studentFullName, [FromQuery] string group, [FromQuery] string FullName) =>
 			Ok(ContractReader.IsContract(e =>
-				 e.documentId.ToSearchView() == documentId.ToSearchView() &&
-				 e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
-				 e.studentFullName.ToSearchView() == studentFullName.ToSearchView() &&
-				 e.Group.ToSearchView() == group.ToSearchView() &&
-				 e.FullName.ToSearchView() == FullName.ToSearchView()));
+				e.documentId.ToSearchView() == documentId.ToSearchView() &&
+				e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
+				e.studentFullName.ToSearchView() == studentFullName.ToSearchView() &&
+				e.Group.ToSearchView() == group.ToSearchView() &&
+				e.FullName.ToSearchView() == FullName.ToSearchView()));
 
 	}
 }

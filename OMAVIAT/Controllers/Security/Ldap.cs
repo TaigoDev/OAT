@@ -3,14 +3,12 @@ using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Text;
 
-namespace OMAVIAT.Controllers.Security
-{
-	public class Ldap
-	{
+namespace OMAVIAT.Controllers.Security {
+	public class Ldap {
 
 		public static bool Login(string username, string password, string IP, bool WithError = true)
 		{
-			if(Configurator.IsLocal)
+			if (Configurator.IsLocal)
 				return true;
 
 			try
@@ -28,9 +26,9 @@ namespace OMAVIAT.Controllers.Security
 			{
 				if (WithError)
 					TelegramBot.SendMessage($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
-						$"L: {username}\n" +
-						$"IP-адрес отправителя: {IP}." +
-						$"Ошибка: {ex}", ex);
+					                        $"L: {username}\n" +
+					                        $"IP-адрес отправителя: {IP}." +
+					                        $"Ошибка: {ex}", ex);
 				return false;
 			}
 		}
@@ -52,7 +50,7 @@ namespace OMAVIAT.Controllers.Security
 
 		public static string? GetFullName(string username)
 		{
-			if(Configurator.IsLocal)
+			if (Configurator.IsLocal)
 				return "Admin Admin Admin";
 			var response = SearchByUsername(username);
 			var attributes = GetValuesAttributeByTag(response, "cn");
@@ -80,7 +78,7 @@ namespace OMAVIAT.Controllers.Security
 
 		public static DirectoryAttribute? GetAttributeByTag(SearchResponse results, string tag) =>
 			results.Entries.Count is 0 ? null :
-			results.Entries[0].Attributes.Values.Cast<DirectoryAttribute>().FirstOrDefault(e => e.Name == tag);
+				results.Entries[0].Attributes.Values.Cast<DirectoryAttribute>().FirstOrDefault(e => e.Name == tag);
 
 		public static List<string>? GetValuesAttributeByTag(SearchResponse results, string tag)
 		{

@@ -6,10 +6,8 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace OMAVIAT.Utilities.Telegram
-{
-	public class TelegramBot
-	{
+namespace OMAVIAT.Utilities.Telegram {
+	public class TelegramBot {
 
 		protected static TelegramBotClient botClient;
 		public static bool IsProxy = false;
@@ -46,7 +44,7 @@ namespace OMAVIAT.Utilities.Telegram
 					}
 				}
 				else
-				{ 
+				{
 					botClient = new TelegramBotClient(Configurator.telegram.token, new HttpClient());
 					IsProxy = false;
 				}
@@ -54,12 +52,15 @@ namespace OMAVIAT.Utilities.Telegram
 				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 					return;
 				var me = await botClient.GetMeAsync();
-				var receiverOptions = new ReceiverOptions() { AllowedUpdates = Array.Empty<UpdateType>() };
+				var receiverOptions = new ReceiverOptions()
+				{
+					AllowedUpdates = Array.Empty<UpdateType>()
+				};
 				botClient.StartReceiving(
 				updateHandler: HandleUpdateAsync,
-					pollingErrorHandler: HandlePollingErrorAsync,
-					receiverOptions: receiverOptions,
-					cancellationToken: cancelTokenSource.Token
+				pollingErrorHandler: HandlePollingErrorAsync,
+				receiverOptions: receiverOptions,
+				cancellationToken: cancelTokenSource.Token
 				);
 				Logger.InfoWithoutTelegram($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
 			}
@@ -108,7 +109,7 @@ namespace OMAVIAT.Utilities.Telegram
 			{
 				if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 					await botClient.SendTextMessageAsync(new ChatId(long.Parse(Configurator.telegram.chat_id)), message,
-						replyMarkup: Buttons.CreateKeyboard(Buttons.CreateButtonInRow("🔓 Посмотреть ошибку", $"{ErrorNotification.Message}")));
+					replyMarkup: Buttons.CreateKeyboard(Buttons.CreateButtonInRow("🔓 Посмотреть ошибку", $"{ErrorNotification.Message}")));
 				else
 					Console.WriteLine(message);
 			}

@@ -1,9 +1,7 @@
 ﻿using Telegram.Bot.Types.ReplyMarkups;
 
-namespace OMAVIAT.Utilities.Telegram
-{
-	public class Buttons
-	{
+namespace OMAVIAT.Utilities.Telegram {
+	public class Buttons {
 
 		public static InlineKeyboardButton CreateButton(string text, string cmd) =>
 			InlineKeyboardButton.WithCallbackData(text, cmd);

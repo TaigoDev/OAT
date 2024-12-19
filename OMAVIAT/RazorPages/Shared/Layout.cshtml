@@ -5,7 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<title>@ViewData["Title"]</title>
-	<meta name="description" content="Омский авиационный колледж имени Н.Е. Жуковского готов предоставить свои образовательные услуги по обучению будующих профессионалов!">
+	<meta name="description"
+	      content="Омский авиационный колледж имени Н.Е. Жуковского готов предоставить свои образовательные услуги по обучению будующих профессионалов!">
 	<link rel="stylesheet" href="/css/site.css">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
 	<link rel="stylesheet" href="/OMAVIAT.styles.css"/>
@@ -13,446 +14,449 @@
 	<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script>
 </head>
 <body>
-	<header id="site-header" class="site-header">
-		<div class="container">
-			<nav class="navigation">
-				<a class="logo-container" href="/">
-					<img class="logo" src="/images/basic/logo.svg"/>
-					<span class="logo-text">Омский авиационный колледж имени<br>Н.Е. жуковского</span>
-				</a>
+<header id="site-header" class="site-header">
+	<div class="container">
+		<nav class="navigation">
+			<a class="logo-container" href="/">
+				<img class="logo" src="/images/basic/logo.svg"/>
+				<span class="logo-text">Омский авиационный колледж имени<br>Н.Е. жуковского</span>
+			</a>
 
-				<ul class="important-pages">
-					<li>
-						<a asp-page="/Applicant">
+			<ul class="important-pages">
+				<li>
+					<a asp-page="/Applicant">
+						Абитуриентам
+					</a>
+				</li>
+				<li>
+					<a asp-page="/Students">
+						Обучающимся
+					</a>
+				</li>
+				<li>
+					<a asp-page="/timetable/Classes">
+						Расписание
+					</a>
+				</li>
+				<li>
+					<a href="https://elo.oat.ru/">
+						Лицей
+					</a>
+				</li>
+			</ul>
+
+			<div class="functional">
+				<a href="https://e.oat.ru/"><img class="icon" src="~/images/basic/sitemap.svg" alt="карта колледжа"></a>
+				<a asp-page="/feedback/Pay"><img class="icon" src="~/images/basic/rubles.svg"
+				                                 alt="оплатить обучение"></a>
+				<img id="specialButton" class="icon" src="~/images/basic/eyeOpen.svg" alt="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ"
+				     title="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ"/>
+				<img id="search-icon" class="icon" src="~/images/basic/search.svg" alt="поиск">
+			</div>
+
+			<div id="menu-icon" class="main-menu-icon">
+				<img class="icon" src="~/images/basic/menu/burger.svg" alt="меню">
+			</div>
+
+			<div id="main-menu-window" class="main-menu-window">
+				<ul id="main-menu" class="main-menu">
+					<li class="main-menu-item">
+						<a asp-page="/students/AlumniEmploymentCenterOmaviat" class="main-menu-item-pictogram">
+							<img class="icon" src="~/images/basic/menu/student.svg" alt="">
+						</a>
+						<a asp-page="/students/AlumniEmploymentCenterOmaviat">
+							Студентам
+						</a>
+					</li>
+					<li class="main-menu-item">
+						<a asp-page="/applicant/SelectionCommittee" class="main-menu-item-pictogram">
+							<img class="icon" src="~/images/basic/menu/applicant.svg" alt="">
+						</a>
+						<a asp-page="/applicant/SelectionCommittee">
 							Абитуриентам
 						</a>
 					</li>
-					<li>
-						<a asp-page="/Students">
-							Обучающимся
+					<li class="main-menu-item">
+						<a asp-page="/parents/AcademicProgress" class="main-menu-item-pictogram">
+							<img class="icon" src="~/images/basic/menu/parents.svg" alt="">
+						</a>
+						<a asp-page="/parents/AcademicProgress">
+							Родителям
 						</a>
 					</li>
-					<li>
+					<li class="main-menu-item">
+						<a asp-page="/organizationInformation/CommonIntelligence" class="main-menu-item-pictogram">
+							<img class="icon" src="~/images/basic/menu/college.svg" alt="">
+						</a>
+						<a asp-page="/organizationInformation/CommonIntelligence">
+							Колледж
+						</a>
+					</li>
+					<li class="main-menu-item">
+						<a asp-page="/feedback/Contacts" class="main-menu-item-pictogram">
+							<img class="icon" src="~/images/basic/menu/contacts.svg" alt="">
+						</a>
+						<a asp-page="/feedback/Contacts">
+							Контакты
+						</a>
+					</li>
+					<li class="main-menu-item">
+						<a asp-page="/timetable/Classes" class="main-menu-item-pictogram">
+							<img class="icon" src="~/images/basic/menu/timetable.svg" alt="">
+						</a>
 						<a asp-page="/timetable/Classes">
 							Расписание
 						</a>
 					</li>
-					<li>
-						<a href="https://elo.oat.ru/">
-							Лицей
-						</a>
-					</li>
 				</ul>
-
-				<div class="functional">
-					<a href="https://e.oat.ru/"><img class="icon" src="~/images/basic/sitemap.svg" alt="карта колледжа"></a>
-					<a asp-page="/feedback/Pay"><img class="icon" src="~/images/basic/rubles.svg" alt="оплатить обучение"></a>
-                    <img id="specialButton" class="icon" src="~/images/basic/eyeOpen.svg" alt="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" title="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" />
-					<img id="search-icon" class="icon" src="~/images/basic/search.svg" alt="поиск">
-				</div>
-
-				<div id="menu-icon" class="main-menu-icon">
-					<img class="icon" src="~/images/basic/menu/burger.svg" alt="меню">
-				</div>
-
-				<div id="main-menu-window" class="main-menu-window">
-					<ul id="main-menu" class="main-menu">
-						<li class="main-menu-item">
-							<a asp-page="/students/AlumniEmploymentCenterOmaviat" class="main-menu-item-pictogram">
-								<img class="icon" src="~/images/basic/menu/student.svg" alt="">
-							</a>
-                            <a asp-page="/students/AlumniEmploymentCenterOmaviat">
-								Студентам
-							</a>
-						</li>
-						<li class="main-menu-item">
-							<a asp-page="/applicant/SelectionCommittee" class="main-menu-item-pictogram">
-								<img class="icon" src="~/images/basic/menu/applicant.svg" alt="">
-							</a>
-							<a asp-page="/applicant/SelectionCommittee">
-								Абитуриентам
-							</a>
-						</li>
-						<li class="main-menu-item">
-							<a asp-page="/parents/AcademicProgress" class="main-menu-item-pictogram">
-								<img class="icon" src="~/images/basic/menu/parents.svg" alt="">
-							</a>
-							<a asp-page="/parents/AcademicProgress">
-								Родителям
-							</a>
-						</li>
-						<li class="main-menu-item">
-							<a asp-page="/organizationInformation/CommonIntelligence" class="main-menu-item-pictogram">
-								<img class="icon" src="~/images/basic/menu/college.svg" alt="">
-							</a>
-							<a asp-page="/organizationInformation/CommonIntelligence">
-								Колледж
-							</a>
-						</li>
-						<li class="main-menu-item">
-							<a asp-page="/feedback/Contacts" class="main-menu-item-pictogram">
-								<img class="icon" src="~/images/basic/menu/contacts.svg" alt="">
-							</a>
-							<a asp-page="/feedback/Contacts">
-								Контакты
-							</a>
-						</li>
-						<li class="main-menu-item">
-							<a asp-page="/timetable/Classes" class="main-menu-item-pictogram">
-								<img class="icon" src="~/images/basic/menu/timetable.svg" alt="">
-							</a>
-							<a asp-page="/timetable/Classes">
-								Расписание
-							</a>
-						</li>
-					</ul>
-				</div>
-
-			</nav>
-
-			<div class="site-search-container">
-
-				<div class="site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;@Configurator.config.MainUrl/search&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;#ffffff&quot;,&quot;fontsize&quot;:14,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;ru&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;БПОУ Омавиат&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;ru&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2958566,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Поиск по сайту www.oat.ru&quot;,&quot;input_placeholderColor&quot;:&quot;#000000&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}">
-					<form action="https://yandex.ru/search/site/" method="get" target="_self" accept-charset="utf-8">
-						<input type="hidden" name="searchid" value="2958566" />
-						<input type="hidden" name="l10n" value="ru" />
-						<input type="hidden" name="reqenc" value="" />
-						<input type="search" name="text" value="" />
-						<input type="submit" value="Найти" />
-					</form>
-				</div>
-				<script type="text/javascript">
-					(function (w, d, c) {
-						var s = d.createElement('script'),
-							h = d.getElementsByTagName('script')[0],
-							e = d.documentElement;
-						if ((' ' + e.className + ' ').indexOf(' ya-page_js_yes ') === -1) {
-							e.className += ' ya-page_js_yes';
-						}
-						s.type = 'text/javascript';
-						s.async = true;
-						s.charset = 'utf-8';
-						s.src = '@Configurator.config.MainUrl/js/yandex_all.js';
-						h.parentNode.insertBefore(s, h);
-						(w[c] || (w[c] = [])).push(function () {
-							Ya.Site.Form.init()
-						})
-					})(window, document, 'yandex_site_callbacks');
-				</script>
 			</div>
 
+		</nav>
+
+		<div class="site-search-container">
+
+			<div class="site-form ya-site-form_inited_no"
+			     data-bem="{&quot;action&quot;:&quot;@Configurator.config.MainUrl/search&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;#ffffff&quot;,&quot;fontsize&quot;:14,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;ru&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;БПОУ Омавиат&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;ru&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2958566,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Поиск по сайту www.oat.ru&quot;,&quot;input_placeholderColor&quot;:&quot;#000000&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}">
+				<form action="https://yandex.ru/search/site/" method="get" target="_self" accept-charset="utf-8">
+					<input type="hidden" name="searchid" value="2958566"/>
+					<input type="hidden" name="l10n" value="ru"/>
+					<input type="hidden" name="reqenc" value=""/>
+					<input type="search" name="text" value=""/>
+					<input type="submit" value="Найти"/>
+				</form>
+			</div>
+			<script type="text/javascript">
+				(function (w, d, c) {
+					var s = d.createElement('script'),
+						h = d.getElementsByTagName('script')[0],
+						e = d.documentElement;
+					if ((' ' + e.className + ' ').indexOf(' ya-page_js_yes ') === -1) {
+						e.className += ' ya-page_js_yes';
+					}
+					s.type = 'text/javascript';
+					s.async = true;
+					s.charset = 'utf-8';
+					s.src = '@Configurator.config.MainUrl/js/yandex_all.js';
+					h.parentNode.insertBefore(s, h);
+					(w[c] || (w[c] = [])).push(function () {
+						Ya.Site.Form.init()
+					})
+				})(window, document, 'yandex_site_callbacks');
+			</script>
 		</div>
-	</header>
 
-	<main class="site-main" role="main">
-		@RenderBody()
-	</main>
+	</div>
+</header>
 
-	<footer class="site-footer">
-		<div class="partners-list-container">
-			<div class="partners-list">
-				<a href="https://www.uec-saturn.ru/?sat=280" target="_blank">
-					<img src="~/images/basic/partners/odkSaturn.png" alt="">
-				</a>
-				<a href="https://guit.omskportal.ru/oiv/buguit" target="_blank">
-					<img src="~/images/basic/partners/omskaiaGubernia.png" alt="">
-				</a>
-				<a href="http://omport.ru/" target="_blank">
-					<img src="~/images/basic/partners/omskiRecnoiPort.png" alt="">
-				</a>
-				<a href="http://oniip.ru/" target="_blank">
-					<img src="~/images/basic/partners/oniip.png" alt="">
-				</a>
-				<a href="http://polyot.su/" target="_blank">
-					<img src="~/images/basic/partners/polet.png" alt="">
-				</a>
-				<a href="http://www.aoomkb.ru/" target="_blank">
-					<img src="~/images/basic/partners/omskoeMashinostroitelnoeBuro.png" alt="">
-				</a>
-				<a href="https://omgpu.ru/" target="_blank">
-					<img src="~/images/basic/partners/pedagogiceskiUniversitet.png" alt="">
-				</a>
-				<a href="https://www.cisco.com/" target="_blank">
-					<img src="~/images/basic/partners/cisco.png" alt="">
-				</a>
-				<a href="https://www.visual-paradigm.com/" target="_blank">
-					<img src="~/images/basic/partners/visualParadigm.png" alt="">
-				</a>
-				<a href="http://xn--b1apfhqi.xn--p1ai/" target="_blank">
-					<img src="~/images/basic/partners/visokieTehnologii.png" alt="">
-				</a>
-				<a href="http://www.salutomsk.ru/" target="_blank">
-					<img src="~/images/basic/partners/salut.png" alt="">
-				</a>
-				<a href="https://www.oemz.ru/" target="_blank">
-					<img src="~/images/basic/partners/electromehaniceskiZavod.png" alt="">
-				</a>
-				<a href="https://www.omskelectro.ru/" target="_blank">
-					<img src="~/images/basic/partners/omskElectro.png" alt="">
-				</a>
-				<a href="https://sibpribor.ru/" target="_blank">
-					<img src="~/images/basic/partners/sibirskiePriboriSistemi.png" alt="">
-				</a>
-                <a href="https://taigo.xyz/" target="_blank">
-                    <img src="~/images/basic/partners/taigo.svg" alt="">
-                </a>
-				<a href="https://www.smartkom.ru/" target="_blank">
-					<img src="~/images/basic/partners/smartcom.png" alt="">
-				</a>
-				<a href="https://admomsk.ru/web/guest/government/divisions/47/technologies/about" target="_blank">
-					<img src="~/images/basic/partners/upravlenieInformacionnoKommunikacionnixTehnologi.png" alt="">
-				</a>
-				<a href="https://www.omskagregat.ru/" target="_blank">
-					<img src="~/images/basic/partners/omskiAgregatniZavod.png" alt="">
-				</a>
-                <a href="https://vk.com/omsktransmash" target="_blank">
-					<img src="~/images/basic/partners/omskTransMash.png" alt="">
-				</a>
-				<a href="http://www.relero.ru/" target="_blank">
-					<img src="~/images/basic/partners/radiozavodImeniPopova.png" alt="">
-				</a>
-				<a href="http://xn--80aafyrmaqq.xn--p1ai/site" target="_blank">
-					<img src="~/images/basic/partners/motor.png" alt="">
-				</a>
-				<a href="https://auto-plus.ru/" target="_blank">
-					<img src="~/images/basic/partners/avtoplus.png" alt="">
-				</a>
-				<a href="https://ante55.ru/" target="_blank">
-					<img src="~/images/basic/partners/ante.png" alt="">
-				</a>
-				<a href="https://bsomsk.ru/" target="_blank">
-					<img src="~/images/basic/partners/biznesSistemi.jpg" alt="">
-				</a>
-				<a href="https://ds.gazprom-neft.ru/" target="_blank">
-					<img src="~/images/basic/partners/gazpromCifrovieReshenia.svg" alt="">
-				</a>
-				<a href="http://gidroprivod55.ru/about" target="_blank">
-					<img src="~/images/basic/partners/omskGidroPrivod.png" alt="">
-				</a>
-				<a href="https://zngs.ru/" target="_blank">
-					<img src="~/images/basic/partners/zavodNeftegazovixSistem.png" alt="">
-				</a>
-				<a href="https://lenta.com/o-kompanii/" target="_blank">
-					<img src="~/images/basic/partners/lenta.png" alt="">
-				</a>
-				<a href="https://mt-t.ru/omsk/" target="_blank">
-					<img src="~/images/basic/partners/mttehno.png" alt="">
-				</a>
-				<a href="https://mir-omsk.ru/" target="_blank">
-					<img src="~/images/basic/partners/npoMir.png" alt="">
-				</a>
-				<a href="https://cryontk.ru/" target="_blank">
-					<img src="~/images/basic/partners/kriogennaiaTehnika.png" alt="">
-				</a>
-                <a href="https://www.addamant.ru/" target="_blank">
-                    <img src="~/images/basic/partners/addamant.svg" alt="">
-                </a>
-                <a href="https://sibsr.ru/" target="_blank">
-                    <img src="~/images/basic/partners/sibirskaiaStudiaRazrabotcikov.png" alt="">
-                </a>
-				<a href="https://www.omkc.ru/" target="_blank">
-					<img src="~/images/basic/partners/omskieKabelnieSeti.png" alt="">
-				</a>
-				<a href="http://ppconsult.ru/" target="_blank">
-					<img src="~/images/basic/partners/proektiPoddergka.png" alt="">
-				</a>
-				<a href="https://www.ritmservice.ru/" target="_blank">
-					<img src="~/images/basic/partners/ritmServis.png" alt="">
-				</a>
-				<a href="https://sigma-it.ru/" target="_blank">
-					<img src="~/images/basic/partners/sigma.png" alt="">
-				</a>
-				<a href="http://www.ooo-skb.ru/" target="_blank">
-					<img src="~/images/basic/partners/kompleksnaiaBezopasnost.jpg" alt="">
-				</a>
-				<a href="https://xn--80ab2achei.xn--p1ai/" target="_blank">
-					<img src="~/images/basic/partners/blankom.png" alt="">
-				</a>
-				<a href="https://www.patrik.ru/" target="_blank">
-					<img src="~/images/basic/partners/patrik.png" alt="">
-				</a>
-				<a href="http://www.saturn-omsk.ru/" target="_blank">
-					<img src="~/images/basic/partners/saturn.png" alt="">
-				</a>
-				<a href="https://www.rosseti.ru/about/sites/?ELEMENT_ID=12370" target="_blank">
-					<img src="~/images/basic/partners/rossetiSibir.png" alt="">
-				</a>
-				<a href="http://www.souzmash-omsk.ru/" target="_blank">
-					<img src="~/images/basic/partners/souzMashinostroiteleiRossii.png" alt="">
-				</a>
-				<a href="http://www.ckba.net/" target="_blank">
-					<img src="~/images/basic/partners/ckba.png" alt="">
-				</a>
+<main class="site-main" role="main">
+	@RenderBody()
+</main>
+
+<footer class="site-footer">
+	<div class="partners-list-container">
+		<div class="partners-list">
+			<a href="https://www.uec-saturn.ru/?sat=280" target="_blank">
+				<img src="~/images/basic/partners/odkSaturn.png" alt="">
+			</a>
+			<a href="https://guit.omskportal.ru/oiv/buguit" target="_blank">
+				<img src="~/images/basic/partners/omskaiaGubernia.png" alt="">
+			</a>
+			<a href="http://omport.ru/" target="_blank">
+				<img src="~/images/basic/partners/omskiRecnoiPort.png" alt="">
+			</a>
+			<a href="http://oniip.ru/" target="_blank">
+				<img src="~/images/basic/partners/oniip.png" alt="">
+			</a>
+			<a href="http://polyot.su/" target="_blank">
+				<img src="~/images/basic/partners/polet.png" alt="">
+			</a>
+			<a href="http://www.aoomkb.ru/" target="_blank">
+				<img src="~/images/basic/partners/omskoeMashinostroitelnoeBuro.png" alt="">
+			</a>
+			<a href="https://omgpu.ru/" target="_blank">
+				<img src="~/images/basic/partners/pedagogiceskiUniversitet.png" alt="">
+			</a>
+			<a href="https://www.cisco.com/" target="_blank">
+				<img src="~/images/basic/partners/cisco.png" alt="">
+			</a>
+			<a href="https://www.visual-paradigm.com/" target="_blank">
+				<img src="~/images/basic/partners/visualParadigm.png" alt="">
+			</a>
+			<a href="http://xn--b1apfhqi.xn--p1ai/" target="_blank">
+				<img src="~/images/basic/partners/visokieTehnologii.png" alt="">
+			</a>
+			<a href="http://www.salutomsk.ru/" target="_blank">
+				<img src="~/images/basic/partners/salut.png" alt="">
+			</a>
+			<a href="https://www.oemz.ru/" target="_blank">
+				<img src="~/images/basic/partners/electromehaniceskiZavod.png" alt="">
+			</a>
+			<a href="https://www.omskelectro.ru/" target="_blank">
+				<img src="~/images/basic/partners/omskElectro.png" alt="">
+			</a>
+			<a href="https://sibpribor.ru/" target="_blank">
+				<img src="~/images/basic/partners/sibirskiePriboriSistemi.png" alt="">
+			</a>
+			<a href="https://taigo.xyz/" target="_blank">
+				<img src="~/images/basic/partners/taigo.svg" alt="">
+			</a>
+			<a href="https://www.smartkom.ru/" target="_blank">
+				<img src="~/images/basic/partners/smartcom.png" alt="">
+			</a>
+			<a href="https://admomsk.ru/web/guest/government/divisions/47/technologies/about" target="_blank">
+				<img src="~/images/basic/partners/upravlenieInformacionnoKommunikacionnixTehnologi.png" alt="">
+			</a>
+			<a href="https://www.omskagregat.ru/" target="_blank">
+				<img src="~/images/basic/partners/omskiAgregatniZavod.png" alt="">
+			</a>
+			<a href="https://vk.com/omsktransmash" target="_blank">
+				<img src="~/images/basic/partners/omskTransMash.png" alt="">
+			</a>
+			<a href="http://www.relero.ru/" target="_blank">
+				<img src="~/images/basic/partners/radiozavodImeniPopova.png" alt="">
+			</a>
+			<a href="http://xn--80aafyrmaqq.xn--p1ai/site" target="_blank">
+				<img src="~/images/basic/partners/motor.png" alt="">
+			</a>
+			<a href="https://auto-plus.ru/" target="_blank">
+				<img src="~/images/basic/partners/avtoplus.png" alt="">
+			</a>
+			<a href="https://ante55.ru/" target="_blank">
+				<img src="~/images/basic/partners/ante.png" alt="">
+			</a>
+			<a href="https://bsomsk.ru/" target="_blank">
+				<img src="~/images/basic/partners/biznesSistemi.jpg" alt="">
+			</a>
+			<a href="https://ds.gazprom-neft.ru/" target="_blank">
+				<img src="~/images/basic/partners/gazpromCifrovieReshenia.svg" alt="">
+			</a>
+			<a href="http://gidroprivod55.ru/about" target="_blank">
+				<img src="~/images/basic/partners/omskGidroPrivod.png" alt="">
+			</a>
+			<a href="https://zngs.ru/" target="_blank">
+				<img src="~/images/basic/partners/zavodNeftegazovixSistem.png" alt="">
+			</a>
+			<a href="https://lenta.com/o-kompanii/" target="_blank">
+				<img src="~/images/basic/partners/lenta.png" alt="">
+			</a>
+			<a href="https://mt-t.ru/omsk/" target="_blank">
+				<img src="~/images/basic/partners/mttehno.png" alt="">
+			</a>
+			<a href="https://mir-omsk.ru/" target="_blank">
+				<img src="~/images/basic/partners/npoMir.png" alt="">
+			</a>
+			<a href="https://cryontk.ru/" target="_blank">
+				<img src="~/images/basic/partners/kriogennaiaTehnika.png" alt="">
+			</a>
+			<a href="https://www.addamant.ru/" target="_blank">
+				<img src="~/images/basic/partners/addamant.svg" alt="">
+			</a>
+			<a href="https://sibsr.ru/" target="_blank">
+				<img src="~/images/basic/partners/sibirskaiaStudiaRazrabotcikov.png" alt="">
+			</a>
+			<a href="https://www.omkc.ru/" target="_blank">
+				<img src="~/images/basic/partners/omskieKabelnieSeti.png" alt="">
+			</a>
+			<a href="http://ppconsult.ru/" target="_blank">
+				<img src="~/images/basic/partners/proektiPoddergka.png" alt="">
+			</a>
+			<a href="https://www.ritmservice.ru/" target="_blank">
+				<img src="~/images/basic/partners/ritmServis.png" alt="">
+			</a>
+			<a href="https://sigma-it.ru/" target="_blank">
+				<img src="~/images/basic/partners/sigma.png" alt="">
+			</a>
+			<a href="http://www.ooo-skb.ru/" target="_blank">
+				<img src="~/images/basic/partners/kompleksnaiaBezopasnost.jpg" alt="">
+			</a>
+			<a href="https://xn--80ab2achei.xn--p1ai/" target="_blank">
+				<img src="~/images/basic/partners/blankom.png" alt="">
+			</a>
+			<a href="https://www.patrik.ru/" target="_blank">
+				<img src="~/images/basic/partners/patrik.png" alt="">
+			</a>
+			<a href="http://www.saturn-omsk.ru/" target="_blank">
+				<img src="~/images/basic/partners/saturn.png" alt="">
+			</a>
+			<a href="https://www.rosseti.ru/about/sites/?ELEMENT_ID=12370" target="_blank">
+				<img src="~/images/basic/partners/rossetiSibir.png" alt="">
+			</a>
+			<a href="http://www.souzmash-omsk.ru/" target="_blank">
+				<img src="~/images/basic/partners/souzMashinostroiteleiRossii.png" alt="">
+			</a>
+			<a href="http://www.ckba.net/" target="_blank">
+				<img src="~/images/basic/partners/ckba.png" alt="">
+			</a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="footer-top">
+			<div class="footer-top-item">
+				<h5 class="footer-top-item-title">
+					приемная комиссия
+				</h5>
+				<div class="footer-top-item-body">
+					<div>
+						г. Омск, ул. Ленина, д. 24
+					</div>
+					<a href="tel:+7 (3812) 31-16-39">
+						(3812) 31-16-39
+					</a>
+					<div>
+						ПН-ПТ 8:00-18:00, СБ 9:00-15:00
+					</div>
+				</div>
+			</div>
+			<div class="footer-top-item">
+				<h5 class="footer-top-item-title">
+					учебная часть
+				</h5>
+				<div class="footer-top-item-body">
+					<div>
+						г. Омск, ул. Ленина, д. 24
+					</div>
+					<a href="tel:+7 (3812) 31-30-42">
+						(3812) 31-30-42
+					</a>
+					<div>
+						ПН-ПТ 7:30-19:30
+					</div>
+				</div>
+			</div>
+			<div class="footer-top-item">
+				<h5 class="footer-top-item-title">
+					приемная директора
+				</h5>
+				<div class="footer-top-item-body">
+					<div>
+						г. Омск, ул. Ленина, д. 24
+					</div>
+					<a href="tel:+7 (3812) 31-44-65">
+						(3812) 31-44-65
+					</a>
+					<div>
+						ПН-ПТ 8:00-17:00
+					</div>
+				</div>
+			</div>
+			<div class="footer-top-item departments">
+				<h5 class="footer-top-item-title">
+					отделения
+				</h5>
+				<div class="footer-top-item-body">
+					<a asp-page="/departments/IT">
+						ИТ
+					</a>
+					<a asp-page="/departments/EiSR">
+						ЭиСР
+					</a>
+					<a asp-page="/departments/TM">
+						ТМ
+					</a>
+					<a asp-page="/departments/PPKRS">
+						ППКРС
+					</a>
+					<a asp-page="/departments/RTS">
+						РТС
+					</a>
+					<a asp-page="/departments/TAKPiE">
+						ТАКПиЭ
+					</a>
+					<a asp-page="/departments/ZOsDT">
+						ЗОсДТ
+					</a>
+				</div>
 			</div>
 		</div>
+
+	</div>
+	<div class="footer-bottom">
 		<div class="container">
-			<div class="footer-top">
-				<div class="footer-top-item">
-					<h5 class="footer-top-item-title">
-						приемная комиссия
-					</h5>
-					<div class="footer-top-item-body">
-						<div>
-							г. Омск, ул. Ленина, д. 24
-						</div>
-						<a href="tel:+7 (3812) 31-16-39">
-							(3812) 31-16-39
-						</a>
-						<div>
-							ПН-ПТ 8:00-18:00, СБ 9:00-15:00
-						</div>
-					</div>
-				</div>
-				<div class="footer-top-item">
-					<h5 class="footer-top-item-title">
-						учебная часть
-					</h5>
-					<div class="footer-top-item-body">
-						<div>
-                            г. Омск, ул. Ленина, д. 24
-						</div>
-						<a href="tel:+7 (3812) 31-30-42">
-							(3812) 31-30-42
-						</a>
-						<div>
-							ПН-ПТ 7:30-19:30
-						</div>
-					</div>
-				</div>
-				<div class="footer-top-item">
-					<h5 class="footer-top-item-title">
-						приемная директора
-					</h5>
-					<div class="footer-top-item-body">
-						<div>
-                            г. Омск, ул. Ленина, д. 24
-						</div>
-						<a href="tel:+7 (3812) 31-44-65">
-							(3812) 31-44-65
-						</a>
-						<div>
-							ПН-ПТ 8:00-17:00
-						</div>
-					</div>
-				</div>
-				<div class="footer-top-item departments">
-					<h5 class="footer-top-item-title">
-						отделения
-					</h5>
-					<div class="footer-top-item-body">
-						<a asp-page="/departments/IT">
-							ИТ
-						</a>
-						<a asp-page="/departments/EiSR">
-							ЭиСР
-						</a>
-						<a asp-page="/departments/TM">
-							ТМ
-						</a>
-						<a asp-page="/departments/PPKRS">
-							ППКРС
-						</a>
-						<a asp-page="/departments/RTS">
-							РТС
-						</a>
-						<a asp-page="/departments/TAKPiE">
-							ТАКПиЭ
-						</a>
-						<a asp-page="/departments/ZOsDT">
-							ЗОсДТ
-						</a>
-					</div>
-				</div>
-			</div>
-
-		</div>
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="footer-bottom-row">
-					<div class="footer-bottom-logo">
-						<img class="logo" src="/images/basic/logo.svg"/>	
-						<span class="footer-bottom-logo-text">
+			<div class="footer-bottom-row">
+				<div class="footer-bottom-logo">
+					<img class="logo" src="/images/basic/logo.svg"/>
+					<span class="footer-bottom-logo-text">
 							Бюджетное профессиональное образовательное учреждение
 							Омской области «Омский авиационный колледж имени Н.Е. Жуковского»
 						</span>
-					</div>
-					<ul class="footer-bottom-social">
-						<li>
-							<a href="https://vk.com/omaviat_2020">
-								<img class="icon" src="~/images/basic/socialLinks/vk.svg" alt="">
-							</a>
-						</li>
-						<li>
-							<a href="https://www.youtube.com/channel/UC-Ss6mzhYiKeGZaCBNyXo2w">
-								<img class="icon" src="~/images/basic/socialLinks/youtube.svg" alt="">
-							</a>
-						</li>
-						<li>
-							<a href="https://t.me/omaviatomsk">
-								<img class="icon" src="~/images/basic/socialLinks/telegram.svg" alt="">
-							</a>
-						</li>
-					</ul>
 				</div>
+				<ul class="footer-bottom-social">
+					<li>
+						<a href="https://vk.com/omaviat_2020">
+							<img class="icon" src="~/images/basic/socialLinks/vk.svg" alt="">
+						</a>
+					</li>
+					<li>
+						<a href="https://www.youtube.com/channel/UC-Ss6mzhYiKeGZaCBNyXo2w">
+							<img class="icon" src="~/images/basic/socialLinks/youtube.svg" alt="">
+						</a>
+					</li>
+					<li>
+						<a href="https://t.me/omaviatomsk">
+							<img class="icon" src="~/images/basic/socialLinks/telegram.svg" alt="">
+						</a>
+					</li>
+				</ul>
+			</div>
 
-				<div class="footer-bottom-row">
-					<ul class="footer-bottom-pages">
-						<li>
-							<a asp-page="/timetable/Classes">
-								расписание
-							</a>
-						</li>
-						<li>
-							<a asp-page="/parents/AcademicProgress">
-								родителям
-							</a>
-						</li>
-						<li>
-                            <a asp-page="/students/AlumniEmploymentCenterOmaviat">
-								студентам
-							</a>
-						</li>
-						<li>
-							<a asp-page="/organizationInformation/CommonIntelligence">
-								колледж
-							</a>
-						</li>
-						<li>
-							<a href="https://help.oat.ru/">
-								техподдержка
-							</a>
-						</li>
-						<li>
-							<a asp-page="/applicant/SelectionCommittee">
-								абитуриентам
-							</a>
-						</li>
-						<li>
-							<a asp-page="/feedback/Contacts">
-								контакты
-							</a>
-						</li>
-						<li>
-							<a href="https://elo.oat.ru/">
-								лицей
-							</a>
-						</li>
-					</ul>
-				</div>
-                <div class="created-by">
-                    Сделано с 🤍
-                    <br>
-                    при поддержке <a target="_blank" href="https://vk.com/taigoofficial">Taigo</a>
-                </div>
-				<div class="copyright">
-					© @DateTime.UtcNow.Year ОМСКИЙ АВИАЦИОННЫЙ КОЛЛЕДЖ
-				</div>
+			<div class="footer-bottom-row">
+				<ul class="footer-bottom-pages">
+					<li>
+						<a asp-page="/timetable/Classes">
+							расписание
+						</a>
+					</li>
+					<li>
+						<a asp-page="/parents/AcademicProgress">
+							родителям
+						</a>
+					</li>
+					<li>
+						<a asp-page="/students/AlumniEmploymentCenterOmaviat">
+							студентам
+						</a>
+					</li>
+					<li>
+						<a asp-page="/organizationInformation/CommonIntelligence">
+							колледж
+						</a>
+					</li>
+					<li>
+						<a href="https://help.oat.ru/">
+							техподдержка
+						</a>
+					</li>
+					<li>
+						<a asp-page="/applicant/SelectionCommittee">
+							абитуриентам
+						</a>
+					</li>
+					<li>
+						<a asp-page="/feedback/Contacts">
+							контакты
+						</a>
+					</li>
+					<li>
+						<a href="https://elo.oat.ru/">
+							лицей
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="created-by">
+				Сделано с 🤍
+				<br>
+				при поддержке <a target="_blank" href="https://vk.com/taigoofficial">Taigo</a>
+			</div>
+			<div class="copyright">
+				© @DateTime.UtcNow.Year ОМСКИЙ АВИАЦИОННЫЙ КОЛЛЕДЖ
 			</div>
 		</div>
-	</footer>
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
-	@await RenderSectionAsync("Scripts", required: false)
+	</div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

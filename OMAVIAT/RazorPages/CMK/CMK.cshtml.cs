@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.CMK
-{
-	public class CMKModel : PageModel
-	{
+namespace OMAVIAT.Pages.CMK {
+	public class CMKModel : PageModel {
 		private readonly ILogger<CMKModel> _logger;
 
 		public CMKModel(ILogger<CMKModel> logger)

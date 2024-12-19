@@ -5,7 +5,7 @@
 
 @model OMAVIAT.Pages.timetable.TeachersModel
 @{
-    ViewData["Title"] = "Расписание по кабинетам";
+	ViewData["Title"] = "Расписание по кабинетам";
 
 }
 
@@ -13,39 +13,39 @@
 <link rel="stylesheet" href="~/css/timetable/groups.css" asp-append-version="true">
 <section class="centered">
 
-    <h2 class="section-title title-centered">
-        Кабинеты
-    </h2>
-    <table class="customized timetable groups">
-        <thead>
-            <tr>
-                <th>
-                    №
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                if (!Enum.TryParse<Building>(Model.building, true, out var result))
-                    return;
-                var corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
-                if (corpus is null)
-                    return;
+	<h2 class="section-title title-centered">
+		Кабинеты
+	</h2>
+	<table class="customized timetable groups">
+		<thead>
+		<tr>
+			<th>
+				№
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		@{
+			if (!Enum.TryParse<Building>(Model.building, true, out var result))
+				return;
+			var corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
+			if (corpus is null)
+				return;
 
-            }
-            @foreach (var cabinet in corpus.cabinets.OrderBy(e => e.name))
-            {
-                if (string.IsNullOrWhiteSpace(cabinet.name))
-                    continue;
-                <tr>
-                    <td>
-                        <a href="/timetable/CabinetSchedule/@Model.building/@cabinet.name">@cabinet.name</a>
-                    </td>
-                </tr>
-            }
+		}
+		@foreach (var cabinet in corpus.cabinets.OrderBy(e => e.name))
+		{
+			if (string.IsNullOrWhiteSpace(cabinet.name))
+				continue;
+			<tr>
+				<td>
+					<a href="/timetable/CabinetSchedule/@Model.building/@cabinet.name">@cabinet.name</a>
+				</td>
+			</tr>
+		}
 
-        </tbody>
+		</tbody>
 
-    </table>
+	</table>
 
 </section>

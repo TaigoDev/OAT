@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>@ViewData["Title"]</title>
 
@@ -11,98 +11,98 @@
 
 </head>
 <body>
-	<header class="panel-header">
-		<ul class="panel-tabs">
-			<li>
-				<a asp-page="/admin/news">
+<header class="panel-header">
+	<ul class="panel-tabs">
+		<li>
+			<a asp-page="/admin/news">
 					<span>
 						News
 					</span>
-					<img class="icon" src="~/images/panel/news.svg" alt="">
-				</a>
-			</li>			
-			<li>
-				<a asp-page="/admin/cmk">
+				<img class="icon" src="~/images/panel/news.svg" alt="">
+			</a>
+		</li>
+		<li>
+			<a asp-page="/admin/cmk">
 					<span>
 						CMK
 					</span>
-					<img class="icon" src="~/images/panel/cmk.svg" alt="">
-				</a>
-			</li>
-			
-			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Role.www_admin))
-			{
-				<li>
-					<a asp-page="/admin/MySQL">
+				<img class="icon" src="~/images/panel/cmk.svg" alt="">
+			</a>
+		</li>
+
+		@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Role.www_admin))
+		{
+			<li>
+				<a asp-page="/admin/MySQL">
 					<span>
 						Mysql
 					</span>
 					<img class="icon" src="~/images/panel/mysql.svg" alt="">
 				</a>
 			</li>
-			}
+		}
 
-			@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Role.www_admin, Role.www_manager_files_sessions_ALL, Role.www_manager_changes_ALL, Role.www_manager_files_practice_ALL))
-			{
-				<li>
-					<a asp-page ="/admin/files">
+		@if (User != null && User.Identity!.IsAuthenticated && User.IsRole(Role.www_admin, Role.www_manager_files_sessions_ALL, Role.www_manager_changes_ALL, Role.www_manager_files_practice_ALL))
+		{
+			<li>
+				<a asp-page="/admin/files">
 						<span>
 							Files
 						</span>
-						<img class="icon" src="~/images/panel/timetable.svg" alt="">
-					</a>
-				</li>
-			}
+					<img class="icon" src="~/images/panel/timetable.svg" alt="">
+				</a>
+			</li>
+		}
 
 
-			<li>
-				<a href="/">
+		<li>
+			<a href="/">
 					<span>
 						Site
 					</span>
-					<img class="icon" src="~/images/panel/site.svg" alt="">
-				</a>
-			</li>
-			<li>
-				<a href="/api/logout">
+				<img class="icon" src="~/images/panel/site.svg" alt="">
+			</a>
+		</li>
+		<li>
+			<a href="/api/logout">
 					<span>
 						Exit
 					</span>
-					<img class="icon" src="~/images/panel/exitBlack.svg" alt="">
-				</a>
-			</li>
-		</ul>
-	</header>
-	<main class="site-main" role="main">
-		@RenderBody()
-		<section class="container">
-			@if (User is not null && User.Identity!.IsAuthenticated)
-			{
-				<div class="current-user-info">
-					<img class="current-user-info-head" src="~/images/panel/currentUser.svg">
-					<div class="current-user-info-body">
-						<p class="current-user-info-name"><b>Имя:</b> @User.GetUsername()</p>
-						<p class="current-user-info-ip"><b>IP:</b> @Context.UserIP()</p>
-					</div>
+				<img class="icon" src="~/images/panel/exitBlack.svg" alt="">
+			</a>
+		</li>
+	</ul>
+</header>
+<main class="site-main" role="main">
+	@RenderBody()
+	<section class="container">
+		@if (User is not null && User.Identity!.IsAuthenticated)
+		{
+			<div class="current-user-info">
+				<img class="current-user-info-head" src="~/images/panel/currentUser.svg">
+				<div class="current-user-info-body">
+					<p class="current-user-info-name"><b>Имя:</b> @User.GetUsername()</p>
+					<p class="current-user-info-ip"><b>IP:</b> @Context.UserIP()</p>
 				</div>
-			}
-		</section>
-	</main>
+			</div>
+		}
+	</section>
+</main>
 
-    <base href="~/" />
-    <script src="~/_framework/blazor.server.js" autostart="false"></script>
-    <script>
-        (function start() {
-            Blazor.start({
-                configureSignalR: builder => builder.withUrl('_blazor', 1 | 4) // WebSockets and Long Polling
-            });
-        })()
-    </script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
+<base href="~/"/>
+<script src="~/_framework/blazor.server.js" autostart="false"></script>
+<script>
+	(function start() {
+		Blazor.start({
+			configureSignalR: builder => builder.withUrl('_blazor', 1 | 4) // WebSockets and Long Polling
+		});
+	})()
+</script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
 
-	@await RenderSectionAsync("Scripts", required: false)
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

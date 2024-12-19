@@ -7,7 +7,7 @@
 	formData.append("password", password);
 
 	POSTWithjqXHR("/api/login", formData, (response) => {
-		window.location = "/admin/panel";
+			window.location = "/admin/panel";
 		},
 		(jqXHR) => {
 			console.log(`Your error code: ${jqXHR.status}`);

@@ -1,9 +1,7 @@
 ﻿using static OMAVIAT.Controllers.Evalutions.EvaluationsReader;
 
-namespace OMAVIAT.Entities.Journal
-{
-	public class Student
-	{
+namespace OMAVIAT.Entities.Journal {
+	public class Student {
 		public string FullName { get; set; }
 		public List<Discipline> Disciplines = new List<Discipline>();
 

@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Controllers.App
-{
-	public class DirectoriesConfigurator
-	{
+﻿namespace OMAVIAT.Controllers.App {
+	public class DirectoriesConfigurator {
 		public static Task Create()
 		{
 			Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "news"));

@@ -1,4 +1,4 @@
-﻿.another-list{
+﻿.another-list {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 50px;
@@ -6,7 +6,7 @@
 }
 
 .another-list-item {
-	position: relative;	
+	position: relative;
 	display: grid;
 	background-size: 500%;
 	place-items: center;
@@ -24,8 +24,8 @@
 	transition: 150ms ease;
 }
 
-@keyframes another-play{
-	from{
+@keyframes another-play {
+	from {
 		background-position: 0;
 	}
 	to {

@@ -4,11 +4,9 @@ using OMAVIAT.Entities.Schedule;
 using OMAVIAT.Schedule.Entities.Enums;
 using OMAVIAT.Schedule.Services.MainSchedule;
 
-namespace OMAVIAT.Pages.timetable
-{
+namespace OMAVIAT.Pages.timetable {
 	[NoCache]
-	public class TeacherScheduleModel : PageModel
-	{
+	public class TeacherScheduleModel : PageModel {
 
 		public Entities.Schedule.Schedule? teacher;
 		public CorpusSchedule? corpus;
@@ -24,13 +22,13 @@ namespace OMAVIAT.Pages.timetable
 			corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
 			if (corpus == null)
 				return;
-			teacher = ScheduleReader.teachers.FirstOrDefault(e => e.name.ToSearchView() == fullname.ToSearchView() && e.Corpus == (Corpus) result - 1);
+			teacher = ScheduleReader.teachers.FirstOrDefault(e => e.name.ToSearchView() == fullname.ToSearchView() && e.Corpus == (Corpus)result - 1);
 		}
 
 		public List<ScheduleLesson?> GetAllLessonsByNumber(int id, ScheduleWeek week)
 		{
 			var lessons = new List<ScheduleLesson?>();
-			for(var i = 1; i <= 6; i++)
+			for (var i = 1; i <= 6; i++)
 				lessons.Add(null);
 			foreach (var day in week.Days.OrderBy(e => e.Type))
 			{
@@ -44,11 +42,11 @@ namespace OMAVIAT.Pages.timetable
 					{
 						var less = lesson.FirstOrDefault();
 						var raz = lesson.LastOrDefault();
-						if(less is null || raz is null) continue;
+						if (less is null || raz is null) continue;
 						var combine = new ScheduleLesson()
 						{
 							Id = less.Id,
-							Cabinet =  $"{less.Cabinet}/{raz.Cabinet}",
+							Cabinet = $"{less.Cabinet}/{raz.Cabinet}",
 							subGroupId = less.subGroupId,
 							FullName = less.FullName,
 							Teacher = less.Teacher,
@@ -61,7 +59,7 @@ namespace OMAVIAT.Pages.timetable
 					}
 					default:
 					{
-						if(lesson.Count != 0)
+						if (lesson.Count != 0)
 						{
 							lessons[day.Type - 1] = lesson.First();
 						}

@@ -57,11 +57,9 @@ function SendNews() {
 			if (jqXHR.status == 401 || jqXHR.status == 405) {
 				SendMessage("message-fail-auth");
 				window.location = "/api/logout";
-			}
-			else if (jqXHR.status == 406 || jqXHR.status == 403) {
+			} else if (jqXHR.status == 406 || jqXHR.status == 403) {
 				SendMessage("message-fail-perms");
-			}
-			else
+			} else
 				SendMessage("message-fail");
 		}
 	});
@@ -94,6 +92,7 @@ function DeleteNews(id) {
 		}
 	});
 }
+
 function SendMessage(tag) {
 	var element = document.getElementById(tag);
 	element.classList.add("panel-message-active");
@@ -128,15 +127,14 @@ function UploadProfNews() {
 			if (jqXHR.status == 401 || jqXHR.status == 405) {
 				SendMessage("message-fail-auth");
 				window.location = "/api/logout";
-			}
-			else if (jqXHR.status == 406 || jqXHR.status == 403) {
+			} else if (jqXHR.status == 406 || jqXHR.status == 403) {
 				SendMessage("message-fail-perms");
-			}
-			else
+			} else
 				SendMessage("message-fail");
 		}
 	});
 }
+
 function DeleteProfNews(id) {
 	var url = "/api/prof/news/" + id + "/delete";
 	$.ajax({

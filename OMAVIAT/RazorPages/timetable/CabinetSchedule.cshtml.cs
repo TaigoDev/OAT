@@ -4,11 +4,9 @@ using OMAVIAT.Entities.Schedule;
 using OMAVIAT.Schedule.Services.MainSchedule;
 using OMAVIAT.Services.Schedule.MainSchedule;
 
-namespace OMAVIAT.RazorPages.timetable
-{
+namespace OMAVIAT.RazorPages.timetable {
 	[NoCache]
-	public class CabinetScheduleModel : PageModel
-	{
+	public class CabinetScheduleModel : PageModel {
 		public Entities.Schedule.Schedule? cabinet;
 		public CorpusSchedule? corpus;
 		public string? cabinet_text;
@@ -29,7 +27,7 @@ namespace OMAVIAT.RazorPages.timetable
 		public List<ScheduleLesson?> GetAllLessonsByNumber(int id, ScheduleWeek week)
 		{
 			var lessons = new List<ScheduleLesson?>();
-			for(var i = 1; i <= 6; i++)
+			for (var i = 1; i <= 6; i++)
 				lessons.Add(null);
 			foreach (var day in week.Days.OrderBy(e => e.Type))
 			{
@@ -43,11 +41,11 @@ namespace OMAVIAT.RazorPages.timetable
 					{
 						var less = lesson.FirstOrDefault();
 						var raz = lesson.LastOrDefault();
-						if(less is null || raz is null) continue;
+						if (less is null || raz is null) continue;
 						var combine = new ScheduleLesson()
 						{
 							Id = less.Id,
-							Cabinet =  $"{less.Cabinet}/{raz.Cabinet}",
+							Cabinet = $"{less.Cabinet}/{raz.Cabinet}",
 							subGroupId = less.subGroupId,
 							FullName = less.FullName,
 							Teacher = less.Teacher,
@@ -60,7 +58,7 @@ namespace OMAVIAT.RazorPages.timetable
 					}
 					default:
 					{
-						if(lesson.Count != 0)
+						if (lesson.Count != 0)
 						{
 							lessons[day.Type - 1] = lesson.First();
 						}

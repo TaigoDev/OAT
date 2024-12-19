@@ -1,5 +1,4 @@
-﻿
-function StartAnim() {
+﻿function StartAnim() {
 	var element = document.getElementById("ring");
 	element.classList.remove("hide");
 }

@@ -6,10 +6,8 @@ using OMAVIAT.Services.Payments;
 using OMAVIAT.Utilities;
 using System.Text;
 
-namespace OMAVIAT.Pages.feedback
-{
-	public class PrintModel : PageModel
-	{
+namespace OMAVIAT.Pages.feedback {
+	public class PrintModel : PageModel {
 		private readonly ILogger<PrintModel> _logger;
 
 		public PrintModel(ILogger<PrintModel> logger)
@@ -33,13 +31,13 @@ namespace OMAVIAT.Pages.feedback
 				M_FullName = FullName;
 				M_summa = summa;
 				var qrData = $"ST00012|Name=Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)|PersonalAcc=03224643520000005201|BankName=Отделение Омск Банка России//УФК по Омской области г. Омск|BIC=015209001|CorrespAcc=0|PayeeINN=5504000055|KPP=550401001|" +
-					$"Purpose={M_Purpose}|Sum={summa * 100}|CBC=01000000000000000130|OKTMO=52701000";
+				             $"Purpose={M_Purpose}|Sum={summa * 100}|CBC=01000000000000000130|OKTMO=52701000";
 				var qr = QrCode.EncodeText(qrData, QrCode.Ecc.Medium);
 
 				var pathIzv = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
-					$"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
+				$"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 				var pathQvit = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
-					$"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
+				$"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 
 				System.IO.File.WriteAllText(pathIzv, qr.ToSvgString(4), Encoding.UTF8);
 				System.IO.File.WriteAllText(pathQvit, qr.ToSvgString(4), Encoding.UTF8);
@@ -51,11 +49,11 @@ namespace OMAVIAT.Pages.feedback
 			{
 				var contract = new Contract();
 				if (!ContractReader.GetContract(e =>
-				e.documentId.ToSearchView() == documentId.ToSearchView() &&
-				e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
-				e.studentFullName.ToSearchView() == studentFullName.ToSearchView() &&
-				e.Group.ToSearchView() == group.ToSearchView() &&
-				e.FullName.ToSearchView() == FullName.ToSearchView(), out contract))
+					    e.documentId.ToSearchView() == documentId.ToSearchView() &&
+					    e.documentDate.ToSearchView() == documentDate.ToSearchView() &&
+					    e.studentFullName.ToSearchView() == studentFullName.ToSearchView() &&
+					    e.Group.ToSearchView() == group.ToSearchView() &&
+					    e.FullName.ToSearchView() == FullName.ToSearchView(), out contract))
 					return;
 
 
@@ -64,15 +62,15 @@ namespace OMAVIAT.Pages.feedback
 				M_summa = summa;
 
 				var qrData = $"ST00012|Name=Министерство финансов Омской области (БПОУ «Омавиат» л/с 010220608)|PersonalAcc=03224643520000005201|BankName=Отделение Омск Банка России//УФК по Омской области г. Омск|BIC=015209001|CorrespAcc=0|PayeeINN=5504000055|KPP=550401001|" +
-					$"Purpose={M_Purpose}|Contract={contract.documentId.Replace(" ", "")}|ChildFio={contract.studentFullName}|Sum={summa}|" +
-					$"CBC=01000000000000000130|OKTMO=52701000|CATEGORY=1";
+				             $"Purpose={M_Purpose}|Contract={contract.documentId.Replace(" ", "")}|ChildFio={contract.studentFullName}|Sum={summa}|" +
+				             $"CBC=01000000000000000130|OKTMO=52701000|CATEGORY=1";
 
 				var qr = QrCode.EncodeText(qrData, QrCode.Ecc.Medium);
 
 				var pathIzv = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
-					$"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
+				$"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 				var pathQvit = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "pay",
-					$"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
+				$"{StringUtils.SHA226($"{new Random().Next(1000)}-{documentId}-{group}")}.svg");
 
 				System.IO.File.WriteAllText(pathIzv, qr.ToSvgString(4), Encoding.UTF8);
 				System.IO.File.WriteAllText(pathQvit, qr.ToSvgString(4), Encoding.UTF8);

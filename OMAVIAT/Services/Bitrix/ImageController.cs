@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.StaticFiles;
 using OMAVIAT.Utilities;
 using System.Net;
 
-namespace OMAVIAT.Controllers.Bitrix.Controllers
-{
-	public class ImageController : Controller
-	{
+namespace OMAVIAT.Controllers.Bitrix.Controllers {
+	public class ImageController : Controller {
 		[HttpGet, Route("proxing/images/bitrix")]
 		public async Task<IActionResult> getImage([FromQuery] string url)
 		{
@@ -39,14 +37,16 @@ namespace OMAVIAT.Controllers.Bitrix.Controllers
 		private async Task<Stream> ImageStream(string url)
 		{
 			var cookieContainer = new CookieContainer();
-			using var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
+			using var handler = new HttpClientHandler()
+			{
+				CookieContainer = cookieContainer
+			};
 			using var client = new HttpClient(handler);
 			cookieContainer.Add(new Cookie("BX_USER_ID", "c47a549e60a356564f7ae3aff2f365e9", "/", "www.oat.ru"));
 			return await client.GetStreamAsync(url);
 		}
 
-		private void SaveImage(string filePath, string url) => new Task(async () =>
-		{
+		private void SaveImage(string filePath, string url) => new Task(async () => {
 			using var client = new HttpClient();
 			try
 			{

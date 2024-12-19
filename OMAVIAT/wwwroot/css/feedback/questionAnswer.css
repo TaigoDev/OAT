@@ -1,10 +1,10 @@
-﻿.questions{
+﻿.questions {
 	display: flex;
 	flex-direction: column;
 	row-gap: 20px;
 }
 
-.basic-data{
+.basic-data {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 15px;
@@ -30,13 +30,13 @@
 	margin: 0 auto;
 }
 
-@media (width<500px){
+@media (width < 500px) {
 	.basic-data {
 		grid-template-columns: 1fr;
 	}
 }
 
-@media (width<450px) {
+@media (width < 450px) {
 	.captcha-container {
 		grid-template-columns: 1fr;
 	}
@@ -49,7 +49,7 @@
 	font-size: 0.8rem;
 }
 
-.validation-summary-errors ul{
+.validation-summary-errors ul {
 	list-style: decimal;
 	padding-left: 15px;
 }

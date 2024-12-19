@@ -46,8 +46,7 @@ window.addEventListener("load", () => {
 		accordionsList[i].querySelector(".accordion-head").addEventListener("click", () => {
 			if (accordionsList[i].classList.contains("open")) {
 				accordionsList[i].classList.remove("open");
-			}
-			else {
+			} else {
 				accordionsList[i].classList.add("open");
 				for (let j = 0; j < accordionsList.length; j++) {
 					if (j != i) {
@@ -79,7 +78,7 @@ window.addEventListener("load", () => {
 		let countOfImages = slider.querySelectorAll("img").length;
 		let currentImg = 0;
 		console.log(countOfImages);
-		if (countOfImages==1) {
+		if (countOfImages == 1) {
 			sliderContainerNext.classList.add("images-list-slider-container-btn-inactive");
 		}
 

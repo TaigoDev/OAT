@@ -17,20 +17,21 @@
 
 	<table class="customized panel-table">
 		<thead>
-			<tr>
-				<th>
-					Имя
-				</th>
-				<th>
-					Управление
-				</th>
-			</tr>
+		<tr>
+			<th>
+				Имя
+			</th>
+			<th>
+				Управление
+			</th>
+		</tr>
 		</thead>
 		<tbody>
-			@people
+		@people
 		</tbody>
 	</table>
 </div>
+
 @code {
 	[Parameter] public string? CMK { get; set; }
 	private string? FullName { get; set; }
@@ -42,8 +43,7 @@
 		var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
 		if (cmk is null)
 			return;
-		people = (__builder) =>
-		{
+		people = (__builder) => {
 			foreach (var p in cmk.compositions)
 			{
 				<tr>
@@ -88,6 +88,6 @@
 
 	private async Task Log(string message)
 	{
-        await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
+		await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
 	}
 }

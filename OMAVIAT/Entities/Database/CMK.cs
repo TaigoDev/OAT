@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OMAVIAT.Entities.Database
-{
-	public class CMK
-	{
+namespace OMAVIAT.Entities.Database {
+	public class CMK {
 		public CMK()
 		{
 		}

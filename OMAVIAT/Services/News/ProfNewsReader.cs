@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OMAVIAT.Entities.Database;
 
-namespace OMAVIAT.Services.News
-{
-	public class ProfNewsReader
-	{
+namespace OMAVIAT.Services.News {
+	public class ProfNewsReader {
 		public static List<ProfNews> news = [];
 		public static IEnumerable<IEnumerable<ProfNews>> pages = [];
 

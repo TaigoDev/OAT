@@ -19,225 +19,221 @@
 
 @code {
 
-    private DotNetObjectReference<ChangesComponent>? objRef;
+	private DotNetObjectReference<ChangesComponent>? objRef;
 
-    [Parameter]
-    public string? search { get; set; }
+	[Parameter]
+	public string? search { get; set; }
 
-    [Parameter]
-    public Corpus corpus { get; set; }
+	[Parameter]
+	public Corpus corpus { get; set; }
 
-    [Parameter]
-    public DateOnly date { get; set; }
+	[Parameter]
+	public DateOnly date { get; set; }
 
-    public static List<ChangesTable> rows = new();
-    private RenderFragment renderFragment = (__builder) =>
-    {
-        <h3 class="section-title title-centered" style="font-size: 1.4rem;">
-            Пожалуйста, подождите. Идет проверка вашего устройства
-        </h3>
-    };
+	public static List<ChangesTable> rows = new();
 
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            objRef = DotNetObjectReference.Create(this);
-            await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper",
-                    objRef);
+	private RenderFragment renderFragment = (__builder) => {
+		<h3 class="section-title title-centered" style="font-size: 1.4rem;">
+			Пожалуйста, подождите. Идет проверка вашего устройства
+		</h3>
+	};
 
-            await using var db = new DatabaseContext();
-            var changes = await db.changes.Where(e => e.corpus == corpus && e.date == date).ToListAsync();
-            if (search is not null)
-                rows = changes.Where(e =>
-                    ToSearch(e.group ?? "").Contains(ToSearch(search)) ||
-                    ToSearch(e.teacher ?? "").Contains(ToSearch(search)) ||
-                    ToSearch(e.was_teacher ?? "").Contains(ToSearch(search))).ToList();
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			objRef = DotNetObjectReference.Create(this);
+			await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper",
+			objRef);
 
-            string ToSearch(string? s)
-            {
-	            return s is null ? "" : s.ToLower().Replace(" ", "");
-            }
+			await using var db = new DatabaseContext();
+			var changes = await db.changes.Where(e => e.corpus == corpus && e.date == date).ToListAsync();
+			if (search is not null)
+				rows = changes.Where(e =>
+					ToSearch(e.group ?? "").Contains(ToSearch(search)) ||
+					ToSearch(e.teacher ?? "").Contains(ToSearch(search)) ||
+					ToSearch(e.was_teacher ?? "").Contains(ToSearch(search))).ToList();
 
-            if (httpContextAccessor.HttpContext is not null && string.IsNullOrWhiteSpace(httpContextAccessor.HttpContext.Request.Headers["CF-Connecting-IP"]))
-            {
-                OnRowDisplay();
-                this.StateHasChanged();
-                return;
-            }
+			string ToSearch(string? s)
+			{
+				return s is null ? "" : s.ToLower().Replace(" ", "");
+			}
+
+			if (httpContextAccessor.HttpContext is not null && string.IsNullOrWhiteSpace(httpContextAccessor.HttpContext.Request.Headers["CF-Connecting-IP"]))
+			{
+				OnRowDisplay();
+				this.StateHasChanged();
+				return;
+			}
 
 			await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper", objRef);
 
-             renderFragment = (__builder) =>
-             {
-	             <h3 class="section-title title-centered" style="font-size: 1.4rem;">
-		             Пройдите проверку на робота.
-	             </h3>
-	             <div
-		             id="captcha-container"
-		             class="smart-captcha"
-		             data-sitekey="@Configurator.SmartCaptcha.WebSecretKey"
-	             ></div>
-             };
-            this.StateHasChanged();
-            await JSRuntime.InvokeVoidAsync("loadScript", "https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=onloadFunction");
-        }
-        catch (Exception ex)
-        {
-            renderFragment = (__builder) =>
-            {
-                <h3 class="section-title title-centered" style="font-size: 1.4rem;">
-                    Произошла техническая ошибка! Сообщите разработчикам сайта через службу информатизации
-                </h3>
-            };
+			renderFragment = (__builder) => {
+				<h3 class="section-title title-centered" style="font-size: 1.4rem;">
+					Пройдите проверку на робота.
+				</h3>
+				<div
+					id="captcha-container"
+					class="smart-captcha"
+					data-sitekey="@Configurator.SmartCaptcha.WebSecretKey"
+				></div>
+			};
+			this.StateHasChanged();
+			await JSRuntime.InvokeVoidAsync("loadScript", "https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=onloadFunction");
+		}
+		catch (Exception ex)
+		{
+			renderFragment = (__builder) => {
+				<h3 class="section-title title-centered" style="font-size: 1.4rem;">
+					Произошла техническая ошибка! Сообщите разработчикам сайта через службу информатизации
+				</h3>
+			};
 
-        }
-    }
+		}
+	}
 
 
 
 
-    [JSInvokable]
-    public async Task OnComplete(string token)
-    {
-        if (await ValidateToken(token))
-        {
-            OnRowDisplay();
-            this.StateHasChanged();
-            return;
-        }
+	[JSInvokable]
+	public async Task OnComplete(string token)
+	{
+		if (await ValidateToken(token))
+		{
+			OnRowDisplay();
+			this.StateHasChanged();
+			return;
+		}
 
-        renderFragment = (__builder) =>
-        {
-            <h3 class="section-title title-centered" style="font-size: 1.4rem;">
-                Произошла техническая ошибка. Попробуйте позже.
-            </h3>
-        };
-        this.StateHasChanged();
-    }
+		renderFragment = (__builder) => {
+			<h3 class="section-title title-centered" style="font-size: 1.4rem;">
+				Произошла техническая ошибка. Попробуйте позже.
+			</h3>
+		};
+		this.StateHasChanged();
+	}
 
-    private static async Task<bool> ValidateToken(string token)
-    {
-	    try
-	    {
-		    var proxy = new WebProxy
-		    {
-			    Address = new Uri($"http://10.0.55.52:3128"),
-			    BypassProxyOnLocal = false,
-			    UseDefaultCredentials = false,
-		    };
+	private static async Task<bool> ValidateToken(string token)
+	{
+		try
+		{
+			var proxy = new WebProxy
+			{
+				Address = new Uri($"http://10.0.55.52:3128"),
+				BypassProxyOnLocal = false,
+				UseDefaultCredentials = false,
+			};
 
-		    var httpClientHandler = new HttpClientHandler
-		    {
-			    Proxy = proxy,
-			    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-		    };
+			var httpClientHandler = new HttpClientHandler
+			{
+				Proxy = proxy,
+				ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+			};
 
-		    using var httpClient = OperatingSystem.IsWindows() ? new HttpClient() : new HttpClient(httpClientHandler);
-		    var response = await httpClient.PostAsync(
-			    $"https://smartcaptcha.yandexcloud.net/validate?secret={Configurator.SmartCaptcha.CodeSecretKey}&token={token}", null);
-		    var content = await response.Content.ReadAsStringAsync();
-		    var parsed = JObject.Parse(content);
-		    return parsed["status"]?.Value<string>() == "ok";
-	    }
-	    catch (Exception e)
-	    {
+			using var httpClient = OperatingSystem.IsWindows() ? new HttpClient() : new HttpClient(httpClientHandler);
+			var response = await httpClient.PostAsync(
+			$"https://smartcaptcha.yandexcloud.net/validate?secret={Configurator.SmartCaptcha.CodeSecretKey}&token={token}", null);
+			var content = await response.Content.ReadAsStringAsync();
+			var parsed = JObject.Parse(content);
+			return parsed["status"]?.Value<string>() == "ok";
+		}
+		catch (Exception e)
+		{
 			Logger.Error(e);
-	    }
+		}
 
-	    return false;
-    }
+		return false;
+	}
 
-    private void OnRowDisplay()
-    {
-        renderFragment = (__builder) =>
-        {
-            <table class="customized timetable">
-                <thead>
-                    <tr>
-                        <th>
-                            Курс
-                        </th>
-                        <th>
-                            Группа
-                        </th>
-                        <th>
-                            Пара
-                        </th>
-                        <th>
-                            Аудит
-                        </th>
-                        <th>
-                            Учеб.дисциплина
-                        </th>
-                        <th>
-                            ФИО преподавателя
-                        </th>
-                        <th>
-                            причина
-                        </th>
-                        <th>
-                            пара
-                        </th>
-                        <th>
-                            Аудит
-                        </th>
-                        <th>
-                            Учеб.дисциплина
-                        </th>
-                        <th>
-                            ФИО преподавателя
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var change in rows)
-                    {
+	private void OnRowDisplay()
+	{
+		renderFragment = (__builder) => {
+			<table class="customized timetable">
+				<thead>
+				<tr>
+					<th>
+						Курс
+					</th>
+					<th>
+						Группа
+					</th>
+					<th>
+						Пара
+					</th>
+					<th>
+						Аудит
+					</th>
+					<th>
+						Учеб.дисциплина
+					</th>
+					<th>
+						ФИО преподавателя
+					</th>
+					<th>
+						причина
+					</th>
+					<th>
+						пара
+					</th>
+					<th>
+						Аудит
+					</th>
+					<th>
+						Учеб.дисциплина
+					</th>
+					<th>
+						ФИО преподавателя
+					</th>
+				</tr>
+				</thead>
+				<tbody>
+				@foreach (var change in rows)
+				{
 
-                        <tr>
-                            <td>
-                                @change.group.FirstDigit()
-                            </td>
-                            <td>
-                                @change.group
-                            </td>
-                            <td>
-                                @change.was_couple
-                            </td>
-                            <td>
-                                @change.was_cabinet
-                            </td>
-                            <td>
-                                @change.was_discipline
-                            </td>
-                            <td>
-                                @change.was_teacher
-                            </td>
-                            <td>
-                                @change.reason
-                            </td>
-                            <td>
-                                @change.couple
-                            </td>
-                            <td>
-                                @change.cabinet
-                            </td>
-                            <td>
-                                @change.discipline
-                            </td>
-                            <td>
-                                @change.teacher
-                            </td>
-                        </tr>
+					<tr>
+						<td>
+							@change.group.FirstDigit()
+						</td>
+						<td>
+							@change.group
+						</td>
+						<td>
+							@change.was_couple
+						</td>
+						<td>
+							@change.was_cabinet
+						</td>
+						<td>
+							@change.was_discipline
+						</td>
+						<td>
+							@change.was_teacher
+						</td>
+						<td>
+							@change.reason
+						</td>
+						<td>
+							@change.couple
+						</td>
+						<td>
+							@change.cabinet
+						</td>
+						<td>
+							@change.discipline
+						</td>
+						<td>
+							@change.teacher
+						</td>
+					</tr>
 
 
-                    }
-                </tbody>
-            </table>
+				}
+				</tbody>
+			</table>
 
-        };
-    }
+		};
+	}
 
-    public void Dispose() => objRef?.Dispose();
+	public void Dispose() => objRef?.Dispose();
 
 }

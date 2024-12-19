@@ -7,8 +7,7 @@ using OMAVIAT.Entities.Enums;
 using OMAVIAT.Utilities;
 using System.Security.Claims;
 
-public class ValidationFilterForPages : IAsyncPageFilter
-{
+public class ValidationFilterForPages : IAsyncPageFilter {
 	public async Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)
 	{
 		if (!context.RouteData.Values.Any(e => e.Value != null && e.Value.ToString()!.ToLower().Contains("admin") && !e.Value.ToString()!.ToLower().Contains("authorization")))

@@ -5,7 +5,7 @@
 	justify-content: center;
 }
 
-.workshops-list li{
+.workshops-list li {
 	width: min(100%, 350px);
 }
 
@@ -23,11 +23,11 @@
 	transition: 150ms ease;
 }
 
-.workshops-list-item:hover{
+.workshops-list-item:hover {
 	border-color: var(--m-d-color);
 	background: var(--m-l-color);
 }
 
-.workshops-list-item img{
+.workshops-list-item img {
 	width: 60px;
 }

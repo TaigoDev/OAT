@@ -10,8 +10,7 @@ using OMAVIAT.Entities.Enums;
 using OMAVIAT.Utilities;
 using System.Security.Claims;
 
-public class ValidationFilter : IAsyncActionFilter
-{
+public class ValidationFilter : IAsyncActionFilter {
 	public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
 	{
 		if (context.ActionDescriptor is not ControllerActionDescriptor controllerActionDescriptor)

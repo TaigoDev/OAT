@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation
-{
-	public class UPKModel : PageModel
-	{
+namespace OMAVIAT.Pages.organizationInformation {
+	public class UPKModel : PageModel {
 		private readonly ILogger<UPKModel> _logger;
 
 		public UPKModel(ILogger<UPKModel> logger)

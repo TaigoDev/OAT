@@ -24,25 +24,24 @@ await ScheduleLib.Init(TelegramBot.SendMessage, new OMAVIAT.Schedule.Entities.Da
 });
 
 Runs.StartModules(
+//Çàïóñêàåì ñåðâèñ ÒÃ
+TelegramBot.init,
+DownDetector.init,
 
-	   //Çàïóñêàåì ñåðâèñ ÒÃ
-	   TelegramBot.init,
-	   DownDetector.init,
+//Çàïóñêàåì áàçó äàííûõ 
+DatabaseHelper.WaitStableConnection,
+async () => await ScheduleLib.Start(false, false, false, false, false),
+//Íàñòðàèâàåì ïåðåàäðåñàöèþ ñ áèòðèêñà
+UrlsContoller.init,
 
-	   //Çàïóñêàåì áàçó äàííûõ 
-	   DatabaseHelper.WaitStableConnection,
-	   async () => await ScheduleLib.Start(false, false, false, false, false),
-	   //Íàñòðàèâàåì ïåðåàäðåñàöèþ ñ áèòðèêñà
-	   UrlsContoller.init,
+//Çàïóñêàåì íîâîñòè
+NewsReader.init,
+ProfNewsReader.init,
+DemoExamsNewsReader.init,
 
-	   //Çàïóñêàåì íîâîñòè
-	   NewsReader.init,
-	   ProfNewsReader.init,
-	   DemoExamsNewsReader.init,
-
-	   //Çàïóñêàåì äðóãèå ñëóæáû
-	   () => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),
-	   WorkersReader.Init
+//Çàïóñêàåì äðóãèå ñëóæáû
+() => RepeaterUtils.RepeatAsync(async () => await ContractReader.init(), 15),
+WorkersReader.Init
 );
 var builder = WebApplication.CreateBuilder(args);
 WebBuilderConfigurator.SetupServices(ref builder);
@@ -57,8 +56,7 @@ if (Configurator.config.bitrixProxy)
 	app.BitrixProxy();
 else
 {
-	app.Use(async (context, next) =>
-	{
+	app.Use(async (context, next) => {
 		await next();
 
 		if (context.Response.StatusCode == 404)

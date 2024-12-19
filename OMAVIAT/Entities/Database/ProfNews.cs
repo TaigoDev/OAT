@@ -2,11 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OMAVIAT.Entities.Database
-{
+namespace OMAVIAT.Entities.Database {
 
-	public class ProfNews : INews
-	{
+	public class ProfNews : INews {
 		public ProfNews(int id, string date, string title, string description, string short_description, string photos, bool IsFixed)
 		{
 			this.id = id;

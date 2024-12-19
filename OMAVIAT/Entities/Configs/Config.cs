@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Entities.Configs
-{
-	public class Config
-	{
+﻿namespace OMAVIAT.Entities.Configs {
+	public class Config {
 		public string BaseUrl { get; set; }
 		public string MainUrl { get; set; }
 		public int bind_port { get; set; }
@@ -16,6 +14,6 @@
 		public string ldap_password { get; set; }
 		public string ldap_domain { get; set; }
 		public string ldap_zone { get; set; }
-		public bool bitrixProxy { get; set; } 
+		public bool bitrixProxy { get; set; }
 	}
 }

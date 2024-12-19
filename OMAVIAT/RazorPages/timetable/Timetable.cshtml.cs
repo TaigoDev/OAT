@@ -3,11 +3,9 @@ using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule;
 using OMAVIAT.Schedule.Services.MainSchedule;
 
-namespace OMAVIAT.Pages.timetable
-{
+namespace OMAVIAT.Pages.timetable {
 	[NoCache]
-	public class TimetableModel : PageModel
-	{
+	public class TimetableModel : PageModel {
 		private readonly ILogger<TimetableModel> _logger;
 
 		public TimetableModel(ILogger<TimetableModel> logger)

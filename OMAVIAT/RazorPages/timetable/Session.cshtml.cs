@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Utilities;
 
-namespace OMAVIAT.Pages.timetable
-{
+namespace OMAVIAT.Pages.timetable {
 	[NoCache]
-	public class SessionModel : PageModel
-	{
+	public class SessionModel : PageModel {
 		private readonly ILogger<SessionModel> _logger;
 
 		public SessionModel(ILogger<SessionModel> logger)
@@ -25,7 +23,7 @@ namespace OMAVIAT.Pages.timetable
 				var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", $"b{i}");
 				var files = Directory.GetFiles(folder, "*.xlsx", SearchOption.TopDirectoryOnly).ToList();
 				GetList(i).AddRange(files.ConvertAll(e => new FileSession(StringUtils.ConvertHexToString(Path.GetFileNameWithoutExtension(e)),
-					$"api/sessions/b{i}/{Path.GetFileNameWithoutExtension(e)}/download")));
+				$"api/sessions/b{i}/{Path.GetFileNameWithoutExtension(e)}/download")));
 
 			}
 		}
@@ -42,8 +40,7 @@ namespace OMAVIAT.Pages.timetable
 			};
 		}
 
-		public class FileSession
-		{
+		public class FileSession {
 			public FileSession(string filename, string url)
 			{
 				Filename = filename;

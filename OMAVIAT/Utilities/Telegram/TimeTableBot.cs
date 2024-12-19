@@ -1,10 +1,8 @@
 ﻿using OMAVIAT.Schedule.Schedule.ScheduleChanges;
 using OMAVIAT.Services.Schedule.ScheduleChanges;
 
-namespace OMAVIAT.Utilities.Telegram
-{
-	public class TimeTableBot
-	{
+namespace OMAVIAT.Utilities.Telegram {
+	public class TimeTableBot {
 
 
 		public static async Task onChangesInSchedule(string building, string xlsx, bool IsNext = false)
@@ -16,10 +14,12 @@ namespace OMAVIAT.Utilities.Telegram
 				var client = new HttpClient();
 				client.Timeout = TimeSpan.FromMinutes(2);
 				using var request = new HttpRequestMessage(HttpMethod.Post,
-					$"{Configurator.timetable.url}/api/alerts/changes/schedule/{building}");
+				$"{Configurator.timetable.url}/api/alerts/changes/schedule/{building}");
 				using var content = new MultipartFormDataContent
 				{
-					{ new StringContent(Configurator.timetable.token), "token" },
+					{
+						new StringContent(Configurator.timetable.token), "token"
+					},
 				};
 
 				request.Content = content;
@@ -42,11 +42,15 @@ namespace OMAVIAT.Utilities.Telegram
 				client.Timeout = TimeSpan.FromMinutes(2);
 				await using var stream = File.OpenRead(xlsx);
 				using var request = new HttpRequestMessage(HttpMethod.Post,
-					$"{Configurator.timetable.url}/api/test/changes/{building}");
+				$"{Configurator.timetable.url}/api/test/changes/{building}");
 				using var content = new MultipartFormDataContent
 				{
-					{ new StringContent(Configurator.timetable.token), "token" },
-					{ new StringContent(filename), "filename" },
+					{
+						new StringContent(Configurator.timetable.token), "token"
+					},
+					{
+						new StringContent(filename), "filename"
+					},
 				};
 
 				request.Content = content;
@@ -75,11 +79,15 @@ namespace OMAVIAT.Utilities.Telegram
 				client.Timeout = TimeSpan.FromMinutes(2);
 				await using var stream = File.OpenRead(xlsx);
 				using var request = new HttpRequestMessage(HttpMethod.Post,
-					$"{Configurator.timetable.url}/api/test/practice/schedule/{building}");
+				$"{Configurator.timetable.url}/api/test/practice/schedule/{building}");
 				using var content = new MultipartFormDataContent
 				{
-					{ new StringContent(Configurator.timetable.token), "token" },
-					{ new StringContent(filename), "filename" },
+					{
+						new StringContent(Configurator.timetable.token), "token"
+					},
+					{
+						new StringContent(filename), "filename"
+					},
 				};
 
 				request.Content = content;
@@ -109,11 +117,15 @@ namespace OMAVIAT.Utilities.Telegram
 				var client = new HttpClient();
 				await using var stream = File.OpenRead(xml);
 				using var request = new HttpRequestMessage(HttpMethod.Post,
-					$"{Configurator.timetable.url}/api/alerts/schedule/{building}");
+				$"{Configurator.timetable.url}/api/alerts/schedule/{building}");
 				using var content = new MultipartFormDataContent
 				{
-					{ new StringContent(Configurator.timetable.token), "token" },
-					{ new StreamContent(stream), "file", $"{building}.xml" }
+					{
+						new StringContent(Configurator.timetable.token), "token"
+					},
+					{
+						new StreamContent(stream), "file", $"{building}.xml"
+					}
 				};
 
 				request.Content = content;

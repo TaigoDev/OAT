@@ -5,11 +5,9 @@ using OMAVIAT.Entities.Journal;
 using OMAVIAT.Utilities;
 using System.Globalization;
 
-namespace OMAVIAT.Pages.parents
-{
+namespace OMAVIAT.Pages.parents {
 	[NoCache]
-	public class GradesModel : PageModel
-	{
+	public class GradesModel : PageModel {
 		private readonly ILogger<GradesModel> _logger;
 
 		public GradesModel(ILogger<GradesModel> logger)
@@ -45,7 +43,10 @@ namespace OMAVIAT.Pages.parents
 			var groupName = Ldap.GetStudentGroup(username);
 
 			this.month = month ?? DateTime.Now.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
-			var blackList = new string[] { "август", "июль" };
+			var blackList = new string[]
+			{
+				"август", "июль"
+			};
 			if (groupName is not null)
 				Disciplines = !blackList.Contains(month) ? EvaluationsReader.Search(groupName, FullName, this.month).GetAwaiter().GetResult() : null;
 		}

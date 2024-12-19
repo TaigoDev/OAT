@@ -17,13 +17,13 @@
 	border-radius: var(--border-radius-xl);
 }
 
-@media(width<1200px){
-	.products{
+@media (width < 1200px) {
+	.products {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
-@media(width<600px){
+@media (width < 600px) {
 	.products {
 		grid-template-columns: minmax(250px, 300px);
 		gap: 30px;

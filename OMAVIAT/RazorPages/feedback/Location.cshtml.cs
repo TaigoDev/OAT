@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.feedback
-{
-	public class LocationModel : PageModel
-	{
+namespace OMAVIAT.Pages.feedback {
+	public class LocationModel : PageModel {
 		private readonly ILogger<LocationModel> _logger;
 
 		public LocationModel(ILogger<LocationModel> logger)

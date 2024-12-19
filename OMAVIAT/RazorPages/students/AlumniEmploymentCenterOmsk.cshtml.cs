@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.students
-{
-	public class AlumniEmploymentCenterOmskModel : PageModel
-	{
+namespace OMAVIAT.Pages.students {
+	public class AlumniEmploymentCenterOmskModel : PageModel {
 		private readonly ILogger<AlumniEmploymentCenterOmskModel> _logger;
 
 		public AlumniEmploymentCenterOmskModel(ILogger<AlumniEmploymentCenterOmskModel> logger)

@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Utilities
-{
-	public static class CookieUtils
-	{
+﻿namespace OMAVIAT.Utilities {
+	public static class CookieUtils {
 		public static void SetCookie(this HttpContext context, string key, string value)
 		{
 			CookieOptions cookie = new CookieOptions();

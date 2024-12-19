@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
 
-namespace OMAVIAT.Controllers.Security
-{
-	public class RawJsonBodyInputFormatter : InputFormatter
-	{
+namespace OMAVIAT.Controllers.Security {
+	public class RawJsonBodyInputFormatter : InputFormatter {
 		public RawJsonBodyInputFormatter()
 		{
 			SupportedMediaTypes.Add("application/json");
@@ -31,5 +29,3 @@ namespace OMAVIAT.Controllers.Security
 
 
 }
-
-

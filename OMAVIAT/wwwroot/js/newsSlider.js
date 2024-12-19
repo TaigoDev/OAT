@@ -15,8 +15,7 @@ window.addEventListener("load", () => {
 			slidePosition--;
 			newsSlider.style = `--news-offset: ${-100 * slidePosition}%; transform: translateX(calc(var(--news-offset) - var(--news-offset-helper) * ${slidePosition}));`;
 			sliderNext.classList.remove("inactive");
-		}
-		else {
+		} else {
 			sliderPrev.classList.add("inactive");
 		}
 	});

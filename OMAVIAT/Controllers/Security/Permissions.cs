@@ -1,13 +1,11 @@
 ﻿using System.Text;
 
-namespace OMAVIAT.Controllers.Security
-{
-	public class Permissions
-	{
+namespace OMAVIAT.Controllers.Security {
+	public class Permissions {
 
 		public static List<Role> GetUserRoles(string username)
 		{
-			if(Configurator.IsLocal)
+			if (Configurator.IsLocal)
 				return [Role.www_admin];
 			var results = Ldap.SearchByUsername(username);
 			var roles = new List<Role>();
@@ -31,7 +29,7 @@ namespace OMAVIAT.Controllers.Security
 
 		public static bool RightsToBuildingById(string username, string BuildingName)
 		{
-			if(Configurator.IsLocal)
+			if (Configurator.IsLocal)
 				return true;
 			var roles = GetUserRoles(username);
 			if (roles is null)

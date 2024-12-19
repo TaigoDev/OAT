@@ -2,7 +2,8 @@
 	<ul class="pagination">
 		@for (var i = 1; i <= Count; i++)
 		{
-			<PaginationItemComponent PageNumber="1" OnClick="async () => await OnClick.InvokeAsync(i)" Class='@(CurrentPage == i ? "active" : string.Empty)'/>
+			<PaginationItemComponent PageNumber="1" OnClick="async () => await OnClick.InvokeAsync(i)"
+			                         Class='@(CurrentPage == i ? "active" : string.Empty)'/>
 		}
 	</ul>
 </div>

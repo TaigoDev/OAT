@@ -1,14 +1,11 @@
 ﻿using OMAVIAT.Utilities.Telegram;
 using System.Net;
 
-namespace OMAVIAT.Utilities
-{
-	public class DownDetector
-	{
+namespace OMAVIAT.Utilities {
+	public class DownDetector {
 		public static Task init()
 		{
-			new Task(async () =>
-			{
+			new Task(async () => {
 				try
 				{
 					while (true)

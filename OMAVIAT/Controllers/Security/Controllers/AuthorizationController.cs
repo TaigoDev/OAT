@@ -8,10 +8,8 @@ using OMAVIAT.Entities.Enums;
 using OMAVIAT.Utilities;
 using System.Security.Claims;
 
-namespace OMAVIAT.Controllers.Security.Controllers
-{
-	public class AuthorizationController : Controller
-	{
+namespace OMAVIAT.Controllers.Security.Controllers {
+	public class AuthorizationController : Controller {
 		[HttpPost("api/login"), NoCache]
 		public async Task<IActionResult> Login(string username, string password)
 		{
@@ -57,7 +55,8 @@ namespace OMAVIAT.Controllers.Security.Controllers
 			}
 			await connection.AddAsync(new Tokens(username, Token, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"), JsonConvert.SerializeObject(roles, new Newtonsoft.Json.Converters.StringEnumConverter())));
 			await connection.SaveChangesAsync();
-			var claims = new List<Claim>() {
+			var claims = new List<Claim>()
+			{
 				new("username", username),
 				new("Token", Token),
 			};
@@ -67,11 +66,11 @@ namespace OMAVIAT.Controllers.Security.Controllers
 
 			var identity = new ClaimsIdentity(claims.ToArray(), CookieAuthenticationDefaults.AuthenticationScheme);
 			await HttpContext.SignInAsync(
-				CookieAuthenticationDefaults.AuthenticationScheme,
-				new ClaimsPrincipal(identity));
+			CookieAuthenticationDefaults.AuthenticationScheme,
+			new ClaimsPrincipal(identity));
 
 			Logger.Info($"Удачная попытка входа в аккаунт {username} управления. " +
-					$"IP-адрес: {HttpContext.UserIP()}");
+			            $"IP-адрес: {HttpContext.UserIP()}");
 			return Redirect($"/admin/panel");
 		}
 

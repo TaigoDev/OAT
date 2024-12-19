@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OMAVIAT.Entities.Database
-{
-	public class Documents(string name, string url)
-	{
+namespace OMAVIAT.Entities.Database {
+	public class Documents(string name, string url) {
 		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int id { get; set; }
 		public string name { get; set; } = name;

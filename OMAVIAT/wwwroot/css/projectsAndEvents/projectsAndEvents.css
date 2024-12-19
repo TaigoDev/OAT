@@ -24,6 +24,6 @@
 	transition: transform 500ms ease;
 }
 
-.projects-list img:hover{
+.projects-list img:hover {
 	transform: scale(1.15);
 }

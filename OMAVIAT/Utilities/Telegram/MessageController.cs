@@ -3,10 +3,8 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace OMAVIAT.Utilities.Telegram
-{
-	public static class MessageController
-	{
+namespace OMAVIAT.Utilities.Telegram {
+	public static class MessageController {
 
 
 		public static async Task EditMessageOrNewAsync(this ITelegramBotClient botClient,
@@ -31,8 +29,8 @@ namespace OMAVIAT.Utilities.Telegram
 				}
 
 			await botClient.SendTextMessageAsync(chatId, text, MessageThreadId, parseMode, entities,
-				disableWebPagePreview, disableNotification, ProtectContent, replyToMessageId, allowSendingWithoutReply,
-				replyMarkup, cancellationToken);
+			disableWebPagePreview, disableNotification, ProtectContent, replyToMessageId, allowSendingWithoutReply,
+			replyMarkup, cancellationToken);
 		}
 
 	}

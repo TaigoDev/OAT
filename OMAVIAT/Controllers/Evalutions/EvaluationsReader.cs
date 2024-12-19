@@ -4,10 +4,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace OMAVIAT.Controllers.Evalutions
-{
-	public class EvaluationsReader
-	{
+namespace OMAVIAT.Controllers.Evalutions {
+	public class EvaluationsReader {
 
 		public static async Task<Student?> Search(string group, string FullName, string month)
 		{
@@ -48,15 +46,14 @@ namespace OMAVIAT.Controllers.Evalutions
 			var letters = matches.First().Groups[1].Value;
 			var numbers = matches.First().Groups[2].Value.ToString().Remove(0, 1);
 
-			var files = Directory.GetFiles(folder, "*.xlsx").Where(e =>
-			{
+			var files = Directory.GetFiles(folder, "*.xlsx").Where(e => {
 				var info = new FileInfo(e).Name;
 				return info.Contains(letters) && GetGroupNumbers(info).Contains(numbers);
 			});
 
 			if (files.Count() >= 1)
 				return files.FirstOrDefault(e =>
-				new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
+					new FileInfo(e).Name.Replace(".xlsx", "").Length == group.Length) ?? "";
 
 			return "";
 		}
@@ -74,8 +71,7 @@ namespace OMAVIAT.Controllers.Evalutions
 		}
 
 
-		public class RawRecord
-		{
+		public class RawRecord {
 			[Column("Студент")]
 			public string FullName { get; set; }
 

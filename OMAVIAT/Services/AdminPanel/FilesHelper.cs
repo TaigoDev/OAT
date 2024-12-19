@@ -9,10 +9,8 @@ using OMAVIAT.Services.ScheduleLoggers;
 using OMAVIAT.Utilities;
 using OMAVIAT.Utilities.Telegram;
 
-namespace OMAVIAT.Services.AdminPanel
-{
-	public class FilesHelper
-	{
+namespace OMAVIAT.Services.AdminPanel {
+	public class FilesHelper {
 		public static async Task<TestResponseModel> ChangesSaveFile(Building? building, IBrowserFile file)
 		{
 			var filename = $"{Path.GetRandomFileName()}-changes.xlsx";
@@ -20,12 +18,13 @@ namespace OMAVIAT.Services.AdminPanel
 			await using FileStream fs = new(path, FileMode.Create);
 			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
 			await fs.DisposeAsync();
-			if (building is null) return new TestResponseModel()
-			{
-				Details = "Произошла ошибка. Обратитесь в службу информатизации",
-				IsUploaded = false,
-				IsSuccess = false,
-			};
+			if (building is null)
+				return new TestResponseModel()
+				{
+					Details = "Произошла ошибка. Обратитесь в службу информатизации",
+					IsUploaded = false,
+					IsSuccess = false,
+				};
 			return await ScheduleChangesTester.LoadAndTestAsync(path, (Corpus)((int)building - 1), new MyOATChangesLogger(), new TimeTableBotChangesLogger());
 		}
 
@@ -49,12 +48,13 @@ namespace OMAVIAT.Services.AdminPanel
 			await using FileStream fs = new(path, FileMode.Create);
 			await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100).CopyToAsync(fs);
 			await fs.DisposeAsync();
-			if (building is null) return new TestResponseModel()
-			{
-				Details = "Произошла ошибка. Обратитесь в службу информатизации",
-				IsUploaded = false,
-				IsSuccess = false,
-			};
+			if (building is null)
+				return new TestResponseModel()
+				{
+					Details = "Произошла ошибка. Обратитесь в службу информатизации",
+					IsUploaded = false,
+					IsSuccess = false,
+				};
 			return await MainScheduleTester.LoadAndTestAsync(path, (Corpus)((int)building - 1), new MyOATMainScheduleLogger(), new TimeTableBotMainScheduleLogger());
 		}
 

@@ -1,52 +1,53 @@
 ﻿<aside id="file-error" class="file-error active">
-    <button class="file-error-close" onclick="document.getElementById('file-error').classList.remove('active');">
-        <img class="icon" src="/images/panel/closeWindow.svg" alt="" />
-    </button>
-    <h3 class="file-error-title">
-	    @if (!IsUpload)
-	    {
-		    <span class="bigger">
-			    ⛔️
-			    <span class="bigger">
-				    ОШИБКА
-			    </span>
-			    ⛔️
-		    </span>
-		    <br>
-		    <p>Произошла ошибка во время выгрузки расписания</p>
-	    }
-	    else
-	    {
-		    <span class="bigger">
-			    ⚠️
-			    <span class="bigger">
-				    Предупреждение
-			    </span>
-			    ⚠️
-		    </span>
-		    <br>
-		    <p>Во время тестирования выявлены нарушения</p>
-	    }
-    </h3>
-    
+	<button class="file-error-close" onclick="document.getElementById('file-error').classList.remove('active');">
+		<img class="icon" src="/images/panel/closeWindow.svg" alt=""/>
+	</button>
+	<h3 class="file-error-title">
+		@if (!IsUpload)
+		{
+			<span class="bigger">
+				⛔️
+				<span class="bigger">
+					ОШИБКА
+				</span>
+				⛔️
+			</span>
+			<br>
+			<p>Произошла ошибка во время выгрузки расписания</p>
+		}
+		else
+		{
+			<span class="bigger">
+				⚠️
+				<span class="bigger">
+					Предупреждение
+				</span>
+				⚠️
+			</span>
+			<br>
+			<p>Во время тестирования выявлены нарушения</p>
+		}
+	</h3>
 
-    <p class="file-error-text" id="error-text">
-	    @if (IsUpload)
-	    {
-		    <p>Во время тестирования расписания были выявлены не серьезные ошибки, которые не помешали выгрузить файл. Файл был обновлен. Рекомендуется устранить все ошибки.</p>
-	    }
 
-	    @foreach (var d in description.Split("\n"))
-	    {
-		    <p>@d</p>
-	    }
-    </p>
+	<p class="file-error-text" id="error-text">
+		@if (IsUpload)
+		{
+		<p>Во время тестирования расписания были выявлены не серьезные ошибки, которые не помешали выгрузить файл. Файл
+			был обновлен. Рекомендуется устранить все ошибки.</p>
+	}
+
+	@foreach (var d in description.Split("\n"))
+	{
+		<p>@d</p>
+	}
+	</p>
 
 
 </aside>
 
 
 @code {
-    [Parameter] public string? description { get; set; }
-    [Parameter] public bool IsUpload { get; set; }
+	[Parameter] public string? description { get; set; }
+	[Parameter] public bool IsUpload { get; set; }
 }

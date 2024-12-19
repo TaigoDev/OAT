@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace OMAVIAT.Utilities
-{
-	public class DatabaseHelper
-	{
+namespace OMAVIAT.Utilities {
+	public class DatabaseHelper {
 		public static async Task WaitStableConnection()
 		{
 
@@ -18,7 +16,7 @@ namespace OMAVIAT.Utilities
 					await context.Database.CloseConnectionAsync();
 					Logger.Info($"✅ Подключение с базой данных успешно установлено!");
 					using var db = new DatabaseContext();
-					Console.WriteLine($"Количество новостей: {db.News.Count()} "); 
+					Console.WriteLine($"Количество новостей: {db.News.Count()} ");
 					//await db.Database.MigrateAsync();
 					await DropTokens();
 					return;

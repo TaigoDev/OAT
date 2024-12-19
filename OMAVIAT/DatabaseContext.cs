@@ -5,10 +5,8 @@ using OMAVIAT.Entities.Schedule;
 using OMAVIAT.Entities.Schedule.Database;
 using OMAVIAT.Schedule;
 
-namespace OMAVIAT
-{
-	public class DatabaseContext : ExcelContext
-	{
+namespace OMAVIAT {
+	public class DatabaseContext : ExcelContext {
 		public virtual DbSet<Tokens> Tokens { get; set; }
 		public virtual DbSet<News> News { get; set; }
 		public virtual DbSet<ProfNews> ProfNews { get; set; }
@@ -16,7 +14,7 @@ namespace OMAVIAT
 		public virtual DbSet<IPTables> IPTables { get; set; }
 		public virtual DbSet<Documents> documents { get; set; }
 		public virtual DbSet<CMK> CMK { get; set; }
-		
+
 
 	}
 }

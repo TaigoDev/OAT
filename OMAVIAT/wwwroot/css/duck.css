@@ -16,13 +16,13 @@
 	transition: opacity 250ms ease;
 }
 
-.duck-container:hover{
+.duck-container:hover {
 	opacity: 1;
 	animation-play-state: paused;
 }
 
-@keyframes duckFly{
-	0%, 100%{
+@keyframes duckFly {
+	0%, 100% {
 		translate: 0px;
 		offset-rotate: 0deg;
 	}
@@ -97,13 +97,13 @@
 	}
 }
 
-@media(width<1800px){
+@media (width < 1800px) {
 	.duck-container {
 		--duck-time: 10s;
 	}
 }
 
-@media(width<1000px) {
+@media (width < 1000px) {
 	.duck-container {
 		--duck-time: 8s;
 		width: 80px;

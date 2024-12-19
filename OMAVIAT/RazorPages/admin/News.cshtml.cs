@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages
-{
+namespace OMAVIAT.Pages {
 	[NoCache, Authorize]
-	public class PanelModel : PageModel
-	{
+	public class PanelModel : PageModel {
 		private readonly ILogger<PanelModel> _logger;
 
 		public PanelModel(ILogger<PanelModel> logger)

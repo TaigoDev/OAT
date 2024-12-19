@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Utilities
-{
-	public class DirectoryUtils
-	{
+﻿namespace OMAVIAT.Utilities {
+	public class DirectoryUtils {
 		public static void CreateDirectory(string path)
 		{
 			if (!Directory.Exists(path))

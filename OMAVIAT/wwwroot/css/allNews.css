@@ -32,7 +32,7 @@
 	--block-height: 100px;
 }
 
-.news-item-img::before{
+.news-item-img::before {
 	content: "";
 	position: absolute;
 	left: -30px;
@@ -112,7 +112,7 @@
 		row-gap: 5px;
 	}
 
-	.news-item-date, .news-item-title{
+	.news-item-date, .news-item-title {
 		text-align: center;
 	}
 }

@@ -26,19 +26,19 @@
 	transition: 200ms ease;
 }
 
-.months-choose-item:hover, .months-choose-item.active{
+.months-choose-item:hover, .months-choose-item.active {
 	opacity: 1;
 	background: var(--m-color);
 }
 
-.months-current{
+.months-current {
 	font-size: 1.15rem;
 	font-weight: 500;
 	text-transform: uppercase;
 	line-height: 1;
 }
 
-@media (width<800px){
+@media (width < 800px) {
 	.months {
 		flex-direction: column;
 		justify-content: center;

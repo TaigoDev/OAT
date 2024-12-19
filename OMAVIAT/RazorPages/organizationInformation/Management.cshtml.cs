@@ -2,10 +2,9 @@
 
 namespace OMAVIAT.Pages.organizationInformation;
 
-public class Management : PageModel
-{
+public class Management : PageModel {
 	public void OnGet()
 	{
-		
+
 	}
 }

@@ -2,14 +2,12 @@
 using OMAVIAT.Entities.Models;
 using RepoDb.Extensions;
 
-namespace OMAVIAT.Services.Workers
-{
-	public static class WorkersReader
-	{
+namespace OMAVIAT.Services.Workers {
+	public static class WorkersReader {
 		public static List<List<Worker>> administration = [];
 		public static IEnumerable<IEnumerable<Worker>> Workers = new List<List<Worker>>();
 		public static List<Worker> AllWorkers = [];
-		
+
 		public static async Task Init()
 		{
 			var file = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "workers", "workers.xlsx");
@@ -19,7 +17,7 @@ namespace OMAVIAT.Services.Workers
 				return;
 			}
 
-		    await using var stream = File.Open(file, FileMode.Open, FileAccess.Read);
+			await using var stream = File.Open(file, FileMode.Open, FileAccess.Read);
 
 			var excel = new ExcelMapper()
 			{
@@ -72,7 +70,7 @@ namespace OMAVIAT.Services.Workers
 			AdministrationByPost(ref workers, e => e.Contains("Заместитель директора") && !e.Contains("инженерного лицея"));
 			AdministrationByPost(ref workers, e => e is "Главный бухгалтер");
 			await ReadPedagogicalWorkersAsync();
-		 	await ManagementReader.Init();
+			await ManagementReader.Init();
 		}
 
 		private static async Task ReadPedagogicalWorkersAsync()
@@ -95,7 +93,7 @@ namespace OMAVIAT.Services.Workers
 			var workers = reader.ToList();
 			Workers = workers.OrderBy(e => e.FullName).Split(14);
 		}
-		
+
 		private static void AdministrationByPost(ref List<Worker> workers, Func<string, bool> predicate)
 		{
 			administration.Add(workers.Where(e => predicate.Invoke(e.Post)).ToList());

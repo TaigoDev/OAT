@@ -28,7 +28,7 @@
 				<a class="months-choose-item" href="/parents/grades/@nextMonth">
 					Следующий месяц
 				</a>
-			}   
+			}
 		</div>
 		<div class="months-current">
 			@Model.month
@@ -39,40 +39,40 @@
 	{
 		<table class="customized">
 			<thead>
-				<tr>
+			<tr>
+				<th>
+					Дисциплина
+				</th>
+				@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", CultureInfo.GetCultureInfo("ru-ru")).Month); i++)
+				{
 					<th>
-						Дисциплина
+						@i
 					</th>
-					@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", CultureInfo.GetCultureInfo("ru-ru")).Month); i++)
-					{
-						<th>
-							@i
-						</th>
-					}
-					<th>
-					   Рубежный контроль
-					</th>
-				</tr>
+				}
+				<th>
+					Рубежный контроль
+				</th>
+			</tr>
 			</thead>
 			<tbody>
-				@if (Model.Disciplines is not null)
+			@if (Model.Disciplines is not null)
+			{
+				@foreach (var discipline in Model.Disciplines.Disciplines)
 				{
-					@foreach (var discipline in Model.Disciplines.Disciplines)
-					{
-						<tr>
+					<tr>
+						<td>
+							@discipline.discipline
+						</td>
+						@foreach (var mark in discipline.marks)
+						{
 							<td>
-								@discipline.discipline
+								@mark
 							</td>
-							@foreach (var mark in discipline.marks)
-							{
-								<td>
-									@mark
-								</td>
-							}
-						</tr>
-					}
-
+						}
+					</tr>
 				}
+
+			}
 			</tbody>
 		</table>
 	}

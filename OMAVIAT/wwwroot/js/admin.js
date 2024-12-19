@@ -1,4 +1,4 @@
-﻿function MessageController(tag){
+﻿function MessageController(tag) {
 	var element = document.getElementById(tag);
 	element.classList.add("panel-message-active");
 	setTimeout("document.getElementById(\"" + tag + "\").classList.remove(\"panel-message-active\")", 2000);
@@ -11,7 +11,7 @@ function MessageControllerWithMSG(tag, message) {
 	setTimeout("document.getElementById(\"" + tag + "\").classList.remove(\"panel-message-active\")", 2000);
 }
 
-function POST(url, formData, success, error){
+function POST(url, formData, success, error) {
 	$.ajax({
 		type: 'POST',
 		url: url,
@@ -46,13 +46,13 @@ function POSTWithjqXHR(url, formData, success, error) {
 	});
 }
 
-function GetFile(tag){
-	var fileUpload =  $("#" + tag).get(0);
+function GetFile(tag) {
+	var fileUpload = $("#" + tag).get(0);
 	var files = fileUpload.files;
 	return files[0];
 }
 
-function GET(url, success, error){
+function GET(url, success, error) {
 	$.ajax({
 		type: 'GET',
 		url: url,
@@ -67,7 +67,7 @@ function GET(url, success, error){
 	});
 }
 
-function DELETE(url, formData, success, error){
+function DELETE(url, formData, success, error) {
 	$.ajax({
 		type: 'DELETE',
 		url: url,

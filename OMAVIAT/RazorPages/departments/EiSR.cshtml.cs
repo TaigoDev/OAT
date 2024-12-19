@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages
-{
-	public class EiSRModel : PageModel
-	{
+namespace OMAVIAT.Pages {
+	public class EiSRModel : PageModel {
 		private readonly ILogger<EiSRModel> _logger;
 
 		public EiSRModel(ILogger<EiSRModel> logger)

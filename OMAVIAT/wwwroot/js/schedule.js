@@ -20,11 +20,9 @@
 			if (jqXHR.status == 401) {
 				SendMessage("message-fail-auth");
 				window.location = "/api/logout";
-			}
-			else if (jqXHR.status == 406 || jqXHR.status == 403) {
+			} else if (jqXHR.status == 406 || jqXHR.status == 403) {
 				SendMessage("message-fail-perms");
-			}
-			else
+			} else
 				SendMessage("message-fail");
 		}
 	});

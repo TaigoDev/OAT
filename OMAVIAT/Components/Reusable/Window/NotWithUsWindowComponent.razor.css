@@ -1,10 +1,10 @@
-﻿::deep .window{
+﻿::deep .window {
 	display: grid;
 	grid-template-rows: auto auto;
 	max-width: min(95%, 600px);
 }
 
-::deep .window-body{
+::deep .window-body {
 	display: flex;
 	flex-direction: column;
 	row-gap: 30px;
@@ -12,40 +12,41 @@
 	text-align: center;
 }
 
-::deep .window-body p{
+::deep .window-body p {
 	color: var(--light-white-c);
 	margin-top: 0;
 }
 
-::deep .window-body header{
+::deep .window-body header {
 	display: flex;
 	flex-direction: column;
 	row-gap: 15px;
 	align-items: center;
 }
 
-::deep .rule{
+::deep .rule {
 	max-width: 375px;
 }
 
-::deep .window-body footer{
+::deep .window-body footer {
 	display: flex;
 	flex-direction: column;
 	row-gap: 7px;
 	align-items: center;
 }
 
-::deep .later{
+::deep .later {
 	color: var(--gray-c);
 	font-size: var(--subtext-fs);
 	font-weight: var(--subtext-fw);
 }
 
-@media(width<600px){
-	::deep .window-body{
+@media (width < 600px) {
+	::deep .window-body {
 		row-gap: 20px;
 	}
-	::deep .window-body header{
+
+	::deep .window-body header {
 		row-gap: 10px;
 	}
 }

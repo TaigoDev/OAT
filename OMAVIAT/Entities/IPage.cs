@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Entities
-{
-	public class IPage
-	{
+﻿namespace OMAVIAT.Entities {
+	public class IPage {
 		public string current { get; set; }
 		public string map { get; set; }
 

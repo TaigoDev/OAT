@@ -1,10 +1,8 @@
 ﻿using OMAVIAT.Controllers.Security;
 using System.Security.Claims;
 
-namespace OMAVIAT.Utilities
-{
-	public static class ClaimsUtils
-	{
+namespace OMAVIAT.Utilities {
+	public static class ClaimsUtils {
 		public static string GetToken(this ClaimsPrincipal User) =>
 			User.Identity is ClaimsIdentity identity ? identity.Claims.First(e => e.Type == "Token").Value : "404-GetToken";
 

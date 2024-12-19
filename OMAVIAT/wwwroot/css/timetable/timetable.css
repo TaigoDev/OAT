@@ -3,11 +3,11 @@
 	margin: 0 auto;
 }
 
-.timetable-container::before{
+.timetable-container::before {
 	content: none;
 }
 
-.timetable-container .section-title:first-of-type{
+.timetable-container .section-title:first-of-type {
 	margin-top: 0;
 }
 
@@ -15,7 +15,7 @@ table.timetable tbody tr td:first-child {
 	text-align: center !important;
 }
 
-.subjectt{
+.subjectt {
 	display: flex;
 	align-items: center;
 	gap: 20px;

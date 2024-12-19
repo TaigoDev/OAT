@@ -13,9 +13,9 @@
 
 <form class="panel-form">
 
-    <label for="news" class="panel-form-title">
-        @CMK @(type is null ? "" : $"- {type}")
-    </label>
+	<label for="news" class="panel-form-title">
+		@CMK @(type is null ? "" : $"- {type}")
+	</label>
 
 	<div class="input-box">
 		<label for="CMK">
@@ -26,7 +26,7 @@
 			await OnSelectCMK();
 			this.StateHasChanged();
 		}'>
-            <option selected disabled value="Выберите ЦМК">
+			<option selected disabled value="Выберите ЦМК">
 				Выберите ЦМК
 			</option>
 			@if (User.IsRole(Role.www_POIT_owner))
@@ -71,12 +71,12 @@
 					ЦМК СГД
 				</option>
 			}
-            @if (User.IsRole(Role.www_GD_owner))
-            {
-                <option value="ЦМК ГД">
-                    ЦМК ГД
-                </option>
-            }
+			@if (User.IsRole(Role.www_GD_owner))
+			{
+				<option value="ЦМК ГД">
+					ЦМК ГД
+				</option>
+			}
 			@if (User.IsRole(Role.www_END_owner))
 			{
 				<option value="ЦМК ЕНД">
@@ -95,24 +95,24 @@
 					ЦМК ФКД
 				</option>
 			}
-            @if (User.IsRole(Role.www_Tehmash_owner))
-            {
-                <option value="ЦМК ТехМаш">
-                    ЦМК ТехМаш
-                </option>
-            }
-            @if (User.IsRole(Role.www_TehREO_owner))
-            {
-                <option value="ЦМК ТехРЭО">
-                    ЦМК ТехРЭО
-                </option>
-            }
-            @if (User.IsRole(Role.www_Angliyskiy_owner))
-            {
-                <option value="ЦМК Ин.яз">
-                    ЦМК Ин.яз
-                </option>
-            }
+			@if (User.IsRole(Role.www_Tehmash_owner))
+			{
+				<option value="ЦМК ТехМаш">
+					ЦМК ТехМаш
+				</option>
+			}
+			@if (User.IsRole(Role.www_TehREO_owner))
+			{
+				<option value="ЦМК ТехРЭО">
+					ЦМК ТехРЭО
+				</option>
+			}
+			@if (User.IsRole(Role.www_Angliyskiy_owner))
+			{
+				<option value="ЦМК Ин.яз">
+					ЦМК Ин.яз
+				</option>
+			}
 			@if (User.IsRole(Role.www_informatiki_owner))
 			{
 				<option value="ЦМК Информатики">
@@ -128,7 +128,7 @@
 			@if (User.IsRole(Role.www_russYaz_owner))
 			{
 				<option value="ЦМК РусЯз">
-                    ЦМК РусЯз
+					ЦМК РусЯз
 				</option>
 			}
 		</select>
@@ -145,17 +145,17 @@
 			<option>
 				Выберите материал
 			</option>
-            <option value="Описание работы ЦМК">
+			<option value="Описание работы ЦМК">
 				Описание работы ЦМК
 			</option>
 			<option value="Члены ЦМК">
 				Члены ЦМК
 			</option>
-            <option value="Достижения ЦМК">
+			<option value="Достижения ЦМК">
 				Достижения ЦМК
 			</option>
-            <option value="Решаемые задачи и планы">
-                Решаемые задачи и планы
+			<option value="Решаемые задачи и планы">
+				Решаемые задачи и планы
 			</option>
 			<option value="История">
 				История
@@ -186,7 +186,8 @@
 		}
 	}
 
-	private async Task UpdateType(){
+	private async Task UpdateType()
+	{
 		await JSRuntime.InvokeVoidAsync("ShowForm", type);
 	}
 }

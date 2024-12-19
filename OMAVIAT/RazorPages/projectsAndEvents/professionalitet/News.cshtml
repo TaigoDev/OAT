@@ -8,49 +8,49 @@
 <link rel="stylesheet" href="~/css/news.css">
 
 <article class="centered">
-    @if (!int.TryParse(Model.id, null, out var id))
-    {
-        <h3 class="news-title">
-            Искали и не нашли
-        </h3>
-        return;
-    }
-    @{
-        var news = ProfNewsReader.news.FirstOrDefault(e => e.id == id);
-    }
+	@if (!int.TryParse(Model.id, null, out var id))
+	{
+		<h3 class="news-title">
+			Искали и не нашли
+		</h3>
+		return;
+	}
+	@{
+		var news = ProfNewsReader.news.FirstOrDefault(e => e.id == id);
+	}
 
-    @if (news is null)
-    {
-        <h3 class="news-title">
-            Искали и не нашли
-        </h3>
-        return;
-    }
+	@if (news is null)
+	{
+		<h3 class="news-title">
+			Искали и не нашли
+		</h3>
+		return;
+	}
 
-    <h3 class="news-title">
-        @news.title
-    </h3>
-    @foreach (var t in news.description.Split("\n"))
-    {
-        <p>@Html.Raw(@t)</p>
-    }
-    <div class="images-list-slider-container">
-        <div class="images-list-slider">
-            @foreach (var image in news.photos.toObject<List<string>>())
-            {
-                @if (!image.Contains(".mp4"))
-                {
-                    <img src="/@image" alt="">
-                }
-                else
-                {
-                    <video class="customized" controls>
-                        <source src="/@image" type="video/mp4">
-                    </video>
-                }
-            }
-        </div>
-    </div>
+	<h3 class="news-title">
+		@news.title
+	</h3>
+	@foreach (var t in news.description.Split("\n"))
+	{
+		<p>@Html.Raw(@t)</p>
+	}
+	<div class="images-list-slider-container">
+		<div class="images-list-slider">
+			@foreach (var image in news.photos.toObject<List<string>>())
+			{
+				@if (!image.Contains(".mp4"))
+				{
+					<img src="/@image" alt="">
+				}
+				else
+				{
+					<video class="customized" controls>
+						<source src="/@image" type="video/mp4">
+					</video>
+				}
+			}
+		</div>
+	</div>
 
 
 </article>

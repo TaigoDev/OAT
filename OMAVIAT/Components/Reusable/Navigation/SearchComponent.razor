@@ -9,7 +9,7 @@
 
 @code {
 	[Parameter] public string Placeholder { get; set; } = "Строка поиска...";
-	
+
 	[Parameter]
 	public string? Value
 	{
@@ -25,9 +25,9 @@
 
 	[Parameter]
 	public EventCallback<string> ValueChanged { get; set; }
-	
+
 	[Parameter]
 	public EventCallback<MouseEventArgs> OnClick { get; set; }
-	
+
 	private string? _Value;
 }

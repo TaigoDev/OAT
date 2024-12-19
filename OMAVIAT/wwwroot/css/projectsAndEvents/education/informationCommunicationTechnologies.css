@@ -1,4 +1,4 @@
-﻿.workshops-list{
+﻿.workshops-list {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -17,26 +17,26 @@
 	box-shadow: 0 15px 50px -30px gray;
 }
 
-.workshops-list-item img{
+.workshops-list-item img {
 	height: 145px;
 	scale: 1.025;
 }
 
-.workshops-list-item-head{
+.workshops-list-item-head {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	font-weight: 500;
 }
 
-.workshops-list-item-head span:first-of-type{
+.workshops-list-item-head span:first-of-type {
 	min-height: 50px;
 }
 
-.workshops-list-item-body{
+.workshops-list-item-body {
 	padding: 0 5px 0 10px;
 }
 
-.workshops-list-item-body > ul.customized{
+.workshops-list-item-body > ul.customized {
 	margin-top: 0px;
 }

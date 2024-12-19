@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Utilities
-{
-	public static class ControllersUtils
-	{
+﻿namespace OMAVIAT.Utilities {
+	public static class ControllersUtils {
 
 		public static bool IsCorrectFile(IFormFile file, string expansion)
 		{
@@ -15,12 +13,11 @@
 
 		public static string UserIP(this HttpContext context) =>
 			!string.IsNullOrWhiteSpace(context.Request.Headers["CF-Connecting-IP"]) ?
-			context.Request.Headers["CF-Connecting-IP"] : context.Request.Headers["X-Real-IP"];
+				context.Request.Headers["CF-Connecting-IP"] : context.Request.Headers["X-Real-IP"];
 
 		public static IApplicationBuilder UseNoSniffHeaders(this IApplicationBuilder builder)
 		{
-			return builder.Use(async (context, next) =>
-			{
+			return builder.Use(async (context, next) => {
 				context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
 				await next();
 			});

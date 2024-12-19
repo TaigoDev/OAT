@@ -5,11 +5,9 @@ using OMAVIAT.Entities.Enums;
 using OMAVIAT.Entities.Schedule.Database;
 using OMAVIAT.Schedule.Entities.Enums;
 
-namespace OMAVIAT.Pages
-{
+namespace OMAVIAT.Pages {
 	[NoCache]
-	public class ChangesModel : PageModel
-	{
+	public class ChangesModel : PageModel {
 		private readonly ILogger<ChangesModel> _logger;
 
 		public ChangesModel(ILogger<ChangesModel> logger)
@@ -35,13 +33,11 @@ namespace OMAVIAT.Pages
 			if (DateOnly.TryParseExact(sheet, "dd.MM.yyyy", out var date))
 			{
 				this.sheet = date;
-				daysChanges = db.daysChanges.Include(e => e.bells).
-					FirstOrDefault(e => e.corpus == result && e.date == date);
+				daysChanges = db.daysChanges.Include(e => e.bells).FirstOrDefault(e => e.corpus == result && e.date == date);
 				return;
 			}
 
-			var search = db.daysChanges.Include(e => e.bells).
-				Where(e => e.corpus == result).ToList().MaxBy(e => e.date);
+			var search = db.daysChanges.Include(e => e.bells).Where(e => e.corpus == result).ToList().MaxBy(e => e.date);
 			if (search is null) return;
 			this.sheet = search.date;
 			daysChanges = search;

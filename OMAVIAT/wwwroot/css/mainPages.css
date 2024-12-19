@@ -4,7 +4,7 @@ body {
 	padding-top: 0px;
 }
 
-.site-header::before{
+.site-header::before {
 	display: none;
 }
 
@@ -80,7 +80,7 @@ body {
 	transition: background-color 600ms, border-color 600ms;
 }
 
-.important-link::after{
+.important-link::after {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -116,18 +116,19 @@ body {
 	aspect-ratio: 1;
 }
 
-@media (width<1450px) {
+@media (width < 1450px) {
 	.important-links {
 		--columns: 2;
 	}
 }
 
-@media (width<750px) {
+@media (width < 750px) {
 	.important-links {
 		--columns: 1;
 		justify-content: center;
 		gap: 20px;
 	}
+
 	.welcome {
 		margin-top: 25vh;
 	}

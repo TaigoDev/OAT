@@ -1,9 +1,7 @@
 ﻿using CsvHelper.Configuration.Attributes;
 
-namespace OMAVIAT.Entities
-{
-	public class Contract
-	{
+namespace OMAVIAT.Entities {
+	public class Contract {
 		[Name("NomKontrakt")]
 		public string documentId { get; set; }
 

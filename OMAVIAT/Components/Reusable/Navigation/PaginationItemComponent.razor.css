@@ -2,7 +2,7 @@
 	--size: 40px;
 }
 
-::deep .pagination-item div{
+::deep .pagination-item div {
 	display: grid;
 	place-items: center;
 	width: var(--size);
@@ -18,7 +18,7 @@
 	cursor: pointer;
 }
 
-::deep .pagination-item div:not(.active):hover{
+::deep .pagination-item div:not(.active):hover {
 	color: var(--text-c);
 }
 

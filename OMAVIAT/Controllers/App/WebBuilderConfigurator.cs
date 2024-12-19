@@ -2,21 +2,19 @@
 using MyOAT.Utilities.Cookies;
 using OMAVIAT.Controllers.Security;
 
-namespace OMAVIAT.Controllers.App
-{
-	public class WebBuilderConfigurator
-	{
+namespace OMAVIAT.Controllers.App {
+	public class WebBuilderConfigurator {
 		public static void SetupServices(ref WebApplicationBuilder builder)
 		{
 
 			builder.Services.AddRazorComponents()
-				.AddInteractiveServerComponents(); builder.Services.AddControllersWithViews();
+				.AddInteractiveServerComponents();
+			builder.Services.AddControllersWithViews();
 			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddServerSideBlazor(o =>o.DetailedErrors = true);
+			builder.Services.AddServerSideBlazor(o => o.DetailedErrors = true);
 			builder.Services.AddScoped<ICookie, Cookie>();
 
-			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
-			{
+			builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
 				options.ExpireTimeSpan = TimeSpan.FromDays(31);
 				options.SlidingExpiration = true;
 				options.AccessDeniedPath = "/admin/authorization";
@@ -24,8 +22,7 @@ namespace OMAVIAT.Controllers.App
 				options.Cookie.Name = "Authorization";
 			});
 			builder.Services.AddAuthorization();
-			builder.Services.AddMvc(options =>
-			{
+			builder.Services.AddMvc(options => {
 				options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter());
 				options.Filters.Add<ExceptionFilter>();
 				options.Filters.Add<ValidationFilter>();

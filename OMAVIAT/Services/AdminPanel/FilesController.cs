@@ -3,11 +3,11 @@ using MimeTypes;
 using OMAVIAT.Controllers.Security;
 using OMAVIAT.Utilities;
 
-namespace OMAVIAT.Services.AdminPanel
-{
-	public class FilesController : Controller
-	{
-		#region Schedule changes 
+namespace OMAVIAT.Services.AdminPanel {
+	public class FilesController : Controller {
+
+		#region Schedule changes
+
 		[HttpGet("changes/{building}/09876635187285765187736186318263782/download"), NoCache]
 		public async Task<IActionResult> DownloadChanges(string building)
 		{
@@ -19,8 +19,8 @@ namespace OMAVIAT.Services.AdminPanel
 		}
 
 		#endregion
-		#region Sessions
 
+		#region Sessions
 
 		[HttpGet("api/sessions/{building}/files"), NoCache]
 		public IActionResult GetSessionsFiles(string building)
@@ -45,7 +45,9 @@ namespace OMAVIAT.Services.AdminPanel
 		}
 
 		#endregion
-		#region Practice 
+
+		#region Practice
+
 		[HttpGet("api/practice/{building}/files"), NoCache]
 		public IActionResult GetPracticeFiles(string building)
 		{
@@ -69,7 +71,7 @@ namespace OMAVIAT.Services.AdminPanel
 			return File(await System.IO.File.ReadAllBytesAsync(file), MimeTypeMap.GetMimeType(Path.GetExtension(file)), Path.GetFileName(StringUtils.ConvertHexToString(filename)));
 		}
 
-
 		#endregion
+
 	}
 }

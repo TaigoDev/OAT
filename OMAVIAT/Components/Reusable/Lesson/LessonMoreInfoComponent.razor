@@ -14,7 +14,8 @@
 						</IconizedListItemComponent>
 						@if (IsGroup)
 						{
-							<IconizedListItemComponent Type="Препод" Value="@LessonTeacher1" Href="@GetTeacherLink(LessonTeacher1)">
+							<IconizedListItemComponent Type="Препод" Value="@LessonTeacher1"
+							                           Href="@GetTeacherLink(LessonTeacher1)">
 								<PersonIconComponent ClassList="in-text"/>
 							</IconizedListItemComponent>
 						}
@@ -34,7 +35,8 @@
 
 						@if (IsGroup)
 						{
-							<IconizedListItemComponent Type="Препод 1пг" Value="@LessonTeacher1" Href="@GetTeacherLink(LessonTeacher1)">
+							<IconizedListItemComponent Type="Препод 1пг" Value="@LessonTeacher1"
+							                           Href="@GetTeacherLink(LessonTeacher1)">
 								<PersonIconComponent ClassList="in-text"/>
 							</IconizedListItemComponent>
 						}
@@ -53,7 +55,8 @@
 
 						@if (IsGroup)
 						{
-							<IconizedListItemComponent Type="Препод 2пг" Value="@LessonTeacher2" Href="@GetTeacherLink(LessonTeacher2)">
+							<IconizedListItemComponent Type="Препод 2пг" Value="@LessonTeacher2"
+							                           Href="@GetTeacherLink(LessonTeacher2)">
 								<PersonIconComponent ClassList="in-text"/>
 							</IconizedListItemComponent>
 						}
@@ -101,14 +104,14 @@
 		@if (LessonLength != 0 || LessonFinished != 0)
 		{
 			<LessonProgressComponent LessonFinished="LessonFinished"
-									 LessonLength="LessonLength"
-									 Orientation="vertical"/>
+			                         LessonLength="LessonLength"
+			                         Orientation="vertical"/>
 		}
 	</MoreInfoComponent>
 </div>
 
 @code {
-	[Parameter] public string LessonName { get; set; } = "Технические средства информатизации"; // полное наименование предмета
+	[Parameter] public string LessonName { get; set; } = "Технические средства информатизации";// полное наименование предмета
 	[Parameter] public string LessonType { get; set; } = "лекция";
 	[Parameter] public string? LessonCabinet1 { get; set; }
 	[Parameter] public string? LessonTeacher1 { get; set; }

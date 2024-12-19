@@ -25,7 +25,7 @@
 	column-gap: 10px;
 }
 
-.staff-person-basic-job::before, .staff-person-basic-phone::before, .staff-person-basic-email::before{
+.staff-person-basic-job::before, .staff-person-basic-phone::before, .staff-person-basic-email::before {
 	content: "";
 	height: 25px;
 	min-width: 25px;
@@ -63,10 +63,11 @@
 	scale: 1.25;
 }
 
-@media (width<600px){
+@media (width < 600px) {
 	.staff-person-basic {
 		flex-direction: column-reverse;
 	}
+
 	.staff-person-basic-info {
 		text-align: center;
 	}

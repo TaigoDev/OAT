@@ -2,10 +2,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Models;
 using static OMAVIAT.Services.Workers.WorkersReader;
 
-namespace OMAVIAT.Pages.organizationInformation
-{
-	public class SearchWorkerModel : PageModel
-	{
+namespace OMAVIAT.Pages.organizationInformation {
+	public class SearchWorkerModel : PageModel {
 
 		public List<Worker> Workers = new List<Worker>();
 

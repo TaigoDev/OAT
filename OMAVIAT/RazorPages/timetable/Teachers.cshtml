@@ -15,35 +15,35 @@
 <link rel="stylesheet" href="~/css/timetable/groups.css" asp-append-version="true">
 <section class="centered">
 
-	 <h2 class="section-title title-centered">
+	<h2 class="section-title title-centered">
 		Преподаватели
 	</h2>
 	<table class="customized timetable groups">
 		<thead>
-			<tr>
-				<th>
-					ФИО
-				</th>
-			</tr>
+		<tr>
+			<th>
+				ФИО
+			</th>
+		</tr>
 		</thead>
 		<tbody>
-            @{
-                if (!Enum.TryParse<Building>(Model.building, true, out var result))
-                    return;
-                var schedules = ScheduleReader.teachers.Where(e => e.Corpus == (Corpus)(int)result - 1);
-            }
-            @foreach (var teacher in schedules.OrderBy(e => e.name))
-			{
-				<tr>
-					<td>
-						<a href="/timetable/TeacherSchedule/@Model.building/@teacher.name">@teacher.name</a>
-					</td>
-				</tr>
-			}
-			
+		@{
+			if (!Enum.TryParse<Building>(Model.building, true, out var result))
+				return;
+			var schedules = ScheduleReader.teachers.Where(e => e.Corpus == (Corpus)(int)result - 1);
+		}
+		@foreach (var teacher in schedules.OrderBy(e => e.name))
+		{
+			<tr>
+				<td>
+					<a href="/timetable/TeacherSchedule/@Model.building/@teacher.name">@teacher.name</a>
+				</td>
+			</tr>
+		}
+
 		</tbody>
-		
+
 	</table>
-	
+
 </section>
 	

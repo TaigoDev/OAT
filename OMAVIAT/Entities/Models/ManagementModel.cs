@@ -2,8 +2,7 @@
 
 namespace OMAVIAT.Entities.Models;
 
-public class ManagementModel
-{
+public class ManagementModel {
 	[Column(1)]
 	public string FullName { get; set; }
 	[Column(2)]

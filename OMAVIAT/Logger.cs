@@ -1,7 +1,6 @@
 ﻿using OMAVIAT.Utilities.Telegram;
 
-public class Logger
-{
+public class Logger {
 
 
 	public static void Info(string message)
@@ -26,7 +25,7 @@ public class Logger
 			if (!disableLogInFile)
 			{
 				var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "Logs",
-					$"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log");
+				$"{DateTime.UtcNow.ToString("dd-MM-yyyy")}.log");
 				if (File.Exists(path))
 					await File.AppendAllTextAsync(path, $"{message}\n");
 				else
@@ -45,7 +44,6 @@ public class Logger
 	}
 
 	private static string GetTimeUTC() =>
-			DateTime.UtcNow.ToString("dd.MM.yyyy HH:mm:ss");
+		DateTime.UtcNow.ToString("dd.MM.yyyy HH:mm:ss");
 
 }
-

@@ -51,14 +51,15 @@
 			</div>
 			<div class="input-box">
 				<label for="description">Вопрос</label>
-				<textarea asp-for="description" id="description" class="customized" placeholder="Введите вопрос"></textarea>
+				<textarea asp-for="description" id="description" class="customized"
+				          placeholder="Введите вопрос"></textarea>
 			</div>
 			<p class="question-warning">
 				Нажимая на кнопку "Отправить", вы даете согласие на обработку персональных данных
 			</p>
 			<button type="submit" class="customized question-send">Отправить</button>
 		</form>
-		
+
 	</section>
 	<aside id="sidebar" class="sidebar">
 		<h3 class="sidebar-title">
@@ -86,15 +87,15 @@
 						Электронные платежи
 					</a>
 				</li>
-                <li class="sidebar-link">
-                    <a asp-page="Map">
-                        Карта
-                    </a>
-                </li>
+				<li class="sidebar-link">
+					<a asp-page="Map">
+						Карта
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</aside>
 </div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-		async defer></script>
+        async defer></script>

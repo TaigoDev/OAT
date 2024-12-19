@@ -1,10 +1,7 @@
-﻿namespace OMAVIAT.Utilities
-{
-	public class RepeaterUtils
-	{
+﻿namespace OMAVIAT.Utilities {
+	public class RepeaterUtils {
 		public static void Repeat(Func<Task> method, int time) =>
-			new Task(async () =>
-			{
+			new Task(async () => {
 				while (true)
 				{
 					try
@@ -21,8 +18,7 @@
 
 		public static Task RepeatAsync(Func<Task> repeat, int minutes)
 		{
-			new Thread(async () =>
-			{
+			new Thread(async () => {
 				try
 				{
 					await repeat.Invoke();

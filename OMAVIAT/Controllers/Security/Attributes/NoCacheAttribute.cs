@@ -2,8 +2,7 @@
 using Microsoft.Net.Http.Headers;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public sealed class NoCacheAttribute : ActionFilterAttribute
-{
+public sealed class NoCacheAttribute : ActionFilterAttribute {
 	public override void OnResultExecuting(ResultExecutingContext filterContext)
 	{
 		filterContext.HttpContext.Response.GetTypedHeaders().CacheControl =

@@ -17,7 +17,7 @@
 	color: var(--light-white);
 }
 
-.file-error.active{
+.file-error.active {
 	opacity: 1;
 	visibility: visible;
 }
@@ -33,7 +33,7 @@
 	transition: 250ms ease;
 }
 
-.file-error-close:hover{
+.file-error-close:hover {
 	scale: 1;
 	opacity: 1;
 }
@@ -46,11 +46,11 @@
 	text-align: center;
 }
 
-.file-error-title .bigger{
+.file-error-title .bigger {
 	font-size: 1.15em;
 }
 
-.file-error-text{
+.file-error-text {
 	overflow-y: auto;
 	max-height: 150px;
 	padding-right: 5px;
@@ -86,7 +86,7 @@
 	justify-content: center;
 }
 
-.hide{
+.hide {
 	display: none;
 }
 

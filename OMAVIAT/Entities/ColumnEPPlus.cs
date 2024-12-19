@@ -1,8 +1,6 @@
-﻿namespace OMAVIAT.Entities
-{
+﻿namespace OMAVIAT.Entities {
 	[AttributeUsage(AttributeTargets.All)]
-	public class ColumnEPPlus : Attribute
-	{
+	public class ColumnEPPlus : Attribute {
 		public int ColumnIndex { get; set; }
 
 

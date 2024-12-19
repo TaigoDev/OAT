@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Entities.Enums
-{
-	public enum Building
-	{
+﻿namespace OMAVIAT.Entities.Enums {
+	public enum Building {
 		all,
 		ul_lenina_24,
 		ul_b_khmelnickogo_281a,

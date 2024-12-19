@@ -4,8 +4,7 @@ using OMAVIAT;
 using OMAVIAT.Controllers.Bitrix.Controllers;
 using System.Text;
 
-public static class ProxyController
-{
+public static class ProxyController {
 
 	public static void BitrixProxy(this WebApplication context) =>
 		context.Use((context, next) => Proxy(context, next));
@@ -116,4 +115,3 @@ public static class ProxyController
 	}
 
 }
-

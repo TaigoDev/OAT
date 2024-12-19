@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Utilities;
 
-namespace OMAVIAT.Pages.timetable
-{
+namespace OMAVIAT.Pages.timetable {
 	[NoCache]
-	public class PracticeModel : PageModel
-	{
+	public class PracticeModel : PageModel {
 		private readonly ILogger<PracticeModel> _logger;
 
 		public PracticeModel(ILogger<PracticeModel> logger)
@@ -25,7 +23,7 @@ namespace OMAVIAT.Pages.timetable
 				var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", $"b{i}");
 				var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly).ToList();
 				GetList(i).AddRange(files.ConvertAll(e => new FilePractice(StringUtils.ConvertHexToString(Path.GetFileName(e).Replace(Path.GetExtension(e), "")),
-					$"api/practice/b{i}/{StringUtils.ConvertStringToHex(Path.GetFileName(e))}/download")));
+				$"api/practice/b{i}/{StringUtils.ConvertStringToHex(Path.GetFileName(e))}/download")));
 
 			}
 		}
@@ -42,8 +40,7 @@ namespace OMAVIAT.Pages.timetable
 			};
 		}
 
-		public class FilePractice
-		{
+		public class FilePractice {
 			public FilePractice(string filename, string url)
 			{
 				Filename = filename;

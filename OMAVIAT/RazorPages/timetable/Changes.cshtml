@@ -5,13 +5,13 @@
 
 @model ChangesModel
 @{
-    ViewData["Title"] = "Изменения в расписании";
-    if (Model.corpus is null)
-    {
-        HttpContext.Response.Redirect("/timetable/ClassesChanges");
-        return;
-    }
-    var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
+	ViewData["Title"] = "Изменения в расписании";
+	if (Model.corpus is null)
+	{
+		HttpContext.Response.Redirect("/timetable/ClassesChanges");
+		return;
+	}
+	var search = Request.Query.FirstOrDefault(e => e.Key == "search").Value.ToString().ToLower();
 }
 <script src="~/js/recaptcha.js" asp-append-version="true"></script>
 <link rel="stylesheet" href="~/css/parents/grades.css" asp-append-version="true">
@@ -20,81 +20,82 @@
 
 @if (Model.corpus is null || Model.daysChanges is null)
 {
-    <h2 class="section-title">
-        Не удалось получить изменения в расписании
-    </h2>
-    return;
+	<h2 class="section-title">
+		Не удалось получить изменения в расписании
+	</h2>
+	return;
 }
 
 <section class="centered timetable-container">
-    <h2 class="section-title">
-        @Model.daysChanges.DateText
-    </h2>
-    <h3 class="section-subtitle-small title-centered">
-        @Model.daysChanges.SchoolWeek
-    </h3>
-    <div class="months">
-        <div class="months-choose">
-            @{
-                using var db = new DatabaseContext();
-                var days = db.daysChanges.Where(e => e.corpus == Model.corpus).ToList();
-            }
-            @foreach (var sheet in days.OrderBy(e => e.date))
-            {
-                <a class="months-choose-item @(Model.sheet == sheet.date ? "active" : "")" href="/timetable/Changes/@Model.corpus/@sheet.date.ToString("dd.MM.yyyy")">
-	                @sheet.date.ToString("dd.MM.yyyy")
-                </a>
-            }
-        </div>
-        <form class="search-body">
-            <div class="search-body-container">
-                <input id="search" type="search" placeholder="Введите группу или преподавателя...">
-                <button onclick="onSearch('@Model.corpus', '@Model.sheet?.ToString("dd.MM.yyyy")');return false">
-                    <img style="width: 20px;" class="icon" src="/images/basic/search.svg" alt="искать">
-                </button>
-            </div>
-        </form>
-    </div>
+	<h2 class="section-title">
+		@Model.daysChanges.DateText
+	</h2>
+	<h3 class="section-subtitle-small title-centered">
+		@Model.daysChanges.SchoolWeek
+	</h3>
+	<div class="months">
+		<div class="months-choose">
+			@{
+				using var db = new DatabaseContext();
+				var days = db.daysChanges.Where(e => e.corpus == Model.corpus).ToList();
+			}
+			@foreach (var sheet in days.OrderBy(e => e.date))
+			{
+				<a class="months-choose-item @(Model.sheet == sheet.date ? "active" : "")"
+				   href="/timetable/Changes/@Model.corpus/@sheet.date.ToString("dd.MM.yyyy")">
+					@sheet.date.ToString("dd.MM.yyyy")
+				</a>
+			}
+		</div>
+		<form class="search-body">
+			<div class="search-body-container">
+				<input id="search" type="search" placeholder="Введите группу или преподавателя...">
+				<button onclick="onSearch('@Model.corpus', '@Model.sheet?.ToString("dd.MM.yyyy")');return false">
+					<img style="width: 20px;" class="icon" src="/images/basic/search.svg" alt="искать">
+				</button>
+			</div>
+		</form>
+	</div>
 
 
 
-    @(await Html.RenderComponentAsync<ChangesComponent>(RenderMode.Server, new
-    {
-        search = search,
-        corpus = Model.corpus,
-        date = Model.daysChanges.date
-    }))
+	@(await Html.RenderComponentAsync<ChangesComponent>(RenderMode.Server, new
+	{
+		search = search,
+		corpus = Model.corpus,
+		date = Model.daysChanges.date
+	}))
 
 
-    <table style="margin: 10px auto !important;" class="customized timetable">
-        <thead>
-            <tr>
-                <th colspan="2">
-                    Режим звонков
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var bell in Model.daysChanges.bells)
-            {
-                <tr>
-                    <td>
-                        @bell.id
-                    </td>
-                    <td>
-                        @bell.period
-                    </td>
-                </tr>
-            }
+	<table style="margin: 10px auto !important;" class="customized timetable">
+		<thead>
+		<tr>
+			<th colspan="2">
+				Режим звонков
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		@foreach (var bell in Model.daysChanges.bells)
+		{
+			<tr>
+				<td>
+					@bell.id
+				</td>
+				<td>
+					@bell.period
+				</td>
+			</tr>
+		}
 
-        </tbody>
-    </table>
-    <input type="hidden" name="captchaToken" id="captchaToken" />
+		</tbody>
+	</table>
+	<input type="hidden" name="captchaToken" id="captchaToken"/>
 
 </section>
 
 
 
-<base href="~/" />
+<base href="~/"/>
 <script src="~/_framework/blazor.server.js"></script>
 

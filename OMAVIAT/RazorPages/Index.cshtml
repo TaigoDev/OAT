@@ -145,11 +145,11 @@
 			<ul id="news-slider" class="news-slider">
 				@foreach (var news in Model.News)
 				{
-                    var photos = news.GetPhotos();
-                    if (photos.Count is 0)
-                        continue;
-                    <li class="news-item">
-                        <img src="@photos.FirstOrDefault()" alt="">
+					var photos = news.GetPhotos();
+					if (photos.Count is 0)
+						continue;
+					<li class="news-item">
+						<img src="@photos.FirstOrDefault()" alt="">
 						<a tabindex="-1" href="~/news/@news.id" class="news-content">
 							<div class="news-date">
 								@news.date
@@ -185,31 +185,34 @@
 			Код будущего
 		</h3>
 		<a href="~/documents/mainPage/codeOfFuture.pdf" target="_blank">
-            <img src="~/images/mainPage/codeOfFuture.jpg" class="customized code-of-future" alt="баннер код будущего">
+			<img src="~/images/mainPage/codeOfFuture.jpg" class="customized code-of-future" alt="баннер код будущего">
 		</a>
 
 	</div>
 </section>
 
 <section>
-    <div class="container">
-	    <h3 class="section-title">
-		    Оцените нашу работу
-	    </h3>
-	    <!-- сказали можно потом переместить на отдельную страницу "Оценка труда" -->
-	    <div class="tessda">
-		    <a href="https://anketolog.ru/omsknok2024" target="_blank">
-			    <img src="~/images/mainPage/rateOurWork.jpg" class="customized rate-our-work" alt="баннер оцените нашу работу">
-		    </a>
-		    <a href="https://bus.gov.ru/qrcode/rate/378012?agencyId=169761" target="_blank">
-			    <img src="~/images/mainPage/rateOurWorkBusGov.jpg" class="customized rate-our-work" alt="баннер оцените нашу работу">
-		    </a>
-		    <a href="https://forms.yandex.ru/u/67553c4090fa7b6df424c86a/" target="_blank">
-			    <img src="~/images/mainPage/rateOurWorkYandex.jpg" class="customized rate-our-work" alt="баннер оцените нашу работу">
-		    </a>
-	    </div>
+	<div class="container">
+		<h3 class="section-title">
+			Оцените нашу работу
+		</h3>
+		<!-- сказали можно потом переместить на отдельную страницу "Оценка труда" -->
+		<div class="tessda">
+			<a href="https://anketolog.ru/omsknok2024" target="_blank">
+				<img src="~/images/mainPage/rateOurWork.jpg" class="customized rate-our-work"
+				     alt="баннер оцените нашу работу">
+			</a>
+			<a href="https://bus.gov.ru/qrcode/rate/378012?agencyId=169761" target="_blank">
+				<img src="~/images/mainPage/rateOurWorkBusGov.jpg" class="customized rate-our-work"
+				     alt="баннер оцените нашу работу">
+			</a>
+			<a href="https://forms.yandex.ru/u/67553c4090fa7b6df424c86a/" target="_blank">
+				<img src="~/images/mainPage/rateOurWorkYandex.jpg" class="customized rate-our-work"
+				     alt="баннер оцените нашу работу">
+			</a>
+		</div>
 
-    </div>
+	</div>
 </section>
 
 <section>

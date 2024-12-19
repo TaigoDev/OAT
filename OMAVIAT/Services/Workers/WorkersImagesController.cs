@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace OMAVIAT.Services.Workers
-{
-	public class WorkersImagesController : Controller
-	{
+namespace OMAVIAT.Services.Workers {
+	public class WorkersImagesController : Controller {
 		[HttpGet("api/images/teachers/{FullName?}")]
 		public async Task<IActionResult> GetTeacherPhoto(string? FullName)
 		{

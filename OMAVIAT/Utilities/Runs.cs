@@ -1,7 +1,5 @@
-﻿namespace OMAVIAT.Utilities
-{
-	public class Runs<T>
-	{
+﻿namespace OMAVIAT.Utilities {
+	public class Runs<T> {
 		public delegate Task Method(T parametr);
 		public delegate Task Method2(T parametr, bool IsRepeat);
 
@@ -29,8 +27,7 @@
 
 	}
 
-	public class Runs
-	{
+	public class Runs {
 		public static async void StartModules(params Func<Task>[] modules)
 		{
 			bool IsError = false;

@@ -4,8 +4,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
 
-public static class Utils
-{
+public static class Utils {
 
 	public static T toObject<T>(this string json) =>
 		JsonConvert.DeserializeObject<T>(json) ?? throw new Exception("Ошибка toObject<T>()");
@@ -60,7 +59,3 @@ public static class Utils
 			_ => "b1"
 		};
 }
-
-
-
-

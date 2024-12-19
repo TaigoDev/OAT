@@ -7,7 +7,7 @@
 	/* background-color: #e4e4e4 !important; */
 }
 
-.library-main-text p{
+.library-main-text p {
 	margin-bottom: 20px;
 	font-size: 1.075rem;
 }
@@ -41,23 +41,23 @@
 	--c: #151f70;
 }
 
-.library-timetable-item:nth-of-type(2n){
+.library-timetable-item:nth-of-type(2n) {
 	margin-left: auto;
 }
 
-.library-timetable-item:nth-child(1){
+.library-timetable-item:nth-child(1) {
 	box-shadow: -6px -6px 0px -2px var(--c);
 }
 
-.library-timetable-item:nth-child(2){
+.library-timetable-item:nth-child(2) {
 	box-shadow: 6px -6px 0px -2px var(--c);
 }
 
-.library-timetable-item:nth-child(3){
+.library-timetable-item:nth-child(3) {
 	box-shadow: -6px 6px 0px -2px var(--c);
 }
 
-.library-timetable-item:nth-child(4){
+.library-timetable-item:nth-child(4) {
 	box-shadow: 6px 6px 0px -2px var(--c);
 }
 
@@ -73,7 +73,7 @@
 	row-gap: 7px;
 }
 
-.library-timetable-item-body-row{
+.library-timetable-item-body-row {
 	display: flex;
 	justify-content: space-between;
 }
@@ -82,20 +82,22 @@
 	width: 10ch;
 }
 
-@media(600px<width<1000px){
+@media (600px < width < 1000px) {
 	.library-timetable {
 		grid-template-columns: repeat(auto-fit, 300px);
 	}
+
 	.library-timetable-item {
-		box-shadow: 0px 7px 2px -2px var(--c)!important;
+		box-shadow: 0px 7px 2px -2px var(--c) !important;
 	}
 }
 
-@media(width<600px) {
+@media (width < 600px) {
 	.library-timetable {
 		grid-template-columns: repeat(auto-fit, 270px);
 		justify-content: center;
 	}
+
 	.library-timetable-item {
 		box-shadow: 0px 7px 2px -2px var(--c) !important;
 	}

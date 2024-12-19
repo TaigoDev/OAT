@@ -17,8 +17,6 @@ window.addEventListener("load", () => {
 				selectorItem.classList.add("active");
 
 
-
-				
 				if (selectorItem.hasAttribute("data-target-corpus-name")) {
 					document.getElementById("choose-floor").classList.remove("hide");
 					currentCorpus = map.querySelector(`.map-corpus[data-corpus-name=${selectorItem.getAttribute("data-target-corpus-name")}]`);

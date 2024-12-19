@@ -26,13 +26,13 @@
 		@if (LessonLength != 0 || LessonFinished != 0)
 		{
 			<LessonProgressComponent LessonLength="LessonLength"
-									 LessonFinished="LessonFinished"/>
+			                         LessonFinished="LessonFinished"/>
 		}
 	</ZoneComponent>
 </div>
 
 @code {
-	[Parameter] public string LessonName { get; set; } = "ТСИ"; // сокращенное имя предмета
+	[Parameter] public string LessonName { get; set; } = "ТСИ";// сокращенное имя предмета
 	[Parameter] public string LessonType { get; set; } = "лекция";
 	[Parameter] public string LessonCabinet { get; set; } = "000";
 	[Parameter] public string LessonTeacher { get; set; } = "Фамилия И.О.";

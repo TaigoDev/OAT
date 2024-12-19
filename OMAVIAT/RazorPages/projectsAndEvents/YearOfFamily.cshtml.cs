@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages
-{
-	public class YearOfFamilyModel : PageModel
-	{
+namespace OMAVIAT.Pages {
+	public class YearOfFamilyModel : PageModel {
 		private readonly ILogger<YearOfFamilyModel> _logger;
 
 		public YearOfFamilyModel(ILogger<YearOfFamilyModel> logger)

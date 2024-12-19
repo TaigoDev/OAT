@@ -24,36 +24,36 @@
 				</button>
 			</div>
 		</form>
-			<h3 class="section-subtitle">
-				Персональный состав педагогических работников
-			</h3>
-			<ul class="people-list">
-				@if (Model.id < WorkersReader.Workers.Count())
+		<h3 class="section-subtitle">
+			Персональный состав педагогических работников
+		</h3>
+		<ul class="people-list">
+			@if (Model.id < WorkersReader.Workers.Count())
+			{
+				@foreach (var person in WorkersReader.Workers.ToList()[Model.id])
 				{
-					@foreach (var person in WorkersReader.Workers.ToList()[Model.id])
-					{
-						<li class="people-item">
-							<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
-								<img src="/api/images/teachers/@person.FullName" loading="lazy" alt="">
-							</a>
-							<div class="people-item-body more-info">
-								<div class="people-item-body-fio">
-									@person.FullName
-								</div>
-								<div class="people-item-body-job">
-									@person.Post
-								</div>
+					<li class="people-item">
+						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
+							<img src="/api/images/teachers/@person.FullName" loading="lazy" alt="">
+						</a>
+						<div class="people-item-body more-info">
+							<div class="people-item-body-fio">
+								@person.FullName
 							</div>
-						</li>
-					}
+							<div class="people-item-body-job">
+								@person.Post
+							</div>
+						</div>
+					</li>
 				}
-			</ul>
+			}
+		</ul>
 		@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
 		{
-			 CurrentPage = Model.id + 1,
+			CurrentPage = Model.id + 1,
 			count = WorkersReader.Workers.Sum(e => e.Count()),
-			 countInPage= 14,
-			 UrlWithParameter = "/organizationInformation/ManagementPedagogicalStaff/{id}"
+			countInPage = 14,
+			UrlWithParameter = "/organizationInformation/ManagementPedagogicalStaff/{id}"
 		}))
 	</section>
 	<aside id="sidebar" class="sidebar long">

@@ -3,10 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using OMAVIAT.Utilities;
 using System.Data;
 
-namespace OMAVIAT.Services.AdminPanel
-{
-	public class MysqlController : Controller
-	{
+namespace OMAVIAT.Services.AdminPanel {
+	public class MysqlController : Controller {
 		[HttpPost, Route("api/mysql/cmd"), AuthorizeRoles(Role.www_admin), NoCache]
 		public IActionResult SendCmd(string command)
 		{

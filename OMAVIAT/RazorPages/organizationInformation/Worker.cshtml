@@ -25,7 +25,7 @@
 					<div class="staff-person-basic-job">
 						@Model.worker.Post
 					</div>
-		
+
 					@if (management is not null)
 					{
 						<div class="staff-person-basic-phone">
@@ -35,8 +35,8 @@
 							@management.Email
 						</div>
 					}
-					
-					
+
+
 				</div>
 				<div class="staff-person-basic-photo">
 					<img src="/api/images/teachers/@Model.worker.FullName" alt="">
@@ -125,12 +125,12 @@
 			<ul class="customized">
 				@if (worker.Qualification is not null)
 					@foreach (var Qualification in worker.Qualification.Split("\n"))
-					{
-						<li>
-							@Qualification
-						</li>
-					}
-				
+				{
+					<li>
+						@Qualification
+					</li>
+				}
+
 			</ul>
 			@*		  
 			<h4 class="section-subtitle-small">
@@ -139,17 +139,18 @@
 			<p>
 				ФГАОУ ДПО "Государственный институт новых форм обучения" (18.02.2019 - 27.04.2019)
 			</p>
+			
 			*@
 			@if (worker.AcademicDegree is not null)
 			{
 				<h4 class="section-subtitle-small">
-					Ученая степень 
+					Ученая степень
 				</h4>
 				<p>
 					@worker.AcademicDegree
 				</p>
 			}
-			
+
 			@if (worker.Сategory is not null)
 			{
 				<h4 class="section-subtitle-small">
@@ -167,8 +168,9 @@
 			<p>
 				Информация не указана
 			</p>
-			*@
 			
+			*@
+
 			@if (worker.Subjects is not null)
 			{
 				var subjects = worker.Subjects.Split(";");
@@ -188,7 +190,7 @@
 
 				}
 			}
-			
+
 			@if (worker.ProfessionalDevelopment is not null)
 			{
 				var ProfessionalDevelopment = worker.ProfessionalDevelopment.Split("\n");
@@ -246,7 +248,7 @@
 			</h2>
 		}
 	</section>
-	
+
 	<aside id="sidebar" class="sidebar long">
 		<h3 class="sidebar-title">
 			Сведения об образовательной организации

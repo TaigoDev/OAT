@@ -3,10 +3,8 @@ using CsvHelper.Configuration;
 using OMAVIAT.Entities;
 using System.Globalization;
 
-namespace OMAVIAT.Services.Payments
-{
-	public class ContractReader
-	{
+namespace OMAVIAT.Services.Payments {
+	public class ContractReader {
 		protected static List<Contract> contracts = new();
 
 		public static async Task init()
@@ -44,8 +42,8 @@ namespace OMAVIAT.Services.Payments
 			if (badRecord.Count != 0)
 			{
 				var errorString = $"⚠️ При чтении файла kontra.csv произошли ошибки, которые не позволили загрузить {badRecord.Count()} строк(-у,-и)" +
-					$"\nВсего загружено строк: {badRecord.Count()}" +
-					"\nСтроки, которые не удалось загрузить:\n";
+				                  $"\nВсего загружено строк: {badRecord.Count()}" +
+				                  "\nСтроки, которые не удалось загрузить:\n";
 				foreach (var record in badRecord)
 					errorString += record;
 				Logger.Warning(errorString);

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.applicant
-{
-	public class QualificationIncreaseModel : PageModel
-	{
+namespace OMAVIAT.Pages.applicant {
+	public class QualificationIncreaseModel : PageModel {
 		private readonly ILogger<QualificationIncreaseModel> _logger;
 
 		public QualificationIncreaseModel(ILogger<QualificationIncreaseModel> logger)

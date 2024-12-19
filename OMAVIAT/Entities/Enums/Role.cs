@@ -1,5 +1,4 @@
-﻿public enum Role
-{
+﻿public enum Role {
 	www_admin,
 	www_reporter_news,
 	www_reporter_prof_news,
