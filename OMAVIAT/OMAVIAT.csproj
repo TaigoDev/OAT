@@ -58,4 +58,15 @@
 		<_ContentIncludedByDefault Remove="Components\Reusable\Attestation\AttestationEventMoreInfoComponent.razor"/>
 		<_ContentIncludedByDefault Remove="RazorPages\targetedTraining\GeneralInformation.cshtml"/>
 	</ItemGroup>
+	<ItemGroup>
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\About.cshtml" />
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\ManagementCompany.cshtml" />
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\News.cshtml" />
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\OPOPP.cshtml" />
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\Partners.cshtml" />
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\ProjectNews.cshtml" />
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\RepairProgress.cshtml" />
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\Specialities.cshtml" />
+	  <AdditionalFiles Include="RazorPages\projectsAndEvents\professionals\UPK.cshtml" />
+	</ItemGroup>
 </Project>
