@@ -1,0 +1,110 @@
+﻿@page
+@model DocumentsModel
+@{
+	ViewData["Title"] = "О чемпионате";
+}
+
+<div class="container content-page">
+	<section class="content">
+		<a id="plane" class="plane" href="#sidebar"></a>
+		<h2 class="section-title">
+			Документы
+		</h2>
+
+		<div class="accordions-list">
+			<div class="accordion">
+				<div class="accordion-head">
+					Положения
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list little">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank"
+								   href="~/documents/projectsAndEvents/professionals/Polozhenie_Ob_etike_red_2024.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								Положение
+								об этике поведения на мероприятиях всероссийского
+								чемпионатного движения по профессиональному мастерству
+							</div>
+						</li>
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank"
+								   href="~/documents/projectsAndEvents/professionals/Polozhenie_O_VChD_red_2024.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								Положение
+								о всероссийском чемпионатном движении
+								по профессиональному мастерству
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="accordion">
+				<div class="accordion-head">
+					Приказы
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank"
+								   href="~/documents/projectsAndEvents/professionals/1 Prikaz №86-OD ot 07.03.2024 Ob uchastii v chempionate Professionaly.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								Приказ №86-ОД от 07.03.2024 Об участии в чемпионате Профессионалы
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="accordion">
+				<div class="accordion-head">
+					Результаты
+				</div>
+				<div class="accordion-body">
+					<ul class="documents-list">
+						<li class="document-item">
+							<div class="document-item-head">
+								<a target="_blank"
+								   href="~/documents/projectsAndEvents/professionals/Rezul'taty regional'nogo etapa CHempionata.pdf"></a>
+							</div>
+							<div class="document-item-body">
+								Результаты регионального этапа Чемпионата
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+	
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Профессионалы
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="About">
+						О чемпионате
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="Documents">
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Links">
+						Полезные ссылки
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>

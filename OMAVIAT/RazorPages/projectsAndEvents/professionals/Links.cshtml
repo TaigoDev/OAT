@@ -1,0 +1,68 @@
+﻿@page
+@model LinksModel
+@{
+	ViewData["Title"] = "Полезные ссылки";
+}
+
+<div class="container content-page">
+	<section class="content">
+		<a id="plane" class="plane" href="#sidebar"></a>
+		<h2 class="section-title">
+			Полезные ссылки
+		</h2>
+		
+		<ul class="customized">
+			<li>
+				<a href="https://pro.firpo.ru/" target="_blank">
+					Официальный сайт Всероссийского чемпионатного движения по профессиональному мастерству
+				</a>
+			</li>
+			<li>
+				<a href="https://t.me/profirpo" target="_blank">
+					Telegram-канал
+				</a>
+			</li>
+			<li>
+				<a href="https://vk.com/pro.firpo" target="_blank">
+					Сообщество ВКонтакте
+				</a>
+			</li>
+			<li>
+				<a href="https://dzen.ru/profirpo" target="_blank">
+					Яндекс Дзен
+				</a>
+			</li>
+			<li>
+				<a href="https://pro.firpo.ru/o-nas/kontakty-federalnogo-operatora/" target="_blank">
+					Обратная связь
+				</a>
+			</li>
+		</ul>
+		
+	</section>
+	
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Профессионалы
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="About">
+						О чемпионате
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Documents">
+						Документы
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="Links">
+						Полезные ссылки
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>
