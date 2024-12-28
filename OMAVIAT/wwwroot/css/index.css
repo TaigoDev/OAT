@@ -403,3 +403,14 @@ html.special.special-color-2 .news-slider-arrow img, html.special.special-color-
 	background: none !important;
 	filter: invert(1) !important;
 }
+
+.pos{
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.pos-item{
+	max-width: min(100%, 350px) !important;
+}
