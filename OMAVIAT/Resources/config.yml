@@ -1,7 +1,7 @@
 baseUrl: https://new.oat.ru
 mainUrl: http://localhost:20045
 bindPort: 20045
-dbIp: "taigo.xyz"
+dbIp: "node.taigo.xyz"
 dbPort: 3306
 dbUser: "u126_FTgyBjq2cl"
 dbPassword: "qYqy6O.MgSk!lm54ieYlnhly"

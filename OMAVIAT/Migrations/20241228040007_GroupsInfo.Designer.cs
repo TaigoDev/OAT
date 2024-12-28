@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OMAVIAT;
 
@@ -11,9 +12,11 @@ using OMAVIAT;
 namespace OMAVIAT.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241228040007_GroupsInfo")]
+    partial class GroupsInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,131 +28,46 @@ namespace OMAVIAT.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("OMAVIAT.Entities.Database.CMK", b =>
+            modelBuilder.Entity("MyOAT.Entities.Database.Advertisement", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("achievements")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("compositions")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("descriptionOfWork")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("history")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("plans")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("url")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("CMK");
-                });
-
-            modelBuilder.Entity("OMAVIAT.Entities.Database.DemoExamNews", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Corpus")
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<bool>("IsFixed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("date")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("photos")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("short_description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("DemoExamNews");
-                });
-
-            modelBuilder.Entity("OMAVIAT.Entities.Database.Documents", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("url")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("documents");
-                });
-
-            modelBuilder.Entity("OMAVIAT.Entities.Database.IPTables", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<DateTime>("BanTime")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("IP")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("LastFailAttempt")
+                    b.Property<int>("Direction")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("attempts")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("IPTables");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Advertisements");
                 });
 
-            modelBuilder.Entity("OMAVIAT.Entities.Database.News", b =>
+            modelBuilder.Entity("MyOAT.Entities.Database.Messages", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -157,97 +75,112 @@ namespace OMAVIAT.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<bool>("IsFixed")
+                    b.Property<int>("messageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("MyOAT.Entities.Database.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsAnswered")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("date")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("photos")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("short_description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("News");
-                });
-
-            modelBuilder.Entity("OMAVIAT.Entities.Database.ProfNews", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<bool>("IsFixed")
+                    b.Property<bool>("IsPublic")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("date")
+                    b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("photos")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.HasKey("Id");
 
-                    b.Property<string>("short_description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.HasIndex("UserId");
 
-                    b.Property<string>("title")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ProfNews");
+                    b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("OMAVIAT.Entities.Database.Tokens", b =>
+            modelBuilder.Entity("MyOAT.Entities.Database.TelegramToken", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("Roles")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Token")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("issued")
-                        .IsRequired()
+                    b.Property<string>("Username")
                         .HasColumnType("longtext");
+
+                    b.Property<long?>("userId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TelegramTokens");
+                });
+
+            modelBuilder.Entity("MyOAT.Entities.Database.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Banned")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<long?>("TelegramUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("group")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("type")
+                        .HasColumnType("int");
 
                     b.Property<string>("username")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("Tokens");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("OMAVIAT.Entities.Schedule.Bell", b =>
@@ -535,6 +468,26 @@ namespace OMAVIAT.Migrations
                     b.ToTable("DisciplineTeacherModel");
                 });
 
+            modelBuilder.Entity("MyOAT.Entities.Database.Advertisement", b =>
+                {
+                    b.HasOne("MyOAT.Entities.Database.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MyOAT.Entities.Database.Question", b =>
+                {
+                    b.HasOne("MyOAT.Entities.Database.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("OMAVIAT.Entities.Schedule.Bell", b =>
                 {
                     b.HasOne("OMAVIAT.Entities.Schedule.Database.DaysChangesTable", null)
@@ -546,16 +499,14 @@ namespace OMAVIAT.Migrations
                 {
                     b.HasOne("OMAVIAT.Entities.Schedule.Database.TeacherInfo", null)
                         .WithMany("Disciplines")
-                        .HasForeignKey("TeacherInfoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TeacherInfoId");
                 });
 
             modelBuilder.Entity("OMAVIAT.Schedule.Entities.Models.DisciplineTeacherModel", b =>
                 {
                     b.HasOne("OMAVIAT.Entities.Schedule.Database.GroupInfo", null)
                         .WithMany("Disciplines")
-                        .HasForeignKey("GroupInfoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GroupInfoId");
                 });
 
             modelBuilder.Entity("OMAVIAT.Entities.Schedule.Database.DaysChangesTable", b =>
