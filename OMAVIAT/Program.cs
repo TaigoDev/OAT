@@ -20,7 +20,7 @@ await ScheduleLib.Init(TelegramBot.SendMessage, new OMAVIAT.Schedule.Entities.Da
 	db_password = Configurator.config.db_password,
 	db_port = Configurator.config.db_port,
 	db_user = Configurator.config.db_user,
-	IsLocalDB = OperatingSystem.IsWindows(),
+	IsLocalDB = OperatingSystem.IsWindows() || OperatingSystem.IsMacOS(),
 });
 
 Runs.StartModules(

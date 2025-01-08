@@ -1,0 +1,15 @@
+baseUrl: 
+mainUrl: 
+bindPort: 0
+dbIp: 
+dbPort: 0
+dbUser: 
+dbPassword: 
+dbName: 
+ldapIP: 
+ldapPort: 0
+ldapLogin: 
+ldapPassword: 
+ldapDomain: 
+ldapZone: 
+bitrixProxy: false

@@ -15,7 +15,7 @@ namespace OMAVIAT {
 		public static async Task init()
 		{
 			config = await FileUtils.SetupConfiguration<Config>(
-			Path.Combine(Directory.GetCurrentDirectory(), "Resources", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "config.yml" : "config-linux.yml"), new());
+			Path.Combine(Directory.GetCurrentDirectory(), "Resources", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || OperatingSystem.IsMacOS() ? "config.yml" : "config-linux.yml"), new());
 			telegram = await FileUtils.SetupConfiguration<TelegramConfig>(
 			Path.Combine(Directory.GetCurrentDirectory(), "Resources", "telegram.yml"), new());
 			timetable = await FileUtils.SetupConfiguration<TimeTableBotConfig>(
