@@ -1,7 +1,7 @@
 ﻿@page
 @model CareerGuidanceEventsModel
 @{
-	ViewData["Title"] = "Профориентационные мероприятия";
+	ViewData["Title"] = "Дни открытых дверей";
 }
 
 <style type="text/css">
@@ -13,70 +13,49 @@
 		font-weight: 500;
 		text-align: center !important;
 	}
+
+	.event-form {
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+		max-width: min(450px, 100%);
+	}
 </style>
 
 <div class="container content-page">
 	<section class="content">
 		<h2 class="section-title">
-			Профориентационные мероприятия
+			Дни открытых дверей
 		</h2>
 
-		<table class="customized">
-			<thead>
-			<tr>
-				<th>Дата, время, место проведения</th>
-				<th>Мастер-классы</th>
-			</tr>
-			</thead>
-			<tbody class="very-special">
-
-			<tr>
-				<td rowspan="6">
-					03.05. 2024
-					15.00
-					ул. Ленина, 24
-				</td>
-				<td>
-					Мастер-класс «Настройка сетевого оборудования»
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Мастер-класс «Дизайн и моделирование рекламных конструкций»
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Мастер-класс «Разработка мобильных приложений»
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Мастер-класс «Разработка виртуальной и дополненной реальности»
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Мастер-класс «Разработка системы безопасности от внутренних угроз на предприятии»
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Мастер-класс «Технология производства радиоэлектронных систем и устройств»
-				</td>
-			</tr>
-			<tr>
-				<td>
-					17.05. 2024
-					15.00
-					ул. Ленина, 24
-				</td>
-				<td>
-					День открытых дверей
-				</td>
-			</tr>
-			</tbody>
-		</table>
+		<form class="event-form">
+			<div class="input-box">
+				<label for="FIO">
+					Фамилия имя отчество
+				</label>
+				<input id="FIO" type="text">
+			</div>
+			<div class="input-box">
+				<label for="phone">
+					Телефон
+				</label>
+				<input id="phone" type="tel">
+			</div>
+			<div class="input-box">
+				<label for="email">
+					E-mail
+				</label>
+				<input id="email" type="email">
+			</div>
+			<div>
+				<input type="checkbox" id="agreement" value="agreement"/>
+				<label for="agreement">
+					Устанавливая флажок внутри данного чек-бокса вы даете согласие на обработку своих персональных
+					данных.
+				</label>
+			</div>
+			<button onclick="" class="customized">Подать заявку</button>
+		</form>
 
 	</section>
 	<aside id="sidebar" class="sidebar">
@@ -122,7 +101,7 @@
 				</li>
 				<li class="sidebar-link sidebar-link-selected">
 					<a asp-page="CareerGuidanceEvents">
-						Профориентационные мероприятия
+						Дни открытых дверей
 					</a>
 				</li>
 				<li class="sidebar-link">
