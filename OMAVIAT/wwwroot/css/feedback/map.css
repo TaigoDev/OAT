@@ -21,7 +21,7 @@
 
 .selector-items li {
 	color: var(--light-white);
-	background: var(--m-l-color);
+	background: var(--m-color);
 	border-radius: var(--border-radius-m);
 	cursor: pointer;
 	text-align: center;
@@ -29,7 +29,7 @@
 }
 
 .selector-items li:hover, .selector-items li.active {
-	background: var(--m-d-color);
+	background: var(--m-l-color);
 	color: #ffffff;
 }
 

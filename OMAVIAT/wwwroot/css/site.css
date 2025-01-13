@@ -98,11 +98,11 @@
 
 :root {
 	/* colors */
-	--m-color: #002453;
-	--m-d-color: #00032e;
-	--m-l-color: #004771;
+	--m-color: #042859;
+	--m-d-color: #040965;
+	--m-l-color: #044a73;
 	--matte-color: #222222;
-	--light-white: #dedede;
+	--light-white: #dfdede;
 	/* borders */
 	--border-width: 4px;
 	--border-radius-m: 5px;
@@ -132,12 +132,12 @@
 @supports (color: oklch(0.25 0 0)) {
 	:root {
 		--h: 200;
-		--s: 0.3;
+		--s: 0.385;
 		--m-color: oklch(0.225 calc(var(--s) + 0.05) var(--h));
 		--m-d-color: oklch(0.175 var(--s) var(--h));
-		--m-l-color: oklch(0.275 calc(var(--s) + 0.05) var(--h));
+		--m-l-color: oklch(0.275 calc(var(--s) + 0.075) var(--h));
 		--matte-color: oklch(0.25 0 0);
-		--light-white: oklch(0.9 0 0);
+		--light-white: oklch(0.95 0 0);
 	}
 }
 
@@ -638,10 +638,9 @@ section.centered .section-title {
 
 .input-box input, .input-box textarea, .input-box select {
 	padding: 7px 5px;
-	border: var(--border-width) solid transparent;
-	border-radius: var(--border-radius-l);
-	background: var(--matte-color);
-	color: var(--light-white);
+	border: var(--border-width) solid var(--m-d-color);
+	border-radius: var(--border-radius-m);
+	background-color: var(--light-white);
 	letter-spacing: .075em;
 	opacity: .825;
 	transition: opacity 100ms ease, border-color 100ms ease;
@@ -659,9 +658,8 @@ section.centered .section-title {
 input:not([readonly]):focus-visible,
 textarea:not([readonly]):focus-visible,
 select:focus-visible {
-	border-color: #00000090;
+	border-color: var(--m-l-color);
 	opacity: .9;
-	outline: none;
 }
 
 textarea.customized {
@@ -699,18 +697,18 @@ button.customized {
 	padding: 10px;
 	border: var(--border-width) solid transparent;
 	border-radius: var(--border-radius-m);
-	background-color: hsl(0, 0%, 20%);
+	background-color: var(--m-l-color);
 	color: var(--light-white);
 	font-weight: 700;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	opacity: 0.95;
 	overflow: hidden;
-	transition: border-color 225ms ease, opacity 225ms ease;
+	transition: border-color 75ms ease, opacity 75ms ease;
 }
 
 button.customized:hover {
-	border-color: rgb(20, 20, 20);
+	border-color: var(--m-d-color);
 }
 
 /* images */
@@ -1565,7 +1563,7 @@ table.two-column tr td:first-child {
 body {
 	display: table;
 	padding-top: calc(var(--max-header-heigth) + 50px);
-	--max-header-heigth: 110px;
+	--max-header-heigth: 100px;
 	background-color: oklch(0.92 0 0);
 }
 

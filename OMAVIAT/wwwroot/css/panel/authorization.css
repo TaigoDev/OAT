@@ -63,10 +63,6 @@ body {
 	row-gap: 10px;
 }
 
-.input-box input {
-	background-color: hsl(0, 0%, 20%);
-}
-
 .sign-in {
 	position: relative;
 	z-index: 1;

@@ -1,8 +1,20 @@
 ﻿.pay-form {
-	display: flex;
-	flex-direction: column;
-	row-gap: 10px;
-	max-width: min(450px, 100%);
+	display: grid;
+	grid-template-columns: repeat(2, minmax(200px, 1fr));
+	gap: 20px;
+	max-width: min(800px, 100%);
+}
+
+@media(width>500px){
+	.pay-form div:nth-of-type(10), .pay-form div:nth-of-type(11), button.customized {
+		grid-column: span 2;
+	}
+}
+
+@media(width<500px){
+	.pay-form {
+		grid-template-columns: repeat(1, minmax(200px, 1fr));
+	}
 }
 
 .hide {

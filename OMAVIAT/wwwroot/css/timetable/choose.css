@@ -12,7 +12,7 @@
 	background-color: var(--m-color);
 	color: var(--light-white);
 	font-weight: 500;
-	transition: 100ms ease;
+	transition: 75ms ease;
 }
 
 .corpus:hover {

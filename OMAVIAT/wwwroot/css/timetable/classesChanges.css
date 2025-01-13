@@ -1,9 +1,8 @@
-﻿
-.document-item {
+﻿.document-item {
 	cursor: pointer;
 }
 
-.document-item, .document-item-head a {
-	background-color: #0b1b41;
+.document-item {
+	opacity: 0.9;
 }
 
