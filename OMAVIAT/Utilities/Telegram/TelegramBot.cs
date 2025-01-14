@@ -107,7 +107,7 @@ namespace OMAVIAT.Utilities.Telegram {
 		{
 			try
 			{
-				if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && !OperatingSystem.IsMacOS())
 					await botClient.SendTextMessageAsync(new ChatId(long.Parse(Configurator.telegram.chat_id)), message,
 					replyMarkup: Buttons.CreateKeyboard(Buttons.CreateButtonInRow("🔓 Посмотреть ошибку", $"{ErrorNotification.Message}")));
 				else
