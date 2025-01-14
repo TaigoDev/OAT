@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace OMAVIAT.Utilities {
 	public class DatabaseHelper {
@@ -17,7 +17,7 @@ namespace OMAVIAT.Utilities {
 					Logger.Info($"✅ Подключение с базой данных успешно установлено!");
 					using var db = new DatabaseContext();
 					Console.WriteLine($"Количество новостей: {db.News.Count()} ");
-					await db.Database.MigrateAsync();
+					//await db.Database.MigrateAsync();
 					await DropTokens();
 					return;
 				}
