@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Runtime.InteropServices;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
@@ -90,7 +90,7 @@ namespace OMAVIAT.Utilities.Telegram {
 		{
 			try
 			{
-				if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && !OperatingSystem.IsMacOS())
 					await botClient.SendTextMessageAsync(new ChatId(long.Parse(Configurator.telegram.chat_id)), message);
 				else
 					Console.WriteLine(message);
