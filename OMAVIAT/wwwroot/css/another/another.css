@@ -13,25 +13,16 @@
 	width: 200px;
 	aspect-ratio: 1;
 	padding: 15px;
-	background-image: repeating-linear-gradient(45deg, var(--m-color), var(--m-d-color) 10%, var(--m-l-color) 20%, var(--m-color) 30%);
+	background-image: linear-gradient(45deg, var(--m-color), var(--m-l-color) 50%);
 	border-radius: var(--border-radius-l);
 	color: #ffffff90;
 	text-align: center;
 	font-weight: 600;
 	font-size: 1.15rem;
 	letter-spacing: 0.05em;
-	animation: another-play 20s infinite linear;
 	transition: 150ms ease;
 }
 
-@keyframes another-play {
-	from {
-		background-position: 0;
-	}
-	to {
-		background-position: 100%;
-	}
-}
 
 .another-list-item:hover {
 	color: white;

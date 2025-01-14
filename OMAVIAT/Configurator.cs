@@ -10,7 +10,7 @@ namespace OMAVIAT {
 		public static TimeTableBotConfig timetable = new();
 		public static TimeTableBotConfig myoat = new();
 		public static YandexSmartCaptchaConfig SmartCaptcha = new();
-		public static bool IsLocal = OperatingSystem.IsWindows();
+		public static bool IsLocal = OperatingSystem.IsWindows() || OperatingSystem.IsMacOS();
 
 		public static async Task init()
 		{

@@ -25,13 +25,8 @@
 	padding-bottom: 5px;
 	font-weight: 500;
 	font-size: 1.1rem;
-	color: var(--matte-color);
-}
-
-.all-news:hover:after {
-	right: 0;
-	width: 0;
-	left: unset;
+	color: var(--m-color);
+	transition: 100ms ease;
 }
 
 .all-news::after {
@@ -42,8 +37,18 @@
 	display: block;
 	height: 2px;
 	width: 100%;
-	background-color: var(--matte-color);
-	transition: 275ms ease;
+	background-color: currentColor;
+	transition: right 225ms ease, left 225ms ease, width 225ms ease, background-color 100ms ease;
+}
+
+.all-news:hover{
+	color: var(--m-l-color);
+}
+
+.all-news:hover:after {
+	right: 0;
+	width: 0;
+	left: unset;
 }
 
 .news-slider-btns {
@@ -58,20 +63,15 @@
 	width: 45px;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	border: 2.5px solid var(--matte-color);
+	border: 2.5px solid var(--m-color);
 	cursor: pointer;
 	--rotate-arrow: 90deg;
-	opacity: 0.8;
-	transition: 275ms ease;
+	transition: 125ms ease;
 }
 
 .news-slider-arrow:hover {
-	border-color: black;
+	border-color: var(--m-l-color);
 	opacity: 1;
-}
-
-.news-slider-arrow:hover img {
-	scale: 1.2;
 }
 
 .news-slider-prev {
@@ -80,7 +80,6 @@
 
 .news-slider-arrow img {
 	width: 45%;
-	transition: 276ms ease;
 }
 
 .news-slider-arrow.inactive {
@@ -95,7 +94,7 @@
 	height: 400px;
 	--news-offset: 0%;
 	--news-offset-helper: 30px;
-	transition: 1250ms ease;
+	transition: 1100ms ease;
 }
 
 .news-item {
@@ -192,7 +191,7 @@
 }
 
 .card-item:hover {
-	background-color: #4D89E2;
+	background-color: var(--m-l-color);
 }
 
 .card-item::after {
@@ -320,7 +319,7 @@
 	margin: auto;
 	border-radius: var(--border-radius-xl);
 	color: var(--light-white);
-	background: linear-gradient(45deg, var(--m-color), var(--m-l-color)), radial-gradient(at 70% 30%, rgb(230, 100, 101) 20%, rgb(145, 152, 229) 20%);
+	background: linear-gradient(45deg, var(--m-color), var(--m-l-color));
 	box-shadow: -20px 20px 100px -30px var(--m-d-color), 20px -20px 100px -30px var(--m-l-color);
 	font-size: 1.5rem;
 	font-weight: 700;
@@ -366,7 +365,7 @@
 	left: 50%;
 	translate: -50% -50%;
 	width: 150%;
-	background: repeating-conic-gradient(var(--m-color) 10%, color-mix(in srgb, var(--m-color) 80%, black) 20%, var(--m-color) 30%);
+	background: repeating-conic-gradient(var(--m-color) 10%, color-mix(in srgb, var(--m-color) 80%, var(--m-l-color)) 20%, var(--m-color) 30%);
 	aspect-ratio: 1;
 	opacity: 0;
 	animation: 30s rotate infinite linear normal;

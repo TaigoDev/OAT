@@ -104,7 +104,7 @@
 	--matte-color: #222222;
 	--light-white: #dfdede;
 	/* borders */
-	--border-width: 4px;
+	--border-width: 3px;
 	--border-radius-m: 5px;
 	--border-radius-l: 10px;
 	--border-radius-xl: 15px;
@@ -133,9 +133,9 @@
 	:root {
 		--h: 200;
 		--s: 0.385;
-		--m-color: oklch(0.225 calc(var(--s) + 0.05) var(--h));
-		--m-d-color: oklch(0.175 var(--s) var(--h));
-		--m-l-color: oklch(0.275 calc(var(--s) + 0.075) var(--h));
+		--m-color: oklch(0.25 var(--s) var(--h));
+		--m-d-color: oklch(0.195 calc(var(--s) - 0.05) var(--h));
+		--m-l-color: oklch(0.45 calc(var(--s) + 0.2) var(--h));
 		--matte-color: oklch(0.25 0 0);
 		--light-white: oklch(0.95 0 0);
 	}
@@ -223,7 +223,7 @@ textarea[readonly], input[readonly] {
 
 a {
 	display: contents;
-	color: #4D89E2;
+	color: var(--m-l-color);
 }
 
 a,
@@ -232,9 +232,13 @@ a:hover {
 	text-decoration: none;
 }
 
-a:focus-visible, button:focus-visible, input:focus-visible {
-	outline: 3px solid var(--m-color);
+a:focus-visible, input:focus-visible, textarea:focus-visible {
+	outline: none;
+}
+
+button:focus-visible {
 	outline-offset: 3px;
+	outline: 2.5px solid var(--m-l-color);
 }
 
 img {
@@ -320,7 +324,7 @@ section.centered .section-title {
 }
 
 .content a {
-	color: #4D89E2;
+	color: var(--m-l-color);
 }
 
 .plane {
@@ -681,13 +685,14 @@ textarea.customized::-webkit-scrollbar-thumb {
 
 input[type=file]::file-selector-button {
 	padding: 5px;
-	border-radius: var(--border-radius-l);
+	border-radius: var(--border-radius-m);
+	border: 2px solid var(--m-color);
 	background-color: var(--light-white);
-	transition: 200ms ease;
+	transition: 100ms ease;
 }
 
 input[type=file]::file-selector-button:hover {
-	background-color: #201e1e;
+	background-color: var(--m-l-color);
 	color: var(--light-white);
 }
 
@@ -715,7 +720,7 @@ button.customized:hover {
 
 .icon {
 	width: 25px;
-	transition: 175ms ease;
+	transition: 125ms ease;
 }
 
 img.customized {
@@ -827,7 +832,7 @@ ul.customized li::before {
 	width: 6px;
 	height: 6px;
 	border-radius: 50%;
-	background: var(--m-l-color);
+	background: currentColor;
 	transition: 150ms ease;
 }
 
@@ -839,15 +844,11 @@ ul.customized li::after {
 	bottom: 10px;
 	width: 1px;
 	height: calc(100% + 5px);
-	border-left: 2px dotted var(--m-l-color);
+	border-left: 2px dotted currentColor;
 }
 
 ul.customized li:last-child::after {
 	content: none;
-}
-
-ul.customized li:hover:before {
-	box-shadow: 0 0 0 8px #677ea130;
 }
 
 ol.customized {
@@ -861,34 +862,27 @@ ol.customized {
 ol.customized li {
 	position: relative;
 	line-height: 1.3;
-	background-color: #b6c5dea8;
-	padding: 7px 7px 7px 30px;
-	border-radius: var(--border-radius-m);
-	overflow: hidden;
-}
-
-ol.customized li:hover::before {
-	color: white;
-	background: var(--m-l-color);
-	opacity: 1;
+	padding: 0 0 0 32px;
 }
 
 ol.customized li:before {
 	content: counter(num);
 	counter-increment: num;
 	position: absolute;
-	top: 0;
+	top: 50%;
 	left: 0;
+	translate: 0 -50%;
 	display: grid;
 	place-content: center;
-	width: 22px;
-	height: 100%;
-	background: var(--m-color);
-	color: var(--light-white);
-	font-weight: 500;
+	width: 23px;
+	height: 23px;
+	border-radius: 50%;
+	background: var(--matte-c);
+	color: white;
+	font-weight: 600;
+	font-size: 0.9em;
 	text-align: center;
 	opacity: 0.65;
-	transition: 100ms ease;
 }
 
 /* tables */
@@ -1564,7 +1558,7 @@ body {
 	display: table;
 	padding-top: calc(var(--max-header-heigth) + 50px);
 	--max-header-heigth: 100px;
-	background-color: oklch(0.92 0 0);
+	background-color: oklch(0.91 0 0);
 }
 
 section::before,
@@ -1654,11 +1648,11 @@ section.content::before {
 .important-pages li a {
 	color: var(--light-white);
 	font-size: 1.1rem;
-	transition: 150ms ease;
+	transition: 100ms ease;
 }
 
 .important-pages li:hover a {
-	color: #4d89e2;
+	color: var(--m-l-color);
 }
 
 .functional {
@@ -2169,11 +2163,11 @@ a.main-menu-item-pictogram {
 	display: block;
 	padding: 8px 0;
 	color: var(--light-white);
-	transition: 150ms ease;
+	transition: 100ms ease;
 }
 
 .footer-bottom-pages li a:hover {
-	color: #4d89e2;
+	color: var(--m-l-color);
 }
 
 .copyright {
