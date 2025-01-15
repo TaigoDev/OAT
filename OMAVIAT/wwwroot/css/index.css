@@ -204,7 +204,7 @@
 	aspect-ratio: 1;
 	background: center/cover url(../images/mainPage/planeFront.svg);
 	opacity: 0;
-	transition: 400ms ease-in-out;
+	transition: 350ms ease-in-out;
 }
 
 .card-item:hover::after {
@@ -245,7 +245,7 @@
 
 .card-item-header, .card-item-description {
 	opacity: 0;
-	transition: opacity 450ms 100ms ease-in-out, translate 450ms ease-in-out;
+	transition: opacity 350ms 100ms ease-in-out, translate 350ms ease-in-out;
 }
 
 .card-item:hover .card-item-description,

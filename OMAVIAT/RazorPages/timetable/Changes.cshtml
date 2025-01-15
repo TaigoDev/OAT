@@ -34,14 +34,14 @@
 		@Model.daysChanges.SchoolWeek
 	</h3>
 	<div class="months">
-		<div class="months-choose">
+		<div class="choose">
 			@{
 				using var db = new DatabaseContext();
 				var days = db.daysChanges.Where(e => e.corpus == Model.corpus).ToList();
 			}
 			@foreach (var sheet in days.OrderBy(e => e.date))
 			{
-				<a class="months-choose-item @(Model.sheet == sheet.date ? "active" : "")"
+				<a class="choose-item @(Model.sheet == sheet.date ? "active" : "")"
 				   href="/timetable/Changes/@Model.corpus/@sheet.date.ToString("dd.MM.yyyy")">
 					@sheet.date.ToString("dd.MM.yyyy")
 				</a>

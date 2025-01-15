@@ -16,16 +16,16 @@
 		Успеваемость студента @Model.FullName
 	</h2>
 	<div class="months">
-		<div class="months-choose">
+		<div class="choose">
 			@if (lastMonth != "август")
 			{
-				<a class="months-choose-item" href="/parents/grades/@lastMonth">
+				<a class="choose-item" href="/parents/grades/@lastMonth">
 					Предыдущий месяц
 				</a>
 			}
 			@if (nextMonth != "июль")
 			{
-				<a class="months-choose-item" href="/parents/grades/@nextMonth">
+				<a class="choose-item" href="/parents/grades/@nextMonth">
 					Следующий месяц
 				</a>
 			}

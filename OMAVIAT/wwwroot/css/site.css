@@ -133,11 +133,11 @@
 	:root {
 		--h: 200;
 		--s: 0.385;
-		--m-color: oklch(0.25 var(--s) var(--h));
-		--m-d-color: oklch(0.195 calc(var(--s) - 0.05) var(--h));
+		--m-color: oklch(0.275 var(--s) var(--h));
+		--m-d-color: oklch(0.2 calc(var(--s) - 0.05) var(--h));
 		--m-l-color: oklch(0.45 calc(var(--s) + 0.2) var(--h));
-		--matte-color: oklch(0.25 0 0);
-		--light-white: oklch(0.95 0 0);
+		--matte-color: oklch(0.325 0 0);
+		--light-white: oklch(0.925 0 0);
 	}
 }
 
@@ -699,21 +699,52 @@ input[type=file]::file-selector-button:hover {
 button.customized {
 	position: relative;
 	display: block;
-	padding: 10px;
-	border: var(--border-width) solid transparent;
+	padding: 15px;
 	border-radius: var(--border-radius-m);
-	background-color: var(--m-l-color);
+	background-color: var(--m-color);
 	color: var(--light-white);
 	font-weight: 700;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	opacity: 0.95;
 	overflow: hidden;
-	transition: border-color 75ms ease, opacity 75ms ease;
+	transition: 100ms ease;
 }
 
-button.customized:hover {
-	border-color: var(--m-d-color);
+button.customized:hover, button.customized:focus-visible {
+	background-color: var(--m-l-color);
+	outline: none;
+}
+
+/* chooses */
+
+.choose {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 15px;
+}
+
+.choose-item {
+	display: grid;
+	place-items: center;
+	padding: 8px 20px;
+	font-weight: 500;
+	border-radius: var(--border-radius-m);
+	background: var(--m-color);
+	color: var(--light-white);
+	transition: 125ms ease;
+}
+
+.choose-item:hover, .choose-item.active {
+	background: var(--m-l-color);
+}
+
+.choose-current {
+	font-size: 1.15rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	line-height: 1;
 }
 
 /* images */
@@ -931,13 +962,9 @@ table.customized thead td {
 	padding: 7px;
 }
 
-table.customized tbody {
-	background-color: #ffffff90;
-}
-
 table.customized tbody td {
 	padding: 7px 5px;
-	background: #00000025;
+	background: #00000015;
 	text-align: center;
 }
 
@@ -1558,7 +1585,7 @@ body {
 	display: table;
 	padding-top: calc(var(--max-header-heigth) + 50px);
 	--max-header-heigth: 100px;
-	background-color: oklch(0.91 0 0);
+	background-color: var(--light-white);
 }
 
 section::before,
@@ -2134,11 +2161,6 @@ a.main-menu-item-pictogram {
 .footer-bottom-social {
 	display: flex;
 	gap: 15px;
-}
-
-.footer-bottom-social img {
-	opacity: 0.8;
-	transition: 250ms ease;
 }
 
 .footer-bottom-social img:hover {
