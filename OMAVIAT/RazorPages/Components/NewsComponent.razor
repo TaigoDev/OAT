@@ -403,7 +403,7 @@
 	private void SetAddButton()
 	{
 		button = (__builder) => {
-			<button type="button" class="panel-form-send" value="Отправить" @onclick="async () => await OnPublish()"
+			<button type="button" class="customized" value="Отправить" @onclick="async () => await OnPublish()"
 			        multiple>
 				Отправить
 			</button>
@@ -415,7 +415,7 @@
 		button = (__builder) => {
 			<p>⚠️ Частичное изменение фотографий недоступно. Вы можете только обновить все фотографии сразу. Если вы
 				хотите оставить текущие фотографии, то просто не выбирайте другие и они сохраняться автоматически.</p>
-			<button type="button" class="panel-form-send" value="Отправить"
+			<button type="button" class="customized" value="Отправить"
 			        @onclick="async () => await UpdateNews(news)" multiple>
 				Обновить новость
 			</button>

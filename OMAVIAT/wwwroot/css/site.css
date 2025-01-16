@@ -104,7 +104,8 @@
 	--matte-color: #222222;
 	--light-white: #dfdede;
 	/* borders */
-	--border-width: 3px;
+	--border-width: 2px;
+	--border-radius-s: 3px;
 	--border-radius-m: 5px;
 	--border-radius-l: 10px;
 	--border-radius-xl: 15px;
@@ -134,10 +135,10 @@
 		--h: 200;
 		--s: 0.385;
 		--m-color: oklch(0.275 var(--s) var(--h));
-		--m-d-color: oklch(0.2 calc(var(--s) - 0.05) var(--h));
-		--m-l-color: oklch(0.45 calc(var(--s) + 0.2) var(--h));
-		--matte-color: oklch(0.325 0 0);
-		--light-white: oklch(0.925 0 0);
+		--m-d-color: oklch(0.185 calc(var(--s) - 0.05) var(--h));
+		--m-l-color: oklch(0.425 calc(var(--s) + 0.05) var(--h));
+		--matte-color: oklch(0.4 0 0);
+		--light-white: oklch(0.95 0 0);
 	}
 }
 
@@ -644,7 +645,7 @@ section.centered .section-title {
 	padding: 7px 5px;
 	border: var(--border-width) solid var(--m-d-color);
 	border-radius: var(--border-radius-m);
-	background-color: var(--light-white);
+	background-color: white;
 	letter-spacing: .075em;
 	opacity: .825;
 	transition: opacity 100ms ease, border-color 100ms ease;
@@ -685,15 +686,14 @@ textarea.customized::-webkit-scrollbar-thumb {
 
 input[type=file]::file-selector-button {
 	padding: 5px;
-	border-radius: var(--border-radius-m);
-	border: 2px solid var(--m-color);
-	background-color: var(--light-white);
+	border-radius: var(--border-radius-s);
+	background-color: var(--m-color);
+	color: var(--light-white);
 	transition: 100ms ease;
 }
 
 input[type=file]::file-selector-button:hover {
 	background-color: var(--m-l-color);
-	color: var(--light-white);
 }
 
 button.customized {
@@ -1584,7 +1584,7 @@ table.two-column tr td:first-child {
 body {
 	display: table;
 	padding-top: calc(var(--max-header-heigth) + 50px);
-	--max-header-heigth: 100px;
+	--max-header-heigth: 85px;
 	background-color: var(--light-white);
 }
 
@@ -1621,7 +1621,7 @@ section.content::before {
 	height: 100%;
 	min-width: 100dvw;
 	max-height: var(--max-header-heigth);
-	padding: 20px 0;
+	padding: 15px 0;
 	text-transform: uppercase;
 	font-weight: 700;
 	color: var(--light-white);
@@ -1657,7 +1657,7 @@ section.content::before {
 }
 
 .logo {
-	height: 60px;
+	height: 55px;
 	filter: drop-shadow(0 0 0.5px black);
 }
 
@@ -1742,7 +1742,7 @@ section.content::before {
 	}
 
 	.logo {
-		height: 60px;
+		height: 50px;
 	}
 
 	.navigation {
@@ -2059,7 +2059,7 @@ a.main-menu-item-pictogram {
 
 .site-footer {
 	display: table-row;
-	background-color: #00000015;
+	background-color: #00000010;
 	text-transform: uppercase;
 	font-weight: 700;
 	overflow-x: hidden;
