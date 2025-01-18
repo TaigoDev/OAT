@@ -11,8 +11,8 @@
 	gap: 15px;
 	padding: 10px;
 	border-radius: var(--border-radius-l);
-	background-color: var(--m-l-color);
-	transition: 200ms ease;
+	background-color: var(--m-color);
+	transition: 150ms ease;
 }
 
 .specialities-item img {
@@ -29,7 +29,7 @@
 }
 
 .specialities-item:hover {
-	background: var(--m-color);
+	background: var(--m-l-color);
 }
 
 .specialities-item img {

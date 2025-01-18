@@ -133,12 +133,12 @@
 @supports (color: oklch(0.25 0 0)) {
 	:root {
 		--h: 200;
-		--s: 0.385;
-		--m-color: oklch(0.275 var(--s) var(--h));
-		--m-d-color: oklch(0.185 calc(var(--s) - 0.05) var(--h));
-		--m-l-color: oklch(0.425 calc(var(--s) + 0.05) var(--h));
-		--matte-color: oklch(0.4 0 0);
-		--light-white: oklch(0.95 0 0);
+		--s: 0.4;
+		--m-color: oklch(0.235 var(--s) var(--h));
+		--m-d-color: oklch(0.185 var(--s) var(--h));
+		--m-l-color: oklch(0.35 var(--s) var(--h));
+		--matte-color: oklch(0.325 0 0);
+		--light-white: oklch(0.97 0 0);
 	}
 }
 
@@ -224,7 +224,7 @@ textarea[readonly], input[readonly] {
 
 a {
 	display: contents;
-	color: var(--m-l-color);
+	color: #4D89E2;
 }
 
 a,
@@ -233,7 +233,7 @@ a:hover {
 	text-decoration: none;
 }
 
-a:focus-visible, input:focus-visible, textarea:focus-visible {
+a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
 	outline: none;
 }
 
@@ -325,7 +325,7 @@ section.centered .section-title {
 }
 
 .content a {
-	color: var(--m-l-color);
+	color: #4D89E2;
 }
 
 .plane {
@@ -442,8 +442,8 @@ section.centered .section-title {
 	position: sticky;
 	right: 10px;
 	top: 10px;
-	min-width: 290px;
-	max-width: 290px;
+	min-width: 300px;
+	max-width: 300px;
 	height: fit-content;
 	background: var(--matte-color);
 	border: var(--border-width-sidebar) solid;
@@ -456,17 +456,24 @@ section.centered .section-title {
 
 .sidebar-title {
 	--vertical-padding: 10px;
-	padding: calc(var(--vertical-padding) - var(--border-width-sidebar)) 5px var(--vertical-padding) 5px;
+	padding: calc(var(--vertical-padding) - var(--border-width-sidebar)) 5px 0 5px;
 	font-size: 1.1rem;
 	font-weight: 700;
 	text-align: center;
 	color: var(--light-white);
 }
 
+.sidebar-title::after{
+	content: "";
+	display: block;
+	height: 2px;
+	width: 80%;
+	margin: 8px auto 3px auto;
+	background-color: #ffffff20;
+}
+
 .sidebar-body {
 	padding: 6px;
-	background-color: #ffffff25;
-	border-radius: calc(var(--border-radius-sidebar) - var(--border-width-sidebar) / 2);
 	font-size: 0.95rem;
 }
 
@@ -647,8 +654,7 @@ section.centered .section-title {
 	border-radius: var(--border-radius-m);
 	background-color: white;
 	letter-spacing: .075em;
-	opacity: .825;
-	transition: opacity 100ms ease, border-color 100ms ease;
+	transition: 100ms ease;
 }
 
 .input-box:has(input[type="checkbox"]) {
@@ -664,7 +670,6 @@ input:not([readonly]):focus-visible,
 textarea:not([readonly]):focus-visible,
 select:focus-visible {
 	border-color: var(--m-l-color);
-	opacity: .9;
 }
 
 textarea.customized {
@@ -686,6 +691,7 @@ textarea.customized::-webkit-scrollbar-thumb {
 
 input[type=file]::file-selector-button {
 	padding: 5px;
+	border: none;
 	border-radius: var(--border-radius-s);
 	background-color: var(--m-color);
 	color: var(--light-white);
@@ -1458,30 +1464,10 @@ table.two-column tr td:first-child {
 	display: flex;
 	flex-direction: column;
 	max-width: 310px;
-	padding-bottom: 10px;
 	border-radius: var(--border-radius-xl);
-	background-color: var(--m-d-color);
+	background-color: var(--m-color);
 	overflow: hidden;
 	color: var(--light-white);
-}
-
-.question-contact::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	translate: 100% -100%;
-	width: 35px;
-	aspect-ratio: 1;
-	background: center / cover url(../images/basic/good.svg);
-	background-repeat: no-repeat;
-	opacity: 0;
-	transition: translate 350ms ease, opacity 600ms ease;
-}
-
-.question-contact:hover::before {
-	translate: -10px 10px;
-	opacity: 1;
 }
 
 .question-contact p {
@@ -1494,8 +1480,10 @@ table.two-column tr td:first-child {
 	align-items: center;
 	row-gap: 10px;
 	padding: 15px;
-	background-color: var(--m-color);
+	background: #00000030;
+	border-radius: var(--border-radius-l);
 	text-align: center;
+	margin: 10px 10px 0 10px;
 }
 
 .question-contact-head-img-container {
@@ -1512,7 +1500,7 @@ table.two-column tr td:first-child {
 
 .question-contact-head-img-container img {
 	border-radius: 50%;
-	transition: 500ms ease;
+	transition: 250ms ease;
 }
 
 .question-contact-head-fio {
@@ -1679,7 +1667,7 @@ section.content::before {
 }
 
 .important-pages li:hover a {
-	color: var(--m-l-color);
+	color: #4D89E2;
 }
 
 .functional {
@@ -2189,7 +2177,7 @@ a.main-menu-item-pictogram {
 }
 
 .footer-bottom-pages li a:hover {
-	color: var(--m-l-color);
+	color: #4D89E2;
 }
 
 .copyright {
