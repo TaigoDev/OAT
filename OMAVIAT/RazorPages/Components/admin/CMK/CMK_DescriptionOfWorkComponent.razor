@@ -1,12 +1,11 @@
 ﻿@using Microsoft.EntityFrameworkCore
-@using OMAVIAT
 <div id="descriptionOfWork-form" class="hide">
 	<form class="panel-form">
 		<div class="input-box">
 			<label for="news-text">
 				Текст
 			</label>
-			<textarea class="customized" id="news-text" @onchange="(e) => text = e.Value!.ToString()!">@text</textarea>
+			<textarea class="customized" id="news-text" @onchange="e => text = e.Value!.ToString()!">@text</textarea>
 		</div>
 
 		<button type="button" class="customized" value="Отправить" @onclick="async () => await Update()">
@@ -38,6 +37,7 @@
 			await Log("❌ Выберите ЦМК!");
 			return;
 		}
+
 		cmk.descriptionOfWork = text ?? "Истории ещё нет";
 		db.Update(cmk);
 		await db.SaveChangesAsync();
@@ -48,4 +48,5 @@
 	{
 		await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
 	}
+
 }

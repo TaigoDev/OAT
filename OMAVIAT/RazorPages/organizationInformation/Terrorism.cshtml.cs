@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation {
-	public class TerrorismModel : PageModel {
-		private readonly ILogger<TerrorismModel> _logger;
+namespace OMAVIAT.Pages.organizationInformation;
 
-		public TerrorismModel(ILogger<TerrorismModel> logger)
-		{
-			_logger = logger;
-		}
+public class TerrorismModel : PageModel
+{
+	private readonly ILogger<TerrorismModel> _logger;
 
-		public void OnGet()
-		{
+	public TerrorismModel(ILogger<TerrorismModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

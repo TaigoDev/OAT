@@ -1,19 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation {
-	public class ManagementPedagogicalStaffModel : PageModel {
-		private readonly ILogger<ManagementPedagogicalStaffModel> _logger;
+namespace OMAVIAT.Pages.organizationInformation;
 
-		public ManagementPedagogicalStaffModel(ILogger<ManagementPedagogicalStaffModel> logger)
-		{
-			_logger = logger;
-		}
+public class ManagementPedagogicalStaffModel : PageModel
+{
+	private readonly ILogger<ManagementPedagogicalStaffModel> _logger;
 
-		public int id { get; set; }
-		public void OnGet(int? id)
-		{
+	public ManagementPedagogicalStaffModel(ILogger<ManagementPedagogicalStaffModel> logger)
+	{
+		_logger = logger;
+	}
 
-			this.id = id - 1 ?? 0;
-		}
+	public int id { get; set; }
+
+	public void OnGet(int? id)
+	{
+		this.id = id - 1 ?? 0;
 	}
 }

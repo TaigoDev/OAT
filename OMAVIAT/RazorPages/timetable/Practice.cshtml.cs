@@ -1,54 +1,56 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Utilities;
 
-namespace OMAVIAT.Pages.timetable {
-	[NoCache]
-	public class PracticeModel : PageModel {
-		private readonly ILogger<PracticeModel> _logger;
+namespace OMAVIAT.Pages.timetable;
 
-		public PracticeModel(ILogger<PracticeModel> logger)
+[NoCache]
+public class PracticeModel : PageModel
+{
+	private readonly ILogger<PracticeModel> _logger;
+
+	public List<FilePractice> b1 = new();
+	public List<FilePractice> b2 = new();
+	public List<FilePractice> b3 = new();
+	public List<FilePractice> b4 = new();
+
+	public PracticeModel(ILogger<PracticeModel> logger)
+	{
+		_logger = logger;
+	}
+
+	public void OnGet()
+	{
+		for (var i = 1; i <= 4; i++)
 		{
-			_logger = logger;
-		}
-
-		public List<FilePractice> b1 = new List<FilePractice>();
-		public List<FilePractice> b2 = new List<FilePractice>();
-		public List<FilePractice> b3 = new List<FilePractice>();
-		public List<FilePractice> b4 = new List<FilePractice>();
-
-		public void OnGet()
-		{
-			for (int i = 1; i <= 4; i++)
-			{
-				var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", $"b{i}");
-				var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly).ToList();
-				GetList(i).AddRange(files.ConvertAll(e => new FilePractice(StringUtils.ConvertHexToString(Path.GetFileName(e).Replace(Path.GetExtension(e), "")),
+			var folder = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", $"b{i}");
+			var files = Directory.GetFiles(folder, "*.*", SearchOption.TopDirectoryOnly).ToList();
+			GetList(i).AddRange(files.ConvertAll(e => new FilePractice(
+				StringUtils.ConvertHexToString(Path.GetFileName(e).Replace(Path.GetExtension(e), "")),
 				$"api/practice/b{i}/{StringUtils.ConvertStringToHex(Path.GetFileName(e))}/download")));
-
-			}
 		}
+	}
 
-		private List<FilePractice> GetList(int i)
+	private List<FilePractice> GetList(int i)
+	{
+		return i switch
 		{
-			return i switch
-			{
-				1 => b1,
-				2 => b2,
-				3 => b3,
-				4 => b4,
-				_ => new List<FilePractice>()
-			};
+			1 => b1,
+			2 => b2,
+			3 => b3,
+			4 => b4,
+			_ => new List<FilePractice>()
+		};
+	}
+
+	public class FilePractice
+	{
+		public FilePractice(string filename, string url)
+		{
+			Filename = filename;
+			this.url = url;
 		}
 
-		public class FilePractice {
-			public FilePractice(string filename, string url)
-			{
-				Filename = filename;
-				this.url = url;
-			}
-
-			public string Filename { get; set; }
-			public string url { get; set; }
-		}
+		public string Filename { get; set; }
+		public string url { get; set; }
 	}
 }

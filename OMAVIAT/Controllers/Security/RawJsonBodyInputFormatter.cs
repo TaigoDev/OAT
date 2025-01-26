@@ -1,31 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
 
-namespace OMAVIAT.Controllers.Security {
-	public class RawJsonBodyInputFormatter : InputFormatter {
-		public RawJsonBodyInputFormatter()
-		{
-			SupportedMediaTypes.Add("application/json");
-		}
+namespace OMAVIAT.Controllers.Security;
 
-		public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
-		{
-			var request = context.HttpContext.Request;
-			using (var reader = new StreamReader(request.Body))
-			{
-				var content = await reader.ReadToEndAsync();
-				return await InputFormatterResult.SuccessAsync(content);
-			}
-		}
+public class RawJsonBodyInputFormatter : InputFormatter
+{
+	public RawJsonBodyInputFormatter()
+	{
+		SupportedMediaTypes.Add("application/json");
+	}
 
-		protected override bool CanReadType(Type type)
+	public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
+	{
+		var request = context.HttpContext.Request;
+		using (var reader = new StreamReader(request.Body))
 		{
-			return type == typeof(string);
+			var content = await reader.ReadToEndAsync();
+			return await InputFormatterResult.SuccessAsync(content);
 		}
 	}
 
-
-
-
-
-
+	protected override bool CanReadType(Type type)
+	{
+		return type == typeof(string);
+	}
 }

@@ -1,7 +1,7 @@
 ﻿@page "{building?}/{group_name?}"
+
+
 @using OMAVIAT.Schedule.Entities.Enums
-
-
 @model TimetableModel
 @{
 	ViewData["Title"] = "Расписание группы " + Model.group_name;
@@ -21,7 +21,6 @@
 	</h2>
 	@for (var week_id = 1; week_id <= Model.group.Weeks.Count; week_id++)
 	{
-
 		<table class="customized timetable" style="display: none;">
 			<thead>
 			<tr>
@@ -71,7 +70,7 @@
 				var week = Model.group.Weeks.Where(e => e.Type == (week_id == 1 ? ScheduleWeekType.First : ScheduleWeekType.Second)).First();
 			}
 
-			@for (int lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
+			@for (var lesson_id = Model.GetMinLessonsInDay(week); lesson_id <= Model.GetMaxLessonsInDay(week); lesson_id++)
 			{
 				var days = Model.GetAllLessonsByNumber(lesson_id, week);
 				var ring = Model.corpus.bells.FirstOrDefault(e => e.Id == lesson_id);
@@ -116,7 +115,6 @@
 											</div>
 										</div>
 									</div>
-
 								}
 								else if (lessons.First().Name.ToSearchView() == lessons.Last().Name.ToSearchView())
 								{
@@ -166,10 +164,8 @@
 								}
 							</div>
 						</td>
-
 					}
 				</tr>
-
 			}
 
 			</tbody>

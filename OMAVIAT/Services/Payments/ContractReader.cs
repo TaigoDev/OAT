@@ -1,62 +1,66 @@
-﻿using CsvHelper;
+﻿using System.Globalization;
+using CsvHelper;
 using CsvHelper.Configuration;
+using NLog;
 using OMAVIAT.Entities;
-using System.Globalization;
 
-namespace OMAVIAT.Services.Payments {
-	public class ContractReader {
-		protected static List<Contract> contracts = new();
+namespace OMAVIAT.Services.Payments;
 
-		public static async Task init()
+public class ContractReader
+{
+	private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+	private static List<Contract> Contracts { get; } = [];
+
+	public static async Task Init()
+	{
+		var path = Path.Combine(Directory.GetCurrentDirectory(), "kontra.csv");
+		if (!File.Exists(path))
 		{
-			var path = Path.Combine(Directory.GetCurrentDirectory(), "kontra.csv");
-			if (!File.Exists(path))
-			{
-				Logger.Warning("[ContractReader]: Файл kontra.csv не найден!");
-				return;
-			}
-
-			var badRecord = new List<string>();
-			var config = new CsvConfiguration(CultureInfo.CurrentCulture)
-			{
-				Delimiter = ";",
-				Mode = CsvMode.NoEscape,
-				BadDataFound = context => badRecord.Add(context.RawRecord)
-			};
-
-			using var reader = new StreamReader(path);
-			using var csv = new CsvReader(reader, config);
-			while (await csv.ReadAsync())
-			{
-				try
-				{
-					var record = csv.GetRecord<Contract>();
-					contracts.Add(record!);
-				}
-				catch (Exception ex)
-				{
-					Logger.Error(ex.ToString());
-				}
-			}
-
-			if (badRecord.Count != 0)
-			{
-				var errorString = $"⚠️ При чтении файла kontra.csv произошли ошибки, которые не позволили загрузить {badRecord.Count()} строк(-у,-и)" +
-				                  $"\nВсего загружено строк: {badRecord.Count()}" +
-				                  "\nСтроки, которые не удалось загрузить:\n";
-				foreach (var record in badRecord)
-					errorString += record;
-				Logger.Warning(errorString);
-			}
+			Logger.Warn("[ContractReader]: Файл kontra.csv не найден!");
+			return;
 		}
 
-		public static bool IsContract(Func<Contract, bool> predicate) =>
-			contracts.Any(predicate);
-
-		public static bool GetContract(Func<Contract, bool> predicate, out Contract? contract)
+		var badRecord = new List<string>();
+		var config = new CsvConfiguration(CultureInfo.CurrentCulture)
 		{
-			contract = contracts.FirstOrDefault(predicate);
-			return contract != null;
+			Delimiter = ";",
+			Mode = CsvMode.NoEscape,
+			BadDataFound = context => badRecord.Add(context.RawRecord)
+		};
+
+		using var reader = new StreamReader(path);
+		using var csv = new CsvReader(reader, config);
+		while (await csv.ReadAsync())
+			try
+			{
+				var record = csv.GetRecord<Contract>();
+				Contracts.Add(record!);
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(ex.ToString());
+			}
+
+		if (badRecord.Count != 0)
+		{
+			var errorString =
+				$"⚠️ При чтении файла kontra.csv произошли ошибки, которые не позволили загрузить {badRecord.Count()} строк(-у,-и)" +
+				$"\nВсего загружено строк: {badRecord.Count}" +
+				"\nСтроки, которые не удалось загрузить:\n";
+			foreach (var record in badRecord)
+				errorString += record;
+			Logger.Warn(errorString);
 		}
+	}
+
+	public static bool IsContract(Func<Contract, bool> predicate)
+	{
+		return Contracts.Any(predicate);
+	}
+
+	public static bool GetContract(Func<Contract, bool> predicate, out Contract? contract)
+	{
+		contract = Contracts.FirstOrDefault(predicate);
+		return contract != null;
 	}
 }

@@ -1,57 +1,65 @@
-﻿using OfficeOpenXml;
+﻿using System.Reflection;
+using OfficeOpenXml;
 using OMAVIAT.Entities;
-using System.Reflection;
 
-namespace OMAVIAT.Utilities {
-	public static class EPPLusExtensions {
+namespace OMAVIAT.Utilities;
 
-		public static IEnumerable<T> Fetch<T>(this ExcelWorksheet worksheet, int start = 0, int end = 300) where T : new()
+public static class EPPLusExtensions
+{
+	public static IEnumerable<T> Fetch<T>(this ExcelWorksheet worksheet, int start = 0, int end = 300) where T : new()
+	{
+		static bool columnOnly(CustomAttributeData y)
 		{
-			static bool columnOnly(CustomAttributeData y) => y.AttributeType == typeof(ColumnEPPlus);
+			return y.AttributeType == typeof(ColumnEPPlus);
+		}
 
-			var columns = typeof(T)
-				.GetProperties()
-				.Where(x => x.CustomAttributes.Any(columnOnly))
-				.Select(p => new
+		var columns = typeof(T)
+			.GetProperties()
+			.Where(x => x.CustomAttributes.Any(columnOnly))
+			.Select(p => new
+			{
+				Property = p,
+				Column = p.GetCustomAttributes<ColumnEPPlus>().First().ColumnIndex //safe because if where above
+			}).ToList();
+
+
+		var rows = worksheet.Cells
+			.Select(cell => cell.Start.Row)
+			.Distinct()
+			.OrderBy(x => x);
+
+		var collection = rows.Where(e => e >= start && e <= end)
+			.Select(row =>
+			{
+				var tnew = new T();
+				columns.ForEach(col =>
 				{
-					Property = p,
-					Column = p.GetCustomAttributes<ColumnEPPlus>().First().ColumnIndex//safe because if where above
-				}).ToList();
+					var val = worksheet.Cells[row, col.Column];
+					if (val.Value == null)
+					{
+						col.Property.SetValue(tnew, null);
+						return;
+					}
 
+					if (col.Property.PropertyType == typeof(int))
+					{
+						col.Property.SetValue(tnew, val.GetValue<int>());
+						return;
+					}
 
-			var rows = worksheet.Cells
-				.Select(cell => cell.Start.Row)
-				.Distinct()
-				.OrderBy(x => x);
+					if (col.Property.PropertyType == typeof(double))
+					{
+						col.Property.SetValue(tnew, val.GetValue<double>());
+						return;
+					}
 
-			var collection = rows.Where(e => e >= start && e <= end)
-				.Select(row => {
-					var tnew = new T();
-					columns.ForEach(col => {
-						var val = worksheet.Cells[row, col.Column];
-						if (val.Value == null)
-						{
-							col.Property.SetValue(tnew, null);
-							return;
-						}
-						if (col.Property.PropertyType == typeof(int))
-						{
-							col.Property.SetValue(tnew, val.GetValue<int>());
-							return;
-						}
-						if (col.Property.PropertyType == typeof(double))
-						{
-							col.Property.SetValue(tnew, val.GetValue<double>());
-							return;
-						}
-						col.Property.SetValue(tnew, val.GetValue<string>());
-					});
-
-					return tnew;
+					col.Property.SetValue(tnew, val.GetValue<string>());
 				});
 
+				return tnew;
+			});
 
-			return collection;
-		}
+
+		return collection;
 	}
 }

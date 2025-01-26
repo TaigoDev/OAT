@@ -1,16 +1,10 @@
 ﻿@using System.Net
 @using Microsoft.EntityFrameworkCore
 @using Newtonsoft.Json.Linq
-@using OMAVIAT
-
-@using OMAVIAT.Entities.Database
-@using OMAVIAT.Entities.Enums
-@using OMAVIAT.Entities.Schedule
+@using NLog
 @using OMAVIAT.Entities.Schedule.Database
 @using OMAVIAT.Schedule.Entities.Enums
 @using OMAVIAT.Utilities
-
-
 @inject IJSRuntime JSRuntime;
 @inject IHttpContextAccessor httpContextAccessor;
 @renderFragment
@@ -20,19 +14,18 @@
 @code {
 
 	private DotNetObjectReference<ChangesComponent>? objRef;
+	private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-	[Parameter]
-	public string? search { get; set; }
+	[Parameter] public string? search { get; set; }
 
-	[Parameter]
-	public Corpus corpus { get; set; }
+	[Parameter] public Corpus corpus { get; set; }
 
-	[Parameter]
-	public DateOnly date { get; set; }
+	[Parameter] public DateOnly date { get; set; }
 
 	public static List<ChangesTable> rows = new();
 
-	private RenderFragment renderFragment = (__builder) => {
+	private RenderFragment renderFragment = __builder =>
+	{
 		<h3 class="section-title title-centered" style="font-size: 1.4rem;">
 			Пожалуйста, подождите. Идет проверка вашего устройства
 		</h3>
@@ -44,7 +37,7 @@
 		{
 			objRef = DotNetObjectReference.Create(this);
 			await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper",
-			objRef);
+				objRef);
 
 			await using var db = new DatabaseContext();
 			var changes = await db.changes.Where(e => e.corpus == corpus && e.date == date).ToListAsync();
@@ -62,13 +55,14 @@
 			if (httpContextAccessor.HttpContext is not null && string.IsNullOrWhiteSpace(httpContextAccessor.HttpContext.Request.Headers["CF-Connecting-IP"]))
 			{
 				OnRowDisplay();
-				this.StateHasChanged();
+				StateHasChanged();
 				return;
 			}
 
 			await JSRuntime.InvokeVoidAsync("GreetingHelpers.setDotNetHelper", objRef);
 
-			renderFragment = (__builder) => {
+			renderFragment = __builder =>
+			{
 				<h3 class="section-title title-centered" style="font-size: 1.4rem;">
 					Пройдите проверку на робота.
 				</h3>
@@ -78,21 +72,19 @@
 					data-sitekey="@Configurator.SmartCaptcha.WebSecretKey"
 				></div>
 			};
-			this.StateHasChanged();
+			StateHasChanged();
 			await JSRuntime.InvokeVoidAsync("loadScript", "https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=onloadFunction");
 		}
 		catch (Exception ex)
 		{
-			renderFragment = (__builder) => {
+			renderFragment = __builder =>
+			{
 				<h3 class="section-title title-centered" style="font-size: 1.4rem;">
 					Произошла техническая ошибка! Сообщите разработчикам сайта через службу информатизации
 				</h3>
 			};
-
 		}
 	}
-
-
 
 
 	[JSInvokable]
@@ -101,16 +93,17 @@
 		if (await ValidateToken(token))
 		{
 			OnRowDisplay();
-			this.StateHasChanged();
+			StateHasChanged();
 			return;
 		}
 
-		renderFragment = (__builder) => {
+		renderFragment = __builder =>
+		{
 			<h3 class="section-title title-centered" style="font-size: 1.4rem;">
 				Произошла техническая ошибка. Попробуйте позже.
 			</h3>
 		};
-		this.StateHasChanged();
+		StateHasChanged();
 	}
 
 	private static async Task<bool> ValidateToken(string token)
@@ -119,9 +112,9 @@
 		{
 			var proxy = new WebProxy
 			{
-				Address = new Uri($"http://10.0.55.52:3128"),
+				Address = new Uri("http://10.0.55.52:3128"),
 				BypassProxyOnLocal = false,
-				UseDefaultCredentials = false,
+				UseDefaultCredentials = false
 			};
 
 			var httpClientHandler = new HttpClientHandler
@@ -132,7 +125,7 @@
 
 			using var httpClient = OperatingSystem.IsWindows() ? new HttpClient() : new HttpClient(httpClientHandler);
 			var response = await httpClient.PostAsync(
-			$"https://smartcaptcha.yandexcloud.net/validate?secret={Configurator.SmartCaptcha.CodeSecretKey}&token={token}", null);
+				$"https://smartcaptcha.yandexcloud.net/validate?secret={Configurator.SmartCaptcha.CodeSecretKey}&token={token}", null);
 			var content = await response.Content.ReadAsStringAsync();
 			var parsed = JObject.Parse(content);
 			return parsed["status"]?.Value<string>() == "ok";
@@ -147,7 +140,8 @@
 
 	private void OnRowDisplay()
 	{
-		renderFragment = (__builder) => {
+		renderFragment = __builder =>
+		{
 			<table class="customized timetable">
 				<thead>
 				<tr>
@@ -189,7 +183,6 @@
 				<tbody>
 				@foreach (var change in rows)
 				{
-
 					<tr>
 						<td>
 							@change.group.FirstDigit()
@@ -225,15 +218,15 @@
 							@change.teacher
 						</td>
 					</tr>
-
-
 				}
 				</tbody>
 			</table>
-
 		};
 	}
 
-	public void Dispose() => objRef?.Dispose();
+	public void Dispose()
+	{
+		objRef?.Dispose();
+	}
 
 }

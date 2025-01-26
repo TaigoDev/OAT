@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages {
-	public class GalleryModel : PageModel {
-		private readonly ILogger<GalleryModel> _logger;
+namespace OMAVIAT.Pages;
 
-		public GalleryModel(ILogger<GalleryModel> logger)
-		{
-			_logger = logger;
-		}
+public class GalleryModel : PageModel
+{
+	private readonly ILogger<GalleryModel> _logger;
 
-		public void OnGet()
-		{
+	public GalleryModel(ILogger<GalleryModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

@@ -40,7 +40,7 @@
 	zoom: 0.95;
 }
 
-.contacts-item:hover{
+.contacts-item:hover {
 	background: var(--m-l-color);
 }
 

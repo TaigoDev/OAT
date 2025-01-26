@@ -1,9 +1,8 @@
 ﻿@page "{FullName?}"
-@using OMAVIAT.Pages.organizationInformation;
+
 @using OMAVIAT.Schedule.Utilities
 @using OMAVIAT.Services.Workers
 @using OMAVIAT.Utilities
-
 @model WorkerModel
 @{
 	ViewData["Title"] = Model.worker is not null ? Model.worker.FullName : "Пользователь не найден";
@@ -80,6 +79,7 @@
 						@worker.Education1_EducationalInstitution @(worker.Education1_issued is not null ? $"({worker.Education1_issued})" : "")
 					</p>
 				}
+
 				if (worker.Education1_specialization is not null)
 				{
 					<h4 class="section-subtitle-small">
@@ -108,6 +108,7 @@
 						@worker.Education2_EducationalInstitution @(worker.Education2_issued is not null ? $"({worker.Education2_issued})" : "")
 					</p>
 				}
+
 				if (worker.Education2_specialization is not null)
 				{
 					<h4 class="section-subtitle-small">
@@ -140,6 +141,8 @@
 				ФГАОУ ДПО "Государственный институт новых форм обучения" (18.02.2019 - 27.04.2019)
 			</p>
 			
+			
+
 			*@
 			@if (worker.AcademicDegree is not null)
 			{
@@ -169,6 +172,8 @@
 				Информация не указана
 			</p>
 			
+			
+
 			*@
 
 			@if (worker.Subjects is not null)
@@ -187,7 +192,6 @@
 							</li>
 						}
 					</ul>
-
 				}
 			}
 
@@ -205,9 +209,9 @@
 							@_element
 						</p>
 					}
-
 				}
 			}
+
 			<h3 class="section-subtitle">
 				Стаж работы
 			</h3>

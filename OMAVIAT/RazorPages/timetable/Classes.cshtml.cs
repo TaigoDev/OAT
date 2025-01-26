@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.timetable {
-	public class ClassesModel : PageModel {
-		private readonly ILogger<ClassesModel> _logger;
+namespace OMAVIAT.Pages.timetable;
 
-		public ClassesModel(ILogger<ClassesModel> logger)
-		{
-			_logger = logger;
-		}
+public class ClassesModel : PageModel
+{
+	private readonly ILogger<ClassesModel> _logger;
 
-		public void OnGet()
-		{
+	public ClassesModel(ILogger<ClassesModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

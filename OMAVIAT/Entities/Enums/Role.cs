@@ -1,4 +1,5 @@
-﻿public enum Role {
+﻿public enum Role
+{
 	www_admin,
 	www_reporter_news,
 	www_reporter_prof_news,
@@ -45,5 +46,5 @@
 	www_informatiki_owner,
 	www_Angliyskiy_owner,
 	www_matematiki_owner,
-	www_russYaz_owner,
+	www_russYaz_owner
 }

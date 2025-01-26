@@ -3,7 +3,6 @@
 @model OMAVIAT.RazorPages.timetable.CabinetScheduleModel
 @{
 	ViewData["Title"] = $"Расписание кабинета {Model.cabinet_text}";
-
 }
 <link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
 <section class="timetable-container">
@@ -122,16 +121,13 @@
 								</div>
 							</div>
 						</td>
-
 					}
 
 					@for (var i = 0; i < 7 - days.Count(); i++)
 					{
 						<td></td>
-
 					}
 				</tr>
-
 			}
 
 			</tbody>

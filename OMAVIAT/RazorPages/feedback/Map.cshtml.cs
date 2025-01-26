@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.feedback {
-	public class MapModel : PageModel {
-		private readonly ILogger<MapModel> _logger;
+namespace OMAVIAT.Pages.feedback;
 
-		public MapModel(ILogger<MapModel> logger)
-		{
-			_logger = logger;
-		}
+public class MapModel : PageModel
+{
+	private readonly ILogger<MapModel> _logger;
 
-		public void OnGet()
-		{
+	public MapModel(ILogger<MapModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

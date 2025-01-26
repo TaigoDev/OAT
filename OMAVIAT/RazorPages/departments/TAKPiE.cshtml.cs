@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages {
-	public class TAKPiEModel : PageModel {
-		private readonly ILogger<TAKPiEModel> _logger;
+namespace OMAVIAT.Pages;
 
-		public TAKPiEModel(ILogger<TAKPiEModel> logger)
-		{
-			_logger = logger;
-		}
+public class TAKPiEModel : PageModel
+{
+	private readonly ILogger<TAKPiEModel> _logger;
 
-		public void OnGet()
-		{
+	public TAKPiEModel(ILogger<TAKPiEModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

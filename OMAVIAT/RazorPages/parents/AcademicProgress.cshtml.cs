@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.parents {
-	public class AcademicProgressModel : PageModel {
-		private readonly ILogger<AcademicProgressModel> _logger;
+namespace OMAVIAT.Pages.parents;
 
-		public AcademicProgressModel(ILogger<AcademicProgressModel> logger)
-		{
-			_logger = logger;
-		}
+public class AcademicProgressModel : PageModel
+{
+	private readonly ILogger<AcademicProgressModel> _logger;
 
-		public void OnGet()
-		{
+	public AcademicProgressModel(ILogger<AcademicProgressModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

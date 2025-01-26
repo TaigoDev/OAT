@@ -1,7 +1,7 @@
 ﻿@page
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using OMAVIAT.Services.Workers
-@model OMAVIAT.Pages.organizationInformation.Management
+@model Management
 
 @{
 }
@@ -13,13 +13,13 @@
 			Руководство
 		</h2>
 
-		@if (WorkersReader.administration.Count() is 3)
+		@if (WorkersReader.Administration.Count() is 3)
 		{
 			<h3 class="section-subtitle">
 				Директор
 			</h3>
 			<ul class="people-list">
-				@foreach (var person in WorkersReader.administration[0])
+				@foreach (var person in WorkersReader.Administration[0])
 				{
 					<li class="people-item">
 						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
@@ -41,7 +41,7 @@
 				Заместители руководителя
 			</h3>
 			<ul class="people-list">
-				@foreach (var person in WorkersReader.administration[1])
+				@foreach (var person in WorkersReader.Administration[1])
 				{
 					<li class="people-item">
 						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">
@@ -63,7 +63,7 @@
 				Главный бухгалтер
 			</h3>
 			<ul class="people-list">
-				@foreach (var person in WorkersReader.administration[2])
+				@foreach (var person in WorkersReader.Administration[2])
 				{
 					<li class="people-item">
 						<a class="people-item-img-container" href="/organizationInformation/worker/@person.FullName">

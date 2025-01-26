@@ -155,7 +155,7 @@ table.panel-table tbody tr td:first-child {
 	text-align: center !important;
 }
 
-table.panel-table tbody td{
+table.panel-table tbody td {
 	background-color: var(--light-white-c);
 }
 

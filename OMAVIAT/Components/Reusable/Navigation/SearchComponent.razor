@@ -23,11 +23,9 @@
 		}
 	}
 
-	[Parameter]
-	public EventCallback<string> ValueChanged { get; set; }
+	[Parameter] public EventCallback<string> ValueChanged { get; set; }
 
-	[Parameter]
-	public EventCallback<MouseEventArgs> OnClick { get; set; }
+	[Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
 	private string? _Value;
 }

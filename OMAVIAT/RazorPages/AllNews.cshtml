@@ -1,6 +1,6 @@
 ﻿@page "{id?}"
 @using OMAVIAT.RazorPages.Components
-@using OMAVIAT.Utilities;
+@using OMAVIAT.Utilities
 @model AllNewsModel
 @{
 	ViewData["Title"] = "Все новости";
@@ -51,8 +51,6 @@
 			countInPage = 10,
 			UrlWithParameter = "/AllNews/{id}"
 		}))
-
-
 	}
 	else
 	{

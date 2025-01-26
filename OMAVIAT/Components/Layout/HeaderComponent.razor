@@ -1,5 +1,4 @@
-﻿@using NPOI.SS.Formula.Functions
-@rendermode @(new InteractiveServerRenderMode(false))
+﻿@rendermode @(new InteractiveServerRenderMode(false))
 
 <header class="site-header @State">
 	<a href="/" class="logo-container">
@@ -68,8 +67,10 @@
 
 @code {
 	private string State = "";
+
 	private void Burger()
 	{
 		State = State == "open" ? "" : "open";
 	}
+
 }

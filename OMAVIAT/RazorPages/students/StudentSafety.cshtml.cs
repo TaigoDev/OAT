@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.students {
-	public class StudentSafetyModel : PageModel {
-		private readonly ILogger<StudentSafetyModel> _logger;
+namespace OMAVIAT.Pages.students;
 
-		public StudentSafetyModel(ILogger<StudentSafetyModel> logger)
-		{
-			_logger = logger;
-		}
+public class StudentSafetyModel : PageModel
+{
+	private readonly ILogger<StudentSafetyModel> _logger;
 
-		public void OnGet()
-		{
+	public StudentSafetyModel(ILogger<StudentSafetyModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

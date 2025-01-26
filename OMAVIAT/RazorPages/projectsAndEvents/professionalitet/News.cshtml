@@ -1,9 +1,8 @@
 ﻿@page "{id?}"
+
 @using OMAVIAT.Services.News
-
-@model OMAVIAT.Pages.projectsAndEvents.professionalitet.NewsModel
+@model NewsModel
 @{
-
 }
 <link rel="stylesheet" href="~/css/news.css">
 
@@ -32,7 +31,7 @@
 	</h3>
 	@foreach (var t in news.description.Split("\n"))
 	{
-		<p>@Html.Raw(@t)</p>
+		<p>@Html.Raw(t)</p>
 	}
 	<div class="images-list-slider-container">
 		<div class="images-list-slider">

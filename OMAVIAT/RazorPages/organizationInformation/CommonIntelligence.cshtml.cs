@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation {
-	public class CommonIntelligenceModel : PageModel {
-		private readonly ILogger<CommonIntelligenceModel> _logger;
+namespace OMAVIAT.Pages.organizationInformation;
 
-		public CommonIntelligenceModel(ILogger<CommonIntelligenceModel> logger)
-		{
-			_logger = logger;
-		}
+public class CommonIntelligenceModel : PageModel
+{
+	private readonly ILogger<CommonIntelligenceModel> _logger;
 
-		public void OnGet()
-		{
+	public CommonIntelligenceModel(ILogger<CommonIntelligenceModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

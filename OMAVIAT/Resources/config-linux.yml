@@ -1,15 +1,15 @@
-baseUrl: 
-mainUrl: 
+baseUrl:
+mainUrl:
 bindPort: 0
-dbIp: 
+dbIp:
 dbPort: 0
-dbUser: 
-dbPassword: 
-dbName: 
-ldapIP: 
+dbUser:
+dbPassword:
+dbName:
+ldapIP:
 ldapPort: 0
-ldapLogin: 
-ldapPassword: 
-ldapDomain: 
-ldapZone: 
+ldapLogin:
+ldapPassword:
+ldapDomain:
+ldapZone:
 bitrixProxy: false

@@ -1,6 +1,4 @@
 ﻿@using Microsoft.EntityFrameworkCore
-@using OMAVIAT
-
 <div id="people-form" class="hide">
 	<form class="panel-form">
 		<div class="input-box">
@@ -43,7 +41,8 @@
 		var cmk = await db.CMK.FirstOrDefaultAsync(e => e.name == CMK);
 		if (cmk is null)
 			return;
-		people = (__builder) => {
+		people = __builder =>
+		{
 			foreach (var p in cmk.compositions)
 			{
 				<tr>
@@ -79,6 +78,7 @@
 			await Log("❌ Выберите ЦМК!");
 			return;
 		}
+
 		cmk.compositions.Add(FullName ?? "Пользователь не найден");
 		db.Update(cmk);
 		await db.SaveChangesAsync();
@@ -90,4 +90,5 @@
 	{
 		await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
 	}
+
 }

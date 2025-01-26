@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.timetable {
-	[NoCache]
-	public class ClassesChangesModel : PageModel {
-		private readonly ILogger<ClassesChangesModel> _logger;
+namespace OMAVIAT.Pages.timetable;
 
-		public ClassesChangesModel(ILogger<ClassesChangesModel> logger)
-		{
-			_logger = logger;
-		}
+[NoCache]
+public class ClassesChangesModel : PageModel
+{
+	private readonly ILogger<ClassesChangesModel> _logger;
 
-		public void OnGet()
-		{
+	public ClassesChangesModel(ILogger<ClassesChangesModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

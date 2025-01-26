@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.applicant {
-	public class DLinkCiscoModel : PageModel {
-		private readonly ILogger<DLinkCiscoModel> _logger;
+namespace OMAVIAT.Pages.applicant;
 
-		public DLinkCiscoModel(ILogger<DLinkCiscoModel> logger)
-		{
-			_logger = logger;
-		}
+public class DLinkCiscoModel : PageModel
+{
+	private readonly ILogger<DLinkCiscoModel> _logger;
 
-		public void OnGet()
-		{
+	public DLinkCiscoModel(ILogger<DLinkCiscoModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

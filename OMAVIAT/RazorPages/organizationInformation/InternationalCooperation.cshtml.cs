@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation {
-	public class InternationalCooperationModel : PageModel {
-		private readonly ILogger<InternationalCooperationModel> _logger;
+namespace OMAVIAT.Pages.organizationInformation;
 
-		public InternationalCooperationModel(ILogger<InternationalCooperationModel> logger)
-		{
-			_logger = logger;
-		}
+public class InternationalCooperationModel : PageModel
+{
+	private readonly ILogger<InternationalCooperationModel> _logger;
 
-		public void OnGet()
-		{
+	public InternationalCooperationModel(ILogger<InternationalCooperationModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

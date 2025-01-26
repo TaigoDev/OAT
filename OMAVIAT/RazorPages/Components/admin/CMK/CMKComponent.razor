@@ -1,6 +1,5 @@
 ﻿@using Microsoft.EntityFrameworkCore
-@using OMAVIAT
-@using OMAVIAT.RazorPages.Components.admin.CMK;
+@using OMAVIAT.Entities.Database
 @using OMAVIAT.Utilities
 @inject IHttpContextAccessor httpContextAccessor;
 
@@ -21,11 +20,11 @@
 		<label for="CMK">
 			Выбор ЦМК
 		</label>
-		<select id="CMK" @onchange='async (e) => {
+		<select id="CMK" @onchange="async e => {
 			CMK = e.Value?.ToString()!;
 			await OnSelectCMK();
-			this.StateHasChanged();
-		}'>
+			StateHasChanged();
+		}">
 			<option selected disabled value="Выберите ЦМК">
 				Выберите ЦМК
 			</option>
@@ -137,11 +136,11 @@
 		<label for="material">
 			Редактируемый материал
 		</label>
-		<select id="material" @onchange='async (e) => {
+		<select id="material" @onchange="async e => {
 			type = e.Value?.ToString()!;
 			await UpdateType();
-			this.StateHasChanged();
-		}'>
+			StateHasChanged();
+		}">
 			<option>
 				Выберите материал
 			</option>
@@ -180,7 +179,7 @@
 		using var db = new DatabaseContext();
 		if (CMK != "Выберите ЦМК" && !await db.CMK.AnyAsync(e => e.name == CMK))
 		{
-			var cmk = new OMAVIAT.Entities.Database.CMK(CMK, new(), "Истории пока нет", "Описание работы ЦМК", "Достижения ЦМК", "Решаемые задачи и планы");
+			var cmk = new CMK(CMK, new List<string>(), "Истории пока нет", "Описание работы ЦМК", "Достижения ЦМК", "Решаемые задачи и планы");
 			await db.AddAsync(cmk);
 			await db.SaveChangesAsync();
 		}
@@ -190,5 +189,6 @@
 	{
 		await JSRuntime.InvokeVoidAsync("ShowForm", type);
 	}
+
 }
 

@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation {
-	public class FinancialEconomicActivityModel : PageModel {
-		private readonly ILogger<FinancialEconomicActivityModel> _logger;
+namespace OMAVIAT.Pages.organizationInformation;
 
-		public FinancialEconomicActivityModel(ILogger<FinancialEconomicActivityModel> logger)
-		{
-			_logger = logger;
-		}
+public class FinancialEconomicActivityModel : PageModel
+{
+	private readonly ILogger<FinancialEconomicActivityModel> _logger;
 
-		public void OnGet()
-		{
+	public FinancialEconomicActivityModel(ILogger<FinancialEconomicActivityModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

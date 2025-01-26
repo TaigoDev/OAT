@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.parents {
-	public class ParentMeetingsModel : PageModel {
-		private readonly ILogger<ParentMeetingsModel> _logger;
+namespace OMAVIAT.Pages.parents;
 
-		public ParentMeetingsModel(ILogger<ParentMeetingsModel> logger)
-		{
-			_logger = logger;
-		}
+public class ParentMeetingsModel : PageModel
+{
+	private readonly ILogger<ParentMeetingsModel> _logger;
 
-		public void OnGet()
-		{
+	public ParentMeetingsModel(ILogger<ParentMeetingsModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

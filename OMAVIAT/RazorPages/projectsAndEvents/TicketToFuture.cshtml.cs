@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages {
-	public class TicketToFutureModel : PageModel {
-		private readonly ILogger<TicketToFutureModel> _logger;
+namespace OMAVIAT.Pages;
 
-		public TicketToFutureModel(ILogger<TicketToFutureModel> logger)
-		{
-			_logger = logger;
-		}
+public class TicketToFutureModel : PageModel
+{
+	private readonly ILogger<TicketToFutureModel> _logger;
 
-		public void OnGet()
-		{
+	public TicketToFutureModel(ILogger<TicketToFutureModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

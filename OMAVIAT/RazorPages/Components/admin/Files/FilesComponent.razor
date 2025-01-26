@@ -1,11 +1,8 @@
-﻿@using Microsoft.EntityFrameworkCore
+﻿@using NLog
 @using OMAVIAT.Controllers.Security
 @using OMAVIAT.Entities.Enums
-@using OMAVIAT.Schedule.Entities
-@using OMAVIAT.Utilities
-@using OMAVIAT.Utilities.Telegram
 @using OMAVIAT.Services.AdminPanel
-@using OMAVIAT.Services.ScheduleLoggers
+@using OMAVIAT.Utilities
 @inject IHttpContextAccessor httpContextAccessor;
 
 @{
@@ -16,8 +13,6 @@
 	var User = httpContextAccessor.HttpContext.User;
 	if (User is null)
 		return;
-
-
 }
 
 @error
@@ -63,7 +58,7 @@
 		<label for="type">
 			Тип документов
 		</label>
-		<select id="type" @onchange="(x) => OnChangeType(x.Value!.ToString()!)">
+		<select id="type" @onchange="x => OnChangeType(x.Value!.ToString()!)">
 			<option value="schedule-changes">
 				Изменения в расписании
 			</option>
@@ -83,18 +78,21 @@
 </form>
 
 @code {
-	private Submit submit = new Submit();
+
+	private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+	private readonly Submit submit = new();
 	private RenderFragment? button { get; set; }
 	private RenderFragment? error { get; set; }
 
 	private async Task SubmitPractice()
 	{
-
 		if (submit.building is Building.all)
 		{
 			await Log("❌ Выберите корпус!");
 			return;
 		}
+
 		var User = httpContextAccessor!.HttpContext!.User;
 		if (User is null)
 		{
@@ -136,18 +134,18 @@
 		Logger.Info($"Пользователь {User.GetUsername()} добавил файл {submit.filename} практики {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
 		await Log($"✅ Файл {submit.filename} успешно добавлен");
 		button = null;
-		this.StateHasChanged();
+		StateHasChanged();
 		OnChangeType("practice");
 	}
 
 	private async Task SubmitSession()
 	{
-
 		if (submit.building is Building.all)
 		{
 			await Log("❌ Выберите корпус!");
 			return;
 		}
+
 		var User = httpContextAccessor!.HttpContext!.User;
 		if (User is null)
 		{
@@ -172,12 +170,13 @@
 			await Log("❌ Заполните имя файла!");
 			return;
 		}
+
 		await JSRuntime.InvokeVoidAsync("StartAnim");
 		await FilesHelper.SessionSaveFile(submit.filename, submit.building, submit.file);
 		await Log($"✅ Файл {submit.filename} успешно добавлен");
 		Logger.Info($"Пользователь {User.GetUsername()} добавил файл {submit.filename} сессии {submit.building.ConvertToString()}\nIP: {httpContextAccessor.HttpContext.UserIP()}");
 		button = null;
-		this.StateHasChanged();
+		StateHasChanged();
 		OnChangeType("session");
 	}
 
@@ -188,6 +187,7 @@
 			await Log("❌ Выберите корпус!");
 			return;
 		}
+
 		var User = httpContextAccessor!.HttpContext!.User;
 		if (User is null)
 		{
@@ -211,7 +211,8 @@
 		var response = await FilesHelper.ScheduleSaveFile(submit.building, submit.file);
 		if (!response.IsSuccess || !response.IsUploaded)
 		{
-			error = (__builder) => {
+			error = __builder =>
+			{
 				<ErrorComponent IsUpload="@response.IsUploaded" description="@response.Details"/>
 			};
 			if (!response.IsUploaded)
@@ -234,6 +235,7 @@
 			await Log("❌ Выберите корпус!");
 			return;
 		}
+
 		var User = httpContextAccessor!.HttpContext!.User;
 		if (User is null)
 		{
@@ -252,11 +254,13 @@
 			await Log("❌ У вас недостаточно прав");
 			return;
 		}
+
 		await JSRuntime.InvokeVoidAsync("StartAnim");
 		var response = await FilesHelper.ChangesSaveFile(submit.building, submit.file);
 		if (!response.IsSuccess || !response.IsUploaded)
 		{
-			error = (__builder) => {
+			error = __builder =>
+			{
 				<ErrorComponent IsUpload="@response.IsUploaded" description="@response.Details"/>
 			};
 			if (!response.IsUploaded)
@@ -276,12 +280,13 @@
 	{
 		button = type switch
 		{
-			"schedule-changes" => (__builder) => {
+			"schedule-changes" => __builder =>
+			{
 				<div class="input-box">
 					<label for="files-corpus">
 						Файл
 					</label>
-					<InputFile type="file" name="files" accept=".xlsx" OnChange="(x) => submit.file = x.File"/>
+					<InputFile type="file" name="files" accept=".xlsx" OnChange="x => submit.file = x.File"/>
 				</div>
 				<button type="button" class="customized button-process" value="Отправить"
 				        @onclick="async () => await SubmitChanges()">
@@ -289,12 +294,13 @@
 					Обновить изменения
 				</button>
 			},
-			"schedule" => (__builder) => {
+			"schedule" => __builder =>
+			{
 				<div class="input-box">
 					<label for="files-corpus">
 						Файл
 					</label>
-					<InputFile type="file" name="files" accept=".xml" OnChange="(x) => submit.file = x.File"/>
+					<InputFile type="file" name="files" accept=".xml" OnChange="x => submit.file = x.File"/>
 				</div>
 				<button type="button" class="customized button-process" value="Отправить"
 				        @onclick="async () => await SubmitSchedule()">
@@ -302,7 +308,8 @@
 					Обновить расписание
 				</button>
 			},
-			"session" => (__builder) => {
+			"session" => __builder =>
+			{
 				<div class="input-box">
 					<label for="filename-display-practice">
 						Имя файла, которое будет отображаться в описании
@@ -313,7 +320,7 @@
 					<label for="files-corpus">
 						Файл
 					</label>
-					<InputFile type="file" name="files" accept=".xlsx" OnChange="(x) => submit.file = x.File"/>
+					<InputFile type="file" name="files" accept=".xlsx" OnChange="x => submit.file = x.File"/>
 				</div>
 				<button type="button" class="customized button-process" value="Отправить"
 				        @onclick="async () => await SubmitSession()">
@@ -322,9 +329,9 @@
 				</button>
 				<TableComponent building="@submit.building"
 				                path="@Path.Combine(Directory.GetCurrentDirectory(), "Resources", "sessions", submit.building.ConvertToString())"/>
-
 			},
-			_ => (__builder) => {
+			_ => __builder =>
+			{
 				<div class="input-box">
 					<label for="filename-display-practice">
 						Имя файла, которое будет отображаться в описании
@@ -335,7 +342,7 @@
 					<label for="files-corpus">
 						Файл
 					</label>
-					<InputFile type="file" name="files" accept=".xlsx" OnChange="(x) => submit.file = x.File"/>
+					<InputFile type="file" name="files" accept=".xlsx" OnChange="x => submit.file = x.File"/>
 				</div>
 				<button type="button" class="customized button-process" value="Отправить"
 				        @onclick="async () => await SubmitPractice()">
@@ -345,13 +352,21 @@
 				<TableComponent building="@submit.building"
 				                path="@Path.Combine(Directory.GetCurrentDirectory(), "Resources", "practice", submit.building.ConvertToString())"/>
 			}
-
 		};
 	}
-	private async Task Log(string message) => await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
-	protected override void OnInitialized() => OnChangeType("schedule-changes");
 
-	public class Submit {
+	private async Task Log(string message)
+	{
+		await JSRuntime.InvokeVoidAsync("MessageControllerWithMSG", "logger", message);
+	}
+
+	protected override void OnInitialized()
+	{
+		OnChangeType("schedule-changes");
+	}
+
+	public class Submit
+	{
 		public string? filename { get; set; }
 		public IBrowserFile? file { get; set; }
 		public Building? building { get; set; } = Building.all;

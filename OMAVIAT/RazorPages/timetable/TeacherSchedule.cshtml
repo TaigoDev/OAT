@@ -1,6 +1,6 @@
 ﻿@page "{building?}/{fullname?}"
 @using OMAVIAT.Schedule.Entities.Enums
-@model OMAVIAT.Pages.timetable.TeacherScheduleModel
+@model TeacherScheduleModel
 @{
 }
 <link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
@@ -119,16 +119,13 @@
 								</div>
 							</div>
 						</td>
-
 					}
 
 					@for (var i = 0; i < 7 - days.Count(); i++)
 					{
 						<td></td>
-
 					}
 				</tr>
-
 			}
 
 			</tbody>

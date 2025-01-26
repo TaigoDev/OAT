@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages {
-	[NoCache]
-	public class AuthorizationModel : PageModel {
-		private readonly ILogger<AuthorizationModel> _logger;
+namespace OMAVIAT.Pages;
 
-		public AuthorizationModel(ILogger<AuthorizationModel> logger)
-		{
-			_logger = logger;
-		}
+[NoCache]
+public class AuthorizationModel : PageModel
+{
+	private readonly ILogger<AuthorizationModel> _logger;
 
-		public void OnGet()
-		{
-		}
+	public AuthorizationModel(ILogger<AuthorizationModel> logger)
+	{
+		_logger = logger;
+	}
+
+	public void OnGet()
+	{
 	}
 }

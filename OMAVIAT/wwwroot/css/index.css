@@ -41,7 +41,7 @@
 	transition: right 225ms ease, left 225ms ease, width 225ms ease, background-color 100ms ease;
 }
 
-.all-news:hover{
+.all-news:hover {
 	color: var(--m-l-color);
 }
 
@@ -403,13 +403,13 @@ html.special.special-color-2 .news-slider-arrow img, html.special.special-color-
 	filter: invert(1) !important;
 }
 
-.pos{
+.pos {
 	display: flex;
 	justify-content: center;
 	gap: 1rem;
 	flex-wrap: wrap;
 }
 
-.pos-item{
+.pos-item {
 	max-width: min(100%, 350px) !important;
 }

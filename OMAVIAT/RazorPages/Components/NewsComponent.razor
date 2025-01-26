@@ -1,11 +1,10 @@
 ﻿@using Microsoft.EntityFrameworkCore
-@using MySqlConnector
-@using OMAVIAT
+@using NLog
 @using OMAVIAT.Controllers.Security
 @using OMAVIAT.Entities.Database
 @using OMAVIAT.Entities.Interfaces
-@using OMAVIAT.Utilities
 @using OMAVIAT.Services.News
+@using OMAVIAT.Utilities
 @inject IHttpContextAccessor httpContextAccessor
 @inject IJSRuntime JSRuntime;
 
@@ -18,7 +17,7 @@
 		<label for="type">
 			Тип
 		</label>
-		<select id="type" @onchange="(r) => {
+		<select id="type" @onchange="r => {
 			form.type = r.Value?.ToString()!;
 			OnChangeNews(r.Value?.ToString()!);
 	}">
@@ -64,11 +63,11 @@
 		<label for="images">
 			Фото
 		</label>
-		<InputFile id="images" multiple OnChange='(f) =>{
+		<InputFile id="images" multiple OnChange="f =>{
 			form.photos.Clear();
 			foreach(var file in f.GetMultipleFiles(20))
 				form.photos.Add(file);
-		}'/>
+		}"/>
 	</div>
 	@button
 </form>
@@ -97,28 +96,29 @@
 </table>
 
 @code {
+	private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 	protected override void OnInitialized()
 	{
 		OnChangeNews("main");
 		SetAddButton();
 	}
-	private RenderFragment newsList { get; set; } = (__builder) => {};
-	private RenderFragment button { get; set; } = (__builder) => {};
-	private SubmitForm form { get; set; } = new SubmitForm();
+
+	private RenderFragment newsList { get; set; } = __builder => { };
+	private RenderFragment button { get; set; } = __builder => { };
+	private SubmitForm form { get; set; } = new();
 
 	private void OnChangeNews(string name)
 	{
-
 		var _news = name switch
 		{
-			"demoExam" => new List<INews>(DemoExamsNewsReader.news.Cast<INews>()),
-			"professionalitet" => new List<INews>(ProfNewsReader.news.Cast<INews>()),
-			_ => new List<INews>(NewsReader.news.Cast<INews>()),
-
+			"demoExam" => new List<INews>(DemoExamsNewsReader.news),
+			"professionalitet" => new List<INews>(ProfNewsReader.news),
+			_ => new List<INews>(NewsReader.news)
 		};
 
-		newsList = (__builder) => {
+		newsList = __builder =>
+		{
 			foreach (var news in _news)
 			{
 				<tr>
@@ -134,15 +134,15 @@
 					</td>
 					<td>
 						<div class="panel-table-buttons">
-							<button class="panel-table-button" @onclick='async () => {
+							<button class="panel-table-button" @onclick="async () => {
 							await GetNews(name, news);
-						}'>
+						}">
 								изменить
 							</button>
-							<button class="panel-table-button" @onclick='async () => {
+							<button class="panel-table-button" @onclick="async () => {
 							await DeleteNews(name, news);
 							OnChangeNews(name);
-						}'>
+						}">
 								удалить
 							</button>
 						</div>
@@ -150,7 +150,6 @@
 				</tr>
 			}
 		};
-
 	}
 
 	private async Task DeleteNews(string name, INews news)
@@ -165,7 +164,7 @@
 		{
 			"demoExam" => Role.www_reporter_demoexams,
 			"professionalitet" => Role.www_reporter_prof_news,
-			_ => Role.www_reporter_news,
+			_ => Role.www_reporter_news
 		};
 
 		var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
@@ -188,7 +187,6 @@
 			connection.ProfNews.RemoveRange(connection.ProfNews.Where(e => e.id == news.id));
 			await connection.SaveChangesAsync();
 			await ProfNewsReader.init();
-
 		}
 		else
 		{
@@ -196,12 +194,12 @@
 			await connection.SaveChangesAsync();
 			await NewsReader.init();
 		}
+
 		Logger.Info($"Пользователь удалил новость.\n" +
 		            $"ID: {news.id}\n" +
 		            $"Пользователь: {httpContextAccessor.HttpContext.User.GetUsername()}\n" +
 		            $"IP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
 		await Log("✅ Новость удалена");
-
 	}
 
 	private async Task OnPublish()
@@ -218,7 +216,7 @@
 			{
 				"demoExam" => Role.www_reporter_demoexams,
 				"professionalitet" => Role.www_reporter_prof_news,
-				_ => Role.www_reporter_news,
+				_ => Role.www_reporter_news
 			};
 
 			var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
@@ -235,11 +233,12 @@
 				await Log("❌ Прикрепите фотографии");
 				return;
 			}
+
 			foreach (var file in form.photos)
 			{
 				var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
 				await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
-				await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
+				await file.OpenReadStream(1024 * 1024 * 10).CopyToAsync(fs);
 				photos.Add(path);
 			}
 
@@ -247,7 +246,7 @@
 			if (form.type is "demoExam")
 			{
 				var news = new DemoExamNews(form.date.ToString("yyyy-MM-dd"),
-				form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
 				await connection.AddAsync(news);
 				await connection.SaveChangesAsync();
 				await DemoExamsNewsReader.init();
@@ -255,7 +254,7 @@
 			else if (form.type is "professionalitet")
 			{
 				var news = new ProfNews(form.date.ToString("yyyy-MM-dd"),
-				form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
 				await connection.AddAsync(news);
 				await connection.SaveChangesAsync();
 				await ProfNewsReader.init();
@@ -263,7 +262,7 @@
 			else
 			{
 				var news = new News(form.date.ToString("yyyy-MM-dd"),
-				form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
 				await connection.AddAsync(news);
 				await connection.SaveChangesAsync();
 				await NewsReader.init();
@@ -273,7 +272,7 @@
 			Logger.Info($"Пользователь {httpContextAccessor.HttpContext.User.GetUsername()} опубликовал новую новость. \nТекст Новости: {form.name}. Тип: {form.type}.\nIP-адрес: {httpContextAccessor.HttpContext.UserIP()}");
 			OnChangeNews(form.type);
 			await Log("✅ Новость добавлена");
-			form = new(form.type);
+			form = new SubmitForm(form.type);
 		}
 		catch (Exception ex)
 		{
@@ -294,7 +293,7 @@
 		{
 			"demoExam" => Role.www_reporter_demoexams,
 			"professionalitet" => Role.www_reporter_prof_news,
-			_ => Role.www_reporter_news,
+			_ => Role.www_reporter_news
 		};
 
 		var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
@@ -308,10 +307,9 @@
 		form.description = news.description;
 		form.IsFixed = news.IsFixed;
 		form.name = news.title;
-		form.photos = new();
+		form.photos = new List<IBrowserFile>();
 		SetUpdateButton(news);
 		await Log("⚠️ Включен режим редактирование новости");
-
 	}
 
 	private async Task UpdateNews(INews Inews)
@@ -327,7 +325,7 @@
 		{
 			"demoExam" => Role.www_reporter_demoexams,
 			"professionalitet" => Role.www_reporter_prof_news,
-			_ => Role.www_reporter_news,
+			_ => Role.www_reporter_news
 		};
 
 		var roles = Permissions.GetUserRoles(httpContextAccessor.HttpContext.User.GetUsername());
@@ -344,7 +342,7 @@
 			{
 				var path = $"images/news/{StringUtils.SHA226($"{file.Name}-{file.Size}")}{Path.GetExtension(file.Name)}";
 				await using FileStream fs = new(Path.Combine("wwwroot", path), FileMode.Create);
-				await file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 10).CopyToAsync(fs);
+				await file.OpenReadStream(1024 * 1024 * 10).CopyToAsync(fs);
 				photos.Add(path);
 			}
 
@@ -397,12 +395,13 @@
 		OnChangeNews(form.type);
 		await Log("✅ Новость обновлена");
 		SetAddButton();
-		form = new(form.type);
+		form = new SubmitForm(form.type);
 	}
 
 	private void SetAddButton()
 	{
-		button = (__builder) => {
+		button = __builder =>
+		{
 			<button type="button" class="customized" value="Отправить" @onclick="async () => await OnPublish()"
 			        multiple>
 				Отправить
@@ -412,7 +411,8 @@
 
 	private void SetUpdateButton(INews news)
 	{
-		button = (__builder) => {
+		button = __builder =>
+		{
 			<p>⚠️ Частичное изменение фотографий недоступно. Вы можете только обновить все фотографии сразу. Если вы
 				хотите оставить текущие фотографии, то просто не выбирайте другие и они сохраняться автоматически.</p>
 			<button type="button" class="customized" value="Отправить"
@@ -428,16 +428,23 @@
 		await JSRuntime.InvokeVoidAsync("MessageController", "logger", message);
 	}
 
-	public class SubmitForm {
+	public class SubmitForm
+	{
 		public string type { get; set; } = "main";
 		public string name { get; set; } = "Тест новость";
 		public string description { get; set; } = "Текст новости, её содержание.";
 		public DateTime date { get; set; } = DateTime.Now;
-		public bool IsFixed { get; set; } = false;
+		public bool IsFixed { get; set; }
 		public List<IBrowserFile> photos { get; set; } = [];
-		public SubmitForm(string type) =>
+
+		public SubmitForm(string type)
+		{
 			this.type = type;
-		public SubmitForm() {}
+		}
+
+		public SubmitForm()
+		{
+		}
 	}
 
 }

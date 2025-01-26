@@ -37,7 +37,7 @@
 		</thead>
 		<tbody>
 
-		@for (int i = 1; i <= Model.max_curse; i++)
+		@for (var i = 1; i <= Model.max_curse; i++)
 		{
 			var groups = Model.groups.Where(e => e.Curs == i);
 			if (groups.Count() == 0)
@@ -45,7 +45,6 @@
 			var firstGroup = true;
 			@foreach (var group in groups)
 			{
-
 				<tr>
 					@if (firstGroup)
 					{

@@ -1,6 +1,5 @@
 ﻿@page "{month?}"
-@using OMAVIAT.Pages.parents;
-@using System.Globalization;
+@using System.Globalization
 @model GradesModel
 @{
 	ViewData["Title"] = $"Успеваемость студента {Model.FullName}";
@@ -43,7 +42,7 @@
 				<th>
 					Дисциплина
 				</th>
-				@for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", CultureInfo.GetCultureInfo("ru-ru")).Month); i++)
+				@for (var i = 1; i <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.ParseExact(Model.month, "MMMM", CultureInfo.GetCultureInfo("ru-ru")).Month); i++)
 				{
 					<th>
 						@i
@@ -71,7 +70,6 @@
 						}
 					</tr>
 				}
-
 			}
 			</tbody>
 		</table>

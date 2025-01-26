@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages {
-	public class RepairProgressModel : PageModel {
-		private readonly ILogger<RepairProgressModel> _logger;
+namespace OMAVIAT.Pages;
 
-		public RepairProgressModel(ILogger<RepairProgressModel> logger)
-		{
-			_logger = logger;
-		}
+public class RepairProgressModel : PageModel
+{
+	private readonly ILogger<RepairProgressModel> _logger;
 
-		public void OnGet()
-		{
+	public RepairProgressModel(ILogger<RepairProgressModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

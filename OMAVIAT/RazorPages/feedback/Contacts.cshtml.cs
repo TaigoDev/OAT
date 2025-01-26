@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.feedback {
-	public class ContactsModel : PageModel {
-		private readonly ILogger<ContactsModel> _logger;
+namespace OMAVIAT.Pages.feedback;
 
-		public ContactsModel(ILogger<ContactsModel> logger)
-		{
-			_logger = logger;
-		}
+public class ContactsModel : PageModel
+{
+	private readonly ILogger<ContactsModel> _logger;
 
-		public void OnGet()
-		{
+	public ContactsModel(ILogger<ContactsModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

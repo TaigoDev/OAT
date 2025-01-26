@@ -463,7 +463,7 @@ section.centered .section-title {
 	color: var(--light-white);
 }
 
-.sidebar-title::after{
+.sidebar-title::after {
 	content: "";
 	display: block;
 	height: 2px;

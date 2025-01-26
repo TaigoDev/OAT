@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.organizationInformation {
-	public class FoodModel : PageModel {
-		private readonly ILogger<FoodModel> _logger;
+namespace OMAVIAT.Pages.organizationInformation;
 
-		public FoodModel(ILogger<FoodModel> logger)
-		{
-			_logger = logger;
-		}
+public class FoodModel : PageModel
+{
+	private readonly ILogger<FoodModel> _logger;
 
-		public void OnGet()
-		{
+	public FoodModel(ILogger<FoodModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

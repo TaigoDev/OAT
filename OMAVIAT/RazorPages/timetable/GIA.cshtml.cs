@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.timetable {
-	public class GIAModel : PageModel {
-		private readonly ILogger<GIAModel> _logger;
+namespace OMAVIAT.Pages.timetable;
 
-		public GIAModel(ILogger<GIAModel> logger)
-		{
-			_logger = logger;
-		}
+public class GIAModel : PageModel
+{
+	private readonly ILogger<GIAModel> _logger;
 
-		public void OnGet()
-		{
+	public GIAModel(ILogger<GIAModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

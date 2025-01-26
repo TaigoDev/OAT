@@ -1,13 +1,11 @@
 ﻿@page "/CMK/{name:regex(^([a-zA-Z0-9А-Яа-я .&'-]+)$)}"
-@using OMAVIAT.RazorPages.Components
-@using OMAVIAT.Utilities
 @using OMAVIAT.Services.Workers
+@using OMAVIAT.Utilities
 @model CMKModel
 @{
 	using var context = new DatabaseContext();
 	var cmk = context.CMK.FirstOrDefault(e => e.url == Model.name);
 	ViewData["Title"] = cmk is not null ? cmk.name : "ЦМК не найден";
-
 }
 @if (cmk is null)
 {
@@ -101,7 +99,7 @@
 
 	@foreach (var t in cmk.history.Split("\n"))
 	{
-		<p>@Html.Raw(@t)</p>
+		<p>@Html.Raw(t)</p>
 	}
 
 
@@ -111,7 +109,7 @@
 
 	@foreach (var t in cmk.descriptionOfWork.Split("\n"))
 	{
-		<p>@Html.Raw(@t)</p>
+		<p>@Html.Raw(t)</p>
 	}
 
 	<h3 id="tasks" class="section-subtitle">
@@ -120,7 +118,7 @@
 
 	@foreach (var t in cmk.plans.Split("\n"))
 	{
-		<p>@Html.Raw(@t)</p>
+		<p>@Html.Raw(t)</p>
 	}
 
 	<h3 id="achievements" class="section-subtitle">
@@ -129,7 +127,7 @@
 
 	@foreach (var t in cmk.achievements.Split("\n"))
 	{
-		<p>@Html.Raw(@t)</p>
+		<p>@Html.Raw(t)</p>
 	}
 
 </section>

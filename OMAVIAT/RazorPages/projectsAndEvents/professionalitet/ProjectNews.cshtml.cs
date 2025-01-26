@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages {
-	public class ProjectNewsModel(ILogger<ProjectNewsModel> logger) : PageModel {
+namespace OMAVIAT.Pages;
 
-		public int id { get; set; }
-		public void OnGet(int? id)
-		{
-			this.id = id - 1 ?? 0;
-		}
+public class ProjectNewsModel(ILogger<ProjectNewsModel> logger) : PageModel
+{
+	public int id { get; set; }
+
+	public void OnGet(int? id)
+	{
+		this.id = id - 1 ?? 0;
 	}
 }

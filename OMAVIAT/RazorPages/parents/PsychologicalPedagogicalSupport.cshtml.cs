@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.parents {
-	public class PsychologicalPedagogicalSupportModel : PageModel {
-		private readonly ILogger<PsychologicalPedagogicalSupportModel> _logger;
+namespace OMAVIAT.Pages.parents;
 
-		public PsychologicalPedagogicalSupportModel(ILogger<PsychologicalPedagogicalSupportModel> logger)
-		{
-			_logger = logger;
-		}
+public class PsychologicalPedagogicalSupportModel : PageModel
+{
+	private readonly ILogger<PsychologicalPedagogicalSupportModel> _logger;
 
-		public void OnGet()
-		{
+	public PsychologicalPedagogicalSupportModel(ILogger<PsychologicalPedagogicalSupportModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

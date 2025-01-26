@@ -1,32 +1,30 @@
-﻿using OMAVIAT.Entities.Configs;
+﻿using System.Runtime.InteropServices;
+using OMAVIAT.Entities.Configs;
 using OMAVIAT.Utilities;
-using System.Runtime.InteropServices;
 
-namespace OMAVIAT {
-	public class Configurator {
+namespace OMAVIAT;
 
-		public static Config config = new();
-		public static TelegramConfig telegram = new();
-		public static TimeTableBotConfig timetable = new();
-		public static TimeTableBotConfig myoat = new();
-		public static YandexSmartCaptchaConfig SmartCaptcha = new();
-		public static bool IsLocal = OperatingSystem.IsWindows() || OperatingSystem.IsMacOS();
+public class Configurator
+{
+	public static Config Config { get; set; } = new();
+	public static TimeTableBotConfig Timetable { get; set; } = new();
+	public static TimeTableBotConfig MyOat { get; set; } = new();
+	public static YandexSmartCaptchaConfig SmartCaptcha { get; set; } = new();
 
-		public static async Task init()
-		{
-			config = await FileUtils.SetupConfiguration<Config>(
-			Path.Combine(Directory.GetCurrentDirectory(), "Resources", RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || OperatingSystem.IsMacOS() ? "config.yml" : "config-linux.yml"), new());
-			telegram = await FileUtils.SetupConfiguration<TelegramConfig>(
-			Path.Combine(Directory.GetCurrentDirectory(), "Resources", "telegram.yml"), new());
-			timetable = await FileUtils.SetupConfiguration<TimeTableBotConfig>(
-			Path.Combine(Directory.GetCurrentDirectory(), "Resources", "timetable_bot.yml"), new());
-			myoat = await FileUtils.SetupConfiguration<TimeTableBotConfig>(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "myoat.yml"), new());
+	public static async Task Init()
+	{
+		Config = await FileUtils.SetupConfiguration<Config>(
+			Path.Combine(Directory.GetCurrentDirectory(), "Resources",
+				RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || OperatingSystem.IsMacOS()
+					? "config.yml"
+					: "config-linux.yml"), new Config());
+		Timetable = await FileUtils.SetupConfiguration<TimeTableBotConfig>(
+			Path.Combine(Directory.GetCurrentDirectory(), "Resources", "timetable_bot.yml"), new TimeTableBotConfig());
+		MyOat = await FileUtils.SetupConfiguration<TimeTableBotConfig>(
+			Path.Combine(Directory.GetCurrentDirectory(), "Resources", "myoat.yml"), new TimeTableBotConfig());
 
-			SmartCaptcha = await FileUtils.SetupConfiguration<YandexSmartCaptchaConfig>(
-			Path.Combine(Directory.GetCurrentDirectory(), "Resources", "smartcaptcha.yml"), new());
-		}
-
-
-
+		SmartCaptcha = await FileUtils.SetupConfiguration<YandexSmartCaptchaConfig>(
+			Path.Combine(Directory.GetCurrentDirectory(), "Resources", "smartcaptcha.yml"),
+			new YandexSmartCaptchaConfig());
 	}
 }

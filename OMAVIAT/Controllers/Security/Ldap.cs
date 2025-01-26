@@ -1,99 +1,96 @@
-﻿using OMAVIAT.Utilities.Telegram;
-using System.DirectoryServices.Protocols;
+﻿using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Text;
+using OMAVIAT.Utilities.Telegram;
 
-namespace OMAVIAT.Controllers.Security {
-	public class Ldap {
+namespace OMAVIAT.Controllers.Security;
 
-		public static bool Login(string username, string password, string IP, bool WithError = true)
+public class Ldap
+{
+	public static bool Login(string username, string password, string ip, bool withError = true)
+	{
+		if (!Configurator.Config.IsProduction)
+			return true;
+
+		try
 		{
-			if (Configurator.IsLocal)
-				return true;
-
-			try
-			{
-				if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-					return false;
-
-				var authType = OperatingSystem.IsWindows() ? AuthType.Negotiate : AuthType.Basic;
-				username = OperatingSystem.IsWindows() ? username : $"{Configurator.config.ldap_domain}\\{username}";
-				var conn = new LdapConnection(new LdapDirectoryIdentifier(Configurator.config.ldap_IP, Configurator.config.ldap_port), new NetworkCredential(username, password), authType);
-				conn.Bind();
-				return true;
-			}
-			catch (Exception ex)
-			{
-				if (WithError)
-					TelegramBot.SendMessage($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
-					                        $"L: {username}\n" +
-					                        $"IP-адрес отправителя: {IP}." +
-					                        $"Ошибка: {ex}", ex);
+			if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
 				return false;
-			}
-		}
 
-		public static string? GetStudentGroup(string username)
+			var authType = OperatingSystem.IsWindows() ? AuthType.Negotiate : AuthType.Basic;
+			username = OperatingSystem.IsWindows() ? username : $"{Configurator.Config.Ldap.Domain}\\{username}";
+			var conn = new LdapConnection(new LdapDirectoryIdentifier(Configurator.Config.Ldap.Address,
+				Configurator.Config.Ldap.Port), new NetworkCredential(username, password), authType);
+			conn.Bind();
+			return true;
+		}
+		catch (Exception ex)
 		{
-			var response = SearchByUsername(username);
-			var attributes = GetValuesAttributeByTag(response, "memberOf");
-
-			if (attributes is null)
-				return null;
-
-			var memberOf = attributes.FirstOrDefault(e => e.Contains("CN=") && e.Contains("Группа -"));
-			if (memberOf is null)
-				return null;
-
-			return memberOf.Replace("CN=", "").Replace("Группа - ", "");
+			if (withError)
+				TelegramBot.SendMessage($"Неудачная попытка входа в аккаунт управления. Используемые данные:\n" +
+				                        $"L: {username}\n" +
+				                        $"IP-адрес отправителя: {ip}." +
+				                        $"Ошибка: {ex}", ex);
+			return false;
 		}
+	}
 
-		public static string? GetFullName(string username)
+	public static string? GetStudentGroup(string username)
+	{
+		var response = SearchByUsername(username);
+		var attributes = GetValuesAttributeByTag(response, "memberOf");
+		var memberOf = attributes?.FirstOrDefault(e => e.Contains("CN=") && e.Contains("Группа -"));
+		return memberOf?.Replace("CN=", "").Replace("Группа - ", "");
+	}
+
+	public static string? GetFullName(string username)
+	{
+		if (!Configurator.Config.IsProduction)
+			return "Admin Admin Admin";
+		var response = SearchByUsername(username);
+		var attributes = GetValuesAttributeByTag(response, "cn");
+		return attributes?.First().Replace("{", "").Replace("}", "");
+	}
+
+	public static SearchResponse SearchByUsername(string username)
+	{
+		using var ldap = new LdapConnection(new LdapDirectoryIdentifier(Configurator.Config.Ldap.Address,
+			Configurator.Config.Ldap.Port));
+
+		ldap.SessionOptions.ProtocolVersion = 3;
+		ldap.AuthType = AuthType.Basic;
+		ldap.Bind(new NetworkCredential(Configurator.Config.Ldap.Username, Configurator.Config.Ldap.Password));
+
+		var search = new SearchRequest
 		{
-			if (Configurator.IsLocal)
-				return "Admin Admin Admin";
-			var response = SearchByUsername(username);
-			var attributes = GetValuesAttributeByTag(response, "cn");
-			return attributes is not null ? attributes.First().Replace("{", "").Replace("}", "") : null;
-		}
+			DistinguishedName = $"DC={Configurator.Config.Ldap.Domain},DC={Configurator.Config.Ldap.Zone}",
+			Filter = $"(&(samaccountname={username}))",
+			Scope = SearchScope.Subtree
+		};
 
-		public static SearchResponse SearchByUsername(string username)
-		{
-			using var ldap = new LdapConnection(new LdapDirectoryIdentifier(Configurator.config.ldap_IP, Configurator.config.ldap_port));
+		search.Attributes.Add(null);
+		return (SearchResponse)ldap.SendRequest(search);
+	}
 
-			ldap.SessionOptions.ProtocolVersion = 3;
-			ldap.AuthType = AuthType.Basic;
-			ldap.Bind(new NetworkCredential(Configurator.config.ldap_login, Configurator.config.ldap_password));
+	public static DirectoryAttribute? GetAttributeByTag(SearchResponse results, string tag)
+	{
+		return results.Entries.Count is 0
+			? null
+			: results.Entries[0].Attributes.Values.Cast<DirectoryAttribute>().FirstOrDefault(e => e.Name == tag);
+	}
 
-			var search = new SearchRequest
-			{
-				DistinguishedName = $"DC={Configurator.config.ldap_domain},DC={Configurator.config.ldap_zone}",
-				Filter = $"(&(samaccountname={username}))",
-				Scope = SearchScope.Subtree
-			};
+	public static List<string>? GetValuesAttributeByTag(SearchResponse results, string tag)
+	{
+		var attribute = GetAttributeByTag(results, tag);
+		if (attribute is null)
+			return null;
 
-			search.Attributes.Add(null);
-			return (SearchResponse)ldap.SendRequest(search);
-		}
+		var values = attribute.GetValues(typeof(byte[]));
+		var stringValues = new List<string>();
 
-		public static DirectoryAttribute? GetAttributeByTag(SearchResponse results, string tag) =>
-			results.Entries.Count is 0 ? null :
-				results.Entries[0].Attributes.Values.Cast<DirectoryAttribute>().FirstOrDefault(e => e.Name == tag);
+		foreach (var t in values)
+			stringValues.AddRange(Encoding.UTF8.GetString((t as byte[])!).Split(','));
 
-		public static List<string>? GetValuesAttributeByTag(SearchResponse results, string tag)
-		{
-			var attribute = GetAttributeByTag(results, tag);
-			if (attribute is null)
-				return null;
-
-			var values = attribute!.GetValues(typeof(byte[]));
-			var StringValues = new List<string>();
-
-			for (int id = 0; id < values.Count(); id++)
-				StringValues.AddRange(Encoding.UTF8.GetString((values[id] as byte[])!).Split(','));
-
-			return StringValues;
-		}
-
+		return stringValues;
 	}
 }

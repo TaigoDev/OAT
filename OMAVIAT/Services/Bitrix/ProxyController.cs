@@ -1,25 +1,27 @@
 ﻿#pragma warning disable CS8604
+using System.Text;
 using HtmlAgilityPack;
 using OMAVIAT;
 using OMAVIAT.Controllers.Bitrix.Controllers;
-using System.Text;
 
-public static class ProxyController {
-
-	public static void BitrixProxy(this WebApplication context) =>
+public static class ProxyController
+{
+	public static void BitrixProxy(this WebApplication context)
+	{
 		context.Use((context, next) => Proxy(context, next));
+	}
 
-	async static Task Proxy(HttpContext context, Func<Task> next)
+	private static async Task Proxy(HttpContext context, Func<Task> next)
 	{
 		try
 		{
-
 			var OnNewSite = UrlsContoller.Redirect(context.Request.Path.Value!);
 			if (OnNewSite != null && $"/{OnNewSite}" != context.Request.Path.Value!)
 			{
-				context.Response.Redirect($"{Configurator.config.MainUrl}/{OnNewSite}");
+				context.Response.Redirect($"{Configurator.Config.MainUrl}/{OnNewSite}");
 				return;
 			}
+
 			await next();
 			if (context.Response.StatusCode == 404)
 				await context.DisplayBitrix(next);
@@ -35,7 +37,7 @@ public static class ProxyController {
 	public static async Task DisplayBitrix(this HttpContext context, Func<Task> next)
 	{
 		var path = context.Request.Path.Value;
-		var BaseUrl = $"{Configurator.config.BaseUrl}{path}{context.Request.QueryString.Value}";
+		var BaseUrl = $"{Configurator.Config.BaseUrl}{path}{context.Request.QueryString.Value}";
 		HttpClientHandler clientHandler = new()
 		{
 			ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
@@ -51,7 +53,8 @@ public static class ProxyController {
 		HttpResponseMessage? response = null;
 		if (context.Request.Method == "GET")
 		{
-			if (path.Contains("students/perfomance") && !string.IsNullOrEmpty(context.Request.Headers.Authorization.ToString()))
+			if (path.Contains("students/perfomance") &&
+			    !string.IsNullOrEmpty(context.Request.Headers.Authorization.ToString()))
 				client.DefaultRequestHeaders.Add("Authorization", context.Request.Headers.Authorization.ToString());
 			response = await client.GetAsync(BaseUrl);
 		}
@@ -60,7 +63,7 @@ public static class ProxyController {
 			try
 			{
 				string documentContents;
-				using Stream receiveStream = context.Request.Body;
+				using var receiveStream = context.Request.Body;
 				using StreamReader readStream = new(receiveStream, Encoding.UTF8);
 				documentContents = readStream.ReadToEnd();
 				HttpContent content = new StringContent(documentContents, Encoding.UTF8, "application/json");
@@ -77,6 +80,7 @@ public static class ProxyController {
 			await context.Response.WriteAsync("FATAL ERROR: response was null", Encoding.UTF8);
 			return;
 		}
+
 		if (!context.Response.HasStarted)
 			context.Response.StatusCode = (int)response.StatusCode;
 		var body = await response.Content.ReadAsStringAsync();
@@ -84,26 +88,29 @@ public static class ProxyController {
 		doc.LoadHtml(body);
 		var head = doc.DocumentNode.SelectSingleNode("/html/head");
 
-		if (path.Contains("students/perfomance") && string.IsNullOrEmpty(context.Request.Headers["Authorization"].ToString()))
+		if (path.Contains("students/perfomance") &&
+		    string.IsNullOrEmpty(context.Request.Headers["Authorization"].ToString()))
 		{
-			context.Response.Headers.TryAdd("Www-Authenticate", "Basic realm=\"Enter your credentials in domain oat.local\"");
+			context.Response.Headers.TryAdd("Www-Authenticate",
+				"Basic realm=\"Enter your credentials in domain oat.local\"");
 			context.Response.Headers.TryAdd("Vary", "Accept-Encoding");
 			context.Response.Headers.TryAdd("Strict-Transport-Security", "max-age=2592000; includeSubDomains; preload");
 		}
 
 		if (head != null)
 		{
-			string newContent = "<meta charset=\"UTF-8\">";
-			HtmlNode newNode = HtmlNode.CreateNode(newContent);
+			var newContent = "<meta charset=\"UTF-8\">";
+			var newNode = HtmlNode.CreateNode(newContent);
 			head.InsertBefore(newNode, head.FirstChild);
 			if (!context.Response.HasStarted)
 				context.Response.ContentType = "text/html";
 
 			await context.Response.WriteAsync(doc.DocumentNode.OuterHtml, Encoding.UTF8);
 		}
-		else await context.Response.WriteAsync(body, Encoding.UTF8);
-
-
+		else
+		{
+			await context.Response.WriteAsync(body, Encoding.UTF8);
+		}
 	}
 
 	private static bool IsImage(string path, params string[] expansions)
@@ -113,5 +120,4 @@ public static class ProxyController {
 				return true;
 		return false;
 	}
-
 }

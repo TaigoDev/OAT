@@ -1,12 +1,11 @@
 ﻿@page "{building?}"
+
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using OMAVIAT.Entities.Enums
 @using OMAVIAT.Schedule.Services.MainSchedule
-
-@model OMAVIAT.Pages.timetable.TeachersModel
+@model TeachersModel
 @{
 	ViewData["Title"] = "Расписание по кабинетам";
-
 }
 
 <link rel="stylesheet" href="~/css/timetable/timetable.css" asp-append-version="true">
@@ -31,7 +30,6 @@
 			var corpus = ScheduleReader.schedules.FirstOrDefault(e => e.building == (int)result);
 			if (corpus is null)
 				return;
-
 		}
 		@foreach (var cabinet in corpus.cabinets.OrderBy(e => e.name))
 		{

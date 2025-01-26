@@ -2,22 +2,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using OMAVIAT.Entities.Models;
 using static OMAVIAT.Services.Workers.WorkersReader;
 
-namespace OMAVIAT.Pages.organizationInformation {
-	public class SearchWorkerModel : PageModel {
+namespace OMAVIAT.Pages.organizationInformation;
 
-		public List<Worker> Workers = new List<Worker>();
+public class SearchWorkerModel : PageModel
+{
+	public List<Worker> Workers = new();
 
-		public void OnGet(string? text)
+	public void OnGet(string? text)
+	{
+		if (text is null || text is "undefined")
 		{
-			if (text is null || text is "undefined")
-			{
-				Response.Redirect("/organizationInformation/ManagementPedagogicalStaff");
-				return;
-			}
-
-			if (text.Length < 3)
-				return;
-			Workers = AllWorkers.Where(e => e.FullName.ToLower().Contains(text.ToLower())).ToList();
+			Response.Redirect("/organizationInformation/ManagementPedagogicalStaff");
+			return;
 		}
+
+		if (text.Length < 3)
+			return;
+		Workers = AllWorkers.Where(e => e.FullName.ToLower().Contains(text.ToLower())).ToList();
 	}
 }

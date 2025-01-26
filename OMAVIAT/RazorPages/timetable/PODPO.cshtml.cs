@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.timetable {
-	[NoCache]
-	public class PODPOModel : PageModel {
-		private readonly ILogger<PODPOModel> _logger;
+namespace OMAVIAT.Pages.timetable;
 
-		public PODPOModel(ILogger<PODPOModel> logger)
-		{
-			_logger = logger;
-		}
+[NoCache]
+public class PODPOModel : PageModel
+{
+	private readonly ILogger<PODPOModel> _logger;
 
-		public void OnGet()
-		{
+	public PODPOModel(ILogger<PODPOModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

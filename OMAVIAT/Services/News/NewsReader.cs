@@ -2,8 +2,8 @@
 using OMAVIAT;
 using OMAVIAT.Entities.Database;
 
-
-public class NewsReader {
+public class NewsReader
+{
 	public static IEnumerable<IEnumerable<News>> pages = new List<List<News>>();
 	public static List<News> news = [];
 
@@ -15,8 +15,4 @@ public class NewsReader {
 		news = [.. news.Where(e => e.IsFixed), .. news.Where(e => !e.IsFixed)];
 		pages = news.PagesSplit(10);
 	}
-
-
-
-
 }

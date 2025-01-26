@@ -32,7 +32,7 @@
 </div>
 
 @code {
-	[Parameter] public string LessonName { get; set; } = "ТСИ";// сокращенное имя предмета
+	[Parameter] public string LessonName { get; set; } = "ТСИ"; // сокращенное имя предмета
 	[Parameter] public string LessonType { get; set; } = "лекция";
 	[Parameter] public string LessonCabinet { get; set; } = "000";
 	[Parameter] public string LessonTeacher { get; set; } = "Фамилия И.О.";
@@ -41,6 +41,9 @@
 	[Parameter] public bool IsGroup { get; set; } = true;
 	[Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
 	[Parameter] public int ColorId { get; set; }
-	private string GetTeacherLink(string? fullName) => $"https://www.oat.ru/organizationInformation/worker/{fullName}";
+	private string GetTeacherLink(string? fullName)
+	{
+		return $"https://www.oat.ru/organizationInformation/worker/{fullName}";
+	}
 
 }

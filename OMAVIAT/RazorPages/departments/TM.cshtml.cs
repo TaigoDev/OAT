@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages {
-	public class TMModel : PageModel {
-		private readonly ILogger<TMModel> _logger;
+namespace OMAVIAT.Pages;
 
-		public TMModel(ILogger<TMModel> logger)
-		{
-			_logger = logger;
-		}
+public class TMModel : PageModel
+{
+	private readonly ILogger<TMModel> _logger;
 
-		public void OnGet()
-		{
+	public TMModel(ILogger<TMModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

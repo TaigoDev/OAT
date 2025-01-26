@@ -2,7 +2,8 @@
 
 namespace MyOAT.Utilities.Cookies;
 
-public class Cookie : ICookie {
+public class Cookie : ICookie
+{
 	private readonly IJSRuntime JSRuntime;
 	private string expires = "";
 

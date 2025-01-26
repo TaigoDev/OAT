@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages.CMK {
-	public class CMKModel : PageModel {
-		private readonly ILogger<CMKModel> _logger;
+namespace OMAVIAT.Pages.CMK;
 
-		public CMKModel(ILogger<CMKModel> logger)
-		{
-			_logger = logger;
-		}
-		public string? name { get; set; }
-		public void OnGet(string? name)
-		{
-			this.name = name;
+public class CMKModel : PageModel
+{
+	private readonly ILogger<CMKModel> _logger;
 
-		}
+	public CMKModel(ILogger<CMKModel> logger)
+	{
+		_logger = logger;
+	}
+
+	public string? name { get; set; }
+
+	public void OnGet(string? name)
+	{
+		this.name = name;
 	}
 }

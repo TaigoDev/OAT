@@ -1,8 +1,7 @@
 ﻿@page "{id?}"
-@using OMAVIAT.Utilities
+
 @using OMAVIAT.RazorPages.Components
 @using OMAVIAT.Services.News
-
 @model ProjectNewsModel
 @{
 	ViewData["Title"] = "Новости проекта";
@@ -54,8 +53,6 @@
 				countInPage = 10,
 				UrlWithParameter = "/projectsAndEvents/demoExam/ProjectNews/{id}"
 			}))
-
-
 		}
 		else
 		{

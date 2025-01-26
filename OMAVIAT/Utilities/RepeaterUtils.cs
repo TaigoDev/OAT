@@ -1,67 +1,75 @@
-﻿namespace OMAVIAT.Utilities {
-	public class RepeaterUtils {
-		public static void Repeat(Func<Task> method, int time) =>
-			new Task(async () => {
-				while (true)
-				{
-					try
-					{
-						await method.Invoke();
-						await Task.Delay(time);
-					}
-					catch (Exception ex)
-					{
-						Logger.Error(ex.ToString());
-					}
-				}
-			}).Start();
+﻿using NLog;
 
-		public static Task RepeatAsync(Func<Task> repeat, int minutes)
+namespace OMAVIAT.Utilities;
+
+public class RepeaterUtils
+{
+	private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+	public static void Repeat(Func<Task> method, int time)
+	{
+		new Task(async () =>
 		{
-			new Thread(async () => {
+			while (true)
 				try
 				{
-					await repeat.Invoke();
-					await Task.Delay(minutes * 60 * 1000);
+					await method.Invoke();
+					await Task.Delay(time);
 				}
 				catch (Exception ex)
 				{
 					Logger.Error(ex.ToString());
 				}
-			}).Start();
-			return Task.CompletedTask;
-		}
+		}).Start();
+	}
 
-		public static async Task RepeatOnce(Func<Task> repeat, int count)
+	public static Task RepeatAsync(Func<Task> repeat, int minutes)
+	{
+		new Thread(async () =>
 		{
 			try
 			{
-				for (int i = 0; i < count; i++)
-					await repeat.Invoke();
+				await repeat.Invoke();
+				await Task.Delay(minutes * 60 * 1000);
 			}
 			catch (Exception ex)
 			{
 				Logger.Error(ex.ToString());
 			}
+		}).Start();
+		return Task.CompletedTask;
+	}
 
-		}
-
-		public static void Try(Func<Task> action, TimeSpan timeSpan, int attempt = 2) =>
-			new Task(async () => await Try(action, timeSpan, attempt, 0));
-
-		private static async Task Try(Func<Task> action, TimeSpan timeSpan, int attempt, int count)
+	public static async Task RepeatOnce(Func<Task> repeat, int count)
+	{
+		try
 		{
-			if (count >= attempt)
-				return;
-			try
-			{
-				await action.Invoke();
-			}
-			catch
-			{
-				await Task.Delay(timeSpan);
-				await Try(action, timeSpan, attempt, count + 1);
-			}
+			for (var i = 0; i < count; i++)
+				await repeat.Invoke();
+		}
+		catch (Exception ex)
+		{
+			Logger.Error(ex.ToString());
+		}
+	}
+
+	public static void Try(Func<Task> action, TimeSpan timeSpan, int attempt = 2)
+	{
+		new Task(async () => await Try(action, timeSpan, attempt, 0));
+	}
+
+	private static async Task Try(Func<Task> action, TimeSpan timeSpan, int attempt, int count)
+	{
+		if (count >= attempt)
+			return;
+		try
+		{
+			await action.Invoke();
+		}
+		catch
+		{
+			await Task.Delay(timeSpan);
+			await Try(action, timeSpan, attempt, count + 1);
 		}
 	}
 }

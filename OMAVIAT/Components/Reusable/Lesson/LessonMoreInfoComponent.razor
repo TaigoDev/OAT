@@ -111,7 +111,7 @@
 </div>
 
 @code {
-	[Parameter] public string LessonName { get; set; } = "Технические средства информатизации";// полное наименование предмета
+	[Parameter] public string LessonName { get; set; } = "Технические средства информатизации"; // полное наименование предмета
 	[Parameter] public string LessonType { get; set; } = "лекция";
 	[Parameter] public string? LessonCabinet1 { get; set; }
 	[Parameter] public string? LessonTeacher1 { get; set; }
@@ -121,10 +121,13 @@
 	[Parameter] public int? LessonFinished { get; set; } = 17;
 	[Parameter] public int? LessonLength { get; set; } = 25;
 	[Parameter] public bool IsGroup { get; set; } = true;
-	[Parameter] public bool IsSubGroups { get; set; } = false;
+	[Parameter] public bool IsSubGroups { get; set; }
 	[Parameter] public int ColorId { get; set; }
 	[Parameter] public EventCallback<bool> OnCloseMenu { get; set; }
 
-	private string GetTeacherLink(string? fullName) => $"https://www.oat.ru/organizationInformation/worker/{fullName}";
+	private string GetTeacherLink(string? fullName)
+	{
+		return $"https://www.oat.ru/organizationInformation/worker/{fullName}";
+	}
 
 }

@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace OMAVIAT.Pages {
-	public class ONIIPModel : PageModel {
-		private readonly ILogger<ONIIPModel> _logger;
+namespace OMAVIAT.Pages;
 
-		public ONIIPModel(ILogger<ONIIPModel> logger)
-		{
-			_logger = logger;
-		}
+public class ONIIPModel : PageModel
+{
+	private readonly ILogger<ONIIPModel> _logger;
 
-		public void OnGet()
-		{
+	public ONIIPModel(ILogger<ONIIPModel> logger)
+	{
+		_logger = logger;
+	}
 
-		}
+	public void OnGet()
+	{
 	}
 }

@@ -26,14 +26,16 @@
 		RenderNextButton();
 		var max = GetMaxPage();
 		var min = GetMinPage();
-		pages = (__builder) => {
+		pages = __builder =>
+		{
 			if (min != 1)
 			{
 				<div class="pages-nav-pages-list-item points">
 					...
 				</div>
 			}
-			for (int i = min; i <= max; i++)
+
+			for (var i = min; i <= max; i++)
 			{
 				if (CurrentPage == i)
 				{
@@ -43,11 +45,12 @@
 				}
 				else
 				{
-					<a href="@(UrlWithParameter.Replace("{id}", (i).ToString()))" class="pages-nav-pages-list-item">
+					<a href="@UrlWithParameter.Replace("{id}", i.ToString())" class="pages-nav-pages-list-item">
 						@i
 					</a>
 				}
 			}
+
 			if (max != GetCountPages())
 			{
 				<div class="pages-nav-pages-list-item points">
@@ -58,18 +61,16 @@
 	}
 
 
-
-
 	private void RenderBackButton()
 	{
 		if (CurrentPage is 1)
 			return;
-		backButton = (__builder) => {
+		backButton = __builder =>
+		{
 			<a href="@(UrlWithParameter.Replace("{id}", (CurrentPage - 1).ToString()))"
 			   class="pages-nav-arrow pages-nav-prev">
 				<img class="icon" src="/images/basic/longArrow.svg" alt="назад">
 			</a>
-
 		};
 	}
 
@@ -77,7 +78,8 @@
 	{
 		if (CurrentPage == GetCountPages())
 			return;
-		nextButton = (__builder) => {
+		nextButton = __builder =>
+		{
 			<a href="@(UrlWithParameter.Replace("{id}", (CurrentPage + 1).ToString()))"
 			   class="pages-nav-arrow pages-nav-next">
 				<img class="icon" src="/images/basic/longArrow.svg" alt="вперед">
@@ -85,11 +87,16 @@
 		};
 	}
 
-	private int GetCountPages() => count % countInPage != 0 ?
-		count / countInPage + 1 :
-		count / countInPage;
+	private int GetCountPages()
+	{
+		return count % countInPage != 0 ? count / countInPage + 1 : count / countInPage;
+	}
 
-	private int GetMinPage() => CurrentPage <= 5 ? 1 : CurrentPage - 5;
+	private int GetMinPage()
+	{
+		return CurrentPage <= 5 ? 1 : CurrentPage - 5;
+	}
+
 	private int GetMaxPage()
 	{
 		var min = GetMinPage();
@@ -98,4 +105,5 @@
 			return GetMinPage() + 10;
 		return GetCountPages();
 	}
+
 }
