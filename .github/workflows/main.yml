@@ -26,13 +26,13 @@ jobs:
         - name: Create Zip File
           uses: papeloto/action-zip@v1
           with:
-            files: "OMAVIAT/bin/Release/net8.0/linux-x64/publish/"
-            dest: "OMAVIAT/bin/Release/net8.0/linux-x64/publish/release.zip"
+            files: "OMAVIAT/bin/Release/net9.0/linux-x64/publish/"
+            dest: "OMAVIAT/bin/Release/net9.0/linux-x64/publish/release.zip"
             
         - name: Release
           uses: softprops/action-gh-release@v2
           with:
-            files: "OMAVIAT/bin/Release/net8.0/linux-x64/publish/release.zip"
+            files: "OMAVIAT/bin/Release/net9.0/linux-x64/publish/release.zip"
             tag_name: ${{ steps.generate_release_tag.outputs.release_tag }}
             token: ${{ secrets.git_token }}
 
