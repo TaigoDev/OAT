@@ -1,0 +1,63 @@
+/* for all child pages */
+
+.photo{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: min(275px, 100%);
+	text-align: center;
+	margin: 15px auto auto auto;
+}
+
+.photo.wide{
+	width: min(700px, 100%);
+}
+
+.photo.fullwidth{
+	width: 100%;
+}
+
+.photo img{
+	object-fit: cover;
+}
+
+/* for main page */
+.museum-pages{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 25px;
+}
+
+.museum-page{
+	display: grid;
+	place-items: center;
+	aspect-ratio: 1;
+	width: 250px;
+	padding: 15px;
+	font-size: 1.25rem;
+	font-weight: 600;
+	text-align: center;
+	color: var(--light-white);
+	background: var(--m-color);
+	border-radius: var(--br-m);
+	transition: 100ms ease;
+}
+
+.museum-page:hover {
+	background: var(--m-l-color);
+}
+
+@media(width<850px){
+	.museum-page{
+		font-size: 1.15rem;
+		width: 225px;
+	}
+}
+
+@media(width<650px){
+	.museum-page{
+		width: 100%;
+		aspect-ratio: auto;
+	}
+}

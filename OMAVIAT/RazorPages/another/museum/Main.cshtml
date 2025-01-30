@@ -1,0 +1,29 @@
+﻿@page
+@model MainModel
+@{
+	ViewData["Title"] = "Музей истории Омского Авиационного колледжа имени Н.Е. Жуковского";
+}
+
+<link rel="stylesheet" href="~/css/another/museum/main.css" asp-append-version="true">
+
+<section class="centered">
+	<h2 class="section-title">
+		Музей истории Омского Авиационного колледжа имени Н.Е. Жуковского
+	</h2>
+
+	<div class="museum-pages">
+		<a asp-page="History" class="museum-page">
+			К 95-летию
+			колледжа
+		</a>
+		<a asp-page="Events" class="museum-page">
+			Мероприятия
+			музея
+		</a>
+		<a asp-page="InterestingFacts" class="museum-page">
+			Интересные
+			факты
+		</a>
+	</div>
+
+</section>

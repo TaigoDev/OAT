@@ -1,0 +1,13 @@
+.four-people{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0 20px;
+	max-width: 800px;
+	margin: auto;
+}
+
+@media(width<750px){
+	.four-people{
+		grid-template-columns: 1fr;
+	}
+}
