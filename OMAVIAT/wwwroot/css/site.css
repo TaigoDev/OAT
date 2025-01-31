@@ -88,12 +88,13 @@
 	}
 }
 
+/*
 @media (width < 1200px) {
 	html, body {
 		font-size: 15px;
 	}
 }
-
+*/
 :root {
 	/* colors */
 	--m-color: #042859;
@@ -1087,11 +1088,11 @@ table.two-column tr td:first-child {
 
 @media (width < 600px) {
 	.section-title {
-		font-size: 1.525rem;
+		font-size: 1.55rem;
 	}
 
 	.section-subtitle {
-		font-size: 1.275rem;
+		font-size: 1.35rem;
 	}
 
 	.section-subtitle-small {
