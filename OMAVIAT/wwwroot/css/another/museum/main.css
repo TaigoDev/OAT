@@ -27,15 +27,16 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 25px;
+	margin: 20px auto 40px auto;
 }
 
 .museum-page{
 	display: grid;
 	place-items: center;
 	aspect-ratio: 1;
-	width: 250px;
+	width: 225px;
 	padding: 15px;
-	font-size: 1.25rem;
+	font-size: 1.15rem;
 	font-weight: 600;
 	text-align: center;
 	color: var(--light-white);

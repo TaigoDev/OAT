@@ -1,0 +1,31 @@
+@implements OMAVIAT.Components.Interface.ISelectorParent<ZoneComponent>
+
+<div class="zone-list @ClassList">
+	<CascadingValue Value="@(this)">
+		@ChildContent
+	</CascadingValue>
+</div>
+
+@code {
+	[Parameter] public RenderFragment? ChildContent { get; set; } // Список блоков
+	[Parameter] public string ClassList { get; set; } = "";
+
+	public List<ZoneComponent> Childs { get; set; } = [];
+
+	public void Select(ZoneComponent selectedChild)
+	{
+		foreach (var child in Childs)
+			child.OnChangeSelect(child.Equals(selectedChild));
+	}
+
+}
+
+<!-- логика:
+	1) среди всех компонентов ZoneComponent должен оставаться 1 активный.
+	2) у активного компонента будет добавляться класс active
+	3) активный компонент тот, по которому нажали
+	примеры:
+	1) страница "Практики и сессии" (блоки слева)
+	2) страница "Вопрос-ответ" (аккордионы)
+	3) страница "Доска объявлений" (блоки слева)
+-->

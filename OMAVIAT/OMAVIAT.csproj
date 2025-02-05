@@ -55,4 +55,9 @@
 			<HintPath>OMAVIAT.Schedule.dll</HintPath>
 		</Reference>
 	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Components\Reusable\Lesson\LessonComponent.razor" />
+	  <_ContentIncludedByDefault Remove="Components\Reusable\Lesson\LessonMoreInfoComponent.razor" />
+	  <_ContentIncludedByDefault Remove="Components\Reusable\Lesson\LessonProgressComponent.razor" />
+	</ItemGroup>
 </Project>

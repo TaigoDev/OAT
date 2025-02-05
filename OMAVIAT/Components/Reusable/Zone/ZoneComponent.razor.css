@@ -1,0 +1,27 @@
+.zone {
+	padding: 15px;
+	border: var(--zone-bw) solid var(--zone-bc);
+	border-radius: var(--zone-br);
+	background-color: var(--zone-bgc);
+	transition: background-color var(--td-s) var(--ttf), border-color var(--td-s) var(--ttf);
+}
+
+.zone.can-change-state:hover {
+	border-color: var(--zone-active-bc);
+}
+
+.zone.active {
+	border-color: var(--zone-active-bc);
+	background: var(--zone-active-bgc);
+	color: var(--matte-c);
+}
+
+.zone.can-change-state {
+	cursor: pointer;
+}
+
+@media (width < 700px) {
+	.zone {
+		padding: 10px;
+	}
+}

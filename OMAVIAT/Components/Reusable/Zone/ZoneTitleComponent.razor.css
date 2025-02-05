@@ -1,0 +1,5 @@
+.zone-title {
+	font-size: var(--subtitle-fs);
+	font-weight: var(--subtitle-fw);
+	line-height: var(--subtitle-lh);
+}

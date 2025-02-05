@@ -1,0 +1,55 @@
+@implements OMAVIAT.Components.Interface.ISelectorChild<ZoneListComponent>
+
+@if (CanChangeState)
+{
+	<div @onclick="OnClick" class="zone can-change-state @State @ClassList">
+		@ChildContent
+	</div>
+}
+else
+{
+	<div class="zone @ClassList">
+		@ChildContent
+	</div>
+}
+
+@code {
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+	[Parameter] public string ClassList { get; set; } = "";
+	[Parameter] public bool CanChangeState { get; set; } = true;
+	[Parameter] public string State { get; set; } = "inactive";
+
+	[CascadingParameter] public ZoneListComponent? Parent { get; set; }
+
+	protected override void OnInitialized()
+	{
+		if (Parent is null)
+			return;
+		Parent.Childs.Add(this);
+	}
+
+	public void OnClick()
+	{
+		if (Parent is not null)
+			Parent.Select(this);
+		else
+			OnChangeSelect(State != "active");
+	}
+
+	public void OnChangeSelect(bool enable)
+	{
+		State = enable ? "active" : "inactive";
+		StateHasChanged();
+	}
+
+}
+
+<!-- логика:
+	1) среди всех компонентов ZoneComponent должен оставаться 1 активный.
+	2) у активного компонента будет добавляться класс active 
+	3) активный компонент тот, по которому нажали 
+	примеры:
+	1) страница "Практики и сессии" (блоки слева)
+	2) страница "Вопрос-ответ" (аккордионы)
+	3) страница "Доска объявлений" (блоки слева)
+-->

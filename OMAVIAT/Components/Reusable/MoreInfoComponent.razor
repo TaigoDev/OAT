@@ -1,0 +1,25 @@
+@rendermode InteractiveServer
+<div @onclick="async () => await ChangeState()" class="more-info-backdrop">
+</div>
+
+<aside class="more-info @State">
+	<button @onclick="async () => await ChangeState()" class="more-info-close">
+		<span class="more-info-close-line"></span>
+		<span class="more-info-close-line"></span>
+	</button>
+	@ChildContent
+</aside>
+
+@code{
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public string State { get; set; } = "inactive";
+	[Parameter] public EventCallback<bool> OnChangeState { get; set; }
+
+	public async Task ChangeState()
+	{
+		State = State == "inactive" ? "active" : "inactive";
+		await OnChangeState.InvokeAsync(State == "active");
+		await InvokeAsync(StateHasChanged);
+	}
+
+}

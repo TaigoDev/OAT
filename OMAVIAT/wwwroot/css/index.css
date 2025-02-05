@@ -1,5 +1,46 @@
 ﻿/* MAIN PAGE */
 
+/* museum */
+
+.museum{
+	display: block;
+	position: relative;
+	padding: 10px 20px;
+	border: var(--border-width) solid;
+	border-radius: var(--border-radius-xl);
+	background-color: #23212199;
+	font-size: 1.3rem;
+	color: inherit;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: 125ms ease;
+	cursor: pointer;
+}
+
+.museum:hover {
+	background-color: var(--matte-c);
+	border-color: white;
+}
+
+.museum-happy{
+	position: absolute;
+	font-size: 2.25rem;
+}
+
+.museum-happy.left{
+	top: -5px;
+	left: -5px;
+	translate: -50% -50%;
+	rotate: -90deg;
+}
+
+.museum-happy.right{
+	top: -5px;
+	right: -5px;
+	translate: 50% -50%;
+}
+
 /* news slider */
 
 .news-slider-container {

@@ -74,7 +74,7 @@ body {
 	position: relative;
 	height: 100px;
 	width: 100%;
-	border: 2px solid;
+	border: var(--border-width) solid;
 	border-radius: var(--border-radius-xl);
 	background-color: #23212199;
 	transition: 125ms ease;
