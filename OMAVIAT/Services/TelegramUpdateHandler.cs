@@ -42,6 +42,7 @@ public class TelegramUpdateHandler : IUpdateHandler
 	{
 		try
 		{
+			Logger.Info($"Type is {update.Type}");
 			switch (update.Type)
 			{
 				case UpdateType.CallbackQuery:
