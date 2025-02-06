@@ -12,6 +12,9 @@ public static class TelegramNewsService
 
 	public static async Task OnNewMessage(Update update)
 	{
+		Logger.Info($"ChatId {update.GetChatId()}");
+		Logger.Info($"Caption {update.ChannelPost?.Caption}");
+
 		if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId
 		    || update.ChannelPost?.Caption is null ||
 		    !update.ChannelPost.Caption.Contains(Configurator.Config.Telegram.NewsPublishTag))
