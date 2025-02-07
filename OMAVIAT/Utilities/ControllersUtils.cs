@@ -17,8 +17,8 @@ public static class ControllersUtils
 	public static string UserIP(this HttpContext context)
 	{
 		return !string.IsNullOrWhiteSpace(context.Request.Headers["CF-Connecting-IP"])
-			? context.Request.Headers["CF-Connecting-IP"]
-			: context.Request.Headers["X-Real-IP"];
+			? context.Request.Headers["CF-Connecting-IP"].ToString() ?? "localhost"
+			: context.Request.Headers["X-Real-IP"].ToString() ?? "localhost";
 	}
 
 	public static IApplicationBuilder UseNoSniffHeaders(this IApplicationBuilder builder)

@@ -11,7 +11,10 @@ public class EventsModel : PageModel
 		_logger = logger;
 	}
 
-	public void OnGet()
+	public int Id { get; set; }
+
+	public void OnGet(int? id)
 	{
+		this.Id = id - 1 ?? 0;
 	}
 }

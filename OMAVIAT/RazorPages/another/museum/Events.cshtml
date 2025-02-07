@@ -1,4 +1,8 @@
-﻿@page
+﻿@page "{id?}"
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using OMAVIAT.RazorPages.Components
+@using OMAVIAT.Services.News
+@using OMAVIAT.Utilities
 @model EventsModel
 @{
 	ViewData["Title"] = "Мероприятия музея";
@@ -9,26 +13,70 @@
 <script src="~/js/allNews.js" asp-append-version="true"></script>
 
 <section class="centered">
-	<h2 class="section-title">
-		Мероприятия музея
-	</h2>
+
+	
+	@if (MuseumNewsReader.MuseumEventsNewsPages.Count() >= Model.Id)
+	{
+		<h2 class="section-title">
+			Мероприятия музея
+		</h2>
+		<div class="news-list">
+
+			@foreach (var news in MuseumNewsReader.MuseumEventsNewsPages.ToList()[Model.Id])
+			{
+				var photos = news.GetPhotos();
+				if (photos.Count is 0)
+					continue;
+				<div class="news-item">
+					<a class="news-item-img" href="/another/museum/MuseumNews/@news.id/type/events">
+						<img loading="lazy" src="/@photos.FirstOrDefault()" alt="">
+					</a>
+					<div class="news-item-content">
+						<div class="news-item-date">
+							@news.date
+						</div>
+						<div class="news-item-title">
+							@news.title
+						</div>
+						<div class="news-item-info">
+							@Html.Raw(news.description.GetWords(10))
+							<a href="~/news/@news.id">
+								ещё...
+							</a>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+		@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+		{
+			CurrentPage = Model.Id + 1,
+			count = MuseumNewsReader.MuseumEventsNews.Count,
+			countInPage = 10,
+			UrlWithParameter = "/another/museum/Events/{id}"
+		}))
+	}
+	else
+	{
+		<h3 class="section-title">
+			Упс, такой страницы нет...
+			<br>
+			Мы знаем о проблеме и уже решаем ее
+		</h3>
+	}
 	
 	
 	
-	
-	
-	
-	
-<!--
-<p>
-	2 - 7 февраля выставка «Сталинградская битва»
-</p>
-<p>
-	14 - 18 февраля выставка «Война в Афганистане»
-</p>
-<p>
-	20 – 28 февраля выставка «Выпускники колледжа – Герои Отечества»
-</p>
--->
+	<!--
+	<p>
+		2 - 7 февраля выставка «Сталинградская битва»
+	</p>
+	<p>
+		14 - 18 февраля выставка «Война в Афганистане»
+	</p>
+	<p>
+		20 – 28 февраля выставка «Выпускники колледжа – Герои Отечества»
+	</p>
+	-->
 
 </section>

@@ -1,0 +1,96 @@
+﻿@page "{id?}/type/{type?}"
+@using OMAVIAT.Entities.Interfaces
+@using OMAVIAT.Services.News
+@model OMAVIAT.Pages.another.museum.MuseumNews
+
+@{
+	ViewData["Title"] = "Новость";
+}
+
+<link rel="stylesheet" href="~/css/news.css">
+
+<article class="centered">
+	@{
+		if (string.IsNullOrWhiteSpace(Model.Id))
+		{
+			PrintError();
+			return;
+		}
+
+		var isInt = int.TryParse(Model.Id, out var id);
+		if (!isInt)
+		{
+			PrintError();
+			return;
+		}
+
+		var news = GetNews(id);
+		if (news is null)
+		{
+			PrintError();
+			return;
+		}
+	}
+
+	<h3 class="news-title">
+		@news.title
+	</h3>
+	@foreach (var t in news.description.Split("\n"))
+	{
+		<p>@Html.Raw(t)</p>
+	}
+
+
+	<div class="images-list-slider-container">
+		<div class="images-list-slider">
+			@foreach (var image in news.photos.toObject<List<string>>())
+			{
+				@if (!image.Contains(".mp4") && !image.Contains(".pdf"))
+				{
+					<img src="/@image" alt="">
+				}
+				else if (image.Contains(".mp4"))
+				{
+					<video class="customized" controls>
+						<source src="/@image" type="video/mp4">
+					</video>
+				}
+			}
+		</div>
+	</div>
+
+	@foreach (var pdf in news.photos.toObject<List<string>>().Where(e => e.Contains(".pdf")))
+	{
+		<ul class="document-item" style="width: 50%; margin: 0 auto;">
+			<div class="document-item-head">
+				<a target="_blank" href="/@pdf">
+				</a>
+			</div>
+			<div class="document-item-body">
+				@news.title
+			</div>
+		</ul>
+	}
+
+
+	@{
+		void PrintError()
+		{
+			<h3 class="news-title">
+				Упс, такой страницы нет...
+				<br>
+				Мы знаем о проблеме и уже решаем ее
+			</h3>
+		}
+
+		INews? GetNews(int newsId)
+		{
+			return Model.Type switch
+			{
+				"events" => MuseumNewsReader.MuseumEventsNews.FirstOrDefault(e => e.id == newsId),
+				"facts" => MuseumNewsReader.MuseumInterestingFactsNews.FirstOrDefault(e => e.id == newsId),
+				_ => MuseumNewsReader.MuseumHistoryNews.FirstOrDefault(e => e.id == newsId),
+			};
+		}
+	}
+</article>

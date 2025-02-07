@@ -11,4 +11,26 @@ public class MuseumInterestingFactsNews : INews
 	public string short_description { get; set; }
 	public string photos { get; set; }
 	public bool IsFixed { get; set; }
+	
+	public List<string> GetPhotos()
+	{
+		return photos.toObject<List<string>>();
+	}
+	
+	public MuseumInterestingFactsNews()
+	{
+		
+	}
+	
+	public MuseumInterestingFactsNews(string date, string title, string description, string short_description, List<string> photos,
+		bool IsFixed)
+	{
+		id = id;
+		this.date = date;
+		this.title = title;
+		this.short_description = short_description;
+		this.description = description;
+		this.photos = photos.toJson();
+		this.IsFixed = IsFixed;
+	}
 }

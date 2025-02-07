@@ -123,9 +123,9 @@
 		{
 			"demoExam" => new List<INews>(DemoExamsNewsReader.news),
 			"professionalitet" => new List<INews>(ProfNewsReader.news),
-			"MuseumEventsNews" => new List<INews>(ProfNewsReader.news),
-			"MuseumHistoryNews" => new List<INews>(ProfNewsReader.news),
-			"MuseumInterestingFactsNews" => new List<INews>(ProfNewsReader.news),
+			"MuseumEventsNews" => new List<INews>(MuseumNewsReader.MuseumEventsNews),
+			"MuseumHistoryNews" => new List<INews>(MuseumNewsReader.MuseumHistoryNews),
+			"MuseumInterestingFactsNews" => new List<INews>(MuseumNewsReader.MuseumInterestingFactsNews),
 			_ => new List<INews>(NewsReader.news)
 		};
 
@@ -176,6 +176,9 @@
 		{
 			"demoExam" => Role.www_reporter_demoexams,
 			"professionalitet" => Role.www_reporter_prof_news,
+			"MuseumEventsNews" => Role.www_reporter_museum_news,
+			"MuseumHistoryNews" => Role.www_reporter_museum_news,
+			"MuseumInterestingFactsNews" => Role.www_reporter_museum_news,
 			_ => Role.www_reporter_news
 		};
 
@@ -199,6 +202,24 @@
 			connection.ProfNews.RemoveRange(connection.ProfNews.Where(e => e.id == news.id));
 			await connection.SaveChangesAsync();
 			await ProfNewsReader.Init();
+		}
+		else if (name is "MuseumEventsNews")
+		{
+			connection.MuseumEventsNews.RemoveRange(connection.MuseumEventsNews.Where(e => e.id == news.id));
+			await connection.SaveChangesAsync();
+			await MuseumNewsReader.Init();
+		}
+		else if (name is "MuseumHistoryNews")
+		{
+			connection.MuseumHistoryNews.RemoveRange(connection.MuseumHistoryNews.Where(e => e.id == news.id));
+			await connection.SaveChangesAsync();
+			await MuseumNewsReader.Init();
+		}
+		else if (name is "MuseumInterestingFactsNews")
+		{
+			connection.MuseumInterestingFactsNews.RemoveRange(connection.MuseumInterestingFactsNews.Where(e => e.id == news.id));
+			await connection.SaveChangesAsync();
+			await MuseumNewsReader.Init();
 		}
 		else
 		{
@@ -228,6 +249,9 @@
 			{
 				"demoExam" => Role.www_reporter_demoexams,
 				"professionalitet" => Role.www_reporter_prof_news,
+				"MuseumEventsNews" => Role.www_reporter_museum_news,
+				"MuseumHistoryNews" => Role.www_reporter_museum_news,
+				"MuseumInterestingFactsNews" => Role.www_reporter_museum_news,
 				_ => Role.www_reporter_news
 			};
 
@@ -271,6 +295,30 @@
 				await connection.SaveChangesAsync();
 				await ProfNewsReader.Init();
 			}
+			else if (form.type is "MuseumEventsNews")
+			{
+				var news = new MuseumEventsNews(form.date.ToString("yyyy-MM-dd"),
+					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+				await connection.AddAsync(news);
+				await connection.SaveChangesAsync();
+				await MuseumNewsReader.Init();
+			}
+			else if (form.type is "MuseumHistoryNews")
+			{
+				var news = new MuseumHistoryNews(form.date.ToString("yyyy-MM-dd"),
+					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+				await connection.AddAsync(news);
+				await connection.SaveChangesAsync();
+				await MuseumNewsReader.Init();
+			}
+			else if (form.type is "MuseumInterestingFactsNews")
+			{
+				var news = new MuseumInterestingFactsNews(form.date.ToString("yyyy-MM-dd"),
+					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
+				await connection.AddAsync(news);
+				await connection.SaveChangesAsync();
+				await MuseumNewsReader.Init();
+			}
 			else
 			{
 				var news = new News(form.date.ToString("yyyy-MM-dd"),
@@ -305,6 +353,9 @@
 		{
 			"demoExam" => Role.www_reporter_demoexams,
 			"professionalitet" => Role.www_reporter_prof_news,
+			"MuseumEventsNews" => Role.www_reporter_museum_news,
+			"MuseumHistoryNews" => Role.www_reporter_museum_news,
+			"MuseumInterestingFactsNews" => Role.www_reporter_museum_news,
 			_ => Role.www_reporter_news
 		};
 
@@ -337,6 +388,9 @@
 		{
 			"demoExam" => Role.www_reporter_demoexams,
 			"professionalitet" => Role.www_reporter_prof_news,
+			"MuseumEventsNews" => Role.www_reporter_museum_news,
+			"MuseumHistoryNews" => Role.www_reporter_museum_news,
+			"MuseumInterestingFactsNews" => Role.www_reporter_museum_news,
 			_ => Role.www_reporter_news
 		};
 
@@ -386,6 +440,48 @@
 			connection.Update(news);
 			await connection.SaveChangesAsync();
 			await ProfNewsReader.Init();
+		}
+		else if (form.type is "MuseumEventsNews")
+		{
+			var news = await connection.MuseumEventsNews.FirstAsync(e => e.id == Inews.id);
+			news.IsFixed = form.IsFixed;
+			news.title = form.name;
+			news.date = form.date.ToString("yyyy-MM-dd");
+			news.description = form.description;
+			news.short_description = form.description.GetWords(15);
+			if (photos.Count is not 0)
+				news.photos = photos.toJson();
+			connection.Update(news);
+			await connection.SaveChangesAsync();
+			await MuseumNewsReader.Init();
+		}
+		else if (form.type is "MuseumHistoryNews")
+		{
+			var news = await connection.MuseumHistoryNews.FirstAsync(e => e.id == Inews.id);
+			news.IsFixed = form.IsFixed;
+			news.title = form.name;
+			news.date = form.date.ToString("yyyy-MM-dd");
+			news.description = form.description;
+			news.short_description = form.description.GetWords(15);
+			if (photos.Count is not 0)
+				news.photos = photos.toJson();
+			connection.Update(news);
+			await connection.SaveChangesAsync();
+			await MuseumNewsReader.Init();
+		}
+		else if (form.type is "MuseumInterestingFactsNews")
+		{
+			var news = await connection.MuseumInterestingFactsNews.FirstAsync(e => e.id == Inews.id);
+			news.IsFixed = form.IsFixed;
+			news.title = form.name;
+			news.date = form.date.ToString("yyyy-MM-dd");
+			news.description = form.description;
+			news.short_description = form.description.GetWords(15);
+			if (photos.Count is not 0)
+				news.photos = photos.toJson();
+			connection.Update(news);
+			await connection.SaveChangesAsync();
+			await MuseumNewsReader.Init();
 		}
 		else
 		{

@@ -17,7 +17,7 @@ namespace OMAVIAT.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "9.0.1")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -37,7 +37,7 @@ namespace OMAVIAT.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("compositions")
+                    b.PrimitiveCollection<string>("compositions")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -149,6 +149,114 @@ namespace OMAVIAT.Migrations
                     b.ToTable("IPTables");
                 });
 
+            modelBuilder.Entity("OMAVIAT.Entities.Database.MuseumEventsNews", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<bool>("IsFixed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("date")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("photos")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("short_description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("MuseumEventsNews");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Database.MuseumHistoryNews", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<bool>("IsFixed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("date")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("photos")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("short_description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("MuseumHistoryNews");
+                });
+
+            modelBuilder.Entity("OMAVIAT.Entities.Database.MuseumInterestingFactsNews", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<bool>("IsFixed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("date")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("photos")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("short_description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("MuseumInterestingFactsNews");
+                });
+
             modelBuilder.Entity("OMAVIAT.Entities.Database.News", b =>
                 {
                     b.Property<int>("id")
@@ -159,6 +267,9 @@ namespace OMAVIAT.Migrations
 
                     b.Property<bool>("IsFixed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("TelegramMessageId")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("date")
                         .IsRequired()
@@ -467,7 +578,7 @@ namespace OMAVIAT.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Corpus")
+                    b.PrimitiveCollection<string>("Corpus")
                         .IsRequired()
                         .HasColumnType("longtext");
 

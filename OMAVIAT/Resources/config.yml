@@ -4,11 +4,11 @@ baseUrl: https://www.oat.ru/
 mainUrl: https://www.oat.ru/
 bindPort: 20045
 database:
-    address: "node.taigo.xyz"
+    address: "node-4.taigo.xyz"
     port: 3306
-    name: s126_OAT
-    username: "u126_FTgyBjq2cl"
-    password: "qYqy6O.MgSk!lm54ieYlnhly"
+    name: s243_oat
+    username: "u243_FamdORgAVM"
+    password: "FN0YDnWg5^n+J00dJTGx3H80"
 ldap:
     address: "178.74.67.83"
     port: 789

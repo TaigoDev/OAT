@@ -1,4 +1,8 @@
-﻿@page
+﻿@page "{id?}"
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using OMAVIAT.RazorPages.Components
+@using OMAVIAT.Services.News
+@using OMAVIAT.Utilities
 @model InterestingFactsModel
 @{
 	ViewData["Title"] = "Интересные факты истории Омавиат (1930-1933 гг)";
@@ -13,7 +17,52 @@
 	<h2 class="section-title">
 		Интересные факты истории Омавиат (1930-1933 гг)
 	</h2>
+	@if (MuseumNewsReader.MuseumInterestingFactsNewsPages.Count() >= Model.Id)
+	{
+		<div class="news-list">
 
+			@foreach (var news in MuseumNewsReader.MuseumInterestingFactsNewsPages.ToList()[Model.Id])
+			{
+				var photos = news.GetPhotos();
+				if (photos.Count is 0)
+					continue;
+				<div class="news-item">
+					<a class="news-item-img" href="/another/museum/MuseumNews/@news.id/type/facts">
+						<img loading="lazy" src="/@photos.FirstOrDefault()" alt="">
+					</a>
+					<div class="news-item-content">
+						<div class="news-item-date">
+							@news.date
+						</div>
+						<div class="news-item-title">
+							@news.title
+						</div>
+						<div class="news-item-info">
+							@Html.Raw(news.description.GetWords(10))
+							<a href="~/news/@news.id">
+								ещё...
+							</a>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+		@(await Html.RenderComponentAsync<PagesComponent>(RenderMode.Static, new
+		{
+			CurrentPage = Model.Id + 1,
+			count = MuseumNewsReader.MuseumInterestingFactsNews.Count,
+			countInPage = 10,
+			UrlWithParameter = "/another/museum/InterestingFacts/{id}"
+		}))
+	}
+	else
+	{
+		<h3 class="section-title">
+			Упс, такой страницы нет...
+			<br>
+			Мы знаем о проблеме и уже решаем ее
+		</h3>
+	}
 	
 	
 	
