@@ -14,11 +14,18 @@ public static class TelegramNewsService
 	{
 		Logger.Info($"ChatId {update.GetChatId()}");
 		Logger.Info($"Caption {update.ChannelPost?.Caption}");
+		Logger.Info($"1 {update.GetChatId() != Configurator.Config.Telegram.NewsChannelId}");
+		Logger.Info($"2 {update.ChannelPost?.Caption is null}");
+		Logger.Info($"3 {!update.ChannelPost?.Caption?.Contains(Configurator.Config.Telegram.NewsPublishTag)}");
 
 		if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId
 		    || update.ChannelPost?.Caption is null ||
 		    !update.ChannelPost.Caption.Contains(Configurator.Config.Telegram.NewsPublishTag))
+		{
+			Logger.Info("Exit");
 			return;
+		}
+		Logger.Info("Download images...");
 
 		var photos = new List<string>();
 		foreach (var photo in update.ChannelPost.Photo ?? [])
@@ -27,6 +34,7 @@ public static class TelegramNewsService
 			if (await DownloadImage(photo.FileId, Path.Combine("wwwroot", path)))
 				photos.Add(path);
 		}
+		Logger.Info("Download images... COMPLETE");
 
 		if (photos.Count == 0)
 		{
@@ -34,6 +42,7 @@ public static class TelegramNewsService
 				$"[TelegramNewsService]: Не удалось найти фото, чтобы выложить новость {update.ChannelPost.Id} из {Configurator.Config.Telegram.NewsChannelId}");
 			return;
 		}
+		Logger.Info("Create news");
 
 		var title = update.ChannelPost.Caption.Split("\n").FirstOrDefault() ?? update.ChannelPost.Caption.GetWords(10);
 		if (title.Length > 50)
@@ -54,7 +63,7 @@ public static class TelegramNewsService
 		             Photos count: {photos.Count}
 		             MessageId: {update.ChannelPost.MessageId}
 		             """);
-		await NewsReader.init();
+		await NewsReader.Init();
 	}
 
 	private static async Task<bool> DownloadImage(string fileId, string path)

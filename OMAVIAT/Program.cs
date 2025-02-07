@@ -39,9 +39,10 @@ Runs.StartModules(
 	UrlsContoller.init,
 
 //Çàïóñêàåì íîâîñòè
-	NewsReader.init,
-	ProfNewsReader.init,
-	DemoExamsNewsReader.init,
+	NewsReader.Init,
+	ProfNewsReader.Init,
+	DemoExamsNewsReader.Init,
+	MuseumNewsReader.Init,
 
 //Çàïóñêàåì äðóãèå ñëóæáû
 	() => RepeaterUtils.RepeatAsync(async () => await ContractReader.Init(), 15),

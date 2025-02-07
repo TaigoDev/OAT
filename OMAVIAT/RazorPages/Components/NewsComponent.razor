@@ -30,6 +30,15 @@
 			<option value="demoExam">
 				Новости демонстрационного экзамена
 			</option>
+			<option value="MuseumEventsNews">
+				События в музее
+			</option>
+			<option value="MuseumHistoryNews">
+				История музея 
+			</option>
+			<option value="MuseumInterestingFactsNews">
+				Интересные факты музея
+			</option>
 		</select>
 	</div>
 
@@ -114,6 +123,9 @@
 		{
 			"demoExam" => new List<INews>(DemoExamsNewsReader.news),
 			"professionalitet" => new List<INews>(ProfNewsReader.news),
+			"MuseumEventsNews" => new List<INews>(ProfNewsReader.news),
+			"MuseumHistoryNews" => new List<INews>(ProfNewsReader.news),
+			"MuseumInterestingFactsNews" => new List<INews>(ProfNewsReader.news),
 			_ => new List<INews>(NewsReader.news)
 		};
 
@@ -174,25 +186,25 @@
 			return;
 		}
 
-		using var connection = new DatabaseContext();
+		await using var connection = new DatabaseContext();
 
 		if (name is "demoExam")
 		{
 			connection.DemoExamNews.RemoveRange(connection.DemoExamNews.Where(e => e.id == news.id));
 			await connection.SaveChangesAsync();
-			await DemoExamsNewsReader.init();
+			await DemoExamsNewsReader.Init();
 		}
 		else if (name is "professionalitet")
 		{
 			connection.ProfNews.RemoveRange(connection.ProfNews.Where(e => e.id == news.id));
 			await connection.SaveChangesAsync();
-			await ProfNewsReader.init();
+			await ProfNewsReader.Init();
 		}
 		else
 		{
 			connection.News.RemoveRange(connection.News.Where(e => e.id == news.id));
 			await connection.SaveChangesAsync();
-			await NewsReader.init();
+			await NewsReader.Init();
 		}
 
 		Logger.Info($"Пользователь удалил новость.\n" +
@@ -249,7 +261,7 @@
 					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
 				await connection.AddAsync(news);
 				await connection.SaveChangesAsync();
-				await DemoExamsNewsReader.init();
+				await DemoExamsNewsReader.Init();
 			}
 			else if (form.type is "professionalitet")
 			{
@@ -257,7 +269,7 @@
 					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
 				await connection.AddAsync(news);
 				await connection.SaveChangesAsync();
-				await ProfNewsReader.init();
+				await ProfNewsReader.Init();
 			}
 			else
 			{
@@ -265,7 +277,7 @@
 					form.name, form.description, form.description.GetWords(15), photos, form.IsFixed);
 				await connection.AddAsync(news);
 				await connection.SaveChangesAsync();
-				await NewsReader.init();
+				await NewsReader.Init();
 			}
 
 
@@ -359,7 +371,7 @@
 				news.photos = photos.toJson();
 			connection.Update(news);
 			await connection.SaveChangesAsync();
-			await DemoExamsNewsReader.init();
+			await DemoExamsNewsReader.Init();
 		}
 		else if (form.type is "professionalitet")
 		{
@@ -373,7 +385,7 @@
 				news.photos = photos.toJson();
 			connection.Update(news);
 			await connection.SaveChangesAsync();
-			await ProfNewsReader.init();
+			await ProfNewsReader.Init();
 		}
 		else
 		{
@@ -387,7 +399,7 @@
 				news.photos = photos.toJson();
 			connection.Update(news);
 			await connection.SaveChangesAsync();
-			await NewsReader.init();
+			await NewsReader.Init();
 		}
 
 

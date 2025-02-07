@@ -7,7 +7,7 @@ public class NewsReader
 	public static IEnumerable<IEnumerable<News>> pages = new List<List<News>>();
 	public static List<News> news = [];
 
-	public static async Task init()
+	public static async Task Init()
 	{
 		using var connection = new DatabaseContext();
 		news = await connection.News.ToListAsync();

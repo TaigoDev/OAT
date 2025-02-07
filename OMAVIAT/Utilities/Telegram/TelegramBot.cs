@@ -54,8 +54,8 @@ public static class TelegramBot
 				IsProxy = false;
 			}
 
-			if (!Configurator.Config.IsProduction)
-				return;
+			// if (!Configurator.Config.IsProduction)
+   //                     				return;
 			var me = await BotClient.GetMe();
 			var receiverOptions = new ReceiverOptions
 			{
