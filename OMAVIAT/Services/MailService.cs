@@ -34,7 +34,7 @@ public class MailService
 				client.ProxyClient = new HttpProxyClient ("10.0.55.52", 3128);
 			
 			await client.ConnectAsync (Configurator.MailConfig.SmtpServer, Configurator.MailConfig.SmtpPort, Configurator.MailConfig.EnableSsl);
-			await client.AuthenticateAsync("joey", "password");
+			await client.AuthenticateAsync(Configurator.MailConfig.EmailUser, Configurator.MailConfig.EmailPassword);
 			await client.SendAsync(message);
 			await client.DisconnectAsync(true);
 			return true;

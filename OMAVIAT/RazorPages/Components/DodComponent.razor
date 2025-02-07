@@ -1,0 +1,75 @@
+﻿@using OMAVIAT.Services
+<form class="event-form">
+	<div class="input-box">
+		<label for="FIO">
+			Фамилия имя отчество
+		</label>
+		<input id="FIO" type="text" @bind-value="@FullName">
+	</div>
+	<div class="input-box">
+		<label for="phone">
+			Телефон
+		</label>
+		<input id="phone" type="tel" @bind-value="@Telephone">
+	</div>
+	<div class="input-box">
+		<label for="email">
+			E-mail
+		</label>
+		<input id="email" type="email" @bind-value="@Email">
+	</div>
+	<div class="input-box">
+		<label for="school">
+			Школа
+		</label>
+		<input id="school" type="text" @bind-value="@School">
+	</div>
+	<div class="input-box">
+		<label for="class">
+			Классы
+		</label>
+		<input id="class" type="text" @bind-value="@Level">
+	</div>
+	<div>
+		<input type="checkbox" id="agreement" @bind-value="@Checkbox"/>
+		<label for="agreement">
+			Устанавливая флажок внутри данного чек-бокса вы даете согласие на обработку своих персональных
+			данных.
+		</label>
+	</div>
+	<button @onclick="SendAsync" type="button" class="customized">Подать заявку</button>
+</form>
+@if (Message is not null)
+{
+	<p>@Message</p>
+}
+@code {
+	private string? FullName { get; set; }
+	private string? Telephone { get; set; }
+	private string? Email { get; set; }
+	private string? School { get; set; }
+	private string? Level { get; set; }
+	private bool Checkbox { get; set; }
+
+	private string? Message { get; set; }
+	
+	private async Task SendAsync()
+	{
+		if (string.IsNullOrWhiteSpace(FullName) || string.IsNullOrWhiteSpace(Telephone)
+		                                        || string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(School)
+		                                        || string.IsNullOrWhiteSpace(Level))
+		{
+			Message = "Заполните все поля!";
+			return;
+		}
+
+		if (Checkbox is false)
+		{
+			Message = "Поставьте флажок";
+			return;
+		}
+
+		var result = await MailService.SendMailAsync(FullName, Telephone, Email, School, Level);
+		Message = result ? "Заявка отправлена" : "Произошла ошибка во время отправки письма";
+	}
+}

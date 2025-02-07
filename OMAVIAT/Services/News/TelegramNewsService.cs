@@ -17,6 +17,8 @@ public static class TelegramNewsService
 		Logger.Info($"1 {update.GetChatId() != Configurator.Config.Telegram.NewsChannelId}");
 		Logger.Info($"2 {update.ChannelPost?.Caption is null}");
 		Logger.Info($"3 {!update.ChannelPost?.CaptionEntityValues?.Contains(Configurator.Config.Telegram.NewsPublishTag)}");
+		Logger.Info($"4 {update.ChannelPost?.CaptionEntityValues?.toJson()}");
+		Logger.Info($"5 {Configurator.Config.Telegram.NewsPublishTag}");
 
 		if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId
 		    || update.ChannelPost?.Caption is null || update.ChannelPost.CaptionEntityValues is null ||

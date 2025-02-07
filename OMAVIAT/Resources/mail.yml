@@ -2,6 +2,6 @@ smtpServer: smtp.yandex.ru
 smtpPort: 465
 enableSsl: true
 emailUser: dod@oat.ru
-emailPassword: Pa$swOrD
+emailPassword: Pas$word
 sendTo: dod@oat.ru
-enableProxy: true
+enableProxy: false

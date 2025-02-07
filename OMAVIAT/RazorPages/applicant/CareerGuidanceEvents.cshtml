@@ -1,4 +1,5 @@
 ﻿@page
+@using OMAVIAT.RazorPages.Components
 @model CareerGuidanceEventsModel
 @{
 	ViewData["Title"] = "Профориентационные мероприятия";
@@ -32,46 +33,7 @@
 			Записаться на мероприятие
 		</h3>
 
-		<form class="event-form">
-			<div class="input-box">
-				<label for="FIO">
-					Фамилия имя отчество
-				</label>
-				<input id="FIO" type="text">
-			</div>
-			<div class="input-box">
-				<label for="phone">
-					Телефон
-				</label>
-				<input id="phone" type="tel">
-			</div>
-			<div class="input-box">
-				<label for="email">
-					E-mail
-				</label>
-				<input id="email" type="email">
-			</div>
-			<div class="input-box">
-				<label for="school">
-					Школа
-				</label>
-				<input id="school" type="text">
-			</div>
-			<div class="input-box">
-				<label for="class">
-					Классы
-				</label>
-				<input id="class" type="text">
-			</div>
-			<div>
-				<input type="checkbox" id="agreement" value="agreement"/>
-				<label for="agreement">
-					Устанавливая флажок внутри данного чек-бокса вы даете согласие на обработку своих персональных
-					данных.
-				</label>
-			</div>
-			<button onclick="" class="customized">Подать заявку</button>
-		</form>
+		@(await Html.RenderComponentAsync<DodComponent>(RenderMode.Server, new()))
 
 
 		<h3 class="section-subtitle">
@@ -513,10 +475,10 @@
 			</tr>
 			<tr>
 				<td rowspan="2">
-					15.05.2025
-					15:00
-					ул. Б.
-					Хмельницкого, 281
+				15.05.2025
+				15:00
+				ул. Б.
+				Хмельницкого, 281
 				<td>
 					Мастер-класс «Проектирование и обслуживание авиадвигателей»
 				</td>
@@ -1030,3 +992,6 @@
 		</nav>
 	</aside>
 </div>
+
+<base href="~/"/>
+<script src="~/_framework/blazor.server.js"></script>
