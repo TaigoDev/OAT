@@ -15,7 +15,7 @@
 <section class="centered">
 
 	
-	@if (MuseumNewsReader.MuseumEventsNewsPages.Count() >= Model.Id)
+	@if (MuseumNewsReader.MuseumEventsNewsPages.Count() >= Model.Id && Model.Id != 0)
 	{
 		<h2 class="section-title">
 			Мероприятия музея
@@ -59,9 +59,7 @@
 	else
 	{
 		<h3 class="section-title">
-			Упс, такой страницы нет...
-			<br>
-			Мы знаем о проблеме и уже решаем ее
+			Упс, новостей пока нет
 		</h3>
 	}
 	

@@ -17,7 +17,7 @@
 	<h2 class="section-title">
 		Интересные факты истории Омавиат (1930-1933 гг)
 	</h2>
-	@if (MuseumNewsReader.MuseumInterestingFactsNewsPages.Count() >= Model.Id)
+	@if (MuseumNewsReader.MuseumInterestingFactsNewsPages.Count() >= Model.Id && Model.Id != 0)
 	{
 		<div class="news-list">
 
@@ -58,9 +58,7 @@
 	else
 	{
 		<h3 class="section-title">
-			Упс, такой страницы нет...
-			<br>
-			Мы знаем о проблеме и уже решаем ее
+			Упс, новостей пока нет
 		</h3>
 	}
 	
