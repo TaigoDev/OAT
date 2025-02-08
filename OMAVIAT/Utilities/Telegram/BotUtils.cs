@@ -9,6 +9,8 @@ public static class BotUtils
 
 	public static long GetChatId(this Update update)
 	{
+		if (update.EditedChannelPost is not null && update.EditedChannelPost.Chat is not null)
+			return update.EditedChannelPost.Chat.Id;
 		if (update.ChannelPost is not null && update.ChannelPost.Chat is not null)
 			return update.ChannelPost.Chat.Id;
 

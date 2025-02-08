@@ -52,7 +52,8 @@ public class News : INews
 	public string description { get; set; }
 	public string photos { get; set; }
 	public bool IsFixed { get; set; }
-	public string? TelegramMessageId { get; set; }
+	public int? TelegramMessageId { get; set; }
+	public string? TelegramMediaGroupId { get; set; }
 
 	public List<string> GetPhotos()
 	{

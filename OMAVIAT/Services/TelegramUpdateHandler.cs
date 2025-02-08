@@ -42,7 +42,6 @@ public class TelegramUpdateHandler : IUpdateHandler
 	{
 		try
 		{
-			Logger.Info($"Type is {update.Type}");
 			switch (update.Type)
 			{
 				case UpdateType.CallbackQuery:
@@ -51,6 +50,9 @@ public class TelegramUpdateHandler : IUpdateHandler
 					break;
 				case UpdateType.ChannelPost:
 					await TelegramNewsService.OnNewMessage(update);
+					break;
+				case UpdateType.EditedChannelPost:
+					await TelegramNewsService.OnEditMessage(update);
 					break;
 			}
 		}

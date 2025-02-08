@@ -268,8 +268,11 @@ namespace OMAVIAT.Migrations
                     b.Property<bool>("IsFixed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("TelegramMessageId")
+                    b.Property<string>("TelegramMediaGroupId")
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("TelegramMessageId")
+                        .HasColumnType("int");
 
                     b.Property<string>("date")
                         .IsRequired()
