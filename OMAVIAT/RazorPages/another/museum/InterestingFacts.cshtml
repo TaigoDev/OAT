@@ -1,4 +1,4 @@
-﻿@page "{id?}"
+@page "{id?}"
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using OMAVIAT.RazorPages.Components
 @using OMAVIAT.Services.News
@@ -17,7 +17,7 @@
 	<h2 class="section-title">
 		Интересные факты истории Омавиат (1930-1933 гг)
 	</h2>
-	@if (MuseumNewsReader.MuseumInterestingFactsNewsPages.Count() >= Model.Id && Model.Id != 0)
+	@if (MuseumNewsReader.MuseumInterestingFactsNewsPages.Count() > Model.Id)
 	{
 		<div class="news-list">
 
