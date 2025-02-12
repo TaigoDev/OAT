@@ -1,4 +1,4 @@
-﻿@page "{id?}"
+@page "{id?}"
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using OMAVIAT.RazorPages.Components
 @using OMAVIAT.Services.News
@@ -20,7 +20,7 @@
 	<h2 class="section-title">
 		История Омского авиационного колледжа имени Н.Е. Жуковского. Начало.  Запорожский период (1930-1933 гг.)
 	</h2>
-	@if (MuseumNewsReader.MuseumHistoryNewsPages.Count() >= Model.Id && Model.Id != 0)
+	@if (MuseumNewsReader.MuseumHistoryNewsPages.Count() > Model.Id)
 	{
 		<div class="news-list">
 
