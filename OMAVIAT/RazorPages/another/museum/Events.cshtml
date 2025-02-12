@@ -1,4 +1,4 @@
-﻿@page "{id?}"
+@page "{id?}"
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using OMAVIAT.RazorPages.Components
 @using OMAVIAT.Services.News
@@ -15,7 +15,7 @@
 <section class="centered">
 
 	
-	@if (MuseumNewsReader.MuseumEventsNewsPages.Count() >= Model.Id && Model.Id != 0)
+	@if (MuseumNewsReader.MuseumEventsNewsPages.Count() > Model.Id)
 	{
 		<h2 class="section-title">
 			Мероприятия музея
