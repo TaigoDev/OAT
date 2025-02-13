@@ -132,10 +132,10 @@
 @supports (color: oklch(0.25 0 0)) {
 	:root {
 		--h: 200;
-		--s: 0.4;
+		--s: 0.15;
 		--m-color: oklch(0.235 var(--s) var(--h));
 		--m-d-color: oklch(0.185 var(--s) var(--h));
-		--m-l-color: oklch(0.35 var(--s) var(--h));
+		--m-l-color: oklch(0.335 var(--s) var(--h));
 		--matte-color: oklch(0.325 0 0);
 		--light-white: oklch(0.97 0 0);
 	}
@@ -434,7 +434,7 @@ section.centered .section-title {
 }
 
 .sidebar {
-	--border-width-sidebar: 6px;
+	--sidebar-padding: 5px;
 	--border-radius-sidebar: var(--border-radius-l);
 	position: sticky;
 	right: 10px;
@@ -442,8 +442,8 @@ section.centered .section-title {
 	min-width: 300px;
 	max-width: 300px;
 	height: fit-content;
-	background: var(--matte-color);
-	border: var(--border-width-sidebar) solid;
+	background: var(--m-color);
+	padding: var(--sidebar-padding);
 	border-radius: var(--border-radius-sidebar);
 }
 
@@ -453,7 +453,7 @@ section.centered .section-title {
 
 .sidebar-title {
 	--vertical-padding: 10px;
-	padding: calc(var(--vertical-padding) - var(--border-width-sidebar)) 5px 0 5px;
+	padding: calc(var(--vertical-padding) - var(--sidebar-padding)) 5px 0 5px;
 	font-size: 1.1rem;
 	font-weight: 700;
 	text-align: center;
@@ -1142,30 +1142,26 @@ table.two-column tr td:first-child {
 	max-width: 210px;
 	margin-top: 10px;
 	border-radius: var(--border-radius-xl);
-	background-color: var(--m-color);
-	color: hsl(200deg 35% 85%);
-	opacity: 0.8;
+	background-color: var(--m-l-color);
+	color: var(--light-white);
 	overflow: hidden;
-	transition: 400ms;
 }
 
 .document-item-head {
 	position: relative;
 	height: 50px;
-	background-image: linear-gradient(90deg, var(--m-d-color) 0%, var(--m-color) 25%, var(--m-l-color) 100%);
+	background-image: linear-gradient(90deg, var(--m-color) 0%, var(--m-l-color) 100%);
 	overflow: hidden;
-	transition: 800ms;
 }
 
 .document-item-head::after {
 	content: "";
 	position: absolute;
-	right: 83px;
 	bottom: 0;
-	width: 0;
-	border-top: 3px solid hsl(200deg 75% 40%);
+	width: 100%;
+	border-top: 3px solid var(--m-d-color);
 	opacity: 0;
-	transition: left 800ms, width 400ms, opacity 400ms;
+	transition: opacity 250ms;
 }
 
 .document-item-head a {
@@ -1178,10 +1174,10 @@ table.two-column tr td:first-child {
 	width: 100px;
 	height: 100px;
 	border: 3px solid transparent;
-	background-color: var(--m-color);
+	background-color: var(--m-l-color);
 	transform: translateX(10px) translateY(-25px);
 	border-radius: 50%;
-	transition: border-color 800ms;
+	transition: border-color 250ms;
 }
 
 .document-item-head a::after {
@@ -1191,7 +1187,7 @@ table.two-column tr td:first-child {
 	height: 40%;
 	background-image: url("../images/basic/download.svg");
 	background-size: cover;
-	transition: 400ms;
+	transition: 300ms;
 }
 
 .document-item-body {
@@ -1204,11 +1200,6 @@ table.two-column tr td:first-child {
 	text-transform: uppercase;
 }
 
-.document-item:hover {
-	border-color: hsl(225deg 10% 20%); /* #1f67ae */
-	opacity: 0.9;
-}
-
 .document-item:hover .document-item-head::after {
 	left: 0;
 	bottom: 0;
@@ -1217,7 +1208,7 @@ table.two-column tr td:first-child {
 }
 
 .document-item:hover .document-item-head a {
-	border-color: hsl(200deg 75% 40%);
+	border-color: var(--m-d-color);
 }
 
 .document-item:hover .document-item-head a::after {
@@ -1373,56 +1364,39 @@ table.two-column tr td:first-child {
 	display: grid;
 	grid-template-rows: 100px auto;
 	place-items: center;
-	gap: 15px;
 	width: 100%;
 	max-width: 420px;
-	padding: 0 10px 10px 10px;
-	background: linear-gradient(90deg, var(--m-color), var(--m-d-color) 50%);
+	padding: 0 10px 15px 10px;
+	background: var(--m-color);
 	color: var(--light-white);
 	border-radius: var(--border-radius-xl);
-	opacity: 0.95;
-	perspective: 500px;
-	transition: 350ms ease;
-}
-
-.people-item:hover {
-	opacity: 1;
-}
-
-.people-item:hover .people-item-img-container {
-	transform: rotate3d(1, 0, 0, -10deg);
+	transition: 100ms ease;
 }
 
 .people-item-img-container {
 	translate: 0 -20px;
-	transform: rotate3d(1, 0, 0, 10deg);
 	display: block;
 	min-height: 140px;
 	max-height: 140px;
 	min-width: 140px;
 	max-width: 140px;
 	align-self: center;
-	border: 5px solid #3480be;
+	padding: 10px;
 	border-radius: 50%;
-	background-color: #125694;
-	box-shadow: 0 10px 40px -15px black;
+	background-color: inherit;
 	overflow: hidden;
-	transition: 350ms ease;
 }
 
 .people-item-img-container img {
 	display: block;
 	width: 100%;
 	height: 100%;
-	padding: 8px;
 	object-fit: cover;
-	border: 10px solid hsl(225 50% 22%);
 	border-radius: 50%;
-	transition: 350ms ease;
 }
 
-.people-item-img-container:hover img {
-	scale: 1.2;
+.people-item:hover {
+	background-color: var(--m-l-color);
 }
 
 .people-item-body {
@@ -1449,7 +1423,6 @@ table.two-column tr td:first-child {
 @media (width < 550px) {
 	.people-item {
 		max-width: none;
-		padding: 5px;
 	}
 }
 
@@ -1568,7 +1541,7 @@ table.two-column tr td:first-child {
 body {
 	display: table;
 	padding-top: calc(var(--max-header-heigth) + 50px);
-	--max-header-heigth: 85px;
+	--max-header-heigth: 80px;
 	background-color: var(--light-white);
 }
 
@@ -1611,7 +1584,7 @@ section.content::before {
 	color: var(--light-white);
 	background-image: linear-gradient(#00000075, transparent);
 	overflow: hidden;
-	transition: max-height 1750ms ease-in-out, background-color 1750ms ease-in-out;
+	transition: 300ms ease-in-out;
 }
 
 .site-header::before {
@@ -1622,7 +1595,7 @@ section.content::before {
 	min-width: 100dvw;
 	width: 100%;
 	height: var(--max-header-heigth);
-	background-color: var(--matte-color);
+	background-color: var(--m-color);
 }
 
 .navigation {
@@ -1641,7 +1614,7 @@ section.content::before {
 }
 
 .logo {
-	height: 55px;
+	height: 50px;
 }
 
 .logo-text {
@@ -2108,7 +2081,7 @@ a.main-menu-item-pictogram {
 }
 
 .footer-bottom {
-	background-color: var(--matte-color);
+	background-color: var(--m-color);
 	color: var(--light-white);
 }
 
