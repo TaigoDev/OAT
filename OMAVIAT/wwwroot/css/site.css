@@ -1159,9 +1159,9 @@ table.two-column tr td:first-child {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	border-top: 3px solid var(--m-d-color);
+	border-top: 3px solid var(--m-color);
 	opacity: 0;
-	transition: opacity 250ms;
+	transition: opacity 200ms;
 }
 
 .document-item-head a {
@@ -1177,7 +1177,7 @@ table.two-column tr td:first-child {
 	background-color: var(--m-l-color);
 	transform: translateX(10px) translateY(-25px);
 	border-radius: 50%;
-	transition: border-color 250ms;
+	transition: border-color 200ms;
 }
 
 .document-item-head a::after {
@@ -1187,7 +1187,7 @@ table.two-column tr td:first-child {
 	height: 40%;
 	background-image: url("../images/basic/download.svg");
 	background-size: cover;
-	transition: 300ms;
+	transition: 200ms;
 }
 
 .document-item-body {
@@ -1208,7 +1208,7 @@ table.two-column tr td:first-child {
 }
 
 .document-item:hover .document-item-head a {
-	border-color: var(--m-d-color);
+	border-color: var(--m-color);
 }
 
 .document-item:hover .document-item-head a::after {
