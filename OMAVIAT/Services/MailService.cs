@@ -1,7 +1,10 @@
 ﻿using System.Net;
+using System.Net.Security;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using MailKit.Net.Proxy;
 using MailKit.Net.Smtp;
+using MailKit.Security;
 using MimeKit;
 using NLog;
 
@@ -33,10 +36,16 @@ public class MailService
 			if (Configurator.MailConfig.EnableProxy)
 			{
 				client.ProxyClient = new HttpProxyClient("10.0.55.52", 3128);
-				client.CheckCertificateRevocation = false;
+				var certificates = new X509Certificate2Collection();
+				certificates.Import(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ca-root.pem"));
+				client.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
+				{
+					chain.Build(new X509Certificate2(certificate));
+					return sslPolicyErrors == SslPolicyErrors.None;
+				};
 			}
 
-			await client.ConnectAsync(Configurator.MailConfig.SmtpServer, Configurator.MailConfig.SmtpPort, Configurator.MailConfig.EnableSsl);
+			await client.ConnectAsync(Configurator.MailConfig.SmtpServer, Configurator.MailConfig.SmtpPort, SecureSocketOptions.SslOnConnect);
 			await client.AuthenticateAsync(Configurator.MailConfig.EmailUser, Configurator.MailConfig.EmailPassword);
 			await client.SendAsync(message);
 			await client.DisconnectAsync(true);
