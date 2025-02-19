@@ -33,10 +33,9 @@ public class MailService
 			if (Configurator.MailConfig.EnableProxy)
 			{
 				client.ProxyClient = new HttpProxyClient("10.0.55.52", 3128);
-			    client.ServerCertificateValidationCallback = (s,c,h,e) => true;
 			}
 
-			await client.ConnectAsync (Configurator.MailConfig.SmtpServer, Configurator.MailConfig.SmtpPort, Configurator.MailConfig.EnableSsl);
+			await client.ConnectAsync(Configurator.MailConfig.SmtpServer, Configurator.MailConfig.SmtpPort, Configurator.MailConfig.EnableSsl);
 			await client.AuthenticateAsync(Configurator.MailConfig.EmailUser, Configurator.MailConfig.EmailPassword);
 			await client.SendAsync(message);
 			await client.DisconnectAsync(true);
