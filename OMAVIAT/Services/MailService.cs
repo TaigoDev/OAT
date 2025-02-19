@@ -36,13 +36,11 @@ public class MailService
 			if (Configurator.MailConfig.EnableProxy)
 			{
 				client.ProxyClient = new HttpProxyClient("10.0.55.52", 3128);
-				var certificates = new X509Certificate2Collection();
-				certificates.Import(Path.Combine(Directory.GetCurrentDirectory(), "Resources", "ca-root.pem"));
 				client.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
 				{
-					chain.Build(new X509Certificate2(certificate));
-					return sslPolicyErrors == SslPolicyErrors.None;
+					return sslPolicyErrors == SslPolicyErrors.None || sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors;
 				};
+
 			}
 
 			await client.ConnectAsync(Configurator.MailConfig.SmtpServer, Configurator.MailConfig.SmtpPort, SecureSocketOptions.SslOnConnect);
