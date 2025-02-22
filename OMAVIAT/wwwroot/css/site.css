@@ -132,10 +132,10 @@
 @supports (color: oklch(0.25 0 0)) {
 	:root {
 		--h: 200;
-		--s: 0.15;
-		--m-color: oklch(0.235 var(--s) var(--h));
-		--m-d-color: oklch(0.185 var(--s) var(--h));
-		--m-l-color: oklch(0.335 var(--s) var(--h));
+		--s: 0.25;
+		--m-color: oklch(0.25 var(--s) var(--h));
+		--m-d-color: oklch(0.2 var(--s) var(--h));
+		--m-l-color: oklch(0.35 var(--s) var(--h));
 		--matte-color: oklch(0.325 0 0);
 		--light-white: oklch(0.97 0 0);
 	}
