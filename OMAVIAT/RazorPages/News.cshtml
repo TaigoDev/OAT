@@ -6,6 +6,16 @@
 
 <link rel="stylesheet" href="~/css/news.css">
 
+<link href="/lib/lightbox/lightbox.css" rel="stylesheet" />
+<script src="/lib/lightbox/lightbox-plus-jquery.js"></script>
+
+<script>
+	lightbox.option({
+		'resizeDuration': 500,
+		'wrapAround': true
+	})
+</script>
+
 <article class="centered">
 	@{
 		if (string.IsNullOrWhiteSpace(Model.id))
@@ -44,7 +54,9 @@
 			{
 				@if (!image.Contains(".mp4") && !image.Contains(".pdf"))
 				{
-					<img src="/@image" alt="">
+					<a href="/@image" data-lightbox="example-set" data-title="картинка">
+						<img src="/@image" alt="">
+					</a>
 				}
 				else if (image.Contains(".mp4"))
 				{

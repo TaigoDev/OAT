@@ -50,6 +50,7 @@
 		<Folder Include="wwwroot\images\another\museum\interestingFacts\" />
 		<Folder Include="wwwroot\images\students\alumniEmploymentCenterOmaviat\"/>
 		<Folder Include="wwwroot\images\students\alumniEmploymentCenterOmsk\"/>
+		<Folder Include="wwwroot\lib\lightbox\images\" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="OMAVIAT.Schedule">
