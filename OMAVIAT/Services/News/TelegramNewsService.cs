@@ -29,11 +29,21 @@ public static class TelegramNewsService
 			await NewsReader.Init();
 			return;
 		}
-		
+
 		if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId
 		    || update.ChannelPost?.Caption is null || update.ChannelPost.CaptionEntityValues is null ||
 		    !update.ChannelPost.CaptionEntityValues.Contains(Configurator.Config.Telegram.NewsPublishTag))
+		{
+			
+			Logger.Info($"""
+						Telegram Chat: {update.GetChatId()}
+						Config Telegram Chat: {Configurator.Config.Telegram.NewsChannelId}
+						Caption: {update.ChannelPost?.Caption}
+						CaptionEntityValues nullable: {update.ChannelPost?.CaptionEntityValues is null}
+						PublishTag: {Configurator.Config.Telegram.NewsPublishTag}
+						""");
 			return;
+		}
 		var photos = await DownloadMedia(update);
 		if (photos.Count == 0)
 		{
