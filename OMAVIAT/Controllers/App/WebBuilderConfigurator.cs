@@ -14,7 +14,7 @@ public class WebBuilderConfigurator
 		LogManager.Setup().SetupExtensions(ext => ext.RegisterTarget<TelegramLogTarget>()).LoadConfiguration(nlog =>
 		{
 			nlog.ForLogger().WriteToConsole();
-			nlog.ForLogger().FilterLevel(LogLevel.Info).WriteTo(new TelegramLogTarget()).WithAsync();
+			nlog.ForLogger().WriteTo(new TelegramLogTarget()).WithAsync();
 			nlog.ForLogger()
 				.FilterLevel(LogLevel.Trace)
 				.WriteToFile(Path.Combine(Directory.GetCurrentDirectory(), "Logs", "log-${shortdate}.log"));
