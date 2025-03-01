@@ -16,7 +16,6 @@ public class WebBuilderConfigurator
 			nlog.ForLogger().WriteToConsole();
 			nlog.ForLogger().WriteTo(new TelegramLogTarget()).WithAsync();
 			nlog.ForLogger()
-				.FilterLevel(LogLevel.Trace)
 				.WriteToFile(Path.Combine(Directory.GetCurrentDirectory(), "Logs", "log-${shortdate}.log"));
 		});
 		builder.Services.AddRazorComponents()

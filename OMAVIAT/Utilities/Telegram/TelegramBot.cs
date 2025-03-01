@@ -75,6 +75,7 @@ public static class TelegramBot
 		try
 		{
 			using var client = new HttpClient();
+			client.Timeout = TimeSpan.FromSeconds(5);
 			var response =
 				await client.GetAsync($"https://api.telegram.org/bot{Configurator.Config.Telegram.ApiKey}/getMe");
 			return response.StatusCode is HttpStatusCode.OK or HttpStatusCode.NotFound or HttpStatusCode.Unauthorized;
