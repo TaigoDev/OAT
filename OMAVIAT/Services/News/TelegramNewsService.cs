@@ -51,12 +51,13 @@ public static class TelegramNewsService
 				$"[TelegramNewsService]: Не удалось найти фото, чтобы выложить новость {update.ChannelPost.Id} из {Configurator.Config.Telegram.NewsChannelId}");
 			return;
 		}
-
+		var urls = update.ChannelPost.CaptionEntityValues.Where(e => e.Contains("http://") || e.Contains("https://")).ToList();
 		var title = update.ChannelPost.Caption.Split("\n").FirstOrDefault() ?? update.ChannelPost.Caption.GetWords(10);
 		if (title.Length > 50)
 			title = title.GetWords(10);
+		var description = urls.Aggregate(update.ChannelPost.Caption, (current, url) => current.Replace(url, $"<a href=\"{url}\">{url}</a>"));
 		var news = new Entities.Database.News(DateTime.Now.ToString("yyyy-MM-dd"),
-			title, update.ChannelPost.Caption, update.ChannelPost.Caption.GetWords(15), photos, false);
+			title, description, update.ChannelPost.Caption.GetWords(15), photos, false);
 		news.TelegramMessageId = update.ChannelPost.MessageId;
 		news.TelegramMediaGroupId = update.ChannelPost.MediaGroupId;
 		await connection.AddAsync(news);
@@ -130,7 +131,9 @@ public static class TelegramNewsService
 				title = title.GetWords(10);
 			news.title = title;
 			news.photos = photos.toJson();
-			news.description = update.EditedChannelPost.Caption;
+			var urls = update.EditedChannelPost.CaptionEntityValues.Where(e => e.Contains("http://") || e.Contains("https://")).ToList();
+			var description = urls.Aggregate(update.EditedChannelPost.Caption, (current, url) => current.Replace(url, $"<a href=\"{url}\">{url}</a>"));
+			news.description = description;
 			news.short_description = update.EditedChannelPost.Caption.GetWords(15);
 			connection.Update(news);
 			await connection.SaveChangesAsync();
