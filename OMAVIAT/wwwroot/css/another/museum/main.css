@@ -1,10 +1,18 @@
+.bigger-text-museum{
+	font-size: 1.25em;
+}
+
+.bigger-text-museum p{
+	text-indent: 4ch;
+}
+
 /* for all child pages */
 
 .photo{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: min(275px, 100%);
+	width: min(300px, 100%);
 	text-align: center;
 	margin: 15px auto auto auto;
 }
@@ -36,7 +44,7 @@
 	aspect-ratio: 1;
 	width: 225px;
 	padding: 15px;
-	font-size: 1.15rem;
+	font-size: 1.2rem;
 	font-weight: 600;
 	text-align: center;
 	color: var(--light-white);
