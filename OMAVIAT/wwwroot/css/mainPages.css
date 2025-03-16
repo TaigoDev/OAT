@@ -50,6 +50,7 @@ body {
 
 .contacts-list {
 	display: flex;
+	align-items: center;
 	column-gap: 35px;
 }
 
