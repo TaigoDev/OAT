@@ -301,6 +301,12 @@ section.centered .section-title {
 	width: 100%;
 }
 
+section.centered .accordion {
+	width: 100%;
+	max-width: none;
+	
+}
+
 .content-page {
 	position: relative;
 	display: flex;
@@ -1319,7 +1325,7 @@ table.two-column tr td:first-child {
 .accordion.open .accordion-body {
 	visibility: visible;
 	opacity: 1;
-	max-height: 300px;
+	max-height: 330px;
 	padding: 10px 15px;
 	margin-top: 15px;
 }
