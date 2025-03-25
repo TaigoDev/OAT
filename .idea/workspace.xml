@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7a3bdfd-66cd-469f-b117-67140c8d76f0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OMAVIAT/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/OMAVIAT/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OMAVIAT/wwwroot/documents/applicant/selectionCommittee/1_План_набора_на_2024_25_учебный_год_ЭЦП.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OMAVIAT/wwwroot/documents/applicant/selectionCommittee/2. Условия приёма платно_2024 ЭЦП.pdf" beforeDir="false" />
-    </list>
+    <list default="true" id="d7a3bdfd-66cd-469f-b117-67140c8d76f0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,6 +64,7 @@
       <workItem from="1736320535557" duration="41000" />
       <workItem from="1737111067174" duration="1312000" />
       <workItem from="1737113257176" duration="904000" />
+      <workItem from="1742720968166" duration="14000" />
     </task>
     <servers />
   </component>
