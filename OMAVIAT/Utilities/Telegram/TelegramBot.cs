@@ -57,11 +57,7 @@ public static class TelegramBot
 			// if (!Configurator.Config.IsProduction)
    //                     				return;
 			var me = await BotClient.GetMe();
-			var receiverOptions = new ReceiverOptions
-			{
-				AllowedUpdates = []
-			};
-			BotClient.StartReceiving(new TelegramUpdateHandler());
+			BotClient.StartReceiving(new TelegramUpdateHandler(), cancellationToken: CancelTokenSource.Token);
 			Logger.Info($"Авторизация бота Telegram успешно произошла. Имя бота: {me.Username}");
 		}
 		catch (Exception ex)
