@@ -1,0 +1,15 @@
+.veterans li{
+	margin-bottom: 5px;
+}
+
+.veterans a::before{
+	content: "";
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	translate: 0 2px;
+	margin-right: 2px;
+	background-size: cover;
+	background-image: url("../../images/basic/personBlack.svg");
+	filter: brightness(0) saturate(100%) invert(61%) sepia(43%) saturate(5233%) hue-rotate(195deg) brightness(93%) contrast(89%);
+}
