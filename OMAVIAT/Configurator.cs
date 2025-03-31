@@ -6,6 +6,7 @@ namespace OMAVIAT;
 
 public class Configurator
 {
+	public static string NewsPublishTag { get; set; } = "#омавиат_сайт"; 
 	public static Config Config { get; set; } = new();
 	public static TimeTableBotConfig Timetable { get; set; } = new();
 	public static TimeTableBotConfig MyOat { get; set; } = new();

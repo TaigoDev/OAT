@@ -5,6 +5,7 @@ using OMAVIAT.Controllers.App;
 using OMAVIAT.Controllers.Bitrix.Controllers;
 using OMAVIAT.Schedule;
 using OMAVIAT.Schedule.Entities;
+using OMAVIAT.Services;
 using OMAVIAT.Services.News;
 using OMAVIAT.Services.Payments;
 using OMAVIAT.Services.Workers;
@@ -40,6 +41,7 @@ Runs.StartModules(
 
 //Çàïóñêàåì íîâîñòè
 	NewsReader.Init,
+	ScheduleService.RegisterAsync,
 	ProfNewsReader.Init,
 	DemoExamsNewsReader.Init,
 	MuseumNewsReader.Init,
@@ -73,4 +75,5 @@ app.UseCors("AllowAll");
 app.MapControllerRoute("default", "{controller=Home}/{action=Get}/{id?}");
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 app.MapRazorPages();
-app.Run();
+await app.RunAsync();
+await ScheduleService.ShutdownAsync();

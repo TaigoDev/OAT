@@ -17,7 +17,7 @@ namespace OMAVIAT.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -264,6 +264,12 @@ namespace OMAVIAT.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("EloTelegramMediaGroupId")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("EloTelegramMessageId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsFixed")
                         .HasColumnType("tinyint(1)");

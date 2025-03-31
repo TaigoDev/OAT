@@ -2,8 +2,10 @@
 using NLog;
 using OMAVIAT.Utilities;
 using OMAVIAT.Utilities.Telegram;
+using Quartz;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace OMAVIAT.Services.News;
 
@@ -13,16 +15,32 @@ public static class TelegramNewsService
 
 	public static async Task OnNewMessage(Update update)
 	{
+		if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId &&
+		    update.GetChatId() != Configurator.Config.Telegram.NewsEloChannelId)
+		{
+			Logger.Info($"""
+			             Telegram Chat: {update.GetChatId()}
+			             Config Telegram Chat: {Configurator.Config.Telegram.NewsChannelId}
+			             Caption: {update.ChannelPost?.Caption}
+			             CaptionEntityValues nullable: {update.ChannelPost?.CaptionEntityValues is null}
+			             PublishTag: {Configurator.NewsPublishTag}
+			             """);
+			return;
+		}
+		
+		var isElo = Configurator.Config.Telegram.NewsEloChannelId == update.GetChatId();
 		await using var connection = new DatabaseContext();
-		if (update.GetChatId() == Configurator.Config.Telegram.NewsChannelId &&
-		    update.ChannelPost?.MediaGroupId is not null && update.ChannelPost?.Caption is null)
+		if (update.ChannelPost?.MediaGroupId is not null && update.ChannelPost?.Caption is null)
 		{
 			if(update.ChannelPost is null) return;
-			var mediaNews = await connection.News.FirstOrDefaultAsync(e => e.TelegramMediaGroupId == update.ChannelPost.MediaGroupId);
+			var mediaNews = isElo ? 
+				await connection.News.FirstOrDefaultAsync(e => e.EloTelegramMediaGroupId == update.ChannelPost.MediaGroupId) 
+				: await connection.News.FirstOrDefaultAsync(e => e.TelegramMediaGroupId == update.ChannelPost.MediaGroupId);
 			if(mediaNews is null) return;
 			var media = await DownloadMedia(update);
+			if(media is null) return;
 			var currentMedia = mediaNews.GetPhotos();
-			currentMedia.AddRange(media);
+			currentMedia.Add(media);
 			mediaNews.photos = currentMedia.toJson();
 			connection.Update(mediaNews);
 			await connection.SaveChangesAsync();
@@ -30,9 +48,8 @@ public static class TelegramNewsService
 			return;
 		}
 
-		if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId
-		    || update.ChannelPost?.Caption is null || update.ChannelPost.CaptionEntityValues is null ||
-		    !update.ChannelPost.CaptionEntityValues.Contains(Configurator.Config.Telegram.NewsPublishTag))
+		if (update.ChannelPost?.Caption is null || update.ChannelPost.CaptionEntityValues is null ||
+		    !update.ChannelPost.CaptionEntityValues.Contains(Configurator.NewsPublishTag))
 		{
 			
 			Logger.Info($"""
@@ -40,11 +57,16 @@ public static class TelegramNewsService
 						Config Telegram Chat: {Configurator.Config.Telegram.NewsChannelId}
 						Caption: {update.ChannelPost?.Caption}
 						CaptionEntityValues nullable: {update.ChannelPost?.CaptionEntityValues is null}
-						PublishTag: {Configurator.Config.Telegram.NewsPublishTag}
+						PublishTag: {Configurator.NewsPublishTag}
 						""");
 			return;
 		}
-		var photos = await DownloadMedia(update);
+
+
+		var photos = new List<string>();
+		var photo = await DownloadMedia(update);
+		if(photo is not null) photos.Add(photo); 
+
 		if (photos.Count == 0)
 		{
 			Logger.Info(
@@ -58,13 +80,36 @@ public static class TelegramNewsService
 		var description = urls.Aggregate(update.ChannelPost.Caption, (current, url) => current.Replace(url, $"<a href=\"{url}\">{url}</a>"));
 		var news = new Entities.Database.News(DateTime.Now.ToString("yyyy-MM-dd"),
 			title, description, update.ChannelPost.Caption.GetWords(15), photos, false);
-		news.TelegramMessageId = update.ChannelPost.MessageId;
-		news.TelegramMediaGroupId = update.ChannelPost.MediaGroupId;
+		if (isElo)
+		{
+			news.EloTelegramMessageId = update.ChannelPost.MessageId;
+			news.EloTelegramMediaGroupId = update.ChannelPost.MediaGroupId;
+		}
+		else
+		{
+			news.TelegramMessageId = update.ChannelPost.MessageId;
+			news.TelegramMediaGroupId = update.ChannelPost.MediaGroupId;
+		}
+		
+
 		await connection.AddAsync(news);
 		await connection.SaveChangesAsync();
+		if(isElo)
+		{			
 
+			var job = JobBuilder.Create<RepostNewsJob>()
+				.WithIdentity("PostNewsFromEloGroup", "TelegramNewsService").UsingJobData("newsId", news.id)
+				.Build();
+			var trigger = TriggerBuilder.Create()
+				.WithIdentity("ExecuteLater", "TelegramNewsService")
+				.StartAt(DateTimeOffset.Now.AddSeconds(10)) 
+				.Build();
+			await ScheduleService.Scheduler.ScheduleJob(job, trigger);
+			await ScheduleService.Scheduler.Start();
+
+		}
 		Logger.Info($"""
-		             [TelegramNewsService]: Новость на сайте была опубликована автоматически, т.к. в сообщение официального ТГ канала ОМАВИАТ ({Configurator.Config.Telegram.NewsChannelId}) был указан хештег ({Configurator.Config.Telegram.NewsPublishTag})
+		             [TelegramNewsService]: Новость на сайте была опубликована автоматически, т.к. в сообщение официального ТГ канала ОМАВИАТ ({Configurator.Config.Telegram.NewsChannelId}) был указан хештег ({Configurator.NewsPublishTag})
 		             Информация об опубликованной новости:
 		             ID: {news.id}
 		             Title: {news.title}
@@ -82,31 +127,47 @@ public static class TelegramNewsService
 		try
 		{
 			await using var connection = new DatabaseContext();
+			if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId &&
+			    update.GetChatId() != Configurator.Config.Telegram.NewsEloChannelId)
+			{
+				Logger.Info($"""
+				             Telegram Chat: {update.GetChatId()}
+				             Config Telegram Chat: {Configurator.Config.Telegram.NewsChannelId}
+				             Caption: {update.ChannelPost?.Caption}
+				             CaptionEntityValues nullable: {update.ChannelPost?.CaptionEntityValues is null}
+				             PublishTag: {Configurator.NewsPublishTag}
+				             """);
+				return;
+			}
 
-			if (update.GetChatId() == Configurator.Config.Telegram.NewsChannelId &&
+			var isElo = Configurator.Config.Telegram.NewsEloChannelId == update.GetChatId();
+
+			if (
 			    update.EditedChannelPost?.MediaGroupId is not null && update.EditedChannelPost?.Caption is null)
 			{
 				if(update.EditedChannelPost?.Photo is null) return;
-				var mediaNews = await connection.News.FirstOrDefaultAsync(e => e.TelegramMediaGroupId == update.EditedChannelPost.MediaGroupId);
-				if(mediaNews is null) return;
+				var mediaNews = isElo ? 
+					await connection.News.FirstOrDefaultAsync(e => e.EloTelegramMediaGroupId == update.EditedChannelPost.MediaGroupId) 
+					: await connection.News.FirstOrDefaultAsync(e => e.TelegramMediaGroupId == update.EditedChannelPost.MediaGroupId);				if(mediaNews is null) return;
 				var currentPhoto = update.EditedChannelPost.Photo.LastOrDefault();
 				if(currentPhoto is null) return;
 				
 				var currentMedia = mediaNews.GetPhotos();
 				currentMedia.RemoveAll(e => e.Contains(StringUtils.SHA226($"telegram-msg-id-{update.EditedChannelPost?.MessageId}")));
-				currentMedia.AddRange(await DownloadMedia(update));
+				currentMedia.Add(await DownloadMedia(update));
 				mediaNews.photos = currentMedia.toJson();
 				connection.Update(mediaNews);
 				await connection.SaveChangesAsync();
 				await NewsReader.Init();
 				return;
 			}
-			if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId
-			    || update.EditedChannelPost?.Caption is null || update.EditedChannelPost.CaptionEntityValues is null ||
-			    !update.EditedChannelPost.CaptionEntityValues.Contains(Configurator.Config.Telegram.NewsPublishTag))
+			if (update.EditedChannelPost?.Caption is null || update.EditedChannelPost.CaptionEntityValues is null ||
+			    !update.EditedChannelPost.CaptionEntityValues.Contains(Configurator.NewsPublishTag))
 				return;
-			var news = await connection.News.FirstOrDefaultAsync(e =>
-				e.TelegramMessageId == update.EditedChannelPost.MessageId);
+			var news = isElo ? await connection.News.FirstOrDefaultAsync(e =>
+				e.EloTelegramMessageId == update.EditedChannelPost.MessageId) :
+					await connection.News.FirstOrDefaultAsync(e =>
+						e.TelegramMessageId == update.EditedChannelPost.MessageId);
 			if (news is null) return;
 			if (update.EditedChannelPost.Photo is null || update.EditedChannelPost.Photo.Length == 0)
 			{
@@ -137,9 +198,12 @@ public static class TelegramNewsService
 			news.short_description = update.EditedChannelPost.Caption.GetWords(15);
 			connection.Update(news);
 			await connection.SaveChangesAsync();
+			if(isElo && news.TelegramMessageId is not null)
+				await TelegramBot.BotClient.EditMessageCaption(new ChatId(Configurator.Config.Telegram.NewsChannelId),(int)news.TelegramMessageId, description, parseMode: ParseMode.Html);
+			
 
 			Logger.Info($"""
-			             [TelegramNewsService]: Новость на сайте была ОБНОВЛЕНА автоматически, т.к. в сообщение официального ТГ канала ОМАВИАТ ({Configurator.Config.Telegram.NewsChannelId}) был указан хештег ({Configurator.Config.Telegram.NewsPublishTag})
+			             [TelegramNewsService]: Новость на сайте была ОБНОВЛЕНА автоматически, т.к. в сообщение официального ТГ канала ОМАВИАТ ({Configurator.Config.Telegram.NewsChannelId}) был указан хештег ({Configurator.NewsPublishTag})
 			             Информация об опубликованной новости:
 			             ID: {news.id}
 			             Title: {news.title}
@@ -157,18 +221,16 @@ public static class TelegramNewsService
 	}
 
 
-	private static async Task<List<string>> DownloadMedia(Update update)
+	private static async Task<string?> DownloadMedia(Update update)
 	{
-		var photos = new List<string>();
 		if(update.ChannelPost?.Photo is null && update.EditedChannelPost?.Photo is null)
-			return [];
+			return null;
 		
 		var photo = (update.ChannelPost?.Photo ?? update.EditedChannelPost?.Photo!).LastOrDefault();
-		if (photo is null) return [];
+		if (photo is null) return null;
 		var path = $"images/news/{StringUtils.SHA226($"{photo.FileUniqueId}")}-{StringUtils.SHA226($"telegram-msg-id-{update.ChannelPost?.MessageId ?? update.EditedChannelPost?.MessageId}")}.png";
-		if (await DownloadImage(photo.FileId, Path.Combine("wwwroot", path)))
-			photos.Add(path);
-		return photos;
+
+		return await DownloadImage(photo.FileId, Path.Combine("wwwroot", path)) ? path : null;
 	}
 	
 	private static async Task<bool> DownloadImage(string fileId, string path)

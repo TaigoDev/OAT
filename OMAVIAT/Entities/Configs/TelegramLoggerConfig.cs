@@ -5,5 +5,5 @@ public class TelegramLoggerConfig
 	public string ApiKey { get; set; } = string.Empty;
 	public long LogChatId { get; set; }
 	public long NewsChannelId { get; set; }
-	public string NewsPublishTag { get; set; } = "#омавиат_сайт";
+	public long NewsEloChannelId { get; set; }
 }

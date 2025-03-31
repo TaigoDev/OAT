@@ -23,6 +23,7 @@
 		<PackageReference Include="NLog" Version="5.4.0" />
 		<PackageReference Include="NLog.Web.AspNetCore" Version="5.4.0" />
 		<PackageReference Include="Polly" Version="8.5.2" />
+		<PackageReference Include="Quartz" Version="3.14.0" />
 		<PackageReference Include="RepoDb.MySqlConnector" Version="1.13.2-alpha1"/>
 		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
 		<PackageReference Include="StackExchange.Redis" Version="2.8.31" />
