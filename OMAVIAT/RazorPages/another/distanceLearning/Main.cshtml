@@ -1,0 +1,29 @@
+﻿@page
+@model OMAVIAT.Pages.another.museum.MainModel
+@{
+	ViewData["Title"] = "Дистанционное обучение";
+}
+
+<link rel="stylesheet" href="~/css/another/distanceLearning/main.css" asp-append-version="true">
+
+<section class="centered">
+	<h2 class="section-title">
+		Дистанционное обучение
+	</h2>
+
+	<div class="museum-pages">
+		<a asp-page="/departments/ZOsDT" class="museum-page">
+			Отделение ЗОсДТ
+		</a>
+		<a href="~/documents/another/distanceLearning/How to submit documents.pdf" target="_blank" class="museum-page">
+			Как подать документы
+		</a>
+		<a href="~/documents/another/distanceLearning/How to study remotely.pdf" target="_blank" class="museum-page">
+			Как учиться дистанционно
+		</a>
+		<a asp-page="Specialities" class="museum-page">
+			Специальности
+		</a>
+	</div>
+
+</section>

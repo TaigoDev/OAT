@@ -1980,7 +1980,6 @@ a.main-menu-item-pictogram {
 
 .partners-list-container {
 	overflow: hidden;
-	margin-top: 30px;
 	max-width: 100%;
 	width: calc(100dvw - 5px);
 }
@@ -2026,39 +2025,43 @@ a.main-menu-item-pictogram {
 }
 
 .site-footer {
-	display: table-row;
-	background-color: #00000010;
 	text-transform: uppercase;
 	font-weight: 700;
+	margin-top: 30px;
 	overflow-x: hidden;
 }
 
-.footer-top {
+.footer-top{
+	background-color: #00000010;
+	padding: 30px 0;
+}
+
+.footer-top-contacts {
 	display: flex;
 	justify-content: space-between;
 	gap: 60px;
-	margin: 55px 0;
+	margin-top: 50px;
 }
 
-.footer-top-item {
+.footer-top-contacts-item {
 	display: flex;
 	flex-direction: column;
 	row-gap: 10px;
 	min-width: fit-content;
 }
 
-.footer-top-item.departments .footer-top-item-body {
+.footer-top-contacts-item.departments .footer-top-contacts-item-body {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 5px 15px;
 }
 
-.footer-top-item-title {
+.footer-top-contacts-item-title {
 	font-size: 1.1rem;
 	font-weight: 700;
 }
 
-.footer-top-item-body {
+.footer-top-contacts-item-body {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
@@ -2066,18 +2069,18 @@ a.main-menu-item-pictogram {
 	font-weight: 500;
 }
 
-.footer-top-item-body a {
+.footer-top-contacts-item-body a {
 	display: inline-block;
 	width: fit-content;
 	text-underline-offset: 3px;
 }
 
-.footer-top-item-body a:hover {
+.footer-top-contacts-item-body a:hover {
 	text-decoration: underline;
 }
 
 @media (width < 1000px) {
-	.footer-top {
+	.footer-top-contacts {
 		display: grid;
 		grid-template-columns: repeat(2, auto);
 		gap: 40px;
@@ -2085,13 +2088,13 @@ a.main-menu-item-pictogram {
 }
 
 @media (width < 550px) {
-	.footer-top {
+	.footer-top-contacts {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 30px;
 	}
 
-	.footer-top-item.departments .footer-top-item-body {
+	.footer-top-contacts-item.departments .footer-top-contacts-item-body {
 		grid-template-columns: repeat(2, 8ch);
 	}
 }
@@ -2293,7 +2296,7 @@ html.special .welcome {
 	margin: 10vh auto 0 auto !important;
 }
 
-html.special .footer-top {
+html.special .footer-top-contacts {
 	display: flex !important;
 	flex-wrap: wrap !important;
 }

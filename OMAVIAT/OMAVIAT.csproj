@@ -47,6 +47,7 @@
 		<Folder Include="Components\Pages\parents\"/>
 		<Folder Include="Components\Pages\students\"/>
 		<Folder Include="Controllers\Schedules\"/>
+		<Folder Include="wwwroot\documents\another\distanceLearning\" />
 		<Folder Include="wwwroot\images\another\museum\history\" />
 		<Folder Include="wwwroot\images\another\museum\interestingFacts\" />
 		<Folder Include="wwwroot\images\students\alumniEmploymentCenterOmaviat\"/>
