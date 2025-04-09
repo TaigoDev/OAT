@@ -3,9 +3,11 @@ using NLog;
 using OMAVIAT.Utilities;
 using OMAVIAT.Utilities.Telegram;
 using Quartz;
+using Quartz.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Logger = NLog.Logger;
 
 namespace OMAVIAT.Services.News;
 
@@ -96,7 +98,6 @@ public static class TelegramNewsService
 		await connection.SaveChangesAsync();
 		if(isElo)
 		{			
-
 			var job = JobBuilder.Create<RepostNewsJob>()
 				.WithIdentity("PostNewsFromEloGroup", "TelegramNewsService").UsingJobData("newsId", news.id)
 				.Build();
