@@ -31,6 +31,7 @@
 		<PackageReference Include="System.IO.Packaging" Version="9.0.3" />
 		<PackageReference Include="Telegram.Bot" Version="22.4.4" />
 		<PackageReference Include="Telegram.Bot.Enforcer" Version="13.0.13"/>
+		<PackageReference Include="VkNet" Version="1.79.0-alpha-124" />
 		<PackageReference Include="YamlDotNet" Version="16.3.0"/>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.3" />
@@ -38,30 +39,8 @@
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-preview.2.efcore.9.0.0"/>
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="wwwroot\**">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Components\Pages\applicants\"/>
-		<Folder Include="Components\Pages\parents\"/>
-		<Folder Include="Components\Pages\students\"/>
-		<Folder Include="Controllers\Schedules\"/>
-		<Folder Include="wwwroot\documents\another\distanceLearning\" />
-		<Folder Include="wwwroot\images\another\museum\history\" />
-		<Folder Include="wwwroot\images\another\museum\interestingFacts\" />
-		<Folder Include="wwwroot\images\students\alumniEmploymentCenterOmaviat\"/>
-		<Folder Include="wwwroot\images\students\alumniEmploymentCenterOmsk\"/>
-		<Folder Include="wwwroot\lib\lightbox\images\" />
-	</ItemGroup>
-	<ItemGroup>
 		<Reference Include="OMAVIAT.Schedule">
 			<HintPath>OMAVIAT.Schedule.dll</HintPath>
 		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Components\Reusable\Lesson\LessonComponent.razor" />
-	  <_ContentIncludedByDefault Remove="Components\Reusable\Lesson\LessonMoreInfoComponent.razor" />
-	  <_ContentIncludedByDefault Remove="Components\Reusable\Lesson\LessonProgressComponent.razor" />
 	</ItemGroup>
 </Project>
