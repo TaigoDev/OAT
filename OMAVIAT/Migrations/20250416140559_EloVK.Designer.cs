@@ -12,8 +12,8 @@ using OMAVIAT;
 namespace OMAVIAT.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250331132213_TelegramElo")]
-    partial class TelegramElo
+    [Migration("20250416140559_EloVK")]
+    partial class EloVK
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -273,6 +273,9 @@ namespace OMAVIAT.Migrations
 
                     b.Property<int?>("EloTelegramMessageId")
                         .HasColumnType("int");
+
+                    b.Property<long>("EloVkPostId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsFixed")
                         .HasColumnType("tinyint(1)");

@@ -56,6 +56,7 @@ public class News : INews
 	public int? TelegramMessageId { get; set; }
 	public string? TelegramMediaGroupId { get; set; }
 	public string? EloTelegramMediaGroupId { get; set; }
+	public long EloVkPostId { get; set; }
 
 	public List<string> GetPhotos()
 	{

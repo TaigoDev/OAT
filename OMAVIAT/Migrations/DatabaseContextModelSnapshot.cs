@@ -271,6 +271,9 @@ namespace OMAVIAT.Migrations
                     b.Property<int?>("EloTelegramMessageId")
                         .HasColumnType("int");
 
+                    b.Property<long>("EloVkPostId")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("IsFixed")
                         .HasColumnType("tinyint(1)");
 

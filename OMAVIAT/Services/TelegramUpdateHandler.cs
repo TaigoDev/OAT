@@ -1,4 +1,6 @@
 ﻿using NLog;
+using OMAVIAT.Entities.Telegram;
+using OMAVIAT.Schedule.Utilities;
 using OMAVIAT.Services.News;
 using OMAVIAT.Utilities.Telegram;
 using Telegram.Bot;
@@ -12,7 +14,7 @@ namespace OMAVIAT.Services;
 public class TelegramUpdateHandler : IUpdateHandler
 {
 	private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
+	private static List<TelegramMediaGroup> MediaGroups { get; set; } = [];
 	public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, HandleErrorSource source,
 		CancellationToken token)
 	{
@@ -46,13 +48,61 @@ public class TelegramUpdateHandler : IUpdateHandler
 			{
 				case UpdateType.CallbackQuery:
 					await TelegramBot.BotClient.SendMessage(update.CallbackQuery!.Message!.Chat.Id,
-						update.CallbackQuery!.Data, cancellationToken: cancellationToken);
+						update.CallbackQuery!.Data!, cancellationToken: cancellationToken);
 					break;
 				case UpdateType.ChannelPost:
-					await TelegramNewsService.OnNewMessage(update);
+					if (update.ChannelPost?.Caption is not null && (update.ChannelPost.MediaGroupId is not null ||
+					                                                (update.ChannelPost.MediaGroupId is null &&
+					                                                 update.ChannelPost.Photo is not null)))
+
+					{
+						if (update.ChannelPost.MediaGroupId is null && update.ChannelPost.Photo is not null)
+						{
+							Runs.InThread(async () =>
+							{
+								await TelegramPublishNewsHandler.OnNewTelegramMessage(update,
+									[new(update.ChannelPost.MessageId, update.ChannelPost.Photo!.Last())]);
+							});
+							return;
+						}
+
+						var mediaGroup =
+							MediaGroups.FirstOrDefault(e => e.MediaGroupId == update.ChannelPost.MediaGroupId);
+						if (mediaGroup is null)
+						{
+							mediaGroup = new TelegramMediaGroup(update.ChannelPost.MediaGroupId!,
+								[new(update.ChannelPost.MessageId,  update.ChannelPost.Photo!.Last())]);
+							MediaGroups.Add(mediaGroup);
+						}
+						else
+							mediaGroup.Photos.Add(new(update.ChannelPost.MessageId, update.ChannelPost.Photo!.Last()));
+
+						Runs.InThread(async () =>
+						{
+							var localMediaId = update.ChannelPost.MediaGroupId;
+							await Task.Delay(new TimeSpan(0, 0, 5), cancellationToken); //change 
+							await TelegramPublishNewsHandler.OnNewTelegramMessage(update,
+								MediaGroups.FirstOrDefault(e => e.MediaGroupId == localMediaId)?.Photos);
+							MediaGroups.Remove(mediaGroup);
+						});
+					}
+					else if (update.ChannelPost?.Caption is null && update.ChannelPost?.MediaGroupId is not null)
+					{
+						var mediaGroup = MediaGroups.FirstOrDefault(e => e.MediaGroupId == update.ChannelPost.MediaGroupId);
+						if (mediaGroup is null)
+						{
+							 mediaGroup = new TelegramMediaGroup(update.ChannelPost.MediaGroupId, [new(update.ChannelPost.MessageId, update.ChannelPost.Photo!.Last())]); 
+							 MediaGroups.Add(mediaGroup);
+						}
+						else
+						{
+							var photo = update.ChannelPost.Photo?.LastOrDefault();
+							if (photo is not null) mediaGroup.Photos.Add(new(update.ChannelPost.MessageId, photo));
+						}
+					}
 					break;
 				case UpdateType.EditedChannelPost:
-					await TelegramNewsService.OnEditMessage(update);
+					await TelegramEditNewsHandler.EditNewsAsync(update);
 					break;
 			}
 		}

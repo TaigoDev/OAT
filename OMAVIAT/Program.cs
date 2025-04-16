@@ -11,7 +11,9 @@ using OMAVIAT.Services.Payments;
 using OMAVIAT.Services.Workers;
 using OMAVIAT.Utilities;
 using OMAVIAT.Utilities.Telegram;
+using Quartz.Logging;
 
+LogProvider.IsDisabled = true;
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 var builder = WebApplication.CreateBuilder(args);
 WebBuilderConfigurator.SetupServices(ref builder);
