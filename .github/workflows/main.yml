@@ -16,6 +16,9 @@ jobs:
         - name: Publish project
           run: dotnet publish -c Release
 
+        - name: Copy wwwroot folder
+          run: cp -r OMAVIAT/wwwroot OMAVIAT/bin/Release/net9.0/linux-x64/publish/wwwroot
+          
         - name: Generate release tag
           id: generate_release_tag
           uses: alexvingg/next-release-tag@v1.0.4
