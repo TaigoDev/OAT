@@ -62,8 +62,16 @@ public class Runs
 		return $"{module.Method.DeclaringType!.Name}.{module.Method.Name}";
 	}
 
-	public static void InThread(Action action)
-	{
-		new Task(() => { action.Invoke(); }).Start();
-	}
+		public static void InThread(Action action)
+		{
+			new Task(() => {
+				try
+				{
+					action.Invoke();
+				}
+				catch (Exception ex)
+				{
+					Logger.Error(ex);
+				}}).Start();
+		}
 }
