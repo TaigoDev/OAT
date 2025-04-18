@@ -21,9 +21,15 @@ public class DatabaseHelper
 				Logger.Info("\u2705 Подключение с базой данных успешно установлено!");
 				await using var db = new DatabaseContext();
 				Console.WriteLine($"Количество новостей: {db.News.Count()} ");
-				//await db.Database.MigrateAsync();
-				//Logger.Info("\u2705 Миграция выполнена!");
-
+				try
+				{
+					await db.Database.MigrateAsync();
+					Logger.Info("\u2705 Миграция выполнена!");
+				}
+				catch (Exception ex)
+				{
+					Logger.Error(ex);
+				}
 				await DropTokens();
 				return;
 			}
