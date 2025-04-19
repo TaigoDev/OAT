@@ -251,7 +251,7 @@ public static class TelegramPublishNewsHandler
 		}
 
 		if (update.ChannelPost?.Caption is not null && update.ChannelPost.CaptionEntityValues is not null &&
-		    update.ChannelPost.CaptionEntityValues.Contains(Configurator.NewsPublishTag)) return true;
+		    (update.ChannelPost.CaptionEntityValues.Contains(Configurator.NewsPublishTag) || update.ChannelPost.CaptionEntityValues.Contains(Configurator.EloNewsPublishTag))) return true;
 		Logger.Info($"""
 		             Telegram Chat: {update.GetChatId()}
 		             Config Telegram Chat: {Configurator.Config.Telegram.NewsChannelId}
