@@ -2,7 +2,7 @@
 	display: grid;
 	place-items: center;
 	max-width: min(300px, 100%);
-	margin: 20px auto;
+	margin: 20px 0;
 	padding: 15px;
 	border-radius: var(--border-radius-m);
 	background-color: var(--m-color);
