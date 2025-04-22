@@ -20,6 +20,18 @@ public static class TelegramEditNewsHandler
 
 	public static async Task EditNewsAsync(Update update)
 	{
+		if (update.GetChatId() != Configurator.Config.Telegram.NewsChannelId &&
+		    update.GetChatId() != Configurator.Config.Telegram.NewsEloChannelId)
+		{
+			Logger.Info($"""
+			             Telegram Chat: {update.GetChatId()}
+			             Config Telegram Chat: {Configurator.Config.Telegram.NewsChannelId}
+			             Caption: {update.ChannelPost?.Caption}
+			             CaptionEntityValues nullable: {update.ChannelPost?.CaptionEntityValues is null}
+			             PublishTag: {Configurator.NewsPublishTag}
+			             """);
+			return;
+		}
 		await EloNewsAsync(update);
 		await OmaviatNewsAsync(update);
 	}
