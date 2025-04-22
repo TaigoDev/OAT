@@ -29,18 +29,62 @@ public static class TelegramPublishNewsHandler
 		
 		await PublishOnSite(news, update, update.ChannelPost);
 		await TelegramRepostNews(news, update);
+		await EloVkRepostNews(news, update);
 		await VkRepostNews(news, update);
 	}
 
-
 	private static async Task VkRepostNews(Entities.Database.News news, Update update)
 	{
-		if(!IsElo(update) || !news.description.Contains(Configurator.EloNewsPublishTag)) return;
+		if(!news.description.Contains(Configurator.VkPublishTag)) return;
 		var api = new VkApi();
 		await api.AuthorizeAsync(new ApiAuthParams
 		{
-			AccessToken = Configurator.Config.Telegram.EloVkApiKey
-			
+			AccessToken = Configurator.Config.Telegram.VkApiKey
+		});
+		var attachments = new List<MediaAttachment>();
+		var uploadServer = api.Photo.GetWallUploadServer(Configurator.Config.Telegram.VkGroupId);
+		foreach (var photo in news.photos.toObject<List<string>>())
+		{
+			var response = await UploadFile(uploadServer.UploadUrl,
+				Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photo));
+
+			var attachment = api.Photo.SaveWallPhoto(response, Configurator.Config.Telegram.VkUserId, (ulong)Configurator.Config.Telegram.VkGroupId).FirstOrDefault();
+			if (attachment is not null)
+				attachments.Add(attachment);
+		}
+
+		var message = update.ChannelPost;
+		if(message is null) return;
+		var replacements = new List<Replacement>();
+		for (var id = 0; id < message.CaptionEntities?.Length; id++)
+		{
+			var entity = message.CaptionEntities[id];
+			var value = message.CaptionEntityValues!.ToArray()[id];
+			if(entity.Type == MessageEntityType.TextLink)
+				replacements.Add(new Replacement( entity.Offset, entity.Length, $"{value} (ссылка: {entity.Url})"));
+		}
+
+		var description = ReplaceMultiple(message.Caption!, replacements);
+		var post = await api.Wall.PostAsync(new WallPostParams()
+		{
+			OwnerId = -Configurator.Config.Telegram.VkGroupId, 
+			Message = description,
+			Attachments = attachments
+		});
+		await using var db = new DatabaseContext();
+		news.VkPostId = post;
+		db.Update(news);
+		await db.SaveChangesAsync();
+		Logger.Info($"Новость #{news.id} опубликована в ВК омавиата");
+	}
+	
+	private static async Task EloVkRepostNews(Entities.Database.News news, Update update)
+	{
+		if(!IsElo(update) || !news.description.Contains(Configurator.EloVkPublishTag)) return;
+		var api = new VkApi();
+		await api.AuthorizeAsync(new ApiAuthParams
+		{
+			AccessToken = Configurator.Config.Telegram.VkApiKey
 		});
 		var attachments = new List<MediaAttachment>();
 		var uploadServer = api.Photo.GetWallUploadServer(Configurator.Config.Telegram.EloVkGroupId);
@@ -49,7 +93,7 @@ public static class TelegramPublishNewsHandler
 			var response = await UploadFile(uploadServer.UploadUrl,
 				Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photo));
 
-			var attachment = api.Photo.SaveWallPhoto(response, Configurator.Config.Telegram.EloVkUserId, (ulong)Configurator.Config.Telegram.EloVkGroupId).FirstOrDefault();
+			var attachment = api.Photo.SaveWallPhoto(response, Configurator.Config.Telegram.VkUserId, (ulong)Configurator.Config.Telegram.EloVkGroupId).FirstOrDefault();
 			if (attachment is not null)
 				attachments.Add(attachment);
 		}
@@ -76,12 +120,13 @@ public static class TelegramPublishNewsHandler
 		news.EloVkPostId = post;
 		db.Update(news);
 		await db.SaveChangesAsync();
+		Logger.Info($"Новость #{news.id} опубликована в ВК лицея из канала лицея");
 	}
 	
 
 	private static async Task TelegramRepostNews(Entities.Database.News news, Update update)
 	{
-		if(!IsElo(update) || !news.description.Contains(Configurator.NewsPublishTag)) return;
+		if(!IsElo(update) || !news.description.Contains(Configurator.EloTelegramRepostPublishTag)) return;
 		await using var db = new DatabaseContext();
 		var mediaGroup = new List<IAlbumInputMedia>();
 		var photos = news.photos.toObject<List<string>>();
@@ -104,29 +149,33 @@ public static class TelegramPublishNewsHandler
 		news.TelegramMediaGroupId = message.FirstOrDefault()?.MediaGroupId;
 		db.Update(news);
 		await db.SaveChangesAsync();
+		Logger.Info($"Новость #{news.id} опубликована в тг омавиата из канала лицея");
 	}
 	
 	
 	private static async Task PublishOnSite(Entities.Database.News news, Update update, Message message)
 	{
 		await using var db = new DatabaseContext();
-		if(IsElo(update) && !news.description.Contains(Configurator.NewsPublishTag)) return;
-		
 		if (IsElo(update))
 		{
+			if(!HasAnyTag(news.description))
+				return;
+			news.IsHide = !news.description.Contains(Configurator.NewsPublishTag);
 			news.EloTelegramMessageId = message.MessageId;
 			news.EloTelegramMediaGroupId = message.MediaGroupId;
 		}
 		else
 		{
+			if(!news.description.Contains(Configurator.NewsPublishTag)) return;
 			news.TelegramMessageId = message.MessageId;
 			news.TelegramMediaGroupId = message.MediaGroupId;
 		}
-
+		
 		await db.AddAsync(news);
 		await db.SaveChangesAsync();
 		Log(news);
 		await NewsReader.Init();
+		Logger.Info($"Новость #{news.id} опубликована на сайте (скрыта: {news.IsHide})");
 	}
 	
 	private static Entities.Database.News? CreateNews(Message message, List<string> photos)
@@ -250,8 +299,7 @@ public static class TelegramPublishNewsHandler
 			return false;
 		}
 
-		if (update.ChannelPost?.Caption is not null && update.ChannelPost.CaptionEntityValues is not null &&
-		    (update.ChannelPost.CaptionEntityValues.Contains(Configurator.NewsPublishTag) || update.ChannelPost.CaptionEntityValues.Contains(Configurator.EloNewsPublishTag))) return true;
+		if (update.ChannelPost?.Caption is not null && update.ChannelPost.CaptionEntityValues is not null) return true;
 		Logger.Info($"""
 		             Telegram Chat: {update.GetChatId()}
 		             Config Telegram Chat: {Configurator.Config.Telegram.NewsChannelId}
@@ -261,4 +309,19 @@ public static class TelegramPublishNewsHandler
 		             """);
 		return false;
 	}
+
+	public static bool HasAnyTag(string description)
+	{
+
+		if (
+			HasTag(Configurator.NewsPublishTag) ||
+			HasTag(Configurator.EloVkPublishTag) ||
+			HasTag(Configurator.VkPublishTag) ||
+			HasTag(Configurator.EloTelegramRepostPublishTag)
+		    )
+			return true;
+		return false;
+		bool HasTag(string tag) =>
+			description.Contains(tag);
+	} 
 }

@@ -6,8 +6,9 @@ public class TelegramLoggerConfig
 	public long LogChatId { get; set; }
 	public long NewsChannelId { get; set; }
 	public long NewsEloChannelId { get; set; }
-	public string EloVkApiKey { get; set; } = string.Empty;
+	public string VkApiKey { get; set; } = string.Empty;
+	public long VkGroupId { get; set; }
 	public long EloVkGroupId { get; set; }
-	public ulong EloVkUserId { get; set; }
+	public ulong VkUserId { get; set; }
 	
 }

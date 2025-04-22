@@ -52,11 +52,13 @@ public class News : INews
 	public string description { get; set; }
 	public string photos { get; set; }
 	public bool IsFixed { get; set; }
+	public bool IsHide { get; set; }
 	public int? EloTelegramMessageId { get; set; }
 	public int? TelegramMessageId { get; set; }
 	public string? TelegramMediaGroupId { get; set; }
 	public string? EloTelegramMediaGroupId { get; set; }
 	public long EloVkPostId { get; set; }
+	public long VkPostId { get; set; }
 
 	public List<string> GetPhotos()
 	{

@@ -7,7 +7,10 @@ namespace OMAVIAT;
 public static class Configurator
 {
 	public static string NewsPublishTag { get; set; } = "#омавиат_сайт"; 
-	public static string EloNewsPublishTag { get; set; } = "#лицей_сайт"; 
+	public static string EloTelegramRepostPublishTag { get; set; } = "#омавиат_тг";
+	public static string VkPublishTag { get; set; } = "#омавиат_вк";
+	public static string EloVkPublishTag { get; set; } = "#лицей_вк";
+
 	public static Config Config { get; set; } = new();
 	public static TimeTableBotConfig Timetable { get; set; } = new();
 	public static TimeTableBotConfig MyOat { get; set; } = new();

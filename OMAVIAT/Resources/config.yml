@@ -21,6 +21,7 @@ telegram:
     logChatId: -1001909586864
     newsChannelId: -1002352511070
     newsEloChannelId: -1002690593740
-    eloVkApiKey: "vk1.a.oYyZosXrHw-I-AUhBEtGWvRgfH7lx8HurdrsaKNA3LBuLh8arcfDvmxwdsWaTn_jMheTa8h5aLAHTn5ksAzxz7n2VzOTHLCStO5Jao5vj34JXgRMj9baCBHGljOUCBnNm3a59fBvbq6UgurN82xH_GTYpja9o6AwE2InnIiwIU8ilWZOT91HAY1GEm-uE39C4SsZnCzE6Fl8lY8admBl5g"
+    vkApiKey: "vk1.a.oYyZosXrHw-I-AUhBEtGWvRgfH7lx8HurdrsaKNA3LBuLh8arcfDvmxwdsWaTn_jMheTa8h5aLAHTn5ksAzxz7n2VzOTHLCStO5Jao5vj34JXgRMj9baCBHGljOUCBnNm3a59fBvbq6UgurN82xH_GTYpja9o6AwE2InnIiwIU8ilWZOT91HAY1GEm-uE39C4SsZnCzE6Fl8lY8admBl5g"
+    vkGroupId: 216259673
     eloVkGroupId: 216259673
-    eloVkUserId: 473411367
+    vkUserId: 473411367

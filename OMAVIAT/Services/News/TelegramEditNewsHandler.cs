@@ -28,7 +28,6 @@ public static class TelegramEditNewsHandler
 	{
 		if(update.EditedChannelPost is null)
 			return;
-		
 		await using var db = new DatabaseContext();
 		var news = await db.News.FirstOrDefaultAsync(e => e.TelegramMediaGroupId == update.EditedChannelPost.MediaGroupId 
 		                                                  || e.TelegramMessageId == update.EditedChannelPost.MessageId);
@@ -68,7 +67,9 @@ public static class TelegramEditNewsHandler
 
 		db.Update(news);
 		await db.SaveChangesAsync();
+		await VkUpdateAsync(update, news);
 		await NewsReader.Init();
+		Logger.Info($"Новость #{news.id} обновлена на сайте (скрыта: {news.IsHide})");
 		Log(news);
 	}
 	
@@ -115,6 +116,7 @@ public static class TelegramEditNewsHandler
 
 		await RepostNewsUpdateAsync(news);
 		await EloVkUpdateAsync(update, news);
+		await VkUpdateAsync(update, news);
 		db.Update(news);
 		await db.SaveChangesAsync();
 		await NewsReader.Init();
@@ -122,56 +124,129 @@ public static class TelegramEditNewsHandler
 		Log(news);
 	}
 
+	private static async Task VkUpdateAsync(Update update, Entities.Database.News news)
+	{
+		try
+		{
+			if (!news.description.Contains(Configurator.VkPublishTag)) return;
+			var api = new VkApi();
+			await api.AuthorizeAsync(new ApiAuthParams
+			{
+				AccessToken = Configurator.Config.Telegram.VkApiKey
+			});
+			var attachments = new List<MediaAttachment>();
+			var uploadServer = api.Photo.GetWallUploadServer(Configurator.Config.Telegram.VkGroupId);
+			foreach (var photo in news.photos.toObject<List<string>>())
+			{
+				var response = await UploadFile(uploadServer.UploadUrl,
+					Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photo));
+
+				var attachment = api.Photo.SaveWallPhoto(response, Configurator.Config.Telegram.VkUserId,
+					(ulong)Configurator.Config.Telegram.VkGroupId).FirstOrDefault();
+				if (attachment is not null)
+					attachments.Add(attachment);
+			}
+
+
+			var param = new WallEditParams()
+			{
+				OwnerId = -Configurator.Config.Telegram.VkGroupId,
+				Attachments = attachments,
+				PostId = news.VkPostId
+			};
+			if (update.EditedChannelPost?.Caption is not null)
+			{
+				var message = update.EditedChannelPost;
+				var replacements = new List<Replacement>();
+				for (var id = 0; id < message.CaptionEntities?.Length; id++)
+				{
+					var entity = message.CaptionEntities[id];
+					var value = message.CaptionEntityValues!.ToArray()[id];
+					if (entity.Type == MessageEntityType.TextLink)
+						replacements.Add(new Replacement(entity.Offset, entity.Length,
+							$"{value} (ссылка: {entity.Url})"));
+				}
+
+				var description = ReplaceMultiple(message.Caption!, replacements);
+				param.Message = description;
+			}
+			else
+			{
+				var posts = await api.Wall.GetByIdAsync(
+					[$"-{Configurator.Config.Telegram.EloVkGroupId}_{news.VkPostId}"], 0);
+				var post = posts.FirstOrDefault();
+				if (post is null) return;
+				param.Message = post.Text;
+			}
+
+			await api.Wall.EditAsync(param);
+			Logger.Info($"Новость #{news.id} обновлена в ВК омавиата (скрыта: {news.IsHide})");
+		}
+		catch (Exception e)
+		{
+			Logger.Error(e.Message);
+		}
+	}
+	
 	private static async Task EloVkUpdateAsync(Update update, Entities.Database.News news)
 	{
-		var api = new VkApi();
-		await api.AuthorizeAsync(new ApiAuthParams
+		try
 		{
-			AccessToken = Configurator.Config.Telegram.EloVkApiKey
-			
-		});
-		var attachments = new List<MediaAttachment>();
-		var uploadServer = api.Photo.GetWallUploadServer(Configurator.Config.Telegram.EloVkGroupId);
-		foreach (var photo in news.photos.toObject<List<string>>())
-		{
-			var response = await UploadFile(uploadServer.UploadUrl,
-				Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photo));
-
-			var attachment = api.Photo.SaveWallPhoto(response, Configurator.Config.Telegram.EloVkUserId, (ulong)Configurator.Config.Telegram.EloVkGroupId).FirstOrDefault();
-			if (attachment is not null)
-				attachments.Add(attachment);
-		}
-		
-
-		var param = new WallEditParams()
-		{
-			OwnerId = -Configurator.Config.Telegram.EloVkGroupId,
-			Attachments = attachments,
-			PostId = news.EloVkPostId
-		};
-		if (update.EditedChannelPost?.Caption is not null)
-		{
-			var message = update.EditedChannelPost;
-			var replacements = new List<Replacement>();
-			for (var id = 0; id < message.CaptionEntities?.Length; id++)
+			if (!news.description.Contains(Configurator.EloVkPublishTag)) return;
+			var api = new VkApi();
+			await api.AuthorizeAsync(new ApiAuthParams
 			{
-				var entity = message.CaptionEntities[id];
-				var value = message.CaptionEntityValues!.ToArray()[id];
-				if(entity.Type == MessageEntityType.TextLink)
-					replacements.Add(new Replacement( entity.Offset, entity.Length, $"{value} (ссылка: {entity.Url})"));
+				AccessToken = Configurator.Config.Telegram.VkApiKey
+				
+			});
+			var attachments = new List<MediaAttachment>();
+			var uploadServer = api.Photo.GetWallUploadServer(Configurator.Config.Telegram.EloVkGroupId);
+			foreach (var photo in news.photos.toObject<List<string>>())
+			{
+				var response = await UploadFile(uploadServer.UploadUrl,
+					Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photo));
+
+				var attachment = api.Photo.SaveWallPhoto(response, Configurator.Config.Telegram.VkUserId, (ulong)Configurator.Config.Telegram.EloVkGroupId).FirstOrDefault();
+				if (attachment is not null)
+					attachments.Add(attachment);
 			}
-			var description = ReplaceMultiple(message.Caption!, replacements);
-			param.Message = description;
+			
+
+			var param = new WallEditParams()
+			{
+				OwnerId = -Configurator.Config.Telegram.EloVkGroupId,
+				Attachments = attachments,
+				PostId = news.EloVkPostId
+			};
+			if (update.EditedChannelPost?.Caption is not null)
+			{
+				var message = update.EditedChannelPost;
+				var replacements = new List<Replacement>();
+				for (var id = 0; id < message.CaptionEntities?.Length; id++)
+				{
+					var entity = message.CaptionEntities[id];
+					var value = message.CaptionEntityValues!.ToArray()[id];
+					if(entity.Type == MessageEntityType.TextLink)
+						replacements.Add(new Replacement( entity.Offset, entity.Length, $"{value} (ссылка: {entity.Url})"));
+				}
+				var description = ReplaceMultiple(message.Caption!, replacements);
+				param.Message = description;
+			}
+			else
+			{
+				var posts = await api.Wall.GetByIdAsync([ $"-{Configurator.Config.Telegram.EloVkGroupId}_{news.EloVkPostId}"], 0);
+				var post = posts.FirstOrDefault();
+				if(post is null) return;
+				param.Message = post.Text;
+			}
+			
+			await api.Wall.EditAsync(param);	
+			Logger.Info($"Новость #{news.id} обновлена в ВК лицея (скрыта: {news.IsHide})");
 		}
-		else
+		catch (Exception e)
 		{
-			var posts = await api.Wall.GetByIdAsync([ $"-{Configurator.Config.Telegram.EloVkGroupId}_{news.EloVkPostId}"], 0);
-			var post = posts.FirstOrDefault();
-			if(post is null) return;
-			param.Message = post.Text;
+			Logger.Error(e.Message);
 		}
-		
-		await api.Wall.EditAsync(param);	
 	}
 
 	private static async Task RepostNewsUpdateAsync(Entities.Database.News news)
