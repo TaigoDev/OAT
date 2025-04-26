@@ -1448,7 +1448,7 @@ table.two-column tr td:first-child {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	max-width: 330px;
+	max-width: 340px;
 	border-radius: var(--border-radius-xl);
 	background-color: var(--m-color);
 	overflow: hidden;
