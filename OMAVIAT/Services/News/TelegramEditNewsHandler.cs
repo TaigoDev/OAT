@@ -38,11 +38,12 @@ public static class TelegramEditNewsHandler
 
 	private static async Task OmaviatNewsAsync(Update update)
 	{
-		if(update.EditedChannelPost is null)
+		if(update.EditedChannelPost is null || IsElo(update))
 			return;
 		await using var db = new DatabaseContext();
-		var news = await db.News.FirstOrDefaultAsync(e => e.TelegramMediaGroupId == update.EditedChannelPost.MediaGroupId 
-		                                                  || e.TelegramMessageId == update.EditedChannelPost.MessageId);
+		var news = await db.News.FirstOrDefaultAsync(e =>
+			(e.TelegramMediaGroupId != null && e.TelegramMediaGroupId == update.EditedChannelPost.MediaGroupId)
+			|| e.TelegramMessageId == update.EditedChannelPost.MessageId);
 		if(news is null) return;
 		
 		if (update.EditedChannelPost.Photo is not null)
@@ -90,7 +91,7 @@ public static class TelegramEditNewsHandler
 	{
 		if(update.EditedChannelPost is null) return;
 		await using var db = new DatabaseContext();
-		var news = await db.News.FirstOrDefaultAsync(e => e.EloTelegramMediaGroupId == update.EditedChannelPost.MediaGroupId 
+		var news = await db.News.FirstOrDefaultAsync(e => (e.EloTelegramMediaGroupId != null && e.EloTelegramMediaGroupId == update.EditedChannelPost.MediaGroupId)
 		                                                  || e.EloTelegramMessageId == update.EditedChannelPost.MessageId);
 		if(news is null) return;
 		
