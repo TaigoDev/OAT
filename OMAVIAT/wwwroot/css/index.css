@@ -337,6 +337,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 40px;
+	max-width: 1000px;
+	margin: auto;
 }
 
 .rate-our-work {
@@ -452,5 +454,5 @@ html.special.special-color-2 .news-slider-arrow img, html.special.special-color-
 }
 
 .pos-item {
-	max-width: min(100%, 350px) !important;
+	max-width: min(100%, 250px) !important;
 }
