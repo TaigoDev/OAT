@@ -68,7 +68,7 @@ public static class WorkersReader
 
 		workers.RemoveAll(e => ignoredPost.Contains(e.Post) || ignoredPost.Contains(e.FullName));
 		AllWorkers.AddRange(workers);
-		AdministrationByPost(ref workers, e => e is "Директор");
+		AdministrationByPost(ref workers, e => e is "Директор" or "Исполняющий обязанности директора");
 		AdministrationByPost(ref workers, e => e.Contains("Заместитель директора"));
 		AdministrationByPost(ref workers, e => e is "Главный бухгалтер");
 		await ReadPedagogicalWorkersAsync();
