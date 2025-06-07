@@ -1,0 +1,75 @@
+﻿@page
+@model ContactsModel
+@{
+	ViewData["Title"] = "Контакты оператора Проекта";
+}
+
+<div class="container content-page">
+	<section class="content">
+		<a id="plane" class="plane" href="#sidebar"></a>
+		<h2 class="section-title">
+			Контакты оператора Проекта
+		</h2>
+		
+		<p>
+			Оператором Проекта выступает Казанский филиал федерального государственного бюджетного образовательного учреждения дополнительного профессионального образования «Институт развития профессионального образования»
+		</p>
+		<p>
+			Получить методическую и информационно-консультационную поддержку можно:
+		</p>
+		<ul class="customized">
+			<li>
+				На сайте Минпросвещения РФ в разделе «Вопросы и ответы»;  
+			</li>
+			<li>
+				По телефону горячей линии: +7 (499) 009-05-51 (доб. 5505);
+			</li>
+			<li>
+				По электронной почте: obrkreditspo@firpo.ru
+			</li>
+		</ul>
+		<p>
+			Все разработанные материалы по Проекту находятся в социальной сети ВКонтакте в <a href="https://vk.com/obrkredit_spo.">Банке материалов «Обркредит в СПО»</a>
+		</p>
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Образовательное кредитование
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="ObrkreditSPO">
+						Образовательное кредитование
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="About">
+						О проекте
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="TermsOfProvision">
+						Условия предоставления
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="MaterialsForStudents">
+						Материалы для студентов и абитуриентов
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="MaterialsForTeachers">
+						Материалы для педагогов и руководителей
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="Contacts">
+						Контакты оператора Проекта
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>

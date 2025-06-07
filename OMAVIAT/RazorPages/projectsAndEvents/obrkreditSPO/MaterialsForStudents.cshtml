@@ -1,0 +1,135 @@
+﻿@page
+@model MaterialsForStudentsModel
+@{
+	ViewData["Title"] = "Материалы для студентов и абитуриентов";
+}
+
+<div class="container content-page">
+	<section class="content">
+		<a id="plane" class="plane" href="#sidebar"></a>
+		<h2 class="section-title">
+			Материалы для студентов и абитуриентов
+		</h2>
+		
+		<ul class="page-navigation">
+			<li>
+				<a href="#what">
+					Что вы найдёте в этом разделе?
+				</a>
+			</li>
+			<li>
+				<a href="#why">
+					Почему это полезно?
+				</a>
+			</li>
+			<li>
+				<a href="#questions">
+					Остались вопросы?
+				</a>
+			</li>
+		</ul>
+		
+		
+		<p>
+			Здесь собраны все необходимые материалы, которые помогут вам разобраться в программе образовательного кредита с господдержкой. Если вы только планируете поступление или уже оформили кредит – эти документы ответят на ваши вопросы и упростят взаимодействие с банком.
+		</p>
+		<h3 id="what" class="section-subtitle">
+			Что вы найдёте в этом разделе?
+		</h3>
+		<h4 class="section-subtitle-small">
+			<a href="~/documents/projectsAndEvents/obrkreditSPO/materialsForStudents/Booklet What to do if you did not get into the budget.pdf'">1.	Буклет «Что делать, если не поступил на бюджет?»</a>
+		</h4>
+		<p>
+			В буклете простым языком объясняется, что делать, если не хватило баллов для зачисления на бюджет, как работает кредит с господдержкой, какие у него преимущества перед обычными кредитами и как избежать распространённых ошибок при оформлении
+		</p>
+		<h4 class="section-subtitle-small">
+			<a href="~/documents/projectsAndEvents/obrkreditSPO/materialsForStudents/Interview with a participant of the project Obrkredit v SPO.pdf">2.	Интервью с участником проекта</a>
+		</h4>
+		<p>
+			В интервью участник программы господдержки рассказывает почему образовательный, а не обычный кредит, как проходило оформление, насколько удобно погашать, как кредит поможет карьере и многое другое;
+		</p>
+		<h4 class="section-subtitle-small">
+			<a href="~/documents/projectsAndEvents/obrkreditSPO/materialsForStudents/Information poster Educational loan Pros and cons.pdf">3.	Информационный плакат об изменениях договора</a>
+		</h4>
+		<p>
+			Если условия кредита изменились (например, из-за перевода на другую специальность или академического отпуска), этот материал подскажет, как действовать;
+		</p>
+		
+		
+		<h3 id="why" class="section-subtitle">
+			Почему это полезно?
+		</h3>
+		<ul class="customized">
+			<li>
+				<b>Экономия времени:</b> вместо долгих поисков в интернете – вся информация в одном месте.
+			</li>
+			<li>
+				<b>Актуальные данные:</b> материалы регулярно обновляются с учётом изменений в законодательстве.
+			</li>
+			<li>
+				<b>Понятно даже новичку:</b> никаких сложных терминов – только конкретные примеры и инструкции.
+			</li>
+		</ul>		
+		<p>
+			<b>Совет:</b> сохраните чек-лист на телефон, чтобы он был под рукой при визите в банк.
+		</p>
+		
+		<h3 id="questions" class="section-subtitle">
+			Остались вопросы
+		</h3>
+		<p>
+			Если остались вопросы, получите информационную поддержку:
+		</p>
+		<ul class="customized">
+			<li>
+				На сайте Минпросвещения в разделе «Вопросы и ответы»;  
+			</li>
+			<li>
+				По телефону горячей линии: +7 (499) 009-05-51 (доб. 5505);
+			</li>
+			<li>
+				По электронной почте: obrkreditspo@firpo.ru
+			</li>
+		</ul>
+		
+	</section>
+	<aside id="sidebar" class="sidebar">
+		<h3 class="sidebar-title">
+			Образовательное кредитование
+		</h3>
+		<nav class="sidebar-body">
+			<ul class="sidebar-links">
+				<li class="sidebar-link">
+					<a asp-page="ObrkreditSPO">
+						Образовательное кредитование
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="About">
+						О проекте
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="TermsOfProvision">
+						Условия предоставления
+					</a>
+				</li>
+				<li class="sidebar-link sidebar-link-selected">
+					<a asp-page="MaterialsForStudents">
+						Материалы для студентов и абитуриентов
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="MaterialsForTeachers">
+						Материалы для педагогов и руководителей
+					</a>
+				</li>
+				<li class="sidebar-link">
+					<a asp-page="Contacts">
+						Контакты оператора Проекта
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</aside>
+</div>
